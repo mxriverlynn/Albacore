@@ -6,11 +6,13 @@ class MSBuild
 	end
 	
 	def build_path_to_exe
-		@path_to_exe = '"' + File.join(ENV['windir'].dup, 'Microsoft.NET', 'Framework', 'v3.5', 'msbuild.exe') + '"'
+		@path_to_exe = '"' + File.join(ENV['windir'].dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe') + '"'
+		puts @path_to_exe
 	end
 	
 	def build(solution)
-		system @path_to_exe, solution
+		execute_path = @path_to_exe << " #{solution}"
+		system execute_path
 	end
 	
 end
