@@ -1,7 +1,9 @@
-# require(File.join(File.dirname(__FILE__), 'config', 'boot'))
+@current_dir = File.expand_path(File.dirname(__FILE__))
+$: << File.join(@current_dir, "lib", "rake")
+$: << File.join(@current_dir, "lib")
 
 require 'spec/rake/spectask'
-require 'lib/rake/msbuildtask'
+require 'msbuildtask'
 
 task :default => 'spec:test'
 
