@@ -2,7 +2,6 @@ require 'lib/msbuild'
 require 'lib/spec/model/msbuildtestdata'
 require 'lib/spec/model/msbuildfake'
 
-
 describe MSBuild, "when an msbuild path is not specified" do
 	
 	before :all do
