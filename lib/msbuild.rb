@@ -4,8 +4,8 @@ class MSBuild
 	attr_accessor :path_to_exe
 	
 	def initialize(path_to_exe=nil) 
-		@properties={}
-		@targets={}
+		self.properties={}
+		self.targets={}
 
 		if path_to_exe == nil
 			build_path_to_exe
@@ -20,14 +20,16 @@ class MSBuild
 	
 	def targets=(targets={})
 		@targets=targets
+		@targets.extend(ArrayParameterBuilder)
 	end
 	
 	def properties=(properties={})
 		@properties = properties
+		@properties.extend(HashParameterBuilder)
 	end
 	
-	def build(solution)
-		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
+	def build(path_to_solution)
+		cmd = "\"#{@path_to_exe}\" \"#{path_to_solution}\""
 		cmd << " /property:#{@properties.build_parameters}" if @properties.length>0
 		cmd << " /target:#{@targets.build_parameters}" if @targets.length>0
 		

@@ -1,4 +1,4 @@
-class Hash
+module HashParameterBuilder
 	def build_parameters
 		option_text = ''
 		self.each do |key, value|
@@ -8,7 +8,7 @@ class Hash
 	end
 end
 
-class Array
+module ArrayParameterBuilder
 	def build_parameters
 		option_text = ''
 		self.each do |value|
