@@ -3,7 +3,7 @@ require 'lib/spec/model/msbuildtestdata'
 require 'lib/spec/model/msbuildfake'
 
 
-describe MSBuild, "when initializing without an msbuild path specified" do
+describe MSBuild, "when an msbuild path is not specified" do
 	
 	before :all do
 		@testdata= MSBuildTestData.new
@@ -13,6 +13,18 @@ describe MSBuild, "when initializing without an msbuild path specified" do
 	it "should default to the .net framework v3.5" do
 		@msbuild.path_to_exe.should == @testdata.msbuild_path
 	end
+end
+
+describe MSBuild, "when an msbuild path is specified" do
+	
+	before :all do
+		@testdata= MSBuildTestData.new
+		@msbuild = MSBuild.new "Some Path"
+	end
+	
+	it "should use the specified path for the msbuild exe" do
+		@msbuild.path_to_exe.should == "Some Path"
+	end	
 end
 
 describe MSBuild, "when building a visual studio solution" do
