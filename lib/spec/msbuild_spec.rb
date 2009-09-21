@@ -15,7 +15,7 @@ describe MSBuild, "when building a visual studio solution" do
 
 	before :all do
 		@solution = File.join(File.dirname(__FILE__), 'support', 'TestSolution', 'TestSolution.sln')
-		@output = "D:\\Dev\\Derick-GitHub\\MSBuildTask\\lib\\spec\\support\\TestSolution\\TestSolution\\bin\\Debug\\TestSolution.dll"
+		@output = File.join(File.dirname(__FILE__), 'support', 'TestSolution', 'TestSolution', 'bin', 'Debug', 'TestSolution.dll')
 		File.delete @output if File.exist? @output
 		@msbuild = MSBuild.new
 		@msbuild.build @solution
@@ -30,13 +30,14 @@ describe MSBuild, "when building a visual studio solution for a specified config
 	
 	before :all do
 		@solution = File.join(File.dirname(__FILE__), 'support', 'TestSolution', 'TestSolution.sln')
-		@output = "D:\\Dev\\Derick-GitHub\\MSBuildTask\\lib\\spec\\support\\TestSolution\\TestSolution\\bin\\Release\\TestSolution.dll"
+		@output = File.join(File.dirname(__FILE__), 'support', 'TestSolution', 'TestSolution', 'bin', 'Release', 'TestSolution.dll')
 		File.delete @output if File.exist? @output
 		@msbuild = MSBuild.new
 		@msbuild.build @solution, {:configuration => :release}
 	end
 	
 	it "should output the solution's binaries according to the specified configuration" do
+		puts @output
 		File.exist?(@output).should == true
 	end
 end
