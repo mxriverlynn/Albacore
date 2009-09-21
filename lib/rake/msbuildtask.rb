@@ -11,7 +11,7 @@ module Rake
 			if msbuild_path==nil
 				@msbuild = MSBuild.new
 			else
-				@msbuild = MSBiuld.new msbuild_path
+				@msbuild = MSBuild.new msbuild_path
 			end
 			yield @msbuild if block_given?
 			define

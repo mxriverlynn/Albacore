@@ -58,8 +58,5 @@ describe MSBuild, "when specifying targets to build" do
 	it "should build the targets" do
 		$system_command.should include "/target:Clean;Build"
 	end
-	
-	it "should output the solution's binaries" do
-		File.exist?(@testdata.output_path).should == true
-	end
+
 end

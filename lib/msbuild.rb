@@ -1,10 +1,15 @@
 class MSBuild
 	attr_accessor :path_to_exe
 	
-	def initialize(path_to_exe = "") 
-		build_path_to_exe if path_to_exe == ""
+	def initialize(path_to_exe=nil) 
 		@properties={}
 		@targets={}
+
+		if path_to_exe == nil
+			build_path_to_exe
+		else
+			@path_to_exe = path_to_exe
+		end		
 	end
 	
 	def build_path_to_exe
