@@ -33,7 +33,8 @@ describe MSBuild, "when building a visual studio solution" do
 		@testdata= MSBuildTestData.new
 		@msbuild = MSBuild.new
 		
-		@msbuild.build @testdata.solution_path
+		@msbuild.solution = @testdata.solution_path
+		@msbuild.build
 	end
 	
 	it "should output the solution's binaries" do
@@ -48,7 +49,8 @@ describe MSBuild, "when building a visual studio solution for a specified config
 		@msbuild = MSBuild.new
 		
 		@msbuild.properties = {:configuration => :release}
-		@msbuild.build @testdata.solution_path
+		@msbuild.solution = @testdata.solution_path
+		@msbuild.build
 	end
 	
 	it "should output the solution's binaries according to the specified configuration" do
@@ -64,7 +66,8 @@ describe MSBuild, "when specifying targets to build" do
 		@msbuild = MSBuild.new
 		
 		@msbuild.targets = [:Clean, :Build]
-		@msbuild.build @testdata.solution_path
+		@msbuild.solution = @testdata.solution_path
+		@msbuild.build
 	end
 
 	it "should build the targets" do

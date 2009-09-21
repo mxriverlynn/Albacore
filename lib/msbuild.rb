@@ -1,7 +1,7 @@
-require 'patches/buildparameters'
+require 'lib/patches/buildparameters'
 
 class MSBuild
-	attr_accessor :path_to_exe
+	attr_accessor :path_to_exe, :solution
 	
 	def initialize(path_to_exe=nil) 
 		self.properties={}
@@ -28,12 +28,16 @@ class MSBuild
 		@properties.extend(HashParameterBuilder)
 	end
 	
-	def build(path_to_solution)
-		cmd = "\"#{@path_to_exe}\" \"#{path_to_solution}\""
+	def build
+		build_solution(@solution)
+	end
+	
+	def build_solution(solution)
+		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
 		cmd << " /property:#{@properties.build_parameters}" if @properties.length>0
 		cmd << " /target:#{@targets.build_parameters}" if @targets.length>0
 		
 		system cmd
-	end
+	end; private :build_solution
 	
 end

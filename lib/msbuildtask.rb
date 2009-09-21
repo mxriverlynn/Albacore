@@ -1,6 +1,5 @@
 require 'rake'
 require 'rake/tasklib'
-require 'msbuild'
 
 module Rake
 	class MSBuildTask < Rake::TaskLib
@@ -20,7 +19,7 @@ module Rake
 		
 		def define
 			task name do
-				@msbuild.build @solution_path
+				@msbuild.build
 			end
 		end
 		
