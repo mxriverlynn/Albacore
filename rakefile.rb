@@ -5,11 +5,11 @@ $: << File.join(@current_dir, "lib")
 require 'spec/rake/spectask'
 require 'msbuildtask'
 
-task :default => 'spec:test'
+task :default => 'albacore:specs'
 
-namespace :spec do
-  desc "Run functional specs"
-  Spec::Rake::SpecTask.new :test do |t|
+namespace :albacore do
+  desc "Run functional specs for Albacore"
+  Spec::Rake::SpecTask.new :specs do |t|
 	t.spec_opts << '--colour'
 	t.spec_opts << '--format specdoc'
     t.spec_files = FileList['lib/spec/**/*_spec.rb']

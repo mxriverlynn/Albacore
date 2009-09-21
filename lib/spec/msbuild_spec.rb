@@ -33,10 +33,26 @@ describe MSBuild, "when building a visual studio solution for a specified config
 		@testdata= MSBuildTestData.new("Release")
 		@msbuild = MSBuild.new
 		
-		@msbuild.build @testdata.solution_path, {:configuration => :release}
+		@msbuild.properties = {:configuration => :release}
+		@msbuild.build @testdata.solution_path
 	end
 	
 	it "should output the solution's binaries according to the specified configuration" do
 		File.exist?(@testdata.output_path).should == true
+	end
+end
+
+describe MSBuild, "when specifying targets to build" do
+	
+	before :all do
+		@testdata= MSBuildTestData.new("Release")
+		@msbuild = MSBuild.new
+		
+		@msbuild.targets = [:Clean, :Build]
+		@msbuild.build @testdata.solution_path
+	end
+
+	it "should build the targets" do
+		
 	end
 end
