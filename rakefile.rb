@@ -1,5 +1,4 @@
 require 'spec/rake/spectask'
-require 'rake/gempackagetask'
 
 task :default => 'albacore:specs'
 

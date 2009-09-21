@@ -26,7 +26,7 @@ class MSBuild
 	
 	def build(solution)
 		
-		property_text = build_key_value_options("property", @properties)
+		property_text = build_options("property", @properties)
 		target_text = build_options("target", @targets)
 	
 		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
@@ -36,30 +36,32 @@ class MSBuild
 		system cmd
 	end
 	
-	def build_key_value_options(option_name, option_values={})
-		
-		if (option_values.length > 0)
-			option_text = "/#{option_name}:"
-			option_values.each do |key, value|
-				option_text << "#{key}\=#{value};"
-			end
-			option_text = option_text.chop
-		end
-		
-		option_text
-	end
-	
 	def build_options(option_name, option_values={})
-		
 		if (option_values.length > 0)
 			option_text = "/#{option_name}:"
-			option_values.each do |key|
-				option_text << "#{key};"
+			if (option_values.kind_of?(Hash))
+				option_text << process_hash(option_values)
+			else
+				option_text << process_array(option_values)
 			end
 			option_text = option_text.chop
 		end
-		
 		option_text
 	end
 
+	def process_hash(option_values={})
+		option_text = ''
+		option_values.each do |key, value|
+			option_text << "#{key}\=#{value};"
+		end
+		option_text
+	end
+	
+	def process_array(option_values={})		
+		option_text = ''
+		option_values.each do |key|
+			option_text << "#{key};"
+		end
+		option_text
+	end
 end
