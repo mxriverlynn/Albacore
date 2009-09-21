@@ -1,21 +1,26 @@
 require 'rake'
 require 'rake/tasklib'
 
-module MSBuild
+module Rake
 	class MSBuildTask < Rake::TaskLib
 		
-		attr_accessor :name, :task_dependencies
+		attr_accessor :name
 		attr_accessor :msbuild_path, :solution_path
 		
-		def initialize(name=:MSBuild, task_dependencies={})
+		def initialize(name=:MSBuild, msbuild_path=nil)
 			@name = name
-			@task_dependencies = task_dependencies
-			yield self if block_given?
+			if msbuild_path==nil
+				@msbuild = MSBuild.new
+			else
+				@msbuild = MSBiuld.new msbuild_path
+			end
+			yield @msbuild if block_given?
 			define
 		end
 		
 		def define
-			task name => task_dependencies do
+			task name do
+				@msbuild.build @solution_path
 			end
 		end
 		
