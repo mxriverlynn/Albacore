@@ -1,23 +1,13 @@
 class MSBuildTestData
 	
+	attr_accessor :msbuild_path, :solution_path, :config_mode, :output_path
+	
 	def initialize(config_mode='Debug')
 		@msbuild_path = "C:\\Windows/Microsoft.NET/Framework/v3.5/MSBuild.exe"
 		@solution_path = File.join(File.dirname(__FILE__), "../", "support", "TestSolution", "TestSolution.sln")
 		@config_mode = config_mode
 		
 		setup_output
-	end
-	
-	def msbuild_path
-		@msbuild_path
-	end
-	
-	def solution_path
-		@solution_path
-	end
-	
-	def output_path
-		@output_path
 	end
 	
 	def setup_output()
