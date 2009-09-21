@@ -1,7 +1,7 @@
 require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
 require 'msbuild'
 require 'msbuildtestdata'
-require 'msbuildfake'
+require 'system_patch'
 
 describe MSBuild, "when an msbuild path is not specified" do
 	
