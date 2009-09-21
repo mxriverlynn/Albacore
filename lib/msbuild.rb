@@ -1,3 +1,5 @@
+require 'patches/buildparameters'
+
 class MSBuild
 	attr_accessor :path_to_exe
 	
@@ -25,38 +27,11 @@ class MSBuild
 	end
 	
 	def build(solution)
-		
-		property_text = build_hash_options("property", @properties)
-		target_text = build_array_options("target", @targets)
-	
 		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
-		cmd << " #{property_text}" if property_text != nil
-		cmd << " #{target_text}" if target_text != nil
+		cmd << " /property:#{@properties.build_parameters}" if @properties.length>0
+		cmd << " /target:#{@targets.build_parameters}" if @targets.length>0
 		
 		system cmd
 	end
 	
-	def build_hash_options(option_name, option_values={})
-		return if (option_values.length==0)
-
-		option_text = "/#{option_name}:"
-		option_values.each do |key, value|
-			option_text << "#{key}\=#{value};"
-		end
-		option_text = option_text.chop
-		
-		option_text
-	end
-
-	def build_array_options(option_name, option_values={})
-		return if (option_values.length==0)
-
-		option_text = "/#{option_name}:"
-		option_values.each do |value|
-			option_text << "#{value};"
-		end
-		option_text = option_text.chop
-		
-		option_text
-	end
 end
