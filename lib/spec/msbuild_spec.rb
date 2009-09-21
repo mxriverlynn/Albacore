@@ -1,6 +1,7 @@
-require 'lib/msbuild'
-require 'lib/spec/model/msbuildtestdata'
-require 'lib/spec/model/msbuildfake'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
+require 'msbuild'
+require 'msbuildtestdata'
+require 'msbuildfake'
 
 describe MSBuild, "when an msbuild path is not specified" do
 	

@@ -1,5 +1,6 @@
-require 'lib/msbuild'
-require 'lib/rake/msbuildtask'
+require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
+require 'msbuild'
+require 'msbuildtask'
 
 describe Rake::MSBuildTask, "when running" do
 	before :all do
