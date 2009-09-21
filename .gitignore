@@ -10,3 +10,4 @@ _ReSharper.*
 *.cache
 ~$*
 *.tmp
+*.eprj
