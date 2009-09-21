@@ -4,8 +4,7 @@ require 'rake/tasklib'
 module Rake
 	class MSBuildTask < Rake::TaskLib
 		
-		attr_accessor :name
-		attr_accessor :msbuild_path, :solution_path
+		attr_accessor :name, :solution_path
 		
 		def initialize(name=:MSBuild, msbuild_path=nil)
 			@name = name

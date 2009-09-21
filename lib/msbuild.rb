@@ -6,13 +6,20 @@ class MSBuild
 	end
 	
 	def build_path_to_exe
-		@path_to_exe = '"' + File.join(ENV['windir'].dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe') + '"'
-		puts @path_to_exe
+		@path_to_exe = File.join(ENV['windir'].dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
 	end
 	
-	def build(solution)
-		execute_path = @path_to_exe << " #{solution}"
-		system execute_path
+	def build(solution, options={})
+		
+		option_text = ''
+		options.each do |key, value|
+			option_text << "/p:#{key}\=#{value} "
+		end
+		
+		cmd = "\"#{@path_to_exe}\" \"#{solution}\" #{option_text}"
+		puts cmd + " ............. TEST"
+		
+		system cmd
 	end
 	
 end
