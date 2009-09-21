@@ -1,5 +1,5 @@
 require 'lib/msbuild'
-require 'lib/spec/model/msbuildtester'
+require 'lib/spec/model/msbuildtestdata'
 
 describe MSBuild, "when initializing without an msbuild path specified" do
 	
