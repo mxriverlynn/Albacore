@@ -17,7 +17,6 @@ class MSBuild
 		end
 		
 		cmd = "\"#{@path_to_exe}\" \"#{solution}\" #{option_text}"
-		puts cmd + " ............. TEST"
 		
 		system cmd
 	end
