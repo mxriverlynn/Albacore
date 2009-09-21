@@ -15,7 +15,7 @@ end
 namespace :albacore do
 	desc "Run a sample build using the MSBuildTask"
 	Rake::MSBuildTask.new(:msbuild) do |msb|
-		msb.properties = {:configuration => :debug}
+		msb.properties = {:configuration => :Debug}
 		msb.targets = [:Clean, :Build]
 		msb.solution = "lib/spec/support/TestSolution/TestSolution.sln"
 	end

@@ -18,12 +18,12 @@ class MSBuild
 		@path_to_exe = File.join(ENV['windir'].dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
 	end
 	
-	def targets=(targets={})
+	def targets=(targets)
 		@targets=targets
 		@targets.extend(ArrayParameterBuilder)
 	end
 	
-	def properties=(properties={})
+	def properties=(properties)
 		@properties = properties
 		@properties.extend(HashParameterBuilder)
 	end
