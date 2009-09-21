@@ -1,5 +1,7 @@
 require 'lib/msbuild'
 require 'lib/spec/model/msbuildtestdata'
+require 'lib/spec/model/msbuildfake'
+
 
 describe MSBuild, "when initializing without an msbuild path specified" do
 	
@@ -45,7 +47,8 @@ end
 describe MSBuild, "when specifying targets to build" do
 	
 	before :all do
-		@testdata= MSBuildTestData.new("Release")
+
+		@testdata= MSBuildTestData.new
 		@msbuild = MSBuild.new
 		
 		@msbuild.targets = [:Clean, :Build]
@@ -53,6 +56,10 @@ describe MSBuild, "when specifying targets to build" do
 	end
 
 	it "should build the targets" do
-		
+		$system_command.should include "/target:Clean;Build"
+	end
+	
+	it "should output the solution's binaries" do
+		File.exist?(@testdata.output_path).should == true
 	end
 end
