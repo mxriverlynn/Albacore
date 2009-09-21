@@ -1,43 +1,42 @@
 require 'lib/msbuild'
+require 'lib/spec/model/msbuildtester'
 
 describe MSBuild, "when initializing without an msbuild path specified" do
 	
 	before :all do
+		@testdata= MSBuildTestData.new
 		@msbuild = MSBuild.new
 	end
 	
 	it "should default to the .net framework v3.5" do
-		@msbuild.path_to_exe.should == "C:\\Windows/Microsoft.NET/Framework/v3.5/MSBuild.exe"
+		@msbuild.path_to_exe.should == @testdata.msbuild_path
 	end
 end
 
 describe MSBuild, "when building a visual studio solution" do
 
 	before :all do
-		@solution = File.join(File.dirname(__FILE__), 'support', 'TestSolution', 'TestSolution.sln')
-		@output = File.join(File.dirname(__FILE__), 'support', 'TestSolution', 'TestSolution', 'bin', 'Debug', 'TestSolution.dll')
-		File.delete @output if File.exist? @output
+		@testdata= MSBuildTestData.new
 		@msbuild = MSBuild.new
-		@msbuild.build @solution
+		
+		@msbuild.build @testdata.solution_path
 	end
 	
 	it "should output the solution's binaries" do
-		File.exist?(@output).should == true
+		File.exist?(@testdata.output_path).should == true
 	end
 end
 
 describe MSBuild, "when building a visual studio solution for a specified configuration" do
 	
 	before :all do
-		@solution = File.join(File.dirname(__FILE__), 'support', 'TestSolution', 'TestSolution.sln')
-		@output = File.join(File.dirname(__FILE__), 'support', 'TestSolution', 'TestSolution', 'bin', 'Release', 'TestSolution.dll')
-		File.delete @output if File.exist? @output
+		@testdata= MSBuildTestData.new("Release")
 		@msbuild = MSBuild.new
-		@msbuild.build @solution, {:configuration => :release}
+		
+		@msbuild.build @testdata.solution_path, {:configuration => :release}
 	end
 	
 	it "should output the solution's binaries according to the specified configuration" do
-		puts @output
-		File.exist?(@output).should == true
+		File.exist?(@testdata.output_path).should == true
 	end
 end
