@@ -1,14 +1,15 @@
 class AssemblyInfo
 	
-	attr_accessor :version, :title
+	attr_accessor :version, :title, :description
 	
 	def write(assemblyinfo_file)
 		File.open(assemblyinfo_file, 'w') do |f|
 			
 			f.write using_statements
 			f.write "\n"
-			f.write build_attribute("AssemblyVersion", @version) if :version != nil
-			f.write build_attribute("AssemblyTitle", @title) if :title != nil			
+			f.write build_attribute("AssemblyVersion", @version) if @version != nil
+			f.write build_attribute("AssemblyTitle", @title) if @title != nil
+			f.write build_attribute("AssemblyDescription", @description) if @description != nil
 		end
 	end
 	

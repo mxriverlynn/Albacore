@@ -10,6 +10,7 @@ describe "when generating an assembly info file" do
 		
 		asm.version = @tester.version
 		asm.title = @tester.title
+		asm.description = @tester.description
 		
 		asm.write(@tester.assemblyinfo_file)
 		@filedata = @tester.read_assemblyinfo_file
@@ -29,6 +30,10 @@ describe "when generating an assembly info file" do
 	
 	it "should contain the assembly title" do
 		@filedata.should include("[assembly: AssemblyTitle(\"#{@tester.title}\")]")
+	end
+	
+	it "should contain the assembly description" do
+		@filedata.should include("[assembly: AssemblyDescription(\"#{@tester.description}\")]")
 	end
 	
 end
