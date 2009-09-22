@@ -4,8 +4,14 @@ class AssemblyInfoTester
 	
 	def initialize
 		@version = "0.0.0.1"
-		@assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.cs")
 		@title = "some assembly title"
+		
+		setup_assemblyinfo_file
+	end
+	
+	def setup_assemblyinfo_file
+		@assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.cs")
+		File.delete @assemblyinfo_file if File.exist?(@assemblyinfo_file)
 	end
 	
 	def read_assemblyinfo_file
