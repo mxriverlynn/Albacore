@@ -61,6 +61,8 @@ describe AssemblyInfo, "when generating an assembly info file" do
 		asm.title = @tester.title
 		asm.description = @tester.description
 		asm.copyright = @tester.copyright
+		asm.com_visible = @tester.com_visible
+		asm.com_guid = @tester.com_guid
 		
 		@filedata = @tester.build_and_read_assemblyinfo_file asm
 	end
@@ -88,6 +90,11 @@ describe AssemblyInfo, "when generating an assembly info file" do
 	it "should contain the copyright information" do
 		@filedata.should include("[assembly: AssemblyCopyright(\"#{@tester.copyright}\")]")
 	end
+	
+	it "should contain the com visible information" do
+		@filedata.should include("[assembly: ComVisible(#{@tester.com_visible})]")
+		@filedata.should include("[assembly: Guid(\"#{@tester.com_guid}\")]")
+	end
 end
 
 describe AssemblyInfo, "when generating an assembly info file with no attributes provided" do
@@ -113,5 +120,10 @@ describe AssemblyInfo, "when generating an assembly info file with no attributes
 	
 	it "should not contain the copyright information" do
 		@filedata.should_not include("[assembly: AssemblyCopyright(\"#{@tester.copyright}\")]")
+	end
+	
+	it "should not contain the com visible information" do
+		@filedata.should_not include("[assembly: ComVisible(#{@tester.com_visible})]")
+		@filedata.should_not include("[assembly: Guid(\"#{@tester.com_guid}\")]")
 	end
 end

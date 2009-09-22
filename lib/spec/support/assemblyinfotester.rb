@@ -9,6 +9,8 @@ class AssemblyInfoTester < AssemblyInfo
 		@title = "some assembly title"
 		@description = "some assembly description goes here."
 		@copyright = "some copyright info goes here"
+		@com_visible = false
+		@com_guid = "dbabb27c-a536-4b5b-91f1-2226b6e3655c"
 		
 		setup_assemblyinfo_file
 	end

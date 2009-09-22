@@ -1,6 +1,6 @@
 class AssemblyInfo
 	
-	attr_accessor :version, :title, :description, :output_file, :custom_attributes, :copyright
+	attr_accessor :version, :title, :description, :output_file, :custom_attributes, :copyright, :com_visible, :com_guid
 	
 	def write
 		write_assemblyinfo @output_file
@@ -14,7 +14,10 @@ class AssemblyInfo
 			f.write build_attribute("AssemblyTitle", @title) if @title != nil
 			f.write build_attribute("AssemblyDescription", @description) if @description != nil
 			f.write build_attribute("AssemblyCopyright", @copyright) if @copyright != nil
+			f.write build_attribute("ComVisible", @com_visible) if @com_visible != nil
+			f.write build_attribute("Guid", @com_guid) if @com_guid != nil
 			
+			f.write "\n"
 			if @custom_attributes != nil
 				attributes = build_custom_attributes()
 				f.write attributes.join
