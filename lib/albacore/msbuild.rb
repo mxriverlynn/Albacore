@@ -1,4 +1,4 @@
-require 'lib/albacore/patches/buildparameters'
+require File.join(File.dirname(__FILE__), 'patches', 'buildparameters')
 
 class MSBuild
 	attr_accessor :path_to_exe, :solution
