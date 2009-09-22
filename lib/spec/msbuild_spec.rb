@@ -53,6 +53,10 @@ describe MSBuild, "when building a visual studio solution for a specified config
 		@msbuild.build
 	end
 	
+	it "should build with the specified configuration as a property" do
+		$system_command.should include "/property:configuration=release"
+	end
+	
 	it "should output the solution's binaries according to the specified configuration" do
 		File.exist?(@testdata.output_path).should == true
 	end
