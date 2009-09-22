@@ -27,7 +27,9 @@ namespace :albacore do
 		asm.version = "0.1.2.3"
 		asm.title = "my assembly title"
 		asm.description = "this is the assembly description"
-		asm.file = "lib/spec/support/AssemblyInfo/AssemblyInfo.cs"
+		asm.copyright = "copyright some year, by some legal entity"
 		asm.custom_attributes :SomeAttribute => "some value goes here", :AnotherAttribute => "with some data"
+		
+		asm.output_file = "lib/spec/support/AssemblyInfo/AssemblyInfo.cs"
 	end
 end

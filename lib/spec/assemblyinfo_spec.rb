@@ -10,9 +10,7 @@ describe AssemblyInfo, "when providing custom attributes" do
 		
 		asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
 
-		asm.file = @tester.assemblyinfo_file
-		asm.write
-		@filedata = @tester.read_assemblyinfo_file
+		@filedata = @tester.build_and_read_assemblyinfo_file asm
 	end
 	
 	it "should write the custom attributes to the assembly info file" do
@@ -29,9 +27,7 @@ describe AssemblyInfo, "when specifying a custom attribute with no data" do
 		
 		asm.custom_attributes :NoArgsAttribute => nil
 
-		asm.file = @tester.assemblyinfo_file
-		asm.write
-		@filedata = @tester.read_assemblyinfo_file		
+		@filedata = @tester.build_and_read_assemblyinfo_file asm
 	end
 	
 	it "should write the attribute with an empty argument list" do
@@ -47,9 +43,7 @@ describe AssemblyInfo, "when specifying an attribute with non-string data" do
 		
 		asm.custom_attributes :NonStringAttribute => true
 
-		asm.file = @tester.assemblyinfo_file
-		asm.write
-		@filedata = @tester.read_assemblyinfo_file		
+		@filedata = @tester.build_and_read_assemblyinfo_file asm
 	end
 	
 	it "should write the attribute data without quotes" do
@@ -68,9 +62,7 @@ describe AssemblyInfo, "when generating an assembly info file" do
 		asm.description = @tester.description
 		asm.copyright = @tester.copyright
 		
-		asm.file = @tester.assemblyinfo_file
-		asm.write
-		@filedata = @tester.read_assemblyinfo_file
+		@filedata = @tester.build_and_read_assemblyinfo_file asm
 	end
 	
 	it "should use the system.reflection namespace" do
@@ -104,9 +96,7 @@ describe AssemblyInfo, "when generating an assembly info file with no attributes
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
 		
-		asm.file = @tester.assemblyinfo_file
-		asm.write
-		@filedata = @tester.read_assemblyinfo_file
+		@filedata = @tester.build_and_read_assemblyinfo_file asm
 	end
 	
 	it "should not contain the specified version information" do

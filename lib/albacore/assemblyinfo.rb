@@ -1,9 +1,9 @@
 class AssemblyInfo
 	
-	attr_accessor :version, :title, :description, :file, :custom_attributes, :copyright
+	attr_accessor :version, :title, :description, :output_file, :custom_attributes, :copyright
 	
 	def write
-		write_assemblyinfo @file
+		write_assemblyinfo @output_file
 	end
 	
 	def write_assemblyinfo(assemblyinfo_file)

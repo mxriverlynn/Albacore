@@ -18,7 +18,10 @@ class AssemblyInfoTester < AssemblyInfo
 		File.delete @assemblyinfo_file if File.exist? @assemblyinfo_file
 	end
 	
-	def read_assemblyinfo_file
+	def build_and_read_assemblyinfo_file(assemblyinfo)
+		assemblyinfo.output_file = @assemblyinfo_file
+		assemblyinfo.write
+
 		contents = ''
 		File.open(@assemblyinfo_file, "r") do |f|
     		contents = f.read
