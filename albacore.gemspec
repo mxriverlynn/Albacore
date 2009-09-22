@@ -3,7 +3,7 @@ require 'rake'
 
 Gem::Specification.new do |s| 
 	s.name = "Albacore"
-	s.version = "0.0.1"
+	s.version = "0.0.2"
 	
 	s.author = "Derick Bailey"
 	s.email = "derickbailey@gmail.com"
