@@ -38,6 +38,6 @@ class MSBuild
 		cmd << " /target:#{@targets.build_parameters}" if @targets.length>0
 		
 		system cmd
-	end; private :build_solution
+	end
 	
 end
