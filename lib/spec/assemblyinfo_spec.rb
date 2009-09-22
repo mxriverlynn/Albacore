@@ -2,7 +2,26 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_hel
 require 'assemblyinfotester'
 require 'assemblyinfo'
 
-describe "when generating an assembly info file" do
+describe AssemblyInfo, "when providing custom attributes" do
+	
+	before :all do
+		@tester = AssemblyInfoTester.new
+		asm = AssemblyInfo.new
+		
+		asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
+
+		asm.file = @tester.assemblyinfo_file
+		asm.write
+		@filedata = @tester.read_assemblyinfo_file
+	end
+	
+	it "should write the custom attributes to the assembly info file" do
+		@filedata.should include("[assembly: CustomAttribute(\"custom attribute data\")]")
+		@filedata.should include("[assembly: AnotherAttribute(\"more data here\")]")
+	end
+end
+
+describe AssemblyInfo, "when generating an assembly info file" do
 	
 	before :all do
 		@tester = AssemblyInfoTester.new
@@ -39,7 +58,7 @@ describe "when generating an assembly info file" do
 	
 end
 
-describe "when generating an assembly info file with no attributes provided" do
+describe AssemblyInfo, "when generating an assembly info file with no attributes provided" do
 	
 	before :all do
 		@tester = AssemblyInfoTester.new
