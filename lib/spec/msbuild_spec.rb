@@ -48,7 +48,7 @@ describe MSBuild, "when building a visual studio solution for a specified config
 		@testdata= MSBuildTestData.new("Release")
 		@msbuild = @testdata.msbuild
 		
-		@msbuild.properties = {:configuration => :release}
+		@msbuild.properties :configuration => :release
 		@msbuild.solution = @testdata.solution_path
 		@msbuild.build
 	end
@@ -69,7 +69,7 @@ describe MSBuild, "when specifying targets to build" do
 		@testdata= MSBuildTestData.new
 		@msbuild = @testdata.msbuild
 		
-		@msbuild.targets = [:Clean, :Build]
+		@msbuild.targets [:Clean, :Build]
 		@msbuild.solution = @testdata.solution_path
 		@msbuild.build
 	end

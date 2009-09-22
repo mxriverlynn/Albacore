@@ -4,9 +4,6 @@ class MSBuild
 	attr_accessor :path_to_exe, :solution
 	
 	def initialize(path_to_exe=nil) 
-		self.properties={}
-		self.targets={}
-
 		if path_to_exe == nil
 			build_path_to_exe
 		else
@@ -18,12 +15,12 @@ class MSBuild
 		@path_to_exe = File.join(ENV['windir'].dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
 	end
 	
-	def targets=(targets)
+	def targets(targets)
 		@targets=targets
 		@targets.extend(ArrayParameterBuilder)
 	end
 	
-	def properties=(properties)
+	def properties(properties)
 		@properties = properties
 		@properties.extend(HashParameterBuilder)
 	end
@@ -34,8 +31,8 @@ class MSBuild
 	
 	def build_solution(solution)
 		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
-		cmd << " /property:#{@properties.build_parameters}" if @properties.length>0
-		cmd << " /target:#{@targets.build_parameters}" if @targets.length>0
+		cmd << " /property:#{@properties.build_parameters}" if @properties != nil
+		cmd << " /target:#{@targets.build_parameters}" if @targets != nil
 		
 		system cmd
 	end

@@ -12,12 +12,13 @@ end
 
 namespace :albacore do
 	
+	desc "Run a complete Albacore build sample"
 	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild']
 	
 	desc "Run a sample build using the MSBuildTask"
 	Rake::MSBuildTask.new(:msbuild) do |msb|
-		msb.properties = {:configuration => :Debug}
-		msb.targets = [:Clean, :Build]
+		msb.properties :configuration => :Debug
+		msb.targets [:Clean, :Build]
 		msb.solution = "lib/spec/support/TestSolution/TestSolution.sln"
 	end
 	
@@ -27,6 +28,6 @@ namespace :albacore do
 		asm.title = "my assembly title"
 		asm.description = "this is the assembly description"
 		asm.file = "lib/spec/support/AssemblyInfo/AssemblyInfo.cs"
-		asm.custom_attributes :SomeAttribute => "some value goes here"
+		asm.custom_attributes :SomeAttribute => "some value goes here", :AnotherAttribute => "with some data"
 	end
 end

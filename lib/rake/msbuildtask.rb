@@ -7,11 +7,7 @@ module Rake
 		
 		def initialize(name=:MSBuild, msbuild_path=nil)
 			@name = name
-			if msbuild_path==nil
-				@msbuild = MSBuild.new
-			else
-				@msbuild = MSBuild.new msbuild_path
-			end
+			@msbuild = MSBuild.new msbuild_path
 			yield @msbuild if block_given?
 			define
 		end

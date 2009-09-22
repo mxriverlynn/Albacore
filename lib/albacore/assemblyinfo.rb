@@ -19,7 +19,7 @@ class AssemblyInfo
 		end
 	end
 	
-	def custom_attributes(attributes={})
+	def custom_attributes(attributes)
 		@custom_attributes = attributes
 	end
 	
