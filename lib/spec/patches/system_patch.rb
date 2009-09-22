@@ -1,6 +1,6 @@
 require 'lib/albacore/msbuild'
 
-class MSBuild
+module SystemPatch
 	def system(cmd)
 		$system_command = cmd
 		super cmd

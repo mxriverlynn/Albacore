@@ -6,8 +6,8 @@ require 'system_patch'
 describe MSBuild, "when an msbuild path is not specified" do
 	
 	before :all do
-		@testdata= MSBuildTestData.new
-		@msbuild = MSBuild.new
+		@testdata = MSBuildTestData.new
+		@msbuild = @testdata.msbuild
 	end
 	
 	it "should default to the .net framework v3.5" do
@@ -18,8 +18,8 @@ end
 describe MSBuild, "when an msbuild path is specified" do
 	
 	before :all do
-		@testdata= MSBuildTestData.new
-		@msbuild = MSBuild.new "Some Path"
+		@testdata = MSBuildTestData.new
+		@msbuild = @testdata.msbuild "Some Path"
 	end
 	
 	it "should use the specified path for the msbuild exe" do
@@ -30,8 +30,8 @@ end
 describe MSBuild, "when building a visual studio solution" do
 
 	before :all do
-		@testdata= MSBuildTestData.new
-		@msbuild = MSBuild.new
+		@testdata = MSBuildTestData.new
+		@msbuild = @testdata.msbuild
 		
 		@msbuild.solution = @testdata.solution_path
 		@msbuild.build
@@ -46,7 +46,7 @@ describe MSBuild, "when building a visual studio solution for a specified config
 	
 	before :all do
 		@testdata= MSBuildTestData.new("Release")
-		@msbuild = MSBuild.new
+		@msbuild = @testdata.msbuild
 		
 		@msbuild.properties = {:configuration => :release}
 		@msbuild.solution = @testdata.solution_path
@@ -67,7 +67,7 @@ describe MSBuild, "when specifying targets to build" do
 	before :all do
 
 		@testdata= MSBuildTestData.new
-		@msbuild = MSBuild.new
+		@msbuild = @testdata.msbuild
 		
 		@msbuild.targets = [:Clean, :Build]
 		@msbuild.solution = @testdata.solution_path
