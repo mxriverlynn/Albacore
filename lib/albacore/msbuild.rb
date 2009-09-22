@@ -1,4 +1,4 @@
-require 'lib/patches/buildparameters'
+require 'lib/albacore/patches/buildparameters'
 
 class MSBuild
 	attr_accessor :path_to_exe, :solution

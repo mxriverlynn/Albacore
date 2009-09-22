@@ -54,7 +54,7 @@ describe MSBuild, "when building a visual studio solution for a specified config
 	end
 	
 	it "should build with the specified configuration as a property" do
-		$system_command.should include "/property:configuration=release"
+		$system_command.should include("/property:configuration=release")
 	end
 	
 	it "should output the solution's binaries according to the specified configuration" do
@@ -75,7 +75,7 @@ describe MSBuild, "when specifying targets to build" do
 	end
 
 	it "should build the targets" do
-		$system_command.should include "/target:Clean;Build"
+		$system_command.should include("/target:Clean;Build")
 	end
 
 end

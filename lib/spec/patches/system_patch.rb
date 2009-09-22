@@ -1,4 +1,4 @@
-require 'lib/msbuild'
+require 'lib/albacore/msbuild'
 
 class MSBuild
 	def system(cmd)
