@@ -12,7 +12,8 @@ describe "when generating an assembly info file" do
 		asm.title = @tester.title
 		asm.description = @tester.description
 		
-		asm.write(@tester.assemblyinfo_file)
+		asm.file = @tester.assemblyinfo_file
+		asm.write
 		@filedata = @tester.read_assemblyinfo_file
 	end
 	
@@ -44,7 +45,8 @@ describe "when generating an assembly info file with no attributes provided" do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
 		
-		asm.write(@tester.assemblyinfo_file)
+		asm.file = @tester.assemblyinfo_file
+		asm.write
 		@filedata = @tester.read_assemblyinfo_file
 	end
 	

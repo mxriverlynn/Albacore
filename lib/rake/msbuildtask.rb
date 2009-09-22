@@ -3,8 +3,7 @@ require 'rake/tasklib'
 
 module Rake
 	class MSBuildTask < Rake::TaskLib
-		
-		attr_accessor :name, :solution_path
+		attr_accessor :name
 		
 		def initialize(name=:MSBuild, msbuild_path=nil)
 			@name = name
@@ -21,7 +20,6 @@ module Rake
 			task name do
 				@msbuild.build
 			end
-		end
-		
+		end		
 	end
 end
