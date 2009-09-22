@@ -37,3 +37,26 @@ describe "when generating an assembly info file" do
 	end
 	
 end
+
+describe "when generating an assembly info file with no attributes provided" do
+	
+	before :all do
+		@tester = AssemblyInfoTester.new
+		asm = AssemblyInfo.new
+		
+		asm.write(@tester.assemblyinfo_file)
+		@filedata = @tester.read_assemblyinfo_file
+	end
+	
+	it "should not contain the specified version information" do
+		@filedata.should_not include("[assembly: AssemblyVersion(\"#{@tester.version}\")]")
+	end
+	
+	it "should not contain the assembly title" do
+		@filedata.should_not include("[assembly: AssemblyTitle(\"#{@tester.title}\")]")
+	end
+	
+	it "should not contain the assembly description" do
+		@filedata.should_not include("[assembly: AssemblyDescription(\"#{@tester.description}\")]")
+	end
+end
