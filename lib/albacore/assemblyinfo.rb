@@ -20,7 +20,7 @@ class AssemblyInfo
 	end
 	
 	def build_attribute(attr_name, attr_data)
-		attribute = "[assembly: #{attr_name}(\"#{attr_data}\")]"
+		attribute = "[assembly: #{attr_name}(\"#{attr_data}\")]\n"
 		attribute
 	end
 	

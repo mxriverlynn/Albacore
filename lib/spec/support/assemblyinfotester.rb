@@ -11,7 +11,7 @@ class AssemblyInfoTester
 	
 	def setup_assemblyinfo_file
 		@assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.cs")
-		File.delete @assemblyinfo_file if File.exist?(@assemblyinfo_file)
+		File.delete @assemblyinfo_file if File.exist? @assemblyinfo_file
 	end
 	
 	def read_assemblyinfo_file
