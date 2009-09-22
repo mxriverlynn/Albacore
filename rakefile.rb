@@ -27,5 +27,6 @@ namespace :albacore do
 		asm.title = "my assembly title"
 		asm.description = "this is the assembly description"
 		asm.file = "lib/spec/support/AssemblyInfo/AssemblyInfo.cs"
+		asm.custom_attributes :SomeAttribute => "some value goes here"
 	end
 end
