@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+require 'rake'
 
 Gem::Specification.new do |s| 
 	s.name = "Albacore"
@@ -9,7 +10,7 @@ Gem::Specification.new do |s|
 	s.homepage = "http://github.com/derickbailey/Albacore"
 	s.platform = Gem::Platform::RUBY
 	s.summary = "A Suite of Rake Build Tasks For .Net Solutions"
-	s.files = FileList["rakefile.rb", "{lib}/**/*"].to_a
+	s.files = FileList["rakefile.rb", "EULA.txt", "{lib}/**/*"].to_a
 	s.require_path = "lib"
 	# s.autorequire = "name"
 	s.test_files = FileList["{spec}/**/*test.rb"].to_a
