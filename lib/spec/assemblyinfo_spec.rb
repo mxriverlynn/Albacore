@@ -21,6 +21,42 @@ describe AssemblyInfo, "when providing custom attributes" do
 	end
 end
 
+describe AssemblyInfo, "when specifying a custom attribute with no data" do
+	
+	before :all do
+		@tester = AssemblyInfoTester.new
+		asm = AssemblyInfo.new
+		
+		asm.custom_attributes :NoArgsAttribute => nil
+
+		asm.file = @tester.assemblyinfo_file
+		asm.write
+		@filedata = @tester.read_assemblyinfo_file		
+	end
+	
+	it "should write the attribute with an empty argument list" do
+		@filedata.should include("[assembly: NoArgsAttribute()]")
+	end
+end
+
+describe AssemblyInfo, "when specifying an attribute with non-string data" do
+	
+	before :all do
+		@tester = AssemblyInfoTester.new
+		asm = AssemblyInfo.new
+		
+		asm.custom_attributes :NonStringAttribute => true
+
+		asm.file = @tester.assemblyinfo_file
+		asm.write
+		@filedata = @tester.read_assemblyinfo_file		
+	end
+	
+	it "should write the attribute data without quotes" do
+		@filedata.should include("[assembly: NonStringAttribute(true)]")
+	end
+end
+
 describe AssemblyInfo, "when generating an assembly info file" do
 	
 	before :all do
@@ -30,6 +66,7 @@ describe AssemblyInfo, "when generating an assembly info file" do
 		asm.version = @tester.version
 		asm.title = @tester.title
 		asm.description = @tester.description
+		asm.copyright = @tester.copyright
 		
 		asm.file = @tester.assemblyinfo_file
 		asm.write
@@ -56,6 +93,9 @@ describe AssemblyInfo, "when generating an assembly info file" do
 		@filedata.should include("[assembly: AssemblyDescription(\"#{@tester.description}\")]")
 	end
 	
+	it "should contain the copyright information" do
+		@filedata.should include("[assembly: AssemblyCopyright(\"#{@tester.copyright}\")]")
+	end
 end
 
 describe AssemblyInfo, "when generating an assembly info file with no attributes provided" do
@@ -79,5 +119,9 @@ describe AssemblyInfo, "when generating an assembly info file with no attributes
 	
 	it "should not contain the assembly description" do
 		@filedata.should_not include("[assembly: AssemblyDescription(\"#{@tester.description}\")]")
+	end
+	
+	it "should not contain the copyright information" do
+		@filedata.should_not include("[assembly: AssemblyCopyright(\"#{@tester.copyright}\")]")
 	end
 end

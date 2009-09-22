@@ -1,11 +1,14 @@
-class AssemblyInfoTester
+require 'assemblyinfo'
+
+class AssemblyInfoTester < AssemblyInfo
 	
-	attr_accessor :version, :assemblyinfo_file, :title, :description
+	attr_accessor :assemblyinfo_file
 	
 	def initialize
 		@version = "0.0.0.1"
 		@title = "some assembly title"
 		@description = "some assembly description goes here."
+		@copyright = "some copyright info goes here"
 		
 		setup_assemblyinfo_file
 	end

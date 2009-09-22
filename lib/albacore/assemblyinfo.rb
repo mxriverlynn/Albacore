@@ -1,6 +1,6 @@
 class AssemblyInfo
 	
-	attr_accessor :version, :title, :description, :file, :custom_attributes
+	attr_accessor :version, :title, :description, :file, :custom_attributes, :copyright
 	
 	def write
 		write_assemblyinfo @file
@@ -13,8 +13,13 @@ class AssemblyInfo
 			f.write build_attribute("AssemblyVersion", @version) if @version != nil
 			f.write build_attribute("AssemblyTitle", @title) if @title != nil
 			f.write build_attribute("AssemblyDescription", @description) if @description != nil
+			f.write build_attribute("AssemblyCopyright", @copyright) if @copyright != nil
 			
-			write_custom_attributes(f) if @custom_attributes != nil
+			if @custom_attributes != nil
+				attributes = build_custom_attributes()
+				f.write attributes.join
+				f.write("\n")
+			end
 			
 		end
 	end
@@ -31,14 +36,18 @@ class AssemblyInfo
 	end
 	
 	def build_attribute(attr_name, attr_data)
-		attribute = "[assembly: #{attr_name}(\"#{attr_data}\")]\n"
+		attribute = "[assembly: #{attr_name}("
+		attribute << "#{attr_data.inspect}" if attr_data != nil
+		attribute << ")]\n"
 		attribute
 	end
 	
-	def write_custom_attributes(f)
+	def build_custom_attributes()
+		attributes = []
 		@custom_attributes.each do |key, value|
-			f.write build_attribute(key, value.to_s)
+			attributes << build_attribute(key, value)
 		end
+		attributes
 	end
 	
 end
