@@ -12,3 +12,4 @@ _ReSharper.*
 *.tmp
 *.eprj
 lib/spec/support/AssemblyInfo/AssemblyInfo.cs
+github-test.rb
