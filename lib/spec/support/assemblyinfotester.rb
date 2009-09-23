@@ -11,6 +11,8 @@ class AssemblyInfoTester < AssemblyInfo
 		@copyright = "some copyright info goes here"
 		@com_visible = false
 		@com_guid = "dbabb27c-a536-4b5b-91f1-2226b6e3655c"
+		@company_name = "some company name"
+		@product_name = "my product, yo."
 		
 		setup_assemblyinfo_file
 	end

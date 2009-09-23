@@ -25,6 +25,8 @@ namespace :albacore do
 	desc "Run a sample assembly info generator"
 	Rake::AssemblyInfoTask.new(:assemblyinfo) do |asm|
 		asm.version = "0.1.2.3"
+		asm.company_name = "a test company"
+		asm.product_name = "a product name goes here"
 		asm.title = "my assembly title"
 		asm.description = "this is the assembly description"
 		asm.copyright = "copyright some year, by some legal entity"
