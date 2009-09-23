@@ -1,6 +1,6 @@
 Gem::Specification.new do |s| 
 	s.name = "Albacore"
-	s.version = "0.0.2"
+	s.version = "0.0.1"
 	s.author = "Derick Bailey"
 	s.email = "derickbailey@gmail.com"
 	s.homepage = "http://github.com/derickbailey/Albacore"
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 		"lib/albacore/patches/buildparameters.rb",
 		"lib/albacore.rb",
 		"lib/rake",
-		"lib/rake/assemblyinfo.rb",
+		"lib/rake/assemblyinfotask.rb",
 		"lib/rake/msbuildtask.rb",
 		"lib/spec",
 		"lib/spec/assemblyinfo_spec.rb",
