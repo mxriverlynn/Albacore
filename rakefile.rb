@@ -1,5 +1,5 @@
 require 'spec/rake/spectask'
-require 'lib/albacore'
+require 'albacore'
 
 task :default => :specs
 
