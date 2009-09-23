@@ -1,10 +1,6 @@
-# -*- encoding: utf-8 -*-
-require 'rake'
-
 Gem::Specification.new do |s| 
 	s.name = "Albacore"
 	s.version = "0.0.1"
-	
 	s.author = "Derick Bailey"
 	s.email = "derickbailey@gmail.com"
 	s.homepage = "http://github.com/derickbailey/Albacore"
@@ -42,7 +38,6 @@ Gem::Specification.new do |s|
 		"lib/spec/support/TestSolution/TestSolution/TestSolution.csproj",
 		"lib/spec/support/TestSolution/TestSolution.sln"
 	]
-	puts s.files
 	s.require_path = "lib"
 	s.has_rdoc = false	
 end
