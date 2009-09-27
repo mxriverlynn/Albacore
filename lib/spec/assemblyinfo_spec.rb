@@ -11,7 +11,9 @@ describe AssemblyInfo, "when generating an assembly info file" do
 		@filedata = @tester.build_and_read_assemblyinfo_file asm
 	end
 	
-	it "should log the name of the output file"
+	it "should log the name of the output file" do
+		
+	end
 end
 
 describe "when generating an assembly info file in verbose mode" do

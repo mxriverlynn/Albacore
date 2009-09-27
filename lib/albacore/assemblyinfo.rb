@@ -1,14 +1,11 @@
-require 'logger'
+require 'support/logging'
 
 class AssemblyInfo
 	
+	include LogBase
+	
 	attr_accessor :version, :title, :description, :output_file, :custom_attributes
 	attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-	
-	def initialize
-		@logger = Logger.new(STDOUT)
-		@logger.level = Logger::INFO
-	end
 	
 	def write
 		write_assemblyinfo @output_file
@@ -16,6 +13,7 @@ class AssemblyInfo
 	
 	def write_assemblyinfo(assemblyinfo_file)
 		asm_data = build_assembly_info_data
+
 		@logger.info "Generating Assembly Info File At: " + assemblyinfo_file
 		File.open(assemblyinfo_file, 'w') do |f|			
 			f.write asm_data
@@ -61,6 +59,7 @@ class AssemblyInfo
 		attribute = "[assembly: #{attr_name}("
 		attribute << "#{attr_data.inspect}" if attr_data != nil
 		attribute << ")]\n"
+		
 		@logger.debug "Build Assembly Info Attribute: " + attribute
 		attribute
 	end
