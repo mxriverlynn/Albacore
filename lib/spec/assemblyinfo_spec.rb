@@ -2,6 +2,31 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_hel
 require 'assemblyinfotester'
 require 'assemblyinfo'
 
+describe AssemblyInfo, "when generating an assembly info file" do
+	
+	before :all do
+		@tester = AssemblyInfoTester.new
+		asm = AssemblyInfo.new
+
+		@filedata = @tester.build_and_read_assemblyinfo_file asm
+	end
+	
+	it "should log the name of the output file"
+end
+
+describe "when generating an assembly info file in verbose mode" do
+	
+	it "should log the supplied attribute information"
+end
+
+describe "when generating an assembly info file without an output file specified" do
+	
+	before :all do
+	end
+	
+	it "should log an error message saying the output file is required" 
+end
+
 describe AssemblyInfo, "when providing custom attributes" do
 	
 	before :all do
@@ -51,7 +76,7 @@ describe AssemblyInfo, "when specifying an attribute with non-string data" do
 	end
 end
 
-describe AssemblyInfo, "when generating an assembly info file" do
+describe AssemblyInfo, "when generating an assembly info file with the built in attributes" do
 	
 	before :all do
 		@tester = AssemblyInfoTester.new
