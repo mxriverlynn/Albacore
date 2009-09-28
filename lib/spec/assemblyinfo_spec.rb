@@ -21,7 +21,7 @@ describe AssemblyInfo, "when generating an assembly info file" do
 end
 
 describe "when generating an assembly info file in verbose mode" do
-		before :all do
+	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
 		strio = StringIO.new
@@ -46,9 +46,26 @@ end
 describe "when generating an assembly info file without an output file specified" do
 	
 	before :all do
+		@tester = AssemblyInfoTester.new
+		asm = AssemblyInfo.new
+		strio = StringIO.new
+		asm.log_device = strio
+		
+		begin
+			asm.write
+		rescue Exception => e
+			@exception = e
+		end
+		@log_data = strio.string
 	end
 	
-	it "should log an error message saying the output file is required" 
+	it "should log an error message saying the output file is required" do
+		@log_data.should include("output_file cannot be nil")
+	end
+	
+	it "should throw an exception saying the output file is required" do
+		@exception.should_not == nil
+	end
 end
 
 describe AssemblyInfo, "when providing custom attributes" do

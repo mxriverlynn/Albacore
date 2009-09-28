@@ -12,12 +12,21 @@ class AssemblyInfo
 	end
 	
 	def write_assemblyinfo(assemblyinfo_file)
+		check_output_file assemblyinfo_file
+		
 		asm_data = build_assembly_info_data
 
 		@logger.info "Generating Assembly Info File At: " + assemblyinfo_file
 		File.open(assemblyinfo_file, 'w') do |f|			
 			f.write asm_data
 		end
+	end
+	
+	def check_output_file(file)
+		return if file
+		msg = 'output_file cannot be nil'
+		@logger.fatal msg
+		raise msg
 	end
 	
 	def build_assembly_info_data
