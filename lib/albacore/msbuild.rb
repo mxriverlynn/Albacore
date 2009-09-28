@@ -34,6 +34,8 @@ class MSBuild
 	end
 	
 	def build_solution(solution)
+		check_solution solution
+		
 		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
 		cmd << " /property:#{@properties.build_parameters}" if @properties != nil
 		cmd << " /target:#{@targets.build_parameters}" if @targets != nil
@@ -41,5 +43,13 @@ class MSBuild
 		@logger.debug "Executing MSBuild: " + cmd
 		system cmd
 	end
+	
+	def check_solution(file)
+		return if file
+		msg = 'solution cannot be nil'
+		@logger.fatal msg
+		raise msg
+	end
+
 	
 end

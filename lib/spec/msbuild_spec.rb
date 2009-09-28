@@ -22,6 +22,32 @@ describe MSBuild, "when building a solution with verbose logging turned on" do
 	end
 end
 
+describe MSBuild, "when building with no solution specified" do
+	before :all do
+		@testdata = MSBuildTestData.new
+		msbuild = @testdata.msbuild
+		strio = StringIO.new
+		msbuild.log_device = strio
+		msbuild.log_level = :verbose
+		
+		begin
+			msbuild.build
+		rescue Exception => e
+			@exception = e
+		end
+		
+		@log_data = strio.string
+	end
+	
+	it "should log an error message saying the output file is required" do
+		@log_data.should include("solution cannot be nil")
+	end
+	
+	it "should throw an exception saying the output file is required" do
+		@exception.should_not == nil
+	end
+end
+
 describe MSBuild, "when an msbuild path is not specified" do
 	
 	before :all do
