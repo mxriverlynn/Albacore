@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
 		"lib/albacore/msbuild.rb",
 		"lib/albacore/patches",
 		"lib/albacore/patches/buildparameters.rb",
+		"lib/albacore/support",
+		"lib/albacore/support/logging.rb",
 		"lib/albacore.rb",
 		"lib/rake",
 		"lib/rake/assemblyinfotask.rb",

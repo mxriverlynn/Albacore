@@ -1,4 +1,4 @@
-require 'support/logging'
+require File.join(File.dirname(__FILE__), 'support', 'logging')
 
 class AssemblyInfo
 	
