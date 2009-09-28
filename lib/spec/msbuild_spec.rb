@@ -72,6 +72,33 @@ describe MSBuild, "when an msbuild path is specified" do
 	end	
 end
 
+describe MSBuild, "when an invalid msbuild path is specified" do
+	before :all do
+		@testdata = MSBuildTestData.new
+		msbuild = @testdata.msbuild "/an invalid path/does not exist.exe"
+		strio = StringIO.new
+		msbuild.log_device = strio
+		msbuild.log_level = :verbose
+		msbuild.solution = @testdata.solution_path
+		
+		begin
+			msbuild.build
+		rescue Exception => e
+			@exception = e
+		end
+		
+		@log_data = strio.string
+	end
+	
+	it "should log an error message saying the output file is required" do
+		@log_data.should include("invalid path to msbuild.exe - file not found:")
+	end
+	
+	it "should throw an exception saying the output file is required" do
+		@exception.should_not == nil
+	end
+end
+
 describe MSBuild, "when building a visual studio solution" do
 
 	before :all do

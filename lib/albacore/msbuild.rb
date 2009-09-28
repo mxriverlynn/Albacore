@@ -34,6 +34,7 @@ class MSBuild
 	end
 	
 	def build_solution(solution)
+		check_msbuild @path_to_exe
 		check_solution solution
 		
 		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
@@ -51,5 +52,10 @@ class MSBuild
 		raise msg
 	end
 
-	
+	def check_msbuild(file)
+		return if File.exist?(file)
+		msg = 'invalid path to msbuild.exe - file not found: ' + File.expand_path(file)
+		@logger.fatal msg
+		raise msg
+	end	
 end
