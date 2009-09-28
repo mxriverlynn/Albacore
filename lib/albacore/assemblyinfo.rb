@@ -1,7 +1,6 @@
 require File.join(File.dirname(__FILE__), 'support', 'logging')
 
 class AssemblyInfo
-	
 	include LogBase
 	
 	attr_accessor :version, :title, :description, :output_file, :custom_attributes

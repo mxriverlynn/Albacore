@@ -3,6 +3,25 @@ require 'msbuild'
 require 'msbuildtestdata'
 require 'system_patch'
 
+describe MSBuild, "when building a solution with verbose logging turned on" do	
+	before :all do
+		@testdata = MSBuildTestData.new
+		msbuild = @testdata.msbuild
+		strio = StringIO.new
+		msbuild.log_device = strio
+		msbuild.log_level = :verbose
+		
+		msbuild.solution = @testdata.solution_path
+		msbuild.build
+		
+		@log_data = strio.string
+	end
+
+	it "should log the msbuild command line being called" do
+		@log_data.should include("Executing MSBuild: \"C:\\Windows/Microsoft.NET/Framework/v3.5/MSBuild.exe\"")
+	end
+end
+
 describe MSBuild, "when an msbuild path is not specified" do
 	
 	before :all do

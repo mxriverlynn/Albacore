@@ -1,14 +1,18 @@
 require File.join(File.dirname(__FILE__), 'patches', 'buildparameters')
+require File.join(File.dirname(__FILE__), 'support', 'logging')
 
 class MSBuild
+	include LogBase
+	
 	attr_accessor :path_to_exe, :solution
 	
-	def initialize(path_to_exe=nil) 
+	def initialize(path_to_exe=nil)
 		if path_to_exe == nil
 			build_path_to_exe
 		else
 			@path_to_exe = path_to_exe
-		end		
+		end	
+		super()
 	end
 	
 	def build_path_to_exe
@@ -34,6 +38,7 @@ class MSBuild
 		cmd << " /property:#{@properties.build_parameters}" if @properties != nil
 		cmd << " /target:#{@targets.build_parameters}" if @targets != nil
 		
+		@logger.debug "Executing MSBuild: " + cmd
 		system cmd
 	end
 	
