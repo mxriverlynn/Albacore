@@ -7,18 +7,40 @@ describe AssemblyInfo, "when generating an assembly info file" do
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
-
-		@filedata = @tester.build_and_read_assemblyinfo_file asm
+		strio = StringIO.new
+		asm.log_device = strio
+		
+		@tester.build_and_read_assemblyinfo_file asm
+		
+		@log_data = strio.string
 	end
 	
 	it "should log the name of the output file" do
-		
+		@log_data.should include(@tester.assemblyinfo_file)
 	end
 end
 
 describe "when generating an assembly info file in verbose mode" do
+		before :all do
+		@tester = AssemblyInfoTester.new
+		asm = AssemblyInfo.new
+		strio = StringIO.new
+		asm.log_device = strio
+		asm.log_level = :verbose
+		
+		asm.version = @tester.version
+		
+		@tester.build_and_read_assemblyinfo_file asm
+		@log_data = strio.string
+	end
 	
-	it "should log the supplied attribute information"
+	it "should log the name of the output file" do
+		@log_data.should include(@tester.assemblyinfo_file)
+	end
+	
+	it "should log the supplied attribute information" do
+		@log_data.should include("[assembly: AssemblyVersion(\"#{@tester.version}\")]")
+	end
 end
 
 describe "when generating an assembly info file without an output file specified" do
