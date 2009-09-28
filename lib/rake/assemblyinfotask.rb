@@ -1,4 +1,3 @@
-require 'rake'
 require 'rake/tasklib'
 
 module Rake
