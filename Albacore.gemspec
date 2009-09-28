@@ -37,6 +37,7 @@ Gem::Specification.new do |s|
 		"lib/spec/support/assemblyinfotester.rb",
 		"lib/spec/support/msbuildtestdata.rb",
 		"lib/spec/support/spec_helper.rb",
+		"lib/spec/support/sqlcmd.yml",
 		"lib/spec/support/TestSolution",
 		"lib/spec/support/TestSolution/TestSolution",
 		"lib/spec/support/TestSolution/TestSolution/Class1.cs",

@@ -4,10 +4,10 @@ require 'lib/albacore'
 task :default => 'specs:core'
 
 namespace :specs do
-	desc "Run all functional specs for the Albacore framework"
+	desc "Run all functional specs for Albacore"
 	task :all => ['specs:core', 'specs:sqlcmd']
 	
-	desc "Run the core functional specs for the Albacore framework"
+	desc "Run the core functional specs"
 	Spec::Rake::SpecTask.new :core do |t|
 		t.spec_opts << '--colour'
 		t.spec_opts << '--format specdoc'
@@ -19,7 +19,7 @@ namespace :specs do
 		]
 	end
 	
-	desc "Run SQLServer SQLCmd functional specs for the Albacore framework" 
+	desc "Run SQLServer SQLCmd functional specs" 
 	Spec::Rake::SpecTask.new :sqlcmd do |t|
 		t.spec_opts << '--colour'
 		t.spec_opts << '--format specdoc'
