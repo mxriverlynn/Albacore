@@ -1,28 +1,35 @@
 require 'spec/rake/spectask'
 require 'lib/albacore'
 
-task :default => 'specs:core'
+task :default => ['specs:assemblyinfo', 'specs:msbuild']
 
 namespace :specs do
+	@spec_opts = '--colour --format specdoc'
+
 	desc "Run all functional specs for Albacore"
-	task :all => ['specs:core', 'specs:sqlcmd']
+	task :all => ['specs:assemblyinfo', 'specs:msbuild', 'specs:sqlcmd']
 	
-	desc "Run the core functional specs"
-	Spec::Rake::SpecTask.new :core do |t|
-		t.spec_opts << '--colour'
-		t.spec_opts << '--format specdoc'
+	desc "Run the assembly info functional specs"
+	Spec::Rake::SpecTask.new :assemblyinfo do |t|
+		t.spec_opts << @spec_opts
 		t.spec_files = FileList[
 			'lib/spec/assemblyinfo_spec.rb',
-			'lib/spec/assemblyinfotask_spec.rb',
+			'lib/spec/assemblyinfotask_spec.rb'
+		]
+	end
+	
+	desc "Run the msbuild functional specs"
+	Spec::Rake::SpecTask.new :msbuild do |t|
+		t.spec_opts << @spec_opts
+		t.spec_files = FileList[
 			'lib/spec/msbuild_spec.rb',
 			'lib/spec/msbuildtask_spec.rb'
 		]
 	end
-	
+
 	desc "Run SQLServer SQLCmd functional specs" 
 	Spec::Rake::SpecTask.new :sqlcmd do |t|
-		t.spec_opts << '--colour'
-		t.spec_opts << '--format specdoc'
+		t.spec_opts << @spec_opts
 		t.spec_files = FileList[
 			'lib/spec/sqlcmd_spec.rb',
 			'lib/spec/sqlcmdtask_spec.rb'

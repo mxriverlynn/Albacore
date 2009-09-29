@@ -4,7 +4,7 @@ require File.join(File.dirname(__FILE__), 'support', 'logging')
 class MSBuild
 	include LogBase
 	
-	attr_accessor :path_to_exe, :solution
+	attr_accessor :path_to_exe, :solution, :verbosity
 	
 	def initialize(path_to_exe=nil)
 		if path_to_exe == nil
@@ -38,6 +38,7 @@ class MSBuild
 		check_solution solution
 		
 		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
+		cmd << " /verbosity:#{@verbosity}" if @verbosity != nil
 		cmd << " /property:#{@properties.build_parameters}" if @properties != nil
 		cmd << " /target:#{@targets.build_parameters}" if @targets != nil
 		

@@ -49,7 +49,6 @@ describe MSBuild, "when building with no solution specified" do
 end
 
 describe MSBuild, "when an msbuild path is not specified" do
-	
 	before :all do
 		@testdata = MSBuildTestData.new
 		@msbuild = @testdata.msbuild
@@ -61,7 +60,6 @@ describe MSBuild, "when an msbuild path is not specified" do
 end
 
 describe MSBuild, "when an msbuild path is specified" do
-	
 	before :all do
 		@testdata = MSBuildTestData.new
 		@msbuild = @testdata.msbuild "Some Path"
@@ -100,7 +98,6 @@ describe MSBuild, "when an invalid msbuild path is specified" do
 end
 
 describe MSBuild, "when building a visual studio solution" do
-
 	before :all do
 		@testdata = MSBuildTestData.new
 		@msbuild = @testdata.msbuild
@@ -115,7 +112,6 @@ describe MSBuild, "when building a visual studio solution" do
 end
 
 describe MSBuild, "when building a visual studio solution for a specified configuration" do
-	
 	before :all do
 		@testdata= MSBuildTestData.new("Release")
 		@msbuild = @testdata.msbuild
@@ -134,8 +130,7 @@ describe MSBuild, "when building a visual studio solution for a specified config
 	end
 end
 
-describe MSBuild, "when specifying targets to build" do
-	
+describe MSBuild, "when specifying targets to build" do	
 	before :all do
 
 		@testdata= MSBuildTestData.new
@@ -150,4 +145,19 @@ describe MSBuild, "when specifying targets to build" do
 		$system_command.should include("/target:Clean;Build")
 	end
 
+end
+
+describe MSBuild, "when building a solution with a specific msbuild verbosity" do
+	before :all do
+		@testdata= MSBuildTestData.new
+		@msbuild = @testdata.msbuild
+		
+		@msbuild.verbosity = "normal"
+		@msbuild.solution = @testdata.solution_path
+		@msbuild.build
+	end
+
+	it "should call msbuild with the specified verbosity" do
+		$system_command.should include("/verbosity:normal")
+	end
 end
