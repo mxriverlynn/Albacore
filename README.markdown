@@ -38,7 +38,7 @@ this will produce an 'Albacore-#.#.#.gem' file, where '#.#.#' is the version num
 
 After building the gem, you can install it from your local file system.
 
-> 'gem install -l Albacore-#.#.#.gem'
+> `gem install -l Albacore-#.#.#.gem`
 
 where '#.#.#' is the version number of the gem. For example 'Albacore-0.0.1.gem'
 
