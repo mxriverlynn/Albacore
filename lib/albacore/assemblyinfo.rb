@@ -7,6 +7,11 @@ class AssemblyInfo
 	attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
 	attr_accessor :file_version, :trademark, :namespaces
 	
+	def initialize
+		@namespaces = []
+		super()
+	end
+	
 	def write
 		write_assemblyinfo @output_file
 	end

@@ -70,6 +70,7 @@ describe AssemblyInfo, "when providing custom namespaces" do
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new		
+		
 		asm.namespaces ['My.Name.Space', 'Another.Namespace.GoesHere']
 
 		@filedata = @tester.build_and_read_assemblyinfo_file asm
