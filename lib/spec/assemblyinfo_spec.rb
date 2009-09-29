@@ -3,7 +3,6 @@ require 'assemblyinfotester'
 require 'assemblyinfo'
 
 describe AssemblyInfo, "when generating an assembly info file" do
-	
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
@@ -44,7 +43,6 @@ describe "when generating an assembly info file in verbose mode" do
 end
 
 describe "when generating an assembly info file without an output file specified" do
-	
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
@@ -68,8 +66,22 @@ describe "when generating an assembly info file without an output file specified
 	end
 end
 
-describe AssemblyInfo, "when providing custom attributes" do
+describe AssemblyInfo, "when providing custom namespaces" do 
+	before :all do
+		@tester = AssemblyInfoTester.new
+		asm = AssemblyInfo.new		
+		asm.namespaces ['My.Name.Space', 'Another.Namespace.GoesHere']
+
+		@filedata = @tester.build_and_read_assemblyinfo_file asm
+	end
 	
+	it "should write the namespaces into the using statements" do
+		@filedata.should include("using My.Name.Space;")
+		@filedata.should include("using Another.Namespace.GoesHere;")
+	end
+end
+
+describe AssemblyInfo, "when providing custom attributes" do	
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
@@ -86,7 +98,6 @@ describe AssemblyInfo, "when providing custom attributes" do
 end
 
 describe AssemblyInfo, "when specifying a custom attribute with no data" do
-	
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
@@ -102,7 +113,6 @@ describe AssemblyInfo, "when specifying a custom attribute with no data" do
 end
 
 describe AssemblyInfo, "when specifying an attribute with non-string data" do
-	
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
@@ -118,7 +128,6 @@ describe AssemblyInfo, "when specifying an attribute with non-string data" do
 end
 
 describe AssemblyInfo, "when generating an assembly info file with the built in attributes" do
-	
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
@@ -184,7 +193,6 @@ describe AssemblyInfo, "when generating an assembly info file with the built in 
 end
 
 describe AssemblyInfo, "when generating an assembly info file with no attributes provided" do
-	
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new

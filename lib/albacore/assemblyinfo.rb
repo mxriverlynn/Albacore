@@ -5,7 +5,7 @@ class AssemblyInfo
 	
 	attr_accessor :version, :title, :description, :output_file, :custom_attributes
 	attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-	attr_accessor :file_version, :trademark
+	attr_accessor :file_version, :trademark, :namespaces
 	
 	def write
 		write_assemblyinfo @output_file
@@ -30,7 +30,7 @@ class AssemblyInfo
 	end
 	
 	def build_assembly_info_data
-		asm_data = using_statements + "\n"
+		asm_data = build_using_statements + "\n"
 		
 		asm_data << build_attribute("AssemblyTitle", @title) if @title != nil
 		asm_data << build_attribute("AssemblyDescription", @description) if @description != nil
@@ -60,12 +60,23 @@ class AssemblyInfo
 		@custom_attributes = attributes
 	end
 	
-	def using_statements
-		statements = ''
-		statements << "using System.Reflection;\n"
-		statements << "using System.Runtime.InteropServices;\n"
-		statements
+	def namespaces(namespaces)
+		@namespaces = namespaces
 	end
+	
+	def build_using_statements
+		@namespaces = [] if @namespaces.nil?
+		
+		@namespaces << "System.Reflection"
+		@namespaces << "System.Runtime.InteropServices"
+		
+		namespaces = ''
+		@namespaces.each do |ns|
+			namespaces << "using #{ns};\n"
+		end
+		
+		namespaces
+	end	
 	
 	def build_attribute(attr_name, attr_data)
 		attribute = "[assembly: #{attr_name}("
