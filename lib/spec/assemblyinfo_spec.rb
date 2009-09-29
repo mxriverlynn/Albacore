@@ -131,6 +131,8 @@ describe AssemblyInfo, "when generating an assembly info file with the built in 
 		asm.copyright = @tester.copyright
 		asm.com_visible = @tester.com_visible
 		asm.com_guid = @tester.com_guid
+		asm.file_version = @tester.file_version
+		asm.trademark = @tester.trademark
 		
 		@filedata = @tester.build_and_read_assemblyinfo_file asm
 	end
@@ -171,6 +173,14 @@ describe AssemblyInfo, "when generating an assembly info file with the built in 
 	it "should contain the product information" do
 		@filedata.should include("[assembly: AssemblyProduct(\"#{@tester.product_name}\")]")
 	end
+	
+	it "should contain the file version information" do
+		@filedata.should include("[assembly: AssemblyFileVersion(\"#{@tester.file_version}\")]")
+	end
+	
+	it "should contain the trademark information" do
+		@filedata.should include("[assembly: AssemblyTrademark(\"#{@tester.trademark}\")]")
+	end
 end
 
 describe AssemblyInfo, "when generating an assembly info file with no attributes provided" do
@@ -209,5 +219,13 @@ describe AssemblyInfo, "when generating an assembly info file with no attributes
 
 	it "should not contain the product information" do
 		@filedata.should_not include("[assembly: AssemblyProduct(\"#{@tester.product_name}\")]")
+	end
+		
+	it "should not contain the file version information" do
+		@filedata.should_not include("[assembly: AssemblyFileVersion(\"#{@tester.file_version}\")]")
+	end
+
+	it "should not contain the trademark information" do
+		@filedata.should_not include("[assembly: AssemblyTrademark(\"#{@tester.trademark}\")]")
 	end
 end

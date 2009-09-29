@@ -13,6 +13,8 @@ class AssemblyInfoTester < AssemblyInfo
 		@com_guid = "dbabb27c-a536-4b5b-91f1-2226b6e3655c"
 		@company_name = "some company name"
 		@product_name = "my product, yo."
+		@file_version = "1.0.0.0"
+		@trademark = "some trademark info goes here"
 		
 		setup_assemblyinfo_file
 	end

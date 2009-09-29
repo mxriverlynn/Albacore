@@ -5,6 +5,7 @@ class AssemblyInfo
 	
 	attr_accessor :version, :title, :description, :output_file, :custom_attributes
 	attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
+	attr_accessor :file_version, :trademark
 	
 	def write
 		write_assemblyinfo @output_file
@@ -35,12 +36,15 @@ class AssemblyInfo
 		asm_data << build_attribute("AssemblyDescription", @description) if @description != nil
 		asm_data << build_attribute("AssemblyCompany", @company_name) if @company_name != nil
 		asm_data << build_attribute("AssemblyProduct", @product_name) if @product_name != nil
+		
 		asm_data << build_attribute("AssemblyCopyright", @copyright) if @copyright != nil
+		asm_data << build_attribute("AssemblyTrademark", @trademark) if @trademark != nil
 		
 		asm_data << build_attribute("ComVisible", @com_visible) if @com_visible != nil
 		asm_data << build_attribute("Guid", @com_guid) if @com_guid != nil
 		
 		asm_data << build_attribute("AssemblyVersion", @version) if @version != nil
+		asm_data << build_attribute("AssemblyFileVersion", @file_version) if @file_version != nil
 		
 		asm_data << "\n"
 		if @custom_attributes != nil
