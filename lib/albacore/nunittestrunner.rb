@@ -13,6 +13,8 @@ class NUnitTestRunner
 	end
 	
 	def get_command_line
-		[@path_to_exe, @assemblies.join(" "), @options.join(" ")].join(" ")
+		command = [@path_to_exe, @assemblies.join(" "), @options.join(" ")].join(" ")
+		@logger.debug "Build NUnit Test Runner Command Line: " + command
+		command
 	end
 end
