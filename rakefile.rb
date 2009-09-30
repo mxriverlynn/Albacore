@@ -7,7 +7,7 @@ namespace :specs do
 	@spec_opts = '--colour --format specdoc'
 
 	desc "Run all functional specs for Albacore"
-	task :all => ['specs:assemblyinfo', 'specs:msbuild', 'specs:sqlcmd']
+	task :all => ['specs:assemblyinfo', 'specs:msbuild', 'specs:sqlcmd', 'specs:ncover']
 	
 	desc "Run the assembly info functional specs"
 	Spec::Rake::SpecTask.new :assemblyinfo do |t|
@@ -33,6 +33,14 @@ namespace :specs do
 		t.spec_files = FileList[
 			'lib/spec/sqlcmd_spec.rb',
 			'lib/spec/sqlcmdtask_spec.rb'
+		]
+	end
+	
+	desc "Run NCover functional specs"
+	Spec::Rake::SpecTask.new :ncover do |t|
+		t.spec_opts << @spec_opts
+		t.spec_files = FileList[
+			'lib/spec/ncoverconsole_spec.rb'
 		]
 	end
 	
