@@ -1,7 +1,6 @@
 require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
 require 'msbuild'
 require 'msbuildtestdata'
-require 'system_patch'
 
 describe MSBuild, "when building a solution with verbose logging turned on" do	
 	before :all do
