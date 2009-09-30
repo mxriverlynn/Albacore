@@ -4,7 +4,7 @@ module Rake
 	class NCoverConsoleTask < Rake::TaskLib
 		attr_accessor :name
 		
-		def initialize(name=:NCover)
+		def initialize(name=:ncoverconsole)
 			@name = name
 			@ncover = NCoverConsole.new
 			yield @ncover if block_given?

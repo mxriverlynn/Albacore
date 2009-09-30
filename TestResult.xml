@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/Assemblies/TestSolution.Tests.dll" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-09-30" time="14:33:59">
+<test-results name="lib/spec/support/CodeCoverage/assemblies/TestSolution.Tests.dll" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-09-30" time="14:42:09">
   <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="D:\Dev\Derick-GitHub\Albacore" machine-name="MATDEV09S" user="derickb" user-domain="MAT" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite name="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/Assemblies/TestSolution.Tests.dll" executed="True" success="True" time="0.020" asserts="0">
+  <test-suite name="lib/spec/support/CodeCoverage/assemblies/TestSolution.Tests.dll" executed="True" success="True" time="0.028" asserts="0">
     <results>
-      <test-suite name="TestSolution" executed="True" success="True" time="0.020" asserts="0">
+      <test-suite name="TestSolution" executed="True" success="True" time="0.024" asserts="0">
         <results>
-          <test-suite name="Tests" executed="True" success="True" time="0.020" asserts="0">
+          <test-suite name="Tests" executed="True" success="True" time="0.023" asserts="0">
             <results>
               <test-suite name="SomeTestFixture" executed="True" success="True" time="0.020" asserts="0">
                 <results>
-                  <test-case name="TestSolution.Tests.SomeTestFixture.foo" executed="True" success="True" time="0.020" asserts="1" />
+                  <test-case name="TestSolution.Tests.SomeTestFixture.foo" executed="True" success="True" time="0.014" asserts="1" />
                 </results>
               </test-suite>
             </results>

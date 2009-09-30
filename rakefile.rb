@@ -37,6 +37,7 @@ namespace :specs do
 	desc "Setup NCover functional specs"
 	task :ncover do
 		@@specs_to_run << 'lib/spec/ncoverconsole_spec.rb'
+		@@specs_to_run << 'lib/spec/ncoverconsoletask_spec.rb'
 	end
 	
 	Spec::Rake::SpecTask.new :run do |t|
@@ -47,7 +48,7 @@ end
 
 namespace :albacore do	
 	desc "Run a complete Albacore build sample"
-	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild']
+	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild', 'albacore:ncoverconsole']
 	
 	desc "Run a sample build using the MSBuildTask"
 	Rake::MSBuildTask.new(:msbuild) do |msb|
@@ -67,5 +68,22 @@ namespace :albacore do
 		asm.custom_attributes :SomeAttribute => "some value goes here", :AnotherAttribute => "with some data"
 		
 		asm.output_file = "lib/spec/support/AssemblyInfo/AssemblyInfo.cs"
+	end
+	
+	desc "Run a sample NCover Console code coverage"
+	Rake::NCoverConsoleTask.new(:ncoverconsole) do |ncc|
+		@xml_coverage = "lib/spec/support/CodeCoverage/test-coverage.xml"
+		File.delete(@xml_coverage) if File.exist?(@xml_coverage)
+		
+		ncc.log_level = :verbose
+		ncc.path_to_exe = "lib/spec/support/Tools/NCover-v3.2/NCover.Console.exe"
+		ncc.coverage :xml, @xml_coverage
+		
+		nunit = NUnitTestRunner.new("lib/spec/support/Tools/NUnit-v2.5/nunit-console.exe")
+		nunit.log_level = :verbose
+		nunit.assemblies << "lib/spec/support/CodeCoverage/assemblies/TestSolution.Tests.dll"
+		nunit.options << '/noshadow'
+		
+		ncc.testrunner = nunit
 	end
 end
