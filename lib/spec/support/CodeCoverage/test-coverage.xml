@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
-<coverage profilerVersion="3.2.4.5844" driverVersion="3.2.4" exportversion="3" viewdisplayname="" startTime="2009-09-30T19:26:29.7669253Z" measureTime="2009-09-30T19:26:30.7679393Z" projectName="" buildid="71976a79-42e4-4d22-bf4f-18faefa44df2" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/test-coverage.xml" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
+<coverage profilerVersion="3.2.4.5844" driverVersion="3.2.4" exportversion="3" viewdisplayname="" startTime="2009-09-30T19:33:58.4848033Z" measureTime="2009-09-30T19:33:59.4643168Z" projectName="" buildid="ea5e18ac-7fcb-4fac-b818-99d68fe8e9fd" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/test-coverage.xml" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
   <rebasedpaths />
   <filters />
   <documents>
