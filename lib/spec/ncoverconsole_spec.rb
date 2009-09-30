@@ -7,7 +7,7 @@ require 'nunittestrunner'
 @@xml_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'test-coverage.xml')
 @@test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'Assemblies', 'TestSolution.Tests.dll')
 
-describe NCoverConsole, "when producing coverage report against1 a .net assembly" do
+describe NCoverConsole, "when producing coverage report with nunit" do
 	before :all do
 		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
 		
