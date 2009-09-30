@@ -8,13 +8,15 @@ namespace TestSolution.Tests
 {
 
 	[TestFixture]
-	public class Class1
+	public class SomeTestFixture
 	{
 
 		[Test]
 		public void foo()
 		{
-			Assert.True(true);
+			Class1 c1 = new Class1();
+			string s = c1.Foo();
+			Assert.AreEqual("bar", s);
 		}
 
 	}
