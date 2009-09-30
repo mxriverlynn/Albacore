@@ -1,51 +1,31 @@
 Gem::Specification.new do |s| 
+	version = "0.0.2"
+
+	s.version = version
 	s.name = "Albacore"
-	s.version = "0.0.2"
 	s.author = "Derick Bailey"
 	s.email = "derickbailey@gmail.com"
 	s.homepage = "http://github.com/derickbailey/Albacore"
 	s.platform = Gem::Platform::RUBY
 	s.summary = "A Suite of Rake Build Tasks For .Net Solutions"
-	s.files = [
-		"rakefile.rb",
-		"EULA.txt",
-		"lib",
-		"lib/albacore.rb",
-		"lib/albacore",
-		"lib/albacore/assemblyinfo.rb",
-		"lib/albacore/msbuild.rb",
-		"lib/albacore/sqlcmd.rb",
-		"lib/albacore/patches",
-		"lib/albacore/patches/buildparameters.rb",
-		"lib/albacore/support",
-		"lib/albacore/support/logging.rb",
-		"lib/rake",
-		"lib/rake/assemblyinfotask.rb",
-		"lib/rake/msbuildtask.rb",
-		"lib/rake/sqlcmdtask.rb",
-		"lib/spec",
-		"lib/spec/assemblyinfo_spec.rb",
-		"lib/spec/assemblyinfotask_spec.rb",
-		"lib/spec/msbuildtask_spec.rb",
-		"lib/spec/msbuild_spec.rb",
-		"lib/spec/sqlcmd_spec.rb",
-		"lib/spec/sqlcmdtask_spec.rb",
-		"lib/spec/patches",
-		"lib/spec/patches/system_patch.rb",
-		"lib/spec/support",
-		"lib/spec/support/AssemblyInfo",
-		"lib/spec/support/assemblyinfotester.rb",
-		"lib/spec/support/msbuildtestdata.rb",
-		"lib/spec/support/spec_helper.rb",
-		"lib/spec/support/sqlcmd.yml",
-		"lib/spec/support/TestSolution",
-		"lib/spec/support/TestSolution/TestSolution",
-		"lib/spec/support/TestSolution/TestSolution/Class1.cs",
-		"lib/spec/support/TestSolution/TestSolution/Properties",
-		"lib/spec/support/TestSolution/TestSolution/Properties/AssemblyInfo.cs",
-		"lib/spec/support/TestSolution/TestSolution/TestSolution.csproj",
-		"lib/spec/support/TestSolution/TestSolution.sln"
-	]
 	s.require_path = "lib"
 	s.has_rdoc = false	
+	
+	#include all files
+	s.files = Dir['**/*']
+
+	#except for the ones named with these
+	s.files.reject! { |fn| fn.include? '.git' }
+	s.files.reject! { |fn| fn.include? '.cache' }
+	s.files.reject! { |fn| fn.include? '/obj/' }
+	s.files.reject! { |fn| fn.include? '/bin/' }
+	s.files.reject! { |fn| fn.include? '_ReSharper' }
+	s.files.reject! { |fn| fn.include? '.csproj.user' }
+	s.files.reject! { |fn| fn.include? '.resharper.user' }
+	s.files.reject! { |fn| fn.include? '.resharper' }
+	s.files.reject! { |fn| fn.include? '.suo' }
+	s.files.reject! { |fn| fn.include? '~$' }
+	s.files.reject! { |fn| fn.include? '.tmp' }
+	s.files.reject! { |fn| fn.include? '.eprj' }
+	s.files.reject! { |fn| fn.include? "Albacore-#{version}.gem" }
 end
