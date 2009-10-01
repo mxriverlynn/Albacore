@@ -80,3 +80,29 @@ describe NCoverConsole, "when specifying an html report and an xml coverage repo
 		File.exist?(@@html_coverage_output).should == true
 	end
 end
+
+describe NCoverConsole, "when specifying an assembly inclusion list for the coverage output" do
+	before :all do
+		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
+		
+		ncc = NCoverConsole.new()
+		
+		ncc.extend(SystemPatch)
+		ncc.log_level = :verbose
+		ncc.path_to_exe = @@ncoverpath
+		ncc.output = {:xml => @@xml_coverage_output}
+		ncc.working_directory = @@working_directory
+		ncc.cover_assemblies << "TestSolution"
+		
+		nunit = NUnitTestRunner.new(@@nunitpath)
+		nunit.assemblies << @@test_assembly
+		nunit.options << '/noshadow'
+		
+		ncc.testrunner = nunit
+		ncc.run
+	end
+
+	it "should provide coverage for the included assemblies" do
+		$system_command.should include("//assemblies TestSolution")
+	end
+end
