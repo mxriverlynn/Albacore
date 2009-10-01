@@ -3,12 +3,13 @@ require File.join(File.dirname(__FILE__), 'support', 'logging')
 class NCoverConsole
 	include LogBase
 	
-	attr_accessor :path_to_exe, :output, :testrunner, :working_directory, :cover_assemblies
+	attr_accessor :path_to_exe, :output, :testrunner, :working_directory, :cover_assemblies, :ignore_assemblies
 	
 	def initialize
 		@output = {}
 		@testrunner_args = []
 		@cover_assemblies = []
+		@ignore_assemblies = []
 		super()
 	end
 	
@@ -22,6 +23,7 @@ class NCoverConsole
 		command << build_output_options(@output) unless @output.nil?
 		command << @working_directory unless @working_directory.nil?
 		command << build_assembly_list("assemblies", @cover_assemblies) unless @cover_assemblies.empty?
+		command << build_assembly_list("exclude-assemblies", @ignore_assemblies) unless @ignore_assemblies.empty?
 		command << @testrunner.get_command_line
 		
 		commandline = command.join(" ")

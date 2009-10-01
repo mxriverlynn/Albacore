@@ -1,19 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
-<coverage profilerVersion="3.2.4.5844" driverVersion="3.2.4" exportversion="3" viewdisplayname="" startTime="2009-10-01T15:20:23.7490844Z" measureTime="2009-10-01T15:20:24.5710844Z" projectName="" buildid="af96f331-99de-40d0-be9f-0001edbd8121" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/test-coverage.xml" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
+<coverage profilerVersion="3.2.4.5844" driverVersion="3.2.4" exportversion="3" viewdisplayname="" startTime="2009-10-01T16:04:15.3493206Z" measureTime="2009-10-01T16:04:16.1023236Z" projectName="" buildid="95c9fcfc-3872-47de-9e36-de540ddacd11" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/test-coverage.xml" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
   <rebasedpaths />
   <filters />
   <documents>
     <doc id="0" excluded="false" url="None" cs="" csa="00000000-0000-0000-0000-000000000000" om="0" nid="0" />
   </documents>
-  <module moduleId="21" name="D:\Dev\Derick-GitHub\Albacore\lib\spec\support\CodeCoverage\Assemblies\TestSolution.dll" assembly="TestSolution" assemblyIdentity="TestSolution, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
-    <class name="TestSolution.Class1" signature="TestSolution.Class1" excluded="false" nid="0">
-      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
-      </method>
-      <method name="Foo" signature="Foo() : System.String" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
-      </method>
-    </class>
-  </module>
 </coverage>
