@@ -132,3 +132,34 @@ describe NCoverConsole, "when specifying aseemblies to ignore" do
 		$system_command.should include("//exclude-assemblies TestSolution.*")
 	end
 end
+
+describe NCoverConsole, "when specifying the types of coverage to analyze" do
+	before :all do
+		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
+		
+		ncc = NCoverConsole.new()
+		
+		ncc.extend(SystemPatch)
+		ncc.log_level = :verbose
+		ncc.path_to_exe = @@ncoverpath
+		ncc.output = {:xml => @@xml_coverage_output}
+		ncc.working_directory = @@working_directory
+		ncc.coverage = [:Symbol, :Branch, :MethodVisits, :CyclomaticComplexity]
+		
+		nunit = NUnitTestRunner.new(@@nunitpath)
+		nunit.assemblies << @@test_assembly
+		nunit.options << '/noshadow'
+		
+		ncc.testrunner = nunit
+		ncc.run
+	end
+		
+	it "should only run coverage for those metrics" do
+		$system_command.should include("//coverage-type \"Symbol, Branch, MethodVisits, CyclomaticComplexity\"")
+	end
+end
+
+describe NCoverConsole, "when analyzing a test suite with failing tests" do
+	
+	it "should fail the build"
+end

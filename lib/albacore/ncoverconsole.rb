@@ -3,13 +3,14 @@ require File.join(File.dirname(__FILE__), 'support', 'logging')
 class NCoverConsole
 	include LogBase
 	
-	attr_accessor :path_to_exe, :output, :testrunner, :working_directory, :cover_assemblies, :ignore_assemblies
+	attr_accessor :path_to_exe, :output, :testrunner, :working_directory, :cover_assemblies, :ignore_assemblies, :coverage
 	
 	def initialize
 		@output = {}
 		@testrunner_args = []
 		@cover_assemblies = []
 		@ignore_assemblies = []
+		@coverage = []
 		super()
 	end
 	
@@ -24,6 +25,7 @@ class NCoverConsole
 		command << @working_directory unless @working_directory.nil?
 		command << build_assembly_list("assemblies", @cover_assemblies) unless @cover_assemblies.empty?
 		command << build_assembly_list("exclude-assemblies", @ignore_assemblies) unless @ignore_assemblies.empty?
+		command << build_coverage_list(@coverage) unless @coverage.empty?
 		command << @testrunner.get_command_line
 		
 		commandline = command.join(" ")
@@ -44,5 +46,9 @@ class NCoverConsole
 	
 	def build_assembly_list(param_name, list)
 		"//#{param_name} #{list.join(';')}"
+	end
+	
+	def build_coverage_list(coverage)
+		"//coverage-type \"#{coverage.join(', ')}\""
 	end
 end
