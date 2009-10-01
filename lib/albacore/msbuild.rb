@@ -16,7 +16,8 @@ class MSBuild
 	end
 	
 	def build_path_to_exe
-		@path_to_exe = File.join(ENV['windir'].dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
+    win_dir = ENV['windir'] || ENV['WINDIR']
+		@path_to_exe = File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
 	end
 	
 	def targets(targets)
