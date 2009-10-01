@@ -5,10 +5,11 @@ require 'nunittestrunner'
 @@ncoverpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NCover-v3.2', 'NCover.Console.exe')
 @@nunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console.exe')
 @@xml_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'test-coverage.xml')
+@@html_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'html', 'test-coverage.html')
 @@working_directory = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage')
 @@test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'Assemblies', 'TestSolution.Tests.dll')
 
-describe NCoverConsole, "when producing coverage report with nunit" do
+describe NCoverConsole, "when producing an xml coverage report with nunit" do
 	before :all do
 		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
 		
@@ -17,7 +18,7 @@ describe NCoverConsole, "when producing coverage report with nunit" do
 		ncc.extend(SystemPatch)
 		ncc.log_level = :verbose
 		ncc.path_to_exe = @@ncoverpath
-		ncc.coverage :xml, @@xml_coverage_output
+		ncc.output = {:xml => @@xml_coverage_output}
 		ncc.working_directory = @@working_directory
 		
 		nunit = NUnitTestRunner.new(@@nunitpath)
@@ -46,5 +47,36 @@ describe NCoverConsole, "when producing coverage report with nunit" do
 		
 	it "should write the coverage data to the specified file" do
 		File.exist?(@@xml_coverage_output).should == true
+	end
+end
+
+describe NCoverConsole, "when specifying an html report and an xml coverage report with nunit" do
+	before :all do
+		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
+		File.delete(@@html_coverage_output) if File.exist?(@@html_coverage_output)
+		
+		ncc = NCoverConsole.new()
+		
+		ncc.extend(SystemPatch)
+		ncc.log_level = :verbose
+		ncc.path_to_exe = @@ncoverpath
+		ncc.output = {:xml => @@xml_coverage_output, :html => @@html_coverage_output}
+		ncc.working_directory = @@working_directory
+		
+		nunit = NUnitTestRunner.new(@@nunitpath)
+		nunit.assemblies << @@test_assembly
+		nunit.options << '/noshadow'
+		
+		ncc.testrunner = nunit
+		ncc.run
+	end
+
+	
+	it "should produce the xml report" do
+		File.exist?(@@xml_coverage_output).should == true
+	end
+	
+	it "should produce the html report" do
+		File.exist?(@@html_coverage_output).should == true
 	end
 end

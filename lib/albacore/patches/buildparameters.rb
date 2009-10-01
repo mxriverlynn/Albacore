@@ -1,5 +1,5 @@
 module HashParameterBuilder
-	def build_parameters
+	def build_parameters()
 		option_text = ''
 		self.each do |key, value|
 			option_text << "#{key}\=#{value};"

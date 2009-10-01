@@ -77,7 +77,7 @@ namespace :albacore do
 		
 		ncc.log_level = :verbose
 		ncc.path_to_exe = "lib/spec/support/Tools/NCover-v3.2/NCover.Console.exe"
-		ncc.coverage :xml, @xml_coverage
+		ncc.output = {:xml => @xml_coverage}
 		ncc.working_directory = "lib/spec/support/CodeCoverage"
 		
 		nunit = NUnitTestRunner.new("lib/spec/support/Tools/NUnit-v2.5/nunit-console.exe")

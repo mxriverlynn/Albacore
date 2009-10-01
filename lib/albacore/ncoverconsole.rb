@@ -3,16 +3,12 @@ require File.join(File.dirname(__FILE__), 'support', 'logging')
 class NCoverConsole
 	include LogBase
 	
-	attr_accessor :path_to_exe, :coverage_type, :coverage_output, :testrunner, :working_directory
+	attr_accessor :path_to_exe, :output, :testrunner, :working_directory
 	
 	def initialize
+		@output = {}
 		@testrunner_args = []
 		super()
-	end
-	
-	def coverage(type, output)
-		@coverage_type = "//#{type.to_s}"
-		@coverage_output = output
 	end
 	
 	def working_directory=(working_dir)
@@ -22,8 +18,7 @@ class NCoverConsole
 	def run
 		command = [
 			@path_to_exe, 
-			@coverage_type, 
-			@coverage_output, 
+			build_output_options(@output),
 			@working_directory,
 			@testrunner.get_command_line
 		].join(" ")
@@ -32,5 +27,13 @@ class NCoverConsole
 		@logger.debug "NCover Command Line: " + command
 
 		output = system command
+	end
+	
+	def build_output_options(output)
+		options = []
+		output.each do |key, value|
+			options << "//#{key} #{value}"
+		end
+		options.join(" ")
 	end
 end
