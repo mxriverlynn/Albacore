@@ -8,6 +8,7 @@ require 'nunittestrunner'
 @@html_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'html', 'test-coverage.html')
 @@working_directory = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage')
 @@test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'Assemblies', 'TestSolution.Tests.dll')
+@@failing_test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'failing_assemblies', 'TestSolution.FailingTests.dll')
 
 describe NCoverConsole, "when producing an xml coverage report with nunit" do
 	before :all do
@@ -160,6 +161,32 @@ describe NCoverConsole, "when specifying the types of coverage to analyze" do
 end
 
 describe NCoverConsole, "when analyzing a test suite with failing tests" do
+	before :all do
+		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
+		
+		ncc = NCoverConsole.new()
+		
+		ncc.extend(SystemPatch)
+		ncc.log_level = :verbose
+		ncc.path_to_exe = @@ncoverpath
+		ncc.output = {:xml => @@xml_coverage_output}
+		ncc.working_directory = @@working_directory
+		
+		nunit = NUnitTestRunner.new(@@nunitpath)
+		nunit.assemblies << @@failing_test_assembly
+		nunit.options << '/noshadow'
+		
+		ncc.testrunner = nunit
+		
+		begin
+			ncc.run
+		rescue Exception => e
+			@exception = e
+		end
+
+	end
 	
-	it "should fail the build"
+	it "should fail the build" do
+		@exception.should_not == nil
+	end
 end

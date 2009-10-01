@@ -33,7 +33,16 @@ class NCoverConsole
 		@logger.info "Executing Code Coverage Analysis."
 		@logger.debug "NCover Command Line: " + commandline
 
-		output = system commandline
+		result = system commandline
+		
+		check_for_success result
+	end
+	
+	def check_for_success(success)
+		return if success
+		msg = 'Code Coverage Analysis Failed. See Build Log For Detail.'
+		@logger.info msg
+		raise msg
 	end
 	
 	def build_output_options(output)
