@@ -5,6 +5,7 @@ require 'nunittestrunner'
 @@ncoverpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NCover-v3.2', 'NCover.Console.exe')
 @@nunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console.exe')
 @@xml_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'test-coverage.xml')
+@@working_directory = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage')
 @@test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'Assemblies', 'TestSolution.Tests.dll')
 
 describe NCoverConsole, "when producing coverage report with nunit" do
@@ -17,6 +18,7 @@ describe NCoverConsole, "when producing coverage report with nunit" do
 		ncc.log_level = :verbose
 		ncc.path_to_exe = @@ncoverpath
 		ncc.coverage :xml, @@xml_coverage_output
+		ncc.working_directory = @@working_directory
 		
 		nunit = NUnitTestRunner.new(@@nunitpath)
 		nunit.assemblies << @@test_assembly
@@ -28,6 +30,10 @@ describe NCoverConsole, "when producing coverage report with nunit" do
 	
 	it "should execute ncover.console from the specified path" do
 		$system_command.should include(@@ncoverpath)
+	end
+	
+	it "should execute with the specified working directory" do
+		$system_command.should include(@@working_directory)
 	end
 	
 	it "should execute the test runner from the specified path" do
