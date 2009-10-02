@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/failing_assemblies/TestSolution.FailingTests.dll" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-10-02" time="09:30:47">
+<test-results name="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/failing_assemblies/TestSolution.FailingTests.dll" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-10-02" time="09:47:19">
   <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="D:\Dev\Derick-GitHub\Albacore\lib\spec\support\CodeCoverage" machine-name="MATDEV09S" user="derickb" user-domain="MAT" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
   <test-suite name="D:/Dev/Derick-GitHub/Albacore/lib/spec/support/CodeCoverage/failing_assemblies/TestSolution.FailingTests.dll" executed="True" success="False" time="0.020" asserts="0">
     <results>
       <test-suite name="TestSolution" executed="True" success="False" time="0.017" asserts="0">
         <results>
-          <test-suite name="FailingTests" executed="True" success="False" time="0.016" asserts="0">
+          <test-suite name="FailingTests" executed="True" success="False" time="0.015" asserts="0">
             <results>
               <test-suite name="FailingTestFixture" executed="True" success="False" time="0.013" asserts="0">
                 <results>

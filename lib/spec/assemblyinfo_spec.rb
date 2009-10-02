@@ -49,20 +49,13 @@ describe "when generating an assembly info file without an output file specified
 		strio = StringIO.new
 		asm.log_device = strio
 		
-		begin
-			asm.write
-		rescue Exception => e
-			@exception = e
-		end
+		asm.write
+
 		@log_data = strio.string
 	end
 	
 	it "should log an error message saying the output file is required" do
 		@log_data.should include("output_file cannot be nil")
-	end
-	
-	it "should throw an exception saying the output file is required" do
-		@exception.should_not == nil
 	end
 end
 

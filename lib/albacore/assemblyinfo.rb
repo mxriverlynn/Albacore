@@ -5,9 +5,10 @@ class AssemblyInfo
 	
 	attr_accessor :version, :title, :description, :output_file, :custom_attributes
 	attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-	attr_accessor :file_version, :trademark, :namespaces
+	attr_accessor :file_version, :trademark, :namespaces, :failed
 	
 	def initialize
+		@failed = false
 		@namespaces = []
 		super()
 	end
@@ -18,6 +19,7 @@ class AssemblyInfo
 	
 	def write_assemblyinfo(assemblyinfo_file)
 		check_output_file assemblyinfo_file
+		return false if @failed
 		
 		asm_data = build_assembly_info_data
 
@@ -31,7 +33,7 @@ class AssemblyInfo
 		return if file
 		msg = 'output_file cannot be nil'
 		@logger.fatal msg
-		raise msg
+		@failed = true
 	end
 	
 	def build_assembly_info_data
