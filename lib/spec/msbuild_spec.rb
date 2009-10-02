@@ -29,21 +29,13 @@ describe MSBuild, "when building with no solution specified" do
 		msbuild.log_device = strio
 		msbuild.log_level = :verbose
 		
-		begin
-			msbuild.build
-		rescue Exception => e
-			@exception = e
-		end
+		msbuild.build
 		
 		@log_data = strio.string
 	end
 	
 	it "should log an error message saying the output file is required" do
 		@log_data.should include("solution cannot be nil")
-	end
-	
-	it "should throw an exception saying the output file is required" do
-		@exception.should_not == nil
 	end
 end
 
@@ -78,21 +70,13 @@ describe MSBuild, "when an invalid msbuild path is specified" do
 		msbuild.log_level = :verbose
 		msbuild.solution = @testdata.solution_path
 		
-		begin
-			msbuild.build
-		rescue Exception => e
-			@exception = e
-		end
-		
+		msbuild.build
+
 		@log_data = strio.string
 	end
 	
 	it "should log an error message saying the output file is required" do
 		@log_data.should include("invalid path to msbuild.exe - file not found:")
-	end
-	
-	it "should throw an exception saying the output file is required" do
-		@exception.should_not == nil
 	end
 end
 
