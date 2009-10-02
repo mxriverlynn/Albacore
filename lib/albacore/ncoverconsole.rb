@@ -3,9 +3,11 @@ require File.join(File.dirname(__FILE__), 'support', 'logging')
 class NCoverConsole
 	include LogBase
 	
-	attr_accessor :path_to_exe, :output, :testrunner, :working_directory, :cover_assemblies, :ignore_assemblies, :coverage
+	attr_accessor :path_to_exe, :output, :testrunner, :working_directory, :cover_assemblies
+	attr_accessor :ignore_assemblies, :coverage, :failed
 	
 	def initialize
+		@failed = false
 		@output = {}
 		@testrunner_args = []
 		@cover_assemblies = []
@@ -19,6 +21,9 @@ class NCoverConsole
 	end
 	
 	def run
+		check_testrunner
+		return false if @failed
+		
 		command = []
 		command << @path_to_exe
 		command << build_output_options(@output) unless @output.nil?
@@ -36,13 +41,21 @@ class NCoverConsole
 		result = system commandline
 		
 		check_for_success result
+		result
+	end
+	
+	def check_testrunner
+		return if (!@testrunner.nil?)
+		msg = 'testrunner cannot be nil.'
+		@logger.info msg
+		@failed = true
 	end
 	
 	def check_for_success(success)
 		return if success
 		msg = 'Code Coverage Analysis Failed. See Build Log For Detail.'
 		@logger.info msg
-		raise msg
+		@failed = true
 	end
 	
 	def build_output_options(output)

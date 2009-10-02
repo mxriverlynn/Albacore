@@ -165,6 +165,8 @@ describe NCoverConsole, "when analyzing a test suite with failing tests" do
 		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
 		
 		ncc = NCoverConsole.new()
+		strio = StringIO.new
+		ncc.log_device = strio
 		
 		ncc.extend(SystemPatch)
 		ncc.log_level = :verbose
@@ -178,15 +180,34 @@ describe NCoverConsole, "when analyzing a test suite with failing tests" do
 		
 		ncc.testrunner = nunit
 		
-		begin
-			ncc.run
-		rescue Exception => e
-			@exception = e
-		end
-
+		@result = ncc.run
+		@log_data = strio.string
 	end
 	
-	it "should fail the build" do
-		@exception.should_not == nil
+	it "should return a failure code" do
+		@result.should == false
+	end
+	
+	it "should log a failure message" do
+		@log_data.should include("Code Coverage Analysis Failed. See Build Log For Detail.")
+	end
+end
+
+describe NCoverConsole, "when running without a testrunner" do
+	before :all do
+		ncc = NCoverConsole.new()
+		strio = StringIO.new
+		ncc.log_device = strio
+		
+		@result = ncc.run
+		@log_data = strio.string
+	end
+
+	it "should log a message saying the test runner is required" do
+		@log_data.should include("testrunner cannot be nil.")
+	end
+	
+	it "should return a failure code" do
+		@result.should == false
 	end
 end
