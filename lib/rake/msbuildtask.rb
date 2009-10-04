@@ -13,7 +13,8 @@ module Rake
 		
 		def define
 			task name do
-				fail unless @msbuild.build
+				@msbuild.build
+				fail if @msbuild.failed
 			end
 		end		
 	end

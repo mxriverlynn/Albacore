@@ -1,13 +1,12 @@
-require File.join(File.dirname(__FILE__), 'support', 'logging')
+require File.join(File.dirname(__FILE__), 'support', 'albacorebase')
 
 class NCoverConsole
-	include LogBase
+	include AlbacoreBase
 	
 	attr_accessor :path_to_exe, :output, :testrunner, :working_directory, :cover_assemblies
-	attr_accessor :ignore_assemblies, :coverage, :failed
+	attr_accessor :ignore_assemblies, :coverage
 	
 	def initialize
-		@failed = false
 		@output = {}
 		@testrunner_args = []
 		@cover_assemblies = []
@@ -39,23 +38,21 @@ class NCoverConsole
 		@logger.debug "NCover Command Line: " + commandline
 
 		result = system commandline
-		
 		check_for_success result
-		result
 	end
 	
 	def check_testrunner
 		return if (!@testrunner.nil?)
 		msg = 'testrunner cannot be nil.'
 		@logger.info msg
-		@failed = true
+		fail
 	end
 	
 	def check_for_success(success)
 		return if success
 		msg = 'Code Coverage Analysis Failed. See Build Log For Detail.'
 		@logger.info msg
-		@failed = true
+		fail
 	end
 	
 	def build_output_options(output)

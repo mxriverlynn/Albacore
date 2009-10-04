@@ -13,7 +13,8 @@ module Rake
 		
 		def define
 			task name do
-				fail unless @ncover.run
+				@ncover.run
+				fail if @ncover.failed
 			end
 		end	
 	end

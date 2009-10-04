@@ -180,12 +180,13 @@ describe NCoverConsole, "when analyzing a test suite with failing tests" do
 		
 		ncc.testrunner = nunit
 		
-		@result = ncc.run
+		ncc.run
+		@failed = ncc.failed
 		@log_data = strio.string
 	end
 	
 	it "should return a failure code" do
-		@result.should == false
+		@failed.should == true
 	end
 	
 	it "should log a failure message" do

@@ -13,7 +13,8 @@ module Rake
 		
 		def define
 			task name do
-				fail unless @asm.write
+				@asm.write
+				fail if @asm.failed
 			end
 		end
 	end

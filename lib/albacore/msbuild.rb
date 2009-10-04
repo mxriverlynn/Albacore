@@ -1,13 +1,12 @@
 require File.join(File.dirname(__FILE__), 'patches', 'buildparameters')
-require File.join(File.dirname(__FILE__), 'support', 'logging')
+require File.join(File.dirname(__FILE__), 'support', 'albacorebase')
 
 class MSBuild
-	include LogBase
+	include AlbacoreBase
 	
-	attr_accessor :failed, :path_to_exe, :solution, :verbosity
+	attr_accessor :path_to_exe, :solution, :verbosity
 	
 	def initialize(path_to_exe=nil)
-		@failed = false
 		if path_to_exe == nil
 			build_path_to_exe
 		else
@@ -53,13 +52,13 @@ class MSBuild
 		return if file
 		msg = 'solution cannot be nil'
 		@logger.fatal msg
-		@failed = true
+		fail
 	end
 
 	def check_msbuild(file)
 		return if File.exist?(file)
 		msg = 'invalid path to msbuild.exe - file not found: ' + File.expand_path(file)
 		@logger.fatal msg
-		@failed = true
+		fail
 	end	
 end

@@ -1,14 +1,13 @@
-require File.join(File.dirname(__FILE__), 'support', 'logging')
+require File.join(File.dirname(__FILE__), 'support', 'albacorebase')
 
 class AssemblyInfo
-	include LogBase
+	include AlbacoreBase
 	
 	attr_accessor :version, :title, :description, :output_file, :custom_attributes
 	attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-	attr_accessor :file_version, :trademark, :namespaces, :failed
+	attr_accessor :file_version, :trademark, :namespaces
 	
 	def initialize
-		@failed = false
 		@namespaces = []
 		super()
 	end
@@ -33,7 +32,7 @@ class AssemblyInfo
 		return if file
 		msg = 'output_file cannot be nil'
 		@logger.fatal msg
-		@failed = true
+		fail
 	end
 	
 	def build_assembly_info_data
