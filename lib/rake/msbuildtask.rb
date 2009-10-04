@@ -4,9 +4,9 @@ module Rake
 	class MSBuildTask < Rake::TaskLib
 		attr_accessor :name
 		
-		def initialize(name=:MSBuild, msbuild_path=nil)
+		def initialize(name=:MSBuild)
 			@name = name
-			@msbuild = MSBuild.new msbuild_path
+			@msbuild = MSBuild.new
 			yield @msbuild if block_given?
 			define
 		end

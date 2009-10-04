@@ -17,8 +17,8 @@ class AssemblyInfo
 	end
 	
 	def write_assemblyinfo(assemblyinfo_file)
-		check_output_file assemblyinfo_file
-		return false if @failed
+		valid = check_output_file assemblyinfo_file
+		return if !valid
 		
 		asm_data = build_assembly_info_data
 
@@ -29,10 +29,9 @@ class AssemblyInfo
 	end
 	
 	def check_output_file(file)
-		return if file
-		msg = 'output_file cannot be nil'
-		@logger.fatal msg
-		fail
+		return true if file
+		fail_with_message 'output_file cannot be nil'
+		return false
 	end
 	
 	def build_assembly_info_data

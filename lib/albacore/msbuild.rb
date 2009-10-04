@@ -2,22 +2,18 @@ require File.join(File.dirname(__FILE__), 'patches', 'buildparameters')
 require File.join(File.dirname(__FILE__), 'support', 'albacorebase')
 
 class MSBuild
-	include AlbacoreBase
+	include CommandBase
 	
-	attr_accessor :path_to_exe, :solution, :verbosity
+	attr_accessor :solution, :verbosity
 	
-	def initialize(path_to_exe=nil)
-		if path_to_exe == nil
-			build_path_to_exe
-		else
-			@path_to_exe = path_to_exe
-		end	
+	def initialize
+		@path_to_command = build_path_to_command
 		super()
 	end
 	
-	def build_path_to_exe
+	def build_path_to_command
 		win_dir = ENV['windir'] || ENV['WINDIR']
-		@path_to_exe = File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
+		File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
 	end
 	
 	def targets(targets)
@@ -35,30 +31,28 @@ class MSBuild
 	end
 	
 	def build_solution(solution)
-		check_msbuild @path_to_exe
 		check_solution solution
-		return false if @failed
 		
-		cmd = "\"#{@path_to_exe}\" \"#{solution}\""
-		cmd << " /verbosity:#{@verbosity}" if @verbosity != nil
-		cmd << " /property:#{@properties.build_parameters}" if @properties != nil
-		cmd << " /target:#{@targets.build_parameters}" if @targets != nil
+		command_parameters = " \"#{solution}\""
+		command_parameters << " /verbosity:#{@verbosity}" if @verbosity != nil
+		command_parameters << " /property:#{@properties.build_parameters}" if @properties != nil
+		command_parameters << " /target:#{@targets.build_parameters}" if @targets != nil
 		
-		@logger.debug "Executing MSBuild: " + cmd
-		system cmd
+		result = run_command "MSBuild", command_parameters
+		
+		failure_message = 'MSBuild Failed. See Build Log For Detail'
+		fail_with_message failure_message if !result
 	end
 	
 	def check_solution(file)
-		return if file
-		msg = 'solution cannot be nil'
-		@logger.fatal msg
-		fail
+		if file.nil?
+			msg = 'solution cannot be nil'
+		else
+			valid = File.exist?(file)
+			(msg = 'solution Cannot Be Nil') if !valid
+			return if valid
+		end
+		
+		fail_with_message msg
 	end
-
-	def check_msbuild(file)
-		return if File.exist?(file)
-		msg = 'invalid path to msbuild.exe - file not found: ' + File.expand_path(file)
-		@logger.fatal msg
-		fail
-	end	
 end

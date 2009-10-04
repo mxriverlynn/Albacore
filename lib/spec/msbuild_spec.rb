@@ -46,7 +46,7 @@ describe MSBuild, "when an msbuild path is not specified" do
 	end
 	
 	it "should default to the .net framework v3.5" do
-		@msbuild.path_to_exe.should == @testdata.msbuild_path
+		@msbuild.path_to_command.should == @testdata.msbuild_path
 	end
 end
 
@@ -57,7 +57,7 @@ describe MSBuild, "when an msbuild path is specified" do
 	end
 	
 	it "should use the specified path for the msbuild exe" do
-		@msbuild.path_to_exe.should == "Some Path"
+		@msbuild.path_to_command.should == "Some Path"
 	end	
 end
 
@@ -75,8 +75,8 @@ describe MSBuild, "when an invalid msbuild path is specified" do
 		@log_data = strio.string
 	end
 	
-	it "should log an error message saying the output file is required" do
-		@log_data.should include("invalid path to msbuild.exe - file not found:")
+	it "should log an error message saying the command was not found" do
+		@log_data.should include("Command not found: #{@testdata.msbuild_path}")
 	end
 end
 

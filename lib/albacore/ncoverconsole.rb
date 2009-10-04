@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'support', 'albacorebase')
 
 class NCoverConsole
-	include AlbacoreBase
+	include CommandBase
 	
-	attr_accessor :path_to_exe, :output, :testrunner, :working_directory, :cover_assemblies
+	attr_accessor :output, :testrunner, :working_directory, :cover_assemblies
 	attr_accessor :ignore_assemblies, :coverage
 	
 	def initialize
@@ -23,34 +23,23 @@ class NCoverConsole
 		check_testrunner
 		return false if @failed
 		
-		command = []
-		command << @path_to_exe
-		command << build_output_options(@output) unless @output.nil?
-		command << @working_directory unless @working_directory.nil?
-		command << build_assembly_list("assemblies", @cover_assemblies) unless @cover_assemblies.empty?
-		command << build_assembly_list("exclude-assemblies", @ignore_assemblies) unless @ignore_assemblies.empty?
-		command << build_coverage_list(@coverage) unless @coverage.empty?
-		command << @testrunner.get_command_line
+		command_parameters = []
+		command_parameters << build_output_options(@output) unless @output.nil?
+		command_parameters << @working_directory unless @working_directory.nil?
+		command_parameters << build_assembly_list("assemblies", @cover_assemblies) unless @cover_assemblies.empty?
+		command_parameters << build_assembly_list("exclude-assemblies", @ignore_assemblies) unless @ignore_assemblies.empty?
+		command_parameters << build_coverage_list(@coverage) unless @coverage.empty?
+		command_parameters << @testrunner.get_command_line
 		
-		commandline = command.join(" ")
-
-		@logger.info "Executing Code Coverage Analysis."
-		@logger.debug "NCover Command Line: " + commandline
-
-		result = system commandline
-		check_for_success result
+		result = run_command "NCover.Console", command_parameters.join(" ")
+		
+		failure_msg = 'Code Coverage Analysis Failed. See Build Log For Detail.'
+		fail_with_message failure_msg if !result
 	end
 	
 	def check_testrunner
 		return if (!@testrunner.nil?)
 		msg = 'testrunner cannot be nil.'
-		@logger.info msg
-		fail
-	end
-	
-	def check_for_success(success)
-		return if success
-		msg = 'Code Coverage Analysis Failed. See Build Log For Detail.'
 		@logger.info msg
 		fail
 	end

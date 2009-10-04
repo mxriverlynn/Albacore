@@ -17,18 +17,6 @@ describe Rake::MSBuildTask, "when running" do
 	end
 end
 
-describe Rake::MSBuildTask, "when specifying the msbuild path" do
-	before :all do
-		@msbuildtask = Rake::MSBuildTask.new(:name, "Path To Exe") do |t|
-			@msbuild = t
-		end
-	end
-	
-	it "should use the specified path for the msbuild exe" do
-		@msbuild.path_to_exe.should == "Path To Exe"
-	end
-end
-
 describe Rake::MSBuildTask, "when execution fails" do
 	before :all do
 		@msbuildtask = Rake::MSBuildTask.new(:failingtask)

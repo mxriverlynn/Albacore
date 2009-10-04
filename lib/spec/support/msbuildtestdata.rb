@@ -18,7 +18,13 @@ class MSBuildTestData
 	end
 	
 	def msbuild(path_to_msbuild=nil)
-		@msbuild = MSBuild.new path_to_msbuild
+		@msbuild = MSBuild.new
+		
+		if (path_to_msbuild)
+			@msbuild_path = path_to_msbuild
+			(@msbuild.path_to_command = path_to_msbuild)
+		end
+		
 		@msbuild.extend(SystemPatch)
 		@msbuild
 	end
