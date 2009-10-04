@@ -45,14 +45,8 @@ class MSBuild
 	end
 	
 	def check_solution(file)
-		if file.nil?
-			msg = 'solution cannot be nil'
-		else
-			valid = File.exist?(file)
-			(msg = 'solution Cannot Be Nil') if !valid
-			return if valid
-		end
-		
+		return if file
+		msg = 'solution cannot be nil'
 		fail_with_message msg
 	end
 end
