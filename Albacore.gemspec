@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.files = [
     "EULA.txt",
      "README.markdown",
+     "VERSION",
      "lib/albacore.rb",
      "lib/albacore/assemblyinfo.rb",
      "lib/albacore/msbuild.rb",

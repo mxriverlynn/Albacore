@@ -2,19 +2,19 @@
 
 Albacore is intended to be a professional quality suite of Rake tasks to help automate the process of building a .NET based system. All tasks are built using a test-first approach through rspec, and all tests are included in the Albacore gem.
 
-## How To Install Albacore From Github Gems:
+## How To Install Albacore From Gemcutter Gems:
 
-If you would like to install the current, stable release of Albacore, you can do so easily through the Github Gems server. Follow these simple instructions and you will be good to go.
+If you would like to install the current, stable release of Albacore, you can do so easily through the Gemcutter gem server. Follow these simple instructions and you will be good to go.
 
-**Step 1:** Setup github as a gem source
+**Step 1:** Setup Gemcutter as a gem source
 
-> `gem source -a http://gems.github.com`
+> `gem source -a http://gemcutter.org`
 
 (note: you only need to do this once for any given computer that is going to install gems from github.)
 
 **Step 2:** Install the Albacore gem
 
-> `gem install derickbailey-Albacore`
+> `gem install Albacore`
 
 ## How To Manually Build And Install The Albacore Gem
 
@@ -28,9 +28,11 @@ Use your Github account to fork Albacore, or clone it directly from my public cl
 
 **Step 2:** Build the gem
 
-In your local clone of Albacore, use the gem build command to build the latest version of the Albacore code into a gem.
+In your local clone of Albacore, use the jeweler rake tasks to build the latest version of the Albacore code into a gem.
 
-> `gem build Albacore.gemspec`
+> `rake gemspec`
+
+> `rake build`
 
 this will produce an 'Albacore-#.#.#.gem' file, where '#.#.#' is the version number. For example 'Albacore-0.0.1.gem'.
 
