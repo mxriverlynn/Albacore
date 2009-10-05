@@ -1,9 +1,8 @@
-require 'spec/rake/spectask'
-require 'lib/albacore'
-
 task :default => ['specs:assemblyinfo', 'specs:msbuild', 'specs:run']
 
 namespace :specs do
+	require 'spec/rake/spectask'
+
 	@@specs_to_run=[]
 	@spec_opts = '--colour --format specdoc'
 
@@ -47,6 +46,8 @@ namespace :specs do
 end
 
 namespace :albacore do	
+	require 'lib/albacore'
+
 	desc "Run a complete Albacore build sample"
 	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild', 'albacore:ncoverconsole']
 	
@@ -87,4 +88,16 @@ namespace :albacore do
 		
 		ncc.testrunner = nunit
 	end
+end
+
+require 'jeweler'	
+Jeweler::Tasks.new do |gs|
+	gs.name = "Albacore"
+	gs.summary = "A Suite of Rake Build Tasks For .Net Solutions"
+	gs.description = "Easily build your .NET solutions with rake, using this suite of custom tasks."
+	gs.email = "derickbailey@gmail.com"
+	gs.homepage = "http://github.com/derickbailey/Albacore"
+	gs.authors = "Derick Bailey"
+	gs.has_rdoc = false	
+	gs.files.exclude("Albacore.gemspec", ".gitignore")
 end
