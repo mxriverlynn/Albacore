@@ -1,48 +1,39 @@
-task :default => ['specs:assemblyinfo', 'specs:msbuild', 'specs:run']
+task :default => ['albacore:sample']
 
 namespace :specs do
 	require 'spec/rake/spectask'
 
-	@@specs_to_run=[]
 	@spec_opts = '--colour --format specdoc'
 
 	desc "Run setup functional specs for Albacore"
-	task :all => [
-		'specs:assemblyinfo', 
-		'specs:msbuild', 
-		'specs:sqlcmd', 
-		'specs:ncover', 
-		'specs:run'
-	]
+	Spec::Rake::SpecTask.new :all do |t|
+		t.spec_files = 'lib/spec/**/*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
 	
 	desc "Setup the assembly info functional specs"
-	task :assemblyinfo do
-		@@specs_to_run << 'lib/spec/assemblyinfo_spec.rb'
-		@@specs_to_run << 'lib/spec/assemblyinfotask_spec.rb'
+	Spec::Rake::SpecTask.new :assemblyinfo do |t|
+		t.spec_files = 'lib/spec/assemblyinfo*_spec.rb'
+		t.spec_opts << @spec_opts
 	end
 	
 	desc "Setup the msbuild functional specs"
-	task :msbuild do
-		@@specs_to_run << 'lib/spec/msbuild_spec.rb'
-		@@specs_to_run << 'lib/spec/msbuildtask_spec.rb'
+	Spec::Rake::SpecTask.new :assemblyinfo do |t|
+		t.spec_files = 'lib/spec/msbuild*_spec.rb'
+		t.spec_opts << @spec_opts
 	end
 
 	desc "Setup SQLServer SQLCmd functional specs" 
-	task :sqlcmd do
-		@@specs_to_run << 'lib/spec/sqlcmd_spec.rb'
-		@@specs_to_run << 'lib/spec/sqlcmdtask_spec.rb'
+	Spec::Rake::SpecTask.new :assemblyinfo do |t|
+		t.spec_files = 'lib/spec/sqlcmd*_spec.rb'
+		t.spec_opts << @spec_opts
 	end
 	
 	desc "Setup NCover functional specs"
-	task :ncover do
-		@@specs_to_run << 'lib/spec/ncoverconsole_spec.rb'
-		@@specs_to_run << 'lib/spec/ncoverconsoletask_spec.rb'
-	end
-	
-	Spec::Rake::SpecTask.new :run do |t|
+	Spec::Rake::SpecTask.new :assemblyinfo do |t|
+		t.spec_files = 'lib/spec/ncoverconsole*_spec.rb'
 		t.spec_opts << @spec_opts
-		t.spec_files = @@specs_to_run
-	end
+	end	
 end
 
 namespace :albacore do	

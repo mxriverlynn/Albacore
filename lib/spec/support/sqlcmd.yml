@@ -1,5 +1,0 @@
-path_to_command: sqlcmd.exe
-server: localhost
-database: albacore
-username: albacore
-password: a1b@c0r3
