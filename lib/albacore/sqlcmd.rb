@@ -46,7 +46,11 @@ class SQLCmd
 	end
 	
 	def build_variable_list
-		@variables.map{|k,v| "-v #{k}=#{v}"}
+		vars = []
+		@variables.each do |k,v| 
+			vars << "-v #{k}=#{v}"
+		end
+		vars.join(" ")
 	end
 	
 end
