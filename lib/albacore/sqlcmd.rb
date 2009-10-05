@@ -46,7 +46,7 @@ class SQLCmd
 	end
 	
 	def build_variable_list
-		@variables.map{|k,v| "-v \"#{k}\"=\"#{v}\""}
+		@variables.map{|k,v| "-v #{k}=#{v}"}
 	end
 	
 end

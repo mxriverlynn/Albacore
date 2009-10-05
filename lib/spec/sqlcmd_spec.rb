@@ -133,7 +133,7 @@ describe SQLCmd, "when running with variables specified" do
 	end
 	
 	it "should supply the variables to sqlcmd" do
-		$system_command.should include("-v \"myvar\"=\"my value\"")
-		$system_command.should include("-v \"another_var\"=\"another_value\"")
+		$system_command.should include("-v myvar=my value")
+		$system_command.should include("-v another_var=another_value")
 	end
 end

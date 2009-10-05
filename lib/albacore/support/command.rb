@@ -3,11 +3,12 @@ require File.join(File.dirname(__FILE__), 'model')
 module CommandBase
 	include ModelBase
 	
-	attr_accessor :path_to_command, :require_valid_command
+	attr_accessor :path_to_command, :require_valid_command, :working_directory
 	
 	def initialize
 		super()
 		@require_valid_command = true
+		@working_directory = Dir.pwd
 	end
 	
 	def run_command(command_name="Command Line", command_parameters="")
@@ -18,12 +19,27 @@ module CommandBase
 		command = "\"#{@path_to_command}\" #{command_parameters}"
 		@logger.debug "Executing #{command_name}: #{command}"
 		
-		system command		
+		set_working_directory		
+		result = system command
+		reset_working_directory
+		
+		result
 	end
 	
 	def valid_command_exists
 		return true if File.exist?(@path_to_command)
 		msg = 'Command not found: ' + @path_to_command
 		@logger.fatal msg
-	end			
+	end
+	
+	def set_working_directory
+		@original_directory = Dir.pwd
+		return if Dir.pwd == @working_directory
+		Dir.chdir(@working_directory)
+	end
+	
+	def reset_working_directory
+		return if Dir.pwd == @original_directory
+		Dir.chdir(@original_directory)
+	end
 end
