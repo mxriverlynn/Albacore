@@ -117,3 +117,23 @@ describe SQLCmd, "when running multiple script files" do
 		$system_command.should include("-i \"i sent you.sql\"")
 	end
 end
+
+describe SQLCmd, "when running with variables specified" do
+	before :all do
+		cmd = SQLCmd.new
+		cmd.path_to_command = "sqlcmd.exe"
+		cmd.log_level = :verbose
+		cmd.extend(SystemPatch)
+		cmd.disable_system = true
+		cmd.scripts << "somescript.sql"
+		
+		cmd.variables = {:myvar => "my value", :another_var => :another_value}
+		
+		cmd.run
+	end
+	
+	it "should supply the variables to sqlcmd" do
+		$system_command.should include("-v \"myvar\"=\"my value\"")
+		$system_command.should include("-v \"another_var\"=\"another_value\"")
+	end
+end

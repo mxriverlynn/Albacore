@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{Albacore}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Derick Bailey"]
@@ -27,7 +27,10 @@ Gem::Specification.new do |s|
      "lib/albacore/patches/buildparameters.rb",
      "lib/albacore/sqlcmd.rb",
      "lib/albacore/support/albacorebase.rb",
+     "lib/albacore/support/command.rb",
      "lib/albacore/support/logging.rb",
+     "lib/albacore/support/model.rb",
+     "lib/albacore/support/yamlconfig.rb",
      "lib/rake/assemblyinfotask.rb",
      "lib/rake/msbuildtask.rb",
      "lib/rake/ncoverconsoletask.rb",
@@ -142,7 +145,8 @@ Gem::Specification.new do |s|
      "lib/spec/support/assemblyinfotester.rb",
      "lib/spec/support/msbuildtestdata.rb",
      "lib/spec/support/spec_helper.rb",
-     "lib/spec/support/sqlcmd.yml",
+     "lib/spec/support/test.yml",
+     "lib/spec/yamlconfig_spec.rb",
      "rakefile.rb"
   ]
   s.homepage = %q{http://github.com/derickbailey/Albacore}
