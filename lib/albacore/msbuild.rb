@@ -34,9 +34,9 @@ class MSBuild
 		check_solution solution
 		
 		command_parameters = " \"#{solution}\""
-		command_parameters << " /verbosity:#{@verbosity}" if @verbosity != nil
-		command_parameters << " /property:#{@properties.build_parameters}" if @properties != nil
-		command_parameters << " /target:#{@targets.build_parameters}" if @targets != nil
+		command_parameters << " \"/verbosity:#{@verbosity}\"" if @verbosity != nil
+		command_parameters << " \"/property:#{@properties.build_parameters}\"" if @properties != nil
+		command_parameters << " \"/target:#{@targets.build_parameters}\"" if @targets != nil
 		
 		result = run_command "MSBuild", command_parameters
 		
