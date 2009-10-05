@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-module Rake
+module Rake	
 	class SQLCmdTask < Rake::TaskLib
 		attr_accessor :name
 		
@@ -13,7 +13,8 @@ module Rake
 		
 		def define
 			task name do
-				#execute the sqlcmd here
+				@sqlcmd.run
+				fail if @sqlcmd.failed
 			end
 		end	
 	end

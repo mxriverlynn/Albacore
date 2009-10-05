@@ -1,17 +1,15 @@
+require File.join(File.dirname(__FILE__), 'support', 'albacorebase')
 require 'yaml'
 
 class SQLCmd
-
-	def configure(yml_file)
-		config = YAML::load(File.open(yml_file))
-		parse_config config
-	end	
+	include CommandBase
+	include YAMLConfigBase
 	
-	def parse_config(config)
-		config.each do |key, value|
-			SQLCmd.send :attr_accessor, key
-			send key+"=", value
-		end
+	attr_accessor :server, :database, :username, :password
+	
+	def run
+		
+		
 	end
 	
 end

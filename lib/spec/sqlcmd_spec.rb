@@ -1,7 +1,7 @@
 require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
 require 'sqlcmd'
 
-describe SQLCmd, "when specifying a yml configuration file" do
+describe SQLCmd, "when configuring with yaml" do
 	
 	before :all do
 		@sql = SQLCmd.new
@@ -9,19 +9,19 @@ describe SQLCmd, "when specifying a yml configuration file" do
 	end
 	
 	it "should set the location of the sqlcmd.exe" do
-		@sql.path_to_exe.should == "sqlcmd.exe"
+		@sql.path_to_command.should == "sqlcmd.exe"
 	end
 	
 	it "should set the server name" do
-		@sql.server_name.should == "localhost"
+		@sql.server.should == "localhost"
 	end
 			
 	it "should set the database name" do
-		@sql.database_name.should == "albacore"
+		@sql.database.should == "albacore"
 	end
 	
 	it "should set the username" do
-		@sql.user_name.should == "albacore"
+		@sql.username.should == "albacore"
 	end
 	
 	it "should set the password" do
