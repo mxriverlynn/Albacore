@@ -5,11 +5,15 @@ $: << File.join(File.expand_path(File.dirname(__FILE__)), "rake")
 require 'logging'
 
 require 'msbuild'
-require 'assemblyinfo'
-require 'ncoverconsole'
-
 require 'msbuildtask'
+
+require 'assemblyinfo'
 require 'assemblyinfotask'
+
+require 'ncoverconsole'
 require 'ncoverconsoletask'
+
+require 'sqlcmd'
+require 'sqlcmdtask'
 
 require 'nunittestrunner'
