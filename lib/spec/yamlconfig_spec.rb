@@ -22,6 +22,8 @@ describe YAMLConfigBase, "when configuring with yaml" do
 			
 	it "should allow hash tables" do
 		@yml.a_hash.length.should == 2
+		@yml.a_hash['name'].should == "value"
+		@yml.a_hash['foo'].should == "bar"
 	end
 	
 	it "should allow symbols" do
