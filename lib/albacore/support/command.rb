@@ -3,12 +3,12 @@ require File.join(File.dirname(__FILE__), 'model')
 module CommandBase
 	include ModelBase
 	
-	attr_accessor :path_to_command, :require_valid_command, :working_directory
+	attr_accessor :path_to_command, :require_valid_command, :command_directory
 	
 	def initialize
 		super()
 		@require_valid_command = true
-		@working_directory = Dir.pwd
+		@command_directory = Dir.pwd
 	end
 	
 	def run_command(command_name="Command Line", command_parameters="")
@@ -34,8 +34,8 @@ module CommandBase
 	
 	def set_working_directory
 		@original_directory = Dir.pwd
-		return if Dir.pwd == @working_directory
-		Dir.chdir(@working_directory)
+		return if @command_directory == @original_directory
+		Dir.chdir(@command_directory)
 	end
 	
 	def reset_working_directory
