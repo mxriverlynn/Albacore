@@ -6,8 +6,8 @@ module CommandBase
 	attr_accessor :path_to_command, :require_valid_command
 	
 	def initialize
-		@require_valid_command = true
 		super()
+		@require_valid_command = true
 	end
 	
 	def run_command(command_name="Command Line", command_parameters="")
@@ -18,8 +18,7 @@ module CommandBase
 		command = "\"#{@path_to_command}\" #{command_parameters}"
 		@logger.debug "Executing #{command_name}: #{command}"
 		
-		result = system command		
-		result
+		system command		
 	end
 	
 	def valid_command_exists

@@ -10,3 +10,4 @@ $: << File.join(File.expand_path(File.dirname(__FILE__)), "../patches/")
 $: << File.join(File.expand_path(File.dirname(__FILE__)), "../support/")
 
 require 'system_patch'
+require 'tasklib_patch'
