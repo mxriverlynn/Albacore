@@ -10,7 +10,7 @@ If you would like to install the current, stable release of Albacore, you can do
 
 > `gem source -a http://gemcutter.org`
 
-(note: you only need to do this once for any given computer that is going to install gems from github.)
+(note: you only need to do this once for any given computer that is going to install gems from gemcutter.)
 
 **Step 2:** Install the Albacore gem
 
