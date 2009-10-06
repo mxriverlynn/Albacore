@@ -13,3 +13,4 @@ require 'assemblyinfotask'
 require 'ncoverconsoletask'
 
 require 'nunittestrunner'
+require 'mspectestrunner'
