@@ -3,7 +3,6 @@
 $: << File.join(@root_dir, "lib")
 $: << File.join(@root_dir, "lib/rake")
 $: << File.join(@root_dir, "lib/albacore")
-$: << File.join(@root_dir, "lib/albacore/patches")
 $: << File.join(@root_dir, "lib/albacore/support")
 $: << File.join(@root_dir, "spec")
 $: << File.join(@root_dir, "spec/patches")

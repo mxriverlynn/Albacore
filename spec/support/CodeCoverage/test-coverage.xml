@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
+<coverage profilerVersion="3.3.0.6070" driverVersion="3.2.4" exportversion="3" viewdisplayname="" startTime="2009-10-06T13:58:19.145396Z" measureTime="2009-10-06T13:58:19.9449Z" projectName="" buildid="8e0eb63b-5065-400c-89ef-009f79bf6823" coveragenodeid="0" failed="true" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="D:/Dev/Derick-GitHub/Albacore/spec/support/CodeCoverage/test-coverage.xml" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
+  <rebasedpaths />
+  <filters />
+  <documents>
+    <doc id="0" excluded="false" url="None" cs="" csa="00000000-0000-0000-0000-000000000000" om="0" nid="0" />
+  </documents>
+  <module moduleId="18" name="D:\Dev\Derick-GitHub\Albacore\spec\support\CodeCoverage\failing_assemblies\TestSolution.FailingTests.dll" assembly="TestSolution.FailingTests" assemblyIdentity="TestSolution.FailingTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
+    <class name="TestSolution.FailingTests.FailingTestFixture" signature="TestSolution.FailingTests.FailingTestFixture" excluded="false" nid="0">
+      <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
+        <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+      <method name="FailingTest" signature="FailingTest() : void" excluded="false" instrumented="false" cc="1" vc="1" nid="0">
+        <seqpnt vc="0" o="C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+      </method>
+    </class>
+  </module>
+</coverage>

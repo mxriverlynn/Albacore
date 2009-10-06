@@ -1,4 +1,3 @@
-require File.join(File.dirname(__FILE__), 'patches', 'buildparameters')
 require File.join(File.dirname(__FILE__), 'support', 'albacorebase')
 
 class MSBuild
@@ -18,12 +17,10 @@ class MSBuild
 	
 	def targets(targets)
 		@targets=targets
-		@targets.extend(ArrayParameterBuilder)
 	end
 	
 	def properties(properties)
 		@properties = properties
-		@properties.extend(HashParameterBuilder)
 	end
 	
 	def build
@@ -35,8 +32,8 @@ class MSBuild
 		
 		command_parameters = " \"#{solution}\""
 		command_parameters << " \"/verbosity:#{@verbosity}\"" if @verbosity != nil
-		command_parameters << " \"/property:#{@properties.build_parameters}\"" if @properties != nil
-		command_parameters << " \"/target:#{@targets.build_parameters}\"" if @targets != nil
+		command_parameters << " \"/property:#{build_properties}\"" if @properties != nil
+		command_parameters << " \"/target:#{build_targets}\"" if @targets != nil
 		
 		result = run_command "MSBuild", command_parameters
 		
@@ -48,5 +45,17 @@ class MSBuild
 		return if file
 		msg = 'solution cannot be nil'
 		fail_with_message msg
+	end
+	
+	def build_targets
+		@targets.join ";"
+	end
+
+	def build_properties
+		option_text = []
+		@properties.each do |key, value|
+			option_text << "#{key}\=#{value}"
+		end
+		option_text.join(";")
 	end
 end
