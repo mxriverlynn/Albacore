@@ -7,31 +7,31 @@ namespace :specs do
 
 	desc "Run setup functional specs for Albacore"
 	Spec::Rake::SpecTask.new :all do |t|
-		t.spec_files = 'lib/spec/**/*_spec.rb'
+		t.spec_files = 'spec/**/*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 	
 	desc "Setup the assembly info functional specs"
 	Spec::Rake::SpecTask.new :assemblyinfo do |t|
-		t.spec_files = 'lib/spec/assemblyinfo*_spec.rb'
+		t.spec_files = 'spec/assemblyinfo*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 	
 	desc "Setup the msbuild functional specs"
 	Spec::Rake::SpecTask.new :assemblyinfo do |t|
-		t.spec_files = 'lib/spec/msbuild*_spec.rb'
+		t.spec_files = 'spec/msbuild*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 
 	desc "Setup SQLServer SQLCmd functional specs" 
 	Spec::Rake::SpecTask.new :assemblyinfo do |t|
-		t.spec_files = 'lib/spec/sqlcmd*_spec.rb'
+		t.spec_files = 'spec/sqlcmd*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 	
 	desc "Setup NCover functional specs"
 	Spec::Rake::SpecTask.new :assemblyinfo do |t|
-		t.spec_files = 'lib/spec/ncoverconsole*_spec.rb'
+		t.spec_files = 'spec/ncoverconsole*_spec.rb'
 		t.spec_opts << @spec_opts
 	end	
 end
@@ -46,7 +46,7 @@ namespace :albacore do
 	Rake::MSBuildTask.new(:msbuild) do |msb|
 		msb.properties :configuration => :Debug
 		msb.targets [:Clean, :Build]
-		msb.solution = "lib/spec/support/TestSolution/TestSolution.sln"
+		msb.solution = "spec/support/TestSolution/TestSolution.sln"
 	end
 	
 	desc "Run a sample assembly info generator"
@@ -59,20 +59,20 @@ namespace :albacore do
 		asm.copyright = "copyright some year, by some legal entity"
 		asm.custom_attributes :SomeAttribute => "some value goes here", :AnotherAttribute => "with some data"
 		
-		asm.output_file = "lib/spec/support/AssemblyInfo/AssemblyInfo.cs"
+		asm.output_file = "spec/support/AssemblyInfo/AssemblyInfo.cs"
 	end
 	
 	desc "Run a sample NCover Console code coverage"
 	Rake::NCoverConsoleTask.new(:ncoverconsole) do |ncc|
-		@xml_coverage = "lib/spec/support/CodeCoverage/test-coverage.xml"
+		@xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
 		File.delete(@xml_coverage) if File.exist?(@xml_coverage)
 		
 		ncc.log_level = :verbose
-		ncc.path_to_command = "lib/spec/support/Tools/NCover-v3.2/NCover.Console.exe"
+		ncc.path_to_command = "spec/support/Tools/NCover-v3.2/NCover.Console.exe"
 		ncc.output = {:xml => @xml_coverage, :html => "lib/spec/support/CodeCoverage/html"}
-		ncc.working_directory = "lib/spec/support/CodeCoverage"
+		ncc.working_directory = "spec/support/CodeCoverage"
 		
-		nunit = NUnitTestRunner.new("lib/spec/support/Tools/NUnit-v2.5/nunit-console.exe")
+		nunit = NUnitTestRunner.new("spec/support/Tools/NUnit-v2.5/nunit-console.exe")
 		nunit.log_level = :verbose
 		nunit.assemblies << "assemblies/TestSolution.Tests.dll"
 		nunit.options << '/noshadow'

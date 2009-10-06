@@ -19,7 +19,7 @@ describe AssemblyInfo, "when generating an assembly info file" do
 	end
 end
 
-describe "when generating an assembly info file in verbose mode" do
+describe AssemblyInfo, "when generating an assembly info file in verbose mode" do
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
@@ -42,7 +42,7 @@ describe "when generating an assembly info file in verbose mode" do
 	end
 end
 
-describe "when generating an assembly info file without an output file specified" do
+describe AssemblyInfo, "when generating an assembly info file without an output file specified" do
 	before :all do
 		@tester = AssemblyInfoTester.new
 		asm = AssemblyInfo.new
