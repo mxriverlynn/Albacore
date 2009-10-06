@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Derick Bailey"]
-  s.date = %q{2009-10-05}
+  s.date = %q{2009-10-06}
   s.description = %q{Easily build your .NET solutions with rake, using this suite of custom tasks.}
   s.email = %q{derickbailey@gmail.com}
   s.extra_rdoc_files = [
@@ -22,9 +22,9 @@ Gem::Specification.new do |s|
      "lib/albacore.rb",
      "lib/albacore/assemblyinfo.rb",
      "lib/albacore/msbuild.rb",
+     "lib/albacore/mspectestrunner.rb",
      "lib/albacore/ncoverconsole.rb",
      "lib/albacore/nunittestrunner.rb",
-     "lib/albacore/patches/buildparameters.rb",
      "lib/albacore/sqlcmd.rb",
      "lib/albacore/support/albacorebase.rb",
      "lib/albacore/support/command.rb",
@@ -78,9 +78,22 @@ Gem::Specification.new do |s|
      "spec/support/CodeCoverage/html/sources_full.html",
      "spec/support/CodeCoverage/html/test-coverage.html",
      "spec/support/CodeCoverage/html/uncoveredreport.html",
+     "spec/support/CodeCoverage/mspec/assemblies/Machine.Specifications.NUnit.dll",
+     "spec/support/CodeCoverage/mspec/assemblies/Machine.Specifications.dll",
+     "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll",
+     "spec/support/CodeCoverage/mspec/assemblies/TestSolution.dll",
+     "spec/support/CodeCoverage/mspec/assemblies/nunit.framework.dll",
+     "spec/support/CodeCoverage/mspec/html/TestSolution.MSpecTests_10062009_142415.html",
+     "spec/support/CodeCoverage/mspec/html/TestSolution.MSpecTests_10062009_142425.html",
+     "spec/support/CodeCoverage/mspec/html/TestSolution.MSpecTests_10062009_142446.html",
+     "spec/support/CodeCoverage/mspec/html/TestSolution.MSpecTests_10062009_142831.html",
+     "spec/support/CodeCoverage/test-coverage.xml.bkp",
      "spec/support/TestSolution/TestSolution.FailingTests/FailingTestFixture.cs",
      "spec/support/TestSolution/TestSolution.FailingTests/Properties/AssemblyInfo.cs",
      "spec/support/TestSolution/TestSolution.FailingTests/TestSolution.FailingTests.csproj",
+     "spec/support/TestSolution/TestSolution.MSpecTests/Properties/AssemblyInfo.cs",
+     "spec/support/TestSolution/TestSolution.MSpecTests/SomeSpecTest.cs",
+     "spec/support/TestSolution/TestSolution.MSpecTests/TestSolution.MSpecTests.csproj",
      "spec/support/TestSolution/TestSolution.Tests/Properties/AssemblyInfo.cs",
      "spec/support/TestSolution/TestSolution.Tests/SomeTestFixture.cs",
      "spec/support/TestSolution/TestSolution.Tests/TestSolution.Tests.csproj",
