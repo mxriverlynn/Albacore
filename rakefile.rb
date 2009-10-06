@@ -18,19 +18,19 @@ namespace :specs do
 	end
 	
 	desc "Setup the msbuild functional specs"
-	Spec::Rake::SpecTask.new :assemblyinfo do |t|
+	Spec::Rake::SpecTask.new :msbuild do |t|
 		t.spec_files = 'spec/msbuild*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 
 	desc "Setup SQLServer SQLCmd functional specs" 
-	Spec::Rake::SpecTask.new :assemblyinfo do |t|
+	Spec::Rake::SpecTask.new :sqlcmd do |t|
 		t.spec_files = 'spec/sqlcmd*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 	
 	desc "Setup NCover functional specs"
-	Spec::Rake::SpecTask.new :assemblyinfo do |t|
+	Spec::Rake::SpecTask.new :ncoverconsole do |t|
 		t.spec_files = 'spec/ncoverconsole*_spec.rb'
 		t.spec_opts << @spec_opts
 	end	
