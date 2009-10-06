@@ -91,6 +91,6 @@ namespace :jeweler do
 		gs.homepage = "http://github.com/derickbailey/Albacore"
 		gs.authors = "Derick Bailey"
 		gs.has_rdoc = false	
-		gs.files.exclude("Albacore.gemspec", ".gitignore")
+		gs.files.exclude("Albacore.gemspec", ".gitignore", "spec/support/Tools")
 	end
 end
