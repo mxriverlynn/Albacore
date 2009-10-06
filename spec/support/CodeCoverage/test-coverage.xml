@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- saved from NCover 3.0 Export url='http://www.ncover.com/' -->
-<coverage profilerVersion="3.3.0.6070" driverVersion="3.2.4" exportversion="3" viewdisplayname="" startTime="2009-10-06T19:24:46.1756971Z" measureTime="2009-10-06T19:24:46.8056971Z" projectName="" buildid="f0c0c5f2-f1c1-4e58-8b6e-2a49b8bdcda4" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="d:/Dev/Derick-GitHub/Albacore/spec/support/CodeCoverage/test-coverage.xml" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
+<coverage profilerVersion="3.3.0.6070" driverVersion="3.2.4" exportversion="3" viewdisplayname="" startTime="2009-10-06T19:28:30.4746971Z" measureTime="2009-10-06T19:28:31.3376971Z" projectName="" buildid="7a266bc5-e890-43ae-ad65-9a4d1f6a4463" coveragenodeid="0" failed="false" satisfactorybranchthreshold="95" satisfactorycoveragethreshold="95" satisfactorycyclomaticcomplexitythreshold="20" satisfactoryfunctionthreshold="80" satisfactoryunvisitedsequencepoints="10" uiviewtype="TreeView" viewguid="d:/Dev/Derick-GitHub/Albacore/spec/support/CodeCoverage/test-coverage.xml" viewfilterstyle="None" viewreportstyle="SequencePointCoveragePercentage" viewsortstyle="Name">
   <rebasedpaths />
   <filters />
   <documents>
-    <doc id="55" excluded="false" url="D:\Dev\Derick-GitHub\Albacore\spec\support\TestSolution\TestSolution.MSpecTests\SomeSpecTest.cs" cs="006910D1C1911216DAD6B20E33824FA1" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="7" nid="0" />
-    <doc id="56" excluded="false" url="D:\Dev\Derick-GitHub\Albacore\spec\support\TestSolution\TestSolution\Class1.cs" cs="525E2AE9A205DDA36C76CBC0791C577C" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="13" nid="0" />
     <doc id="1" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.ConsoleRunner\DefaultConsole.cs" cs="315E0DCD317A006B18F79A4C03C3BE21" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="2" nid="0" />
     <doc id="2" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.ConsoleRunner\ExceptionReporter.cs" cs="3FD7256B36693A9A6912345C88297B68" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="2" nid="0" />
     <doc id="5" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.ConsoleRunner\NewException.cs" cs="80795526B65732D4A780D5A3483ECB5F" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="2" nid="0" />
@@ -13,7 +11,7 @@
     <doc id="7" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.ConsoleRunner\Program.cs" cs="E81CB960094742148639B3F1B0D3BEE2" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="2" nid="0" />
     <doc id="6" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.ConsoleRunner\Properties\Resources.Designer.cs" cs="DFAF75EB1AB9EC3EBB3BC97F7CFFE193" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="2" nid="0" />
     <doc id="4" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.ConsoleRunner\RunListener.cs" cs="B58B4A6B7799ADE81386ECBDEA4A5685" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="2" nid="0" />
-    <doc id="57" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.NUnit\ExtensionMethods.cs" cs="A3FB0206115B2C071A67E4FE0FAA4EBF" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="14" nid="0" />
+    <doc id="55" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.NUnit\ExtensionMethods.cs" cs="A3FB0206115B2C071A67E4FE0FAA4EBF" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="14" nid="0" />
     <doc id="43" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.Reporting\CollectReportingInformationRunListener.cs" cs="F0AD562E78B13E3DF9F7067264969AB0" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="4" nid="0" />
     <doc id="44" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.Reporting\GenerateHtmlReportRunListener.cs" cs="878F79DA026E45A5FE85401410123610" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="4" nid="0" />
     <doc id="45" excluded="false" url="d:\Dev\Tools And Frameworks\MSpec\Source\Machine.Specifications.Reporting\Integration\TeamCityReporter.cs" cs="73DE212ED74BBA303F3A51E18A1E1CFF" csa="406ea660-64cf-4c82-b6f0-42d48172a799" om="4" nid="0" />
@@ -3013,196 +3011,196 @@
   <module moduleId="14" name="d:\Dev\Derick-GitHub\Albacore\spec\support\CodeCoverage\mspec\assemblies\Machine.Specifications.NUnit.dll" assembly="Machine.Specifications.NUnit" assemblyIdentity="Machine.Specifications.NUnit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
     <class name="Machine.Specifications.NUnitCollectionExtensionMethods" signature="Machine.Specifications.NUnitCollectionExtensionMethods" excluded="false" nid="0">
       <method name="ToArrayList" signature="ToArrayList(System.Collections.IEnumerable enumerable) : System.Collections.ArrayList [static]" excluded="false" instrumented="false" cc="3" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="13" el="13" c="7" ec="45" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="14" el="14" c="30" ec="40" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="F" l="14" el="14" c="16" ec="26" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="16" l="16" el="16" c="9" ec="28" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="1E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="1E" l="14" el="14" c="27" ec="29" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="24" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="30" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="39" l="18" el="18" c="7" ec="24" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="3A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="13" el="13" c="7" ec="45" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="14" el="14" c="30" ec="40" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="F" l="14" el="14" c="16" ec="26" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="16" l="16" el="16" c="9" ec="28" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="1E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="1E" l="14" el="14" c="27" ec="29" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="24" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="30" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="39" l="18" el="18" c="7" ec="24" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="3A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
     </class>
     <class name="Machine.Specifications.NUnitShouldExtensionMethods" signature="Machine.Specifications.NUnitShouldExtensionMethods" excluded="false" nid="0">
       <method name="GetException" signature="GetException(System.Action method) : System.Exception [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="201" el="201" c="7" ec="34" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="2" l="205" el="205" c="9" ec="18" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="A" l="207" el="207" c="7" ec="26" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="B" l="209" el="209" c="9" ec="23" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="F" l="212" el="212" c="7" ec="24" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="201" el="201" c="7" ec="34" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="2" l="205" el="205" c="9" ec="18" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="A" l="207" el="207" c="7" ec="26" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="B" l="209" el="209" c="9" ec="23" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="F" l="212" el="212" c="7" ec="24" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldBe" signature="ShouldBe(System.Object actual,System.Type expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="79" el="79" c="7" ec="49" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="80" el="80" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="79" el="79" c="7" ec="49" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="80" el="80" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeEmpty" signature="ShouldBeEmpty(System.Collections.IEnumerable collection) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="123" el="123" c="7" ec="48" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="B" l="124" el="124" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="123" el="123" c="7" ec="48" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="B" l="124" el="124" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeEmpty" signature="ShouldBeEmpty(System.String aString) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="128" el="128" c="7" ec="31" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="129" el="129" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="128" el="128" c="7" ec="31" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="129" el="129" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeEqualIgnoringCase" signature="ShouldBeEqualIgnoringCase(System.String actual,System.String expected) : System.String [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="148" el="148" c="7" ec="59" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="149" el="149" c="7" ec="23" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="148" el="148" c="7" ec="59" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="149" el="149" c="7" ec="23" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldBeFalse" signature="ShouldBeFalse(System.Boolean condition) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="25" el="25" c="7" ec="33" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="26" el="26" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="25" el="25" c="7" ec="33" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="26" el="26" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeGreaterThan" signature="ShouldBeGreaterThan(System.IComparable arg1,System.IComparable arg2) : System.IComparable [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="111" el="111" c="7" ec="34" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="112" el="112" c="7" ec="19" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="111" el="111" c="7" ec="34" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="112" el="112" c="7" ec="19" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldBeLessThan" signature="ShouldBeLessThan(System.IComparable arg1,System.IComparable arg2) : System.IComparable [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="117" el="117" c="7" ec="31" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="118" el="118" c="7" ec="19" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="117" el="117" c="7" ec="31" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="118" el="118" c="7" ec="19" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldBeNull" signature="ShouldBeNull(System.Object anObject) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="47" el="47" c="7" ec="31" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="48" el="48" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="47" el="47" c="7" ec="31" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="48" el="48" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeOfType" signature="ShouldBeOfType(System.Object actual,System.Type expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="69" el="69" c="7" ec="49" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="70" el="70" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="69" el="69" c="7" ec="49" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="70" el="70" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeOfType" signature="ShouldBeOfType&lt;T&gt;(System.Object actual) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="74" el="74" c="7" ec="50" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="10" l="75" el="75" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="74" el="74" c="7" ec="50" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="10" l="75" el="75" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeSurroundedWith" signature="ShouldBeSurroundedWith(System.String actual,System.String expectedDelimiter) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="171" el="171" c="7" ec="58" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="172" el="172" c="7" ec="56" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="E" l="173" el="173" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="171" el="171" c="7" ec="58" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="172" el="172" c="7" ec="56" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="E" l="173" el="173" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeSurroundedWith" signature="ShouldBeSurroundedWith(System.String actual,System.String expectedStartDelimiter,System.String expectedEndDelimiter) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="165" el="165" c="7" ec="63" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="166" el="166" c="7" ec="59" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="E" l="167" el="167" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="165" el="165" c="7" ec="63" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="166" el="166" c="7" ec="59" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="E" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="E" l="167" el="167" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldBeTheSameAs" signature="ShouldBeTheSameAs(System.Object actual,System.Object expected) : System.Object [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="57" el="57" c="7" ec="40" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="58" el="58" c="7" ec="23" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="57" el="57" c="7" ec="40" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="58" el="58" c="7" ec="23" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldBeThrownBy" signature="ShouldBeThrownBy(System.Type exceptionType,System.Action method) : System.Exception [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="192" el="192" c="7" ec="51" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="194" el="194" c="7" ec="35" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="D" l="195" el="195" c="7" ec="59" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="19" l="196" el="196" c="7" ec="24" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="1A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="192" el="192" c="7" ec="51" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="194" el="194" c="7" ec="35" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="D" l="195" el="195" c="7" ec="59" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="19" l="196" el="196" c="7" ec="24" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="1A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldBeTrue" signature="ShouldBeTrue(System.Boolean condition) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="30" el="30" c="7" ec="32" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="31" el="31" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="30" el="30" c="7" ec="32" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="31" el="31" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldContain" signature="ShouldContain(System.Collections.IList actual,System.Object[] expected) : void [static]" excluded="false" instrumented="false" cc="2" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="89" el="89" c="28" ec="36" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="89" el="89" c="16" ec="24" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="A" l="91" el="91" c="9" ec="39" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="15" l="89" el="89" c="25" ec="27" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="19" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="1B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="1B" l="93" el="93" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="89" el="89" c="28" ec="36" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="89" el="89" c="16" ec="24" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="A" l="91" el="91" c="9" ec="39" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="15" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="15" l="89" el="89" c="25" ec="27" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="19" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="1B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="1B" l="93" el="93" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldContain" signature="ShouldContain(System.String actual,System.String expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="143" el="143" c="7" ec="47" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="144" el="144" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="143" el="143" c="7" ec="47" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="144" el="144" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldContain" signature="ShouldContain&lt;T&gt;(System.Collections.Generic.IEnumerable&lt;T&gt; actual,T[] expected) : void [static]" excluded="false" instrumented="false" cc="2" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="97" el="97" c="7" ec="44" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="98" el="98" c="28" ec="36" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="D" l="98" el="98" c="16" ec="24" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="15" l="100" el="100" c="9" ec="43" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="25" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="25" l="98" el="98" c="25" ec="27" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="29" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="2B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="2B" l="102" el="102" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="97" el="97" c="7" ec="44" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="98" el="98" c="28" ec="36" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="D" l="98" el="98" c="16" ec="24" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="15" l="100" el="100" c="9" ec="43" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="25" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="25" l="98" el="98" c="25" ec="27" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="29" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="2B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="2B" l="102" el="102" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldContainErrorMessage" signature="ShouldContainErrorMessage(System.Exception exception,System.String expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="177" el="177" c="7" ec="58" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="C" l="178" el="178" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="177" el="177" c="7" ec="58" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="C" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="C" l="178" el="178" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldContainOnly" signature="ShouldContainOnly&lt;T&gt;(System.Collections.Generic.IEnumerable&lt;T&gt; actual,System.Collections.Generic.IEnumerable&lt;T&gt; expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="187" el="187" c="7" ec="51" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="188" el="188" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="187" el="187" c="7" ec="51" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="188" el="188" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldContainOnly" signature="ShouldContainOnly&lt;T&gt;(System.Collections.Generic.IEnumerable&lt;T&gt; actual,T[] expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="182" el="182" c="7" ec="51" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="183" el="183" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="182" el="182" c="7" ec="51" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="183" el="183" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldEndWith" signature="ShouldEndWith(System.String actual,System.String expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="159" el="159" c="7" ec="47" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="160" el="160" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="159" el="159" c="7" ec="47" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="160" el="160" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldEqual" signature="ShouldEqual(System.Object actual,System.Object expected) : System.Object [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="0" l="35" el="35" c="7" ec="41" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="1" o="7" l="36" el="36" c="7" ec="23" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="1" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="1" o="0" l="35" el="35" c="7" ec="41" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="1" o="7" l="36" el="36" c="7" ec="23" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="1" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldNotBeEmpty" signature="ShouldNotBeEmpty(System.Collections.IEnumerable collection) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="133" el="133" c="7" ec="51" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="B" l="134" el="134" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="133" el="133" c="7" ec="51" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="B" l="134" el="134" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldNotBeEmpty" signature="ShouldNotBeEmpty(System.String aString) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="138" el="138" c="7" ec="34" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="139" el="139" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="138" el="138" c="7" ec="34" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="139" el="139" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldNotBeNull" signature="ShouldNotBeNull(System.Object anObject) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="52" el="52" c="7" ec="34" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="6" l="53" el="53" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="52" el="52" c="7" ec="34" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="6" l="53" el="53" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldNotBeOfType" signature="ShouldNotBeOfType(System.Object actual,System.Type expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="84" el="84" c="7" ec="52" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="85" el="85" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="84" el="84" c="7" ec="52" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="85" el="85" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldNotBeTheSameAs" signature="ShouldNotBeTheSameAs(System.Object actual,System.Object expected) : System.Object [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="63" el="63" c="7" ec="43" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="64" el="64" c="7" ec="23" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="63" el="63" c="7" ec="43" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="64" el="64" c="7" ec="23" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldNotContain" signature="ShouldNotContain(System.Collections.IEnumerable collection,System.Object expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="106" el="106" c="7" ec="61" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="107" el="107" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="106" el="106" c="7" ec="61" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="107" el="107" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
       <method name="ShouldNotEqual" signature="ShouldNotEqual(System.Object actual,System.Object expected) : System.Object [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="41" el="41" c="7" ec="44" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="42" el="42" c="7" ec="23" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="41" el="41" c="7" ec="44" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="42" el="42" c="7" ec="23" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="8" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
       </method>
       <method name="ShouldStartWith" signature="ShouldStartWith(System.String actual,System.String expected) : void [static]" excluded="false" instrumented="false" cc="1" vc="0" nid="0">
-        <seqpnt vc="0" o="0" l="154" el="154" c="7" ec="49" ex="false" fl="65536" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="57" nid="0" />
-        <seqpnt vc="0" o="7" l="155" el="155" c="5" ec="6" ex="false" fl="65536" doc="57" nid="0" />
+        <seqpnt vc="0" o="0" l="154" el="154" c="7" ec="49" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="55" nid="0" />
+        <seqpnt vc="0" o="7" l="155" el="155" c="5" ec="6" ex="false" fl="65536" doc="55" nid="0" />
       </method>
     </class>
   </module>
@@ -4551,30 +4549,29 @@
   <module moduleId="13" name="d:\Dev\Derick-GitHub\Albacore\spec\support\CodeCoverage\mspec\assemblies\TestSolution.dll" assembly="TestSolution" assemblyIdentity="TestSolution, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
     <class name="TestSolution.Class1" signature="TestSolution.Class1" excluded="false" nid="0">
       <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="56" nid="0" />
+        <seqpnt vc="1" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
       </method>
       <method name="Foo" signature="Foo() : System.String" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="13" el="13" c="4" ec="17" ex="false" fl="65536" doc="56" nid="0" />
-        <seqpnt vc="1" o="9" l="14" el="14" c="3" ec="4" ex="false" fl="65536" doc="56" nid="0" />
-        <seqpnt vc="1" o="A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="56" nid="0" />
+        <seqpnt vc="1" o="A" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
       </method>
     </class>
   </module>
   <module moduleId="7" name="d:\Dev\Derick-GitHub\Albacore\spec\support\CodeCoverage\mspec\assemblies\TestSolution.MSpecTests.dll" assembly="TestSolution.MSpecTests" assemblyIdentity="TestSolution.MSpecTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null, processorArchitecture=MSIL" nid="0">
     <class name="TestSolution.MSpecTests.SomeSpecTest" signature="TestSolution.MSpecTests.SomeSpecTest" excluded="false" nid="0">
       <method name=".ctor" signature=".ctor() : void" excluded="false" instrumented="true" cc="4" vc="3" nid="0">
-        <seqpnt vc="3" o="0" l="12" el="12" c="3" ec="67" ex="false" fl="65536" doc="55" nid="0" />
-        <seqpnt vc="3" o="25" l="14" el="14" c="3" ec="57" ex="false" fl="65536" doc="55" nid="0" />
-        <seqpnt vc="3" o="4A" l="16" el="16" c="3" ec="72" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="3" o="6" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="3" o="2B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="3" o="50" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
+        <seqpnt vc="3" o="76" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
       </method>
       <method name="&lt;.ctor&gt;b__0" signature="&lt;.ctor&gt;b__0() : void [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="12" el="12" c="39" ec="64" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="1" o="B" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
       </method>
       <method name="&lt;.ctor&gt;b__1" signature="&lt;.ctor&gt;b__1() : void [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="1" l="14" el="14" c="32" ec="54" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="1" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
       </method>
       <method name="&lt;.ctor&gt;b__2" signature="&lt;.ctor&gt;b__2() : void [static]" excluded="false" instrumented="true" cc="1" vc="1" nid="0">
-        <seqpnt vc="1" o="0" l="16" el="16" c="49" ec="71" ex="false" fl="65536" doc="55" nid="0" />
+        <seqpnt vc="1" o="10" l="0" el="0" c="0" ec="0" ex="false" fl="131072" doc="0" nid="0" />
       </method>
     </class>
   </module>
