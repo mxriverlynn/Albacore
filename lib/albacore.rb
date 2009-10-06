@@ -17,3 +17,4 @@ require 'sqlcmd'
 require 'sqlcmdtask'
 
 require 'nunittestrunner'
+require 'mspectestrunner'
