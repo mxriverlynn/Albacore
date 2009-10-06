@@ -23,7 +23,7 @@ class MSpecTestRunner
 	end
 	
 	def build_assembly_list
-		@assembly.join(" ") 
+		@assemblies.map{|asm| "\"#{asm}\""}.join(" ") 
 	end
 	
 	def build_html_output

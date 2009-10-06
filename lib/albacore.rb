@@ -12,9 +12,8 @@ require 'assemblyinfotask'
 
 require 'ncoverconsole'
 require 'ncoverconsoletask'
+require 'nunittestrunner'
+require 'mspectestrunner'
 
 require 'sqlcmd'
 require 'sqlcmdtask'
-
-require 'nunittestrunner'
-require 'mspectestrunner'

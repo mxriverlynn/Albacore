@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="D:/Dev/Derick-GitHub/Albacore/spec/support/CodeCoverage/failing_assemblies/TestSolution.FailingTests.dll" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-10-06" time="08:58:19">
-  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="D:\Dev\Derick-GitHub\Albacore\spec\support\CodeCoverage" machine-name="MATDEV09S" user="derickb" user-domain="MAT" />
+<test-results name="d:/Dev/Derick-GitHub/Albacore/spec/support/CodeCoverage/Assemblies/TestSolution.Tests.dll" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-10-06" time="14:24:45">
+  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="d:\Dev\Derick-GitHub\Albacore\spec\support\CodeCoverage" machine-name="MATDEV09S" user="derickb" user-domain="MAT" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite name="D:/Dev/Derick-GitHub/Albacore/spec/support/CodeCoverage/failing_assemblies/TestSolution.FailingTests.dll" executed="True" success="False" time="0.020" asserts="0">
+  <test-suite name="d:/Dev/Derick-GitHub/Albacore/spec/support/CodeCoverage/Assemblies/TestSolution.Tests.dll" executed="True" success="True" time="0.020" asserts="0">
     <results>
-      <test-suite name="TestSolution" executed="True" success="False" time="0.020" asserts="0">
+      <test-suite name="TestSolution" executed="True" success="True" time="0.020" asserts="0">
         <results>
-          <test-suite name="FailingTests" executed="True" success="False" time="0.020" asserts="0">
+          <test-suite name="Tests" executed="True" success="True" time="0.020" asserts="0">
             <results>
-              <test-suite name="FailingTestFixture" executed="True" success="False" time="0.020" asserts="0">
+              <test-suite name="SomeTestFixture" executed="True" success="True" time="0.020" asserts="0">
                 <results>
-                  <test-case name="TestSolution.FailingTests.FailingTestFixture.FailingTest" executed="True" success="False" time="0.000" asserts="0">
-                    <failure>
-                      <message><![CDATA[I'm A Failing Test!]]></message>
-                      <stack-trace><![CDATA[at TestSolution.FailingTests.FailingTestFixture.FailingTest()
-]]></stack-trace>
-                    </failure>
-                  </test-case>
+                  <test-case name="TestSolution.Tests.SomeTestFixture.foo" executed="True" success="True" time="0.020" asserts="1" />
                 </results>
               </test-suite>
             </results>

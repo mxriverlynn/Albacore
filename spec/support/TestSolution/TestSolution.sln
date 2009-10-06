@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSolution.Tests", "TestS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSolution.FailingTests", "TestSolution.FailingTests\TestSolution.FailingTests.csproj", "{8D680D34-363A-4AB4-BC8B-ECA28AFE1D46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSolution.MSpecTests", "TestSolution.MSpecTests\TestSolution.MSpecTests.csproj", "{DC8BF855-3A09-4349-8A66-C20AF0EA00DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{8D680D34-363A-4AB4-BC8B-ECA28AFE1D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D680D34-363A-4AB4-BC8B-ECA28AFE1D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D680D34-363A-4AB4-BC8B-ECA28AFE1D46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC8BF855-3A09-4349-8A66-C20AF0EA00DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC8BF855-3A09-4349-8A66-C20AF0EA00DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC8BF855-3A09-4349-8A66-C20AF0EA00DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8BF855-3A09-4349-8A66-C20AF0EA00DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
