@@ -13,9 +13,9 @@ _ReSharper.*
 *.tmp
 *.eprj
 spec/support/AssemblyInfo/AssemblyInfo.cs
-spec/support/CodeCoverage/TestResult.xml
-spec/support/CodeCoverage/test-coverage.xml
-spec/support/CodeCoverage/html
+spec/support/CodeCoverage/nunit/TestResult.xml
+spec/support/CodeCoverage/nunit/test-coverage.xml
+spec/support/CodeCoverage/nunit/html
 spec/support/CodeCoverage/mspec/html
 github-test.rb
 Albacore-*.gem
