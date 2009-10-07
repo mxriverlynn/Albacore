@@ -12,9 +12,10 @@ _ReSharper.*
 ~$*
 *.tmp
 *.eprj
-lib/spec/support/AssemblyInfo/AssemblyInfo.cs
-lib/spec/support/CodeCoverage/TestResult.xml
-lib/spec/support/CodeCoverage/test-coverage.xml
-lib/spec/support/CodeCoverage/html
+spec/support/AssemblyInfo/AssemblyInfo.cs
+spec/support/CodeCoverage/TestResult.xml
+spec/support/CodeCoverage/test-coverage.xml
+spec/support/CodeCoverage/html
+spec/support/CodeCoverage/mspec/html
 github-test.rb
 Albacore-*.gem

@@ -4,7 +4,7 @@ module Rake
 	class AssemblyInfoTask < Rake::TaskLib
 		attr_accessor :name
 		
-		def initialize(name=:AssemblyInfo)
+		def initialize(name=:assemblyinfo)
 			@name = name
 			@asm = AssemblyInfo.new
 			yield @asm if block_given?

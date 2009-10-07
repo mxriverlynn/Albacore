@@ -4,7 +4,7 @@ module Rake
 	class MSBuildTask < Rake::TaskLib
 		attr_accessor :name
 		
-		def initialize(name=:MSBuild)
+		def initialize(name=:msbuild)
 			@name = name
 			@msbuild = MSBuild.new
 			yield @msbuild if block_given?

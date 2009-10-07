@@ -4,7 +4,7 @@ module Rake
 	class SQLCmdTask < Rake::TaskLib
 		attr_accessor :name
 		
-		def initialize(name=:MSBuild)
+		def initialize(name=:sqlcmd)
 			@name = name
 			@sqlcmd = SQLCmd.new
 			yield @sqlcmd if block_given?
