@@ -92,5 +92,8 @@ namespace :jeweler do
 		gs.authors = "Derick Bailey"
 		gs.has_rdoc = false	
 		gs.files.exclude("Albacore.gemspec", ".gitignore", "spec/support/Tools")
+		gs.add_dependency('rake', '>= 0.8.7')
+		gs.add_dependency('rspec', '>= 1.2.8')
+		gs.add_dependency('jeweler', '>= 1.2.1')
 	end
 end
