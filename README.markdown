@@ -8,13 +8,13 @@ If you would like to install the current, stable release of Albacore, you can do
 
 **Step 1:** Setup Gemcutter as a gem source
 
-    gem source -a http://gemcutter.org
+> gem source -a http://gemcutter.org
 
 (note: you only need to do this once for any given computer that is going to install gems from gemcutter.)
 
 **Step 2:** Install the Albacore gem
 
-    gem install Albacore
+> gem install Albacore
 
 ## How To Manually Build And Install The Albacore Gem
 
@@ -24,15 +24,15 @@ If you would like to install the latest source code for Albacore, and get all th
 
 Use your Github account to fork Albacore, or clone it directly from my public clone URL.
 
-    git clone git://github.com/derickbailey/Albacore.git Albacore
+> git clone git://github.com/derickbailey/Albacore.git Albacore
 
 **Step 2:** Build the gem
 
 In your local clone of Albacore, use the jeweler rake tasks to build the latest version of the Albacore code into a gem.
 
-    rake jeweler:gemspec
-
-    rake jeweler:build
+> rake jeweler:gemspec
+>
+> rake jeweler:build
 
 this will produce an 'Albacore-#.#.#.gem' file in the 'pkg' folder, where '#.#.#' is the version number. For example 'Albacore-0.0.1.gem'.
 
@@ -40,7 +40,7 @@ this will produce an 'Albacore-#.#.#.gem' file in the 'pkg' folder, where '#.#.#
 
 After building the gem, you can install it from your local file system.
 
-    gem install -l pkg\Albacore-#.#.#.gem
+> gem install -l pkg\Albacore-#.#.#.gem
 
 where '#.#.#' is the version number of the gem. For example 'Albacore-0.0.1.gem'
 

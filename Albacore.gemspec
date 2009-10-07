@@ -133,8 +133,17 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
+      s.add_runtime_dependency(%q<rspec>, [">= 1.2.8"])
+      s.add_runtime_dependency(%q<jeweler>, [">= 1.2.1"])
     else
+      s.add_dependency(%q<rake>, [">= 0.8.7"])
+      s.add_dependency(%q<rspec>, [">= 1.2.8"])
+      s.add_dependency(%q<jeweler>, [">= 1.2.1"])
     end
   else
+    s.add_dependency(%q<rake>, [">= 0.8.7"])
+    s.add_dependency(%q<rspec>, [">= 1.2.8"])
+    s.add_dependency(%q<jeweler>, [">= 1.2.1"])
   end
 end
