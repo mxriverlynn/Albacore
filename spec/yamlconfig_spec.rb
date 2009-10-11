@@ -2,11 +2,11 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_hel
 require 'yamlconfig'
 
 class YamlTest
-	include YAMLConfigBase
+	include YAMLConfig
 	attr_accessor :some_name
 end
 
-describe YAMLConfigBase, "when configuring with yaml" do
+describe YAMLConfig, "when configuring with yaml" do
 	before :all do
 		@yml = YamlTest.new
 		@yml.configure File.join(File.dirname(__FILE__), 'support', 'test.yml')

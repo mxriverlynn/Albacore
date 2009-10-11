@@ -3,7 +3,7 @@ require 'yaml'
 
 class SQLCmd
 	include RunCommand
-	include YAMLConfigBase
+	include YAMLConfig
 	
 	attr_accessor :server, :database, :username, :password, :scripts, :variables
 	
