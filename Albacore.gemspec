@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{Albacore}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Derick Bailey"]
-  s.date = %q{2009-10-06}
+  s.date = %q{2009-10-11}
   s.description = %q{Easily build your .NET solutions with rake, using this suite of custom tasks.}
   s.email = %q{derickbailey@gmail.com}
   s.extra_rdoc_files = [
@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
      "lib/albacore/ncoverconsole.rb",
      "lib/albacore/nunittestrunner.rb",
      "lib/albacore/sqlcmd.rb",
-     "lib/albacore/support/albacorebase.rb",
      "lib/albacore/support/command.rb",
      "lib/albacore/support/logging.rb",
      "lib/albacore/support/model.rb",
