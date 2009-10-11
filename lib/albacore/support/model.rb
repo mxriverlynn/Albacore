@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), 'logging')
 
 module ModelBase
-	include LogBase
+	include Logging
 	
 	attr_accessor :failed
 	

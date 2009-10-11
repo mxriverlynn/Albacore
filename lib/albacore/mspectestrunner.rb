@@ -1,7 +1,7 @@
 require 'logging'
 
 class MSpecTestRunner
-	include LogBase
+	include Logging
 	
 	attr_accessor :assemblies, :path_to_command, :html_output
 	

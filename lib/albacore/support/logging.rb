@@ -1,6 +1,6 @@
 require 'logger'
 
-module LogBase
+module Logging
 	
 	attr_accessor :logger, :current_log_device
 	

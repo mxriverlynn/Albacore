@@ -1,7 +1,7 @@
 require 'logging'
 
 class NUnitTestRunner
-	include LogBase
+	include Logging
 	
 	attr_accessor :assemblies, :options, :path_to_command
 	
