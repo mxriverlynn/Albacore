@@ -231,3 +231,16 @@ describe AssemblyInfo, "when generating an assembly info file with no attributes
 		@filedata.should_not include("[assembly: AssemblyTrademark(\"#{@tester.trademark}\")]")
 	end
 end
+
+describe AssemblyInfo, "when configuring the assembly info generator with a yaml file" do
+	before :all do
+		tester = AssemblyInfoTester.new
+		@asm = AssemblyInfo.new
+		@asm.configure(tester.yaml_file)
+	end
+	
+	it "should set the values for the provided attributes" do
+		@asm.version.should == "0.0.1"
+		@asm.company_name.should == "some company name"
+	end
+end

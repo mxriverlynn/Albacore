@@ -35,4 +35,8 @@ class AssemblyInfoTester < AssemblyInfo
 		contents		
 	end
 	
+	def yaml_file
+		return File.join(File.dirname(__FILE__), "AssemblyInfo", "assemblyinfo.yml")
+	end
+	
 end
