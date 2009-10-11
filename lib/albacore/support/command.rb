@@ -1,7 +1,7 @@
-require File.join(File.dirname(__FILE__), 'model')
+require File.join(File.dirname(__FILE__), 'failure')
 
 module CommandBase
-	include ModelBase
+	include Failure
 	
 	attr_accessor :path_to_command, :require_valid_command, :command_directory
 	
