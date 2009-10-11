@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
 
 class MSBuild
-	include CommandBase
+	include RunCommand
 	
 	attr_accessor :solution, :verbosity
 	

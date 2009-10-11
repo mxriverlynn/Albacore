@@ -1,6 +1,6 @@
 require File.join(File.dirname(__FILE__), 'failure')
 
-module CommandBase
+module RunCommand
 	include Failure
 	
 	attr_accessor :path_to_command, :require_valid_command, :command_directory

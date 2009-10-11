@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
 require 'yaml'
 
 class SQLCmd
-	include CommandBase
+	include RunCommand
 	include YAMLConfigBase
 	
 	attr_accessor :server, :database, :username, :password, :scripts, :variables
