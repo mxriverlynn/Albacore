@@ -1,0 +1,60 @@
+The SQLCmdTask allows you to run .sql scripts through SQL Server's "sqlcmd.exe" tool. Right now it only supports a few basic options that my projects are using. If you need additional feature support, feel free to submit a patch or add it to the issues list.
+
+h2. How to use the SQLCmdTask
+
+Here is an example of how to use the SQLCmdTask
+
+<pre><code>desc "Create the initial R1 database"
+Rake::SQLCmdTask.new(:create_initial_db) do |sql|
+  sql.path_to_command = "sqlcmd.exe"
+  sql.server = "some_server"
+  sql.database = "some_database"
+  sql.username = "some_user"
+  sql.password = "SHH!!! it's a secret!"
+  sql.variables = {:New_DB_Name => "Albacore_Test"}
+  sql.scripts << "RunCreateDatabase.sql"
+  sql.scripts << "RunUpdateDatabase.sql"
+end
+</code></pre>
+
+All of the settings are optional, except the path_to_command.
+
+h3. path_to_command (required)
+
+Specify the location and name of the sqlcmd executable.
+
+h3. server (optional)
+
+Specify the name of the server to connect to
+
+h3. database (optional)
+
+Specify which database to use
+
+h3. username (optional)
+
+Specify the user to log in and run the scripts as
+
+h3. password (optional)
+
+Specify the password for the user to log in as
+
+h3. variables (optional)
+
+Specify a set of variables to pass to sqlcmd, via a hash table. These are passed to sqlcmd using the "-v name=value" format. See the "http://msdn.microsoft.com/en-us/library/ms162773.aspx"SQLCmd documentation for more information.
+
+h3. scripts (optional)
+
+Specify a set of script files for sqlcmd to execute, via an array. These are passed to sqlcmd using the "-i filename.sql" format. See the "http://msdn.microsoft.com/en-us/library/ms162773.aspx"SQLCmd documentation for more information.
+
+h2. Logging
+
+The SQLCmdTask uses the built in [[loggingoptions|logging options]] to provide some potentially useful information at run-time. By default, no additional information is logged, other than what sqlcmd.exe produces.
+
+h3. verbose mode
+
+When the log_level is set to :verbose, the full command line call for sqlcmd will be logged. This includes the path to the sqlcmd exe as well as the command line parameters that are passed to it.
+
+h3. YAML configuration
+
+The SQLCmdTask supports configuration via an external YAML file. For more information, see the [[yamlconfig|YAMLConfig]] page.

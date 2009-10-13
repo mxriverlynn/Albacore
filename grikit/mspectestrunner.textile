@@ -1,0 +1,37 @@
+The MSpecTestRunner is meant to be used with the NCoverConsoleTask. For more information on test runners, see the [[ncoverconsoletask|NCoverConsoleTask]].
+
+h3. How to use the MSpecTestRunner
+
+There are only a few pieces of information needed for the MSpecTestRunner to operate correctly. Most notably are the path to the machine.specifications.consolerunner executable, and a list of assemblies for nunit to run tests again.
+
+For example
+
+<pre><code>mspec = MSpecTestRunner.new("Tools/Machine.Specifications-v0.2/Machine.Specifications.ConsoleRunner.exe")
+mspec.assemblies << "CodeCoverage/assemblies/TestSolution.Tests.dll"
+mspec.html_output = "some_path/where_the/html_report_goes/"
+</code></pre>
+
+h2. Configuration options
+
+h3. initializer/path_to_command (required)
+
+You must provide the location of the mspec console executable either through the constructor or via the .path_to_command setting.
+
+h3. assemblies (required)
+
+You must provide at least one assembly for mspec to run. This should be the assembly that contains your specification tests. 
+
+You can wholesale replace the assemblies list with an array of dlls, or you can append individual dlls to the list. The following examples produce the same results.
+
+Specify an array of assemblies
+<pre><code>mspec.assemblies = ['some.test.dll', 'another.test.dll', 'stillmore.tests.dll']</code></pre>
+
+Append assemblies one at a time
+<pre><code>mspec.assemblies << 'some.test.dll'
+mspec.assemblies << 'another.test.dll'
+mspec.assemblies << 'stillmore.tests.dll'
+</code></pre>
+
+h3. html_output (optional)
+
+You can specify the folder to write an html report of the specifications to.
