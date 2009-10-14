@@ -1,7 +1,8 @@
-require 'logging'
+require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
 
 class NUnitTestRunner
 	include Logging
+	include YAMLConfig
 	
 	attr_accessor :assemblies, :options, :path_to_command
 	

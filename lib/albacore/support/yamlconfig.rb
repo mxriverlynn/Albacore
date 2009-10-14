@@ -1,3 +1,5 @@
+require 'yaml'
+
 module YAMLConfig
 	def configure(yml_file)
 		config = YAML::load(File.open(yml_file))

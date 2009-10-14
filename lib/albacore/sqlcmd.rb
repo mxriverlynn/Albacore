@@ -1,5 +1,4 @@
 require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
-require 'yaml'
 
 class SQLCmd
 	include RunCommand

@@ -2,6 +2,7 @@ require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
 
 class NCoverConsole
 	include RunCommand
+	include YAMLConfig
 	
 	attr_accessor :output, :testrunner, :working_directory, :cover_assemblies
 	attr_accessor :ignore_assemblies, :coverage
