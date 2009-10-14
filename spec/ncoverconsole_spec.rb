@@ -37,7 +37,7 @@ describe NCoverConsole, "when specifying aseemblies to cover" do
 	end
 
 	it "should provide coverage for the specified assemblies" do
-		$system_command.should include("//assemblies TestSolution")
+		$system_command.should include("//assemblies \"TestSolution\"")
 	end
 end
 
@@ -63,7 +63,7 @@ describe NCoverConsole, "when specifying aseemblies to ignore" do
 	end
 
 	it "should provide coverage for the specified assemblies" do
-		$system_command.should include("//exclude-assemblies TestSolution.*")
+		$system_command.should include("//exclude-assemblies \"TestSolution.*\"")
 	end
 end
 

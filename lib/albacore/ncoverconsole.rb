@@ -54,7 +54,8 @@ class NCoverConsole
 	end
 	
 	def build_assembly_list(param_name, list)
-		"//#{param_name} #{list.join(';')}"
+		assembly_list = list.map{|asm| "\"#{asm}\""}.join(';')
+		"//#{param_name} #{assembly_list}"
 	end
 	
 	def build_coverage_list(coverage)
