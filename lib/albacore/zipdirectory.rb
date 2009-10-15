@@ -28,7 +28,7 @@ class ZipDirectory
 	end
 	
 	def zip_directory(zipfile)
-		Dir["#{@path}/**/**"].reject{|f|}.each do |file_path|
+		Dir["#{@path}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
 			file_name = file_path.sub(@path+'/','');
 			zipfile.add(file_name, file_path)
 		end
