@@ -1,7 +1,7 @@
 require 'rake/tasklib'
 
 module Albacore
-	class NUnitTask < Rake::TaskLib
+	class NUnitTestRunnerTask < Rake::TaskLib
 		attr_accessor :name
 		
 		def initialize(name=:nunit)
