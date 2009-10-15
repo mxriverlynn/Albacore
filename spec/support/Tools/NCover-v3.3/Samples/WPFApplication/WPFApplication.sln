@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWPFApp", "SampleWPFApp\SampleWPFApp.csproj", "{64A13515-8738-4164-A4D9-CF366C54EC7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObjects", "..\ConsoleApplication\BusinessObjects\BusinessObjects.csproj", "{55666266-76A7-486A-B8F5-CCDBB8CFDB53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogic", "..\ConsoleApplication\SampleLogic\SampleLogic.csproj", "{63FE4808-E9E8-4A4D-B963-CBFEDD291F47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64A13515-8738-4164-A4D9-CF366C54EC7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A13515-8738-4164-A4D9-CF366C54EC7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A13515-8738-4164-A4D9-CF366C54EC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A13515-8738-4164-A4D9-CF366C54EC7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55666266-76A7-486A-B8F5-CCDBB8CFDB53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55666266-76A7-486A-B8F5-CCDBB8CFDB53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55666266-76A7-486A-B8F5-CCDBB8CFDB53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55666266-76A7-486A-B8F5-CCDBB8CFDB53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63FE4808-E9E8-4A4D-B963-CBFEDD291F47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63FE4808-E9E8-4A4D-B963-CBFEDD291F47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63FE4808-E9E8-4A4D-B963-CBFEDD291F47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63FE4808-E9E8-4A4D-B963-CBFEDD291F47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

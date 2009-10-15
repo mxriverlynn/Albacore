@@ -68,7 +68,7 @@ namespace :albacore do
 		File.delete(@xml_coverage) if File.exist?(@xml_coverage)
 		
 		ncc.log_level = :verbose
-		ncc.path_to_command = "spec/support/Tools/NCover-v3.2/NCover.Console.exe"
+		ncc.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Console.exe"
 		ncc.output = {:xml => @xml_coverage, :html => "spec/support/CodeCoverage/html"}
 		ncc.working_directory = "spec/support/CodeCoverage/nunit"
 		

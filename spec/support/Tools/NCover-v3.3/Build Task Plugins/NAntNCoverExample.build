@@ -1,0 +1,241 @@
+﻿<project name="NCoverCoverage" default="coverage" xmlns="http://nant.sf.net/schemas/nant.xsd">
+
+    <!-- TODO: Uncomment and add the full path to NCover.NAntTasks.dll if not in your path -->
+    <!-- TODO: Alternatively, remove this line if you have copied the .dll to your NAnt bin folder -->
+    <loadtasks assembly="NCover.NAntTasks.dll"/>
+
+    <!--
+    NOTE: This needs to be changed if you are profiling a 32 bit application on a 64 bit machine
+    NOTE: OR you are testing MSTest on a 64 Bit machine.
+    In that case the path would be C:\Program Files (x86)\NCover\ncover.console.exe
+    -->
+    <property name="ncoverPath" value="C:\Program Files\NCover\ncover.console.exe" />
+    <property name="msTestPath" value="C:\Program Files (x86)\Microsoft Visual Studio 9.0 \Common7\IDE\" />
+    <property name="nantTestRunner" value=".\Tools\nunit-console.exe" />
+    <property name="testDlls" value=".\bin\tests1.dll .\bin\tests2.dll .\bin\tests3.dll" />
+        
+    <!--
+    Simple NCover setup to run NCover on an application which is then tested manually (or by an external program).
+    This task could be used by someone in the QA department running manual tests, or if the UI test runner requires
+    the program to be started before it (the UI test runner) is launched.
+    -->
+    <target name="RunManualTests">
+        <!-- Assumes that the program will be exercised manually, or has some default path of execution -->
+        <ncover program="${ncoverPath}"
+                testRunnerExe="protoype.exe"
+                testRunnerArgs="/clear /nologo"
+                coverageFile="coverage\10.2.2009.xml" />    
+    </target>
+
+    <!--
+    NCover setup for running NUnit tests. Recommend use of the /noshadow flag, as NCover can have trouble
+    covering shadowcopied assemblies.
+    -->
+    <target name="RunNUnitTests">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                coverageFile="coverage\nunit-tests-coverage.xml" />
+    </target>
+
+    <!--
+    NCover setup for running MSTest (VisualStudio) tests. For NCover v2.1 and above, recommend use of
+    CoverChildProcess="VSTestHost.exe" option, as it provides the greatest compatability with MSTest tests.
+    If the CoverChildProcess option is not used, then "/noisolation" should be added to the testRunnerArgs
+    option. However, if "/noisolation" is used, any test using the "DeploymentItem" attribute will break.
+    -->
+    <target name="RunMSTestTests">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${msTestPath}mstest.exe"
+                testRunnerArgs="/testcontainer:Debug\unittests.dll"
+                coverChildProcess="VSTestHost.exe" />
+    </target>
+
+    <!--
+    NCover setup for generating trend data from coverage information. Trend information is more compactly stored
+    than coverage information, but does not store source file links. Trend data works hand-in-hand with coverage
+    information to show coverage values over time.
+    -->
+    <target name="CreateTrendsAlongWithCoverage">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                appendTrendTo=".\reports\project.trend" />
+    </target>
+
+    <!--
+    Using the BuildId option, coverage data and trend data can can be associated with a particular build number.
+    -->
+    <target name="AssociateTrendInstancesWithBuildID">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                appendTrendTo=".\reports\project.trend"
+                buildId="10.2.3.103917"/>
+    </target>
+
+    <!--
+    By default, NCover reports on all coverage types (permitted by the license). If you're not interested in
+    all of the coverage types, you can restrict the types reported on using the "CoverageType" option.
+    -->
+    <target name="SpecifyDesiredCoverageTypes">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                coverageType="Symbol | CyclomaticComplexity" />
+    </target>
+
+    <!--
+    In lieu of using the reporting tool, NCover can generate an HTML report before it exits.
+    -->
+    <target name="CreateHtmlReportFromCoverage">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                htmlReportDir=".\reports\" />
+    </target>
+
+    <!--
+    The "Projectname" option changes the name of the project that appears on the HTML report.
+    -->
+    <target name="SetProjectnameOnHtmlReport">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                Projectname="NHibernate v3.0"
+                htmlReportDir=".\reports\v3\" />
+        
+    </target>
+
+    <!--
+    Log files are useful promarily when interacting with NCover support.
+    -->
+    <target name="CreateALogFile">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                logFile="coverage.log"
+                logLevel="Normal" />
+    </target>
+
+    <!--
+    Often, NCover support will ask for a verbose log file, even though NCover will crash when generating
+    a verbose log on x64 machines.
+    -->
+    <target name="CreateAVerboseLogFile">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                logFile="coverage.log"
+                logLevel="Verbose" />
+    </target>
+
+    <!--
+    Sample task for setting up coverage for a webservice or an ASP.NEt application. In both cases,
+    the test runner would have to be launched externally.
+    -->
+    <target name="CoverAWebserviceOrAnASP.NETApp">
+        <ncover program="${ncoverPath}"
+                profileIIS="true" />
+    </target>
+
+    <!--
+    Sample task for covering a Windows or WCF service exposed as a Windows service. Note that the
+    test runner would have to be launched externally.
+    -->
+    <target name="CoverAWindowsService">
+        <ncover program="${ncoverPath}"
+                profileService="MyInstalledServicename" />
+    </target>
+
+    <!--
+    By default, NCover keeps covering a service (or IIS) until it is explicitly told to stop.
+    The "ServiceTimeout" option tells NCover to stop covering the service (or IIS) and report
+    coverage data after the specified number of seconds have elapsed.
+    -->
+    <target name="TellingNCoverToStopAServiceAfterACertainElapsedTime">
+        <ncover program="${ncoverPath}"
+                profileService="MyInstalledServicename"
+                serviceTimeout="540"/>
+    </target>
+
+    <!--
+    Far more useful for running automated tests, telling NCover to cover both an executable and a service (or IIS)
+    forces it to run in a special mode. In this mode, NCover gathers coverage from the service (or IIS) and shuts
+    the service (or IIS) down once the executable exits.
+    -->
+    <target name="StoppingAServiceAfterAnExeExits">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                profileService="MyInstalledServicename" />
+    </target>
+
+    <!--
+    NCover affects application startup time far more than it affects run-time. By default, NCover
+    waits one minute to recieve a "started" message from the application it covers. However,
+    larger applications can take longer than a minute to startup with NCover attached.
+    The "WaitForAppLoad" option tells NCover to wait the given number of minutes before deciding
+    that the application is a no-show.
+    -->
+    <target name="CoveringAServiceThatHasALongStartupTime">
+        <ncover program="${ncoverPath}"
+                profileService="MyInstalledServicename"
+                waitForAppLoad="10" />
+    </target>
+
+    <target name="UsingTypemockWithNCover">
+        <!-- Trouble using Typemock with NCover should be directed to the Typemock team first -->
+        <!-- <TypeMockStart ProfilerLaunchedFirst="true" /> -->
+        
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow" />
+                
+        <!-- DO NOT USE the RegisterProfiler="true" option -->
+        <!-- <TypeMockStop ProfilerLaunchedFirst="true" /> -->
+    </target>
+
+    <target name="UsingSymbolsFromASymbolServer">
+        <!--
+        Need to set the "_NT_SYMBOL_PATH" environment variable for NCover to find the symbols correctly.
+        If NCover is having trouble finding the symbol server, setting "_NT_SYMBOL_PATH" to the folder
+        with PDB files and telling NCover to search for symbols on a symbolserver will usually solve the problem.
+        -->
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                symbolSearchLocations="SymbolServer"/>
+    </target>
+
+
+    <!-- Exclusion / Inclusion options -->
+    <!--
+        Quick breakdown of what options are available
+                    : Exclusion  : Inclusion
+        ====================================
+        Assembly    : yes        : yes
+        Type        : yes        : yes
+        Method      : yes        : NO
+        Attribute   : yes        : yes
+        Source File : yes        : yes
+        
+        By default, everything in every assembly loaded is included.
+        Inclusions are always applied before exclusions (per type).
+        
+    -->
+    <target name="">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                includeAssemblies=".*tests;DAL\.tests.internal"/>
+    </target>
+
+    <target name="">
+        <ncover program="${ncoverPath}"
+                testRunnerExe="${nantTestRunner}"
+                testRunnerArgs="${testDlls} /noshadow"
+                excludeAssemblies=".*vendorsupplied.*;.*tests"/>
+    </target>
+
+</project>

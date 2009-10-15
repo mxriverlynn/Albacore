@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLogicNUnit2005", "SampleLogicNUnit\SampleLogicNUnit2005.csproj", "{3292064B-A244-4F57-A2EE-825888F81A78}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObjects2005", "..\SampleConsoleApplication\BusinessObjects\BusinessObjects2005.csproj", "{8A293528-9E88-4036-A94E-73FB206E5D75}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3292064B-A244-4F57-A2EE-825888F81A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3292064B-A244-4F57-A2EE-825888F81A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3292064B-A244-4F57-A2EE-825888F81A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3292064B-A244-4F57-A2EE-825888F81A78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A293528-9E88-4036-A94E-73FB206E5D75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A293528-9E88-4036-A94E-73FB206E5D75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A293528-9E88-4036-A94E-73FB206E5D75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A293528-9E88-4036-A94E-73FB206E5D75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,1 @@
+ncover.console.exe //x coverage.xml //at trends.trend bin\debug\SampleWPFApp.exe

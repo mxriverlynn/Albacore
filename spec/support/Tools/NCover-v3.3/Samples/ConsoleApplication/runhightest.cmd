@@ -1,0 +1,1 @@
+ncover.console.exe bin\debug\ConsoleTestApp.exe /h //at output\Trends.trend  //p "My Test Application" //x output\coverage.xml

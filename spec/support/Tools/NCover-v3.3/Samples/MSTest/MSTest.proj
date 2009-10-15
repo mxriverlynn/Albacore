@@ -1,0 +1,78 @@
+﻿<Project DefaultTargets="DoNothing" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <!--NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE-->
+        <!--You need to change this path if you did not install the application in the default location-->
+        <!--NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE-->
+        <ExePath>C:\program files\ncover\</ExePath>
+        <SamplePath>C:\program files\ncover\Samples\MSTest\</SamplePath>
+        <MSTest>C:\Program Files\Microsoft Visual Studio 9.0\Common7\IDE\mstest.exe</MSTest>
+    </PropertyGroup>
+
+    <!-- TODO: Specify the full path to the NCover.MSBuildTasks.dll if not in your path -->
+    <UsingTask TaskName="NCover.MSBuildTasks.NCover"
+           AssemblyFile="$(ExePath)Build Task Plugins\NCover.MSBuildTasks.dll"/>
+
+    <UsingTask TaskName="NCover.MSBuildTasks.NCoverReporting"
+       AssemblyFile="$(ExePath)Build Task Plugins\NCover.MSBuildTasks.dll"/>
+
+    <ItemGroup>
+		<CoverageFile Include="output.xml" />
+	</ItemGroup>
+
+    <Target Name="DoNothing" />
+
+    <Target Name="LowCoverage">
+        <NCover 
+                ToolPath="$(ExePath)"
+                TestRunnerExe="$(MSTest)"
+                TestRunnerArgs="/testcontainer:&quot;$(SamplePath)bin\debug\SampleLogicMSTest.dll&quot; /test:OrderTests.VerifyGetOrderNoItemsNoProductsNoCustomer"
+                CoverChildProcess="vstesthost.exe"
+                CoverageFile="output.xml"
+                />
+    </Target>
+
+    <Target Name="MediumCoverage">
+        <NCover
+                ToolPath="$(ExePath)"
+                TestRunnerExe="$(MSTest)"
+                TestRunnerArgs="/testcontainer:&quot;$(SamplePath)bin\debug\SampleLogicMSTest.dll&quot; /test:OrderTests.VerifyGetOrderNoItemsNoProductsNoCustomer /test:OrderTests.VerifyGetOrderWithItemsAndProductAndCustomer"
+                CoverChildProcess="vstesthost.exe"
+                CoverageFile="output.xml"
+                />
+    </Target>
+
+    <Target Name="HighCoverage">
+        <NCover
+                ToolPath="$(ExePath)"
+                TestRunnerExe="$(MSTest)"
+                TestRunnerArgs="/testcontainer:&quot;$(SamplePath)bin\debug\SampleLogicMSTest.dll&quot; /test:OrderTests.VerifyGetOrderNoItemsNoProductsNoCustomer /test:OrderTests.VerifyGetOrderWithItemsAndProductAndCustomer /test:OrderTests.VerifyGetAdditionalCoveragePart1"
+                CoverChildProcess="vstesthost.exe"
+                CoverageFile="output.xml"
+                />
+    </Target>
+
+    <Target Name="CompleteCoverage">
+        <NCover
+                ToolPath="$(ExePath)"
+                TestRunnerExe="$(MSTest)"
+                TestRunnerArgs="/testcontainer:&quot;$(SamplePath)bin\debug\SampleLogicMSTest.dll&quot; /test:OrderTests.VerifyGetOrderNoItemsNoProductsNoCustomer /test:OrderTests.VerifyGetOrderWithItemsAndProductAndCustomer /test:OrderTests.VerifyGetAdditionalCoveragePart1 /test:OrderTests.VerifyGetAdditionalCoveragePart2"
+                CoverChildProcess="vstesthost.exe"
+                CoverageFile="output.xml"
+                />
+    </Target>
+
+    <Target Name="TestRunnerReporting">
+		<NCoverReporting
+			ToolPath="$(ExePath)"
+            OutputPath="reports\SymbolModuleReport.html"
+			ProjectName="MS Test"
+            ReportFormat="Html"
+            ReportType="SymbolModuleNamespaceClass"
+			CoverageDataPaths="output.xml"
+			MergeFileName="output.Merged.xml"
+		/>
+
+	</Target>
+
+</Project>

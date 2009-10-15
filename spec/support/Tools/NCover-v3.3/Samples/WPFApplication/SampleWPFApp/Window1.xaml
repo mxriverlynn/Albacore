@@ -1,0 +1,25 @@
+﻿<Window x:Class="SampleWPFApp.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="NCover WPF Test Application" Height="400" Width="618">
+    <x:Code>
+    <![CDATA[
+    void Clicked(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show("Hello World");
+    }
+    ]]>
+    </x:Code>
+    <Grid>
+        <Button Name="buttonOne" HorizontalAlignment="Left" Width="109" Margin="12,131,0,0" Height="41" VerticalAlignment="Top" Click="buttonOne_Click" ToolTip="Run the low coverage tests">Low</Button>
+        <TextBox Height="23" Margin="12,34,0,0" Name="sampleTextBoxForChangeEvent" VerticalAlignment="Top" HorizontalAlignment="Left" Width="267" TextChanged="sampleTextBoxForChangeEvent_TextChanged" ToolTip="Typing in this box will cause the text change event to fire, showing many executions of the same code." />
+        <Button Margin="127,131,0,0" Name="buttonTwo" HorizontalAlignment="Left" Width="109" Height="41" VerticalAlignment="Top" Click="buttonTwo_Click" ToolTip="Run the medium coverage tests">Medium</Button>
+        <Label Height="28" HorizontalAlignment="Left" Margin="12,0,0,0" Name="label1" VerticalAlignment="Top" Width="173">On Change Sample Event Fire</Label>
+        <Label Height="28" Margin="12,63,177,0" Name="label2" VerticalAlignment="Top">When you Type into the box above, we will be firing the text changed event</Label>
+        <Label Height="28" HorizontalAlignment="Right" Name="label3" VerticalAlignment="Top" Width="157">Number of characters typed</Label>
+        <TextBox Height="28" HorizontalContentAlignment="Center" HorizontalAlignment="Right" FontSize="18" Margin="0,34,0,0" Name="charactersTypedLabel" VerticalAlignment="Top" Width="157" ToolTip="This shows how many keys were pressed while the text box had focus">0</TextBox>
+        <Button Height="41" Margin="242,131,0,0" Name="buttonThree" VerticalAlignment="Top" Click="buttonThree_Click" HorizontalAlignment="Left" Width="109" ToolTip="Run the high coverage tests">High</Button>
+        <Button Height="41" HorizontalAlignment="Left" Margin="357,131,0,0" Name="buttonFour" VerticalAlignment="Top" Width="109" Click="buttonFour_Click" ToolTip="Run the complete coverage tests">Complete</Button>
+        <Button Height="41" HorizontalAlignment="Left" Margin="472,131,0,0" Name="buttonCodeClick" VerticalAlignment="Top" Click="Clicked" Width="109" ToolTip="Demonstrate that C# code located in the Xaml file will have code coverage">Code Click</Button>
+    </Grid>
+</Window>
