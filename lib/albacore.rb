@@ -12,7 +12,10 @@ require 'assemblyinfotask'
 
 require 'ncoverconsole'
 require 'ncoverconsoletask'
+
 require 'nunittestrunner'
+require 'nunittask'
+
 require 'mspectestrunner'
 
 require 'sqlcmd'
