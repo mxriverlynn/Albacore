@@ -16,6 +16,8 @@ require 'ncoverconsoletask'
 require 'nunittestrunner'
 require 'nunittestrunnertask'
 
+require 'ziptask'
+
 require 'mspectestrunner'
 
 require 'sqlcmd'
