@@ -14,7 +14,7 @@ require 'ncoverconsole'
 require 'ncoverconsoletask'
 
 require 'nunittestrunner'
-require 'nunittask'
+require 'nunittestrunnertask'
 
 require 'mspectestrunner'
 
