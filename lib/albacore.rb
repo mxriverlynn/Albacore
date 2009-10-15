@@ -4,21 +4,5 @@ $: << File.join(File.expand_path(File.dirname(__FILE__)), "rake")
 
 require 'logging'
 
-require 'msbuild'
-require 'msbuildtask'
-
-require 'assemblyinfo'
-require 'assemblyinfotask'
-
-require 'ncoverconsole'
-require 'ncoverconsoletask'
-
-require 'nunittestrunner'
-require 'nunittestrunnertask'
-
-require 'ziptask'
-
-require 'mspectestrunner'
-
-require 'sqlcmd'
-require 'sqlcmdtask'
+Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'rake/*.rb')).each {|f| require f }
+Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'albacore/*.rb')).each {|f| require f }
