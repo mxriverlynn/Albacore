@@ -3,15 +3,17 @@ require 'zip/zipfilesystem'
 include Zip
 
 class ZipDirectory
-	attr_accessor :path
+	attr_accessor :directory_to_zip
+	attr_accessor :additional_files
 	attr_accessor :file
 		
 	def package()
-		@path.sub!(%r[/$],'')
+		@directory_to_zip.sub!(%r[/$],'')
 		remove zip_name
 
-		ZipFile.open(zip_name, 'w') do |zipfile|
+		ZipFile.open(zip_name, 'w')	do |zipfile|
 			zip_directory(zipfile)
+			zip_additional(zipfile)
 		end
 	end
 	
@@ -24,12 +26,19 @@ class ZipDirectory
 	end
 	
 	def zip_name()
-		File.join(@path, @file)
+		File.join(@directory_to_zip, @file)
 	end
 	
 	def zip_directory(zipfile)
-		Dir["#{@path}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
-			file_name = file_path.sub(@path+'/','');
+		Dir["#{@directory_to_zip}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
+			file_name = file_path.sub(@directory_to_zip+'/','');
+			zipfile.add(file_name, file_path)
+		end
+	end
+	
+	def zip_additional(zipfile)
+		@additional_files.reject{|f| reject_file(f)}.each do |file_path|
+			file_name = file_path#.split('/').last
 			zipfile.add(file_name, file_path)
 		end
 	end
