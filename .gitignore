@@ -17,5 +17,6 @@ spec/support/CodeCoverage/nunit/TestResult.xml
 spec/support/CodeCoverage/nunit/test-coverage.*
 spec/support/CodeCoverage/nunit/html/*
 spec/support/CodeCoverage/mspec/html/*
+spec/support/CodeCoverage/html/*
 github-test.rb
 Albacore-*.gem

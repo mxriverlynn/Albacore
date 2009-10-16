@@ -95,5 +95,7 @@ namespace :jeweler do
 		gs.add_dependency('rake', '>= 0.8.7')
 		gs.add_dependency('rspec', '>= 1.2.8')
 		gs.add_dependency('jeweler', '>= 1.2.1')
+		gs.add_dependency('net-ssh', '>= 2.0.15')
+		gs.add_dependency('net-sftp', '>= 2.0.2')
 	end
 end
