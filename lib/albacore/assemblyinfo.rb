@@ -11,6 +11,7 @@ class AssemblyInfo
 	def initialize
 		@namespaces = []
 		super()
+		configure_if_config_exists('AssemblyInfo')
 	end
 	
 	def write

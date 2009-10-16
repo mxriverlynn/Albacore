@@ -1,4 +1,9 @@
 module YAMLConfig
+	def configure_if_config_exists(task_name)
+		task_config = task_name + '.yml'
+		configure(task_config) if File.exists?(task_config)
+	end
+
 	def configure(yml_file)
 		config = YAML::load(File.open(yml_file))
 		parse_config config
