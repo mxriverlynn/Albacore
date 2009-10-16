@@ -1,10 +1,10 @@
 require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
 
 class NUnitTestRunner
-	include Logging
+	include RunCommand
 	include YAMLConfig
 	
-	attr_accessor :assemblies, :options, :path_to_command
+	attr_accessor :assemblies, :options
 	
 	def initialize(path_to_command='')
 		@path_to_command = path_to_command
@@ -14,16 +14,25 @@ class NUnitTestRunner
 	end
 	
 	def get_command_line
-		command = [@path_to_command, @assemblies.join(" "), @options.join(" ")].join(" ")
-		@logger.debug "Build NUnit Test Runner Command Line: " + command
-		command
+		command_params = get_command_parameters
+		commandline = command_params.join(" ")
+		@logger.debug "Build NUnit Test Runner Command Line: " + commandline
+		commandline
+	end
+	
+	def get_command_parameters
+		command_params = []
+		command_params << @path_to_command
+		command_params << @assemblies.join(" ") unless @assemblies.nil?
+		command_params << @options.join(" ") unless @options.nil?
+		command_params
 	end
 	
 	def execute()
-		@result = system(get_command_line)
-	end
-	
-	def failed()
-		@result == false
-	end
+		command_params = get_command_parameters
+		result = run_command "NUnit", command_params
+		
+		failure_message = 'NUnit Failed. See Build Log For Detail'
+		fail_with_message failure_message if !result
+	end	
 end
