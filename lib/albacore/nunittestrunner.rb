@@ -19,7 +19,6 @@ class NUnitTestRunner
 	end
 	
 	def execute()
-		puts get_command_line
 		@result = system(get_command_line)
 	end
 	
