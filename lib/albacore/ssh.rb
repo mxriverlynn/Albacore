@@ -1,3 +1,4 @@
+require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
 require 'net/ssh'
 
 class Ssh

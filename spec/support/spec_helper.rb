@@ -8,5 +8,9 @@ $: << File.join(@root_dir, "spec")
 $: << File.join(@root_dir, "spec/patches")
 $: << File.join(@root_dir, "spec/support")
 
+require 'mocha'
+
+require 'net/ssh'
+
 require 'system_patch'
 require 'tasklib_patch'
