@@ -165,3 +165,149 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
 	end	
 end
+
+describe NCoverReport, "when specifying the coverage item type to check" do
+		before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		report = NCover::Reports::SummaryReport.new
+		report.output_path = NCoverReportTestData.summary_output_file
+		@ncover.reports << report
+		
+		symbolcoverage = NCover::Reports::SymbolCoverage.new
+		symbolcoverage.value = 10
+		symbolcoverage.item_type = :Class
+		@ncover.minimum_coverage << symbolcoverage
+		
+		@ncover.run
+	end
+
+	it "should tell ncover.reporting to check for the specified item type" do
+		$system_command.should include("//mc SymbolCoverage:10:Class")
+	end
+	
+	it "should produce the report" do
+		File.exist?(NCoverReportTestData.summary_output_file).should be_true
+	end	
+end
+
+describe NCoverReport, "when checking more than one type of coverage - symbol and branch - and both fail" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport
+		
+		@ncover.minimum_coverage << NCover::Reports::SymbolCoverage.new(:value => 100, :item_type => :View)
+		@ncover.minimum_coverage << NCover::Reports::BranchCoverage.new(:value => 10, :item_type => :Class)
+
+		@ncover.run
+	end
+
+	it "should tell ncover.reporting to check for the symbol coverage" do
+		$system_command.should include("//mc SymbolCoverage:100:View")
+	end
+	
+	it "should tell ncover.reporting to check for the branch coverage" do
+		$system_command.should include("//mc BranchCoverage:10:Class")
+	end
+	
+	it "should produce the report" do
+		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
+	end	
+	
+	it "should fail the execution" do
+		@ncover.failed.should be_true
+	end
+end
+
+describe NCoverReport, "when checking more than one type of coverage - symbol and branch - and both pass" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport
+		
+		@ncover.minimum_coverage << NCover::Reports::SymbolCoverage.new(:value => 0, :item_type => :View)
+		@ncover.minimum_coverage << NCover::Reports::BranchCoverage.new(:value => 0, :item_type => :Class)
+
+		@ncover.run
+	end
+
+	it "should tell ncover.reporting to check for the symbol coverage" do
+		$system_command.should include("//mc SymbolCoverage:0:View")
+	end
+	
+	it "should tell ncover.reporting to check for the branch coverage" do
+		$system_command.should include("//mc BranchCoverage:0:Class")
+	end
+	
+	it "should produce the report" do
+		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
+	end	
+	
+	it "should not fail the execution" do
+		@ncover.failed.should be_false
+	end
+end
+
+describe NCoverReport, "when checking more than one type of coverage - symbol and branch - and one fails" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport
+		
+		@ncover.minimum_coverage << NCover::Reports::SymbolCoverage.new(:value => 100, :item_type => :View)
+		@ncover.minimum_coverage << NCover::Reports::BranchCoverage.new(:value => 0, :item_type => :Class)
+
+		@ncover.run
+	end
+
+	it "should tell ncover.reporting to check for the symbol coverage" do
+		$system_command.should include("//mc SymbolCoverage:100:View")
+	end
+	
+	it "should tell ncover.reporting to check for the branch coverage" do
+		$system_command.should include("//mc BranchCoverage:0:Class")
+	end
+	
+	it "should produce the report" do
+		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
+	end	
+	
+	it "should fail the execution" do
+		@ncover.failed.should be_true
+	end
+end

@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), '../', 'support', 'albacore_helper')
 module NCover
 	module Reports
 	
-		class SymbolCoverage
+		class BranchCoverage
 			include YAMLConfig
 			
 			attr_accessor :value, :item_type 
@@ -16,7 +16,7 @@ module NCover
 			end
 			
 			def coverage_metric
-				:SymbolCoverage
+				:BranchCoverage
 			end
 		end
 		
