@@ -9,9 +9,6 @@ $: << File.join(@root_dir, "spec/patches")
 $: << File.join(@root_dir, "spec/support")
 
 require 'mocha'
+require 'mochaconfig'
 require 'system_patch'
 require 'tasklib_patch'
-
-Spec::Runner.configure do |config|
-	config.mock_with :mocha
-end
