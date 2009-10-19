@@ -6,11 +6,12 @@ module NCover
 		class SymbolCoverage
 			include YAMLConfig
 			
-			attr_accessor :minimum, :coverage_level
+			attr_accessor :value, :item_type 
 			
 			def initialize
 				super()
-				@coverage_type = :View
+				@value = 0
+				@item_type = :View
 			end
 			
 			def coverage_metric

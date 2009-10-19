@@ -112,15 +112,14 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 		@ncover.reports << fullcoveragereport
 		
 		symbolcoverage = NCover::Reports::SymbolCoverage.new
-		symbolcoverage.minimum = 10
-		symbolcoverage.coverage_level = :View
+		symbolcoverage.value = 10
 		@ncover.minimum_coverage << symbolcoverage
 		
 		@ncover.run
 	end
 
 	it "should tell ncover.reporting to check for the specified minimum coverage" do
-		$system_command.should include("//mc SymbolCoverage:10")
+		$system_command.should include("//mc SymbolCoverage:10:View")
 	end
 	
 	it "should not fail the execution" do
@@ -148,8 +147,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 		@ncover.reports << fullcoveragereport
 		
 		symbolcoverage = NCover::Reports::SymbolCoverage.new
-		symbolcoverage.minimum = 100
-		symbolcoverage.coverage_level = :View
+		symbolcoverage.value = 100
 		@ncover.minimum_coverage << symbolcoverage
 		
 		@ncover.run
