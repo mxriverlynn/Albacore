@@ -30,3 +30,18 @@ describe YAMLConfig, "when configuring with yaml" do
 		@yml.what_ever.should == :a_symbol
 	end	
 end
+
+describe YAMLConfig, "when included yamlconfig in a class" do
+	
+	class YAML_AutoConfig_Test
+		include YAMLConfig
+	end
+	
+	before :all do
+		@yamltest = YAML_AutoConfig_Test.new
+	end
+	
+	it "should automatically configure the class through a yaml file named after the class" do
+		@yamltest.this_attr_was_automatically_added_by.should == "the yaml auto config"
+	end
+end
