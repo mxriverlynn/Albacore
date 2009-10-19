@@ -21,10 +21,8 @@ describe Ssh, 'when executing a command over ssh' do
 		
 	end
 	
-	it "should attempt to open a connection with the supplied connection information" do
-	end
+	it "should attempt to open a connection with the supplied connection information"
 	
-	it "should execute the command" do
-	end
+	it "should execute the command"
 end
 
