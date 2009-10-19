@@ -1,11 +1,18 @@
+require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
 require 'zip/zip'
 require 'zip/zipfilesystem'
 include Zip
 
 class ZipDirectory
+	include YAMLConfig
+	
 	attr_accessor :directory_to_zip
 	attr_accessor :additional_files
 	attr_accessor :file
+
+	def initialize
+		super()
+	end
 		
 	def package()
 		@directory_to_zip.sub!(%r[/$],'')

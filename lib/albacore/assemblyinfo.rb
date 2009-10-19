@@ -9,9 +9,8 @@ class AssemblyInfo
 	attr_accessor :file_version, :trademark, :namespaces
 	
 	def initialize
-		@namespaces = []
 		super()
-		configure_if_config_exists('AssemblyInfo')
+		@namespaces = []
 	end
 	
 	def write

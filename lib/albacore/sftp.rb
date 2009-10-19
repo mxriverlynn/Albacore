@@ -1,3 +1,4 @@
+require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
 require 'net/sftp'
 
 class Sftp
@@ -8,9 +9,7 @@ class Sftp
 	
 	def initialize
 		super()
-		configure_if_config_exists('sftp')
-	end
-	
+	end	
 	
 	def upload()
 		Net::SFTP.start(@server, @username, :password => @password) do |sftp|

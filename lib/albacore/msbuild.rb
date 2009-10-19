@@ -7,8 +7,8 @@ class MSBuild
 	attr_accessor :solution, :verbosity
 	
 	def initialize
-		@path_to_command = build_path_to_command
 		super()
+		@path_to_command = build_path_to_command
 	end
 	
 	def build_path_to_command

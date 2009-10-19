@@ -6,8 +6,8 @@ module Failure
 	attr_accessor :failed
 	
 	def initialize
-		@failed = false
 		super()
+		@failed = false
 	end
 	
 	def fail

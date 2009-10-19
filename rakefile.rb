@@ -29,11 +29,17 @@ namespace :specs do
 		t.spec_opts << @spec_opts
 	end
 	
-	desc "NCover functional specs"
+	desc "NCover Console functional specs"
 	Spec::Rake::SpecTask.new :ncoverconsole do |t|
 		t.spec_files = 'spec/ncoverconsole*_spec.rb'
 		t.spec_opts << @spec_opts
 	end	
+	
+	desc "NCover Report functional specs"
+	Spec::Rake::SpecTask.new :ncoverreport do |t|
+		t.spec_files = 'spec/ncoverreport*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
 
 	desc "SSH functional specs"
 	Spec::Rake::SpecTask.new :ssh do |t|

@@ -9,7 +9,6 @@ class Ssh
 	
 	def initialize
 		super()
-		configure_if_config_exists('ssh')
 	end
 	
 	

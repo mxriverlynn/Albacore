@@ -5,6 +5,8 @@ require 'ncoverreport'
 describe NCoverReport, "when running a full coverage report with a specified output folder" do
 	
 	before :all do
+		ncover = NCoverReport.new
+		
 	end
 	
 	it "should tell ncover.reporting to produce the full coverage report"

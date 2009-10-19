@@ -7,10 +7,10 @@ class NUnitTestRunner
 	attr_accessor :assemblies, :options
 	
 	def initialize(path_to_command='')
+		super()
 		@path_to_command = path_to_command
 		@options=[]
 		@assemblies=[]
-		super()
 	end
 	
 	def get_command_line
