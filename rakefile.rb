@@ -90,7 +90,7 @@ namespace :albacore do
 		nunit.options << '/noshadow'
 		
 		ncc.testrunner = nunit
-	end
+	end	
 end
 
 namespace :jeweler do

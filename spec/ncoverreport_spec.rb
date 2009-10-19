@@ -30,6 +30,36 @@ describe NCoverReport, "when running a full coverage report with a specified out
 	
 	it "should produce the report" do
 		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
+	end	
+end
+
+describe NCoverReport, "when running a summary report with a specified output folder" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		ncover = NCoverReport.new
+		ncover.extend(SystemPatch)
+		ncover.log_level = :verbose
+		
+		ncover.path_to_command = NCoverReportTestData.path_to_command
+		ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		summaryreport = NCover::Reports::Summary.new()
+		summaryreport.output_path = NCoverReportTestData.summary_output_file
+		ncover.reports << summaryreport
+		
+		ncover.run
+	end
+
+	it "should execute ncover.reporting" do
+		$system_command.should include(NCoverReportTestData.path_to_command)
 	end
 	
+	it "should tell ncover.reporting to produce a full coverage html report in the specified folder" do
+		$system_command.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"")
+	end
+	
+	it "should produce the report" do
+		File.exist?(NCoverReportTestData.summary_output_file).should be_true
+	end		
 end

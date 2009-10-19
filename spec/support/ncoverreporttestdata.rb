@@ -18,4 +18,8 @@ class NCoverReportTestData
 		FileUtils.rmtree(@output_folder)
 		Dir.mkdir(@output_folder) unless File.exist?(@output_folder)
 	end
+	
+	def self.summary_output_file
+		File.join(NCoverReportTestData.output_folder, "summary.html")
+	end
 end
