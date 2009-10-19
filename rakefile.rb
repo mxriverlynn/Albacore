@@ -5,33 +5,39 @@ namespace :specs do
 
 	@spec_opts = '--colour --format specdoc'
 
-	desc "Run setup functional specs for Albacore"
+	desc "Run functional specs for Albacore"
 	Spec::Rake::SpecTask.new :all do |t|
 		t.spec_files = 'spec/**/*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 	
-	desc "Setup the assembly info functional specs"
+	desc "Assembly info functional specs"
 	Spec::Rake::SpecTask.new :assemblyinfo do |t|
 		t.spec_files = 'spec/assemblyinfo*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 	
-	desc "Setup the msbuild functional specs"
+	desc "MSBuild functional specs"
 	Spec::Rake::SpecTask.new :msbuild do |t|
 		t.spec_files = 'spec/msbuild*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 
-	desc "Setup SQLServer SQLCmd functional specs" 
+	desc "SQLServer SQLCmd functional specs" 
 	Spec::Rake::SpecTask.new :sqlcmd do |t|
 		t.spec_files = 'spec/sqlcmd*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 	
-	desc "Setup NCover functional specs"
+	desc "NCover functional specs"
 	Spec::Rake::SpecTask.new :ncoverconsole do |t|
 		t.spec_files = 'spec/ncoverconsole*_spec.rb'
+		t.spec_opts << @spec_opts
+	end	
+
+	desc "SSH functional specs"
+	Spec::Rake::SpecTask.new :ssh do |t|
+		t.spec_files = 'spec/ssh*_spec.rb'
 		t.spec_opts << @spec_opts
 	end	
 end
