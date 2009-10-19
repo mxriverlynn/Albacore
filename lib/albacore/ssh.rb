@@ -11,7 +11,6 @@ class Ssh
 		super()
 	end
 	
-	
 	def execute()
 		Net::SSH.start(@server, @username, :password => @password) do |ssh|
 			output = ssh.exec!(@command)
