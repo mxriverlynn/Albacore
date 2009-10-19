@@ -45,3 +45,18 @@ describe YAMLConfig, "when included yamlconfig in a class" do
 		@yamltest.this_attr_was_automatically_added_by.should == "the yaml auto config"
 	end
 end
+
+describe YAMLConfig, "when extending a class with yamlconfig" do
+	
+	class YAML_AutoConfig_Test
+	end
+	
+	before :all do
+		@yamltest = YAML_AutoConfig_Test.new
+		@yamltest.extend YAMLConfig
+	end
+	
+	it "should automatically configure the class through a yaml file named after the class" do
+		@yamltest.this_attr_was_automatically_added_by.should == "the yaml auto config"
+	end
+end

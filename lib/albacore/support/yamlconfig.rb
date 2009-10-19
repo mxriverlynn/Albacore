@@ -7,7 +7,7 @@ module YAMLConfig
 	end
 	
 	def YAMLConfig.extend_object(obj)
-		configure_if_config_exists(obj.class.to_s.downcase)
+		obj.configure_if_config_exists(obj.class.to_s.downcase)
 	end
 	
 	def configure_if_config_exists(task_name)
