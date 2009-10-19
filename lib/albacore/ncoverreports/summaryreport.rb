@@ -3,17 +3,18 @@ require File.join(File.dirname(__FILE__), '../', 'support', 'albacore_helper')
 module NCover
 	module Reports
 		
-		class FullCoverage
+		class SummaryReport
 			include YAMLConfig
 			
 			attr_accessor :output_path
 			
 			def initialize
 				super()
+				@report_format = :Xml
 			end
 			
 			def report_type
-				:FullCoverageReport
+				:Summary
 			end
 			
 			def report_format

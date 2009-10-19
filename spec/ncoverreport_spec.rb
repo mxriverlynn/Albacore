@@ -13,7 +13,7 @@ describe NCoverReport, "when running a full coverage report with a specified out
 		ncover.path_to_command = NCoverReportTestData.path_to_command
 		ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		fullcoveragereport = NCover::Reports::FullCoverage.new()
+		fullcoveragereport = NCover::Reports::FullCoverageReport.new()
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		ncover.reports << fullcoveragereport
 		
@@ -44,7 +44,7 @@ describe NCoverReport, "when running a summary report with a specified output fo
 		ncover.path_to_command = NCoverReportTestData.path_to_command
 		ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		summaryreport = NCover::Reports::Summary.new()
+		summaryreport = NCover::Reports::SummaryReport.new()
 		summaryreport.output_path = NCoverReportTestData.summary_output_file
 		ncover.reports << summaryreport
 		
@@ -75,11 +75,11 @@ describe NCoverReport, "when running multiple ncover reports - a summary and a f
 		ncover.path_to_command = NCoverReportTestData.path_to_command
 		ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		summaryreport = NCover::Reports::Summary.new()
+		summaryreport = NCover::Reports::SummaryReport.new()
 		summaryreport.output_path = NCoverReportTestData.summary_output_file
 		ncover.reports << summaryreport
 		
-		fullcoveragereport = NCover::Reports::FullCoverage.new()
+		fullcoveragereport = NCover::Reports::FullCoverageReport.new()
 		@fullcoverage_output_folder = File.join(NCoverReportTestData.output_folder, "fullcoverage")
 		fullcoveragereport.output_path = @fullcoverage_output_folder
 		ncover.reports << fullcoveragereport
@@ -94,4 +94,76 @@ describe NCoverReport, "when running multiple ncover reports - a summary and a f
 	it "should tell ncover.reporting to produce a summary html report in the specified folder" do
 		$system_command.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"")
 	end
+end
+
+describe NCoverReport, "when running a report with a specified minimum symbol coverage lower than actual coverage" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport
+		
+		symbolcoverage = NCover::Reports::SymbolCoverage.new
+		symbolcoverage.minimum = 10
+		symbolcoverage.coverage_level = :View
+		@ncover.minimum_coverage << symbolcoverage
+		
+		@ncover.run
+	end
+
+	it "should tell ncover.reporting to check for the specified minimum coverage" do
+		$system_command.should include("//mc SymbolCoverage:10")
+	end
+	
+	it "should not fail the execution" do
+		@ncover.failed.should be_false
+	end
+	
+	it "should produce the report" do
+		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
+	end	
+end
+
+describe NCoverReport, "when running a report with a specified minimum symbol coverage higher than actual coverage" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport
+		
+		symbolcoverage = NCover::Reports::SymbolCoverage.new
+		symbolcoverage.minimum = 100
+		symbolcoverage.coverage_level = :View
+		@ncover.minimum_coverage << symbolcoverage
+		
+		@ncover.run
+	end
+
+	it "should tell ncover.reporting to check for the specified minimum coverage" do
+		$system_command.should include("//mc SymbolCoverage:10")
+	end
+	
+	it "should fail the execution" do
+		@ncover.failed.should be_true
+	end
+	
+	it "should produce the report" do
+		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
+	end	
 end
