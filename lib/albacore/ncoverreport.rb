@@ -44,9 +44,7 @@ class NCoverReport
 
 	def build_minimum_coverage
 		@minimum_coverage.map{|c|
-			coverage = "//mc #{c.coverage_metric}"
-			coverage << ":#{c.value}" unless c.value.nil?
-			coverage << ":#{c.item_type}" unless c.item_type.nil?
+			coverage = "//mc #{c.get_coverage_options}"
 		}.join(" ")
 	end
 end

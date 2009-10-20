@@ -6,17 +6,20 @@ module NCover
 		class BranchCoverage
 			include YAMLConfig
 			
-			attr_accessor :value, :item_type 
+			attr_accessor :minimum, :item_type 
 			
 			def initialize(params={})
 				super()
-				@value = 0
+				@minimum = 0
 				@item_type = :View
 				parse_config(params) unless params.nil?
 			end
 			
-			def coverage_metric
-				:BranchCoverage
+			def get_coverage_options
+				options = "BranchCoverage"
+				options << ":#{minimum}" unless minimum.nil?
+				options << ":#{item_type}" unless item_type.nil?
+				options
 			end
 		end
 		
