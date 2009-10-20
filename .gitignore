@@ -21,3 +21,4 @@ spec/support/CodeCoverage/html
 spec/support/CodeCoverage/report/output
 github-test.rb
 Albacore-*.gem
+Albacore.gemspec
