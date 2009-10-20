@@ -2,6 +2,17 @@ require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_hel
 require 'ncoverreport'
 require 'ncoverreporttestdata'
 
+describe NCoverReport, "when runnign without the ncover report location specified" do
+	before :all do
+		@ncover = NCoverReport.new
+		@ncover.run
+	end
+	
+	it "should fail execution" do
+		@ncover.failed.should be_true
+	end
+end
+
 describe NCoverReport, "when running a full coverage report with a specified output folder" do
 	before :all do
 		NCoverReportTestData.clean_output_folder

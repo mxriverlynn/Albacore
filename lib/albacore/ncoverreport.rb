@@ -15,8 +15,8 @@ class NCoverReport
 	end
 	
 	def run
-		#check_testrunner
-		#return false if @failed
+		check_command
+		return if @failed
 		
 		command_parameters = []
 		command_parameters << build_coverage_files unless @coverage_files.empty?
@@ -27,6 +27,11 @@ class NCoverReport
 		
 		failure_msg = 'Code Coverage Reporting Failed. See Build Log For Detail.'
 		fail_with_message failure_msg if !result
+	end
+	
+	def check_command
+		return if @path_to_command
+		fail_with_message 'NCoverReport.path_to_command cannot be nil.'
 	end
 	
 	def build_coverage_files
