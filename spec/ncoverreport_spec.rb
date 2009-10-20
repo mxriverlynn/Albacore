@@ -122,10 +122,9 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		symbolcoverage = NCover::CodeCoverage.new
-		symbolcoverage.coverage_type = :SymbolCoverage
+		symbolcoverage = NCover::SymbolCoverage.new
 		symbolcoverage.minimum = 10
-		@ncover.minimum_coverage << symbolcoverage
+		@ncover.required_coverage << symbolcoverage
 		
 		@ncover.run
 	end
@@ -158,10 +157,9 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		symbolcoverage = NCover::CodeCoverage.new
-		symbolcoverage.coverage_type = :SymbolCoverage
+		symbolcoverage = NCover::SymbolCoverage.new
 		symbolcoverage.minimum = 100
-		@ncover.minimum_coverage << symbolcoverage
+		@ncover.required_coverage << symbolcoverage
 		
 		@ncover.run
 	end
@@ -194,11 +192,10 @@ describe NCoverReport, "when specifying the coverage item type to check" do
 		report.output_path = NCoverReportTestData.summary_output_file
 		@ncover.reports << report
 		
-		symbolcoverage = NCover::CodeCoverage.new
-		symbolcoverage.coverage_type = :SymbolCoverage
+		symbolcoverage = NCover::SymbolCoverage.new
 		symbolcoverage.minimum = 10
 		symbolcoverage.item_type = :Class
-		@ncover.minimum_coverage << symbolcoverage
+		@ncover.required_coverage << symbolcoverage
 		
 		@ncover.run
 	end
@@ -227,8 +224,9 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :SymbolCoverage, :minimum => 100, :item_type => :View)
-		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :BranchCoverage, :minimum => 10, :item_type => :Class)
+		@ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 100, :item_type => :View)
+		@ncover.required_coverage << NCover::BranchCoverage.new(:minimum => 10, :item_type => :Class)
+		@ncover.required_coverage << NCover::MethodCoverage.new(:minimum => 100, :item_type => :Class)
 
 		@ncover.run
 	end
@@ -241,6 +239,10 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
 		$system_command.should include("//mc BranchCoverage:10:Class")
 	end
 	
+	it "should tell ncover.reporting to check for the branch coverage" do
+		$system_command.should include("//mc MethodCoverage:100:Class")
+	end
+
 	it "should produce the report" do
 		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
 	end	
@@ -265,8 +267,9 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :SymbolCoverage, :minimum => 0, :item_type => :View)
-		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :BranchCoverage, :minimum => 0, :item_type => :Class)
+		@ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0, :item_type => :View)
+		@ncover.required_coverage << NCover::BranchCoverage.new(:minimum => 0, :item_type => :Class)
+		@ncover.required_coverage << NCover::MethodCoverage.new(:minimum => 0, :item_type => :Class)
 
 		@ncover.run
 	end
@@ -279,6 +282,10 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
 		$system_command.should include("//mc BranchCoverage:0:Class")
 	end
 	
+	it "should tell ncover.reporting to check for the method coverage" do
+		$system_command.should include("//mc MethodCoverage:0:Class")
+	end
+
 	it "should produce the report" do
 		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
 	end	
@@ -303,8 +310,8 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :SymbolCoverage, :minimum => 100, :item_type => :View)
-		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :BranchCoverage, :minimum => 0, :item_type => :Class)
+		@ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 100, :item_type => :View)
+		@ncover.required_coverage << NCover::BranchCoverage.new(:minimum => 0, :item_type => :Class)
 
 		@ncover.run
 	end
@@ -342,7 +349,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity highe
 		@ncover.reports << fullcoveragereport
 		
 		coverage = NCover::CyclomaticComplexity.new(:maximum => 1, :item_type => :Class)
-		@ncover.minimum_coverage << coverage
+		@ncover.required_coverage << coverage
 		
 		@ncover.run
 	end
@@ -376,7 +383,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity under
 		@ncover.reports << fullcoveragereport
 		
 		coverage = NCover::CyclomaticComplexity.new(:maximum => 1000)
-		@ncover.minimum_coverage << coverage
+		@ncover.required_coverage << coverage
 		
 		@ncover.run
 	end

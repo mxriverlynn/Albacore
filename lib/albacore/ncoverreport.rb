@@ -5,13 +5,13 @@ class NCoverReport
 	include RunCommand
 	include YAMLConfig
 	
-	attr_accessor :coverage_files, :reports, :minimum_coverage
+	attr_accessor :coverage_files, :reports, :required_coverage
 	
 	def initialize
 		super()
 		@coverage_files = []
 		@reports = []
-		@minimum_coverage = []
+		@required_coverage = []
 	end
 	
 	def run
@@ -21,7 +21,7 @@ class NCoverReport
 		command_parameters = []
 		command_parameters << build_coverage_files unless @coverage_files.empty?
 		command_parameters << build_reports unless @reports.empty?
-		command_parameters << build_minimum_coverage unless @minimum_coverage.empty?
+		command_parameters << build_required_coverage unless @required_coverage.empty?
 		
 		result = run_command "NCover.Reporting", command_parameters.join(" ")
 		
@@ -47,8 +47,8 @@ class NCoverReport
 		}.join(" ")
 	end
 
-	def build_minimum_coverage
-		@minimum_coverage.map{|c|
+	def build_required_coverage
+		@required_coverage.map{|c|
 			coverage = "//mc #{c.get_coverage_options}"
 		}.join(" ")
 	end
