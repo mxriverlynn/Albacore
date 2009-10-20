@@ -13,7 +13,7 @@ describe NCoverReport, "when running a full coverage report with a specified out
 		ncover.path_to_command = NCoverReportTestData.path_to_command
 		ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		fullcoveragereport = NCover::Reports::FullCoverageReport.new()
+		fullcoveragereport = NCover::FullCoverageReport.new()
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		ncover.reports << fullcoveragereport
 		
@@ -44,7 +44,7 @@ describe NCoverReport, "when running a summary report with a specified output fo
 		ncover.path_to_command = NCoverReportTestData.path_to_command
 		ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		summaryreport = NCover::Reports::SummaryReport.new()
+		summaryreport = NCover::SummaryReport.new()
 		summaryreport.output_path = NCoverReportTestData.summary_output_file
 		ncover.reports << summaryreport
 		
@@ -75,11 +75,11 @@ describe NCoverReport, "when running multiple ncover reports - a summary and a f
 		ncover.path_to_command = NCoverReportTestData.path_to_command
 		ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		summaryreport = NCover::Reports::SummaryReport.new()
+		summaryreport = NCover::SummaryReport.new()
 		summaryreport.output_path = NCoverReportTestData.summary_output_file
 		ncover.reports << summaryreport
 		
-		fullcoveragereport = NCover::Reports::FullCoverageReport.new()
+		fullcoveragereport = NCover::FullCoverageReport.new()
 		@fullcoverage_output_folder = File.join(NCoverReportTestData.output_folder, "fullcoverage")
 		fullcoveragereport.output_path = @fullcoverage_output_folder
 		ncover.reports << fullcoveragereport
@@ -107,11 +107,12 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 		@ncover.path_to_command = NCoverReportTestData.path_to_command
 		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport = NCover::FullCoverageReport.new
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		symbolcoverage = NCover::Reports::SymbolCoverage.new
+		symbolcoverage = NCover::CodeCoverage.new
+		symbolcoverage.coverage_type = :SymbolCoverage
 		symbolcoverage.minimum = 10
 		@ncover.minimum_coverage << symbolcoverage
 		
@@ -142,11 +143,12 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 		@ncover.path_to_command = NCoverReportTestData.path_to_command
 		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport = NCover::FullCoverageReport.new
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		symbolcoverage = NCover::Reports::SymbolCoverage.new
+		symbolcoverage = NCover::CodeCoverage.new
+		symbolcoverage.coverage_type = :SymbolCoverage
 		symbolcoverage.minimum = 100
 		@ncover.minimum_coverage << symbolcoverage
 		
@@ -177,11 +179,12 @@ describe NCoverReport, "when specifying the coverage item type to check" do
 		@ncover.path_to_command = NCoverReportTestData.path_to_command
 		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		report = NCover::Reports::SummaryReport.new
+		report = NCover::SummaryReport.new
 		report.output_path = NCoverReportTestData.summary_output_file
 		@ncover.reports << report
 		
-		symbolcoverage = NCover::Reports::SymbolCoverage.new
+		symbolcoverage = NCover::CodeCoverage.new
+		symbolcoverage.coverage_type = :SymbolCoverage
 		symbolcoverage.minimum = 10
 		symbolcoverage.item_type = :Class
 		@ncover.minimum_coverage << symbolcoverage
@@ -209,12 +212,12 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
 		@ncover.path_to_command = NCoverReportTestData.path_to_command
 		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport = NCover::FullCoverageReport.new
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		@ncover.minimum_coverage << NCover::Reports::SymbolCoverage.new(:minimum => 100, :item_type => :View)
-		@ncover.minimum_coverage << NCover::Reports::BranchCoverage.new(:minimum => 10, :item_type => :Class)
+		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :SymbolCoverage, :minimum => 100, :item_type => :View)
+		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :BranchCoverage, :minimum => 10, :item_type => :Class)
 
 		@ncover.run
 	end
@@ -247,12 +250,12 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
 		@ncover.path_to_command = NCoverReportTestData.path_to_command
 		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport = NCover::FullCoverageReport.new
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		@ncover.minimum_coverage << NCover::Reports::SymbolCoverage.new(:minimum => 0, :item_type => :View)
-		@ncover.minimum_coverage << NCover::Reports::BranchCoverage.new(:minimum => 0, :item_type => :Class)
+		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :SymbolCoverage, :minimum => 0, :item_type => :View)
+		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :BranchCoverage, :minimum => 0, :item_type => :Class)
 
 		@ncover.run
 	end
@@ -285,12 +288,12 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
 		@ncover.path_to_command = NCoverReportTestData.path_to_command
 		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
-		fullcoveragereport = NCover::Reports::FullCoverageReport.new
+		fullcoveragereport = NCover::FullCoverageReport.new
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
 		@ncover.reports << fullcoveragereport
 		
-		@ncover.minimum_coverage << NCover::Reports::SymbolCoverage.new(:minimum => 100, :item_type => :View)
-		@ncover.minimum_coverage << NCover::Reports::BranchCoverage.new(:minimum => 0, :item_type => :Class)
+		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :SymbolCoverage, :minimum => 100, :item_type => :View)
+		@ncover.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :BranchCoverage, :minimum => 0, :item_type => :Class)
 
 		@ncover.run
 	end
