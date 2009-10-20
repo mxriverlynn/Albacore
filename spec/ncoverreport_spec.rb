@@ -325,3 +325,71 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
 		@ncover.failed.should be_true
 	end
 end
+
+describe NCoverReport, "when running a report with a cyclomatic complexity higher than allowed" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport
+		
+		coverage = NCover::CyclomaticComplexity.new(:maximum => 1, :item_type => :Class)
+		@ncover.minimum_coverage << coverage
+		
+		@ncover.run
+	end
+
+	it "should tell ncover.reporting to check for the maximum cyclomatic complexity" do
+		$system_command.should include("//mc CyclomaticComplexity:1:Class")
+	end
+	
+	it "should fail the execution" do
+		@ncover.failed.should be_true
+	end
+	
+	it "should produce the report" do
+		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
+	end	
+end
+
+describe NCoverReport, "when running a report with a cyclomatic complexity under the limit" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport
+		
+		coverage = NCover::CyclomaticComplexity.new(:maximum => 1000)
+		@ncover.minimum_coverage << coverage
+		
+		@ncover.run
+	end
+
+	it "should tell ncover.reporting to check for the maximum cyclomatic complexity" do
+		$system_command.should include("//mc CyclomaticComplexity:1000:View")
+	end
+	
+	it "should not fail the execution" do
+		@ncover.failed.should be_false
+	end
+	
+	it "should produce the report" do
+		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
+	end	
+end
