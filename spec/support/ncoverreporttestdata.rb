@@ -17,7 +17,7 @@ class NCoverReportTestData
 	def self.clean_output_folder
 		FileUtils.rmtree(@output_folder)
 		Dir.mkdir(@output_folder) unless File.exist?(@output_folder)
-		sleep(3)
+		sleep(3) # this is a hack to work around the slow hard drive in my laptop, which caused failing tests w/ write-through-cache.
 	end
 	
 	def self.summary_output_file
