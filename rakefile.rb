@@ -52,7 +52,7 @@ namespace :albacore do
 	require 'lib/albacore'
 
 	desc "Run a complete Albacore build sample"
-	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild', 'albacore:ncoverconsole']
+	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild', 'albacore:ncoverconsole', 'albacore:ncoverreport']
 	
 	desc "Run a sample build using the MSBuildTask"
 	Rake::MSBuildTask.new(:msbuild) do |msb|
@@ -91,6 +91,20 @@ namespace :albacore do
 		
 		ncc.testrunner = nunit
 	end	
+	
+	desc "Run a sample NCover Report to check code coverage"
+	Rake::NCoverReportTask.new(:ncoverreport => :ncoverconsole) do |ncr|
+		@xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
+		
+		ncr.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Reporting.exe"
+		ncr.coverage_files << @xml_coverage
+		
+		fullcoveragereport = NCover::FullCoverageReport.new
+		fullcoveragereport.output_path = "spec/support/CodeCoverage/report/output"
+		ncr.reports << fullcoveragereport
+		
+		ncr.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :BranchCoverage, :minimum => 100)
+	end
 end
 
 namespace :jeweler do
