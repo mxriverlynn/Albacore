@@ -17,6 +17,7 @@ class NCoverReportTestData
 	def self.clean_output_folder
 		FileUtils.rmtree(@output_folder)
 		Dir.mkdir(@output_folder) unless File.exist?(@output_folder)
+		sleep(3)
 	end
 	
 	def self.summary_output_file

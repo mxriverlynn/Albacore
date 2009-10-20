@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-module Rake
+module Albacore
 	class AssemblyInfoTask < Rake::TaskLib
 		attr_accessor :name
 		

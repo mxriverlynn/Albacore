@@ -3,9 +3,9 @@ require 'ncoverconsole'
 require 'ncoverconsoletask'
 require 'tasklib_patch'
 
-describe Rake::NCoverConsoleTask, "when running" do
+describe Albacore::NCoverConsoleTask, "when running" do
 	before :all do
-		Rake::NCoverConsoleTask.new() do |t|
+		Albacore::NCoverConsoleTask.new() do |t|
 			@yielded_object = t
 		end
 	end
@@ -15,9 +15,9 @@ describe Rake::NCoverConsoleTask, "when running" do
 	end
 end
 
-describe Rake::NCoverConsoleTask, "when execution fails" do
+describe Albacore::NCoverConsoleTask, "when execution fails" do
 	before :all do
-		@task = Rake::NCoverConsoleTask.new(:failingtask)
+		@task = Albacore::NCoverConsoleTask.new(:failingtask)
 		@task.extend(TasklibPatch)
 		Rake::Task["failingtask"].invoke
 	end

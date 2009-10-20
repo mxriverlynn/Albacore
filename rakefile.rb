@@ -55,14 +55,14 @@ namespace :albacore do
 	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild', 'albacore:ncoverconsole', 'albacore:ncoverreport']
 	
 	desc "Run a sample build using the MSBuildTask"
-	Rake::MSBuildTask.new(:msbuild) do |msb|
+	Albacore::MSBuildTask.new(:msbuild) do |msb|
 		msb.properties :configuration => :Debug
 		msb.targets [:Clean, :Build]
 		msb.solution = "spec/support/TestSolution/TestSolution.sln"
 	end
 	
 	desc "Run a sample assembly info generator"
-	Rake::AssemblyInfoTask.new(:assemblyinfo) do |asm|
+	Albacore::AssemblyInfoTask.new(:assemblyinfo) do |asm|
 		asm.version = "0.1.2.3"
 		asm.company_name = "a test company"
 		asm.product_name = "a product name goes here"
@@ -75,7 +75,7 @@ namespace :albacore do
 	end
 	
 	desc "Run a sample NCover Console code coverage"
-	Rake::NCoverConsoleTask.new(:ncoverconsole) do |ncc|
+	Albacore::NCoverConsoleTask.new(:ncoverconsole) do |ncc|
 		@xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
 		File.delete(@xml_coverage) if File.exist?(@xml_coverage)
 		
@@ -93,7 +93,7 @@ namespace :albacore do
 	end	
 	
 	desc "Run a sample NCover Report to check code coverage"
-	Rake::NCoverReportTask.new(:ncoverreport => :ncoverconsole) do |ncr|
+	Albacore::NCoverReportTask.new(:ncoverreport => :ncoverconsole) do |ncr|
 		@xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
 		
 		ncr.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Reporting.exe"
@@ -103,7 +103,8 @@ namespace :albacore do
 		fullcoveragereport.output_path = "spec/support/CodeCoverage/report/output"
 		ncr.reports << fullcoveragereport
 		
-		ncr.minimum_coverage << NCover::CodeCoverage.new(:coverage_type => :BranchCoverage, :minimum => 100)
+		ncr.required_coverage << NCover::BranchCoverage.new(:minimum => 100)
+		ncr.required_coverage << NCover::CyclomaticComplexity.new(:maximum => 1)
 	end
 end
 

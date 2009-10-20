@@ -3,9 +3,9 @@ require 'ncoverreport'
 require 'ncoverreporttask'
 require 'tasklib_patch'
 
-describe Rake::NCoverReportTask, "when running" do
+describe Albacore::NCoverReportTask, "when running" do
 	before :all do
-		Rake::NCoverReportTask.new() do |t|
+		Albacore::NCoverReportTask.new() do |t|
 			@yielded_object = t
 		end
 	end
@@ -15,9 +15,9 @@ describe Rake::NCoverReportTask, "when running" do
 	end
 end
 
-describe Rake::NCoverReportTask, "when execution fails" do
+describe Albacore::NCoverReportTask, "when execution fails" do
 	before :all do
-		@task = Rake::NCoverReportTask.new(:failingtask)
+		@task = Albacore::NCoverReportTask.new(:failingtask)
 		@task.extend(TasklibPatch)
 		Rake::Task["failingtask"].invoke
 	end

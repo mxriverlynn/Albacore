@@ -5,9 +5,9 @@ require 'msbuild'
 require 'msbuildtask'
 require 'tasklib_patch'
 
-describe Rake::MSBuildTask, "when running" do
+describe Albacore::MSBuildTask, "when running" do
 	before :all do
-		Rake::MSBuildTask.new() do |t|
+		Albacore::MSBuildTask.new() do |t|
 			@yielded_object = t
 		end
 	end
@@ -17,9 +17,9 @@ describe Rake::MSBuildTask, "when running" do
 	end
 end
 
-describe Rake::MSBuildTask, "when execution fails" do
+describe Albacore::MSBuildTask, "when execution fails" do
 	before :all do
-		@msbuildtask = Rake::MSBuildTask.new(:failingtask)
+		@msbuildtask = Albacore::MSBuildTask.new(:failingtask)
 		@msbuildtask.extend(TasklibPatch)
 		Rake::Task["failingtask"].invoke
 	end

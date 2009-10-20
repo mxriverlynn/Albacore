@@ -3,9 +3,9 @@ require 'sqlcmd'
 require 'sqlcmdtask'
 require 'tasklib_patch'
 
-describe Rake::SQLCmdTask, "when running" do
+describe Albacore::SQLCmdTask, "when running" do
 	before :all do
-		Rake::SQLCmdTask.new() do |t|
+		Albacore::SQLCmdTask.new() do |t|
 			@yielded_object = t
 		end
 	end
@@ -15,9 +15,9 @@ describe Rake::SQLCmdTask, "when running" do
 	end
 end
 
-describe Rake::SQLCmdTask, "when execution fails" do
+describe Albacore::SQLCmdTask, "when execution fails" do
 	before :all do
-		@task = Rake::SQLCmdTask.new(:failingtask)
+		@task = Albacore::SQLCmdTask.new(:failingtask)
 		@task.extend(TasklibPatch)
 		@task.fail
 		Rake::Task["failingtask"].invoke
