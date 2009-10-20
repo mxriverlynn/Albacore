@@ -198,7 +198,7 @@ describe NCoverReport, "when specifying the coverage item type to check" do
 	end	
 end
 
-describe NCoverReport, "when checking more than one type of coverage - symbol and branch - and both fail" do
+describe NCoverReport, "when checking more than one type of coverage and all fail" do
 	before :all do
 		NCoverReportTestData.clean_output_folder
 		
@@ -236,7 +236,7 @@ describe NCoverReport, "when checking more than one type of coverage - symbol an
 	end
 end
 
-describe NCoverReport, "when checking more than one type of coverage - symbol and branch - and both pass" do
+describe NCoverReport, "when checking more than one type of coverage and all pass" do
 	before :all do
 		NCoverReportTestData.clean_output_folder
 		
@@ -274,7 +274,7 @@ describe NCoverReport, "when checking more than one type of coverage - symbol an
 	end
 end
 
-describe NCoverReport, "when checking more than one type of coverage - symbol and branch - and one fails" do
+describe NCoverReport, "when checking more than one type of coverage and one fails" do
 	before :all do
 		NCoverReportTestData.clean_output_folder
 		
