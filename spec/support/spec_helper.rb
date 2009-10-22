@@ -8,7 +8,11 @@ $: << File.join(@root_dir, "spec")
 $: << File.join(@root_dir, "spec/patches")
 $: << File.join(@root_dir, "spec/support")
 
-require 'mocha'
-require 'mochaconfig'
+require 'not_a_mock'
 require 'system_patch'
 require 'tasklib_patch'
+
+Spec::Runner.configure do |config|
+	config.mock_with NotAMock::RspecMockFrameworkAdapter
+end
+

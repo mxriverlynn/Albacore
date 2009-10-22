@@ -103,7 +103,7 @@ namespace :albacore do
 		fullcoveragereport.output_path = "spec/support/CodeCoverage/report/output"
 		ncr.reports << fullcoveragereport
 		
-		ncr.required_coverage << NCover::BranchCoverage.new(:minimum => 100)
+		ncr.required_coverage << NCover::BranchCoverage.new(:minimum => 10)
 		ncr.required_coverage << NCover::CyclomaticComplexity.new(:maximum => 1)
 	end
 end
@@ -116,7 +116,7 @@ namespace :jeweler do
 		gs.description = "Easily build your .NET solutions with rake, using this suite of custom tasks."
 		gs.email = "derickbailey@gmail.com"
 		gs.homepage = "http://github.com/derickbailey/Albacore"
-		gs.authors = "Derick Bailey"
+		gs.authors = ["Derick Bailey", "Ben Hall"]
 		gs.has_rdoc = false	
 		gs.files.exclude("Albacore.gemspec", ".gitignore", "spec/support/Tools")
 		gs.add_dependency('rake', '>= 0.8.7')
@@ -125,6 +125,5 @@ namespace :jeweler do
 		gs.add_dependency('net-ssh', '>= 2.0.15')
 		gs.add_dependency('net-sftp', '>= 2.0.2')
 		gs.add_dependency('rubyzip', '>= 0.9.1')
-		gs.add_dependency('mocha', '>= 0.9.8')
 	end
 end

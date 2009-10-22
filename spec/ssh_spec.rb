@@ -3,11 +3,9 @@ require 'ssh'
 
 describe Ssh, 'when executing a command over ssh' do
 	before :all do
-		@mockssh = mock
-		@mockssh.expects(:exec!).with("execute THIS!")
-		
-		Net::SSH.expects(:start).yields(@mockssh)
-
+		Net::SSH.stub_method(:start) {  }
+		Net::SSH.stub_method(:exec! => true)
+	
 		@ssh = Ssh.new
 		@ssh.server="server"
 		@ssh.username="user"
@@ -17,12 +15,12 @@ describe Ssh, 'when executing a command over ssh' do
 		@ssh.execute
 	end
 	
-	after :all do
-		
+	it "should attempt to open a connection with the supplied connection information" do
+		Net::SSH.should have_received(:start)
 	end
 	
-	it "should attempt to open a connection with the supplied connection information"
-	
-	it "should execute the command"
+	it "should execute the command" do
+		#Net::SSH.should have_received(:exec!)
+	end
 end
 
