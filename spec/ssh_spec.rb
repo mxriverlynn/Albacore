@@ -1,11 +1,6 @@
 require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
 require 'ssh'
 
-class MockSSH
-	def exec!(command)
-	end
-end
-
 describe Ssh, 'when executing a command over ssh' do
 	before :each do
 		@sshstub = Net::SSH::Connection::Session.stub_instance(:exec! => "executed a command over ssh")
