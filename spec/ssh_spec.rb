@@ -1,11 +1,16 @@
 require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
 require 'ssh'
 
+class MockSSH
+	def exec!(command)
+	end
+end
+
 describe Ssh, 'when executing a command over ssh' do
-	before :all do
-		Net::SSH.stub_method(:start) {  }
-		Net::SSH.stub_method(:exec! => true)
-	
+	before :each do
+		@sshstub = Net::SSH::Connection::Session.stub_instance(:exec! => "executed a command over ssh")
+		Net::SSH.stub_method(:start, &lambda{}).yields(@sshstub)
+
 		@ssh = Ssh.new
 		@ssh.server="server"
 		@ssh.username="user"
@@ -20,7 +25,7 @@ describe Ssh, 'when executing a command over ssh' do
 	end
 	
 	it "should execute the command" do
-		#Net::SSH.should have_received(:exec!)
+		@sshstub.should have_received(:exec!)
 	end
 end
 
