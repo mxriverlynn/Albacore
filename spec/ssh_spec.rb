@@ -3,14 +3,14 @@ require 'ssh'
 
 describe Ssh, 'when executing a command over ssh' do
 	before :each do
-		@sshstub = Net::SSH::Connection::Session.stub_instance(:exec! => "executed a command over ssh")
+		@sshstub = Net::SSH::Connection::Session.stub_instance(:exec! => nil)
 		Net::SSH.stub_method(:start, &lambda{}).yields(@sshstub)
 
 		@ssh = Ssh.new
 		@ssh.server="server"
 		@ssh.username="user"
 		@ssh.password="secret"
-		@ssh.command="execute THIS!"
+		@ssh.commands="execute THIS!"
 		
 		@ssh.execute
 	end
@@ -22,5 +22,27 @@ describe Ssh, 'when executing a command over ssh' do
 	it "should execute the command" do
 		@sshstub.should have_received(:exec!)
 	end
+end
+
+describe Ssh, "when executing multiple commands over ssh" do
+	before :each do
+		@sshstub = Net::SSH::Connection::Session.stub_instance(:exec! => nil)
+		Net::SSH.stub_method(:start, &lambda{}).yields(@sshstub)
+
+		@ssh = Ssh.new
+		@ssh.server="server"
+		@ssh.username="user"
+		@ssh.password="secret"
+		
+		@ssh.commands << "execute THIS!"
+		@ssh.commands << "another execution"
+		
+		@ssh.execute		
+	end
+	
+	it "should execute all of the specified commands" do
+		@sshstub.should have_received(:exec!).twice
+	end
+	
 end
 
