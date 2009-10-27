@@ -119,11 +119,14 @@ namespace :jeweler do
 		gs.authors = ["Derick Bailey", "Ben Hall"]
 		gs.has_rdoc = false	
 		gs.files.exclude("Albacore.gemspec", ".gitignore", "spec/support/Tools")
+
 		gs.add_dependency('rake', '>= 0.8.7')
-		gs.add_dependency('rspec', '>= 1.2.8')
-		gs.add_dependency('jeweler', '>= 1.2.1')
 		gs.add_dependency('net-ssh', '>= 2.0.15')
 		gs.add_dependency('net-sftp', '>= 2.0.2')
 		gs.add_dependency('rubyzip', '>= 0.9.1')
+
+		gs.add_development_dependency('rspec', '>= 1.2.8')
+		gs.add_development_dependency('jeweler', '>= 1.2.1')
+		gs.add_development_dependency('derickbailey-notamock', '>= 0.0.1')
 	end
 end
