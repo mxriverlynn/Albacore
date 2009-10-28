@@ -20,6 +20,7 @@ spec/support/CodeCoverage/mspec/html
 spec/support/CodeCoverage/html
 spec/support/CodeCoverage/report/output
 spec/support/CodeCoverage/test-coverage.xml
+spec/support/zip/*.zip
 github-test.rb
 Albacore-*.gem
 Albacore.gemspec

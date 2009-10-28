@@ -20,7 +20,7 @@ class MSBuild
 		@targets=targets
 	end
 	
-	def properties(properties)
+	def properties=(properties)
 		@properties = properties
 	end
 	
@@ -31,12 +31,13 @@ class MSBuild
 	def build_solution(solution)
 		check_solution solution
 		
-		command_parameters = " \"#{solution}\""
-		command_parameters << " \"/verbosity:#{@verbosity}\"" if @verbosity != nil
-		command_parameters << " \"/property:#{build_properties}\"" if @properties != nil
-		command_parameters << " \"/target:#{build_targets}\"" if @targets != nil
+		command_parameters = []
+		command_parameters << "\"#{solution}\""
+		command_parameters << "\"/verbosity:#{@verbosity}\"" if @verbosity != nil
+		command_parameters << build_properties if @properties != nil
+		command_parameters << "\"/target:#{build_targets}\"" if @targets != nil
 		
-		result = run_command "MSBuild", command_parameters
+		result = run_command "MSBuild", command_parameters.join(" ")
 		
 		failure_message = 'MSBuild Failed. See Build Log For Detail'
 		fail_with_message failure_message if !result
@@ -55,7 +56,7 @@ class MSBuild
 	def build_properties
 		option_text = []
 		@properties.each do |key, value|
-			option_text << "#{key}\=#{value}"
+			option_text << "/p:#{key}\=\"#{value}\""
 		end
 		option_text.join(";")
 	end

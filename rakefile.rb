@@ -56,7 +56,7 @@ namespace :albacore do
 	
 	desc "Run a sample build using the MSBuildTask"
 	Albacore::MSBuildTask.new(:msbuild) do |msb|
-		msb.properties :configuration => :Debug
+		msb.properties = {:configuration => :Debug}
 		msb.targets [:Clean, :Build]
 		msb.solution = "spec/support/TestSolution/TestSolution.sln"
 	end

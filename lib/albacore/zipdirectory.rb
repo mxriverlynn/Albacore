@@ -44,6 +44,7 @@ class ZipDirectory
 	end
 	
 	def zip_additional(zipfile)
+		return if @additional_files.nil?
 		@additional_files.reject{|f| reject_file(f)}.each do |file_path|
 			file_name = file_path#.split('/').last
 			zipfile.add(file_name, file_path)
