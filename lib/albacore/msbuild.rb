@@ -58,6 +58,6 @@ class MSBuild
 		@properties.each do |key, value|
 			option_text << "/p:#{key}\=\"#{value}\""
 		end
-		option_text.join(";")
+		option_text.join(" ")
 	end
 end

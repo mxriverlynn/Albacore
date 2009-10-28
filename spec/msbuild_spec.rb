@@ -144,3 +144,30 @@ describe MSBuild, "when building a solution with a specific msbuild verbosity" d
 		$system_command.should include("/verbosity:normal")
 	end
 end
+
+describe MSBuild, "when specifying multiple configuration properties" do	
+	before :all do
+		@testdata= MSBuildTestData.new
+		@msbuild = @testdata.msbuild
+
+		File.delete(@testdata.output_path) if File.exist?(@testdata.output_path)
+		
+		@msbuild.targets [:Clean, :Build]
+		@msbuild.properties = {:configuration => :Debug, :DebugSymbols => true }
+		@msbuild.solution = @testdata.solution_path
+		@msbuild.build
+	end
+
+	it "should specify the first property" do
+		$system_command.should include("/p:configuration=\"Debug\"")
+	end
+	
+	it "should specifiy the second property" do
+		$system_command.should include("/p:DebugSymbols=\"true\"")
+	end
+	
+	it "should output the solution's binaries" do
+		File.exist?(@testdata.output_path).should == true
+	end
+
+end
