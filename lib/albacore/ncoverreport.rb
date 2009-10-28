@@ -5,13 +5,14 @@ class NCoverReport
 	include RunCommand
 	include YAMLConfig
 	
-	attr_accessor :coverage_files, :reports, :required_coverage
+	attr_accessor :coverage_files, :reports, :required_coverage, :filters
 	
 	def initialize
 		super()
 		@coverage_files = []
 		@reports = []
 		@required_coverage = []
+		@filters = []
 	end
 	
 	def run
@@ -22,6 +23,7 @@ class NCoverReport
 		command_parameters << build_coverage_files unless @coverage_files.empty?
 		command_parameters << build_reports unless @reports.empty?
 		command_parameters << build_required_coverage unless @required_coverage.empty?
+		command_parameters << build_filters unless @filters.empty?
 		
 		result = run_command "NCover.Reporting", command_parameters.join(" ")
 		
@@ -32,6 +34,10 @@ class NCoverReport
 	def check_command
 		return if @path_to_command
 		fail_with_message 'NCoverReport.path_to_command cannot be nil.'
+	end
+	
+	def build_filters
+		@filters.map{|f| "//cf #{f.get_filter_options}"}.join(" ")
 	end
 	
 	def build_coverage_files

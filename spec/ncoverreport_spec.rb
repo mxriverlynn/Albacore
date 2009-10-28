@@ -400,3 +400,178 @@ describe NCoverReport, "when running a report with a cyclomatic complexity under
 		File.exist?(File.join(NCoverReportTestData.output_folder, "fullcoveragereport.html")).should be_true
 	end	
 end
+
+describe NCoverReport, "when filtering on Assembly coverage data" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport		
+		@ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+		
+		@ncover.filters << NCover::AssemblyFilter.new(:filter_type => :exclude, :filter => ["nunit.*"])
+		@ncover.filters << NCover::AssemblyFilter.new(:filter_type => :include, :filter => ["TestSolution.*"])
+		
+		@ncover.run
+	end
+	
+	it "should exclude the specified assemblies data" do
+		$system_command.should include("//cf \"nunit.*\":Assembly:false:false")
+	end
+
+	it "should include the specified assemblies data" do
+		$system_command.should include("//cf \"TestSolution.*\":Assembly:false:true")
+	end
+	
+	it "should not fail" do
+		@ncover.failed.should be_false
+	end
+end
+
+describe NCoverReport, "when filtering on Namespace coverage data" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport		
+		@ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+		
+		@ncover.filters << NCover::NamespaceFilter.new(:filter_type => :exclude, :filter => ["nunit.*"])
+		@ncover.filters << NCover::NamespaceFilter.new(:filter_type => :include, :filter => ["TestSolution.*"])
+		
+		@ncover.run
+	end
+	
+	it "should exclude the specified data" do
+		$system_command.should include("//cf \"nunit.*\":Namespace:false:false")
+	end
+
+	it "should include the specified data" do
+		$system_command.should include("//cf \"TestSolution.*\":Namespace:false:true")
+	end
+	
+	it "should not fail" do
+		@ncover.failed.should be_false
+	end
+end
+
+describe NCoverReport, "when filtering on Class coverage data" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport		
+		@ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+		
+		@ncover.filters << NCover::ClassFilter.new(:filter_type => :exclude, :filter => ["Foo"])
+		@ncover.filters << NCover::ClassFilter.new(:filter_type => :include, :filter => ["Bar"])
+		
+		@ncover.run
+	end
+	
+	it "should exclude the specified data" do
+		$system_command.should include("//cf \"Foo\":Class:false:false")
+	end
+
+	it "should include the specified data" do
+		$system_command.should include("//cf \"Bar\":Class:false:true")
+	end
+	
+	it "should not fail" do
+		@ncover.failed.should be_false
+	end
+end
+
+describe NCoverReport, "when filtering on Method coverage data" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport		
+		@ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+		
+		@ncover.filters << NCover::MethodFilter.new(:filter_type => :exclude, :filter => ["Foo"])
+		@ncover.filters << NCover::MethodFilter.new(:filter_type => :include, :filter => ["Bar"])
+		
+		@ncover.run
+	end
+	
+	it "should exclude the specified data" do
+		$system_command.should include("//cf \"Foo\":Method:false:false")
+	end
+
+	it "should include the specified data" do
+		$system_command.should include("//cf \"Bar\":Method:false:true")
+	end
+	
+	it "should not fail" do
+		@ncover.failed.should be_false
+	end
+end
+
+describe NCoverReport, "when filtering on Document coverage data" do
+	before :all do
+		NCoverReportTestData.clean_output_folder
+		
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
+		
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
+		
+		fullcoveragereport = NCover::FullCoverageReport.new
+		fullcoveragereport.output_path = NCoverReportTestData.output_folder
+		@ncover.reports << fullcoveragereport		
+		@ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+		
+		@ncover.filters << NCover::DocumentFilter.new(:filter_type => :exclude, :filter => ["Foo"])
+		@ncover.filters << NCover::DocumentFilter.new(:filter_type => :include, :filter => ["Bar"])
+		
+		@ncover.run
+	end
+	
+	it "should exclude the specified data" do
+		$system_command.should include("//cf \"Foo\":Document:false:false")
+	end
+
+	it "should include the specified data" do
+		$system_command.should include("//cf \"Bar\":Document:false:true")
+	end
+	
+	it "should not fail" do
+		@ncover.failed.should be_false
+	end
+end
