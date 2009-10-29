@@ -1,5 +1,5 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'msbuild'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/msbuild'
 require 'msbuildtestdata'
 
 describe MSBuild, "when building a solution with verbose logging turned on" do	

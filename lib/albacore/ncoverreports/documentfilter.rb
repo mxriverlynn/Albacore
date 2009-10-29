@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'reportfilterbase')
+require 'albacore/ncoverreports/reportfilterbase'
 
 module NCover
 	class DocumentFilter < NCover::ReportFilterBase

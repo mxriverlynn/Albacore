@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'logging')
+require 'albacore/support/logging'
 
 module Failure
 	include Logging

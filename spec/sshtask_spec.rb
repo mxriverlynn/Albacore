@@ -1,6 +1,6 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'ssh'
-require 'sshtask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/ssh'
+require 'rake/sshtask'
 require 'tasklib_patch'
 
 describe Albacore::SshTask, "when running" do

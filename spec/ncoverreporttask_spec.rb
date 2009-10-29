@@ -1,6 +1,6 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'ncoverreport'
-require 'ncoverreporttask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/ncoverreport'
+require 'rake/ncoverreporttask'
 require 'tasklib_patch'
 
 describe Albacore::NCoverReportTask, "when running" do

@@ -1,6 +1,6 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'sftp'
-require 'sftptask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/sftp'
+require 'rake/sftptask'
 require 'tasklib_patch'
 
 describe Albacore::SftpTask, "when running" do

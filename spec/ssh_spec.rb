@@ -1,5 +1,5 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'ssh'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/ssh'
 
 describe Ssh, 'when executing a command over ssh' do
 	before :each do

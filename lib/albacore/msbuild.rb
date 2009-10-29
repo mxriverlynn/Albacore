@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
+require 'albacore/support/albacore_helper'
 
 class MSBuild
 	include RunCommand

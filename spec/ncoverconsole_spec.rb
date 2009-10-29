@@ -1,7 +1,7 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'ncoverconsole'
-require 'nunittestrunner'
-require 'mspectestrunner'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/ncoverconsole'
+require 'albacore/nunittestrunner'
+require 'albacore/mspectestrunner'
 
 @@ncoverpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NCover-v3.3', 'NCover.Console.exe')
 @@nunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console.exe')

@@ -1,6 +1,6 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'ncoverconsole'
-require 'ncoverconsoletask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/ncoverconsole'
+require 'rake/ncoverconsoletask'
 require 'tasklib_patch'
 
 describe Albacore::NCoverConsoleTask, "when running" do

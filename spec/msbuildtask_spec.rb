@@ -1,8 +1,6 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'rake'
-require 'rake/tasklib'
-require 'msbuild'
-require 'msbuildtask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/msbuild'
+require 'rake/msbuildtask'
 require 'tasklib_patch'
 
 describe Albacore::MSBuildTask, "when running" do

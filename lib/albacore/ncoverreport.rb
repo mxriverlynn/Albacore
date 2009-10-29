@@ -1,5 +1,5 @@
 Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'ncoverreports/*.rb')).each {|f| require f }
-require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
+require 'albacore/support/albacore_helper'
 
 class NCoverReport
 	include RunCommand

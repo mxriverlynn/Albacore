@@ -1,5 +1,5 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'zipdirectory'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/zipdirectory'
 require 'ziptestdata'
 
 describe ZipDirectory, 'when zipping a directory of files' do

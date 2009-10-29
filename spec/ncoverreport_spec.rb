@@ -1,5 +1,5 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'ncoverreport'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/ncoverreport'
 require 'ncoverreporttestdata'
 
 describe NCoverReport, "when runnign without the ncover report location specified" do

@@ -1,6 +1,6 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'sqlcmd'
-require 'sqlcmdtask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/sqlcmd'
+require 'rake/sqlcmdtask'
 require 'tasklib_patch'
 
 describe Albacore::SQLCmdTask, "when running" do

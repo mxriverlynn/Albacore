@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'codecoveragebase')
+require 'albacore/ncoverreports/codecoveragebase'
 
 module NCover
 	class MethodCoverage < NCover::CodeCoverageBase

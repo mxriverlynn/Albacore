@@ -1,6 +1,6 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'assemblyinfo'
-require 'assemblyinfotask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/assemblyinfo'
+require 'rake/assemblyinfotask'
 require 'tasklib_patch'
 
 describe Albacore::AssemblyInfoTask, "when running" do
