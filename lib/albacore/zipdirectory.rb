@@ -15,6 +15,8 @@ class ZipDirectory
 	end
 		
 	def package()
+		return if @directory_to_zip.nil?
+		
 		@directory_to_zip.sub!(%r[/$],'')
 		remove zip_name
 

@@ -1,5 +1,5 @@
 require 'rake/tasklib'
-require 'zipdirectory'
+require 'albacore/zipdirectory'
 
 module Albacore
 	class ZipTask < Rake::TaskLib
