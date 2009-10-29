@@ -1,7 +1,7 @@
 require 'rake/tasklib'
 
 module Albacore
-	class Rename < Rake::TaskLib
+	class RenameTask < Rake::TaskLib
 		attr_accessor :name
 		attr_accessor :actual_name, :target_name
 		
@@ -13,7 +13,11 @@ module Albacore
 		
 		def define
 			task name do
-				File.rename(@actual_name, @target_name)
+				if (@actual_name.nil? || @target_name.nil?)
+					fail
+				else
+					File.rename(@actual_name, @target_name)
+				end
 			end
 		end
 	end
