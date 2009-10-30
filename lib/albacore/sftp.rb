@@ -5,17 +5,17 @@ class Sftp
 	include YAMLConfig
 	include Logging
 	
-	attr_accessor :server, :username, :password, :files_to_upload
+	attr_accessor :server, :username, :password, :upload_files
 	
 	def initialize
 		super()
-		@files_to_upload = {}
+		@upload_files = {}
 	end	
 	
 	def upload()
 		Net::SFTP.start(@server, @username, :password => @password) do |sftp|
 			@logger.debug "Starting File Upload"
-			@files_to_upload.each {|local_file, remote_file|
+			@upload_files.each {|local_file, remote_file|
 				@logger.debug "Uploading #{local_file} to #{remote_file}"
 				sftp.upload!(local_file, remote_file)
 			}

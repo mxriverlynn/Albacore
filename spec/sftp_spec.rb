@@ -11,7 +11,7 @@ describe Sftp, 'when uploading files over sftp' do
 		@sftp.username="user"
 		@sftp.password="secret"
 		
-		@sftp.files_to_upload = {
+		@sftp.upload_files = {
 			"some.file" => "./somefolder/some.file", 
 			"another.file" => "another/folder/another.file"
 		}
