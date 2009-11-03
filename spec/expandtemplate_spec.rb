@@ -72,3 +72,23 @@ describe ExpandTemplates, "when expanding a template file and specifying an outp
 		File.exist?(@testdata.sample_output_file).should be_true
 	end
 end
+
+describe ExpandTemplates, "when expanding multiples value into multiple locations" do
+	it_should_behave_like "prepping the sample templates"
+	
+	before :all do
+		@templates.expand_files << {@testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file}
+		@templates.data_file = @testdata.multiplevalues_data_file
+		@templates.expand
+		
+		@output_file_data = @testdata.read_file(@testdata.multiplevalues_output_file)
+	end
+	
+	it "should replace the values" do
+		@output_file_data.should include("this is a template file with multiple values")
+	end
+	
+	it "should write to the specified output file" do
+		File.exist?(@testdata.multiplevalues_output_file).should be_true
+	end
+end
