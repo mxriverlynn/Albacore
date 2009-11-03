@@ -46,6 +46,12 @@ namespace :specs do
 		t.spec_files = 'spec/ssh*_spec.rb'
 		t.spec_opts << @spec_opts
 	end	
+
+	desc "Expand Templates functional specs"
+	Spec::Rake::SpecTask.new :ssh do |t|
+		t.spec_files = 'spec/expandtemplates*_spec.rb'
+		t.spec_opts << @spec_opts
+	end	
 end
 
 namespace :albacore do	
