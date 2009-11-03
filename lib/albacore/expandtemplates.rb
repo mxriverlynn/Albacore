@@ -13,14 +13,8 @@ class ExpandTemplates
 	end
 	
 	def expand
-		@expand_files.each { |template|
-			if (template.instance_of? Hash)
-				template.each{ |template_file, output_file| 
-					expand_template template_file, output_file
-				}
-			else
-				expand_template template, template
-			end
+		@expand_files.each { |template_file, output_file| 
+			expand_template template_file, output_file
 		}
 	end
 	
