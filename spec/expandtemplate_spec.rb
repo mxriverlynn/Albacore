@@ -53,6 +53,26 @@ describe ExpandTemplates, "when expanding a single value into multiple locations
 	end
 end
 
+describe ExpandTemplates, "when expanding multiples value into multiple locations" do
+	it_should_behave_like "prepping the sample templates"
+	
+	before :all do
+		@templates.expand_files << {@testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file}
+		@templates.data_file = @testdata.multiplevalues_data_file
+		@templates.expand
+		
+		@output_file_data = @testdata.read_file(@testdata.multiplevalues_output_file)
+	end
+	
+	it "should replace the values" do
+		@output_file_data.should include("this is a template file with multiple values")
+	end
+	
+	it "should write to the specified output file" do
+		File.exist?(@testdata.multiplevalues_output_file).should be_true
+	end
+end
+
 describe ExpandTemplates, "when expanding a template file and specifying an output file" do
 	it_should_behave_like "prepping the sample templates"
 	
@@ -73,22 +93,26 @@ describe ExpandTemplates, "when expanding a template file and specifying an outp
 	end
 end
 
-describe ExpandTemplates, "when expanding multiples value into multiple locations" do
+describe ExpandTemplates, "when expanding multiple template files" do
 	it_should_behave_like "prepping the sample templates"
 	
 	before :all do
-		@templates.expand_files << {@testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file}
-		@templates.data_file = @testdata.multiplevalues_data_file
+		@templates.expand_files << @testdata.multipleinstance_template_file
+		@templates.expand_files << {
+			@testdata.sample_template_file => @testdata.sample_output_file,
+			@testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file
+		}
+		@templates.data_file = @testdata.multitemplate_data_file
 		@templates.expand
 		
-		@output_file_data = @testdata.read_file(@testdata.multiplevalues_output_file)
+		@output_file_data = @testdata.read_file(@testdata.multipleinstance_template_file)
 	end
 	
-	it "should replace the values" do
-		@output_file_data.should include("this is a template file with multiple values")
+	it "should expand the first template right onto itself" do
+		@output_file_data.should include("first instance of 'the real value' is here.")
 	end
 	
-	it "should write to the specified output file" do
-		File.exist?(@testdata.multiplevalues_output_file).should be_true
+	it "should expand the second template to the specified location" do
+		File.exist?(@testdata.sample_output_file).should be_true
 	end
 end
