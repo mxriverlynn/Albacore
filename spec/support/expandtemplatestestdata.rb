@@ -29,8 +29,20 @@ class ExpandTemplatesTestData
 		File.join(@workingfolder, "this_is_an_output_file.config")
 	end
 	
+	def multiplevalues_template_file
+		File.join(@workingfolder, "multiplevalues.config")
+	end
+	
+	def multiplevalues_output_file
+		File.join(@workingfolder, "multiplevalues_output_file.config")
+	end
+	
 	def sample_data_file
 		File.join(@datafilesfolder, "sample.yml")
+	end
+	
+	def multiplevalues_data_file
+		File.join(@datafilesfolder, "multiplevalues.yml")
 	end
 	
 	def read_file(file)

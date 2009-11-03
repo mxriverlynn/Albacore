@@ -36,7 +36,7 @@ private
 			template_data = f.read 
 		}
 		
-		template_data.gsub!(/\#\{(.*)?\}/) {|match|
+		template_data.gsub!(/\#\{(.*?)\}/) {|match|
 			value = config[$1.downcase]
 			@logger.debug "Found \"\#{#{$1}}\": Replacing with \"#{value}\"."
 			value
