@@ -21,8 +21,24 @@ class ExpandTemplatesTestData
 		File.join(@workingfolder, "sample.config")
 	end
 	
+	def multipleinstance_template_file
+		File.join(@workingfolder, "multipleinstance.config")
+	end
+	
+	def sample_output_file
+		File.join(@workingfolder, "this_is_an_output_file.config")
+	end
+	
 	def sample_data_file
 		File.join(@datafilesfolder, "sample.yml")
+	end
+	
+	def read_file(file)
+		filedata = ''
+		File.open(file, "r") {|f|
+    		filedata = f.read
+		}
+		filedata
 	end
 	
 end
