@@ -1,7 +1,6 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/expandtemplates'
 require 'expandtemplatestestdata'
-require 'file_patch'
 
 shared_examples_for "prepping the sample templates" do
 	before :all do
