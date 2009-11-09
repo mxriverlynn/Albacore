@@ -95,3 +95,33 @@ describe ExpandTemplates, "when expanding multiple template files" do
 		File.exist?(@testdata.sample_output_file).should be_true
 	end
 end
+
+describe ExpandTemplates, "when expanding template files and the data file contains entries for specific templates" do
+	it_should_behave_like "prepping the sample templates"
+	
+	before :all do
+		@templates.expand_files = {
+			@testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file,
+			@testdata.sample_template_file => @testdata.sample_output_file,
+			@testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file
+		}
+		@templates.data_file = @testdata.multitemplate_specificfile_data_file
+		@templates.expand
+		
+		@multiinstance_file_data = @testdata.read_file(@testdata.multipleinstance_template_file)
+		@sample_file_data = @testdata.read_file(@testdata.sample_output_file)
+	end
+	
+	it "should expand the specific template with the data specified for it" do
+		@multiinstance_file_data.should include("first instance of 'the real value' is here.")
+		@multiinstance_file_data.should include("b has a value of this is a second value")
+	end	
+	
+	it "should use the global data when data for a specific template is not found in that templates specific data" do
+		@multiinstance_file_data.should include("the value of a is a template file")
+	end
+
+	it "should not use the data from specified templates when the template name does not match" do
+		@sample_file_data.should include("this is not the right one!!!")
+	end
+end

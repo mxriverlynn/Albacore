@@ -49,6 +49,10 @@ class ExpandTemplatesTestData
 		File.join(@datafilesfolder, "multitemplate.yml")
 	end
 	
+	def multitemplate_specificfile_data_file
+		File.join(@datafilesfolder, "multitemplate-specificfile.yml")
+	end
+
 	def read_file(file)
 		filedata = ''
 		File.open(file, "r") {|f|
