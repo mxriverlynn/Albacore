@@ -13,6 +13,9 @@ class ExpandTemplates
 	end
 	
 	def expand
+		return if @data_file.nil?
+		return if @expand_files.empty?
+		
 		config = read_config
 		@expand_files.each { |template_file, output_file| 
 			file_config = get_config_for_file config, template_file
