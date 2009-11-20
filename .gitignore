@@ -26,3 +26,5 @@ spec/support/expandtemplates/working
 github-test.rb
 Albacore-*.gem
 Albacore.gemspec
+albacore-*.gem
+albacore.gemspec

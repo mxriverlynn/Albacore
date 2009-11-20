@@ -123,14 +123,14 @@ end
 namespace :jeweler do
 	require 'jeweler'	
 	Jeweler::Tasks.new do |gs|
-		gs.name = "Albacore"
+		gs.name = "albacore"
 		gs.summary = "A Suite of Rake Build Tasks For .Net Solutions"
 		gs.description = "Easily build your .NET solutions with rake, using this suite of custom tasks."
 		gs.email = "derickbailey@gmail.com"
 		gs.homepage = "http://github.com/derickbailey/Albacore"
 		gs.authors = ["Derick Bailey", "Ben Hall"]
 		gs.has_rdoc = false	
-		gs.files.exclude("Albacore.gemspec", ".gitignore", "spec/support/Tools")
+		gs.files.exclude("albacore.gemspec", ".gitignore", "spec/support/Tools")
 
 		gs.add_dependency('rake', '>= 0.8.7')
 		gs.add_dependency('net-ssh', '>= 2.0.15')
