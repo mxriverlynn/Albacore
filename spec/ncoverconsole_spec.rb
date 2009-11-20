@@ -4,7 +4,7 @@ require 'albacore/nunittestrunner'
 require 'albacore/mspectestrunner'
 
 @@ncoverpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NCover-v3.3', 'NCover.Console.exe')
-@@nunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console.exe')
+@@nunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console-x86.exe')
 @@xml_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'nunit', 'test-coverage.xml')
 @@html_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'nunit', 'html', 'test-coverage.html')
 @@working_directory = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'nunit')
