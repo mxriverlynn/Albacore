@@ -1,1 +1,0 @@
-msbuild mstest.proj /t:TestRunnerReporting

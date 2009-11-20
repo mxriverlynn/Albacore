@@ -1,1 +1,0 @@
-ncover.console.exe mstest.exe //pm vstesthost.exe /testcontainer:"bin\Debug\SampleLogicMSTest.dll" /test:OrderTests.VerifyGetOrderNoItemsNoProductsNoCustomer /test:OrderTests.VerifyGetOrderWithItemsAndProductAndCustomer /test:OrderTests.VerifyGetAdditionalCoveragePart1 /test:OrderTests.VerifyGetAdditionalCoveragePart2
