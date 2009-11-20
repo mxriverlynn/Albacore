@@ -6,6 +6,11 @@ class ExpandTemplatesTestData
 		@workingfolder = File.join(@rootfolder, "working")
 		@outputfolder = File.join(@rootfolder, "output")
 		@datafilesfolder = File.join(@rootfolder, "datafiles")
+		create_working_folder
+	end
+	
+	def create_working_folder
+		Dir.mkdir(@workingfolder) unless File.exist?(@workingfolder)
 	end
 
 	def prep_sample_templates

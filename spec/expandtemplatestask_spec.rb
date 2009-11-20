@@ -5,9 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::ExpandTemplatesTask, "when running" do
 	before :each do
-		Albacore::ExpandTemplatesTask.new() do |t|
+		task = Albacore::ExpandTemplatesTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:expandtemplates].invoke
 	end
 	
 	it "should yield the expand template api" do
@@ -24,6 +26,6 @@ describe Albacore::ExpandTemplatesTask, "when execution fails" do
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should be_true
+		@task.task_failed.should be_true
 	end
 end

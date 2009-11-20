@@ -5,9 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::NCoverReportTask, "when running" do
 	before :all do
-		Albacore::NCoverReportTask.new() do |t|
+		task = Albacore::NCoverReportTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:ncoverreport].invoke
 	end
 	
 	it "should yield the ncover report api" do
@@ -19,10 +21,11 @@ describe Albacore::NCoverReportTask, "when execution fails" do
 	before :all do
 		@task = Albacore::NCoverReportTask.new(:failingtask)
 		@task.extend(TasklibPatch)
+		@task.fail
 		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

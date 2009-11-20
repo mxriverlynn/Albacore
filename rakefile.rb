@@ -11,6 +11,12 @@ namespace :specs do
 		t.spec_opts << @spec_opts
 	end
 	
+	desc "Run rake task specs for Albacore"
+	Spec::Rake::SpecTask.new :tasks do |t|
+		t.spec_files = 'spec/**/*task_spec.rb'
+		t.spec_opts << @spec_opts
+	end
+
 	desc "Assembly info functional specs"
 	Spec::Rake::SpecTask.new :assemblyinfo do |t|
 		t.spec_files = 'spec/assemblyinfo*_spec.rb'

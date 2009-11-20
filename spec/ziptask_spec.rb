@@ -5,9 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::ZipTask, "when running" do
 	before :all do
-		Albacore::ZipTask.new() do |t|
+		task = Albacore::ZipTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:zip].invoke
 	end
 	
 	it "should yield the zip api" do
@@ -24,6 +26,6 @@ describe Albacore::ZipTask, "when execution fails" do
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

@@ -5,9 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::AssemblyInfoTask, "when running" do
 	before :all do
-		Albacore::AssemblyInfoTask.new() do |t|
+		@task = Albacore::AssemblyInfoTask.new(:task) do |t|
 			@yielded_object = t
 		end
+		@task.extend(TasklibPatch)
+		Rake::Task["task"].invoke
 	end
 	
 	it "should yield the assembly info api" do
@@ -19,10 +21,11 @@ describe Albacore::AssemblyInfoTask, "when execution fails" do
 	before :all do
 		@task = Albacore::AssemblyInfoTask.new(:failingtask)
 		@task.extend(TasklibPatch)
+		@task.fail
 		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

@@ -5,9 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::SQLCmdTask, "when running" do
 	before :all do
-		Albacore::SQLCmdTask.new() do |t|
+		task = Albacore::SQLCmdTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:sqlcmd].invoke
 	end
 	
 	it "should yield the sqlcmd api" do
@@ -24,6 +26,6 @@ describe Albacore::SQLCmdTask, "when execution fails" do
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should be_true
+		@task.task_failed.should be_true
 	end
 end

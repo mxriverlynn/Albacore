@@ -4,9 +4,11 @@ require 'tasklib_patch'
 
 describe Albacore::RenameTask, "when running" do
 	before :all do
-		Albacore::RenameTask.new() do |t|
+		task = Albacore::RenameTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:rename].invoke
 	end
 	
 	it "should yield the rename api" do
@@ -18,11 +20,11 @@ describe Albacore::RenameTask, "when execution fails" do
 	before :all do
 		@task = Albacore::RenameTask.new(:failingtask)
 		@task.extend(TasklibPatch)
-		Rake::Task["failingtask"].invoke
 		@task.fail
+		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

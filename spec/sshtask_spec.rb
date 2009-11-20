@@ -9,9 +9,11 @@ describe Albacore::SshTask, "when running" do
 	end
 	
 	before :each do
-		Albacore::SshTask.new() do |t|
+		task = Albacore::SshTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:ssh].invoke
 	end
 	
 	it "should yield the ssh api" do
@@ -32,6 +34,6 @@ describe Albacore::SshTask, "when execution fails" do
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should be_true
+		@task.task_failed.should be_true
 	end
 end

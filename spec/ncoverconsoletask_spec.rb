@@ -5,9 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::NCoverConsoleTask, "when running" do
 	before :all do
-		Albacore::NCoverConsoleTask.new() do |t|
+		task = Albacore::NCoverConsoleTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:ncoverconsole].invoke
 	end
 	
 	it "should yield the ncover console api" do
@@ -19,10 +21,11 @@ describe Albacore::NCoverConsoleTask, "when execution fails" do
 	before :all do
 		@task = Albacore::NCoverConsoleTask.new(:failingtask)
 		@task.extend(TasklibPatch)
+		@task.fail
 		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

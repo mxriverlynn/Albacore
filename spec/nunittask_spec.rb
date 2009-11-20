@@ -5,9 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::NUnitTask, "when running" do
 	before :all do
-		Albacore::NUnitTask.new() do |t|
+		task = Albacore::NUnitTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:nunit].invoke
 	end
 	
 	it "should yield the nunit api" do
@@ -19,11 +21,11 @@ describe Albacore::NUnitTask, "when execution fails" do
 	before :all do
 		@task = Albacore::NUnitTask.new(:failingtask)
 		@task.extend(TasklibPatch)
-		Rake::Task["failingtask"].invoke
 		@task.fail
+		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

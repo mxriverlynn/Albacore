@@ -10,9 +10,11 @@ describe Albacore::SftpTask, "when running" do
 	end
 	
 	before :each do
-		Albacore::SftpTask.new() do |t|
+		task = Albacore::SftpTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:sftp].invoke
 	end
 	
 	it "should yield the sftp api" do
@@ -34,6 +36,6 @@ describe Albacore::SftpTask, "when execution fails" do
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should be_true
+		@task.task_failed.should be_true
 	end
 end

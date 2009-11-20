@@ -5,9 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::MSBuildTask, "when running" do
 	before :all do
-		Albacore::MSBuildTask.new() do |t|
+		task = Albacore::MSBuildTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:msbuild].invoke
 	end
 	
 	it "should yield the msbuild api" do
@@ -17,12 +19,13 @@ end
 
 describe Albacore::MSBuildTask, "when execution fails" do
 	before :all do
-		@msbuildtask = Albacore::MSBuildTask.new(:failingtask)
-		@msbuildtask.extend(TasklibPatch)
+		@task = Albacore::MSBuildTask.new(:failingtask)
+		@task.extend(TasklibPatch)
+		@task.fail
 		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

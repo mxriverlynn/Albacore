@@ -5,14 +5,15 @@ module Albacore
 		attr_accessor :name
 		attr_accessor :actual_name, :target_name
 		
-		def initialize(name=:rename)
+		def initialize(name=:rename, &block)
 			@name = name
-			yield self if block_given?
+			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@block.call(self) unless @block.nil?
 				if (@actual_name.nil? || @target_name.nil?)
 					fail
 				else
