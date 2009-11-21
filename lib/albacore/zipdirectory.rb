@@ -1,13 +1,22 @@
+require 'albacore/support/albacore_helper'
 require 'zip/zip'
 require 'zip/zipfilesystem'
 include Zip
 
 class ZipDirectory
+	include YAMLConfig
+	
 	attr_accessor :directory_to_zip
 	attr_accessor :additional_files
 	attr_accessor :file
+
+	def initialize
+		super()
+	end
 		
 	def package()
+		return if @directory_to_zip.nil?
+		
 		@directory_to_zip.sub!(%r[/$],'')
 		remove zip_name
 
@@ -37,6 +46,7 @@ class ZipDirectory
 	end
 	
 	def zip_additional(zipfile)
+		return if @additional_files.nil?
 		@additional_files.reject{|f| reject_file(f)}.each do |file_path|
 			file_name = file_path#.split('/').last
 			zipfile.add(file_name, file_path)

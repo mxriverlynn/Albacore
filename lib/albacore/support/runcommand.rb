@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'failure')
+require 'albacore/support/failure'
 
 module RunCommand
 	include Failure

@@ -1,13 +1,15 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'ncoverconsole'
-require 'ncoverconsoletask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/ncoverconsole'
+require 'rake/ncoverconsoletask'
 require 'tasklib_patch'
 
-describe Rake::NCoverConsoleTask, "when running" do
+describe Albacore::NCoverConsoleTask, "when running" do
 	before :all do
-		Rake::NCoverConsoleTask.new() do |t|
+		task = Albacore::NCoverConsoleTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:ncoverconsole].invoke
 	end
 	
 	it "should yield the ncover console api" do
@@ -15,14 +17,15 @@ describe Rake::NCoverConsoleTask, "when running" do
 	end
 end
 
-describe Rake::NCoverConsoleTask, "when execution fails" do
+describe Albacore::NCoverConsoleTask, "when execution fails" do
 	before :all do
-		@task = Rake::NCoverConsoleTask.new(:failingtask)
+		@task = Albacore::NCoverConsoleTask.new(:failingtask)
 		@task.extend(TasklibPatch)
+		@task.fail
 		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

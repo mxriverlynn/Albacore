@@ -1,0 +1,224 @@
+﻿<Project DefaultTargets="SimpleMerge" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- TODO: Specify the full path to the NCover.MSBuildTasks.dll if not in your path -->
+  <UsingTask TaskName="NCover.MSBuildTasks.NCoverReporting"
+             AssemblyFile="NCover.MSBuildTasks.dll"/>
+
+  <ItemGroup>
+    <CoverageFile Include="unittest_coverage.xml" />
+    <CoverageFile Include="integration_test_coverage.xml" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <FilterTestAssemblies>
+      <Filter>
+        <Pattern>*test.dll</Pattern>
+        <Type>Assembly</Type>
+      </Filter>
+      <Filter>
+        <Pattern>.*nunit.*</Pattern>
+        <Type>Assembly</Type>
+        <IsRegex>true</IsRegex>
+        <IsInclude>false</IsInclude>
+      </Filter>
+    </FilterTestAssemblies>
+
+    <FilterDALAssemblies>
+      <Filter>
+        <Pattern>*.DAL.*</Pattern>
+        <Type>Assembly</Type>
+        <IsInclude>true</IsInclude>
+      </Filter>
+    </FilterDALAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <FailBuildWhen>
+      <Threshold>
+        <CoverageMetric>MethodCoverage</CoverageMetric>
+        <Type>View</Type>
+        <Value>100.0</Value>
+      </Threshold>
+      <Threshold>
+        <CoverageMetric>BranchCoverage</CoverageMetric>
+        <Type>Class</Type>
+        <Value>80.5</Value>
+      </Threshold>
+      <Threshold>
+        <CoverageMetric>CyclomaticComplexity</CoverageMetric>
+        <Pattern>Project.Internal.Critical</Pattern>
+        <Type>Namespace</Type>
+        <Value>60</Value>
+      </Threshold>
+    </FailBuildWhen>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Satisfactory>
+      <Threshold>
+        <CoverageMetric>SymbolCoverage</CoverageMetric>
+        <Value>95.0</Value>
+      </Threshold>
+      <Threshold>
+        <CoverageMetric>MethodCoverage</CoverageMetric>
+        <Type>Document</Type>
+        <Value>70</Value>
+      </Threshold>
+      <Threshold>
+        <CoverageMetric>BranchCoverage</CoverageMetric>
+        <Type>Method</Type>
+        <Value>75</Value>
+      </Threshold>
+    </Satisfactory>
+  </PropertyGroup>
+
+  <PropertyGroup>
+
+    <ExampleParamsUse>
+      <Report>
+        <ReportType>SymbolModule</ReportType>
+        <Format>Xml</Format>
+        <OutputPath>$(OutputPath)\SymbolModuleParams.xml</OutputPath>
+        <params>
+          <param>
+            <name>name1</name>
+            <value>value1</value>
+          </param>
+          <param>
+            <name>name2</name>
+          </param>
+        </params>
+
+      </Report>
+    </ExampleParamsUse>
+
+    <FullCoverageReport>
+      <Report>
+        <ReportType>FullCoverageReport</ReportType>
+        <Format>Html</Format>
+      </Report>
+    </FullCoverageReport>
+
+    <SummaryReport>
+      <Report>
+        <ReportType>Summary</ReportType>
+        <Format>Html</Format>
+      </Report>
+    </SummaryReport>
+
+    <SymbolModuleReport>
+      <Report>
+        <ReportType>SymbolModule</ReportType>
+        <Format>Xml</Format>
+      </Report>
+    </SymbolModuleReport>
+
+    <UncoveredReport>
+      <Report>
+        <ReportType>UncoveredCodeSections</ReportType>
+        <Format>Html</Format>
+      </Report>
+    </UncoveredReport>
+
+  </PropertyGroup>
+
+
+  <Target Name="SimpleMerge">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     MergeFileName="C:\OEM\project\merged.xml"
+    />
+  </Target>
+
+  <Target Name="CreateTrends">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     CoverageTrendPath="C:\OEM\oemtrends.trend"
+    />
+  </Target>
+
+  <Target Name="CreateHTMLReport">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     OutputPath="C:\OEM\reports\html\10.2.2008\"
+                     OutputReport="$(FullCoverageReport)"
+                     SortBy="Name"
+    />
+  </Target>
+
+  <Target Name="CreateSummaryReport">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     Hide="None"
+                     OutputPath="C:\OEM\reports\html\summary\10.2.2008.html"
+                     OutputReport="$(SummaryReport)"
+                     ProjectName="my project"
+                     SortBy="Name"
+    />
+  </Target>
+
+  <Target Name="CreateXmlReportForCC.NET">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     MaxTopUncoveredToReport="15"
+                     ProjectName="CC.NET CI Server"
+                     SortBy="ClassLine"
+                     OutputPath="C:\OEM\reports\xml\10.2.2008\modulesummary.xml"
+                     OutputReport="$(SymbolModuleReport)"
+    />
+  </Target>
+
+  <Target Name="ReportOnlyUncoveredItems">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     Hide="HideFullyCovered"
+                     OutputPath="C:\OEM\reports\uncovered.html"
+                     OutputReport="$(UncoveredReport)"
+                     MergeFileName="C:\OEM\project\merged.xml"
+                         
+    />
+  </Target>
+
+  <Target Name="DontReportTestAssemblies">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     CoverageFilters="$(FilterTestAssemblies)"
+                     MergeFileName="C:\OEM\project\merged.xml"
+    />
+  </Target>
+
+  <Target Name="OnlyReportDALAssemblies">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     CoverageFilters="$(FilterDALAssemblies)"
+                     OutputPath="C:\OEM\reports\DAL"
+                     OutputReport="$(FullCoverageReport)"
+                     MergeFileName="C:\OEM\project\merged.xml"
+                         
+    />
+  </Target>
+
+  <Target Name="FailBuildIfCoverageNotSufficient">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="@(CoverageFile)"
+                     MinimumCoverage="$(FailBuildWhen)"
+                     MaxFailedToShow="0"
+                     MergeFileName="merged.xml"
+    />
+  </Target>
+
+  <Target Name="SetSatisfactoryCoverageButDon'tFailBuildIfNotMet">
+    <NCoverReporting ToolPath="C:\Program Files\NCover\"
+                     CoverageDataPaths="$(CoverageFile)"
+                     MergeFileName="merged.xml"
+                     SatisfactoryCoverage="@(Satisfactory)"
+    />
+  </Target>
+
+  <Target Name="ExampleOfUsingParamsToPassDataToAReport">
+    <NCoverReporting ToolPath="$(ExePath)"
+                     CoverageDataPaths="@(CoverageFile)"
+                     OutputReport="$(ExampleParamsUse)" />
+  </Target>
+
+</Project>

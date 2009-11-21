@@ -1,5 +1,5 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'sqlcmd'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/sqlcmd'
 
 describe SQLCmd, "when running a script file against a database with authentication information" do
 	before :all do

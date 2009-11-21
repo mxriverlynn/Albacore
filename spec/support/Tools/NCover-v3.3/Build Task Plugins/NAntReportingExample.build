@@ -1,0 +1,218 @@
+﻿<project name="NCoverReporting" default="coverage" xmlns="http://nant.sf.net/schemas/nant.xsd">
+
+  <!-- TODO: Uncomment and add the full path to NCover.NAntTasks.dll if not in your path -->
+  <!-- TODO: Alternatively, remove this line if you have copied the .dll to your NAnt bin folder -->
+  <!-- <loadtasks assembly="NCover.NAntTasks.dll"/> -->
+
+  <target name="simplemerge" description="Collate several coverage data files into a single file">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     mergeFileName="C:\OEM\project\merged.xml" >
+
+      <coverageDataPaths>
+        <include name="coverage\company.DAL.coverage.xml" />
+        <include name="coverage\company.UI.coverage.xml" />
+        <include name="coverage\company.business.coverage.xml" />
+        <include name="coverage\company.OEM.coverage.xml" />
+      </coverageDataPaths>
+    </ncoverreporting>
+  </target>
+
+
+  <target name="createTrends" description="Add data from several coverage files to a trend file">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     coverageTrendPath="C:\OEM\oemtrends.trend" >
+
+      <coverageDataPaths>
+        <!-- the coverage files will be merged before the (merged) coverage data is added to the trend file -->
+        <include name="coverage\*.xml" />
+      </coverageDataPaths>
+    </ncoverreporting>
+  </target>
+
+  <target name="createHTMLReport" description="Create a full HTML report from coverage data">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     outputPath="reports\html\10.2.2008\"
+                     projectName="company project"
+                     sortBy="Name" >
+
+      <coverageDataPaths>
+        <include name="coverage\*.xml" />
+      </coverageDataPaths>
+
+      <reports>
+        <report format="Html" reportType="FullCoverageReport" />
+      </reports>
+    </ncoverreporting>
+  </target>
+
+  <target name="createSummaryReport" description="Create a summary (overview) report from coverage data">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     outputPath="reports\html\summary\10.2.2008.html"
+                     projectName="my project" >
+
+      <coverageDataPaths>
+        <include name="coverage.xml" />
+      </coverageDataPaths>
+
+      <reports>
+        <report format="Html" reportType="Summary" />
+      </reports>
+    </ncoverreporting>
+  </target>
+
+  <target name="createXMLReportForCC.NET" description="Create an xml report for viewing in CC.NET or another CI tool">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     projectName="my project"
+                     sortBy="Name"
+                     outputPath="reports\xml\ci\10.2.2008.xml" >
+
+      <coverageDataPaths>
+        <include name="coverage.xml" />
+      </coverageDataPaths>
+
+      <reports>
+        <report format="Xml" reportType="SymbolModule" />
+      </reports>
+    </ncoverreporting>
+  </target>
+
+  <target name="reportOnlyUncoveredItems" description="Create a report that only shows the top 50 uncovered items">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     hide="HideFullyCovered"
+                     outputPath="reports\html\10.2.2008"
+                     maxTopUncoveredToReport="50"
+                     projectName="my project"
+                     sortBy="Name" >
+
+      <coverageDataPaths>
+        <include name="coverage\*.xml" />
+      </coverageDataPaths>
+      
+      <reports>
+        <report format="Html" reportType="FullCoverageReport" />
+      </reports>
+    </ncoverreporting>
+  </target>
+
+  <target name="dontReportTestAssemblies" description="Create a report from coverage data, ignoring coverage on the test assemblies">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     outputPath="reports\html\project\"
+                     projectName="my project"
+                     sortBy="Name" >
+
+      <coverageDataPaths>
+        <include name="coverage\*.xml" />
+      </coverageDataPaths>
+
+      <coverageFilters>
+        <filter pattern="project.unit.test"
+                type="Assembly" />
+        <filter pattern="project.functional.test"
+                type="Assembly" />
+        <filter pattern="project.*.test"
+                type="Assembly" />
+      </coverageFilters>
+      
+      <reports>
+        <report format="Html" reportType="FullCoverageReport" />
+      </reports>
+    </ncoverreporting>
+  </target>
+
+  <target name="onlyReportDALAssemblies" description="Create a report from coverage data, ignoring assemblies that are not part of the Data Access Layer">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     outputPath="reports\html\nonDAL\"
+                     projectName="my project"
+                     sortBy="Name" >
+
+      <coverageDataPaths>
+        <include name="coverage.xml" />
+      </coverageDataPaths>
+
+      <coverageFilters>
+        <filter pattern="project*DAL*"
+                isInclude="true"
+                type="Assembly"
+                isRegex="true" />
+
+      </coverageFilters>
+      <reports>
+        <report format="Html" reportType="FullCoverageReport" />
+      </reports>
+    </ncoverreporting>
+  </target>
+
+  <target name="failBuildIfCoverageNotSufficient" description="Enforce coverage standards by failing the build if certain coverage percentages are not met">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     maxFailedToShow="0">
+
+      <coverageDataPaths>
+        <include name="coverage\*.xml" />
+      </coverageDataPaths>
+
+      <minimumCoverage>
+        <!-- Fail the build if every method hasn't been executed -->
+        <threshold coverageMetric="MethodCoverage"
+                   type="View"
+                   value="100" />
+        <!-- Fail the build if the branch coverage of any class is below 80.5% -->
+        <threshold coverageMetric="BranchCoverage"
+                   type="Class"
+                   value="80.5" />
+        <!-- Fail the build if the maximum Cyclomatic Complexity of any class in the "Project.Internal.Critical" namespace is above 60 -->
+        <threshold coverageMetric="CyclomaticComplexity"
+                   pattern="Project.Internal.Critical"
+                   type="Namespace"
+                   value="60" />
+      </minimumCoverage>
+    </ncoverreporting>
+  </target>
+
+  <target name="setSatisfactoryCoverageButDon'tFailBuildIfNotMet" description="Set satisfactory coverage percentages to control what shows up uncovered, but don't fail the build if the percentage is not met">
+    <ncoverreporting program="C:\Program Files\NCover\NCover.Reporting.exe"
+                     hide="None"
+                     outputPath="reports\html\"
+                     projectName="my project" >
+
+      <coverageDataPaths>
+        <include name="coverage.xml" />
+      </coverageDataPaths>
+
+      <satisfactoryCoverage>
+        <!-- Set overall satisfactory symbol coverage for the project at 95% -->
+        <threshold coverageMetric="SymbolCoverage"
+                   value="95.0" />
+        <!-- 70% of the methods in every document must be executed for the document to be satisfactorily covered-->
+        <threshold coverageMetric="MethodCoverage"
+                   type="Document"
+                   value="70" />
+        <!-- Methods must have 75% branch coverage to be satisfactorily covered-->
+        <threshold coverageMetric="BranchCoverage"
+                   type="Method"
+                   value="75" />
+      </satisfactoryCoverage>
+
+      <reports>
+        <report reportType="FullCoverageReport" format="Html" />
+      </reports>
+    </ncoverreporting>
+  </target>
+
+  <target name="exampleUsingOptionsParamsToPassDataToAReport">
+
+    <ncoverreporting program="${reportingExe}">
+      <coverageDataPaths>
+        <include name="coverage*.xml" />
+      </coverageDataPaths>
+      <reports>
+        <report reportType="SymbolModule" format="Xml" outputPath="${outputPath}\paramstest.xml">
+          <params>
+            <param name="name1" value="value1" />
+            <param name="name2" />
+          </params>
+        </report>
+      </reports>
+    </ncoverreporting>
+
+  </target>
+</project>

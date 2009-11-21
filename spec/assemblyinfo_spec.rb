@@ -1,6 +1,6 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'assemblyinfotester'
-require 'assemblyinfo'
+require 'albacore/assemblyinfo'
 
 describe AssemblyInfo, "when generating an assembly info file" do
 	before :all do

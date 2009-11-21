@@ -1,0 +1,11 @@
+a: a template file
+b: multiple
+c: values
+value: 'not the right one!!!'
+
+sample-badname.config:
+  value: 'the sample value'
+
+multipleinstance.config: 
+  value: 'the real value'
+  b: this is a second value

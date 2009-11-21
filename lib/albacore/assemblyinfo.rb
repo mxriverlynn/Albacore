@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
+require 'albacore/support/albacore_helper'
 
 class AssemblyInfo
 	include Failure
@@ -9,9 +9,8 @@ class AssemblyInfo
 	attr_accessor :file_version, :trademark, :namespaces
 	
 	def initialize
-		@namespaces = []
 		super()
-		configure_if_config_exists('AssemblyInfo')
+		@namespaces = []
 	end
 	
 	def write
@@ -24,7 +23,7 @@ class AssemblyInfo
 		
 		asm_data = build_assembly_info_data
 
-		@logger.debug "Generating Assembly Info File At: " + File.expand_path(assemblyinfo_file)
+		@logger.info "Generating Assembly Info File At: " + File.expand_path(assemblyinfo_file)
 		File.open(assemblyinfo_file, 'w') do |f|			
 			f.write asm_data
 		end

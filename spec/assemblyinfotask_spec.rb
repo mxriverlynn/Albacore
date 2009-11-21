@@ -1,13 +1,15 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'assemblyinfo'
-require 'assemblyinfotask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/assemblyinfo'
+require 'rake/assemblyinfotask'
 require 'tasklib_patch'
 
-describe Rake::AssemblyInfoTask, "when running" do
+describe Albacore::AssemblyInfoTask, "when running" do
 	before :all do
-		Rake::AssemblyInfoTask.new() do |t|
+		@task = Albacore::AssemblyInfoTask.new(:task) do |t|
 			@yielded_object = t
 		end
+		@task.extend(TasklibPatch)
+		Rake::Task["task"].invoke
 	end
 	
 	it "should yield the assembly info api" do
@@ -15,14 +17,15 @@ describe Rake::AssemblyInfoTask, "when running" do
 	end
 end
 
-describe Rake::AssemblyInfoTask, "when execution fails" do
+describe Albacore::AssemblyInfoTask, "when execution fails" do
 	before :all do
-		@task = Rake::AssemblyInfoTask.new(:failingtask)
+		@task = Albacore::AssemblyInfoTask.new(:failingtask)
 		@task.extend(TasklibPatch)
+		@task.fail
 		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

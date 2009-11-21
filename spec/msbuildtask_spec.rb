@@ -1,15 +1,15 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'rake'
-require 'rake/tasklib'
-require 'msbuild'
-require 'msbuildtask'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/msbuild'
+require 'rake/msbuildtask'
 require 'tasklib_patch'
 
-describe Rake::MSBuildTask, "when running" do
+describe Albacore::MSBuildTask, "when running" do
 	before :all do
-		Rake::MSBuildTask.new() do |t|
+		task = Albacore::MSBuildTask.new() do |t|
 			@yielded_object = t
 		end
+		task.extend(TasklibPatch)
+		Rake::Task[:msbuild].invoke
 	end
 	
 	it "should yield the msbuild api" do
@@ -17,14 +17,15 @@ describe Rake::MSBuildTask, "when running" do
 	end
 end
 
-describe Rake::MSBuildTask, "when execution fails" do
+describe Albacore::MSBuildTask, "when execution fails" do
 	before :all do
-		@msbuildtask = Rake::MSBuildTask.new(:failingtask)
-		@msbuildtask.extend(TasklibPatch)
+		@task = Albacore::MSBuildTask.new(:failingtask)
+		@task.extend(TasklibPatch)
+		@task.fail
 		Rake::Task["failingtask"].invoke
 	end
 	
 	it "should fail the rake task" do
-		$task_failed.should == true
+		@task.task_failed.should == true
 	end
 end

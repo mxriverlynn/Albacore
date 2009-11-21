@@ -1,4 +1,4 @@
-require 'msbuild'
+require 'albacore/msbuild'
 
 class MSBuildTestData
 	

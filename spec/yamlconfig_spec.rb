@@ -1,5 +1,5 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'yamlconfig'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/support/yamlconfig'
 
 class YamlTest
 	include YAMLConfig
@@ -29,4 +29,34 @@ describe YAMLConfig, "when configuring with yaml" do
 	it "should allow symbols" do
 		@yml.what_ever.should == :a_symbol
 	end	
+end
+
+describe YAMLConfig, "when included yamlconfig in a class" do
+	
+	class YAML_AutoConfig_Test
+		include YAMLConfig
+	end
+	
+	before :all do
+		@yamltest = YAML_AutoConfig_Test.new
+	end
+	
+	it "should automatically configure the class through a yaml file named after the class" do
+		@yamltest.this_attr_was_automatically_added_by.should == "the yaml auto config"
+	end
+end
+
+describe YAMLConfig, "when extending a class with yamlconfig" do
+	
+	class YAML_AutoConfig_Test
+	end
+	
+	before :all do
+		@yamltest = YAML_AutoConfig_Test.new
+		@yamltest.extend YAMLConfig
+	end
+	
+	it "should automatically configure the class through a yaml file named after the class" do
+		@yamltest.this_attr_was_automatically_added_by.should == "the yaml auto config"
+	end
 end

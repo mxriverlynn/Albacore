@@ -1,7 +1,8 @@
-require File.join(File.dirname(__FILE__), 'support', 'albacore_helper')
+require 'albacore/support/albacore_helper'
 
 class NCoverConsole
 	include RunCommand
+	include YAMLConfig
 	
 	attr_accessor :output, :testrunner, :working_directory, :cover_assemblies
 	attr_accessor :ignore_assemblies, :coverage
@@ -53,7 +54,8 @@ class NCoverConsole
 	end
 	
 	def build_assembly_list(param_name, list)
-		"//#{param_name} #{list.join(';')}"
+		assembly_list = list.map{|asm| "\"#{asm}\""}.join(';')
+		"//#{param_name} #{assembly_list}"
 	end
 	
 	def build_coverage_list(coverage)

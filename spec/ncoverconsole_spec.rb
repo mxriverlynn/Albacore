@@ -1,10 +1,10 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'ncoverconsole'
-require 'nunittestrunner'
-require 'mspectestrunner'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/ncoverconsole'
+require 'albacore/nunittestrunner'
+require 'albacore/mspectestrunner'
 
-@@ncoverpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NCover-v3.2', 'NCover.Console.exe')
-@@nunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console.exe')
+@@ncoverpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NCover-v3.3', 'NCover.Console.exe')
+@@nunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console-x86.exe')
 @@xml_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'nunit', 'test-coverage.xml')
 @@html_coverage_output = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'nunit', 'html', 'test-coverage.html')
 @@working_directory = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'nunit')
@@ -37,7 +37,7 @@ describe NCoverConsole, "when specifying aseemblies to cover" do
 	end
 
 	it "should provide coverage for the specified assemblies" do
-		$system_command.should include("//assemblies TestSolution")
+		$system_command.should include("//assemblies \"TestSolution\"")
 	end
 end
 
@@ -63,7 +63,7 @@ describe NCoverConsole, "when specifying aseemblies to ignore" do
 	end
 
 	it "should provide coverage for the specified assemblies" do
-		$system_command.should include("//exclude-assemblies TestSolution.*")
+		$system_command.should include("//exclude-assemblies \"TestSolution.*\"")
 	end
 end
 

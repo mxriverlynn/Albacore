@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'logging')
+require 'albacore/support/logging'
 
 module Failure
 	include Logging
@@ -6,8 +6,8 @@ module Failure
 	attr_accessor :failed
 	
 	def initialize
-		@failed = false
 		super()
+		@failed = false
 	end
 	
 	def fail

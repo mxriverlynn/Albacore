@@ -1,5 +1,5 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'spec_helper')
-require 'msbuild'
+require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'albacore/msbuild'
 require 'msbuildtestdata'
 
 describe MSBuild, "when building a solution with verbose logging turned on" do	
@@ -99,17 +99,17 @@ describe MSBuild, "when building a visual studio solution for a specified config
 		@testdata= MSBuildTestData.new("Release")
 		@msbuild = @testdata.msbuild
 		
-		@msbuild.properties :configuration => :release
+		@msbuild.properties = {:configuration => :Release}
 		@msbuild.solution = @testdata.solution_path
 		@msbuild.build
 	end
 	
 	it "should build with the specified configuration as a property" do
-		$system_command.should include("/property:configuration=release")
+		$system_command.should include("/p:configuration=\"Release\"")
 	end
 	
 	it "should output the solution's binaries according to the specified configuration" do
-		File.exist?(@testdata.output_path).should == true
+		File.exist?(@testdata.output_path).should be_true
 	end
 end
 
@@ -143,4 +143,31 @@ describe MSBuild, "when building a solution with a specific msbuild verbosity" d
 	it "should call msbuild with the specified verbosity" do
 		$system_command.should include("/verbosity:normal")
 	end
+end
+
+describe MSBuild, "when specifying multiple configuration properties" do	
+	before :all do
+		@testdata= MSBuildTestData.new
+		@msbuild = @testdata.msbuild
+
+		File.delete(@testdata.output_path) if File.exist?(@testdata.output_path)
+		
+		@msbuild.targets [:Clean, :Build]
+		@msbuild.properties = {:configuration => :Debug, :DebugSymbols => true }
+		@msbuild.solution = @testdata.solution_path
+		@msbuild.build
+	end
+
+	it "should specify the first property" do
+		$system_command.should include("/p:configuration=\"Debug\"")
+	end
+	
+	it "should specifiy the second property" do
+		$system_command.should include("/p:DebugSymbols=\"true\"")
+	end
+	
+	it "should output the solution's binaries" do
+		File.exist?(@testdata.output_path).should == true
+	end
+
 end

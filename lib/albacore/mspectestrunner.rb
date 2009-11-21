@@ -1,14 +1,15 @@
-require 'logging'
+require 'albacore/support/albacore_helper'
 
 class MSpecTestRunner
 	include Logging
+	include YAMLConfig
 	
 	attr_accessor :assemblies, :path_to_command, :html_output
 	
 	def initialize(path_to_command)
+		super()
 		@path_to_command = path_to_command
 		@assemblies=[]
-		super()
 	end
 	
 	def get_command_line

@@ -1,4 +1,4 @@
-require 'assemblyinfo'
+require 'albacore/assemblyinfo'
 
 class AssemblyInfoTester < AssemblyInfo
 	

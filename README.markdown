@@ -53,10 +53,18 @@ After installing Albacore, you only need to
 in your rakefile. This will allow you to use the tasks that Albacore includes. 
 
     desc "Run a sample build using the MSBuildTask"
-    Rake::MSBuildTask.new(:msbuild) do |msb|
+    Albacore::MSBuildTask.new(:msbuild) do |msb|
         msb.properties :configuration => :Debug
         msb.targets [:Clean, :Build]
         msb.solution = "spec/support/TestSolution/TestSolution.sln"
     end
 
 Beyond the simple example, check out the [Albacore Wiki](http://wiki.github.com/derickbailey/Albacore) for detailed instructions on how to use the built in tasks and their options.
+
+## Contributors
+
+Many thanks for contributions to Albacore are due:
+
+* [Ben Hall](http://github.com/benhall): SSH, SFTP, ZipDirectory, Rename, YAML auto config, and other great additions
+* [Sean Biefeld](http://github.com/seanbiefeld): MSpecTestRunner for NCoverConsole
+* [Kevin Colyar](http://github.com/kevincolyar): Testing and updating of MSBuild to work with Cygwin

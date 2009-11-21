@@ -1,6 +1,7 @@
-$: << File.join(File.expand_path(File.dirname(__FILE__)), "albacore")
-$: << File.join(File.expand_path(File.dirname(__FILE__)), "albacore", 'support')
-$: << File.join(File.expand_path(File.dirname(__FILE__)), "rake")
+$: << File.expand_path(File.dirname(__FILE__))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "albacore"))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "albacore", 'support'))
+$: << File.expand_path(File.join(File.dirname(__FILE__), "rake"))
 
 require 'logging'
 

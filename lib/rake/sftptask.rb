@@ -4,15 +4,16 @@ module Albacore
 	class SftpTask < Rake::TaskLib
 		attr_accessor :name
 		
-		def initialize(name=:sftp)
+		def initialize(name=:sftp, &block)
 			@name = name
 			@sftp = Sftp.new
-			yield @sftp if block_given?
+			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@block.call(@sftp) unless @block.nil?
 				@sftp.upload
 			end
 		end

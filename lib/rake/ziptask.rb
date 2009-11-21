@@ -1,19 +1,19 @@
 require 'rake/tasklib'
-require 'zipdirectory'
 
 module Albacore
 	class ZipTask < Rake::TaskLib
 		attr_accessor :name
 		
-		def initialize(name=:zip)
+		def initialize(name=:zip, &block)
 			@name = name
 			@zip = ZipDirectory.new
-			yield @zip if block_given?
+			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@block.call(@zip) unless @block.nil?
 				@zip.package
 			end
 		end		
