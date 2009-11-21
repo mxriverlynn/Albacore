@@ -1,0 +1,4 @@
+some_name: some value
+another_name: another value
+a_hash: {name: value, foo: bar}
+what_ever: :a_symbol

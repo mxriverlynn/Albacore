@@ -1,0 +1,115 @@
+The NCoverConsoleTask allows you to run code coverage analysis through NCover 3's NCover Console app. 
+
+!http://derickbailey.github.com/Albacore/i_cover_my_code_promo_badge_white.jpg!:http://ncover.com
+
+h2. How to use the NCoverConsoleTask
+
+Here is an example of how to use the NCoverConsoleTask to run code coverage analysis. 
+
+<pre><code>desc "Run a sample NCover Console code coverage"
+Rake::NCoverConsoleTask.new(:ncoverconsole) do |ncc|
+  ncc.path_to_command = "Tools/NCover-v3.2/NCover.Console.exe"
+  ncc.output = {:xml => "CodeCoverage/test-coverage.xml"}
+  ncc.working_directory = "CodeCoverage/WorkingDir"
+		
+  nunit = NUnitTestRunner.new("Tools/NUnit-v2.5/nunit-console.exe")
+  nunit.assemblies << "CodeCoverage/assemblies/TestSolution.Tests.dll"
+  nunit.options << '/noshadow'
+		
+  ncc.testrunner = nunit
+end
+</code></pre>
+
+h2. NCoverConsole configuration and execution options
+
+h3. path_to_command (required)
+
+Set the location of the ncover.console executable. This can be an absolute or relative path, and should include the executable name.
+
+h3. output (optional)
+
+Set the coverage output type and location. The valid options are
+<pre><code>:xml - output xml coverage
+:html - output html coverage
+</code></pre>
+
+To set the options, use a hash and specify the xml and/or html options, with a value of the file that you wish to produce. Any valid path, relative or absolute, should work. Be sure to provide the extension (.xml or .html) if you need it. 
+
+For example, if you wish to output both xml and html, you can do the following
+
+<pre><code>ncc.output = {:xml => 'CodeCoverage/coverage.xml', :html => 'CodeCoverage/html/coverage.html'}</code></pre>
+
+If you do not provide an :xml output setting, a 'coverage.xml' file will be produced in the current folder.
+
+If you do not provide an :html output setting, no html output report will be generated. If you only specify a folder and do not provide a specific file name for the html report, a 'fullcoveragereport.html' file will be generated.
+
+h3. working_directory (optional)
+
+You can set the working directory that NCover will use, with this option. This will help to ensure that files produced by the running tasks will be placed into the specified folder.
+
+<pre><code>ncc.working_directory = "some/folder/to_work_in"</code></pre>
+
+h3. testrunner (required)
+
+NCover does not run the coverage directly, but analyzes code that is being executed through a test runner. Test runners for NCoverConsole don't need to inherit from a base class or implement a module. They only need to provide a 'get_command_line' method that returns a string. The string returned from this method will be passed directly into the command line for NCover.Console.
+
+The only test runner available, at this time, is for NUnit. For more information, please see the [[nunittestrunner|NUnitTestRunner]] page.
+
+If the test runner returns an error code, this is typically a signal that one or more tests failed. In this case, NCover.Console will also return an error code. When the NCoverConsoleTask sees an error code returned from NCover.Console, it will fail the build.
+
+h3. cover_assemblies (optional)
+
+You can specify an array of assemblies to cover, here, using some basic regular expression syntax. Either append the list, or replace it entirely.
+
+For example
+
+<pre><code>ncc.cover_assemblies << "MyProject.*" 
+ncc.cover_assemblies << "MyOtherStuff.*"
+</code></pre>
+
+Or
+
+<pre><code>ncc.cover_assemblies = ["MyProject.*", "MyOtherStuff.*"]</code></pre>
+
+Both of these will produce the same list of included assemblies, to be covered.
+
+For more information on how this works, see the NCover "Include Assemblies":http://docs.ncover.com/ref/3-0/ncover-console/command-line/profiling-options#ias documentation.
+
+h3. ignore_assemblies (optional)
+
+You can specify an array of assemblies to ignore in the coverage output, here, using some basic regular expression syntax. Either append the list, or replace it entirely.
+
+For example
+
+<pre><code>ncc.ignore_assemblies << "ThirdParty.*" 
+ncc.ignore_assemblies << "AnotherProject.*"
+</code></pre>
+
+Or
+
+<pre><code>ncc.ignore_assemblies = ["ThirdParty.*", "AnotherProject.*"]</code></pre>
+
+Both of these will produce the same list of ignored assemblies.
+
+Note: This feature is only available if you are using NCover Complete. If you are not using NCover Complete, don't specify the ignore_assemblies list at all, and it will not be passed to NCover.Console. 
+
+For more information on how this works, see the NCover "Exclude Assemblies":http://docs.ncover.com/ref/3-0/ncover-console/command-line/profiling-options#eas documentation.
+
+h3. coverage (optional)
+
+You can specify the types of coverage analysis that you want NCover.Console to perform. 
+
+<pre><code>ncc.coverage = [:Branch, :Symbol]</code></pre>
+
+or
+
+<pre><code>ncc.coverage << :Branch
+ncc.coverage << :Symbol
+</code></pre>
+
+The valid options are for coverage types are:
+
+<pre><code>:Symbol, :Branch, :MethodVisits, :CyclomaticComplexity</code></pre>
+
+
+For more information on how this works, see the NCover "Coverage Metric":http://docs.ncover.com/ref/3-0/ncover-console/command-line/profiling-options#ct documentation.

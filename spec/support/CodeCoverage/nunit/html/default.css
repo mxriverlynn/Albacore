@@ -1,0 +1,360 @@
+/* run this source through the css compressor at http://www.cssdrive.com/index.php/main/csscompressor/ */
+html, body {
+	padding: 0;
+	margin: 0;
+	font-family: sans-serif;
+	font-size: 12px;
+}
+a, a:visited 
+{
+	color: blue;
+}
+
+/* covered and uncovered styles */
+.uncovered, .uncovered a{
+	color: #c80000;
+}
+.covered, .covered a {
+	color: #008000;
+}
+.acceptable, .acceptable a {
+	color: #0000C8;
+}
+/* header bar styling */
+#hdrbar {
+	background: #034795;
+	color: #fff;
+	padding: 10px;
+	clear: both;
+	height: 32px;
+	border-bottom: 5px solid #d0e4ff;
+}
+#hdrbar #hdrbar_left {
+	font-size: 26px;
+	float: left;
+}
+#hdrbar #hdrbar_left a {
+	color: #fff;
+	text-decoration: none;
+}
+#hdrbar #hdrbar_right {
+	float: right;
+	font-size: 14px;
+	text-align: right;
+}
+#hdrbar a 
+{
+	color: #fff;
+}
+#exec_summary_link 
+{
+	float: right;
+	padding: 10px;
+	font-size: 14px;
+}
+
+/* style the content top section */
+#page_title {
+	clear: both;
+	font-size: 12px;
+}
+#page_title h1 {
+	margin: 0 0 10px 0;
+	font-size: xx-large;
+	color: #034795;
+}
+
+
+#page_stats 
+{
+	border-top: 2px solid #000;
+	border-bottom: 2px solid #000;
+	overflow: hidden;
+	/* display: inline-block; */
+}
+#page_stats td 
+{
+	/* border: 1px solid #ccc;*/
+	vertical-align: top;
+	text-align: center;
+}
+#page_stats p 
+{
+	margin: 5px;
+	padding: 0;
+}
+#page_stats .highlight 
+{
+	font-size: large;
+	font-weight: bold;
+}
+#page_stats #left 
+{
+	float: left;
+	width: 300px;
+}
+#page_stats #right 
+{
+	width: 435px;
+	float: right;
+	text-align: right;
+	padding-bottom: 15px;
+}
+#page_stats #trendTitle 
+{
+	text-align: center;
+	padding-top: 15px;
+	width: 400px;
+}
+#page_stats #trendGraph 
+{
+	width: 400px;
+	height: 150px;
+	padding: 2px 0 2px 35px;
+	float: right;
+	text-align: left;
+}
+#page_stats #trendGraph .y-axis 
+{
+	position: absolute;
+	font-size: 12px;
+	margin-top: -6px;
+	height: 12px;
+	line-height: 12px;
+	text-align: right;
+	width: 30px;
+}
+
+/* untested report link styling */
+#untested_box {
+	background: url(../images/untested_box.gif) no-repeat center;
+	text-align: center;
+	height: 40px;
+	font-size: 16px;
+	padding: 4px 0;
+}
+#untested_box_content {
+	padding: 12px 0;
+}
+
+/* style the main content */
+#content 
+{
+	padding: 4px 10px;
+	clear: both;
+}
+
+#content table {
+	border-collapse: collapse;
+	width: 100%;
+}
+#content table tr.odd {
+	background: #c3d9ff;
+}
+#content table th
+{
+	border-bottom: 1px solid #ccc;
+}
+#content table.mainTable td, #content table.sortable td
+{
+	border: 1px solid #ccc;
+	padding: 8px 4px;
+}
+#content table .content_table_percentage {
+	text-align: right;
+	width: 1%;
+}
+
+#content table.mainTable th, #content table.sortable th 
+{
+	cursor: default;
+}
+#content table.sortable th 
+{
+	text-decoration: underline;
+}
+
+#content table.mainTable td.graph-left, #content table.sortable td.graph-left, 
+#content table.mainTable td.graph-middle, #content table.sortable td.graph-middle, 
+#content table.mainTable td.graph-right, #content table.sortable td.graph-right
+{
+	vertical-align: top;
+	width: 1%;
+}
+#content table.mainTable td.graph-left, #content table.sortable td.graph-left
+{
+	padding-top: 11px;
+	border-right: 0;
+}
+#content table.mainTable td.graph-middle, #content table.sortable td.graph-middle
+{
+	border-left: 0;
+	border-right: 0;
+	width: 180px;
+}
+#content table.mainTable td.graph-right, #content table.sortable td.graph-right
+{
+	padding-top: 11px;
+	border-left: 0;
+}
+td.graph div.uncovered, td.graph div.covered, td.graph div.nacoverage
+{
+	float: left;
+	margin: 4px;
+	text-align: center;
+}
+#content table td div.graph
+{
+	background: #c80000;
+	width: 100px;
+	height: 5px;
+	margin: 3px;
+	text-align: left;
+}
+#content table div.acceptable 
+{
+	background: #FFFFC8 ! important;
+}
+
+
+#content table div.graph div {
+	background: #008000;
+	height: 5px;
+}
+.gray_graph 
+{
+	width: 100px;
+	background: #aaa;
+	height: 3px;
+	margin: 4px 2px;
+}
+.nacoverage 
+{
+	color: #aaa;
+}
+#content table .graph-cell 
+{
+	width: 120px;
+	text-align: center;
+}
+
+/* style the footer */
+#footer {
+	text-align: right;
+	padding: 10px;
+}
+#footer img {
+	vertical-align: middle;
+	height: 16px;
+}
+
+#footer a img {
+	border: 0;
+}
+
+#togglebar 
+{
+	text-align: right;
+	margin: 20px 0 0 0;
+	padding: 10px 0 0 0;
+}
+
+/* styling for uncovered sections */
+.source {
+	padding: 0 0 10px 0;
+	background: #eee;
+	margin: 0 0 20px 0;
+}
+table.source tr.hasBranch td
+{
+	border-bottom: 1px solid #ccc;
+}
+table.source .linenum {
+	border-right: 1px solid #ccc;
+	width: 1%;
+}
+table.source th 
+{
+	font-family: monospace;
+	font-weight: normal;
+	text-decoration: underline;
+}
+#content table.source tr 
+{
+	border: 0;
+}
+.source pre 
+{
+	margin: 0;
+	padding: 0;
+}
+.source pre .uncovered 
+{
+	color: black;
+	background: #f99;
+}
+.source pre .covered
+{
+	color: black;
+	background: #5efb6e;
+}
+.source td.uncoveredLine 
+{
+	background: #f99;
+	border-right: 1px solid #ccc;
+	width: 1%;
+}
+.source td.coveredLine
+{
+	background: #5EFB6E;
+	border-right: 1px solid #ccc;
+	width: 1%;
+}
+.source .sourceline 
+{
+	padding-left: 10px;
+}
+.source td .covered 
+{
+	color: #000;
+}
+
+/* styling for sidebar title */
+#sidebar 
+{
+	font-size: 10px;
+	margin-left: 4px;
+}
+#sidebar h1 
+{
+	padding: 4px 0px;
+	font-size: 14px;
+	margin: 0;
+}
+#sidebar table 
+{
+	width: 100%;
+}
+#sidebar table.sortable th 
+{
+	text-decoration: underline;
+	cursor: default;
+}
+#sidebar .percentage 
+{
+	text-align: center;
+	width: 1%;
+	white-space: nowrap;
+}
+
+#content .summary_table th
+{
+	text-align: left;
+	width: 1%;
+	white-space: nowrap;
+	border-bottom: 0;
+}
+#content .summary_table td 
+{
+	border: 0;
+}w

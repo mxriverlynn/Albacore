@@ -1,0 +1,21 @@
+Welcome to the Albacore project.
+
+Albacore is intended to be a professional quality suite of Rake tasks to help automate the process of building a .NET based system. All tasks are built using a test-first approach through rspec, and all tests are included in the Albacore gem. 
+
+h2. How To Install Albacore
+
+Please see the readme file on the main "Albacore github":http://github.com/derickbailey/Albacore page for instructions on how to install the latest stable version or the latest source code.
+
+h2. How To Use Albacore
+
+After installing Albacore, you only need to
+<pre><code>require 'albacore'</code></pre>
+in your rakefile. This will allow you to use the tasks that Albacore includes.
+
+h2. The Albacore Tasks
+
+[[msbuildtask|MSBuildTask]] - Build a Visual Studio solution (.sln) or MSBuild file
+[[assemblyinfotask|AssemblyInfoTask]] - Generate an AssemblyInfo.cs file. Currently only supports C#
+[[ncoverconsoletask|NCoverConsoleTask]] - Run code coverage analysis through NCover 3
+[[sqlcmdtask|SQLCmdTask]] - Run scripts and other commands through SQL Server's "sqlcmd.exe"
+
