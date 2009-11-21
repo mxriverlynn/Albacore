@@ -117,15 +117,22 @@ namespace :albacore do
 		
 		ncr.required_coverage << NCover::BranchCoverage.new(:minimum => 10)
 		ncr.required_coverage << NCover::CyclomaticComplexity.new(:maximum => 1)
-    end
+  end
 
    desc "Run the sample for renaming a File"
-   Albacore::RenameTask.new do |rename|
+   Albacore::RenameTask.new() do |rename|
       FileUtils.touch 'web.uat.config.example'
-
-      #This is the main part
+     
       rename.actual_name = 'web.uat.config.example'
       rename.target_name = 'web.config.example'
+   end
+   
+   desc "Run ZipDirectory example"
+   Albacore::ZipTask.new() do |zip|
+     zip.output_path = File.dirname(__FILE__)
+     zip.directories_to_zip = ["lib", "spec"]
+     zip.additional_files = "README.markdown"
+     zip.file = 'albacore_example.zip'
    end
 end
 
