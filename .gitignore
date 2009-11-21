@@ -29,3 +29,4 @@ Albacore.gemspec
 albacore-*.gem
 albacore.gemspec
 .idea
+web.config.example
