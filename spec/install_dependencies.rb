@@ -16,8 +16,15 @@ def install(lib)
   end
 end
 
-puts "Installing required dependencies"
+def add_source(url)
+  begin
+    Gem::GemRunner.new.run ['sources', '-a', url]
+  rescue Gem::SystemExitException => e
+  end
+end
 
+puts "Installing required dependencies"
+add_source 'http://gemcutter.org'
 install 'net-sftp'
 install 'rubyzip'
 install 'jeweler'
