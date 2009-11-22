@@ -34,15 +34,15 @@ In your local clone of Albacore, use the jeweler rake tasks to build the latest 
 >
 > rake jeweler:build
 
-this will produce an 'Albacore-#.#.#.gem' file in the 'pkg' folder, where '#.#.#' is the version number. For example 'Albacore-0.0.1.gem'.
+this will produce an 'albacore-#.#.#.gem' file in the 'pkg' folder, where '#.#.#' is the version number. For example 'Albacore-0.0.1.gem'.
 
 **Step 3:** Install the gem
 
 After building the gem, you can install it from your local file system.
 
-> gem install -l pkg\Albacore-#.#.#.gem
+> gem install -l pkg\albacore-#.#.#.gem
 
-where '#.#.#' is the version number of the gem. For example 'Albacore-0.0.1.gem'
+where '#.#.#' is the version number of the gem. For example 'albacore-0.0.1.gem'
 
 ## How To Use Albacore
 
