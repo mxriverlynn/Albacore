@@ -134,6 +134,12 @@ namespace :albacore do
      zip.additional_files = "README.markdown"
      zip.file = 'albacore_example.zip'
    end
+   
+   desc "MSpec Test Runner Example"
+   Albacore::MSpecTestRunnerTask.new do |mspec|
+     mspec.assemblies << "CodeCoverage/assemblies/TestSolution.Tests.dll"
+     mspec.html_output = "some_path/where_the/html_report_goes/"
+   end
 end
 
 namespace :jeweler do
