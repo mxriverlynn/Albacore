@@ -13,9 +13,9 @@ module Albacore
 		
 		def define
 			task name do
-		  	@block.call(@nunit) unless @block.nil?
-				@nunit.execute
-				fail if @nunit.failed
+		  	  @block.call(@nunit) unless @block.nil?
+			  @nunit.execute
+			  fail if @nunit.failed
 			end
 		end		
 	end

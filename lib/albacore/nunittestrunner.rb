@@ -4,7 +4,7 @@ class NUnitTestRunner
 	include RunCommand
 	include YAMLConfig
 	
-	attr_accessor :assemblies, :options
+	attr_accessor :path_to_command, :assemblies, :options
 	
 	def initialize(path_to_command='')
 		super()
@@ -29,8 +29,7 @@ class NUnitTestRunner
 	end
 	
 	def execute()
-		command_params = get_command_parameters
-		result = run_command "NUnit", command_params
+		result = run_command "NUnit", get_command_line
 		
 		failure_message = 'NUnit Failed. See Build Log For Detail'
 		fail_with_message failure_message if !result

@@ -1,8 +1,7 @@
 require 'albacore/support/albacore_helper'
 
 class MSpecTestRunner
-  include RunCommand
-	include Logging
+    include RunCommand
 	include YAMLConfig
 	
 	attr_accessor :assemblies, :path_to_command, :html_output, :options
@@ -20,9 +19,9 @@ class MSpecTestRunner
         command << @options.join(" ") unless @options.nil?
 		command << build_html_output unless @html_output.nil?
 		
-		command = command.join(" ")
-		@logger.debug "Build MSpec Test Runner Command Line: " + command
-        return command
+		cmd = command.join(" ")
+		@logger.debug "Build MSpec Test Runner Command Line: " + cmd
+        return cmd
 	end
 	
 	def execute()

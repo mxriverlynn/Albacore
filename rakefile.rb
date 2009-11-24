@@ -70,7 +70,7 @@ namespace :albacore do
 	require 'lib/albacore'
 
 	desc "Run a complete Albacore build sample"
-	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild', 'albacore:ncoverconsole', 'albacore:ncoverreport']
+	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild', 'albacore:ncoverconsole', 'albacore:ncoverreport', 'albacore:mspec']
 	
 	desc "Run a sample build using the MSBuildTask"
 	Albacore::MSBuildTask.new(:msbuild) do |msb|
@@ -145,6 +145,13 @@ namespace :albacore do
    Albacore::MSpecTestRunnerTask.new() do |mspec|
      mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
      mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
+   end
+
+   desc "NUnit Test Runner Example"
+  Albacore::NUnitTestRunnerTask.new() do |nunit|
+     nunit.log_level = :verbose
+     nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
+     nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
    end
 end
 
