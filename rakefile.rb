@@ -70,7 +70,13 @@ namespace :albacore do
 	require 'lib/albacore'
 
 	desc "Run a complete Albacore build sample"
-	task :sample => ['albacore:assemblyinfo', 'albacore:msbuild', 'albacore:ncoverconsole', 'albacore:ncoverreport', 'albacore:mspec']
+	task :sample => ['albacore:assemblyinfo',
+                     'albacore:msbuild',
+                     'albacore:ncoverconsole',
+                     'albacore:ncoverreport',
+                     'albacore:rename',  
+                     'albacore:mspec',
+                     'albacore:nunit']
 	
 	desc "Run a sample build using the MSBuildTask"
 	Albacore::MSBuildTask.new(:msbuild) do |msb|
