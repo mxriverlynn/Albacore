@@ -59,9 +59,15 @@ namespace :specs do
 		t.spec_opts << @spec_opts
     end
 
-  desc "Zip functional specs"
+    desc "Zip functional specs"
 	Spec::Rake::SpecTask.new :zip do |t|
 		t.spec_files = 'spec/zip*_spec.rb'
+		t.spec_opts << @spec_opts
+    end
+
+    desc "XUnit functional specs"
+	Spec::Rake::SpecTask.new :xunit do |t|
+		t.spec_files = 'spec/xunit*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 end
@@ -76,7 +82,8 @@ namespace :albacore do
                      'albacore:ncoverreport',
                      'albacore:rename',  
                      'albacore:mspec',
-                     'albacore:nunit']
+                     'albacore:nunit',
+                     'albacore:xunit']
 	
 	desc "Run a sample build using the MSBuildTask"
 	Albacore::MSBuildTask.new(:msbuild) do |msb|
@@ -154,10 +161,15 @@ namespace :albacore do
    end
 
    desc "NUnit Test Runner Example"
-  Albacore::NUnitTestRunnerTask.new() do |nunit|
-     nunit.log_level = :verbose
+   Albacore::NUnitTestRunnerTask.new() do |nunit|
      nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
      nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
+   end
+
+   desc "XUnit Test Runner Example"
+   Albacore::XUnitTestRunnerTask.new() do |xunit|
+     xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
+     xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
    end
 end
 

@@ -12,7 +12,7 @@ describe Albacore::MSpecTestRunnerTask, "when running" do
 		Rake::Task[:mspec].invoke
 	end
 	
-	it "should yield the nunit api" do
+	it "should yield the msoec api" do
 		@yielded_object.kind_of?(MSpecTestRunner).should be_true
 	end
 end
