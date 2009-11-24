@@ -6,7 +6,7 @@ describe ZipDirectory, 'when zipping a directory of files' do
 	before :each do
 		zip = ZipDirectory.new
 		puts "#{ZipTestData.folder}"
-		zip.directory_to_zip = ZipTestData.folder
+		zip.directories_to_zip = [ZipTestData.folder]
 		zip.file = "test.zip"
 		zip.package
 	end

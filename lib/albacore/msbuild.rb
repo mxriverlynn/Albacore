@@ -3,6 +3,7 @@ require 'albacore/support/albacore_helper'
 class MSBuild
 	include RunCommand
 	include YAMLConfig
+	include Logging
 	
 	attr_accessor :solution, :verbosity
 	
@@ -13,6 +14,8 @@ class MSBuild
 	
 	def build_path_to_command
 		win_dir = ENV['windir'] || ENV['WINDIR']
+  	win_dir = 'C:/Windows' if win_dir.nil?
+		
 		File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
 	end
 	

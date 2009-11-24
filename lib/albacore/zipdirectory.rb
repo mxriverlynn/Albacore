@@ -6,7 +6,8 @@ include Zip
 class ZipDirectory
 	include YAMLConfig
 	
-	attr_accessor :directory_to_zip
+	attr_accessor :directories_to_zip
+	attr_accessor :output_path
 	attr_accessor :additional_files
 	attr_accessor :file
 
@@ -15,15 +16,19 @@ class ZipDirectory
 	end
 		
 	def package()
-		return if @directory_to_zip.nil?
+		return if @directories_to_zip.nil?
 		
-		@directory_to_zip.sub!(%r[/$],'')
+		clean_directories_names
 		remove zip_name
 
 		ZipFile.open(zip_name, 'w')	do |zipfile|
 			zip_directory(zipfile)
 			zip_additional(zipfile)
 		end
+	end
+	
+	def clean_directories_names
+	  @directories_to_zip.each { |d| d.sub!(%r[/$],'')}
 	end
 	
 	def remove(filename)
@@ -35,14 +40,18 @@ class ZipDirectory
 	end
 	
 	def zip_name()
-		File.join(@directory_to_zip, @file)
+	  @output_path = @directories_to_zip.first unless @output_path
+		File.join(@output_path, @file)
 	end
 	
 	def zip_directory(zipfile)
-		Dir["#{@directory_to_zip}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
-			file_name = file_path.sub(@directory_to_zip+'/','');
-			zipfile.add(file_name, file_path)
-		end
+	  @directories_to_zip.each do |d|
+  		Dir["#{d}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
+        file_name = file_path
+  			file_name = file_path.sub(d + '/','') if @directories_to_zip.length == 1
+  			zipfile.add(file_name, file_path)
+  		end
+  	end
 	end
 	
 	def zip_additional(zipfile)
