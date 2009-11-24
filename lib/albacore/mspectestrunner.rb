@@ -5,7 +5,7 @@ class MSpecTestRunner
 	include Logging
 	include YAMLConfig
 	
-	attr_accessor :assemblies, :path_to_command, :html_output
+	attr_accessor :assemblies, :path_to_command, :html_output, :options
 	
 	def initialize(path_to_command='')
 		super()
@@ -17,11 +17,12 @@ class MSpecTestRunner
 		command = []
 		command << @path_to_command
 		command << build_assembly_list unless @assemblies.empty?
+        command << @options.join(" ") unless @options.nil?
 		command << build_html_output unless @html_output.nil?
 		
-		cmdline = command.join(" ")
-		@logger.debug "Build MSpec Test Runner Command Line: " + cmdline
-		cmdline
+		command = command.join(" ")
+		@logger.debug "Build MSpec Test Runner Command Line: " + command
+        return command
 	end
 	
 	def execute()

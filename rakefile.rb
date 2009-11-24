@@ -54,10 +54,16 @@ namespace :specs do
 	end	
 
 	desc "Expand Templates functional specs"
-	Spec::Rake::SpecTask.new :ssh do |t|
+	Spec::Rake::SpecTask.new :templates do |t|
 		t.spec_files = 'spec/expandtemplates*_spec.rb'
 		t.spec_opts << @spec_opts
-	end	
+    end
+
+  desc "Zip functional specs"
+	Spec::Rake::SpecTask.new :zip do |t|
+		t.spec_files = 'spec/zip*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
 end
 
 namespace :albacore do	
@@ -136,9 +142,9 @@ namespace :albacore do
    end
    
    desc "MSpec Test Runner Example"
-   Albacore::MSpecTestRunnerTask.new do |mspec|
-     mspec.assemblies << "CodeCoverage/assemblies/TestSolution.Tests.dll"
-     mspec.html_output = "some_path/where_the/html_report_goes/"
+   Albacore::MSpecTestRunnerTask.new() do |mspec|
+     mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
+     mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
    end
 end
 
