@@ -30,7 +30,8 @@ class NUnitTestRunner
 	end
 	
 	def execute()
-		result = run_command "NUnit", get_command_line
+		command_params = get_command_parameters
+		result = run_command "NUnit", command_params.join(" ")
 		
 		failure_message = 'NUnit Failed. See Build Log For Detail'
 		fail_with_message failure_message if !result

@@ -46,3 +46,19 @@ describe NUnitTestRunner, "the command line string for an nunit runner" do
     @command_line.should include(@command_parameters)
   end
 end
+
+
+describe NUnitTestRunner, "when configured correctly" do
+  before :all do
+    nunit = NUnitTestRunner.new(@@nunitpath)
+    nunit.assemblies << @@test_assembly
+    nunit.options << '/noshadow'
+    
+    nunit.execute
+    @failed = nunit.failed
+  end
+  
+  it "should execute" do
+    @failed.should be_false
+  end
+end
