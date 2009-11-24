@@ -48,7 +48,7 @@ class ZipDirectory
 	  @directories_to_zip.each do |d|
   		Dir["#{d}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
         file_name = file_path
-  			file_name = file_path.sub(d + '/','') if @directories_to_zip.count == 1
+  			file_name = file_path.sub(d + '/','') if @directories_to_zip.length == 1
   			zipfile.add(file_name, file_path)
   		end
   	end
