@@ -65,9 +65,7 @@ Beyond the simple example, check out the [Albacore Wiki](http://wiki.github.com/
 
 ## How To Contribute, Collaborate, Communicate
 
-If you'd like to get involved with the Albacore framework, we have a discussion group over at google:
-
-**[AlbacoreDev](http://groups.google.com/group/albacoredev)***
+If you'd like to get involved with the Albacore framework, we have a discussion group over at google: **[AlbacoreDev](http://groups.google.com/group/albacoredev)**
 
 Anyone can fork the main repository and submit patches, as well. And lastly, the [wiki](http://wiki.github.com/derickbailey/Albacore) and [issues list](http://github.com/derickbailey/Albacore/issues) are also open for additions, edits, and discussion.
 
