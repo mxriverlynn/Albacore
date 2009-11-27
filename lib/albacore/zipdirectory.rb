@@ -16,8 +16,6 @@ class ZipDirectory
 	end
 		
 	def package()
-		return if @directories_to_zip.nil?
-		
 		clean_directories_names
 		remove zip_name
 
@@ -28,6 +26,7 @@ class ZipDirectory
 	end
 	
 	def clean_directories_names
+    return if @directories_to_zip.nil?
 	  @directories_to_zip.each { |d| d.sub!(%r[/$],'')}
 	end
 	
@@ -45,6 +44,7 @@ class ZipDirectory
 	end
 	
 	def zip_directory(zipfile)
+    return if @directories_to_zip.nil?
 	  @directories_to_zip.each do |d|
   		Dir["#{d}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
         file_name = file_path
