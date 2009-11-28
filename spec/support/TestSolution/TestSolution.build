@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project name="Test Solution" default="build">
+  <property name="debug" value="true"/>
+  <property name="build.version" value="0.0.1"/>
+  <property name="build.mode" value="debug"/>
+
+  <target name="clean">
+    <delete>
+      <fileset>
+        <include name="out/**"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="build">
+    <mkdir dir="out/${build.version}/${build.mode}" />
+  </target>
+</project>
