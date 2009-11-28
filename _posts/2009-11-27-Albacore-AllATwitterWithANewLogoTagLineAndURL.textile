@@ -1,0 +1,40 @@
+---
+layout: post
+title: All A-Twitter With A New Logo, Tag Line, And URL
+---
+
+There’s been a lot of fun things happening with Albacore over the holiday weekend.
+
+h2. The Discussion Group
+
+First, there was the Google Groups announcement to coordinate the community. It’s taken off fairly well with our first call for help, and an answer from Steve.
+
+bq. <a href="http://groups.google.com/group/albacoredev">Albacore Dev</a>
+
+h2. The Albacore Website
+
+Next, Ben Hall was kind enough to register and host the new url:
+
+bq. <a href="http://albacorebuild.net">http://albacorebuild.net</a>
+
+We’ve got it set to point at the Albacore Github page, and I have some ideas of what we can do with this… it’ll grow over time so be sure to keep that url in mind as the central location to find all things Albacore.
+
+h2. The Albacore Twitter
+
+Then there’s a new twitter account to keep the twitterverse up to date with all the latest and greatest happenings in Albacore.
+
+bq. <a href="http://twitter.com/albacorebuild">@albacorebuild</a>
+
+h2. The Albacore Tag Line
+
+Don’t forget about the new tag line! I’m quite proud of this one… it’s kinda dumb, but funny at the same time. :)
+
+bq. Albacore: Dolphin-Safe Rake Tasks For .NET Systems
+
+h2. The Albacore Logo
+
+And last, but certainly not least for the weekend, is the new Albacore logo that incorporates the tag line. I managed to pull out my rusty old design skills and put together this little gem with the help of InkScape.
+
+bq. <img src="/images/AlbacoreLogo3.png" />
+
+As you can see, it’s been a busy holiday weekend for the Albacore crew. I’m hoping that this is just the beginning of a good community building effort, and a lot of support and contributions for the project.
