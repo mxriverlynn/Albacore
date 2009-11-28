@@ -1,13 +1,35 @@
 body {
 	margin-top: 1.0em;
-	background-color: #ffffff;
+	background-color: #dfdfdf;
 	  font-family: "Helvetica,Arial,FreeSans"; 
 	color: #000000;
 }
 
 #container {
-  margin: 0 auto;
-  width: 700px;
+	padding: 10px;
+	margin: 0 auto;
+	width: 700px;
+	background-color: #ffffff;
+	border-right: 1px solid #afafaf;
+	border-bottom: 1px solid #afafaf;
+}
+
+#titlebar {
+	margin: 0 auto;
+	width: 700px;
+	padding-bottom: 5px;
+}
+
+#navigation {
+	margin: 0 auto;
+	width: 700px;
+	padding: 0px;
+}
+
+#menu {
+	margin: 0px;
+	padding-left: 0px;
+	width: 75px;
 }
 
 h1 { font-size: 2em; color: #172c31; }
@@ -15,11 +37,16 @@ h1 .small { font-size: 0.4em; }
 h1 a { text-decoration: none }
 h2 { border-bottom: 1px solid #cfcfcf; padding-top: 10px; font-size: 1.5em; color: #172c31; }
 h3 { color: #172c31; }
-a { color: #172c31; }
+a { color: #0000df; }
 
 pre { background: #000; color: #fff; padding: 15px;}
 hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 
-.description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+.description { 
+	font-size: 1.2em; 
+	margin-bottom: 30px;
+	font-style: italic;
+}
+
 .download { float: right; }
 .footer { text-align:center; padding-top:30px; font-style: italic; }
