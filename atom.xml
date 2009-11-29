@@ -4,8 +4,8 @@ layout: nil
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>AlbacoreBuild.Net :: Atom</title>
- <link href="http://albacorebuild.net/atom.xml" rel="self"/>
+ <title>Albacore: Dolphin-Safe Rake Tasks For .NET Systems</title>
+ <link href="http://feeds.feedburner.com/AlbacoreBuild" rel="self"/>
  <link href="http://albacorebuild.net/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>http://albacorebuild.net/</id>
