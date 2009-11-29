@@ -5,8 +5,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Albacore: {{ page.title }}</title>
-	<link href="/css/main.css" rel="stylesheet" type="text/css" />
-	<link href="http://albacore.net/atom.xml" rel="alternate" title="AlbacoreBuild.Net" type="application/atom+xml" />
+	<link href="{{ site.url }}/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="{{ site.url }}/atom.xml" rel="alternate" title="AlbacoreBuild.Net" type="application/atom+xml" />
 </head>
 <body>
 	<a href="http://github.com/derickbailey/Albacore"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
@@ -20,14 +20,20 @@
     	</div>
 
     	<div class="logo">
-			<img border="0" src="/images/AlbacoreLogo3.png" />
+			<img border="0" src="{{ site.url }}/images/AlbacoreLogo3.png" />
     	</div>
 	</div>
 	
 	<div id="navigation">
 		<div id="menu">
-			[<a href="/">Home</a>]
+			[<a href="{{ site.url }}">Home</a>]
 		</div>
 	</div>
 	<div id="container">
-
+		{{ content }}
+		<div class="footer">
+			get the source code on GitHub : <a href="http://github.com/derickbailey/Albacore">derickbailey/Albacore</a>
+		</div>
+	</div>
+</body>
+</html>
