@@ -100,7 +100,8 @@ hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 
 .footer { 
 	border-top: 1px solid #7f7f7f;
-	margin-top: 15px;
+	margin-top: 25px;
+	padding-top: 10px;
 	text-align:center; 
 	font-style: italic;
 	font-size: 0.8em; 
