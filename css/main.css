@@ -27,10 +27,19 @@ body {
 	padding: 0px;
 }
 
-#menu {
+.menu, .menu_right {
 	margin: 0px;
 	padding-left: 0px;
 	width: 75px;
+	padding-right: 10px;
+}
+
+.menu{
+	float: left;
+}
+
+.menu_right{
+	float: right;
 }
 
 .main_content{
