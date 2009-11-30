@@ -1,7 +1,7 @@
 require 'rake/tasklib'
 
 module Albacore
-	class XUnitTestRunnerTask < Rake::TaskLib
+	class XUnitTask < Rake::TaskLib
 		attr_accessor :name
 
 		def initialize(name=:xunit, &block)
