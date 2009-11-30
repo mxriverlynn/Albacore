@@ -25,7 +25,7 @@ end
 def add_source(url)
   begin
   	if Gem.sources.include?(url)
-  		puts "Found #{url} gem source = skipping"
+  		puts "Found #{url} gem source - skipping"
   	else
   		puts "Adding #{url} gem source."
 		Gem::GemRunner.new.run ['sources', '-a', url]
