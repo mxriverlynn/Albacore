@@ -59,13 +59,13 @@ namespace :specs do
 		t.spec_opts << @spec_opts
     end
 
-    desc "Zip functional specs"
+  desc "Zip functional specs"
 	Spec::Rake::SpecTask.new :zip do |t|
 		t.spec_files = 'spec/zip*_spec.rb'
 		t.spec_opts << @spec_opts
     end
 
-    desc "XUnit functional specs"
+  desc "XUnit functional specs"
 	Spec::Rake::SpecTask.new :xunit do |t|
 		t.spec_files = 'spec/xunit*_spec.rb'
 		t.spec_opts << @spec_opts
@@ -83,7 +83,8 @@ namespace :albacore do
                      'albacore:rename',  
                      'albacore:mspec',
                      'albacore:nunit',
-                     'albacore:xunit']
+                     'albacore:xunit',
+                     'albacore:ruby']
 	
 	desc "Run a sample build using the MSBuildTask"
 	Albacore::MSBuildTask.new(:msbuild) do |msb|
@@ -170,6 +171,11 @@ namespace :albacore do
    Albacore::XUnitTestRunnerTask.new() do |xunit|
      xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
      xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
+   end
+   
+   desc "Ruby Task Example"
+   Albacore::RubyTask.new() do  
+      puts "Any ruby code here..."
    end
 end
 
