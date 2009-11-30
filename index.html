@@ -3,28 +3,19 @@ layout: default
 title: Dolphin-Safe Rake Tasks For .NET Systems
 ---
 
-<div class="main_content">
-    <div class="description">
-      <h1>Albacore</h1>
-      Dolphin-Safe Rake Tasks For .NET Systems
-    </div>
-
-    <h2>Install The Gem Or Git The Source Code</h2>
-    <p>
-        You can git the source code and/or gem installation instructions from GitHub, at <a href="http://github.com/derickbailey/Albacore">http://github.com/derickbailey/Albacore</a>
-    </p>
-
-	<h2>News And Updates</h2>
-	<ul class="posts">
-		{% for post in site.posts %}
-		<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></li>
-		{% endfor %}
-	</ul>
+<div class="description">
+	<h1>Albacore</h1>
+	Dolphin-Safe Rake Tasks For .NET Systems
 </div>
-<div class="sidebar">
-	<div class="sidebar_item">
-		<h2>Thank You NCover</h2>
-			Thanks to NCover for supporting Albacore and providing a free license, used for functional testing of Albacore's NCoverConsoleTask and NCoverReportTask tasks!<br/>
-			<a href="http://ncover.com"><img src="{{ site.url }}/images/i_cover_my_code_promo_badge_white.jpg" border="0"></a>
-	</div>
-</div>
+
+<h2>Install The Gem Or Git The Source Code</h2>
+<p>
+	You can git the source code and/or gem installation instructions from GitHub, at <a href="http://github.com/derickbailey/Albacore">http://github.com/derickbailey/Albacore</a>
+</p>
+
+<h2>News And Updates</h2>
+<ul class="posts">
+	{% for post in site.posts %}
+	<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></li>
+	{% endfor %}
+</ul>
