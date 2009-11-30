@@ -97,9 +97,27 @@ hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 }
 
 .download { float: right; }
+
 .footer { 
+	border-top: 1px solid #7f7f7f;
+	margin-top: 15px;
 	text-align:center; 
-	padding-top:30px; 
-	font-style: italic; 
+	font-style: italic;
+	font-size: 0.8em; 
 	clear: both;
+	height: 25px;
+}
+
+.footer_left{
+	padding: 0px;
+	float: left;
+	text-align: left;
+	width: auto;
+}
+
+.footer_right{
+	padding: 0px;
+	display: inline;
+	text-align: right;
+	width: auto;
 }
