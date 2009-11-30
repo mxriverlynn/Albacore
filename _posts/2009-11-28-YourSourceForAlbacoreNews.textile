@@ -5,7 +5,7 @@ title: Your Source For Albacore News
 
 h2. Dr. Jekyll, Mr. Albacore
 
-I decided to put <a href="http://pages.github.com/">github's 'pages'</a> feature to good use and set up the AlbacoreBuild.net site with all the configuration files that I needed to make a <a href="http://github.com/mojombo/jekyll">jekyll</a> site and host a blog for Albcare. You're currently reading the results of my effort. 
+I decided to put <a href="http://pages.github.com/">github's 'pages'</a> feature to good use and set up the AlbacoreBuild.net site with all the configuration files that I needed to make a <a href="http://github.com/mojombo/jekyll">jekyll</a> site and host a blog for Albacore. You're currently reading the results of my effort. 
 
 One of the great parts about using jekyll and github pages is that the entire site is managed through the Albacore repository on git. This means we get full source control over the site with collaboration from anyone that wishes to contribute. So, if you have some Albacore news, tips & trick, or any other ideas that you want to share, feel free to drop a file in the _posts folder under the '<a href="http://github.com/derickbailey/Albacore/tree/gh-pages">gh-pages</a>' branch, and send a pull request in. We'll review the post and get it pushed up to the site.
 
@@ -15,4 +15,4 @@ I don't claim that this site perfect yet - far from it. Rather, this will be wor
 
 h2. A Cry For Help!
 
-If your, or anyone you know, has some crazy-good inter-webs design-o-matic skills, some free time and a willingness to contribute to a small but growing open source effort, please let me know. This site really needs some better look and feel, layout, etc. You can get my email from <a href="http://github.com/derickbailey">my github profie<a/>.
+If your, or anyone you know, has some crazy-good inter-webs design-o-matic skills, some free time and a willingness to contribute to a small but growing open source effort, please let me know. This site really needs some better look and feel, layout, etc. You can get my email from <a href="http://github.com/derickbailey">my github profie</a>.
