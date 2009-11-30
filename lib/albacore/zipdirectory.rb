@@ -6,13 +6,13 @@ include Zip
 class ZipDirectory
 	include YAMLConfig
 	
-	attr_accessor :directories_to_zip
-	attr_accessor :output_path
-	attr_accessor :additional_files
-	attr_accessor :file
+	attr_accessor :directories_to_zip, :additional_files
+	attr_accessor :output_path, :output_file
+	attr_accessor :flatten_zip
 
 	def initialize
 		super()
+		@flatten_zip = true
 	end
 		
 	def package()
@@ -40,7 +40,7 @@ class ZipDirectory
 	
 	def zip_name()
 	  @output_path = @directories_to_zip.first unless @output_path
-		File.join(@output_path, @file)
+		File.join(@output_path, @output_file)
 	end
 	
 	def zip_directory(zipfile)
@@ -48,7 +48,7 @@ class ZipDirectory
 	  @directories_to_zip.each do |d|
   		Dir["#{d}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
         file_name = file_path
-  			file_name = file_path.sub(d + '/','') if @directories_to_zip.length == 1
+  			file_name = file_path.sub(d + '/','') if @flatten_zip
   			zipfile.add(file_name, file_path)
   		end
   	end
@@ -57,7 +57,7 @@ class ZipDirectory
 	def zip_additional(zipfile)
 		return if @additional_files.nil?
 		@additional_files.reject{|f| reject_file(f)}.each do |file_path|
-			file_name = file_path#.split('/').last
+			file_name = file_path.split('/').last if @flatten_zip
 			zipfile.add(file_name, file_path)
 		end
 	end
