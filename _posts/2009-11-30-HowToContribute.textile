@@ -1,0 +1,44 @@
+---
+layout: post
+title: How To Contribute To Albacore
+---
+
+If you would like to contribute to the Albacore project, there are a number of things that you can do including code contributions, bug reports, idea submissions, user group discussions, etc.
+
+h2. Github Issues List
+
+Anyone can submit an item to the issues list directly. Just click the "Issues" tab on Derick Bailey's "github repository":http://github.com/derickbailey/Albacore/issues for Albacore. You can add comments to existing items, add new items, vote for them, etc.
+
+h2. Google Groups
+
+There is a user group set up over on google groups: "AlbacoreDev":http://groups.google.com/group/albacoredev Here you can post any kind of discussion you wish, pertaining to Albacore. This includes questions, comments, bugs, ideas, or anything else you want to discuss.
+
+h2. Code Submissions
+
+If you would like to submit code patches to Albacore, the first thing you need to do is fork the repository to your github account. After you have made the changes that you want, send a pull request to Derick Bailey. For more information on how to go about the fork / pull request process, see the "Forking A Project":http://help.github.com/forking/ github help page.
+
+h3. AutoCRLF
+
+Before you begin working with Albacore, be sure to set your "AutoCRLF":http://help.github.com/dealing-with-lineendings/ option correctly.
+
+h3. Rebasing / Merging from Master
+
+Before you send in a Pull Request, be sure you have rebased or merged your working branch with alll changes that are in the Master branch of the "master repository":http://github.com/derickbailey/Albacore . If you don't property rebase / merge from the master repository, your pull request may be ignored or rejected.
+
+h3. Dependencies
+
+If you wish to write / run any of the suite of specs for Albacore, you will need several dependencies installed. If you have installed Albacore via the gem, you will have most of the dependencies you need, but not all of them. If you have only forked / cloned Albacore, you may not have any of the required dependencies.
+
+To install the Albacore dependencies for runtime and development effort, run the following ruby command from the root of your Albacore clone:
+
+<pre><code>ruby install_dependencies.rb</code></pre>
+
+This will install all required dependencies.
+
+h3. Running The RSpec Tests
+
+If you wish to run the rspec test suite, you can get a list of the available specs by running <code>rake -T</code> in the root of your Albacore clone. The <code>specs:all</code> task will run every spec. Other tasks will run only the stated specs.
+
+h4. Note on NCover Specs
+
+You must have a valid NCover 3.x license installed on your system, to run the NCover* specs. If you do not have a license installed, you will receive an error while attempting to run these specs.
