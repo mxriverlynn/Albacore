@@ -65,9 +65,25 @@ namespace :specs do
 		t.spec_opts << @spec_opts
     end
 
+<<<<<<< HEAD
   desc "XUnit functional specs"
+=======
+	desc "XUnit functional specs"
+>>>>>>> 6cc51b536b718607357ac9970c8f08d9caffbeb2
 	Spec::Rake::SpecTask.new :xunit do |t|
 		t.spec_files = 'spec/xunit*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
+
+    desc "NUnit functional specs"
+	Spec::Rake::SpecTask.new :nunit do |t|
+		t.spec_files = 'spec/nunit*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
+
+    desc "MSpec functional specs"
+	Spec::Rake::SpecTask.new :mspec do |t|
+		t.spec_files = 'spec/mspec*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 end
@@ -156,19 +172,19 @@ namespace :albacore do
    end
    
    desc "MSpec Test Runner Example"
-   Albacore::MSpecTestRunnerTask.new() do |mspec|
+   Albacore::MSpecTask.new() do |mspec|
      mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
      mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
    end
 
    desc "NUnit Test Runner Example"
-   Albacore::NUnitTestRunnerTask.new() do |nunit|
+   Albacore::NUnitTask.new() do |nunit|
      nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
      nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
    end
 
    desc "XUnit Test Runner Example"
-   Albacore::XUnitTestRunnerTask.new() do |xunit|
+   Albacore::XUnitTask.new() do |xunit|
      xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
      xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
    end

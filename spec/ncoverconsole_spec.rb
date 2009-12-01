@@ -41,7 +41,7 @@ describe NCoverConsole, "when specifying aseemblies to cover" do
 	end
 end
 
-describe NCoverConsole, "when specifying aseemblies to ignore" do
+describe NCoverConsole, "when specifying assemblies to ignore" do
 	before :all do
 		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
 		

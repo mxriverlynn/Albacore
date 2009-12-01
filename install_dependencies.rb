@@ -11,21 +11,35 @@ end
 
 def install(lib)
   begin
-    Gem::GemRunner.new.run ['install', lib]
+  	matches = Gem.source_index.find_name(lib)
+    if matches.empty?
+    	puts "Installing #{lib}"
+    	Gem::GemRunner.new.run ['install', lib]
+    else
+    	puts "Found #{lib} gem - skipping"
+    end
   rescue Gem::SystemExitException => e
   end
 end
 
 def add_source(url)
   begin
-    Gem::GemRunner.new.run ['sources', '-a', url]
+  	if Gem.sources.include?(url)
+  		puts "Found #{url} gem source - skipping"
+  	else
+  		puts "Adding #{url} gem source."
+		Gem::GemRunner.new.run ['sources', '-a', url]
+	end
   rescue Gem::SystemExitException => e
   end
 end
 
 puts "Installing required dependencies"
 add_source 'http://gemcutter.org'
+install 'rake'
+install 'net-ssh'
 install 'net-sftp'
 install 'rubyzip'
 install 'jeweler'
+install 'rspec'
 install 'derickbailey-notamock'

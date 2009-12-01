@@ -1,3 +1,4 @@
+.DS_Store
 pkg
 obj
 bin
@@ -31,3 +32,4 @@ albacore.gemspec
 .idea
 web.config.example
 albacore_example.zip
+TestResult.xml

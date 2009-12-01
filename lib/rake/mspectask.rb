@@ -1,7 +1,7 @@
 require 'rake/tasklib'
 
 module Albacore
-	class MSpecTestRunnerTask < Rake::TaskLib
+	class MSpecTask < Rake::TaskLib
 		attr_accessor :name
 		
 		def initialize(name=:mspec, &block)
