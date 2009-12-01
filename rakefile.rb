@@ -65,11 +65,7 @@ namespace :specs do
 		t.spec_opts << @spec_opts
     end
 
-<<<<<<< HEAD
-  desc "XUnit functional specs"
-=======
 	desc "XUnit functional specs"
->>>>>>> 6cc51b536b718607357ac9970c8f08d9caffbeb2
 	Spec::Rake::SpecTask.new :xunit do |t|
 		t.spec_files = 'spec/xunit*_spec.rb'
 		t.spec_opts << @spec_opts
