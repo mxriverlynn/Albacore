@@ -5,7 +5,8 @@ include Zip
 
 class ZipDirectory
 	include YAMLConfig
-	
+  include Failure
+  
 	attr_accessor :directories_to_zip, :additional_files
 	attr_accessor :output_path, :output_file
 	attr_accessor :flatten_zip
@@ -16,6 +17,9 @@ class ZipDirectory
 	end
 		
 	def package()
+    fail_with_message 'Output File cannot be empty' if @output_file.nil?
+    return if @output_file.nil?
+        
 		clean_directories_names
 		remove zip_name
 
@@ -39,9 +43,17 @@ class ZipDirectory
 	end
 	
 	def zip_name()
-	  @output_path = @directories_to_zip.first unless @output_path
-		File.join(@output_path, @output_file)
+    @output_path = set_output_path
+    File.join(@output_path, @output_file)
 	end
+  
+  def set_output_path()
+    path = ''
+    path = @directories_to_zip.first unless @directories_to_zip.nil?
+    path = @output_path unless @output_path.nil?
+    return path
+  end
+    
 	
 	def zip_directory(zipfile)
     return if @directories_to_zip.nil?

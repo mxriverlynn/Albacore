@@ -11,7 +11,7 @@ describe ZipDirectory, 'when zipping a directory of files' do
 		zip.package
 	end
 	
-	it "should prodice a zip file" do
+	it "should produce a zip file" do
 		File.exist?(File.join(ZipTestData.folder, "test.zip")).should be_true
 	end
 end

@@ -15,6 +15,7 @@ module Albacore
 			task name do
 				@block.call(@zip) unless @block.nil?
 				@zip.package
+        fail if @zip.failed
 			end
 		end		
 	end
