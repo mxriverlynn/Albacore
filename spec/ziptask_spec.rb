@@ -6,7 +6,7 @@ require 'tasklib_patch'
 describe Albacore::ZipTask, "when running" do
 	before :all do
 		task = Albacore::ZipTask.new() do |t|
-      t.output_file = 'test.zip'
+		t.output_file = 'test.zip'
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

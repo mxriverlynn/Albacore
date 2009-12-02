@@ -6,7 +6,7 @@ module Albacore
 
 		def initialize(name=:ruby, &block)
 			@name = name
-                        @block = block
+			@block = block
 			define
 		end
 

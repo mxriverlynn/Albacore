@@ -59,7 +59,7 @@ namespace :specs do
 		t.spec_opts << @spec_opts
     end
 
-  desc "Zip functional specs"
+	desc "Zip functional specs"
 	Spec::Rake::SpecTask.new :zip do |t|
 		t.spec_files = 'spec/zip*_spec.rb'
 		t.spec_opts << @spec_opts
@@ -149,46 +149,46 @@ namespace :albacore do
 		
 		ncr.required_coverage << NCover::BranchCoverage.new(:minimum => 10)
 		ncr.required_coverage << NCover::CyclomaticComplexity.new(:maximum => 1)
-  end
+	end
 
-   desc "Run the sample for renaming a File"
-   Albacore::RenameTask.new() do |rename|
-      FileUtils.touch 'web.uat.config.example'
+	desc "Run the sample for renaming a File"
+	Albacore::RenameTask.new() do |rename|
+		FileUtils.touch 'web.uat.config.example'
      
-      rename.actual_name = 'web.uat.config.example'
-      rename.target_name = 'web.config.example'
-   end
+		rename.actual_name = 'web.uat.config.example'
+		rename.target_name = 'web.config.example'
+	end
    
-   desc "Run ZipDirectory example"
-   Albacore::ZipTask.new() do |zip|
-     zip.output_path = File.dirname(__FILE__)
-     zip.directories_to_zip = ["lib", "spec"]
-     zip.additional_files = "README.markdown"
-     zip.file = 'albacore_example.zip'
-   end
+	desc "Run ZipDirectory example"
+	Albacore::ZipTask.new() do |zip|
+		zip.output_path = File.dirname(__FILE__)
+		zip.directories_to_zip = ["lib", "spec"]
+		zip.additional_files = "README.markdown"
+		zip.file = 'albacore_example.zip'
+	end
    
-   desc "MSpec Test Runner Example"
-   Albacore::MSpecTask.new() do |mspec|
-     mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
-     mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
-   end
+	desc "MSpec Test Runner Example"
+	Albacore::MSpecTask.new() do |mspec|
+		mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
+		mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
+	end
 
-   desc "NUnit Test Runner Example"
-   Albacore::NUnitTask.new() do |nunit|
-     nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
-     nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
-   end
+	desc "NUnit Test Runner Example"
+	Albacore::NUnitTask.new() do |nunit|
+		nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
+		nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
+	end
 
-   desc "XUnit Test Runner Example"
-   Albacore::XUnitTask.new() do |xunit|
-     xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
-     xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
-   end
+	desc "XUnit Test Runner Example"
+	Albacore::XUnitTask.new() do |xunit|
+		xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
+		xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
+	end
    
-   desc "Ruby Task Example"
-   Albacore::RubyTask.new() do  
-      puts "Any ruby code here..."
-   end
+	desc "Ruby Task Example"
+	Albacore::RubyTask.new() do  
+		puts "Any ruby code here..."
+	end
 end
 
 namespace :jeweler do

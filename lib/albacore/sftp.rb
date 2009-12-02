@@ -12,7 +12,7 @@ class Sftp
 		@upload_files = {}
 	end	
 	
-  def get_connection_options
+	def get_connection_options
 		options = {}
 		options[:verbose] = :debug if @debug == true
 		options[:password] = @password if @password
@@ -22,7 +22,7 @@ class Sftp
 	end
   
 	def upload()
-    warn_about_key if @key
+		warn_about_key if @key
     
 		Net::SFTP.start(@server, @username, get_connection_options) do |sftp|
 			@logger.debug "Starting File Upload"
@@ -32,9 +32,9 @@ class Sftp
 			}
 		end
 	end
-  
-  def warn_about_key()
-      info.debug 'When using a key, you need an SSH-Agent running to manage the keys.'
-      info.debug 'On Windows, a recommended agent is called Pageant, downloadable from the Putty site.'
-  end
+
+	def warn_about_key()
+		info.debug 'When using a key, you need an SSH-Agent running to manage the keys.'
+		info.debug 'On Windows, a recommended agent is called Pageant, downloadable from the Putty site.'
+	end
 end

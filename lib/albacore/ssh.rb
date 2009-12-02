@@ -22,7 +22,7 @@ class Ssh
 	end
 	
 	def execute()
-    warn_about_key if @key
+    	warn_about_key if @key
     
 		Net::SSH.start(@server, @username, get_connection_options) do |ssh|
 			@commands.each{|cmd|
@@ -32,11 +32,11 @@ class Ssh
 				@logger.info output
 			}
 		end
-  end
+	end
   
-  def warn_about_key()
-      info.debug 'When using a key, you need an SSH-Agent running to manage the keys.'
-      info.debug 'On Windows, a recommended agent is called Pageant, downloadable from the Putty site.'
-  end
+	def warn_about_key()
+		info.debug 'When using a key, you need an SSH-Agent running to manage the keys.'
+		info.debug 'On Windows, a recommended agent is called Pageant, downloadable from the Putty site.'
+	end
   
 end
