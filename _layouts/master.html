@@ -41,18 +41,51 @@
 				<h2>Albacore Resources</h2>
 				Google Groups: <a href="http://groups.google.com/group/albacoredev">Albacore Dev</a><br/>
 				<br/>
-				Twitter: <a href="http://twitter.com/albacorebuild">@albacorebuild</a><br/>
-				<br/>
 				Github: 
 				<ul>
 					<li><a href="http://github.com/derickbailey/Albacore">Source Code</a><br/></li>
 					<li><a href="http://wiki.github.com/derickbailey/Albacore">Wiki</a><br/></li>
 					<li><a href="http://github.com/derickbailey/Albacore/issues">Issues List</a><br/></li>
 				</ul>
+				<br/>
+				Twitter: <a href="http://twitter.com/albacorebuild">@albacorebuild</a><br/>
+			</div>
+			<div class="sidebar_item">
+				<script src="http://widgets.twimg.com/j/2/widget.js"></script>
+				<script>
+				new TWTR.Widget({
+				  version: 2,
+				  type: 'profile',
+				  rpp: 4,
+				  interval: 6000,
+				  width: 190,
+				  height: 300,
+				  theme: {
+				    shell: {
+				      background: '#333333',
+				      color: '#ffffff'
+				    },
+				    tweets: {
+				      background: '#000000',
+				      color: '#ffffff',
+				      links: '#4aed05'
+				    }
+				  },
+				  features: {
+				    scrollbar: true,
+				    loop: false,
+				    live: true,
+				    hashtags: true,
+				    timestamp: true,
+				    avatars: true,
+				    behavior: 'all'
+				  }
+				}).render().setUser('albacorebuild').start();
+				</script>
 			</div>
 			<div class="sidebar_item">
 				<h2>Thank You NCover</h2>
-					Thanks to NCover for supporting Albacore and providing a free license, used for functional testing of Albacore's NCoverConsoleTask and NCoverReportTask tasks!<br/>
+					Thanks to NCover for supporting Albacore and providing a free license, used for functional testing of Albacore's NCoverConsoleTask and NCoverReportTask!<br/>
 					<a href="http://ncover.com"><img src="{{ site.url }}/images/i_cover_my_code_promo_badge_white.jpg" border="0"></a>
 			</div>
 		</div>
