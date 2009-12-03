@@ -2,7 +2,7 @@ require 'rake/tasklib'
 
 module Albacore	
 	def self.expandtemplates(name=:expandtemplates, *args, &block)
-		MSBuildTask.new(name, *args, &block)
+		ExpandTemplatesTask.new(name, *args, &block)
 	end
 	
 	class ExpandTemplatesTask < Albacore::AlbacoreTask

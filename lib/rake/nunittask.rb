@@ -1,22 +1,16 @@
 require 'rake/tasklib'
 
 module Albacore
-	class NUnitTask < Rake::TaskLib
-		attr_accessor :name
-		
-		def initialize(name=:nunit, &block)
-			@name = name
-			@block = block
-			define
-		end
-		
-		def define
-			task name do
-				@nunit = NUnitTestRunner.new
-				@block.call(@nunit) unless @block.nil?
-				@nunit.execute
-				fail if @nunit.failed
-			end
+	def self.nunit(name=:nunit, *args, &block)
+		NUnitTask.new(name, *args, &block)
+	end
+	
+	class NUnitTask < Albacore::AlbacoreTask
+		def execute(task_args)
+			@nunit = NUnitTestRunner.new
+			@block.call(@nunit, *task_args) unless @block.nil?
+			@nunit.execute
+			fail if @nunit.failed
 		end		
 	end
 end

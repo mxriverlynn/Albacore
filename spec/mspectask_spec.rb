@@ -5,7 +5,7 @@ require 'tasklib_patch'
 
 describe Albacore::MSpecTask, "when running" do
 	before :all do
-		task = Albacore::MSpecTask.new() do |t|
+		task = Albacore::MSpecTask.new(:mspec) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

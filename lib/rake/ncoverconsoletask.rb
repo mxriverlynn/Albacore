@@ -1,22 +1,16 @@
 require 'rake/tasklib'
 
 module Albacore
-	class NCoverConsoleTask < Rake::TaskLib
-		attr_accessor :name
-		
-		def initialize(name=:ncoverconsole, &block)
-			@name = name
-			@block = block
-			define
-		end
-		
-		def define
-			task name do
-				@ncover = NCoverConsole.new
-				@block.call(@ncover) unless @block.nil?
-				@ncover.run
-				fail if @ncover.failed
-			end
+	def self.ncoverconsole(name=:ncoverconsole, *args, &block)
+		NCoverConsoleTask.new(name, *args, &block)
+	end
+	
+	class NCoverConsoleTask < Albacore::AlbacoreTask
+		def execute(task_args)
+			@ncover = NCoverConsole.new
+			@block.call(@ncover, *task_args) unless @block.nil?
+			@ncover.run
+			fail if @ncover.failed
 		end	
 	end
 end

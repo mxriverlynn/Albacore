@@ -5,7 +5,7 @@ require 'tasklib_patch'
 
 describe Albacore::NUnitTask, "when running" do
 	before :all do
-		task = Albacore::NUnitTask.new() do |t|
+		task = Albacore::NUnitTask.new(:nunit) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

@@ -1,7 +1,6 @@
 require 'rake/tasklib'
 
 module Albacore
-	
 	def self.msbuild(name=:msbuild, *args, &block)
 		MSBuildTask.new(name, *args, &block)
 	end

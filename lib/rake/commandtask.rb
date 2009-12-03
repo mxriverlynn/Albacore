@@ -2,7 +2,7 @@ require 'rake/tasklib'
 
 module Albacore	
 	def self.command(name=:command, *args, &block)
-		MSBuildTask.new(name, *args, &block)
+		CommandTask.new(name, *args, &block)
 	end
 	
 	class CommandTask < Albacore::AlbacoreTask

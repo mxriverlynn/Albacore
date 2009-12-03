@@ -157,7 +157,7 @@ namespace :albacore do
 	end
 
 	desc "Run the sample for renaming a File"
-	Albacore::RenameTask.new() do |rename|
+	Albacore::RenameTask.new(:rename) do |rename|
 		FileUtils.touch 'web.uat.config.example'
      
 		rename.actual_name = 'web.uat.config.example'
@@ -165,7 +165,7 @@ namespace :albacore do
 	end
    
 	desc "Run ZipDirectory example"
-	Albacore::ZipTask.new() do |zip|
+	Albacore::ZipTask.new(:zip) do |zip|
 		zip.output_path = File.dirname(__FILE__)
 		zip.directories_to_zip = ["lib", "spec"]
 		zip.additional_files = "README.markdown"
@@ -173,19 +173,19 @@ namespace :albacore do
 	end
    
 	desc "MSpec Test Runner Example"
-	Albacore::MSpecTask.new() do |mspec|
+	Albacore::MSpecTask.new(:mspec) do |mspec|
 		mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
 		mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
 	end
 
 	desc "NUnit Test Runner Example"
-	Albacore::NUnitTask.new() do |nunit|
+	Albacore::NUnitTask.new(:nunit) do |nunit|
 		nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
 		nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
 	end
 
 	desc "XUnit Test Runner Example"
-	Albacore::XUnitTask.new() do |xunit|
+	Albacore::XUnitTask.new(:xunit) do |xunit|
 		xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
 		xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
 	end   

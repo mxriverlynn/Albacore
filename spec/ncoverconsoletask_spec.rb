@@ -5,7 +5,7 @@ require 'tasklib_patch'
 
 describe Albacore::NCoverConsoleTask, "when running" do
 	before :all do
-		task = Albacore::NCoverConsoleTask.new() do |t|
+		task = Albacore::NCoverConsoleTask.new(:ncoverconsole) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

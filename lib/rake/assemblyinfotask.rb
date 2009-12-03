@@ -1,9 +1,8 @@
 require 'rake/tasklib'
 
 module Albacore
-
 	def self.assemblyinfo(name=:assemblyinfo, *args, &block)
-		MSBuildTask.new(name, *args, &block)
+		AssemblyInfoTask.new(name, *args, &block)
 	end
 	
 	class AssemblyInfoTask < Albacore::AlbacoreTask
