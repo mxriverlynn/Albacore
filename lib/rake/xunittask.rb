@@ -6,14 +6,14 @@ module Albacore
 
 		def initialize(name=:xunit, &block)
 			@name = name
-			@xunit = XUnitTestRunner.new
 			@block = block
 			define
 		end
 
 		def define
 			task name do
-		  	@block.call(@xunit) unless @block.nil?
+				@xunit = XUnitTestRunner.new
+			  	@block.call(@xunit) unless @block.nil?
 				@xunit.execute
 				fail if @xunit.failed
 			end

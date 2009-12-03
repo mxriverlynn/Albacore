@@ -6,13 +6,13 @@ module Albacore
 		
 		def initialize(name=:sqlcmd, &block)
 			@name = name
-			@sqlcmd = SQLCmd.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@sqlcmd = SQLCmd.new
 				@block.call(@sqlcmd) unless @block.nil?
 				@sqlcmd.run
 				fail if @sqlcmd.failed

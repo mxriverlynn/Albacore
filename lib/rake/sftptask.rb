@@ -6,13 +6,13 @@ module Albacore
 		
 		def initialize(name=:sftp, &block)
 			@name = name
-			@sftp = Sftp.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@sftp = Sftp.new
 				@block.call(@sftp) unless @block.nil?
 				@sftp.upload
 			end

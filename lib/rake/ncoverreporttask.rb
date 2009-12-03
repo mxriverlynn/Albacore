@@ -6,13 +6,13 @@ module Albacore
 		
 		def initialize(name=:ncoverreport, &block)
 			@name = name
-			@ncoverreport = NCoverReport.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@ncoverreport = NCoverReport.new
 				@block.call(@ncoverreport) unless @block.nil?
 				@ncoverreport.run
 				fail if @ncoverreport.failed

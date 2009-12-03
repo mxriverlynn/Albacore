@@ -6,14 +6,14 @@ module Albacore
 		
 		def initialize(name=:mspec, &block)
 			@name = name
-			@mspec = MSpecTestRunner.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
-		  	@block.call(@mspec) unless @block.nil?
+				@mspec = MSpecTestRunner.new
+			  	@block.call(@mspec) unless @block.nil?
 				@mspec.execute
 				fail if @mspec.failed
 			end

@@ -6,13 +6,13 @@ module Albacore
 		
 		def initialize(name=:assemblyinfo, &block)
 			@name = name
-			@asm = AssemblyInfo.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@asm = AssemblyInfo.new
 				@block.call(@asm) unless @block.nil?
 				@asm.write
 				fail if @asm.failed

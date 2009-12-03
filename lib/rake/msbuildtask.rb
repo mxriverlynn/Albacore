@@ -6,13 +6,13 @@ module Albacore
 		
 		def initialize(name=:msbuild, &block)
 			@name = name
-			@msbuild = MSBuild.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@msbuild = MSBuild.new
 				@block.call(@msbuild) unless @block.nil?
 				@msbuild.build
 				fail if @msbuild.failed

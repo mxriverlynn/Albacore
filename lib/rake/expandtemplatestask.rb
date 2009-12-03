@@ -6,13 +6,13 @@ module Albacore
 		
 		def initialize(name=:expandtemplates, &block)
 			@name = name
-			@exp = ExpandTemplates.new
 			@block = block
 			define
 		end
 		
 		def define
 			task @name do
+				@exp = ExpandTemplates.new
 				@block.call(@exp) unless @block.nil?
 				@exp.expand
 			end

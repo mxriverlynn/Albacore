@@ -82,6 +82,12 @@ namespace :specs do
 		t.spec_files = 'spec/mspec*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
+
+    desc "Command functional specs"
+	Spec::Rake::SpecTask.new :mspec do |t|
+		t.spec_files = 'spec/command*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
 end
 
 namespace :albacore do	

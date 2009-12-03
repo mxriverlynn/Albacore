@@ -6,16 +6,16 @@ module Albacore
 		
 		def initialize(name=:nunit, &block)
 			@name = name
-			@nunit = NUnitTestRunner.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
-		  	  @block.call(@nunit) unless @block.nil?
-			  @nunit.execute
-			  fail if @nunit.failed
+				@nunit = NUnitTestRunner.new
+				@block.call(@nunit) unless @block.nil?
+				@nunit.execute
+				fail if @nunit.failed
 			end
 		end		
 	end

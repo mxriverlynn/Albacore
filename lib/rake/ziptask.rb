@@ -6,13 +6,13 @@ module Albacore
 		
 		def initialize(name=:zip, &block)
 			@name = name
-			@zip = ZipDirectory.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@zip = ZipDirectory.new
 				@block.call(@zip) unless @block.nil?
 				@zip.package
 				fail if @zip.failed

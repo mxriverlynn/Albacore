@@ -6,13 +6,13 @@ module Albacore
 		
 		def initialize(name=:ssh, &block)
 			@name = name
-			@ssh = Ssh.new
 			@block = block
 			define
 		end
 		
 		def define
 			task name do
+				@ssh = Ssh.new
 				@block.call(@ssh) unless @block.nil?
 				@ssh.execute
 			end
