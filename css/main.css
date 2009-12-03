@@ -6,24 +6,20 @@ body {
 }
 
 #container {
-	padding: 10px;
 	margin: 0 auto;
-	width: 700px;
-	background-color: #ffffff;
-	border-right: 1px solid #afafaf;
-	border-bottom: 1px solid #afafaf;
+	width: 850px;
 	clear: both;
 }
 
 #titlebar {
 	margin: 0 auto;
-	width: 700px;
+	width: 850px;
 	padding-bottom: 5px;
 }
 
 #navigation {
 	margin: 0 auto;
-	width: 700px;
+	width: 850px;
 	padding: 0px;
 }
 
@@ -43,18 +39,24 @@ body {
 }
 
 .main_content{
+	background-color: #ffffff;
+	padding: 9px;
+	border-right: 1px solid #afafaf;
+	border-bottom: 1px solid #afafaf;
 	float: left;
-	width: 480px;
+	width: 580px;
 }
 
 .sidebar {
 	float: right;
-	width: 190px;
+	width: 230px;
 	margin: 0px;
 	padding-left: 10px;
+	padding-right: 10px;
 	padding-bottom: 0px;
 	border-bottom: 1px solid #afafaf;
-	border-left: 1px solid #afafaf;
+	border-right: 1px solid #afafaf;
+	background-color: #ffffff;
 }
 
 .sidebar h2{
@@ -99,7 +101,6 @@ hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
 .download { float: right; }
 
 .footer { 
-	border-top: 1px solid #7f7f7f;
 	margin-top: 25px;
 	padding-top: 10px;
 	text-align:center; 
