@@ -1,0 +1,155 @@
+---
+layout: post
+title: "v0.0.8 Release Notes: More Rake-ish Than Ever!"
+---
+
+There are a significant number of changes that have gone into Albacore in the last few weeks. Everything from new tasks and functionality, updated syntax for the tasks, and bug fixes, too.
+
+h2. Albacore Task Syntax Changes
+
+There was some discussion on "the google group":http://groups.google.com/group/albacoredev surrounding a peice of functionality that we decided to leave out. However, the result of the discussion was the realization that the syntax of the Albacore tasks did not match the built in rake tasks, such as "task" and "file". As a result of this discussion, we're making things more 'rake-ish' for the task usage. After all, that was one of "the original goals":http://www.lostechies.com/blogs/derickbailey/archive/2009/09/17/how-a-net-developer-hacked-out-a-rake-task.aspx right? 
+
+The end result is a new shortcut syntax that allows you to do this:
+
+<pre><code>msbuildtask do |msb|
+ msb.solution = "mysolution.sln"
+ #... other settings here
+end</code></pre>
+
+Youc an do this with any task... so, Albacore::AssemblyInfoTask.new is now <code>assemblyinfotask do ... end</code>, Albacore::NCoverConsoleTask.new is now <code>ncoverconsoletask do ... end</code>, etc. 
+
+The old syntax still works, too. You can still call <code>Albacore::NCoverConsole.new(...) do ... end</code> in your rakefile. The new syntax shortcut is just that - a shortcut. You don't need to specify <code>Albacore::</code> and you don't need to speify the <code>.new</code> initializer.
+
+h2. Supporting The Complete Task Syntax
+
+In addition to the new syntax shortcut, the complete rake task syntax is now supported by all Albacore tasks. This means you can take advantage of the task parameters and dependencies when you want to, like this:
+
+<pre><code>msbuildtask :msbuild, [:config] => :assemblyinfo do |msb, args|
+    msb.properties = {:Configuration => args.config}
+    #... other settings here
+end</code></pre>
+
+and call it with rake like this:
+
+<pre><code>  rake msbuild[Debug]</code></pre>
+
+The new syntax let's you do any valid combination of the "task" syntax...
+
+<pre><code>msbuildtask :name => [:dep1, :dep2, :etc] do |msb| ... end
+
+msbuildtask do |msb| ... end
+
+msbuildtask :name do |msb| ... end
+
+msbuildtask :name, [:param, :param2, :etc] do |msb, args| ... end
+
+msbuildtask :name, [:param, :param2, :etc] => [:dep1, :dep2, :etc] do |msb, args| ... end 
+</code></pre>
+
+h2. Nunit, XUnit and MSpec Tasks
+
+These have kind of, sort of been around for a while now. They are partially in the .7 release, but are officially first class citizens of the .8 release.
+
+From the rakefile, here are some samples of the new tasks:
+
+h3. NUnit Task
+
+<pre><code>desc "NUnit Test Runner Example"
+nunittask do |nunit|
+	nunit.path_to_command = "NUnit/nunit-console.exe"
+	nunit.assemblies << "assemblies/TestSolution.Tests.dll"
+end
+</code></pre>
+
+h3. XUnit Task
+
+<pre><code>desc "XUnit Test Runner Example"
+xunittask do |xunit|
+	xunit.path_to_command = "XUnit/xunit.console.exe"
+	xunit.assemblies << "assemblies/TestSolution.XUnitTests.dll"
+end	
+</code></pre>
+
+h3. MSpec Task
+
+<pre></code>desc "MSpec Test Runner Example"
+mspectask do |mspec|
+	mspec.path_to_command = "MSpec/Machine.Specifications.ConsoleRunner.exe"
+	mspec.assemblies << "assemblies/TestSolution.MSpecTests.dll"
+end
+</code></pre>
+
+h2. Generic Command Execution Task
+
+As a way to help people use the built in logging and auto-configuration capabilities of Albacore, a generic CommandTask has been added. This task will allow you to run any arbitrary command, with parameters, from your rakefile.
+
+As a contrived example that illustrates how it works, here is how you could run the nunit console app with a --help parameter to get the list of options.
+
+<pre><code>commandtask do |cmd|
+	cmd.path_to_command = "tools/nunit-console-x86.exe"
+	cmd.parameters << ["--help"]
+end
+</code></pre>
+
+h2. Include Files For Expand Templates Data
+
+Several users requested the ability to have a "global" data set for the expand templates task. This would allow common data across all environments to be set up in a single location. After some thought, a new <code>@include: filename.yml</code> directive was added to the expand templates task. This will allow you to reference an external yaml file and have the contents of that file included in the data that is used for the expansion.
+
+You can override the external file data by including specific key / value pairs in your regular data file. This works for both simple key / value pairs, and for template specific data.
+
+h3. An extended example
+
+If you have a template, such as this:
+
+h4. web.config.template
+<pre><code>
+<appSettings>
+	<add key="name" value="#{value}" />
+	<add key="another" value="#{setting}" />
+</appSettings>
+</code></pre>
+
+You can provide some data in a web.config.yml file and some data in an external global.yml file, like this:
+
+h4. web.config.yml
+<pre><code>@include: global.yml
+value: this is goes where the 'name' is</code></pre>
+
+h4. global.yml
+<pre><code>another: setting goes here.
+value: you won't see this. it's overriden by the web.config.yml
+</code></pre>
+
+You can use the global.yml or the web.config.yml file reference from any other .yml file that is being parsed by the expand templates task. The task will recursively read and import the settings - so be careful not to create a circular reference loop!
+
+h2. SFTP and SSH: Connect Via Keys
+
+The SFTP and SSH tasks can now connect to remote servers via rsa keys, instead of just username/password. Specify the <code>.key<code> attribute, instead of a password, to connect via rsa keys.
+
+<pre><code>ssh do |ssh|
+	ssh.server = "my server"
+	ssh.key = ... an rsa key
+	ssh.commands << "dir"
+end</code></pre>
+
+For more information on how to specify the key, see the "Net::SSH documentation":http://net-ssh.rubyforge.org/
+
+h2. Zip Loose Directories And Rename To output_file
+
+The zip task has been updated to allow directories to be zipped, and the output is now specified as output_file.
+
+<pre><code>desc "Run ZipDirectory example"
+ziptask do |zip|
+	zip.output_path = File.dirname(__FILE__)
+	zip.directories_to_zip = ["lib", "spec"]
+	zip.additional_files = "README.markdown"
+	zip.file = 'albacore_example.zip'
+end</code></pre>
+
+h2. For The Developer / Contributor
+
+There is now an easy way to install all of the Albacore dependencies. This will let you run and build the gem and the various tasks in albacore, as well as run the rspec tests. For more information on this, please see the "How To Contribute":http://albacorebuild.net/2009/11/30/HowToContribute.html blog post or "wiki page":http://wiki.github.com/derickbailey/Albacore/howtocontribute.
+
+h2. A Lot Of Changes, A Long Way To Go
+
+As you can see, there are a significant number of improvements and changes to albacore in this release. However, we still have a long way to go. We're always looking for good patches, bugs to fix, ideas for improving or any other way that anyon might want to "contribute to the project":http://wiki.github.com/derickbailey/Albacore/howtocontribute . Be sure to check the Issues list and join the the "group discussion":http://groups.google.com/group/albacoredev if you are wanting to help out.
