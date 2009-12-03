@@ -134,7 +134,7 @@ namespace :albacore do
 		ncc.output = {:xml => @xml_coverage}
 		ncc.working_directory = "spec/support/CodeCoverage/nunit"
 		
-		nunit = NUnitTestRunner.new("spec/support/Tools/NUnit-v2.5/nunit-console.exe")
+		nunit = NUnitTestRunner.new("spec/support/Tools/NUnit-v2.5/nunit-console-x86.exe")
 		nunit.log_level = :verbose
 		nunit.assemblies << "assemblies/TestSolution.Tests.dll"
 		nunit.options << '/noshadow'
