@@ -6,11 +6,10 @@ module Albacore
 		MSBuildTask.new(name, *args, &block)
 	end
 	
-	class MSBuildTask < AlbacoreTask
-		
+	class MSBuildTask < Albacore::AlbacoreTask		
 		def execute(task_args)
 			@msbuild = MSBuild.new
-			@block.call(@msbuild, task_args) unless @block.nil? 
+			@block.call(@msbuild, *task_args) unless @block.nil? 
 			@msbuild.build
 			fail if @msbuild.failed
 		end		

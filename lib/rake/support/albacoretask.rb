@@ -1,5 +1,5 @@
 module Albacore
-	class AlbacoreTask < Rake::TaskLib
+	class AlbacoreTask < ::Rake::TaskLib
 		attr_accessor :name
 		
 		def initialize(name, *args, &block)

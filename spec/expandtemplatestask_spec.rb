@@ -5,7 +5,7 @@ require 'tasklib_patch'
 
 describe Albacore::ExpandTemplatesTask, "when running" do
 	before :each do
-		task = Albacore::ExpandTemplatesTask.new() do |t|
+		task = Albacore::ExpandTemplatesTask.new(:expandtemplates) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

@@ -214,3 +214,16 @@ namespace :jeweler do
 		gs.add_development_dependency('jekyll', '>= 0.5.4')
 	end
 end
+
+task :foo do
+	puts "foo"
+end
+
+desc "test"
+Albacore::msbuild :msbuild, [:env] => :foo do |msb|
+	puts "--------------------------------#{msb}}"
+	msb.log_level = :verbose
+	msb.properties = {:configuration => :debug}
+	msb.targets [:Clean, :Build]
+	msb.solution = "spec/support/TestSolution/TestSolution.sln"
+end
