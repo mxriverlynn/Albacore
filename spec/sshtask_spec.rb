@@ -9,7 +9,7 @@ describe Albacore::SshTask, "when running" do
 	end
 	
 	before :each do
-		task = Albacore::SshTask.new() do |t|
+		task = Albacore::SshTask.new(:ssh) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

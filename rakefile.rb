@@ -52,6 +52,12 @@ namespace :specs do
 		t.spec_files = 'spec/ssh*_spec.rb'
 		t.spec_opts << @spec_opts
 	end	
+	
+	desc "SFTP functional specs"
+	Spec::Rake::SpecTask.new :sftp do |t|
+		t.spec_files = 'spec/sftp*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
 
 	desc "Expand Templates functional specs"
 	Spec::Rake::SpecTask.new :templates do |t|
@@ -86,6 +92,12 @@ namespace :specs do
     desc "Command functional specs"
 	Spec::Rake::SpecTask.new :command do |t|
 		t.spec_files = 'spec/command*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
+	
+	desc "Rename functional specs"
+	Spec::Rake::SpecTask.new :rename do |t|
+		t.spec_files = 'spec/rename*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 end
@@ -213,17 +225,4 @@ namespace :jeweler do
 		gs.add_development_dependency('derickbailey-notamock', '>= 0.0.1')
 		gs.add_development_dependency('jekyll', '>= 0.5.4')
 	end
-end
-
-task :foo do
-	puts "foo"
-end
-
-desc "test"
-Albacore::msbuild :msbuild, [:env] => :foo do |msb|
-	puts "--------------------------------#{msb}}"
-	msb.log_level = :verbose
-	msb.properties = {:configuration => :debug}
-	msb.targets [:Clean, :Build]
-	msb.solution = "spec/support/TestSolution/TestSolution.sln"
 end

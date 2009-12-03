@@ -4,7 +4,7 @@ require 'tasklib_patch'
 
 describe Albacore::RenameTask, "when running" do
 	before :all do
-		task = Albacore::RenameTask.new() do |t|
+		task = Albacore::RenameTask.new(:rename) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

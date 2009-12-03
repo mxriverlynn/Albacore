@@ -5,7 +5,7 @@ require 'tasklib_patch'
 
 describe Albacore::SQLCmdTask, "when running" do
 	before :all do
-		task = Albacore::SQLCmdTask.new() do |t|
+		task = Albacore::SQLCmdTask.new(:sqlcmd) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)
