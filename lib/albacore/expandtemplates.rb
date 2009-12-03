@@ -51,9 +51,17 @@ private
 			include_file = File.join(File.dirname(file), config["@include"])
 			@logger.debug("Found @include directive. Loading additional data from #{include_file}")			
 			config.reject!{|k,v| k == "@include"}
-			config = config.merge(read_config(include_file))
+			include_config = read_config(include_file)
+			config = deep_merge(include_config, config)
 		end
 		return config
+	end
+	
+	def deep_merge(first, second)
+		# From: http://www.ruby-forum.com/topic/142809
+		# Author: Stefan Rusterholz
+		merger = proc { |key,v1,v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : v2 }
+		first.merge(second, &merger)
 	end
 	
 	def get_config_for_file(original_config, file)
