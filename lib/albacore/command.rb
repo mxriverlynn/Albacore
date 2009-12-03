@@ -9,6 +9,7 @@ class Command
 	
 	def initialize()
 		super()
+		@require_valid_command=false
 		@path_to_command=''
 		@parameters = []
 	end
