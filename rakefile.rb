@@ -211,5 +211,6 @@ namespace :jeweler do
 		gs.add_development_dependency('rspec', '>= 1.2.8')
 		gs.add_development_dependency('jeweler', '>= 1.2.1')
 		gs.add_development_dependency('derickbailey-notamock', '>= 0.0.1')
+		gs.add_development_dependency('jekyll', '>= 0.5.4')
 	end
 end
