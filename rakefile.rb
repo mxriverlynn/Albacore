@@ -101,8 +101,7 @@ namespace :albacore do
                      'albacore:rename',  
                      'albacore:mspec',
                      'albacore:nunit',
-                     'albacore:xunit',
-                     'albacore:ruby']
+                     'albacore:xunit']
 	
 	desc "Run a sample build using the MSBuildTask"
 	Albacore::MSBuildTask.new(:msbuild) do |msb|
@@ -189,12 +188,7 @@ namespace :albacore do
 	Albacore::XUnitTask.new() do |xunit|
 		xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
 		xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
-	end
-   
-	desc "Ruby Task Example"
-	Albacore::RubyTask.new() do  
-		puts "Any ruby code here..."
-	end
+	end   
 end
 
 namespace :jeweler do
