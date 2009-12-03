@@ -157,3 +157,23 @@ describe ExpandTemplates, "when including external data and specified placeholde
 		@output_file_data.should include("the value of a is data")
 	end	
 end
+
+describe ExpandTemplates, "when when external data includes at least part of the data for a specific template" do
+	it_should_behave_like "prepping the sample templates"
+	
+	before :all do
+		@templates.expand_files = {@testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file}
+		@templates.data_file = @testdata.template_specific_data_file_with_include
+		@templates.expand
+		
+		@output_file_data = @testdata.read_file(@testdata.multipleinstance_template_file)
+	end
+	
+	it "should use the external data that was supplied" do
+		@output_file_data.should include("the value of a is data")
+	end	
+	
+	it "should override the external data with template specific data from the local file" do
+		@output_file_data.should include("first instance of 'the real value' is here.")
+	end
+end

@@ -50,6 +50,10 @@ class ExpandTemplatesTestData
 		File.join(@datafilesfolder, "sample_with_include.yml")
 	end
 	
+	def template_specific_data_file_with_include
+		File.join(@datafilesfolder, "template_specific_data_file_with_include.yml")
+	end
+	
 	def multiplevalues_data_file
 		File.join(@datafilesfolder, "multiplevalues.yml")
 	end
