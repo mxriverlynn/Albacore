@@ -1,25 +1,25 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/mspectestrunner'
-require 'rake/mspectestrunnertask'
+require 'rake/mspectask'
 require 'tasklib_patch'
 
-describe Albacore::MSpecTestRunnerTask, "when running" do
+describe Albacore::MSpecTask, "when running" do
 	before :all do
-		task = Albacore::MSpecTestRunnerTask.new() do |t|
+		task = Albacore::MSpecTask.new(:mspec) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)
 		Rake::Task[:mspec].invoke
 	end
 	
-	it "should yield the msoec api" do
+	it "should yield the mspec api" do
 		@yielded_object.kind_of?(MSpecTestRunner).should be_true
 	end
 end
 
-describe Albacore::MSpecTestRunnerTask, "when execution fails" do
+describe Albacore::MSpecTask, "when execution fails" do
 	before :all do
-		@task = Albacore::MSpecTestRunnerTask.new(:failingtask)
+		@task = Albacore::MSpecTask.new(:failingtask)
 		@task.extend(TasklibPatch)
 		@task.fail
 		Rake::Task["failingtask"].invoke

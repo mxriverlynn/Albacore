@@ -19,25 +19,25 @@ describe NCoverConsole, "when specifying aseemblies to cover" do
 	before :all do
 		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
 		
-		ncc = NCoverConsole.new()
+		@ncc = NCoverConsole.new()
 		
-		ncc.extend(SystemPatch)
-		ncc.log_level = :verbose
-		ncc.path_to_command = @@ncoverpath
-		ncc.output = {:xml => @@xml_coverage_output}
-		ncc.working_directory = @@working_directory
-		ncc.cover_assemblies << "TestSolution"
+		@ncc.extend(SystemPatch)
+		@ncc.log_level = :verbose
+		@ncc.path_to_command = @@ncoverpath
+		@ncc.output = {:xml => @@xml_coverage_output}
+		@ncc.working_directory = @@working_directory
+		@ncc.cover_assemblies << "TestSolution"
 		
 		nunit = NUnitTestRunner.new(@@nunitpath)
 		nunit.assemblies << @@test_assembly
 		nunit.options << '/noshadow'
 		
-		ncc.testrunner = nunit
-		ncc.run
+		@ncc.testrunner = nunit
+		@ncc.run
 	end
 
 	it "should provide coverage for the specified assemblies" do
-		$system_command.should include("//assemblies \"TestSolution\"")
+		@ncc.system_command.should include("//assemblies \"TestSolution\"")
 	end
 end
 
@@ -45,25 +45,25 @@ describe NCoverConsole, "when specifying assemblies to ignore" do
 	before :all do
 		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
 		
-		ncc = NCoverConsole.new()
+		@ncc = NCoverConsole.new()
 		
-		ncc.extend(SystemPatch)
-		ncc.log_level = :verbose
-		ncc.path_to_command = @@ncoverpath
-		ncc.output = {:xml => @@xml_coverage_output}
-		ncc.working_directory = @@working_directory
-		ncc.ignore_assemblies << "TestSolution.*"
+		@ncc.extend(SystemPatch)
+		@ncc.log_level = :verbose
+		@ncc.path_to_command = @@ncoverpath
+		@ncc.output = {:xml => @@xml_coverage_output}
+		@ncc.working_directory = @@working_directory
+		@ncc.ignore_assemblies << "TestSolution.*"
 		
 		nunit = NUnitTestRunner.new(@@nunitpath)
 		nunit.assemblies << @@test_assembly
 		nunit.options << '/noshadow'
 		
-		ncc.testrunner = nunit
-		ncc.run
+		@ncc.testrunner = nunit
+		@ncc.run
 	end
 
 	it "should provide coverage for the specified assemblies" do
-		$system_command.should include("//exclude-assemblies \"TestSolution.*\"")
+		@ncc.system_command.should include("//exclude-assemblies \"TestSolution.*\"")
 	end
 end
 
@@ -71,25 +71,25 @@ describe NCoverConsole, "when specifying the types of coverage to analyze" do
 	before :all do
 		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
 		
-		ncc = NCoverConsole.new()
+		@ncc = NCoverConsole.new()
 		
-		ncc.extend(SystemPatch)
-		ncc.log_level = :verbose
-		ncc.path_to_command = @@ncoverpath
-		ncc.output = {:xml => @@xml_coverage_output}
-		ncc.working_directory = @@working_directory
-		ncc.coverage = [:Symbol, :Branch, :MethodVisits, :CyclomaticComplexity]
+		@ncc.extend(SystemPatch)
+		@ncc.log_level = :verbose
+		@ncc.path_to_command = @@ncoverpath
+		@ncc.output = {:xml => @@xml_coverage_output}
+		@ncc.working_directory = @@working_directory
+		@ncc.coverage = [:Symbol, :Branch, :MethodVisits, :CyclomaticComplexity]
 		
 		nunit = NUnitTestRunner.new(@@nunitpath)
 		nunit.assemblies << @@test_assembly
 		nunit.options << '/noshadow'
 		
-		ncc.testrunner = nunit
-		ncc.run
+		@ncc.testrunner = nunit
+		@ncc.run
 	end
 		
 	it "should only run coverage for those metrics" do
-		$system_command.should include("//coverage-type \"Symbol, Branch, MethodVisits, CyclomaticComplexity\"")
+		@ncc.system_command.should include("//coverage-type \"Symbol, Branch, MethodVisits, CyclomaticComplexity\"")
 	end
 end
 
@@ -150,36 +150,36 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
 	before :all do
 		File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
 		
-		ncc = NCoverConsole.new()
+		@ncc = NCoverConsole.new()
 		
-		ncc.extend(SystemPatch)
-		ncc.log_level = :verbose
-		ncc.path_to_command = @@ncoverpath
-		ncc.output = {:xml => @@xml_coverage_output}
-		ncc.working_directory = @@working_directory
+		@ncc.extend(SystemPatch)
+		@ncc.log_level = :verbose
+		@ncc.path_to_command = @@ncoverpath
+		@ncc.output = {:xml => @@xml_coverage_output}
+		@ncc.working_directory = @@working_directory
 		
 		nunit = NUnitTestRunner.new(@@nunitpath)
 		nunit.assemblies << @@test_assembly
 		nunit.options << '/noshadow'
 		
-		ncc.testrunner = nunit
-		ncc.run
+		@ncc.testrunner = nunit
+		@ncc.run
 	end
 	
 	it "should execute ncover.console from the specified path" do
-		$system_command.should include(@@ncoverpath)
+		@ncc.system_command.should include(@@ncoverpath)
 	end
 	
 	it "should execute with the specified working directory" do
-		$system_command.should include(@@working_directory)
+		@ncc.system_command.should include(@@working_directory)
 	end
 	
 	it "should execute the test runner from the specified path" do
-		$system_command.should include(@@nunitpath)
+		@ncc.system_command.should include(@@nunitpath)
 	end
 	
 	it "should pass the specified arguments to the test runner" do
-		$system_command.should include("TestSolution.Tests.dll /noshadow")
+		@ncc.system_command.should include("TestSolution.Tests.dll /noshadow")
 	end
 		
 	it "should write the coverage data to the specified file" do

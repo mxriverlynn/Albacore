@@ -3,43 +3,43 @@ require 'albacore/sqlcmd'
 
 describe SQLCmd, "when running a script file against a database with authentication information" do
 	before :all do
-		cmd = SQLCmd.new
-		cmd.path_to_command = "sqlcmd.exe"
-		cmd.log_level = :verbose
-		cmd.extend(SystemPatch)
-		cmd.disable_system = true
+		@cmd = SQLCmd.new
+		@cmd.path_to_command = "sqlcmd.exe"
+		@cmd.log_level = :verbose
+		@cmd.extend(SystemPatch)
+		@cmd.disable_system = true
 		
-		cmd.server="a server"
-		cmd.database="a database"
-		cmd.username="some user"
-		cmd.password="shh! it's a secret!"
-		cmd.scripts << "somescript.sql"
+		@cmd.server="a server"
+		@cmd.database="a database"
+		@cmd.username="some user"
+		@cmd.password="shh! it's a secret!"
+		@cmd.scripts << "somescript.sql"
 		
-		cmd.run
+		@cmd.run
 	end
 	
 	it "should specify the location of the sqlcmd exe" do
-		$system_command.should include("sqlcmd.exe")
+		@cmd.system_command.should include("sqlcmd.exe")
 	end
 	
 	it "should specify the script file" do
-		$system_command.should include("-i \"somescript.sql\"")
+		@cmd.system_command.should include("-i \"somescript.sql\"")
 	end
 	
 	it "should specify the server" do
-		$system_command.should include("-S \"a server\"")
+		@cmd.system_command.should include("-S \"a server\"")
 	end
 	
 	it "should specify the database" do
-		$system_command.should include("-d \"a database\"")
+		@cmd.system_command.should include("-d \"a database\"")
 	end
 
 	it "should specify the username" do
-		$system_command.should include("-U \"some user\"")
+		@cmd.system_command.should include("-U \"some user\"")
 	end
 	
 	it "should specify the password" do
-		$system_command.should include("-P \"shh! it's a secret!\"")
+		@cmd.system_command.should include("-P \"shh! it's a secret!\"")
 	end
 end
 
@@ -92,48 +92,48 @@ end
 
 describe SQLCmd, "when running multiple script files" do
 	before :all do
-		cmd = SQLCmd.new
-		cmd.path_to_command = "sqlcmd.exe"
-		cmd.log_level = :verbose
-		cmd.extend(SystemPatch)
-		cmd.disable_system = true
+		@cmd = SQLCmd.new
+		@cmd.path_to_command = "sqlcmd.exe"
+		@cmd.log_level = :verbose
+		@cmd.extend(SystemPatch)
+		@cmd.disable_system = true
 		
-		cmd.scripts << "did you get.sql"
-		cmd.scripts << "that thing.sql"
-		cmd.scripts << "i sent you.sql"
+		@cmd.scripts << "did you get.sql"
+		@cmd.scripts << "that thing.sql"
+		@cmd.scripts << "i sent you.sql"
 		
-		cmd.run
+		@cmd.run
 	end
 	
 	it "should specify the first script file" do
-		$system_command.should include("-i \"did you get.sql\"")
+		@cmd.system_command.should include("-i \"did you get.sql\"")
 	end
 
 	it "should specify the second script file" do
-		$system_command.should include("-i \"that thing.sql\"")
+		@cmd.system_command.should include("-i \"that thing.sql\"")
 	end
 	
 	it "should specify the third script file" do
-		$system_command.should include("-i \"i sent you.sql\"")
+		@cmd.system_command.should include("-i \"i sent you.sql\"")
 	end
 end
 
 describe SQLCmd, "when running with variables specified" do
 	before :all do
-		cmd = SQLCmd.new
-		cmd.path_to_command = "sqlcmd.exe"
-		cmd.log_level = :verbose
-		cmd.extend(SystemPatch)
-		cmd.disable_system = true
-		cmd.scripts << "somescript.sql"
+		@cmd = SQLCmd.new
+		@cmd.path_to_command = "sqlcmd.exe"
+		@cmd.log_level = :verbose
+		@cmd.extend(SystemPatch)
+		@cmd.disable_system = true
+		@cmd.scripts << "somescript.sql"
 		
-		cmd.variables = {:myvar => "my value", :another_var => :another_value}
+		@cmd.variables = {:myvar => "my value", :another_var => :another_value}
 		
-		cmd.run
+		@cmd.run
 	end
 	
 	it "should supply the variables to sqlcmd" do
-		$system_command.should include("-v myvar=my value")
-		$system_command.should include("-v another_var=another_value")
+		@cmd.system_command.should include("-v myvar=my value")
+		@cmd.system_command.should include("-v another_var=another_value")
 	end
 end

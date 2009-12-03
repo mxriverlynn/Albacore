@@ -5,19 +5,21 @@ include Zip
 
 class ZipDirectory
 	include YAMLConfig
-	
-	attr_accessor :directories_to_zip
-	attr_accessor :output_path
-	attr_accessor :additional_files
-	attr_accessor :file
+	include Failure
+  
+	attr_accessor :directories_to_zip, :additional_files
+	attr_accessor :output_path, :output_file
+	attr_accessor :flatten_zip
 
 	def initialize
 		super()
+		@flatten_zip = true
 	end
 		
 	def package()
-		return if @directories_to_zip.nil?
-		
+		fail_with_message 'Output File cannot be empty' if @output_file.nil?
+		return if @output_file.nil?
+        
 		clean_directories_names
 		remove zip_name
 
@@ -28,7 +30,8 @@ class ZipDirectory
 	end
 	
 	def clean_directories_names
-	  @directories_to_zip.each { |d| d.sub!(%r[/$],'')}
+    	return if @directories_to_zip.nil?
+		@directories_to_zip.each { |d| d.sub!(%r[/$],'')}
 	end
 	
 	def remove(filename)
@@ -40,24 +43,33 @@ class ZipDirectory
 	end
 	
 	def zip_name()
-	  @output_path = @directories_to_zip.first unless @output_path
-		File.join(@output_path, @file)
+		@output_path = set_output_path
+		File.join(@output_path, @output_file)
 	end
+  
+	def set_output_path()
+		path = ''
+		path = @directories_to_zip.first unless @directories_to_zip.nil?
+		path = @output_path unless @output_path.nil?
+		return path
+	end
+    
 	
 	def zip_directory(zipfile)
-	  @directories_to_zip.each do |d|
-  		Dir["#{d}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
-        file_name = file_path
-  			file_name = file_path.sub(d + '/','') if @directories_to_zip.length == 1
-  			zipfile.add(file_name, file_path)
-  		end
-  	end
+		return if @directories_to_zip.nil?
+		@directories_to_zip.each do |d|
+			Dir["#{d}/**/**"].reject{|f| reject_file(f)}.each do |file_path|
+				file_name = file_path
+				file_name = file_path.sub(d + '/','') if @flatten_zip
+				zipfile.add(file_name, file_path)
+			end
+		end
 	end
 	
 	def zip_additional(zipfile)
 		return if @additional_files.nil?
 		@additional_files.reject{|f| reject_file(f)}.each do |file_path|
-			file_name = file_path#.split('/').last
+			file_name = file_path.split('/').last if @flatten_zip
 			zipfile.add(file_name, file_path)
 		end
 	end

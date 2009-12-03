@@ -5,7 +5,7 @@ require 'tasklib_patch'
 
 describe Albacore::NCoverReportTask, "when running" do
 	before :all do
-		task = Albacore::NCoverReportTask.new() do |t|
+		task = Albacore::NCoverReportTask.new(:ncoverreport) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

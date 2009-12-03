@@ -1,0 +1,2 @@
+@include: sample.yml
+a: data

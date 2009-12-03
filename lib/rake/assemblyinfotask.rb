@@ -1,22 +1,16 @@
 require 'rake/tasklib'
 
+def assemblyinfotask(name=:assemblyinfo, *args, &block)
+	Albacore::AssemblyInfoTask.new(name, *args, &block)
+end
+	
 module Albacore
-	class AssemblyInfoTask < Rake::TaskLib
-		attr_accessor :name
-		
-		def initialize(name=:assemblyinfo, &block)
-			@name = name
+	class AssemblyInfoTask < Albacore::AlbacoreTask
+		def execute(task_args)
 			@asm = AssemblyInfo.new
-			@block = block
-			define
-		end
-		
-		def define
-			task name do
-				@block.call(@asm) unless @block.nil?
-				@asm.write
-				fail if @asm.failed
-			end
+			@block.call(@asm, *task_args) unless @block.nil?
+			@asm.write
+			fail if @asm.failed
 		end
 	end
 end

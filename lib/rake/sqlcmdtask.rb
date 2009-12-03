@@ -1,22 +1,16 @@
 require 'rake/tasklib'
 
+def sqlcmdtask(name=:sqlcmd, *args, &block)
+	Albacore::SQLCmdTask.new(name, *args, &block)
+end
+	
 module Albacore	
-	class SQLCmdTask < Rake::TaskLib
-		attr_accessor :name
-		
-		def initialize(name=:sqlcmd, &block)
-			@name = name
+	class SQLCmdTask < Albacore::AlbacoreTask
+		def execute(task_args)
 			@sqlcmd = SQLCmd.new
-			@block = block
-			define
-		end
-		
-		def define
-			task name do
-				@block.call(@sqlcmd) unless @block.nil?
-				@sqlcmd.run
-				fail if @sqlcmd.failed
-			end
+			@block.call(@sqlcmd, *task_args) unless @block.nil?
+			@sqlcmd.run
+			fail if @sqlcmd.failed
 		end	
 	end
 end

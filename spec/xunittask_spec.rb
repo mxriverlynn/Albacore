@@ -1,11 +1,11 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/xunittestrunner'
-require 'rake/xunittestrunnertask'
+require 'rake/xunittask'
 require 'tasklib_patch'
 
-describe Albacore::XUnitTestRunnerTask, "when running" do
+describe Albacore::XUnitTask, "when running" do
 	before :all do
-		task = Albacore::XUnitTestRunnerTask.new() do |t|
+		task = Albacore::XUnitTask.new(:xunit) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)
@@ -17,9 +17,9 @@ describe Albacore::XUnitTestRunnerTask, "when running" do
 	end
 end
 
-describe Albacore::XUnitTestRunnerTask, "when execution fails" do
+describe Albacore::XUnitTask, "when execution fails" do
 	before :all do
-		@task = Albacore::XUnitTestRunnerTask.new(:failingtask)
+		@task = Albacore::XUnitTask.new(:failingtask)
 		@task.extend(TasklibPatch)
 		@task.fail
 		Rake::Task["failingtask"].invoke

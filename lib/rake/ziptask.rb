@@ -1,21 +1,16 @@
 require 'rake/tasklib'
 
+def ziptask(name=:zip, *args, &block)
+	Albacore::ZipTask.new(name, *args, &block)
+end
+	
 module Albacore
-	class ZipTask < Rake::TaskLib
-		attr_accessor :name
-		
-		def initialize(name=:zip, &block)
-			@name = name
+	class ZipTask < Albacore::AlbacoreTask
+		def execute(task_args)
 			@zip = ZipDirectory.new
-			@block = block
-			define
-		end
-		
-		def define
-			task name do
-				@block.call(@zip) unless @block.nil?
-				@zip.package
-			end
+			@block.call(@zip, *task_args) unless @block.nil?
+			@zip.package
+			fail if @zip.failed
 		end		
 	end
 end

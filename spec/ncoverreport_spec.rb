@@ -17,26 +17,26 @@ describe NCoverReport, "when running a full coverage report with a specified out
 	before :all do
 		NCoverReportTestData.clean_output_folder
 		
-		ncover = NCoverReport.new
-		ncover.extend(SystemPatch)
-		ncover.log_level = :verbose
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
 		
-		ncover.path_to_command = NCoverReportTestData.path_to_command
-		ncover.coverage_files << NCoverReportTestData.coverage_file
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
 		fullcoveragereport = NCover::FullCoverageReport.new()
 		fullcoveragereport.output_path = NCoverReportTestData.output_folder
-		ncover.reports << fullcoveragereport
+		@ncover.reports << fullcoveragereport
 		
-		ncover.run
+		@ncover.run
 	end
 
 	it "should execute ncover.reporting" do
-		$system_command.should include(NCoverReportTestData.path_to_command)
+		@ncover.system_command.should include(NCoverReportTestData.path_to_command)
 	end
 	
 	it "should tell ncover.reporting to produce a full coverage html report in the specified folder" do
-		$system_command.should include("//or FullCoverageReport:Html:\"#{NCoverReportTestData.output_folder}\"")
+		@ncover.system_command.should include("//or FullCoverageReport:Html:\"#{NCoverReportTestData.output_folder}\"")
 	end
 	
 	it "should produce the report" do
@@ -48,26 +48,26 @@ describe NCoverReport, "when running a summary report with a specified output fo
 	before :all do
 		NCoverReportTestData.clean_output_folder
 		
-		ncover = NCoverReport.new
-		ncover.extend(SystemPatch)
-		ncover.log_level = :verbose
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
 		
-		ncover.path_to_command = NCoverReportTestData.path_to_command
-		ncover.coverage_files << NCoverReportTestData.coverage_file
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
 		summaryreport = NCover::SummaryReport.new()
 		summaryreport.output_path = NCoverReportTestData.summary_output_file
-		ncover.reports << summaryreport
+		@ncover.reports << summaryreport
 		
-		ncover.run
+		@ncover.run
 	end
 
 	it "should execute ncover.reporting" do
-		$system_command.should include(NCoverReportTestData.path_to_command)
+		@ncover.system_command.should include(NCoverReportTestData.path_to_command)
 	end
 	
 	it "should tell ncover.reporting to produce a summary html report in the specified folder" do
-		$system_command.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"")
+		@ncover.system_command.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"")
 	end
 	
 	it "should produce the report" do
@@ -79,31 +79,31 @@ describe NCoverReport, "when running multiple ncover reports - a summary and a f
 	before :all do
 		NCoverReportTestData.clean_output_folder
 		
-		ncover = NCoverReport.new
-		ncover.extend(SystemPatch)
-		ncover.log_level = :verbose
+		@ncover = NCoverReport.new
+		@ncover.extend(SystemPatch)
+		@ncover.log_level = :verbose
 		
-		ncover.path_to_command = NCoverReportTestData.path_to_command
-		ncover.coverage_files << NCoverReportTestData.coverage_file
+		@ncover.path_to_command = NCoverReportTestData.path_to_command
+		@ncover.coverage_files << NCoverReportTestData.coverage_file
 		
 		summaryreport = NCover::SummaryReport.new()
 		summaryreport.output_path = NCoverReportTestData.summary_output_file
-		ncover.reports << summaryreport
+		@ncover.reports << summaryreport
 		
 		fullcoveragereport = NCover::FullCoverageReport.new()
 		@fullcoverage_output_folder = File.join(NCoverReportTestData.output_folder, "fullcoverage")
 		fullcoveragereport.output_path = @fullcoverage_output_folder
-		ncover.reports << fullcoveragereport
+		@ncover.reports << fullcoveragereport
 
-		ncover.run
+		@ncover.run
 	end
 
 	it "should tell ncover.reporting to produce a full coverage html report in the specified folder" do
-		$system_command.should include("//or FullCoverageReport:Html:\"#{@fullcoverage_output_folder}\"")
+		@ncover.system_command.should include("//or FullCoverageReport:Html:\"#{@fullcoverage_output_folder}\"")
 	end
 	
 	it "should tell ncover.reporting to produce a summary html report in the specified folder" do
-		$system_command.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"")
+		@ncover.system_command.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"")
 	end
 end
 
@@ -130,7 +130,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 	end
 
 	it "should tell ncover.reporting to check for the specified minimum coverage" do
-		$system_command.should include("//mc SymbolCoverage:10:View")
+		@ncover.system_command.should include("//mc SymbolCoverage:10:View")
 	end
 	
 	it "should not fail the execution" do
@@ -165,7 +165,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
 	end
 
 	it "should tell ncover.reporting to check for the specified minimum coverage" do
-		$system_command.should include("//mc SymbolCoverage:10")
+		@ncover.system_command.should include("//mc SymbolCoverage:10")
 	end
 	
 	it "should fail the execution" do
@@ -201,7 +201,7 @@ describe NCoverReport, "when specifying the coverage item type to check" do
 	end
 
 	it "should tell ncover.reporting to check for the specified item type" do
-		$system_command.should include("//mc SymbolCoverage:10:Class")
+		@ncover.system_command.should include("//mc SymbolCoverage:10:Class")
 	end
 	
 	it "should produce the report" do
@@ -232,15 +232,15 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
 	end
 
 	it "should tell ncover.reporting to check for the symbol coverage" do
-		$system_command.should include("//mc SymbolCoverage:100:View")
+		@ncover.system_command.should include("//mc SymbolCoverage:100:View")
 	end
 	
 	it "should tell ncover.reporting to check for the branch coverage" do
-		$system_command.should include("//mc BranchCoverage:10:Class")
+		@ncover.system_command.should include("//mc BranchCoverage:10:Class")
 	end
 	
 	it "should tell ncover.reporting to check for the branch coverage" do
-		$system_command.should include("//mc MethodCoverage:100:Class")
+		@ncover.system_command.should include("//mc MethodCoverage:100:Class")
 	end
 
 	it "should produce the report" do
@@ -275,15 +275,15 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
 	end
 
 	it "should tell ncover.reporting to check for the symbol coverage" do
-		$system_command.should include("//mc SymbolCoverage:0:View")
+		@ncover.system_command.should include("//mc SymbolCoverage:0:View")
 	end
 	
 	it "should tell ncover.reporting to check for the branch coverage" do
-		$system_command.should include("//mc BranchCoverage:0:Class")
+		@ncover.system_command.should include("//mc BranchCoverage:0:Class")
 	end
 	
 	it "should tell ncover.reporting to check for the method coverage" do
-		$system_command.should include("//mc MethodCoverage:0:Class")
+		@ncover.system_command.should include("//mc MethodCoverage:0:Class")
 	end
 
 	it "should produce the report" do
@@ -317,11 +317,11 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
 	end
 
 	it "should tell ncover.reporting to check for the symbol coverage" do
-		$system_command.should include("//mc SymbolCoverage:100:View")
+		@ncover.system_command.should include("//mc SymbolCoverage:100:View")
 	end
 	
 	it "should tell ncover.reporting to check for the branch coverage" do
-		$system_command.should include("//mc BranchCoverage:0:Class")
+		@ncover.system_command.should include("//mc BranchCoverage:0:Class")
 	end
 	
 	it "should produce the report" do
@@ -355,7 +355,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity highe
 	end
 
 	it "should tell ncover.reporting to check for the maximum cyclomatic complexity" do
-		$system_command.should include("//mc CyclomaticComplexity:1:Class")
+		@ncover.system_command.should include("//mc CyclomaticComplexity:1:Class")
 	end
 	
 	it "should fail the execution" do
@@ -389,7 +389,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity under
 	end
 
 	it "should tell ncover.reporting to check for the maximum cyclomatic complexity" do
-		$system_command.should include("//mc CyclomaticComplexity:1000:View")
+		@ncover.system_command.should include("//mc CyclomaticComplexity:1000:View")
 	end
 	
 	it "should not fail the execution" do
@@ -424,11 +424,11 @@ describe NCoverReport, "when filtering on Assembly coverage data" do
 	end
 	
 	it "should exclude the specified assemblies data" do
-		$system_command.should include("//cf \"nunit.*\":Assembly:false:false")
+		@ncover.system_command.should include("//cf \"nunit.*\":Assembly:false:false")
 	end
 
 	it "should include the specified assemblies data" do
-		$system_command.should include("//cf \"TestSolution.*\":Assembly:false:true")
+		@ncover.system_command.should include("//cf \"TestSolution.*\":Assembly:false:true")
 	end
 	
 	it "should not fail" do
@@ -459,11 +459,11 @@ describe NCoverReport, "when filtering on Namespace coverage data" do
 	end
 	
 	it "should exclude the specified data" do
-		$system_command.should include("//cf \"nunit.*\":Namespace:false:false")
+		@ncover.system_command.should include("//cf \"nunit.*\":Namespace:false:false")
 	end
 
 	it "should include the specified data" do
-		$system_command.should include("//cf \"TestSolution.*\":Namespace:false:true")
+		@ncover.system_command.should include("//cf \"TestSolution.*\":Namespace:false:true")
 	end
 	
 	it "should not fail" do
@@ -494,11 +494,11 @@ describe NCoverReport, "when filtering on Class coverage data" do
 	end
 	
 	it "should exclude the specified data" do
-		$system_command.should include("//cf \"Foo\":Class:false:false")
+		@ncover.system_command.should include("//cf \"Foo\":Class:false:false")
 	end
 
 	it "should include the specified data" do
-		$system_command.should include("//cf \"Bar\":Class:false:true")
+		@ncover.system_command.should include("//cf \"Bar\":Class:false:true")
 	end
 	
 	it "should not fail" do
@@ -529,11 +529,11 @@ describe NCoverReport, "when filtering on Method coverage data" do
 	end
 	
 	it "should exclude the specified data" do
-		$system_command.should include("//cf \"Foo\":Method:false:false")
+		@ncover.system_command.should include("//cf \"Foo\":Method:false:false")
 	end
 
 	it "should include the specified data" do
-		$system_command.should include("//cf \"Bar\":Method:false:true")
+		@ncover.system_command.should include("//cf \"Bar\":Method:false:true")
 	end
 	
 	it "should not fail" do
@@ -564,11 +564,11 @@ describe NCoverReport, "when filtering on Document coverage data" do
 	end
 	
 	it "should exclude the specified data" do
-		$system_command.should include("//cf \"Foo\":Document:false:false")
+		@ncover.system_command.should include("//cf \"Foo\":Document:false:false")
 	end
 
 	it "should include the specified data" do
-		$system_command.should include("//cf \"Bar\":Document:false:true")
+		@ncover.system_command.should include("//cf \"Bar\":Document:false:true")
 	end
 	
 	it "should not fail" do

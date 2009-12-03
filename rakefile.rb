@@ -52,6 +52,12 @@ namespace :specs do
 		t.spec_files = 'spec/ssh*_spec.rb'
 		t.spec_opts << @spec_opts
 	end	
+	
+	desc "SFTP functional specs"
+	Spec::Rake::SpecTask.new :sftp do |t|
+		t.spec_files = 'spec/sftp*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
 
 	desc "Expand Templates functional specs"
 	Spec::Rake::SpecTask.new :templates do |t|
@@ -59,15 +65,39 @@ namespace :specs do
 		t.spec_opts << @spec_opts
     end
 
-    desc "Zip functional specs"
+	desc "Zip functional specs"
 	Spec::Rake::SpecTask.new :zip do |t|
 		t.spec_files = 'spec/zip*_spec.rb'
 		t.spec_opts << @spec_opts
     end
 
-    desc "XUnit functional specs"
+	desc "XUnit functional specs"
 	Spec::Rake::SpecTask.new :xunit do |t|
 		t.spec_files = 'spec/xunit*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
+
+    desc "NUnit functional specs"
+	Spec::Rake::SpecTask.new :nunit do |t|
+		t.spec_files = 'spec/nunit*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
+
+    desc "MSpec functional specs"
+	Spec::Rake::SpecTask.new :mspec do |t|
+		t.spec_files = 'spec/mspec*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
+
+    desc "Command functional specs"
+	Spec::Rake::SpecTask.new :command do |t|
+		t.spec_files = 'spec/command*_spec.rb'
+		t.spec_opts << @spec_opts
+	end
+	
+	desc "Rename functional specs"
+	Spec::Rake::SpecTask.new :rename do |t|
+		t.spec_files = 'spec/rename*_spec.rb'
 		t.spec_opts << @spec_opts
 	end
 end
@@ -86,14 +116,14 @@ namespace :albacore do
                      'albacore:xunit']
 	
 	desc "Run a sample build using the MSBuildTask"
-	Albacore::MSBuildTask.new(:msbuild) do |msb|
+	msbuildtask do |msb|
 		msb.properties = {:configuration => :Debug}
 		msb.targets [:Clean, :Build]
 		msb.solution = "spec/support/TestSolution/TestSolution.sln"
 	end
 	
 	desc "Run a sample assembly info generator"
-	Albacore::AssemblyInfoTask.new(:assemblyinfo) do |asm|
+	assemblyinfotask do |asm|
 		asm.version = "0.1.2.3"
 		asm.company_name = "a test company"
 		asm.product_name = "a product name goes here"
@@ -106,7 +136,7 @@ namespace :albacore do
 	end
 	
 	desc "Run a sample NCover Console code coverage"
-	Albacore::NCoverConsoleTask.new(:ncoverconsole) do |ncc|
+	ncoverconsoletask do |ncc|
 		@xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
 		File.delete(@xml_coverage) if File.exist?(@xml_coverage)
 		
@@ -115,7 +145,7 @@ namespace :albacore do
 		ncc.output = {:xml => @xml_coverage}
 		ncc.working_directory = "spec/support/CodeCoverage/nunit"
 		
-		nunit = NUnitTestRunner.new("spec/support/Tools/NUnit-v2.5/nunit-console.exe")
+		nunit = NUnitTestRunner.new("spec/support/Tools/NUnit-v2.5/nunit-console-x86.exe")
 		nunit.log_level = :verbose
 		nunit.assemblies << "assemblies/TestSolution.Tests.dll"
 		nunit.options << '/noshadow'
@@ -124,7 +154,7 @@ namespace :albacore do
 	end	
 	
 	desc "Run a sample NCover Report to check code coverage"
-	Albacore::NCoverReportTask.new(:ncoverreport => :ncoverconsole) do |ncr|
+	ncoverreporttask :ncoverreport => :ncoverconsole do |ncr|
 		@xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
 		
 		ncr.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Reporting.exe"
@@ -136,41 +166,41 @@ namespace :albacore do
 		
 		ncr.required_coverage << NCover::BranchCoverage.new(:minimum => 10)
 		ncr.required_coverage << NCover::CyclomaticComplexity.new(:maximum => 1)
-  end
+	end
 
-   desc "Run the sample for renaming a File"
-   Albacore::RenameTask.new() do |rename|
-      FileUtils.touch 'web.uat.config.example'
+	desc "Run the sample for renaming a File"
+	renametask do |rename|
+		FileUtils.touch 'web.uat.config.example'
      
-      rename.actual_name = 'web.uat.config.example'
-      rename.target_name = 'web.config.example'
-   end
+		rename.actual_name = 'web.uat.config.example'
+		rename.target_name = 'web.config.example'
+	end
    
-   desc "Run ZipDirectory example"
-   Albacore::ZipTask.new() do |zip|
-     zip.output_path = File.dirname(__FILE__)
-     zip.directories_to_zip = ["lib", "spec"]
-     zip.additional_files = "README.markdown"
-     zip.file = 'albacore_example.zip'
-   end
+	desc "Run ZipDirectory example"
+	ziptask do |zip|
+		zip.output_path = File.dirname(__FILE__)
+		zip.directories_to_zip = ["lib", "spec"]
+		zip.additional_files = "README.markdown"
+		zip.file = 'albacore_example.zip'
+	end
    
-   desc "MSpec Test Runner Example"
-   Albacore::MSpecTestRunnerTask.new() do |mspec|
-     mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
-     mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
-   end
+	desc "MSpec Test Runner Example"
+	mspectask do |mspec|
+		mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
+		mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
+	end
 
-   desc "NUnit Test Runner Example"
-   Albacore::NUnitTestRunnerTask.new() do |nunit|
-     nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
-     nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
-   end
+	desc "NUnit Test Runner Example"
+	nunittask do |nunit|
+		nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
+		nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
+	end
 
-   desc "XUnit Test Runner Example"
-   Albacore::XUnitTestRunnerTask.new() do |xunit|
-     xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
-     xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
-   end
+	desc "XUnit Test Runner Example"
+	xunittask do |xunit|
+		xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
+		xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
+	end   
 end
 
 namespace :jeweler do
@@ -178,10 +208,10 @@ namespace :jeweler do
 	Jeweler::Tasks.new do |gs|
 		gs.name = "albacore"
 		gs.summary = "A Suite of Rake Build Tasks For .Net Solutions"
-		gs.description = "Easily build your .NET solutions with rake, using this suite of custom tasks."
+		gs.description = "Easily build your .NET solutions with rake, using this suite of rake tasks."
 		gs.email = "derickbailey@gmail.com"
-		gs.homepage = "http://github.com/derickbailey/Albacore"
-		gs.authors = ["Derick Bailey", "Ben Hall"]
+		gs.homepage = "http://albacorebuild.net"
+		gs.authors = ["Derick Bailey", "Ben Hall", "Steven Harman"]
 		gs.has_rdoc = false	
 		gs.files.exclude("albacore.gemspec", ".gitignore", "spec/support/Tools")
 
@@ -193,5 +223,6 @@ namespace :jeweler do
 		gs.add_development_dependency('rspec', '>= 1.2.8')
 		gs.add_development_dependency('jeweler', '>= 1.2.1')
 		gs.add_development_dependency('derickbailey-notamock', '>= 0.0.1')
+		gs.add_development_dependency('jekyll', '>= 0.5.4')
 	end
 end

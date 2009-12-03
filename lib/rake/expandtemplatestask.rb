@@ -1,21 +1,15 @@
 require 'rake/tasklib'
 
+def expandtemplatestask(name=:expandtemplates, *args, &block)
+	Albacore::ExpandTemplatesTask.new(name, *args, &block)
+end
+	
 module Albacore	
-	class ExpandTemplatesTask < Rake::TaskLib
-		attr_accessor :name
-		
-		def initialize(name=:expandtemplates, &block)
-			@name = name
+	class ExpandTemplatesTask < Albacore::AlbacoreTask
+		def execute(task_args)
 			@exp = ExpandTemplates.new
-			@block = block
-			define
-		end
-		
-		def define
-			task @name do
-				@block.call(@exp) unless @block.nil?
-				@exp.expand
-			end
+			@block.call(@exp, *task_args) unless @block.nil?
+			@exp.expand
 		end	
 	end
 end

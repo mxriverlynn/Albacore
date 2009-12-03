@@ -5,7 +5,7 @@ require 'tasklib_patch'
 
 describe Albacore::MSBuildTask, "when running" do
 	before :all do
-		task = Albacore::MSBuildTask.new() do |t|
+		task = Albacore::MSBuildTask.new(:msbuild) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)

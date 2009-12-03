@@ -1,22 +1,16 @@
 require 'rake/tasklib'
 
+def ncoverreporttask(name=:ncoverreport, *args, &block)
+	Albacore::NCoverReportTask.new(name, *args, &block)
+end
+	
 module Albacore
-	class NCoverReportTask < Rake::TaskLib
-		attr_accessor :name
-		
-		def initialize(name=:ncoverreport, &block)
-			@name = name
+	class NCoverReportTask < Albacore::AlbacoreTask
+		def execute(task_args)
 			@ncoverreport = NCoverReport.new
-			@block = block
-			define
-		end
-		
-		def define
-			task name do
-				@block.call(@ncoverreport) unless @block.nil?
-				@ncoverreport.run
-				fail if @ncoverreport.failed
-			end
+			@block.call(@ncoverreport, *task_args) unless @block.nil?
+			@ncoverreport.run
+			fail if @ncoverreport.failed
 		end		
 	end
 end

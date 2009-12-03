@@ -10,7 +10,7 @@ describe Albacore::SftpTask, "when running" do
 	end
 	
 	before :each do
-		task = Albacore::SftpTask.new() do |t|
+		task = Albacore::SftpTask.new(:sftp) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)
