@@ -105,7 +105,7 @@ describe MSBuild, "when building a visual studio solution for a specified config
 	end
 	
 	it "should build with the specified configuration as a property" do
-		$system_command.should include("/p:configuration=\"Release\"")
+		@msbuild.system_command.should include("/p:configuration=\"Release\"")
 	end
 	
 	it "should output the solution's binaries according to the specified configuration" do
@@ -125,7 +125,7 @@ describe MSBuild, "when specifying targets to build" do
 	end
 
 	it "should build the targets" do
-		$system_command.should include("/target:Clean;Build")
+		@msbuild.system_command.should include("/target:Clean;Build")
 	end
 
 end
@@ -141,7 +141,7 @@ describe MSBuild, "when building a solution with a specific msbuild verbosity" d
 	end
 
 	it "should call msbuild with the specified verbosity" do
-		$system_command.should include("/verbosity:normal")
+		@msbuild.system_command.should include("/verbosity:normal")
 	end
 end
 
@@ -159,11 +159,11 @@ describe MSBuild, "when specifying multiple configuration properties" do
 	end
 
 	it "should specify the first property" do
-		$system_command.should include("/p:configuration=\"Debug\"")
+		@msbuild.system_command.should include("/p:configuration=\"Debug\"")
 	end
 	
 	it "should specifiy the second property" do
-		$system_command.should include("/p:DebugSymbols=\"true\"")
+		@msbuild.system_command.should include("/p:DebugSymbols=\"true\"")
 	end
 	
 	it "should output the solution's binaries" do
