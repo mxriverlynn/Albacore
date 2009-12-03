@@ -1,10 +1,10 @@
 require 'rake/tasklib'
 
-module Albacore
-	def self.msbuild(name=:msbuild, *args, &block)
-		MSBuildTask.new(name, *args, &block)
-	end
+def msbuildtask(name=:msbuild, *args, &block)
+	Albacore::MSBuildTask.new(name, *args, &block)
+end
 	
+module Albacore
 	class MSBuildTask < Albacore::AlbacoreTask		
 		def execute(task_args)
 			@msbuild = MSBuild.new

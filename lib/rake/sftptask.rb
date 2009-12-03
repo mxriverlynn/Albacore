@@ -1,10 +1,10 @@
 require 'rake/tasklib'
 
-module Albacore
-	def self.sftp(name=:sftp, *args, &block)
-		SftpTask.new(name, *args, &block)
-	end
+def sftptask(name=:sftp, *args, &block)
+	Albacore::SftpTask.new(name, *args, &block)
+end
 	
+module Albacore
 	class SftpTask < Albacore::AlbacoreTask
 		def execute(task_args)
 			@sftp = Sftp.new

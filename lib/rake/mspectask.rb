@@ -1,10 +1,10 @@
 require 'rake/tasklib'
 
-module Albacore
-	def self.mspec(name=:mspec, *args, &block)
-		MSpecTask.new(name, *args, &block)
-	end
+def mspectask(name=:mspec, *args, &block)
+	Albacore::MSpecTask.new(name, *args, &block)
+end
 	
+module Albacore
 	class MSpecTask < Albacore::AlbacoreTask
 		def execute(task_args)
 			@mspec = MSpecTestRunner.new

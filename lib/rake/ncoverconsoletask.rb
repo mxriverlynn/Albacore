@@ -1,10 +1,10 @@
 require 'rake/tasklib'
 
-module Albacore
-	def self.ncoverconsole(name=:ncoverconsole, *args, &block)
-		NCoverConsoleTask.new(name, *args, &block)
-	end
+def ncoverconsoletask(name=:ncoverconsole, *args, &block)
+	Albacore::NCoverConsoleTask.new(name, *args, &block)
+end
 	
+module Albacore
 	class NCoverConsoleTask < Albacore::AlbacoreTask
 		def execute(task_args)
 			@ncover = NCoverConsole.new

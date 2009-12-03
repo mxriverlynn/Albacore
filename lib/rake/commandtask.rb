@@ -1,10 +1,10 @@
 require 'rake/tasklib'
 
-module Albacore	
-	def self.command(name=:command, *args, &block)
-		CommandTask.new(name, *args, &block)
-	end
+def commandtask(name=:command, *args, &block)
+	Albacore::CommandTask.new(name, *args, &block)
+end
 	
+module Albacore	
 	class CommandTask < Albacore::AlbacoreTask
 		def execute(task_args)
 			cmd = Command.new

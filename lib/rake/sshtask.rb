@@ -1,10 +1,10 @@
 require 'rake/tasklib'
 
-module Albacore
-	def self.ssh(name=:ssh, *args, &block)
-		SshTask.new(name, *args, &block)
-	end
+def sshtask(name=:ssh, *args, &block)
+	Albacore::SshTask.new(name, *args, &block)
+end
 	
+module Albacore
 	class SshTask < Albacore::AlbacoreTask
 		def execute(task_args)
 			@ssh = Ssh.new
