@@ -16,7 +16,7 @@ class Command
 	
 	def execute()
 		result = run_command "Command", @parameters.join(" ")
-		
+
 		failure_message = 'Command Failed. See Build Log For Detail'
 		fail_with_message failure_message if !result
 	end
