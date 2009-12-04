@@ -1,3 +1,5 @@
+require 'rake/tasklib'
+
 module Albacore
 	class AlbacoreTask < ::Rake::TaskLib
 		attr_accessor :name
