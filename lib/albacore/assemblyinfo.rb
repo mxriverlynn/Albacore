@@ -6,7 +6,7 @@ class AssemblyInfo
 	
 	attr_accessor :version, :title, :description, :output_file, :custom_attributes
 	attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-	attr_accessor :file_version, :trademark, :namespaces
+	attr_accessor :file_version, :trademark, :namespaces, :lang_engine
 	
 	def initialize
 		super()
@@ -14,6 +14,7 @@ class AssemblyInfo
 	end
 	
 	def write
+    check_lang_engine
 		write_assemblyinfo @output_file
 	end
 	
@@ -35,22 +36,29 @@ class AssemblyInfo
 		return false
 	end
 	
+	def check_lang_engine
+		return if (!@lang_engine.nil?)
+		msg = 'lang_engine cannot be nil.'
+		@logger.info msg
+		fail
+	end
+
 	def build_assembly_info_data
 		asm_data = build_using_statements + "\n"
 		
-		asm_data << build_attribute("AssemblyTitle", @title) if @title != nil
-		asm_data << build_attribute("AssemblyDescription", @description) if @description != nil
-		asm_data << build_attribute("AssemblyCompany", @company_name) if @company_name != nil
-		asm_data << build_attribute("AssemblyProduct", @product_name) if @product_name != nil
+		asm_data << @lang_engine.build_attribute("AssemblyTitle", @title) if @title != nil
+		asm_data << @lang_engine.build_attribute("AssemblyDescription", @description) if @description != nil
+		asm_data << @lang_engine.build_attribute("AssemblyCompany", @company_name) if @company_name != nil
+		asm_data << @lang_engine.build_attribute("AssemblyProduct", @product_name) if @product_name != nil
 		
-		asm_data << build_attribute("AssemblyCopyright", @copyright) if @copyright != nil
-		asm_data << build_attribute("AssemblyTrademark", @trademark) if @trademark != nil
+		asm_data << @lang_engine.build_attribute("AssemblyCopyright", @copyright) if @copyright != nil
+		asm_data << @lang_engine.build_attribute("AssemblyTrademark", @trademark) if @trademark != nil
 		
-		asm_data << build_attribute("ComVisible", @com_visible) if @com_visible != nil
-		asm_data << build_attribute("Guid", @com_guid) if @com_guid != nil
+		asm_data << @lang_engine.build_attribute("ComVisible", @com_visible) if @com_visible != nil
+		asm_data << @lang_engine.build_attribute("Guid", @com_guid) if @com_guid != nil
 		
-		asm_data << build_attribute("AssemblyVersion", @version) if @version != nil
-		asm_data << build_attribute("AssemblyFileVersion", @file_version) if @file_version != nil
+		asm_data << @lang_engine.build_attribute("AssemblyVersion", @version) if @version != nil
+		asm_data << @lang_engine.build_attribute("AssemblyFileVersion", @file_version) if @file_version != nil
 		
 		asm_data << "\n"
 		if @custom_attributes != nil
@@ -78,25 +86,16 @@ class AssemblyInfo
 		
 		namespaces = ''
 		@namespaces.each do |ns|
-			namespaces << "using #{ns};\n"
+			namespaces << @lang_engine.build_using_statement(ns)
 		end
 		
 		namespaces
 	end	
 	
-	def build_attribute(attr_name, attr_data)
-		attribute = "[assembly: #{attr_name}("
-		attribute << "#{attr_data.inspect}" if attr_data != nil
-		attribute << ")]\n"
-		
-		@logger.debug "Build Assembly Info Attribute: " + attribute
-		attribute
-	end
-	
 	def build_custom_attributes()
 		attributes = []
 		@custom_attributes.each do |key, value|
-			attributes << build_attribute(key, value)
+			attributes << @lang_engine.build_attribute(key, value)
 		end
 		attributes
 	end
