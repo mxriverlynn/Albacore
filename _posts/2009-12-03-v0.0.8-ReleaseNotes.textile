@@ -18,7 +18,9 @@ end</code></pre>
 
 Youc an do this with any task... so, Albacore::AssemblyInfoTask.new is now <code>assemblyinfotask do ... end</code>, Albacore::NCoverConsoleTask.new is now <code>ncoverconsoletask do ... end</code>, etc. 
 
-The old syntax still works, too. However, you are now required to pass a task name into the .new constructor. For example, you can still call <code>Albacore::NCoverConsoleTask.new(:ncoverconsole) do ... end</code>. The default names have been moved to the new syntax shortcuts, and out of the old tasks. Additionally, with the new syntax shortcut, you don't need to specify <code>Albacore::</code> and you don't need to speify the <code>.new</code> initializer. You can just call <code>ncoverconsoletask</code> or <code>assemblyinfotask</code> directly.
+The old syntax still works, too. However, you are now required to pass a task name into the .new constructor. For example, you can still call <code>Albacore::NCoverConsoleTask.new(:ncoverconsole) do ... end</code>. The default names have been moved to the new syntax shortcuts, and out of the old tasks. 
+
+Additionally, with the new syntax shortcut, you don't need to specify <code>Albacore::</code> and you don't need to speify the <code>.new</code> initializer. You can just call <code>ncoverconsoletask</code> or <code>assemblyinfotask</code> directly.
 
 h2. Supporting The Complete Task Syntax
 
