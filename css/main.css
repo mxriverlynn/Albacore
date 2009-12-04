@@ -44,7 +44,8 @@ body {
 	border-right: 1px solid #afafaf;
 	border-bottom: 1px solid #afafaf;
 	float: left;
-	width: 580px;
+	width: 550px;
+	padding-left: 30px;
 }
 
 .sidebar {
@@ -74,7 +75,10 @@ h1 {
 	color: #172c31; 
 	padding-top: 0px;
 	margin-top: 0px;
+	margin-left: -25px;
 }
+
+.sidebar_item h2{ margin-left: 0px;}
 
 .description h1{
 	font-style: normal;
@@ -84,7 +88,13 @@ h1 {
 
 h1 .small { font-size: 0.4em; }
 h1 a { text-decoration: none }
-h2 { border-bottom: 1px solid #cfcfcf; padding-top: 10px; font-size: 1.5em; color: #172c31; }
+h2 { 
+	border-bottom: 1px solid #cfcfcf; 
+	padding-top: 10px; 
+	font-size: 1.5em; 
+	color: #172c31; 
+	margin-left: -25px;
+}
 h3 { color: #172c31; }
 a { color: #0000df; }
 

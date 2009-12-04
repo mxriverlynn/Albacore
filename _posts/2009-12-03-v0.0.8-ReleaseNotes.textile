@@ -18,7 +18,7 @@ end</code></pre>
 
 Youc an do this with any task... so, Albacore::AssemblyInfoTask.new is now <code>assemblyinfotask do ... end</code>, Albacore::NCoverConsoleTask.new is now <code>ncoverconsoletask do ... end</code>, etc. 
 
-The old syntax still works, too. You can still call <code>Albacore::NCoverConsole.new(...) do ... end</code> in your rakefile. The new syntax shortcut is just that - a shortcut. You don't need to specify <code>Albacore::</code> and you don't need to speify the <code>.new</code> initializer.
+The old syntax still works, too. However, you are now required to pass a task name into the .new constructor. For example, you can still call <code>Albacore::NCoverConsoleTask.new(:ncoverconsole) do ... end</code>. The default names have been moved to the new syntax shortcuts, and out of the old tasks. Additionally, with the new syntax shortcut, you don't need to specify <code>Albacore::</code> and you don't need to speify the <code>.new</code> initializer. You can just call <code>ncoverconsoletask</code> or <code>assemblyinfotask</code> directly.
 
 h2. Supporting The Complete Task Syntax
 
@@ -152,4 +152,4 @@ There is now an easy way to install all of the Albacore dependencies. This will 
 
 h2. A Lot Of Changes, A Long Way To Go
 
-As you can see, there are a significant number of improvements and changes to albacore in this release. However, we still have a long way to go. We're always looking for good patches, bugs to fix, ideas for improving or any other way that anyon might want to "contribute to the project":http://wiki.github.com/derickbailey/Albacore/howtocontribute . Be sure to check the Issues list and join the the "group discussion":http://groups.google.com/group/albacoredev if you are wanting to help out.
+As you can see, there are a significant number of improvements and changes to albacore in this release. However, we still have a long way to go. We're always looking for good patches, bugs to fix, ideas for improving or any other way that anyon might want to "contribute to the project":http://wiki.github.com/derickbailey/Albacore/howtocontribute . Be sure to check the "issues list":http://github.com/derickbailey/Albacore/issues and join the the "group discussion":http://groups.google.com/group/albacoredev if you are wanting to help out.
