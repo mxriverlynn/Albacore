@@ -14,7 +14,7 @@ class AssemblyInfo
 	end
 	
 	def write
-    check_lang_engine
+    @lang_engine = CSharpEngine.new unless check_lang_engine
 		write_assemblyinfo @output_file
 	end
 	
@@ -37,10 +37,7 @@ class AssemblyInfo
 	end
 	
 	def check_lang_engine
-		return if (!@lang_engine.nil?)
-		msg = 'lang_engine cannot be nil.'
-		@logger.info msg
-		fail
+		return !@lang_engine.nil?
 	end
 
 	def build_assembly_info_data
