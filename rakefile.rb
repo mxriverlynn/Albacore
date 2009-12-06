@@ -207,6 +207,11 @@ namespace :albacore do
 		xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
 		xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
 	end   
+  
+  desc "Exec Task Example"
+	exec do |exec|
+		exec.command = 'hostname'
+	end   
 end
 
 namespace :jeweler do
