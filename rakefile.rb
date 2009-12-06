@@ -181,7 +181,13 @@ namespace :albacore do
 		zip.output_path = File.dirname(__FILE__)
 		zip.directories_to_zip = ["lib", "spec"]
 		zip.additional_files = "README.markdown"
-		zip.file = 'albacore_example.zip'
+		zip.output_file = 'albacore_example.zip'
+	end
+  
+  desc "Run UnZip example"
+	unziptask do |zip|
+		zip.unzip_path = File.join File.dirname(__FILE__), 'temp'
+		zip.zip_file = 'albacore_example.zip'
 	end
    
 	desc "MSpec Test Runner Example"

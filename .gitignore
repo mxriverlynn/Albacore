@@ -33,3 +33,5 @@ albacore.gemspec
 web.config.example
 albacore_example.zip
 TestResult.xml
+temp
+unziptask
