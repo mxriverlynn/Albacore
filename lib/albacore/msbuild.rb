@@ -19,12 +19,12 @@ class MSBuild
 		File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
 	end
 	
-	def targets(targets)
-		@targets=targets
+	def targets(*targets)
+		@targets=[targets]
 	end
 	
-	def properties=(properties)
-		@properties = properties
+	def properties(*properties)
+		@properties = properties.first unless properties.nil?
 	end
 	
 	def build
