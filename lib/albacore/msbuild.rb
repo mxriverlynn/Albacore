@@ -23,8 +23,8 @@ class MSBuild
 		@targets=[targets]
 	end
 	
-	def properties(*properties)
-		@properties = properties.first unless properties.nil?
+	def properties(properties)
+		@properties = properties
 	end
 	
 	def build
