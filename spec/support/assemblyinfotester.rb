@@ -22,7 +22,7 @@ class AssemblyInfoTester < AssemblyInfo
   def setup_assemblyinfo_file
     @lang_engine = CSharpEngine.new unless check_lang_engine
 
-    @assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.cs")
+    @assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.test")
     File.delete @assemblyinfo_file if File.exist? @assemblyinfo_file
   end
   
