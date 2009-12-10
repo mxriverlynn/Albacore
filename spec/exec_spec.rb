@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/command'
+require 'albacore/exec'
 
 @@nunit = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console-x86.exe')
 
-describe Command, "when executing a command with parameters" do
+describe Exec, "when executing a command with parameters" do
 	before :all do
 		@cmd = Command.new
 		@cmd.log_level = :verbose
