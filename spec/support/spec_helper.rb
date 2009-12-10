@@ -12,6 +12,6 @@ require 'system_patch'
 require 'tasklib_patch'
 
 Spec::Runner.configure do |config|
-	config.mock_with NotAMock::RspecMockFrameworkAdapter
+  config.mock_with NotAMock::RspecMockFrameworkAdapter
 end
 
