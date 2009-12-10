@@ -5,7 +5,7 @@ require 'albacore/exec'
 
 describe Exec, "when executing a command with parameters" do
   before :all do
-    @cmd = Command.new
+    @cmd = Exec.new
     @cmd.log_level = :verbose
     @cmd.extend(SystemPatch)
     @cmd.path_to_command = @@nunit

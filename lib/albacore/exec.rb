@@ -5,22 +5,18 @@ class Exec
   include YAMLConfig
   include Logging
   
-  attr_accessor :command, :parameters
+  attr_accessor :parameters
   
   def initialize
     super()
+    @path_to_command=''
+    @parameters = []
   end
     
   def execute
-    command_to_execute = []
-    command_to_execute << "\"#{@command}\""
-    command_to_execute << @parameters if parameters
-       
-    begin
-      system command_to_execute.join(" ")
-    rescue 
-      failure_message = "#{@command} Failed. See Build Log For Detail"
-      raise failure_message
-    end
+    result = run_command "Exec", @parameters.join(" ")
+    
+    failure_message = 'Exec Failed. See Build Log For Detail'
+    fail_with_message failure_message if !result
   end
 end
