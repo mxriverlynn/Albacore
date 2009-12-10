@@ -6,5 +6,4 @@ module NCover
       super("SymbolCoverage", params)
     end    
   end
-end  
-  
+end
