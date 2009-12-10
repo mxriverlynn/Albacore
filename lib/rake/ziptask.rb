@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def ziptask(name=:zip, *args, &block)
+def zip(name=:zip, *args, &block)
 	Albacore::ZipTask.new(name, *args, &block)
 end
 	

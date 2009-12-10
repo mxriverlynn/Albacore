@@ -99,7 +99,7 @@ describe MSBuild, "when building a visual studio solution for a specified config
 		@testdata= MSBuildTestData.new("Release")
 		@msbuild = @testdata.msbuild
 		
-		@msbuild.properties = {:configuration => :Release}
+		@msbuild.properties :configuration => :Release
 		@msbuild.solution = @testdata.solution_path
 		@msbuild.build
 	end
@@ -119,7 +119,7 @@ describe MSBuild, "when specifying targets to build" do
 		@testdata= MSBuildTestData.new
 		@msbuild = @testdata.msbuild
 		
-		@msbuild.targets [:Clean, :Build]
+		@msbuild.targets :Clean, :Build
 		@msbuild.solution = @testdata.solution_path
 		@msbuild.build
 	end
@@ -152,8 +152,8 @@ describe MSBuild, "when specifying multiple configuration properties" do
 
 		File.delete(@testdata.output_path) if File.exist?(@testdata.output_path)
 		
-		@msbuild.targets [:Clean, :Build]
-		@msbuild.properties = {:configuration => :Debug, :DebugSymbols => true }
+		@msbuild.targets :Clean, :Build
+		@msbuild.properties :configuration => :Debug, :DebugSymbols => true 
 		@msbuild.solution = @testdata.solution_path
 		@msbuild.build
 	end

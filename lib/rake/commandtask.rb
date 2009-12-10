@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def commandtask(name=:command, *args, &block)
+def command(name=:command, *args, &block)
 	Albacore::CommandTask.new(name, *args, &block)
 end
 	

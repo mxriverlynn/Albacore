@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def unziptask(name=:unzip, *args, &block)
+def unzip(name=:unzip, *args, &block)
 	Albacore::UnZipTask.new(name, *args, &block)
 end
 	

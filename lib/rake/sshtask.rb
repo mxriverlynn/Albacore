@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def sshtask(name=:ssh, *args, &block)
+def ssh(name=:ssh, *args, &block)
 	Albacore::SshTask.new(name, *args, &block)
 end
 	

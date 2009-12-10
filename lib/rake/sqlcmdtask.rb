@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def sqlcmdtask(name=:sqlcmd, *args, &block)
+def sqlcmd(name=:sqlcmd, *args, &block)
 	Albacore::SQLCmdTask.new(name, *args, &block)
 end
 	

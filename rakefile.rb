@@ -116,14 +116,14 @@ namespace :albacore do
                      'albacore:xunit']
 	
 	desc "Run a sample build using the MSBuildTask"
-	msbuildtask do |msb|
+	msbuild do |msb|
 		msb.properties :configuration => :release, :platform => 'Any CPU'
 		msb.targets :clean, :build
 		msb.solution = "spec/support/TestSolution/TestSolution.sln"
 	end
 	
 	desc "Run a sample assembly info generator"
-	assemblyinfotask do |asm|
+	assemblyinfo do |asm|
 		asm.version = "0.1.2.3"
 		asm.company_name = "a test company"
 		asm.product_name = "a product name goes here"
@@ -136,7 +136,7 @@ namespace :albacore do
 	end
 	
 	desc "Run a sample NCover Console code coverage"
-	ncoverconsoletask do |ncc|
+	ncoverconsole do |ncc|
 		@xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
 		File.delete(@xml_coverage) if File.exist?(@xml_coverage)
 		
@@ -154,7 +154,7 @@ namespace :albacore do
 	end	
 	
 	desc "Run a sample NCover Report to check code coverage"
-	ncoverreporttask :ncoverreport => :ncoverconsole do |ncr|
+	ncoverreport :ncoverreport => :ncoverconsole do |ncr|
 		@xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
 		
 		ncr.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Reporting.exe"
@@ -169,7 +169,7 @@ namespace :albacore do
 	end
 
 	desc "Run the sample for renaming a File"
-	renametask do |rename|
+	rename do |rename|
 		FileUtils.touch 'web.uat.config.example'
      
 		rename.actual_name = 'web.uat.config.example'
@@ -177,7 +177,7 @@ namespace :albacore do
 	end
    
 	desc "Run ZipDirectory example"
-	ziptask do |zip|
+	zip do |zip|
 		zip.output_path = File.dirname(__FILE__)
 		zip.directories_to_zip = ["lib", "spec"]
 		zip.additional_files = "README.markdown"
@@ -185,25 +185,25 @@ namespace :albacore do
 	end
   
   desc "Run UnZip example"
-	unziptask do |zip|
+	unzip do |zip|
 		zip.unzip_path = File.join File.dirname(__FILE__), 'temp'
 		zip.zip_file = 'albacore_example.zip'
 	end
    
 	desc "MSpec Test Runner Example"
-	mspectask do |mspec|
+	mspec do |mspec|
 		mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
 		mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
 	end
 
 	desc "NUnit Test Runner Example"
-	nunittask do |nunit|
+	nunit do |nunit|
 		nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
 		nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
 	end
 
 	desc "XUnit Test Runner Example"
-	xunittask do |xunit|
+	xunit do |xunit|
 		xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
 		xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
 	end   

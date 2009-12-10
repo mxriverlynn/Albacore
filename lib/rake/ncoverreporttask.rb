@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def ncoverreporttask(name=:ncoverreport, *args, &block)
+def ncoverreport(name=:ncoverreport, *args, &block)
 	Albacore::NCoverReportTask.new(name, *args, &block)
 end
 	

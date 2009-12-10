@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def mspectask(name=:mspec, *args, &block)
+def mspec(name=:mspec, *args, &block)
 	Albacore::MSpecTask.new(name, *args, &block)
 end
 	

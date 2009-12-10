@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def renametask(name=:rename, *args, &block)
+def rename(name=:rename, *args, &block)
 	Albacore::RenameTask.new(name, *args, &block)
 end
 	

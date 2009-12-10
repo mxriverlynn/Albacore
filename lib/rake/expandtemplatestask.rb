@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def expandtemplatestask(name=:expandtemplates, *args, &block)
+def expandtemplates(name=:expandtemplates, *args, &block)
 	Albacore::ExpandTemplatesTask.new(name, *args, &block)
 end
 	

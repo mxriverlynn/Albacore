@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def xunittask(name=:xunit, *args, &block)
+def xunit(name=:xunit, *args, &block)
 	Albacore::XUnitTask.new(name, *args, &block)
 end
 	

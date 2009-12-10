@@ -1,6 +1,6 @@
 require 'rake/tasklib'
 
-def nunittask(name=:nunit, *args, &block)
+def nunit(name=:nunit, *args, &block)
 	Albacore::NUnitTask.new(name, *args, &block)
 end
 	
