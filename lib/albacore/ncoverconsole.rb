@@ -9,6 +9,7 @@ class NCoverConsole
   
   def initialize
     super()
+    @register_dll = false
     @output = {}
     @testrunner_args = []
     @cover_assemblies = []
@@ -20,11 +21,16 @@ class NCoverConsole
     @working_directory = "//working-directory " + working_dir
   end
   
+  def register
+    @register_dll = true
+  end
+  
   def run
     check_testrunner
     return false if @failed
     
     command_parameters = []
+    command_parameters << "//reg" if @register_dll
     command_parameters << build_output_options(@output) unless @output.nil?
     command_parameters << @working_directory unless @working_directory.nil?
     command_parameters << build_assembly_list("assemblies", @cover_assemblies) unless @cover_assemblies.empty?

@@ -67,6 +67,39 @@ describe NCoverConsole, "when specifying assemblies to ignore" do
   end
 end
 
+describe NCoverConsole, "when not specifically registering the ncover dll" do
+  before :all do
+    @ncc = NCoverConsole.new
+    
+    @ncc.extend(SystemPatch)
+    @ncc.path_to_command = @@ncoverpath
+    @ncc.testrunner = NUnitTestRunner.new
+    
+    @ncc.run
+  end
+  
+  it "should not include the register flag in the command" do
+    @ncc.system_command.should_not include "//reg"
+  end
+end
+
+describe NCoverConsole, "when registering the ncover dll" do
+  before :all do
+    @ncc = NCoverConsole.new
+    
+    @ncc.extend(SystemPatch)
+    @ncc.path_to_command = @@ncoverpath
+    @ncc.register
+    @ncc.testrunner = NUnitTestRunner.new
+    
+    @ncc.run
+  end
+  
+  it "should include the register flag in the command" do
+    @ncc.system_command.should include "//reg"
+  end
+end
+
 describe NCoverConsole, "when specifying the types of coverage to analyze" do
   before :all do
     File.delete(@@xml_coverage_output) if File.exist?(@@xml_coverage_output)
@@ -154,6 +187,7 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
     
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
+    @ncc.register
     @ncc.path_to_command = @@ncoverpath
     @ncc.output = {:xml => @@xml_coverage_output}
     @ncc.working_directory = @@working_directory
@@ -196,6 +230,7 @@ describe NCoverConsole, "when specifying an html report and an xml coverage repo
     
     ncc.extend(SystemPatch)
     ncc.log_level = :verbose
+    ncc.register
     ncc.path_to_command = @@ncoverpath
     ncc.output = {:xml => @@xml_coverage_output, :html => @@html_coverage_output}
     ncc.working_directory = @@working_directory
@@ -224,6 +259,7 @@ describe NCoverConsole, "when producing a report with machine.specifications" do
     
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
+    @ncc.register
     @ncc.path_to_command = @@ncoverpath
     @ncc.output = {:xml => @@xml_coverage_output}
     @ncc.working_directory = @@working_directory
