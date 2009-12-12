@@ -1,7 +1,6 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'assemblyinfotester'
 require 'albacore/assemblyinfo'
-require 'albacore/vbnetengine'
 
 describe AssemblyInfo, "when generating an assembly info file" do
   before :all do
