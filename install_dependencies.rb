@@ -11,12 +11,12 @@ end
 
 def install(lib)
   begin
-  	matches = Gem.source_index.find_name(lib)
+    matches = Gem.source_index.find_name(lib)
     if matches.empty?
-    	puts "Installing #{lib}"
-    	Gem::GemRunner.new.run ['install', lib]
+      puts "Installing #{lib}"
+      Gem::GemRunner.new.run ['install', lib]
     else
-    	puts "Found #{lib} gem - skipping"
+      puts "Found #{lib} gem - skipping"
     end
   rescue Gem::SystemExitException => e
   end
@@ -24,12 +24,12 @@ end
 
 def add_source(url)
   begin
-  	if Gem.sources.include?(url)
-  		puts "Found #{url} gem source = skipping"
-  	else
-  		puts "Adding #{url} gem source."
-		Gem::GemRunner.new.run ['sources', '-a', url]
-	end
+    if Gem.sources.include?(url)
+      puts "Found #{url} gem source = skipping"
+    else
+      puts "Adding #{url} gem source."
+    Gem::GemRunner.new.run ['sources', '-a', url]
+  end
   rescue Gem::SystemExitException => e
   end
 end
