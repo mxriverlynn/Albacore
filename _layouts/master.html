@@ -16,35 +16,30 @@
 	<a href="http://github.com/derickbailey/Albacore"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
 	<div id="titlebar">
-    	<div class="download">
-      		<a href="http://github.com/derickbailey/Albacore/zipball/master">
-        		<img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      		<a href="http://github.com/derickbailey/Albacore/tarball/master">
-        		<img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    	</div>
-
-    	<div class="logo">
+    	<div id="logo">
 			<img border="0" src="{{ site.url }}/images/AlbacoreLogo3.png" />
     	</div>
+		<div id="navigation">
+			<div class="menu">
+				[<a href="{{ site.url }}">Home</a>]
+			</div>
+			<div class="menu_right">
+				<a href="http://feeds.feedburner.com/AlbacoreBuild"><img src="http://feeds.feedburner.com/~fc/AlbacoreBuild?bg=FF6600&amp;fg=000000&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a>
+			</div>
+		</div>
 	</div>
 	
-	<div id="navigation">
-		<div class="menu">
-			[<a href="{{ site.url }}">Home</a>]
-		</div>
-		<div class="menu_right">
-			<a href="http://feeds.feedburner.com/AlbacoreBuild"><img src="http://feeds.feedburner.com/~fc/AlbacoreBuild?bg=FF6600&amp;fg=000000&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a>
-		</div>
-	</div>
 	<div id="container">
-		<div class="main_content">
+		<div id="main_content">
 			{{ content }}
 		</div>
-		<div class="sidebar">
+		<div id="sidebar">
 			<div class="sidebar_item">
-				<h2>Albacore Resources</h2>
-				Google Groups: <a href="http://groups.google.com/group/albacoredev">Albacore Dev</a><br/>
-				<br/>
+				<h2>Resources</h2>
+				<p>
+					<a href="http://groups.google.com/group/albacoredev"><img src="{{ site.url}}/images/google.png" border="0"></a>
+					<a href="http://twitter.com/albacorebuild"><img src="{{ site.url }}/images/twitter.png" border="0"></a>
+				</p>
 				Github: 
 				<ul>
 					<li><a href="http://github.com/derickbailey/Albacore">Source Code</a><br/></li>
@@ -52,7 +47,7 @@
 					<li><a href="http://github.com/derickbailey/Albacore/issues">Issues List</a><br/></li>
 				</ul>
 				<br/>
-				Twitter: <a href="http://twitter.com/albacorebuild">@albacorebuild</a><br/>
+				Twitter: <br/>
 			</div>
 			<div class="sidebar_item">
 				<script src="http://widgets.twimg.com/j/2/widget.js"></script>
