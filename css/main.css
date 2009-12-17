@@ -1,6 +1,6 @@
 body {
   margin: 0px;
-  background-color: #6f7f77;
+  background-color: #788e95;
   font-family: Helvetica, Arial, FreeSans; 
   color: #000000;
   position: relative;
@@ -32,7 +32,13 @@ a:hover, a:active {
 
 #navigation {
   float: right;
+  height: 175px;
+  width: 300px;
+}
+
+#navigation .menu {
   vertical-align: middle;
+  text-align: center;
 }
 
 #container {
@@ -63,4 +69,31 @@ a:hover, a:active {
 
 p {
   margin-left: 25px;
+}
+
+#footer{
+	font-size: .7em;
+	margin-top: 50px;
+	border-top: 1px solid #cfcfcf;
+	padding: 25px;
+	width: 950px;
+	margin: 0 auto;
+	clear: both;
+}
+
+.footer_left{
+	float: left;
+}
+
+.footer_right{
+	float: right;
+}
+
+pre code{
+	margin-left: 25px;
+	overflow: scroll;
+	width: *;
+	display: block;
+	background-color: #cfcfcf;
+	padding: 10px;
 }

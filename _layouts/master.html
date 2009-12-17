@@ -17,14 +17,14 @@
 
 	<div id="titlebar">
     	<div id="logo">
-			<img border="0" src="{{ site.url }}/images/AlbacoreLogo3.png" />
+			<a href="{{ site.url }}"><img border="0" src="{{ site.url }}/images/AlbacoreLogo3.png" /></a>
     	</div>
 		<div id="navigation">
 			<div class="menu">
-				[<a href="{{ site.url }}">Home</a>]
-			</div>
-			<div class="menu_right">
-				<a href="http://feeds.feedburner.com/AlbacoreBuild"><img src="http://feeds.feedburner.com/~fc/AlbacoreBuild?bg=FF6600&amp;fg=000000&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a>
+				<a href="http://groups.google.com/group/albacoredev"><img src="{{ site.url}}/images/google.png" border="0"></a>
+				<a href="http://twitter.com/albacorebuild"><img src="{{ site.url }}/images/twitter.png" border="0"></a>
+				<a href="http://github.com/derickbailey/Albacore"><img src="{{ site.url }}/images/github.png" border="0"></a>
+				<a href="http://feeds.feedburner.com/AlbacoreBuild"><img src="{{ site.url }}/images/rss.png" border="0"></a>
 			</div>
 		</div>
 	</div>
@@ -34,21 +34,6 @@
 			{{ content }}
 		</div>
 		<div id="sidebar">
-			<div class="sidebar_item">
-				<h2>Resources</h2>
-				<p>
-					<a href="http://groups.google.com/group/albacoredev"><img src="{{ site.url}}/images/google.png" border="0"></a>
-					<a href="http://twitter.com/albacorebuild"><img src="{{ site.url }}/images/twitter.png" border="0"></a>
-				</p>
-				Github: 
-				<ul>
-					<li><a href="http://github.com/derickbailey/Albacore">Source Code</a><br/></li>
-					<li><a href="http://wiki.github.com/derickbailey/Albacore">Wiki</a><br/></li>
-					<li><a href="http://github.com/derickbailey/Albacore/issues">Issues List</a><br/></li>
-				</ul>
-				<br/>
-				Twitter: <br/>
-			</div>
 			<div class="sidebar_item">
 				<script src="http://widgets.twimg.com/j/2/widget.js"></script>
 				<script>
@@ -83,18 +68,16 @@
 				</script>
 			</div>
 			<div class="sidebar_item">
-				<h2>Thank You NCover</h2>
-					Thanks to NCover for supporting Albacore and providing a free license, used for functional testing of Albacore's NCoverConsoleTask and NCoverReportTask!<br/>
-					<a href="http://ncover.com"><img src="{{ site.url }}/images/i_cover_my_code_promo_badge_white.jpg" border="0"></a>
+				<a href="http://ncover.com"><img src="{{ site.url }}/images/i_cover_my_code_promo_badge_white.jpg" border="0"></a>
 			</div>
 		</div>
-		<div class="footer">
-			<div class="footer_left">
-				git the source code on GitHub : <a href="http://github.com/derickbailey/Albacore">derickbailey/Albacore</a>
-			</div>
-			<div class="footer_right">
-				<a href="http://github.com/derickbailey/Albacore/blob/master/EULA.txt">Copyright ©2009 Derick Bailey.</a> All Rights Reserved.
-			</div>
+	</div>
+	<div id="footer">
+		<div class="footer_left">
+			git the source code on GitHub : <a href="http://github.com/derickbailey/Albacore">derickbailey/Albacore</a>
+		</div>
+		<div class="footer_right">
+			<a href="http://github.com/derickbailey/Albacore/blob/master/EULA.txt">Copyright ©2009 Derick Bailey.</a> All Rights Reserved.
 		</div>
 	</div>
 </body>
