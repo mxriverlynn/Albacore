@@ -24,10 +24,12 @@ a:hover, a:active {
   margin: 0 auto;
   margin-top: 25px;
   margin-bottom: 25px;
-  text-align: center;
 }
 
 #logo {
+  float: left;
+  height: 151px;
+  width: 770px;
   text-align: center;
 }
 
@@ -54,6 +56,7 @@ a:hover, a:active {
   padding-left: 10px;
   float: right;
   margin-top: 0px;
+  text-align: center;
 }
 
 .sidebar_item {
@@ -62,6 +65,7 @@ a:hover, a:active {
   margin-bottom: 25px;
   border-left: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
+  text-align: center;
 }
 
 p {
