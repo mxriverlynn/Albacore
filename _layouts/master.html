@@ -1,84 +1,82 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="description" content="Build Your .NET Systems Quickly And Easily With Ruby And Rake, Using The Albacore Rake Task Suite. Albacore: Dolphin-Safe Rake Tasks For .NET Systems" />
-	<meta name="keywords" content=".net, ruby, rake, albacore, build, nant, msbuild, assemblyinfo, sqlcmd, ncover, nunit, mspec, xunit" />	
-	
-	<link href="{{ site.url }}/css/main.css" rel="stylesheet" type="text/css" />
-	<link href="http://feeds.feedburner.com/AlbacoreBuild" rel="alternate" title="AlbacoreBuild.Net" type="application/atom+xml" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="description" content="Build Your .NET Systems Quickly And Easily With Ruby And Rake, Using The Albacore Rake Task Suite. Albacore: Dolphin-Safe Rake Tasks For .NET Systems" />
+  <meta name="keywords" content=".net, ruby, rake, albacore, build, nant, msbuild, assemblyinfo, sqlcmd, ncover, nunit, mspec, xunit" />  
+  
+  <link href="{{ site.url }}/css/main.css" rel="stylesheet" type="text/css" />
+  <link href="http://feeds.feedburner.com/AlbacoreBuild" rel="alternate" title="AlbacoreBuild.Net" type="application/atom+xml" />
 
-	<title>Albacore: {{ page.title }}</title>
+  <title>Albacore: {{ page.title }}</title>
 </head>
 <body>
-	<a href="http://github.com/derickbailey/Albacore"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-	<div id="titlebar">
-    	<div id="logo">
-			<a href="{{ site.url }}"><img border="0" src="{{ site.url }}/images/AlbacoreLogo3.png" /></a>
-    	</div>
-		<div id="navigation">
-			<div class="menu">
-				<a href="http://groups.google.com/group/albacoredev"><img src="{{ site.url}}/images/google.png" border="0"></a>
-				<a href="http://twitter.com/albacorebuild"><img src="{{ site.url }}/images/twitter.png" border="0"></a>
-				<a href="http://github.com/derickbailey/Albacore"><img src="{{ site.url }}/images/github.png" border="0"></a>
-				<a href="http://feeds.feedburner.com/AlbacoreBuild"><img src="{{ site.url }}/images/rss.png" border="0"></a>
-			</div>
-		</div>
-	</div>
-	
-	<div id="container">
-		<div id="main_content">
-			{{ content }}
-		</div>
-		<div id="sidebar">
-			<div class="sidebar_item">
-				<script src="http://widgets.twimg.com/j/2/widget.js"></script>
-				<script>
-				new TWTR.Widget({
-				  version: 2,
-				  type: 'profile',
-				  rpp: 4,
-				  interval: 6000,
-				  width: 230,
-				  height: 300,
-				  theme: {
-				    shell: {
-				      background: '#333333',
-				      color: '#ffffff'
-				    },
-				    tweets: {
-				      background: '#000000',
-				      color: '#ffffff',
-				      links: '#4aed05'
-				    }
-				  },
-				  features: {
-				    scrollbar: true,
-				    loop: false,
-				    live: true,
-				    hashtags: true,
-				    timestamp: true,
-				    avatars: true,
-				    behavior: 'all'
-				  }
-				}).render().setUser('albacorebuild').start();
-				</script>
-			</div>
-			<div class="sidebar_item">
-				<a href="http://ncover.com"><img src="{{ site.url }}/images/i_cover_my_code_promo_badge_white.jpg" border="0"></a>
-			</div>
-		</div>
-	</div>
-	<div id="footer">
-		<div class="footer_left">
-			git the source code on GitHub : <a href="http://github.com/derickbailey/Albacore">derickbailey/Albacore</a>
-		</div>
-		<div class="footer_right">
-			<a href="http://github.com/derickbailey/Albacore/blob/master/EULA.txt">Copyright ©2009 Derick Bailey.</a> All Rights Reserved.
-		</div>
-	</div>
+  <div id="titlebar">
+    <div id="logo">
+      <a href="{{ site.url }}"><img border="0" src="{{ site.url }}/images/AlbacoreLogo3.png" /></a>
+    </div>
+    <div id="navigation">
+      <div class="menu">
+        <a href="http://groups.google.com/group/albacoredev"><img src="{{ site.url}}/images/google.png" border="0"></a>
+        <a href="http://twitter.com/albacorebuild"><img src="{{ site.url }}/images/twitter.png" border="0"></a>
+        <a href="http://github.com/derickbailey/Albacore"><img src="{{ site.url }}/images/github.png" border="0"></a>
+        <a href="http://feeds.feedburner.com/AlbacoreBuild"><img src="{{ site.url }}/images/rss.png" border="0"></a>
+      </div>
+    </div>
+  </div>
+  
+  <div id="container">
+    <div id="main_content">
+      {{ content }}
+    </div>
+    <div id="sidebar">
+      <div class="sidebar_item">
+        <script src="http://widgets.twimg.com/j/2/widget.js"></script>
+        <script>
+        new TWTR.Widget({
+          version: 2,
+          type: 'profile',
+          rpp: 4,
+          interval: 6000,
+          width: 230,
+          height: 300,
+          theme: {
+            shell: {
+              background: '#333333',
+              color: '#ffffff'
+            },
+            tweets: {
+              background: '#000000',
+              color: '#ffffff',
+              links: '#4aed05'
+            }
+          },
+          features: {
+            scrollbar: true,
+            loop: false,
+            live: true,
+            hashtags: true,
+            timestamp: true,
+            avatars: true,
+            behavior: 'all'
+          }
+        }).render().setUser('albacorebuild').start();
+        </script>
+      </div>
+      <div class="sidebar_item">
+        <a href="http://ncover.com"><img src="{{ site.url }}/images/i_cover_my_code_promo_badge_white.jpg" border="0"></a>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="footer_left">
+      git the source code on GitHub : <a href="http://github.com/derickbailey/Albacore">derickbailey/Albacore</a>
+    </div>
+    <div class="footer_right">
+      <a href="http://github.com/derickbailey/Albacore/blob/master/EULA.txt">Copyright ©2009 Derick Bailey.</a> All Rights Reserved.
+    </div>
+  </div>
 </body>
 </html>

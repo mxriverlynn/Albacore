@@ -7,11 +7,11 @@ body {
 }
 
 a { 
-  color: #dfdfdf;
+  color: #186f35;
 }
 
 a:visited {
-  color: #dfdfdf;
+  color: #186F35;
 }
 
 a:hover, a:active {
@@ -20,24 +20,20 @@ a:hover, a:active {
 
 #titlebar {
   width: 1000px;
-  height: 175px;
   margin: 0 auto;
-  vertical-align: middle;
+  margin-top: 5px;
 }
 
 #logo {
-  float: left;
+  text-align: center;
   padding: 5px;
 }
 
 #navigation {
-  float: right;
-  height: 175px;
-  width: 300px;
+  text-align: center;
 }
 
 #navigation .menu {
-  vertical-align: middle;
   text-align: center;
 }
 
@@ -50,6 +46,7 @@ a:hover, a:active {
   width: 730px;
   padding: 10px;
   float: left;
+  background-color: #98AeB5;
 }
 
 #sidebar {
@@ -57,6 +54,7 @@ a:hover, a:active {
   padding: 10px;
   padding-left: 10px;
   float: right;
+  margin-top: 25px;
 }
 
 .sidebar_item {
@@ -96,4 +94,9 @@ pre code{
 	display: block;
 	background-color: #cfcfcf;
 	padding: 10px;
+}
+
+h1 {
+	margin-top: 25px;
+	padding: 0px;
 }
