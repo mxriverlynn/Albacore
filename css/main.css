@@ -1,40 +1,40 @@
 body {
   margin: 0px;
-  background-color: #788e95;
+  background-color: #ffffff;
   font-family: Helvetica, Arial, FreeSans; 
   color: #000000;
   position: relative;
 }
 
 a { 
-  color: #186f35;
+  color: #004F15;
 }
 
 a:visited {
-  color: #186F35;
+  color: #004F15;
 }
 
 a:hover, a:active {
-  color: #ffffff;
+  color: #186F35;
 }
 
 #titlebar {
   width: 1000px;
+  height: 151px;
   margin: 0 auto;
-  margin-top: 5px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  text-align: center;
 }
 
 #logo {
   text-align: center;
-  padding: 5px;
 }
 
 #navigation {
+  float: right;
   text-align: center;
-}
-
-#navigation .menu {
-  text-align: center;
+  vertical-align: middle;
 }
 
 #container {
@@ -46,7 +46,6 @@ a:hover, a:active {
   width: 730px;
   padding: 10px;
   float: left;
-  background-color: #98AeB5;
 }
 
 #sidebar {
@@ -54,7 +53,7 @@ a:hover, a:active {
   padding: 10px;
   padding-left: 10px;
   float: right;
-  margin-top: 25px;
+  margin-top: 0px;
 }
 
 .sidebar_item {
@@ -71,20 +70,23 @@ p {
 
 #footer{
 	font-size: .7em;
-	margin-top: 50px;
-	border-top: 1px solid #cfcfcf;
-	padding: 25px;
 	width: 950px;
+	height: 15px;
 	margin: 0 auto;
+	margin-bottom: 10px;
 	clear: both;
+	padding: 2px;
+	background-color: #efefef;
 }
 
 .footer_left{
 	float: left;
+	vertical-align: middle;
 }
 
 .footer_right{
 	float: right;
+	vertical-align: middle;
 }
 
 pre code{
@@ -96,7 +98,7 @@ pre code{
 	padding: 10px;
 }
 
-h1 {
-	margin-top: 25px;
+h1, h2 {
+	margin-top: 0px;
 	padding: 0px;
 }
