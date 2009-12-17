@@ -98,6 +98,12 @@ pre code{
 	padding: 10px;
 }
 
+code {
+	background-color: #cfcfcf;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
 h1, h2 {
 	margin-top: 0px;
 	padding: 0px;
