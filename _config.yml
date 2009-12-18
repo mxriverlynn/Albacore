@@ -1,1 +1,3 @@
 url: http://albacorebuild.net
+exclude:
+- _source
