@@ -6,7 +6,7 @@ class AssemblyInfo
   
   attr_accessor :version, :title, :description, :output_file, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-  attr_accessor :file_version, :trademark, :namespaces
+  attr_accessor :file_version, :trademark, :namespaces, :lang_engine
   
   def initialize
     super()
@@ -14,6 +14,7 @@ class AssemblyInfo
   end
   
   def write
+    @lang_engine = CSharpEngine.new unless check_lang_engine
     write_assemblyinfo @output_file
   end
   
@@ -35,6 +36,10 @@ class AssemblyInfo
     return false
   end
   
+  def check_lang_engine
+    return !@lang_engine.nil?
+  end
+
   def build_assembly_info_data
     asm_data = build_using_statements + "\n"
     
@@ -78,19 +83,16 @@ class AssemblyInfo
     
     namespaces = ''
     @namespaces.each do |ns|
-      namespaces << "using #{ns};\n"
+      namespaces << @lang_engine.build_using_statement(ns)
     end
     
     namespaces
   end  
-  
+
   def build_attribute(attr_name, attr_data)
-    attribute = "[assembly: #{attr_name}("
-    attribute << "#{attr_data.inspect}" if attr_data != nil
-    attribute << ")]\n"
-    
+    attribute = @lang_engine.build_attribute(attr_name, attr_data)
     @logger.debug "Build Assembly Info Attribute: " + attribute
-    attribute
+    attribute 
   end
   
   def build_custom_attributes()

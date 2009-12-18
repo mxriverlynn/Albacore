@@ -1,10 +1,12 @@
 require 'albacore/assemblyinfo'
+require 'albacore/csharpengine'
+require 'albacore/vbnetengine'
 
 class AssemblyInfoTester < AssemblyInfo
   
   attr_accessor :assemblyinfo_file
   
-  def initialize
+  def initialize(lang_engine = nil)
     @version = "0.0.0.1"
     @title = "some assembly title"
     @description = "some assembly description goes here."
@@ -15,16 +17,18 @@ class AssemblyInfoTester < AssemblyInfo
     @product_name = "my product, yo."
     @file_version = "1.0.0.0"
     @trademark = "some trademark info goes here"
-    
-    setup_assemblyinfo_file
   end
   
   def setup_assemblyinfo_file
-    @assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.cs")
+    @lang_engine = CSharpEngine.new unless check_lang_engine
+
+    @assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.test")
     File.delete @assemblyinfo_file if File.exist? @assemblyinfo_file
   end
   
   def build_and_read_assemblyinfo_file(assemblyinfo)
+    setup_assemblyinfo_file
+
     assemblyinfo.output_file = @assemblyinfo_file
     assemblyinfo.write
 

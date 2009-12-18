@@ -59,7 +59,7 @@ describe AssemblyInfo, "when generating an assembly info file without an output 
   end
 end
 
-describe AssemblyInfo, "when providing custom namespaces" do 
+describe AssemblyInfo, "when providing custom namespaces without specifiying the language" do 
   before :all do
     @tester = AssemblyInfoTester.new
     asm = AssemblyInfo.new    
@@ -75,7 +75,43 @@ describe AssemblyInfo, "when providing custom namespaces" do
   end
 end
 
-describe AssemblyInfo, "when providing custom attributes" do  
+describe AssemblyInfo, "when providing custom namespaces and specifying C#" do 
+  before :all do
+    @tester = AssemblyInfoTester.new
+    @tester.lang_engine = CSharpEngine.new
+    asm = AssemblyInfo.new
+    asm.lang_engine = CSharpEngine.new
+    
+    asm.namespaces ['My.Name.Space', 'Another.Namespace.GoesHere']
+
+    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  end
+  
+  it "should write the namespaces into the using statements" do
+    @filedata.should include("using My.Name.Space;")
+    @filedata.should include("using Another.Namespace.GoesHere;")
+  end
+end
+
+describe AssemblyInfo, "when providing custom namespaces and specifying VB.NET" do 
+  before :all do
+    @tester = AssemblyInfoTester.new
+    @tester.lang_engine = VbNetEngine.new
+    asm = AssemblyInfo.new
+    asm.lang_engine = VbNetEngine.new
+    
+    asm.namespaces ['My.Name.Space', 'Another.Namespace.GoesHere']
+
+    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  end
+  
+  it "should write the namespaces into the imports statements" do
+    @filedata.should include("Imports My.Name.Space")
+    @filedata.should include("Imports Another.Namespace.GoesHere")
+  end
+end
+
+describe AssemblyInfo, "when providing custom attributes without specifying a language" do  
   before :all do
     @tester = AssemblyInfoTester.new
     asm = AssemblyInfo.new
@@ -88,6 +124,42 @@ describe AssemblyInfo, "when providing custom attributes" do
   it "should write the custom attributes to the assembly info file" do
     @filedata.should include("[assembly: CustomAttribute(\"custom attribute data\")]")
     @filedata.should include("[assembly: AnotherAttribute(\"more data here\")]")
+  end
+end
+
+describe AssemblyInfo, "when providing custom attributes and specifying C#" do  
+  before :all do
+    @tester = AssemblyInfoTester.new
+    @tester.lang_engine = CSharpEngine.new
+    asm = AssemblyInfo.new
+    asm.lang_engine = CSharpEngine.new
+    
+    asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
+
+    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  end
+  
+  it "should write the custom attributes to the assembly info file" do
+    @filedata.should include("[assembly: CustomAttribute(\"custom attribute data\")]")
+    @filedata.should include("[assembly: AnotherAttribute(\"more data here\")]")
+  end
+end
+
+describe AssemblyInfo, "when providing custom attributes and specifying VB.NET" do  
+  before :all do
+    @tester = AssemblyInfoTester.new
+    @tester.lang_engine = VbNetEngine.new
+    asm = AssemblyInfo.new
+    asm.lang_engine = VbNetEngine.new
+    
+    asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
+
+    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  end
+  
+  it "should write the custom attributes to the assembly info file" do
+    @filedata.should include("<assembly: CustomAttribute(\"custom attribute data\")>")
+    @filedata.should include("<assembly: AnotherAttribute(\"more data here\")>")
   end
 end
 
@@ -121,7 +193,7 @@ describe AssemblyInfo, "when specifying an attribute with non-string data" do
   end
 end
 
-describe AssemblyInfo, "when generating an assembly info file with the built in attributes" do
+describe AssemblyInfo, "when generating an assembly info file with the built in attributes and no language specified" do
   before :all do
     @tester = AssemblyInfoTester.new
     asm = AssemblyInfo.new
@@ -183,6 +255,140 @@ describe AssemblyInfo, "when generating an assembly info file with the built in 
   
   it "should contain the trademark information" do
     @filedata.should include("[assembly: AssemblyTrademark(\"#{@tester.trademark}\")]")
+  end
+end
+
+describe AssemblyInfo, "when generating an assembly info file with the built in attributes and C# specified" do
+  before :all do
+    @tester = AssemblyInfoTester.new
+    @tester.lang_engine = CSharpEngine.new
+    asm = AssemblyInfo.new
+    asm.lang_engine = CSharpEngine.new
+    
+    asm.company_name = @tester.company_name
+    asm.product_name = @tester.product_name
+    asm.version = @tester.version
+    asm.title = @tester.title
+    asm.description = @tester.description
+    asm.copyright = @tester.copyright
+    asm.com_visible = @tester.com_visible
+    asm.com_guid = @tester.com_guid
+    asm.file_version = @tester.file_version
+    asm.trademark = @tester.trademark
+    
+    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  end
+  
+  it "should use the system.reflection namespace" do
+    @filedata.should include("using System.Reflection;")
+  end
+  
+  it "should use the system.runtime.interopservices namespace" do
+    @filedata.should include("using System.Runtime.InteropServices;")
+  end
+  
+  it "should contain the specified version information" do
+    @filedata.should include("[assembly: AssemblyVersion(\"#{@tester.version}\")]")
+  end
+  
+  it "should contain the assembly title" do
+    @filedata.should include("[assembly: AssemblyTitle(\"#{@tester.title}\")]")
+  end
+  
+  it "should contain the assembly description" do
+    @filedata.should include("[assembly: AssemblyDescription(\"#{@tester.description}\")]")
+  end
+  
+  it "should contain the copyright information" do
+    @filedata.should include("[assembly: AssemblyCopyright(\"#{@tester.copyright}\")]")
+  end
+  
+  it "should contain the com visible information" do
+    @filedata.should include("[assembly: ComVisible(#{@tester.com_visible})]")
+    @filedata.should include("[assembly: Guid(\"#{@tester.com_guid}\")]")
+  end
+  
+  it "should contain the company name information" do
+    @filedata.should include("[assembly: AssemblyCompany(\"#{@tester.company_name}\")]")
+  end
+  
+  it "should contain the product information" do
+    @filedata.should include("[assembly: AssemblyProduct(\"#{@tester.product_name}\")]")
+  end
+  
+  it "should contain the file version information" do
+    @filedata.should include("[assembly: AssemblyFileVersion(\"#{@tester.file_version}\")]")
+  end
+  
+  it "should contain the trademark information" do
+    @filedata.should include("[assembly: AssemblyTrademark(\"#{@tester.trademark}\")]")
+  end
+end
+
+describe AssemblyInfo, "when generating an assembly info file with the built in attributes and VB.NET specified" do
+  before :all do
+    @tester = AssemblyInfoTester.new
+    @tester.lang_engine = VbNetEngine.new
+    asm = AssemblyInfo.new
+    asm.lang_engine = VbNetEngine.new
+    
+    asm.company_name = @tester.company_name
+    asm.product_name = @tester.product_name
+    asm.version = @tester.version
+    asm.title = @tester.title
+    asm.description = @tester.description
+    asm.copyright = @tester.copyright
+    asm.com_visible = @tester.com_visible
+    asm.com_guid = @tester.com_guid
+    asm.file_version = @tester.file_version
+    asm.trademark = @tester.trademark
+    
+    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  end
+  
+  it "should use the system.reflection namespace" do
+    @filedata.should include("Imports System.Reflection")
+  end
+  
+  it "should use the system.runtime.interopservices namespace" do
+    @filedata.should include("Imports System.Runtime.InteropServices")
+  end
+  
+  it "should contain the specified version information" do
+    @filedata.should include("<assembly: AssemblyVersion(\"#{@tester.version}\")>")
+  end
+  
+  it "should contain the assembly title" do
+    @filedata.should include("<assembly: AssemblyTitle(\"#{@tester.title}\")>")
+  end
+  
+  it "should contain the assembly description" do
+    @filedata.should include("<assembly: AssemblyDescription(\"#{@tester.description}\")>")
+  end
+  
+  it "should contain the copyright information" do
+    @filedata.should include("<assembly: AssemblyCopyright(\"#{@tester.copyright}\")>")
+  end
+  
+  it "should contain the com visible information" do
+    @filedata.should include("<assembly: ComVisible(#{@tester.com_visible})>")
+    @filedata.should include("<assembly: Guid(\"#{@tester.com_guid}\")>")
+  end
+  
+  it "should contain the company name information" do
+    @filedata.should include("<assembly: AssemblyCompany(\"#{@tester.company_name}\")>")
+  end
+  
+  it "should contain the product information" do
+    @filedata.should include("<assembly: AssemblyProduct(\"#{@tester.product_name}\")>")
+  end
+  
+  it "should contain the file version information" do
+    @filedata.should include("<assembly: AssemblyFileVersion(\"#{@tester.file_version}\")>")
+  end
+  
+  it "should contain the trademark information" do
+    @filedata.should include("<assembly: AssemblyTrademark(\"#{@tester.trademark}\")>")
   end
 end
 

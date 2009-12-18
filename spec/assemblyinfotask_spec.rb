@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/assemblyinfo'
+require 'albacore/csharpengine'
 require 'rake/assemblyinfotask'
 require 'tasklib_patch'
 

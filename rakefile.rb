@@ -225,6 +225,7 @@ namespace :jeweler do
     gs.authors = ["Derick Bailey", "Ben Hall", "Steven Harman"]
     gs.has_rdoc = false  
     gs.files.exclude("albacore.gemspec", ".gitignore", "spec/support/Tools")
+    gs.files.include("lib/albacore/vbnetengine.rb", "lib/albacore/csharpengine.rb")
 
     gs.add_dependency('rake', '>= 0.8.7')
     gs.add_dependency('net-ssh', '>= 2.0.15')
