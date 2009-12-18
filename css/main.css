@@ -74,23 +74,25 @@ p {
 
 #footer{
 	font-size: .7em;
-	width: 950px;
-	height: 15px;
+	width: 1000px;
 	margin: 0 auto;
 	margin-bottom: 10px;
 	clear: both;
-	padding: 2px;
+}
+
+#footer_content{ 
+	width: 750px;
+	height: 15px;
 	background-color: #efefef;
+	padding: 2px;
 }
 
 .footer_left{
 	float: left;
-	vertical-align: middle;
 }
 
 .footer_right{
 	float: right;
-	vertical-align: middle;
 }
 
 pre code{
@@ -111,4 +113,13 @@ code {
 h1, h2 {
 	margin-top: 0px;
 	padding: 0px;
+}
+
+#post_comments{
+	margin-top: 25px;
+	padding-top: 15px;
+	border-top: 1px solid #cfcfcf;
+	margin-bottom: 10px;
+	padding-bottom: 25px;
+	border-bottom: 1px solid #cfcfcf;
 }
