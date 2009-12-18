@@ -74,7 +74,7 @@ end
 
 h3. MSpec Task
 
-<pre></code>desc "MSpec Test Runner Example"
+<pre><code>desc "MSpec Test Runner Example"
 mspectask do |mspec|
 	mspec.path_to_command = "MSpec/Machine.Specifications.ConsoleRunner.exe"
 	mspec.assemblies << "assemblies/TestSolution.MSpecTests.dll"
@@ -104,20 +104,23 @@ h3. An extended example
 If you have a template, such as this:
 
 h4. web.config.template
+
 <pre><code>
-<appSettings>
+ <appSettings>
 	<add key="name" value="#{value}" />
 	<add key="another" value="#{setting}" />
-</appSettings>
+ </appSettings>
 </code></pre>
 
 You can provide some data in a web.config.yml file and some data in an external global.yml file, like this:
 
 h4. web.config.yml
+
 <pre><code>@include: global.yml
 value: this is goes where the 'name' is</code></pre>
 
 h4. global.yml
+
 <pre><code>another: setting goes here.
 value: you won't see this. it's overriden by the web.config.yml
 </code></pre>
