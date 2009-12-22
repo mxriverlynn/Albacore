@@ -3568,7 +3568,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -3578,7 +3578,10 @@
      id="layer1"
      style="display:inline">
     <g
-       id="g7103">
+       id="g7103"
+       inkscape:export-filename="/Users/derickbailey/dev/albacore/_source/icons/twitter-color.png"
+       inkscape:export-xdpi="36.66592"
+       inkscape:export-ydpi="36.66592">
       <rect
          y="627.5567"
          x="319.63513"
@@ -3623,7 +3626,10 @@
          style="fill:url(#linearGradient7070);fill-opacity:1;stroke:url(#linearGradient7072);stroke-width:1.79733741;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
     <g
-       id="g7043">
+       id="g7043"
+       inkscape:export-filename="/Users/derickbailey/dev/albacore/_source/icons/google-color.png"
+       inkscape:export-xdpi="36.66592"
+       inkscape:export-ydpi="36.66592">
       <path
          style="fill:url(#linearGradient7019);fill-opacity:1;stroke:url(#linearGradient7021);stroke-width:2;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          d="m 437.23822,300.67178 -0.19488,118.48923 -118.87899,0.19488 c 0,0 38.76384,-25.25624 68.11181,-52.32625 26.25633,-24.21834 50.96206,-66.35786 50.96206,-66.35786 z"
@@ -3666,7 +3672,10 @@
          sodipodi:nodetypes="cscsc" />
     </g>
     <g
-       id="g7140">
+       id="g7140"
+       inkscape:export-filename="/Users/derickbailey/dev/albacore/_source/icons/github-color.png"
+       inkscape:export-xdpi="36.66592"
+       inkscape:export-ydpi="36.66592">
       <rect
          y="787.5567"
          x="319.63513"
@@ -3706,7 +3715,10 @@
          style="fill:url(#linearGradient7114);fill-opacity:1;stroke:url(#linearGradient7116);stroke-width:1.79733741;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
     </g>
     <g
-       id="g7053">
+       id="g7053"
+       inkscape:export-filename="/Users/derickbailey/dev/albacore/_source/icons/rss-color.png"
+       inkscape:export-xdpi="36.66592"
+       inkscape:export-ydpi="36.66592">
       <rect
          style="fill:url(#linearGradient6862);fill-opacity:1;stroke:url(#linearGradient6864);stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
          id="rect6944"
@@ -3823,7 +3835,10 @@
     </g>
     <g
        id="g4614"
-       style="opacity:0.5">
+       style="opacity:0.5"
+       inkscape:export-filename="/Users/derickbailey/dev/albacore/_source/icons/google.png"
+       inkscape:export-xdpi="36.66592"
+       inkscape:export-ydpi="36.66592">
       <g
          id="g3943"
          transform="translate(-368,178)">
@@ -3862,7 +3877,10 @@
     </g>
     <g
        id="g4202"
-       style="opacity:0.5">
+       style="opacity:0.5"
+       inkscape:export-filename="/Users/derickbailey/dev/albacore/_source/icons/rss.png"
+       inkscape:export-xdpi="36.66592"
+       inkscape:export-ydpi="36.66592">
       <g
          transform="translate(-376,344)"
          id="g3969">
@@ -3912,7 +3930,10 @@
     </g>
     <g
        id="g7148"
-       style="opacity:0.5">
+       style="opacity:0.5"
+       inkscape:export-filename="/Users/derickbailey/dev/albacore/_source/icons/twitter.png"
+       inkscape:export-xdpi="36.66592"
+       inkscape:export-ydpi="36.66592">
       <g
          id="g3995"
          transform="translate(-374,512)">
@@ -3952,7 +3973,10 @@
     </g>
     <g
        id="g4250"
-       style="opacity:0.5">
+       style="opacity:0.5"
+       inkscape:export-filename="/Users/derickbailey/dev/albacore/_source/icons/github.png"
+       inkscape:export-xdpi="36.66592"
+       inkscape:export-ydpi="36.66592">
       <g
          transform="translate(-372,666)"
          id="g4021">
