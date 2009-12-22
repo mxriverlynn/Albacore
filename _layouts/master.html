@@ -9,8 +9,23 @@
   
   <link href="{{ site.url }}/css/main.css" rel="stylesheet" type="text/css" />
   <link href="http://feeds.feedburner.com/AlbacoreBuild" rel="alternate" title="AlbacoreBuild.Net" type="application/atom+xml" />
-
+  
+  <script src="{{ site.url }}/scripts/jquery.js" type="text/javascript"></script>
+  
   <title>Albacore: {{ page.title }}</title>
+  <script language="javascript">
+    $(function() {
+      $('.rollover').hover(function() {
+          var currentImg = $(this).attr('src');
+          $(this).attr('src', $(this).attr('hover'));
+          $(this).attr('hover', currentImg);
+      }, function() {
+          var currentImg = $(this).attr('src');
+          $(this).attr('src', $(this).attr('hover'));
+          $(this).attr('hover', currentImg);
+      });
+    });
+  </script>
 </head>
 <body>
   <div id="titlebar">
@@ -25,10 +40,10 @@
     </div>
     <div id="sidebar">
       <div class="sidebar_item">
-        <a href="http://github.com/derickbailey/Albacore"><img src="{{ site.url }}/images/github.png" border="0"></a>
-        <a href="http://groups.google.com/group/albacoredev"><img src="{{ site.url}}/images/google.png" border="0"></a>
-        <a href="http://twitter.com/albacorebuild"><img src="{{ site.url }}/images/twitter.png" border="0"></a>
-        <a href="http://feeds.feedburner.com/AlbacoreBuild"><img src="{{ site.url }}/images/rss.png" border="0"></a>
+        <a href="http://github.com/derickbailey/Albacore"><img class="rollover" src="{{ site.url }}/images/github.png" hover="{{ site.url }}/images/github-color.png" border="0"></a>
+        <a href="http://groups.google.com/group/albacoredev"><img class="rollover" src="{{ site.url}}/images/google.png" hover="{{ site.url }}/images/google-color.png" border="0"></a>
+        <a href="http://twitter.com/albacorebuild"><img class="rollover" src="{{ site.url }}/images/twitter.png" hover="{{ site.url }}/images/twitter-color.png" border="0"></a>
+        <a href="http://feeds.feedburner.com/AlbacoreBuild"><img class="rollover" src="{{ site.url }}/images/rss.png" hover="{{ site.url }}/images/rss-color.png" border="0"></a>
       </div>
       <div class="sidebar_item">
 		<script src="http://widgets.twimg.com/j/2/widget.js"></script>
