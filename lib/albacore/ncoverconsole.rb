@@ -9,7 +9,7 @@ class NCoverConsole
   
   def initialize
     super()
-    @register_dll = false
+    @register_dll = true
     @output = {}
     @testrunner_args = []
     @cover_assemblies = []
@@ -21,8 +21,8 @@ class NCoverConsole
     @working_directory = "//working-directory " + working_dir
   end
   
-  def register
-    @register_dll = true
+  def no_registration
+    @register_dll = false
   end
   
   def run
