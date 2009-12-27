@@ -18,17 +18,22 @@ class PLinkCommand
 	def run()
 		check_command
 		return if @failed
-		parameters = []
+    parameters = create_parameters
+		result = run_command @path_to_command, parameters.join(" ")
+		failure_message = 'Command Failed. See Build Log For Detail'
+		fail_with_message failure_message if !result
+	end
+	
+	def create_parameters
+	  parameters = []
 		parameters << "#{@user}@#{@host} -P #{@port} "
 		parameters << build_parameter("i", @key) unless @key.nil?
 		parameters << "-batch"
 		parameters << "-v" if @verbose
 		parameters << @commands
-		puts parameters.join(" ")
-		result = run_command @path_to_command, parameters.join(" ")
-		failure_message = 'Command Failed. See Build Log For Detail'
-		fail_with_message failure_message if !result
-	end
+		@logger.debug "PLink Parameters" + parameters.join(" ")
+		return parameters
+  end
 
 	def build_parameter(param_name, param_value)
 		"-#{param_name} #{param_value}"
