@@ -100,6 +100,12 @@ namespace :specs do
     t.spec_files = 'spec/rename*_spec.rb'
     t.spec_opts << @spec_opts
   end
+  
+  desc "Docu functional specs"
+  Spec::Rake::SpecTask.new :docu do |t|
+    t.spec_files = 'spec/docu*_spec.rb'
+    t.spec_opts << @spec_opts
+  end
 end
 
 namespace :albacore do  
