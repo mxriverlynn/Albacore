@@ -1,0 +1,45 @@
+---
+layout: post
+title: "Publishing A Web Project With MSBuild"
+---
+
+Today's tidbit of awesomeness comes to you from "Glenn Goodrich":http://ruprict.wordpress.com/ . He originally posted this information over at the "Google Group":http://groups.google.com/group/albacoredev/browse_thread/thread/ecaa76d700fe2d1e . I added a little formatting, but the content of the 'publishing a web project' section is entirely Glenn's.
+
+h2. Publishing A Web Project With MSBuild, via Glenn Goodrich
+
+I thought this was pretty cool and didn't it referenced in the group or on the wiki, so I thought I'd share.
+
+I have a VS.NET solution that has several projects, one of which is a web project (WCF service, actually).  I wanted to mimic the "Publish..." option from inside VS.NET in my rake build, and it was trivially easy to do so.
+
+The rake task looks like:
+
+<pre><code>desc "Publish the web site"
+msbuildtask :publish do |msb|
+  msb.properties = {:configuration=>:Release}
+  msb.targets [:ResolveReferences,:_CopyWebApplication]
+  msb.properties = {
+  :webprojectoutputdir=>"c:/temp/outputdir/",
+  :outdir => "c:/temp/outputdir/bin/"
+  }
+  msb.solution = ".<path to project dir>/Project.Web.csproj"
+end
+</code></pre>
+
+I haven't tried to publish over http, yet.  My guess is if someone wants to go that way, they'd fire up the Web Deployment Tool (something I may look at soon)
+
+Thanks to the following post for helping me get there ["Publishing Web Applications with MsBuild":http://blog.m.jedynak.pl/2008/03/publishing-web-application-with-msbuild.html]
+
+And thanks to this group for making Albacore.
+
+Hope someone finds this useful,
+Glenn 
+
+h3. Alternative Methods Of Publishing
+
+In case you are not interested in this method of publishing, there are some other alternatives
+
+* "zip task":http://wiki.github.com/derickbailey/Albacore/ziptask to package files, 
+* the "ssh":http://wiki.github.com/derickbailey/Albacore/sshtask task and the  
+* "sftp":http://wiki.github.com/derickbailey/Albacore/sftptask task to publishing a package
+
+and coming up in the .9 release, will have a "plink.exe":http://www.chiark.greenend.org.uk/~sgtatham/putty/ task courtesy of "Hibri Marzook":http://www.hibri.net/ 
