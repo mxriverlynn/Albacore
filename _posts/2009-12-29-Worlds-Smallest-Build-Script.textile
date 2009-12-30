@@ -3,7 +3,7 @@ layout: post
 title: "World's Smallest Build Script!"
 ---
 
-Remember how I was all excited about "cutting the number of lines out of my assembly info generator":http://www.lostechies.com/blogs/derickbailey/archive/2009/09/29/albacore-assemblyinfo-task-vs-nant-assembly-info-generator.aspx by switching from nant to albacore? Well, thanks to a nudge from DaveTheNinja, I've realized that I can cut it even further. 
+Remember how I was all excited about "cutting the number of lines out of my assembly info generator":http://www.lostechies.com/blogs/derickbailey/archive/2009/09/29/albacore-assemblyinfo-task-vs-nant-assembly-info-generator.aspx by switching from nant to albacore? Well, thanks to a nudge from "DaveTheNinja":http://davetheninja.net , I've realized that I can cut it even further. 
 
 Here is an example of a functioning build script for a simple project, using Albacore v0.0.8:
 
