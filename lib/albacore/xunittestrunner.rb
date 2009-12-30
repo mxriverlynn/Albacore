@@ -7,9 +7,9 @@ class XUnitTestRunner
 	attr_accessor :assemblies, :path_to_command, :html_output, :options
 
 	def initialize(path_to_command='')
-		super()
 		@path_to_command = path_to_command
 		@assemblies=[]
+		super()
 	end
 
 	def get_command_line

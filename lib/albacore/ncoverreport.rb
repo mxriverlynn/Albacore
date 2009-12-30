@@ -8,11 +8,11 @@ class NCoverReport
 	attr_accessor :coverage_files, :reports, :required_coverage, :filters
 	
 	def initialize
-		super()
 		@coverage_files = []
 		@reports = []
 		@required_coverage = []
 		@filters = []
+		super()
 	end
 	
 	def run

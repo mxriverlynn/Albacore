@@ -8,8 +8,8 @@ class Sftp
 	attr_accessor :server, :username, :password, :upload_files, :port, :key, :debug
   
 	def initialize
-		super()
 		@upload_files = {}
+		super()
 	end	
 	
 	def get_connection_options

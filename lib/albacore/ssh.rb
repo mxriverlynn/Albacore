@@ -8,8 +8,8 @@ class Ssh
 	attr_accessor :server, :username, :password, :commands, :port, :key, :debug
   	
 	def initialize
-		super()
 		@commands = []
+		super()
 	end
   
   	def get_connection_options

@@ -7,10 +7,10 @@ class SQLCmd
 	attr_accessor :server, :database, :username, :password, :scripts, :variables
 	
 	def initialize
-		super()
 		@require_valid_command = false
 		@scripts=[]
 		@variables={}
+		super()
 	end
 	
 	def run
