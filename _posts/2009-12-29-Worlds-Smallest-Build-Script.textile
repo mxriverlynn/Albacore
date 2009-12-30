@@ -1,0 +1,40 @@
+---
+layout: post
+title: "World's Smallest Build Script!"
+---
+
+Remember how I was all excited about "cutting the number of lines out of my assembly info generator":http://www.lostechies.com/blogs/derickbailey/archive/2009/09/29/albacore-assemblyinfo-task-vs-nant-assembly-info-generator.aspx by switching from nant to albacore? Well, thanks to a nudge from DaveTheNinja, I've realized that I can cut it even further. 
+
+Here is an example of a functioning build script for a simple project, using Albacore v0.0.8:
+
+<pre><code>require 'albacore'
+assemblyinfotask :buildversioninfo
+msbuildtask :default => :buildversioninfo
+</code></pre>
+
+That's it! Call <code>rake</code> and it will generate our assembly info and build the project!
+
+h2. YAML Auto-Config To The Rescue!
+
+Ok, so that is _technically_ all you need in the rakefile. However, you will need two more files in the same folder as the rakefile:
+
+# assemblyinfo.yml
+# msbuild.yml
+
+The trick here is that I'm using Albacore's "YAML Auto-Configuration":http://wiki.github.com/derickbailey/Albacore/yamlconfig functionality to store all of my configuration information in external files. In each of these two files, you would find the settings that you normally put in the <code>do ... end</code> blocks of the tasks. For example, our simple project may have the following yaml files:
+
+h4. assemblyinfo.yml
+
+<pre><code>company_name: "My Company, Inc."
+version: 0.0.1
+copyright: "Copyright (C)2009, My Company, Inc."
+output_file: "./src/MySolution/assemblyinfo.cs"
+</code></pre>
+
+h4. msbuild.yml
+
+<pre><code>targets: :rebuild
+solution: "src/MySolution.sln"
+</code></pre>
+
+Even with these external files, though, you have to admit that the amount of work it takes to get a build going with Albacore is on the low end. :)
