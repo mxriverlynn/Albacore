@@ -7,8 +7,8 @@ module NCover
 		attr_accessor :output_path
 		
 		def initialize
-			super()
 			@report_format = :Xml
+			super()
 		end
 		
 		def report_type

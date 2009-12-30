@@ -7,11 +7,11 @@ module NCover
 		attr_accessor :coverage_type, :minimum, :item_type 
 		
 		def initialize(coverage_type, params={})
-			super()
 			@coverage_type = coverage_type
 			@minimum = 0
 			@item_type = :View
 			parse_config(params) unless params.nil?
+			super()
 		end
 		
 		def get_coverage_options

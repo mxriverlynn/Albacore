@@ -7,12 +7,12 @@ module NCover
 		attr_accessor :filter, :filter_type, :item_type, :is_regex
 		
 		def initialize(item_type, params={})
-			super()
 			@filter = ""
 			@item_type = item_type
 			@is_regex = false
 			@filter_type = :exclude
 			parse_config(params) unless params.nil?
+			super()
 		end
 	
 		def get_filter_options
