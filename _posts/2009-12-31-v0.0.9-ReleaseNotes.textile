@@ -24,7 +24,8 @@ msbuildtask :build
 
 h4. msbuild.yml
 
-<pre><code>solution: "src/mysolution.sln"
+<pre><code>path_to_command: tools/msbuild/msbuild.exe
+solution: "src/mysolution.sln"
 targets: [:Clean, :Build]
 </code></pre>
 
@@ -49,7 +50,8 @@ end
 
 h4. msbuild.yml
 
-<pre><code>solution: "src/mysolution.sln"
+<pre><code>path_to_command: tools/msbuild/msbuild.exe
+solution: "src/mysolution.sln"
 targets: [:Clean, :Build]
 </code></pre>
 
