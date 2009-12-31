@@ -1,0 +1,80 @@
+---
+layout: post
+title: "v0.0.9 Release Notes: A Bug Fix For YAML Configuration"
+---
+
+Albacore v0.0.9 was just pushed up to Gemcutter. This release has no new functionality in it. It contains a significant bug fix for the ["YAML configuration":http://wiki.github.com/derickbailey/Albacore/yamlconfig], though. 
+
+h2. Fixing The YAML Auto-Configuration
+
+In the previous versions of Albacore, the auto-configuration of tasks via yaml files named for the task was broken. The object initializers for almost every object in Albacore would overwrite many of the settings that were found in the yaml files with empty values. The fix for this was simple, but affected every task in Albacore. Therefore, we felt it was necessary to release the fix immediately.
+
+h2. Who Should Update?
+
+If you are running Albacore v0.0.8 or earlier, and you are trying to use the auto-configuration feature of one or more tasks, you should update to the .9 release. If you are not trying to use the auto-configuration feature, you do not need to update. 
+
+For example, if you have a task laid out with only the task name being called, and are relying on the .yml file to configure it, you should update to this version.
+
+h4. rakefile.rb
+
+<pre><code>require 'albacore'
+
+msbuildtask :build
+</code></pre>
+
+h4. msbuild.yml
+
+<pre><code>solution: "src/mysolution.sln"
+targets: [:Clean, :Build]
+</code></pre>
+
+Running this sample script in v0.0.8 or earlier may not produce the desired results. 
+
+This is only one example of a task that would not correctly configure itself. _All_ tasks were affected, so you should update if you want to use the auto-configuration.
+
+h2. The Manual YAML Configuration Was Not Affected
+
+This bug does not affect the manual/override yaml configuration. If you are explicitly telling a task where to find the yaml config file, then you do not need to update.
+
+For example, this build script and yml config file work correctly in v0.0.8
+
+h4. rakefile.rb
+
+<pre><code>require 'albacore'
+
+msbuildtask :build do |msb|
+  msb.configure("msbuild.yml")
+end
+</code></pre>
+
+h4. msbuild.yml
+
+<pre><code>solution: "src/mysolution.sln"
+targets: [:Clean, :Build]
+</code></pre>
+
+The reason for this working while the auto-configuration failed, is the order in which the configuration vs. initialization code is executed. 
+
+h2. Understanding The Fix: Call super() Last In The Initializer
+
+The underlying problem that caused this issue is in the initializer of each class that Albacore uses to configure and run the desired functionality. For example, in the MSBuild object used above, the initializer in v0.0.8 looked like this:
+
+<pre><code>def initialize
+  super()
+  @path_to_command = build_path_to_command
+end
+</code></pre>
+
+The yaml auto-configuration happens during the call to <code>super()</code> in the very first line. Therefore if you had set the path_to_command in the yml file, it would be configured during the call to super() and would then be overwritten by the next line of code, forcing the path_to_command back to the default .NET 3.5 version of MSBuild.
+
+To fix this for the MSBuild task and for every other task in Albacore, we only needed to change the location of the call to super()
+
+<pre><code>def initialize
+  @path_to_command = build_path_to_command
+  super()
+end
+</code></pre>
+
+h2. A Side Note On Versioning Of Albacore
+
+The next release of Albacore will be v0.1.0. The versioning is being changed to use the "major.minor.revision" schema so that in the future, we will be able to release bug fixes / patches like this, without having to increment the primary number for the version. For example, a bug fix release after v0.1.0 may be called v0.1.1 instead of v0.2.0. This should help keep the versioning a little more clear for functionality improvements vs bugs and fixes.
