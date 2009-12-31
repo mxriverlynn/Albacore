@@ -10,7 +10,7 @@ describe "when executing Ndepend console" do
     @ndepend.path_to_command = "support/NdependConsole.exe"
 
   end
-  it "should sexecute NdependConsole.exe"do
+  it "should execute NdependConsole.exe"do
     @ndepend.run
     @ndepend.system_command.should include("NdependConsole.exe" )
   end
