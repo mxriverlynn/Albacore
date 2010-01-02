@@ -8,8 +8,8 @@ class ExpandTemplates
 	attr_accessor :expand_files, :data_file
 	
 	def initialize
-		super()
 		@expand_files = []
+		super()
 	end
 	
 	def expand

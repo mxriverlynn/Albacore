@@ -8,12 +8,12 @@ class NCoverConsole
 	attr_accessor :ignore_assemblies, :coverage
 	
 	def initialize
-		super()
 		@output = {}
 		@testrunner_args = []
 		@cover_assemblies = []
 		@ignore_assemblies = []
 		@coverage = []
+		super()
 	end
 	
 	def working_directory=(working_dir)

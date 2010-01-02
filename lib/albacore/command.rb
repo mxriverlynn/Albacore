@@ -8,10 +8,10 @@ class Command
 	attr_accessor :parameters
 	
 	def initialize()
-		super()
 		@require_valid_command=false
 		@path_to_command=''
 		@parameters = []
+		super()
 	end
 	
 	def execute()

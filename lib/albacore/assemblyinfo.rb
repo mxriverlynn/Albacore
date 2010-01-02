@@ -9,8 +9,8 @@ class AssemblyInfo
 	attr_accessor :file_version, :trademark, :namespaces
 	
 	def initialize
-		super()
 		@namespaces = []
+		super()
 	end
 	
 	def write

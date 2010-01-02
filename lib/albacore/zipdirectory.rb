@@ -12,8 +12,8 @@ class ZipDirectory
 	attr_accessor :flatten_zip
 
 	def initialize
-		super()
 		@flatten_zip = true
+		super()
 	end
 		
 	def package()
