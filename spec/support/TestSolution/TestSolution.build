@@ -3,6 +3,7 @@
   <property name="debug" value="true"/>
   <property name="build.version" value="0.0.1"/>
   <property name="build.mode" value="debug"/>
+  <property name="out.file.dir" value="out/${build.version}/${build.mode}"/>
 
   <target name="clean">
     <delete>
@@ -13,6 +14,7 @@
   </target>
 
   <target name="build">
-    <mkdir dir="out/${build.version}/${build.mode}" />
+    <mkdir dir="${out.file.dir}" />
+    <echo message="I am an output file." file="${out.file.dir}/thefile.txt" append="false"/>
   </target>
 </project>
