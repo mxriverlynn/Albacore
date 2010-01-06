@@ -2,14 +2,26 @@ require 'albacore/support/albacore_helper'
 require 'net/ssh'
 
 class Ssh
+<<<<<<< HEAD
   include YAMLConfig
   include Logging
+=======
+	include YAMLConfig
+	include Logging
+	
+	attr_accessor :server, :username, :password, :commands, :port, :key, :debug
+  	
+	def initialize
+		@commands = []
+		super()
+	end
+>>>>>>> master
   
   attr_accessor :server, :username, :password, :commands, :port, :key, :debug
     
   def initialize
+    super()
     @commands = []
-		super()
   end
   
     def get_connection_options

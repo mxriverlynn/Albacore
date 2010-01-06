@@ -1,6 +1,7 @@
 require 'albacore/support/albacore_helper'
 
 class AssemblyInfo
+<<<<<<< HEAD
   include Failure
   include YAMLConfig
   
@@ -9,8 +10,8 @@ class AssemblyInfo
   attr_accessor :file_version, :trademark, :namespaces, :lang_engine
   
   def initialize
+    super()
     @namespaces = []
-		super()
   end
   
   def write
@@ -23,6 +24,29 @@ class AssemblyInfo
     return if !valid
     
     asm_data = build_assembly_info_data
+=======
+	include Failure
+	include YAMLConfig
+	
+	attr_accessor :version, :title, :description, :output_file, :custom_attributes
+	attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
+	attr_accessor :file_version, :trademark, :namespaces
+	
+	def initialize
+		@namespaces = []
+		super()
+	end
+	
+	def write
+		write_assemblyinfo @output_file
+	end
+	
+	def write_assemblyinfo(assemblyinfo_file)
+		valid = check_output_file assemblyinfo_file
+		return if !valid
+		
+		asm_data = build_assembly_info_data
+>>>>>>> master
 
     @logger.info "Generating Assembly Info File At: " + File.expand_path(assemblyinfo_file)
     File.open(assemblyinfo_file, 'w') do |f|      

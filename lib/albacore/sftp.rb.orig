@@ -5,11 +5,27 @@ class Sftp
   include YAMLConfig
   include Logging
   
+<<<<<<< HEAD
   attr_accessor :server, :username, :password, :upload_files, :port, :key, :debug
+=======
+	def initialize
+		@upload_files = {}
+		super()
+	end	
+	
+	def get_connection_options
+		options = {}
+		options[:verbose] = :debug if @debug == true
+		options[:password] = @password if @password
+		options[:port] = @port if @port
+		options[:keys] = [@key] if @key
+		options
+	end
+>>>>>>> master
   
   def initialize
+    super()
     @upload_files = {}
-		super()
   end  
   
   def get_connection_options

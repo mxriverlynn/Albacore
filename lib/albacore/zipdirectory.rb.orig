@@ -11,14 +11,25 @@ class ZipDirectory
   attr_accessor :output_path, :output_file
   attr_accessor :flatten_zip
 
+<<<<<<< HEAD
   def initialize
+    super()
     @flatten_zip = true
-		super()
   end
     
   def package()
     fail_with_message 'Output File cannot be empty' if @output_file.nil?
     return if @output_file.nil?
+=======
+	def initialize
+		@flatten_zip = true
+		super()
+	end
+		
+	def package()
+		fail_with_message 'Output File cannot be empty' if @output_file.nil?
+		return if @output_file.nil?
+>>>>>>> master
         
     clean_directories_names
     remove zip_name

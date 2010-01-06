@@ -2,14 +2,15 @@ require 'albacore/support/albacore_helper'
 
 class MSpecTestRunner
     include RunCommand
+<<<<<<< HEAD
   include YAMLConfig
   
   attr_accessor :assemblies, :path_to_command, :html_output, :options
   
   def initialize(path_to_command='')
+    super()
     @path_to_command = path_to_command
     @assemblies=[]
-		super()
   end
   
   def get_command_line
@@ -18,6 +19,24 @@ class MSpecTestRunner
     command << get_command_parameters
     cmd = command.join(" ")
     @logger.debug "Build MSpec Test Runner Command Line: " + cmd
+=======
+	include YAMLConfig
+	
+	attr_accessor :assemblies, :path_to_command, :html_output, :options
+	
+	def initialize(path_to_command='')
+		@path_to_command = path_to_command
+		@assemblies=[]
+		super()
+	end
+	
+	def get_command_line
+		command = []
+		command << @path_to_command
+		command << get_command_parameters
+		cmd = command.join(" ")
+		@logger.debug "Build MSpec Test Runner Command Line: " + cmd
+>>>>>>> master
         return cmd
   end
   
