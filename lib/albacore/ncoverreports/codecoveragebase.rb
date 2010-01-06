@@ -11,7 +11,7 @@ module NCover
       @minimum = 0
       @item_type = :View
       parse_config(params) unless params.nil?
-			super()
+      super()
     end
     
     def get_coverage_options

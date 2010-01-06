@@ -9,7 +9,7 @@ class Ssh
     
   def initialize
     @commands = []
-		super()
+    super()
   end
   
     def get_connection_options

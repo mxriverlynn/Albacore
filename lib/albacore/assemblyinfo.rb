@@ -10,7 +10,7 @@ class AssemblyInfo
   
   def initialize
     @namespaces = []
-		super()
+    super()
   end
   
   def write

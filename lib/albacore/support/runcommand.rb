@@ -6,9 +6,9 @@ module RunCommand
   attr_accessor :path_to_command, :require_valid_command, :command_directory
   
   def initialize
-    super()
     @require_valid_command = true
     @command_directory = Dir.pwd
+    super()
   end
   
   def run_command(command_name="Command Line", command_parameters="")

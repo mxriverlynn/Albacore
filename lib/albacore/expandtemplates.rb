@@ -9,7 +9,7 @@ class ExpandTemplates
   
   def initialize
     @expand_files = []
-		super()
+    super()
   end
   
   def expand

@@ -12,7 +12,7 @@ module NCover
       @is_regex = false
       @filter_type = :exclude
       parse_config(params) unless params.nil?
-			super()
+      super()
     end
   
     def get_filter_options

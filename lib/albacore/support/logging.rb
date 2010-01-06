@@ -5,8 +5,8 @@ module Logging
   attr_accessor :logger, :current_log_device
   
   def initialize
-    super()
     create_logger(STDOUT, Logger::INFO)
+    super()
   end
   
   def log_device=(logdev)

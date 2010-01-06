@@ -8,9 +8,9 @@ class Exec
   attr_accessor :parameters
   
   def initialize
-    super()
     @path_to_command=''
     @parameters = []
+    super()
   end
     
   def execute

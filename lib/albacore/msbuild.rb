@@ -9,7 +9,7 @@ class MSBuild
   
   def initialize
     @path_to_command = build_path_to_command
-		super()
+    super()
   end
   
   def build_path_to_command

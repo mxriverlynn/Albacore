@@ -14,7 +14,7 @@ class NCoverConsole
     @cover_assemblies = []
     @ignore_assemblies = []
     @coverage = []
-		super()
+    super()
   end
   
   def working_directory=(working_dir)

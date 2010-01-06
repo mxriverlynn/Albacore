@@ -9,7 +9,7 @@ class MSpecTestRunner
   def initialize(path_to_command='')
     @path_to_command = path_to_command
     @assemblies=[]
-		super()
+    super()
   end
   
   def get_command_line

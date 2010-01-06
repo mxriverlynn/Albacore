@@ -8,7 +8,7 @@ module NCover
     
     def initialize
       @report_format = :Xml
-			super()
+      super()
     end
     
     def report_type

@@ -10,7 +10,7 @@ class SQLCmd
     @require_valid_command = false
     @scripts=[]
     @variables={}
-		super()
+    super()
   end
   
   def run

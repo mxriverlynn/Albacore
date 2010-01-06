@@ -13,7 +13,7 @@ class ZipDirectory
 
   def initialize
     @flatten_zip = true
-		super()
+    super()
   end
     
   def package()

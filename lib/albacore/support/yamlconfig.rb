@@ -2,8 +2,8 @@ require 'yaml'
 
 module YAMLConfig  
   def initialize
-    super()
     configure_if_config_exists(self.class.to_s.downcase)
+    super()
   end
   
   def YAMLConfig.extend_object(obj)

@@ -12,7 +12,7 @@ class NCoverReport
     @reports = []
     @required_coverage = []
     @filters = []
-		super()
+    super()
   end
   
   def run

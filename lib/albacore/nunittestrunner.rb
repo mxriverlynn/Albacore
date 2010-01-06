@@ -10,7 +10,7 @@ class NUnitTestRunner
     @path_to_command = path_to_command
     @options=[]
     @assemblies=[]
-		super()
+    super()
   end
   
   def get_command_line

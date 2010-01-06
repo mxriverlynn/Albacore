@@ -9,7 +9,7 @@ class Sftp
   
   def initialize
     @upload_files = {}
-		super()
+    super()
   end  
   
   def get_connection_options
