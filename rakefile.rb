@@ -217,6 +217,13 @@ namespace :albacore do
   desc "Exec Task Example"
   exec do |exec|
     exec.command = 'hostname'
+  end   
+  
+  desc "Mono \ xBuild Example"
+  mono do |xbuild|
+    xbuild.properties :configuration => :release, :platform => 'Any CPU'
+    xbuild.targets :clean, :build
+    xbuild.solution = "spec/support/TestSolution/TestSolution.sln"
   end
 end
 
