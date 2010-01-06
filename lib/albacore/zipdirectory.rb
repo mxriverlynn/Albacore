@@ -7,12 +7,13 @@ class ZipDirectory
   include YAMLConfig
   include Failure
   
-  attr_accessor :directories_to_zip, :additional_files
+  attr_accessor :directories_to_zip, :additional_files, :exclusions
   attr_accessor :output_path, :output_file
   attr_accessor :flatten_zip
 
   def initialize
     @flatten_zip = true
+    @exclusions = []
     super()
   end
     
@@ -39,7 +40,14 @@ class ZipDirectory
   end
   
   def reject_file(f)
-    f == zip_name
+    f == zip_name || is_excluded(f)
+  end
+  
+  def is_excluded(f)
+    @exclusions.any? do |e|
+      return true if e.respond_to? '~' and f =~ e
+      e == f
+    end
   end
   
   def zip_name()
