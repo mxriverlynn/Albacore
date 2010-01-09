@@ -2,18 +2,24 @@ require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/msbuild'
 require 'msbuildtestdata'
 
-describe MSBuild, "when building a solution with verbose logging turned on" do  
+shared_examples_for "prepping msbuild" do
   before :all do
     @testdata = MSBuildTestData.new
-    msbuild = @testdata.msbuild
-    strio = StringIO.new
-    msbuild.log_device = strio
-    msbuild.log_level = :verbose
+    @msbuild = @testdata.msbuild
+    @strio = StringIO.new
+    @msbuild.log_device = @strio
+    @msbuild.log_level = :verbose
+  end
+end
+
+describe MSBuild, "when building a solution with verbose logging turned on" do  
+  it_should_behave_like "prepping msbuild"
+  
+  before :all do
+    @msbuild.solution = @testdata.solution_path
+    @msbuild.build
     
-    msbuild.solution = @testdata.solution_path
-    msbuild.build
-    
-    @log_data = strio.string
+    @log_data = @strio.string
   end
 
   it "should log the msbuild command line being called" do
@@ -22,16 +28,12 @@ describe MSBuild, "when building a solution with verbose logging turned on" do
 end
 
 describe MSBuild, "when building with no solution specified" do
+  it_should_behave_like "prepping msbuild"
+
   before :all do
-    @testdata = MSBuildTestData.new
-    msbuild = @testdata.msbuild
-    strio = StringIO.new
-    msbuild.log_device = strio
-    msbuild.log_level = :verbose
+    @msbuild.build
     
-    msbuild.build
-    
-    @log_data = strio.string
+    @log_data = @strio.string
   end
   
   it "should log an error message saying the output file is required" do
@@ -65,14 +67,14 @@ describe MSBuild, "when an invalid msbuild path is specified" do
   before :all do
     @testdata = MSBuildTestData.new
     msbuild = @testdata.msbuild "/an invalid path/does not exist.exe"
-    strio = StringIO.new
-    msbuild.log_device = strio
+    @strio = StringIO.new
+    msbuild.log_device = @strio
     msbuild.log_level = :verbose
     msbuild.solution = @testdata.solution_path
     
     msbuild.build
 
-    @log_data = strio.string
+    @log_data = @strio.string
   end
   
   it "should log an error message saying the command was not found" do
@@ -81,11 +83,24 @@ describe MSBuild, "when an invalid msbuild path is specified" do
 end
 
 describe MSBuild, "when building a visual studio solution" do
+  it_should_behave_like "prepping msbuild"
+
   before :all do
-    @testdata = MSBuildTestData.new
-    @msbuild = @testdata.msbuild
-    
     @msbuild.solution = @testdata.solution_path
+    @msbuild.build
+  end
+  
+  it "should output the solution's binaries" do
+    File.exist?(@testdata.output_path).should == true
+  end
+end
+
+describe MSBuild, "when building a visual studio solution with a single target" do
+  it_should_behave_like "prepping msbuild"
+
+  before :all do
+    @msbuild.solution = @testdata.solution_path
+    @msbuild.targets :Rebuild
     @msbuild.build
   end
   
@@ -114,11 +129,9 @@ describe MSBuild, "when building a visual studio solution for a specified config
 end
 
 describe MSBuild, "when specifying targets to build" do  
-  before :all do
+  it_should_behave_like "prepping msbuild"
 
-    @testdata= MSBuildTestData.new
-    @msbuild = @testdata.msbuild
-    
+  before :all do
     @msbuild.targets :Clean, :Build
     @msbuild.solution = @testdata.solution_path
     @msbuild.build
@@ -131,10 +144,9 @@ describe MSBuild, "when specifying targets to build" do
 end
 
 describe MSBuild, "when building a solution with a specific msbuild verbosity" do
+  it_should_behave_like "prepping msbuild"
+
   before :all do
-    @testdata= MSBuildTestData.new
-    @msbuild = @testdata.msbuild
-    
     @msbuild.verbosity = "normal"
     @msbuild.solution = @testdata.solution_path
     @msbuild.build
@@ -146,10 +158,9 @@ describe MSBuild, "when building a solution with a specific msbuild verbosity" d
 end
 
 describe MSBuild, "when specifying multiple configuration properties" do  
-  before :all do
-    @testdata= MSBuildTestData.new
-    @msbuild = @testdata.msbuild
+  it_should_behave_like "prepping msbuild"
 
+  before :all do
     File.delete(@testdata.output_path) if File.exist?(@testdata.output_path)
     
     @msbuild.targets :Clean, :Build
