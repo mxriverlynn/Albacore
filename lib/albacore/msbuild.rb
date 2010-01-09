@@ -1,11 +1,14 @@
 require 'albacore/support/albacore_helper'
 
 class MSBuild
+  include AttrMethods
   include RunCommand
   include YAMLConfig
   include Logging
   
   attr_accessor :solution, :verbosity
+  attr_array :targets
+  attr_hash :properties
   
   def initialize
     @path_to_command = build_path_to_command
@@ -17,14 +20,6 @@ class MSBuild
     win_dir = 'C:/Windows' if win_dir.nil?
     
     File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
-  end
-  
-  def targets(*targets)
-    @targets = targets
-  end
-  
-  def properties(*properties)
-    @properties = *properties
   end
   
   def build
