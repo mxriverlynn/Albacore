@@ -18,7 +18,7 @@ describe Docu, "when building docs fails" do
   before :all do
     @docu = Docu.new
     @docu.command_result = false
-    @docu.assemblies << 'test.dll'
+    @docu.assemblies 'test.dll'
     @docu.execute
   end
 
@@ -32,7 +32,7 @@ describe Docu, "when building docs with assemblies specified" do
   before :all do
     @docu = Docu.new
     @docu.command_result = true
-    @docu.assemblies << 'test.dll'
+    @docu.assemblies 'test.dll'
     @docu.execute
   end
   
@@ -45,8 +45,8 @@ describe Docu, "when building docs with assemblies and xml files specified" do
   before :all do
     @docu = Docu.new
     @docu.command_result = true
-    @docu.xml_files << 'test.xml'
-    @docu.assemblies << 'test.dll'
+    @docu.xml_files 'test.xml'
+    @docu.assemblies 'test.dll'
     @docu.execute
   end
   
@@ -59,7 +59,7 @@ describe Docu, "when building docs with an output location specified" do
   before :all do
     @docu = Docu.new
     @docu.command_result = true
-    @docu.assemblies << 'test.dll'
+    @docu.assemblies 'test.dll'
     @docu.output_location = 'output_location'
     @docu.execute
   end

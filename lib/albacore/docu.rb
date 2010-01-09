@@ -1,16 +1,18 @@
 require 'albacore/support/albacore_helper'
 
 class Docu
+  include AttrMethods
   include RunCommand
   
-  attr_accessor :path_to_command, :assemblies, :xml_files, :output_location
+  attr_accessor :output_location
+  attr_array :assemblies, :xml_files
   
   def initialize(path_to_command='docu.exe')
-    super()
     @path_to_command = path_to_command
     @assemblies = []
     @xml_files = []
     @output_location = ""
+    super()
   end
   
   def execute
