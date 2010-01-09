@@ -72,7 +72,7 @@ class AssemblyInfo
   end
   
   def namespaces(*namespaces)
-    @namespaces = *namespaces
+    @namespaces = namespaces
   end
   
   def build_using_statements

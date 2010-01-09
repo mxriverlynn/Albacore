@@ -59,19 +59,18 @@ describe AssemblyInfo, "when generating an assembly info file without an output 
   end
 end
 
-describe AssemblyInfo, "when providing custom namespaces without specifiying the language" do 
+describe AssemblyInfo, "when providing a custom namespace without specifiying the language" do 
   before :all do
     @tester = AssemblyInfoTester.new
     asm = AssemblyInfo.new    
     
-    asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
+    asm.namespaces 'My.Name.Space'
 
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
-  it "should write the namespaces into the using statements" do
+  it "should default to c# for the generated assemby info" do
     @filedata.should include("using My.Name.Space;")
-    @filedata.should include("using Another.Namespace.GoesHere;")
   end
 end
 

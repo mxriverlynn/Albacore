@@ -20,7 +20,7 @@ class MSBuild
   end
   
   def targets(*targets)
-    @targets = [targets]
+    @targets = targets
   end
   
   def properties(*properties)
