@@ -24,13 +24,13 @@ describe NCoverConsole, "when specifying assemblies to cover" do
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
     @ncc.path_to_command = @@ncoverpath
-    @ncc.output = {:xml => @@xml_coverage_output}
+    @ncc.output :xml => @@xml_coverage_output
     @ncc.working_directory = @@working_directory
-    @ncc.cover_assemblies << "TestSolution"
+    @ncc.cover_assemblies "TestSolution"
     
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << @@test_assembly
-    nunit.options << '/noshadow'
+    nunit.assemblies @@test_assembly
+    nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
     @ncc.run
@@ -50,13 +50,13 @@ describe NCoverConsole, "when specifying assemblies to ignore" do
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
     @ncc.path_to_command = @@ncoverpath
-    @ncc.output = {:xml => @@xml_coverage_output}
+    @ncc.output :xml => @@xml_coverage_output
     @ncc.working_directory = @@working_directory
-    @ncc.ignore_assemblies << "TestSolution.*"
+    @ncc.ignore_assemblies "TestSolution.*"
     
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << @@test_assembly
-    nunit.options << '/noshadow'
+    nunit.assemblies @@test_assembly
+    nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
     @ncc.run
@@ -109,13 +109,13 @@ describe NCoverConsole, "when specifying the types of coverage to analyze" do
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
     @ncc.path_to_command = @@ncoverpath
-    @ncc.output = {:xml => @@xml_coverage_output}
+    @ncc.output :xml => @@xml_coverage_output
     @ncc.working_directory = @@working_directory
-    @ncc.coverage = [:Symbol, :Branch, :MethodVisits, :CyclomaticComplexity]
+    @ncc.coverage :Symbol, :Branch, :MethodVisits, :CyclomaticComplexity
     
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << @@test_assembly
-    nunit.options << '/noshadow'
+    nunit.assemblies @@test_assembly
+    nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
     @ncc.run
@@ -137,12 +137,12 @@ describe NCoverConsole, "when analyzing a test suite with failing tests" do
     ncc.extend(SystemPatch)
     ncc.log_level = :verbose
     ncc.path_to_command = @@ncoverpath
-    ncc.output = {:xml => @@xml_coverage_output}
+    ncc.output :xml => @@xml_coverage_output
     ncc.working_directory = @@working_directory
     
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << @@failing_test_assembly
-    nunit.options << '/noshadow'
+    nunit.assemblies @@failing_test_assembly
+    nunit.options '/noshadow'
     
     ncc.testrunner = nunit
     
@@ -188,12 +188,12 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
     @ncc.path_to_command = @@ncoverpath
-    @ncc.output = {:xml => @@xml_coverage_output}
+    @ncc.output :xml => @@xml_coverage_output
     @ncc.working_directory = @@working_directory
     
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << @@test_assembly
-    nunit.options << '/noshadow'
+    nunit.assemblies @@test_assembly
+    nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
     @ncc.run
@@ -230,12 +230,12 @@ describe NCoverConsole, "when specifying an html report and an xml coverage repo
     ncc.extend(SystemPatch)
     ncc.log_level = :verbose
     ncc.path_to_command = @@ncoverpath
-    ncc.output = {:xml => @@xml_coverage_output, :html => @@html_coverage_output}
+    ncc.output :xml => @@xml_coverage_output, :html => @@html_coverage_output
     ncc.working_directory = @@working_directory
     
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << @@test_assembly
-    nunit.options << '/noshadow'
+    nunit.assemblies @@test_assembly
+    nunit.options '/noshadow'
     
     ncc.testrunner = nunit
     ncc.run
@@ -258,11 +258,11 @@ describe NCoverConsole, "when producing a report with machine.specifications" do
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
     @ncc.path_to_command = @@ncoverpath
-    @ncc.output = {:xml => @@xml_coverage_output}
+    @ncc.output :xml => @@xml_coverage_output
     @ncc.working_directory = @@working_directory
     
     mspec = MSpecTestRunner.new(@@mspecpath)
-    mspec.assemblies << @@mspec_test_assembly
+    mspec.assemblies @@mspec_test_assembly
     mspec.html_output = @@mspec_html_output
     
     @ncc.testrunner = mspec

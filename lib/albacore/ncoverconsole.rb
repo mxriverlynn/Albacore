@@ -1,16 +1,17 @@
 require 'albacore/support/albacore_helper'
 
 class NCoverConsole
+  include AttrMethods
   include RunCommand
   include YAMLConfig
   
-  attr_accessor :output, :testrunner, :working_directory, :cover_assemblies
-  attr_accessor :ignore_assemblies, :coverage
+  attr_accessor :testrunner, :working_directory
+  attr_array :cover_assemblies, :ignore_assemblies, :coverage
+  attr_hash :output
   
   def initialize
     @register_dll = true
     @output = {}
-    @testrunner_args = []
     @cover_assemblies = []
     @ignore_assemblies = []
     @coverage = []

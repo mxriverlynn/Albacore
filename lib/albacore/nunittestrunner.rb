@@ -1,10 +1,11 @@
 require 'albacore/support/albacore_helper'
 
 class NUnitTestRunner
+  include AttrMethods
   include RunCommand
   include YAMLConfig
   
-  attr_accessor :path_to_command, :assemblies, :options
+  attr_array :assemblies, :options
   
   def initialize(path_to_command='')
     @path_to_command = path_to_command

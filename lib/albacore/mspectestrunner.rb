@@ -1,10 +1,12 @@
 require 'albacore/support/albacore_helper'
 
 class MSpecTestRunner
-    include RunCommand
+  include AttrMethods
+  include RunCommand
   include YAMLConfig
   
-  attr_accessor :assemblies, :path_to_command, :html_output, :options
+  attr_accessor :html_output
+  attr_array :assemblies, :options
   
   def initialize(path_to_command='')
     @path_to_command = path_to_command
@@ -24,7 +26,7 @@ class MSpecTestRunner
   def get_command_parameters
     command_params = []
     command_params << build_assembly_list unless @assemblies.empty?
-        command_params << @options.join(" ") unless @options.nil?
+    command_params << @options.join(" ") unless @options.nil?
     command_params << build_html_output unless @html_output.nil?
     command_params
   end
