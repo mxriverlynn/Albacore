@@ -1,12 +1,16 @@
 require 'albacore/support/albacore_helper'
 
 class AssemblyInfo
+  include AttrMethods
   include Failure
   include YAMLConfig
   
   attr_accessor :version, :title, :description, :output_file, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
   attr_accessor :file_version, :trademark, :lang_engine
+  
+  attr_array :namespaces
+  attr_hash :custom_attributes
   
   def initialize
     @namespaces = []
@@ -65,14 +69,6 @@ class AssemblyInfo
     end
     
     asm_data
-  end
-  
-  def custom_attributes(*attributes)
-    @custom_attributes = *attributes
-  end
-  
-  def namespaces(*namespaces)
-    @namespaces = namespaces
   end
   
   def build_using_statements
