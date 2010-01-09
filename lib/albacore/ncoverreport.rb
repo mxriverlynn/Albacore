@@ -2,10 +2,11 @@ Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'ncoverreports/*.rb
 require 'albacore/support/albacore_helper'
 
 class NCoverReport
+  include AttrMethods
   include RunCommand
   include YAMLConfig
   
-  attr_accessor :coverage_files, :reports, :required_coverage, :filters
+  attr_array :coverage_files, :reports, :required_coverage, :filters
   
   def initialize
     @coverage_files = []

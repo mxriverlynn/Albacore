@@ -22,11 +22,11 @@ describe NCoverReport, "when running a full coverage report with a specified out
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new()
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports fullcoveragereport
     
     @ncover.run
   end
@@ -53,11 +53,11 @@ describe NCoverReport, "when running a summary report with a specified output fo
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     summaryreport = NCover::SummaryReport.new()
     summaryreport.output_path = NCoverReportTestData.summary_output_file
-    @ncover.reports << summaryreport
+    @ncover.reports summaryreport
     
     @ncover.run
   end
@@ -84,16 +84,15 @@ describe NCoverReport, "when running multiple ncover reports - a summary and a f
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     summaryreport = NCover::SummaryReport.new()
     summaryreport.output_path = NCoverReportTestData.summary_output_file
-    @ncover.reports << summaryreport
     
     fullcoveragereport = NCover::FullCoverageReport.new()
     @fullcoverage_output_folder = File.join(NCoverReportTestData.output_folder, "fullcoverage")
     fullcoveragereport.output_path = @fullcoverage_output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports summaryreport, fullcoveragereport
 
     @ncover.run
   end
@@ -116,15 +115,15 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports fullcoveragereport
     
     symbolcoverage = NCover::SymbolCoverage.new
     symbolcoverage.minimum = 10
-    @ncover.required_coverage << symbolcoverage
+    @ncover.required_coverage symbolcoverage
     
     @ncover.run
   end
@@ -151,15 +150,15 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports fullcoveragereport
     
     symbolcoverage = NCover::SymbolCoverage.new
     symbolcoverage.minimum = 100
-    @ncover.required_coverage << symbolcoverage
+    @ncover.required_coverage symbolcoverage
     
     @ncover.run
   end
@@ -186,16 +185,16 @@ describe NCoverReport, "when specifying the coverage item type to check" do
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     report = NCover::SummaryReport.new
     report.output_path = NCoverReportTestData.summary_output_file
-    @ncover.reports << report
+    @ncover.reports report
     
     symbolcoverage = NCover::SymbolCoverage.new
     symbolcoverage.minimum = 10
     symbolcoverage.item_type = :Class
-    @ncover.required_coverage << symbolcoverage
+    @ncover.required_coverage symbolcoverage
     
     @ncover.run
   end
@@ -218,15 +217,17 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports fullcoveragereport
     
-    @ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 100, :item_type => :View)
-    @ncover.required_coverage << NCover::BranchCoverage.new(:minimum => 10, :item_type => :Class)
-    @ncover.required_coverage << NCover::MethodCoverage.new(:minimum => 100, :item_type => :Class)
+    @ncover.required_coverage(
+    	NCover::SymbolCoverage.new(:minimum => 100, :item_type => :View),
+    	NCover::BranchCoverage.new(:minimum => 10, :item_type => :Class),
+    	NCover::MethodCoverage.new(:minimum => 100, :item_type => :Class)
+    )
 
     @ncover.run
   end
@@ -261,15 +262,17 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports fullcoveragereport
     
-    @ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0, :item_type => :View)
-    @ncover.required_coverage << NCover::BranchCoverage.new(:minimum => 0, :item_type => :Class)
-    @ncover.required_coverage << NCover::MethodCoverage.new(:minimum => 0, :item_type => :Class)
+    @ncover.required_coverage(
+    	NCover::SymbolCoverage.new(:minimum => 0, :item_type => :View),
+    	NCover::BranchCoverage.new(:minimum => 0, :item_type => :Class),
+    	NCover::MethodCoverage.new(:minimum => 0, :item_type => :Class)
+    )
 
     @ncover.run
   end
@@ -304,14 +307,16 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports fullcoveragereport
     
-    @ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 100, :item_type => :View)
-    @ncover.required_coverage << NCover::BranchCoverage.new(:minimum => 0, :item_type => :Class)
+    @ncover.required_coverage(
+    	NCover::SymbolCoverage.new(:minimum => 100, :item_type => :View),
+    	NCover::BranchCoverage.new(:minimum => 0, :item_type => :Class)
+    )
 
     @ncover.run
   end
@@ -342,14 +347,14 @@ describe NCoverReport, "when running a report with a cyclomatic complexity highe
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports fullcoveragereport
     
     coverage = NCover::CyclomaticComplexity.new(:maximum => 1, :item_type => :Class)
-    @ncover.required_coverage << coverage
+    @ncover.required_coverage coverage
     
     @ncover.run
   end
@@ -376,14 +381,14 @@ describe NCoverReport, "when running a report with a cyclomatic complexity under
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport
+    @ncover.reports fullcoveragereport
     
     coverage = NCover::CyclomaticComplexity.new(:maximum => 1000)
-    @ncover.required_coverage << coverage
+    @ncover.required_coverage coverage
     
     @ncover.run
   end
@@ -410,15 +415,17 @@ describe NCoverReport, "when filtering on Assembly coverage data" do
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport    
-    @ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+    @ncover.reports fullcoveragereport    
+    @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
-    @ncover.filters << NCover::AssemblyFilter.new(:filter_type => :exclude, :filter => ["nunit.*"])
-    @ncover.filters << NCover::AssemblyFilter.new(:filter_type => :include, :filter => ["TestSolution.*"])
+    @ncover.filters(
+    	NCover::AssemblyFilter.new(:filter_type => :exclude, :filter => ["nunit.*"]),
+    	NCover::AssemblyFilter.new(:filter_type => :include, :filter => ["TestSolution.*"])
+    )
     
     @ncover.run
   end
@@ -445,15 +452,17 @@ describe NCoverReport, "when filtering on Namespace coverage data" do
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport    
-    @ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+    @ncover.reports fullcoveragereport    
+    @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
-    @ncover.filters << NCover::NamespaceFilter.new(:filter_type => :exclude, :filter => ["nunit.*"])
-    @ncover.filters << NCover::NamespaceFilter.new(:filter_type => :include, :filter => ["TestSolution.*"])
+    @ncover.filters(
+    	NCover::NamespaceFilter.new(:filter_type => :exclude, :filter => ["nunit.*"]),
+    	NCover::NamespaceFilter.new(:filter_type => :include, :filter => ["TestSolution.*"])
+    )
     
     @ncover.run
   end
@@ -480,15 +489,17 @@ describe NCoverReport, "when filtering on Class coverage data" do
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport    
-    @ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+    @ncover.reports fullcoveragereport    
+    @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
-    @ncover.filters << NCover::ClassFilter.new(:filter_type => :exclude, :filter => ["Foo"])
-    @ncover.filters << NCover::ClassFilter.new(:filter_type => :include, :filter => ["Bar"])
+    @ncover.filters(
+    	NCover::ClassFilter.new(:filter_type => :exclude, :filter => ["Foo"]),
+    	NCover::ClassFilter.new(:filter_type => :include, :filter => ["Bar"])
+    )
     
     @ncover.run
   end
@@ -515,15 +526,17 @@ describe NCoverReport, "when filtering on Method coverage data" do
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport    
-    @ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+    @ncover.reports fullcoveragereport    
+    @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
-    @ncover.filters << NCover::MethodFilter.new(:filter_type => :exclude, :filter => ["Foo"])
-    @ncover.filters << NCover::MethodFilter.new(:filter_type => :include, :filter => ["Bar"])
+    @ncover.filters(
+    	NCover::MethodFilter.new(:filter_type => :exclude, :filter => ["Foo"]),
+    	NCover::MethodFilter.new(:filter_type => :include, :filter => ["Bar"])
+    )
     
     @ncover.run
   end
@@ -550,15 +563,17 @@ describe NCoverReport, "when filtering on Document coverage data" do
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
-    @ncover.coverage_files << NCoverReportTestData.coverage_file
+    @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
-    @ncover.reports << fullcoveragereport    
-    @ncover.required_coverage << NCover::SymbolCoverage.new(:minimum => 0)
+    @ncover.reports fullcoveragereport    
+    @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
-    @ncover.filters << NCover::DocumentFilter.new(:filter_type => :exclude, :filter => ["Foo"])
-    @ncover.filters << NCover::DocumentFilter.new(:filter_type => :include, :filter => ["Bar"])
+    @ncover.filters(
+    	NCover::DocumentFilter.new(:filter_type => :exclude, :filter => ["Foo"]),
+    	NCover::DocumentFilter.new(:filter_type => :include, :filter => ["Bar"])
+    )
     
     @ncover.run
   end
