@@ -16,7 +16,7 @@ describe ExpandTemplates, "when expanding a single value into multiple locations
   it_should_behave_like "prepping the sample templates"
   
   before :all do
-    @templates.expand_files = {@testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file}
+    @templates.expand_files @testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file
     @templates.data_file = @testdata.sample_data_file
     @templates.expand
     
@@ -36,7 +36,7 @@ describe ExpandTemplates, "when expanding multiples value into multiple location
   it_should_behave_like "prepping the sample templates"
   
   before :all do
-    @templates.expand_files = {@testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file}
+    @templates.expand_files @testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file
     @templates.data_file = @testdata.multiplevalues_data_file
     @templates.expand
     
@@ -56,7 +56,7 @@ describe ExpandTemplates, "when expanding a template file and specifying an outp
   it_should_behave_like "prepping the sample templates"
   
   before :all do
-    @templates.expand_files = {@testdata.sample_template_file => @testdata.sample_output_file}
+    @templates.expand_files @testdata.sample_template_file => @testdata.sample_output_file
     @templates.data_file = @testdata.sample_data_file
     @templates.expand
     
@@ -76,11 +76,12 @@ describe ExpandTemplates, "when expanding multiple template files" do
   it_should_behave_like "prepping the sample templates"
   
   before :all do
-    @templates.expand_files = {
+    @templates.expand_files(
       @testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file,
       @testdata.sample_template_file => @testdata.sample_output_file,
       @testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file
-    }
+    )
+    
     @templates.data_file = @testdata.multitemplate_data_file
     @templates.expand
     
@@ -100,11 +101,11 @@ describe ExpandTemplates, "when expanding template files and the data file conta
   it_should_behave_like "prepping the sample templates"
   
   before :all do
-    @templates.expand_files = {
+    @templates.expand_files(
       @testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file,
       @testdata.sample_template_file => @testdata.sample_output_file,
       @testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file
-    }
+    )
     @templates.data_file = @testdata.multitemplate_specificfile_data_file
     @templates.expand
     
@@ -130,7 +131,7 @@ describe ExpandTemplates, "when including external data and specified placeholde
   it_should_behave_like "prepping the sample templates"
   
   before :all do
-    @templates.expand_files = {@testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file}
+    @templates.expand_files @testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file
     @templates.data_file = @testdata.sample_data_file_with_include
     @templates.expand
     
@@ -146,7 +147,7 @@ describe ExpandTemplates, "when including external data and specified placeholde
   it_should_behave_like "prepping the sample templates"
   
   before :all do
-    @templates.expand_files = {@testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file}
+    @templates.expand_files @testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file
     @templates.data_file = @testdata.sample_data_file_with_include
     @templates.expand
     
@@ -162,7 +163,7 @@ describe ExpandTemplates, "when when external data includes at least part of the
   it_should_behave_like "prepping the sample templates"
   
   before :all do
-    @templates.expand_files = {@testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file}
+    @templates.expand_files @testdata.multipleinstance_template_file => @testdata.multipleinstance_template_file
     @templates.data_file = @testdata.template_specific_data_file_with_include
     @templates.expand
     

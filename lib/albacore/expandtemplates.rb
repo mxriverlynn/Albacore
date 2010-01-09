@@ -2,13 +2,15 @@ require 'albacore/support/albacore_helper'
 require 'yaml'
 
 class ExpandTemplates
+  include AttrMethods
   include YAMLConfig
   include Logging
   
-  attr_accessor :expand_files, :data_file
+  attr_accessor :data_file
+  attr_hash :expand_files
   
   def initialize
-    @expand_files = []
+    @expand_files = {}
     super()
   end
   
