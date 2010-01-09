@@ -6,7 +6,7 @@ class AssemblyInfo
   
   attr_accessor :version, :title, :description, :output_file, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-  attr_accessor :file_version, :trademark, :namespaces, :lang_engine
+  attr_accessor :file_version, :trademark, :lang_engine
   
   def initialize
     @namespaces = []
@@ -67,12 +67,12 @@ class AssemblyInfo
     asm_data
   end
   
-  def custom_attributes(attributes)
-    @custom_attributes = attributes
+  def custom_attributes(*attributes)
+    @custom_attributes = *attributes
   end
   
-  def namespaces(namespaces)
-    @namespaces = namespaces
+  def namespaces(*namespaces)
+    @namespaces = *namespaces
   end
   
   def build_using_statements
@@ -81,12 +81,13 @@ class AssemblyInfo
     @namespaces << "System.Reflection"
     @namespaces << "System.Runtime.InteropServices"
     
-    namespaces = ''
-    @namespaces.each do |ns|
-      namespaces << @lang_engine.build_using_statement(ns)
+    ns = ''
+    @namespaces.each do |n|
+      puts "----------------#{n}"
+      ns << @lang_engine.build_using_statement(n)
     end
     
-    namespaces
+    ns
   end  
 
   def build_attribute(attr_name, attr_data)

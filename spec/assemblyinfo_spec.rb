@@ -64,7 +64,7 @@ describe AssemblyInfo, "when providing custom namespaces without specifiying the
     @tester = AssemblyInfoTester.new
     asm = AssemblyInfo.new    
     
-    asm.namespaces ['My.Name.Space', 'Another.Namespace.GoesHere']
+    asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
 
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
@@ -82,7 +82,7 @@ describe AssemblyInfo, "when providing custom namespaces and specifying C#" do
     asm = AssemblyInfo.new
     asm.lang_engine = CSharpEngine.new
     
-    asm.namespaces ['My.Name.Space', 'Another.Namespace.GoesHere']
+    asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
 
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
@@ -100,7 +100,7 @@ describe AssemblyInfo, "when providing custom namespaces and specifying VB.NET" 
     asm = AssemblyInfo.new
     asm.lang_engine = VbNetEngine.new
     
-    asm.namespaces ['My.Name.Space', 'Another.Namespace.GoesHere']
+    asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
 
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
