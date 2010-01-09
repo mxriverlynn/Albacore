@@ -19,8 +19,6 @@ module AttrMethods
 :private
 
   def gen_array_methods(obj, *method_names)
-  	puts "------------#{method_names}"
-  	puts "------------#{obj}"
     method_names.each do |m|
         obj.instance_eval(<<-EOF, __FILE__, __LINE__)
           def #{m}(*args)
@@ -32,7 +30,6 @@ module AttrMethods
 
   def gen_hash_methods(obj, *method_names)
     method_names.each do |m|
-    	puts "------------ def #{m}"
         obj.instance_eval(<<-EOF, __FILE__, __LINE__)
           def #{m}(*args)
             @#{m} = *args
