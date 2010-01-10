@@ -2,10 +2,12 @@ require 'albacore/support/albacore_helper'
 require 'net/sftp'
 
 class Sftp
+  include AttrMethods
   include YAMLConfig
   include Logging
   
-  attr_accessor :server, :username, :password, :upload_files, :port, :key, :debug
+  attr_accessor :server, :username, :password, :port, :key, :debug
+  attr_hash :upload_files
   
   def initialize
     @upload_files = {}

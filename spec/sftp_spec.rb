@@ -11,10 +11,10 @@ describe Sftp, 'when uploading files over sftp' do
     @sftp.username="user"
     @sftp.password="secret"
     
-    @sftp.upload_files = {
+    @sftp.upload_files(
       "some.file" => "./somefolder/some.file", 
       "another.file" => "another/folder/another.file"
-    }
+    )
     
     @sftp.upload
   end

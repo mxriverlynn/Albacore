@@ -1,10 +1,13 @@
 require 'albacore/support/albacore_helper'
 
 class SQLCmd
+  include AttrMethods
   include RunCommand
   include YAMLConfig
   
-  attr_accessor :server, :database, :username, :password, :scripts, :variables
+  attr_accessor :server, :database, :username, :password
+  attr_array :scripts
+  attr_hash :variables
   
   def initialize
     @require_valid_command = false

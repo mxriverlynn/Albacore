@@ -13,7 +13,7 @@ describe SQLCmd, "when running a script file against a database with authenticat
     @cmd.database="a database"
     @cmd.username="some user"
     @cmd.password="shh! it's a secret!"
-    @cmd.scripts << "somescript.sql"
+    @cmd.scripts "somescript.sql"
     
     @cmd.run
   end
@@ -98,9 +98,7 @@ describe SQLCmd, "when running multiple script files" do
     @cmd.extend(SystemPatch)
     @cmd.disable_system = true
     
-    @cmd.scripts << "did you get.sql"
-    @cmd.scripts << "that thing.sql"
-    @cmd.scripts << "i sent you.sql"
+    @cmd.scripts "did you get.sql", "that thing.sql", "i sent you.sql"
     
     @cmd.run
   end
@@ -125,9 +123,9 @@ describe SQLCmd, "when running with variables specified" do
     @cmd.log_level = :verbose
     @cmd.extend(SystemPatch)
     @cmd.disable_system = true
-    @cmd.scripts << "somescript.sql"
+    @cmd.scripts "somescript.sql"
     
-    @cmd.variables = {:myvar => "my value", :another_var => :another_value}
+    @cmd.variables :myvar => "my value", :another_var => :another_value
     
     @cmd.run
   end

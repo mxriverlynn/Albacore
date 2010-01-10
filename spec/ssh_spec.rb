@@ -10,7 +10,7 @@ describe Ssh, 'when executing a command over ssh' do
     @ssh.server="server"
     @ssh.username="user"
     @ssh.password="secret"
-    @ssh.commands="execute THIS!"
+    @ssh.commands "execute THIS!"
     
     @ssh.execute
   end
@@ -34,8 +34,7 @@ describe Ssh, "when executing multiple commands over ssh" do
     @ssh.username="user"
     @ssh.password="secret"
     
-    @ssh.commands << "execute THIS!"
-    @ssh.commands << "another execution"
+    @ssh.commands "execute THIS!", "another execution"
     
     @ssh.execute    
   end

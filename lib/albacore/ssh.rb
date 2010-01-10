@@ -2,10 +2,12 @@ require 'albacore/support/albacore_helper'
 require 'net/ssh'
 
 class Ssh
+  include AttrMethods
   include YAMLConfig
   include Logging
   
-  attr_accessor :server, :username, :password, :commands, :port, :key, :debug
+  attr_accessor :server, :username, :password, :port, :key, :debug
+  attr_array :commands
     
   def initialize
     @commands = []
@@ -22,7 +24,7 @@ class Ssh
   end
   
   def execute()
-      warn_about_key if @key
+    warn_about_key if @key
     
     Net::SSH.start(@server, @username, get_connection_options) do |ssh|
       @commands.each{|cmd|
