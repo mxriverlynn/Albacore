@@ -1,0 +1,1 @@
+some_attribute: "this value was loaded from a folder, specified by Albacore::yaml_config_folder"
