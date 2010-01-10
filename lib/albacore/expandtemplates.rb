@@ -2,7 +2,7 @@ require 'albacore/support/albacore_helper'
 require 'yaml'
 
 class ExpandTemplates
-  include AttrMethods
+  extend AttrMethods
   include YAMLConfig
   include Logging
   

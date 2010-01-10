@@ -1,7 +1,7 @@
 require 'albacore/support/albacore_helper'
 
 class SQLCmd
-  include AttrMethods
+  extend AttrMethods
   include RunCommand
   include YAMLConfig
   

@@ -1,7 +1,7 @@
 require 'albacore/support/albacore_helper'
 
 class Exec
-  include AttrMethods
+  extend AttrMethods
   include RunCommand
   include YAMLConfig
   include Logging

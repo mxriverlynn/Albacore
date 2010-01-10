@@ -2,7 +2,7 @@ require 'albacore/support/albacore_helper'
 require 'net/ssh'
 
 class Ssh
-  include AttrMethods
+  extend AttrMethods
   include YAMLConfig
   include Logging
   

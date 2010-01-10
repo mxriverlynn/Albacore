@@ -2,7 +2,7 @@ Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'ncoverreports/*.rb
 require 'albacore/support/albacore_helper'
 
 class NCoverReport
-  include AttrMethods
+  extend AttrMethods
   include RunCommand
   include YAMLConfig
   

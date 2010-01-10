@@ -4,7 +4,7 @@ require 'zip/zipfilesystem'
 include Zip
 
 class ZipDirectory
-  include AttrMethods
+  extend AttrMethods
   include YAMLConfig
   include Failure
   

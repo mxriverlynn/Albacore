@@ -1,7 +1,7 @@
 require 'albacore/support/albacore_helper'
 
 class Docu
-  include AttrMethods
+  extend AttrMethods
   include RunCommand
   
   attr_accessor :output_location

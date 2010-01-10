@@ -2,7 +2,7 @@ require 'albacore/support/albacore_helper'
 require 'net/sftp'
 
 class Sftp
-  include AttrMethods
+  extend AttrMethods
   include YAMLConfig
   include Logging
   

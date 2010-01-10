@@ -3,7 +3,7 @@ require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
 
 class AssemblyInfo
-  include AttrMethods
+  extend AttrMethods
   include Failure
   include YAMLConfig
   
