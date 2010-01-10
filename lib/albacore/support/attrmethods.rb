@@ -1,13 +1,14 @@
 module AttrMethods
-  @@array_methods = {}
-  @@hash_methods = {}
   
-  def attr_array(*method_names)
-  	@@array_methods[self] = method_names
-  end
-  
-  def attr_hash(*method_names)
-  	@@hash_methods[self] = method_names
+  class << Object
+    @@array_methods = {}
+    @@hash_methods = {}
+    def attr_array(*method_names)
+      @@array_methods[self] = method_names
+    end
+    def attr_hash(*method_names)
+      @@hash_methods[self] = method_names
+    end
   end
   
   def initialize
@@ -38,5 +39,3 @@ module AttrMethods
     end
   end
 end
-
-Object.extend(AttrMethods)
