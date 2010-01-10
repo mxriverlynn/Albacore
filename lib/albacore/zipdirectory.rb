@@ -4,12 +4,13 @@ require 'zip/zipfilesystem'
 include Zip
 
 class ZipDirectory
+  include AttrMethods
   include YAMLConfig
   include Failure
   
-  attr_accessor :directories_to_zip, :additional_files, :exclusions
   attr_accessor :output_path, :output_file
   attr_accessor :flatten_zip
+  attr_array :directories_to_zip, :additional_files, :exclusions
 
   def initialize
     @flatten_zip = true
@@ -31,7 +32,7 @@ class ZipDirectory
   end
   
   def clean_directories_names
-      return if @directories_to_zip.nil?
+    return if @directories_to_zip.nil?
     @directories_to_zip.each { |d| d.sub!(%r[/$],'')}
   end
   

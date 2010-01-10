@@ -7,7 +7,7 @@ describe ZipDirectory, 'when zipping a directory of files' do
   before :each do
     zip = ZipDirectory.new
     puts "#{ZipTestData.folder}"
-    zip.directories_to_zip = [ZipTestData.folder]
+    zip.directories_to_zip ZipTestData.folder
     zip.output_file = "test.zip"
     zip.package
   end
@@ -20,9 +20,9 @@ end
 describe ZipDirectory, 'when zipping a directory with string exclusions' do
   before :each do
     zip = ZipDirectory.new
-    zip.directories_to_zip = [ZipTestData.folder]
+    zip.directories_to_zip ZipTestData.folder
     zip.output_file = 'test.zip'
-    zip.exclusions = [File.expand_path(File.join(ZipTestData.folder, 'files', 'testfile.txt'))]
+    zip.exclusions File.expand_path(File.join(ZipTestData.folder, 'files', 'testfile.txt'))
     zip.package
     
     unzip = Unzip.new
@@ -43,9 +43,9 @@ end
 describe ZipDirectory, 'when zipping a directory of files with regexp exclusions' do
 before :each do
     zip = ZipDirectory.new
-    zip.directories_to_zip = [ZipTestData.folder]
+    zip.directories_to_zip ZipTestData.folder
     zip.output_file = 'test.zip'
-    zip.exclusions = [/testfile/]
+    zip.exclusions /testfile/
     zip.package
     
     unzip = Unzip.new
