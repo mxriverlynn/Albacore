@@ -17,7 +17,7 @@ module AttrMethods
   	super()
   end
 
-:private
+private
 
   def gen_array_methods(obj, method_names)
     method_names.each do |m|
