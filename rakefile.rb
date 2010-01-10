@@ -83,19 +83,19 @@ namespace :specs do
     t.spec_opts << @spec_opts
   end
 
-    desc "NUnit functional specs"
+  desc "NUnit functional specs"
   Spec::Rake::SpecTask.new :nunit do |t|
     t.spec_files = 'spec/nunit*_spec.rb'
     t.spec_opts << @spec_opts
   end
 
-    desc "MSpec functional specs"
+  desc "MSpec functional specs"
   Spec::Rake::SpecTask.new :mspec do |t|
     t.spec_files = 'spec/mspec*_spec.rb'
     t.spec_opts << @spec_opts
   end
 
-    desc "Exec functional specs"
+  desc "Exec functional specs"
   Spec::Rake::SpecTask.new :exec do |t|
     t.spec_files = 'spec/exec*_spec.rb'
     t.spec_opts << @spec_opts
