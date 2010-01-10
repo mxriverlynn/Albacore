@@ -129,6 +129,7 @@ namespace :albacore do
   
   desc "Run a sample build using the MSBuildTask"
   msbuild do |msb|
+  	msb.log_level = :verbose
     msb.properties :configuration => :release, :platform => 'Any CPU'
     msb.targets :clean, :build
     msb.solution = "spec/support/TestSolution/TestSolution.sln"
@@ -154,13 +155,13 @@ namespace :albacore do
     
     ncc.log_level = :verbose
     ncc.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Console.exe"
-    ncc.output = {:xml => @xml_coverage}
+    ncc.output :xml => @xml_coverage
     ncc.working_directory = "spec/support/CodeCoverage/nunit"
     
     nunit = NUnitTestRunner.new("spec/support/Tools/NUnit-v2.5/nunit-console-x86.exe")
     nunit.log_level = :verbose
-    nunit.assemblies << "assemblies/TestSolution.Tests.dll"
-    nunit.options << '/noshadow'
+    nunit.assemblies "assemblies/TestSolution.Tests.dll"
+    nunit.options '/noshadow'
     
     ncc.testrunner = nunit
   end  
@@ -170,14 +171,16 @@ namespace :albacore do
     @xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
     
     ncr.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Reporting.exe"
-    ncr.coverage_files << @xml_coverage
+    ncr.coverage_files @xml_coverage
     
     fullcoveragereport = NCover::FullCoverageReport.new
     fullcoveragereport.output_path = "spec/support/CodeCoverage/report/output"
-    ncr.reports << fullcoveragereport
+    ncr.reports fullcoveragereport
     
-    ncr.required_coverage << NCover::BranchCoverage.new(:minimum => 10)
-    ncr.required_coverage << NCover::CyclomaticComplexity.new(:maximum => 1)
+    ncr.required_coverage(
+    	NCover::BranchCoverage.new(:minimum => 10),
+    	NCover::CyclomaticComplexity.new(:maximum => 1)
+    )
   end
 
   desc "Run the sample for renaming a File"
@@ -191,8 +194,8 @@ namespace :albacore do
   desc "Run ZipDirectory example"
   zip do |zip|
     zip.output_path = File.dirname(__FILE__)
-    zip.directories_to_zip = ["lib", "spec"]
-    zip.additional_files = "README.markdown"
+    zip.directories_to_zip = "lib", "spec"
+    zip.additional_files "README.markdown"
     zip.output_file = 'albacore_example.zip'
   end
   
@@ -205,19 +208,19 @@ namespace :albacore do
   desc "MSpec Test Runner Example"
   mspec do |mspec|
     mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
-    mspec.assemblies << "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
+    mspec.assemblies "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
   end
 
   desc "NUnit Test Runner Example"
   nunit do |nunit|
     nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
-    nunit.assemblies << "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
+    nunit.assemblies "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
   end
 
   desc "XUnit Test Runner Example"
   xunit do |xunit|
     xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
-    xunit.assemblies << "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
+    xunit.assemblies "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
   end   
   
   desc "Exec Task Example"
