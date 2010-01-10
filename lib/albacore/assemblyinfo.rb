@@ -1,4 +1,6 @@
 require 'albacore/support/albacore_helper'
+require 'albacore/assemblyinfolanguages/csharpengine'
+require 'albacore/assemblyinfolanguages/vbnetengine'
 
 class AssemblyInfo
   include AttrMethods

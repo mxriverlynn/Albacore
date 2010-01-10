@@ -1,6 +1,4 @@
 require 'albacore/assemblyinfo'
-require 'albacore/csharpengine'
-require 'albacore/vbnetengine'
 
 class AssemblyInfoTester < AssemblyInfo
   
