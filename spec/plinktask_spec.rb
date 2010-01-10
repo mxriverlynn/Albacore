@@ -1,11 +1,11 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/plinkcommand'
-require 'rake/plinkcommandtask'
+require 'albacore/plink'
+require 'rake/plinktask'
 require 'tasklib_patch'
 
-describe Albacore::PLinkCommandTask, "when running" do
+describe Albacore::PLinkTask, "when running" do
 	before :all do
-		task = Albacore::PLinkCommandTask.new(:command) do |t|
+		task = Albacore::PLinkTask.new(:command) do |t|
 			@yielded_object = t
 		end
 		task.extend(TasklibPatch)
@@ -13,13 +13,13 @@ describe Albacore::PLinkCommandTask, "when running" do
 	end
 
 	it "should yield the command api" do
-		@yielded_object.kind_of?(PLinkCommand).should == true 
+		@yielded_object.kind_of?(PLink).should == true 
 	end
 end
 
-describe Albacore::PLinkCommandTask, "when execution fails" do
+describe Albacore::PLinkTask, "when execution fails" do
 	before :all do
-		@task = Albacore::PLinkCommandTask.new(:failingtask)
+		@task = Albacore::PLinkTask.new(:failingtask)
 		@task.extend(TasklibPatch)
 		@task.fail
 		Rake::Task["failingtask"].invoke

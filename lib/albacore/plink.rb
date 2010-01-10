@@ -1,6 +1,6 @@
 require 'albacore/support/albacore_helper'
 
-class PLinkCommand
+class PLink
   include AttrMethods
   include RunCommand
   include YAMLConfig

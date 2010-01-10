@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/plinkcommand'
+require 'albacore/plink'
 
-describe PLinkCommand, 'when executing a command over plink' do
+describe PLink, 'when executing a command over plink' do
   before :each do
-    @cmd = PLinkCommand.new
+    @cmd = PLink.new
     @cmd.extend(SystemPatch)
     @cmd.path_to_command ="C:\\plink.exe"
     @cmd.host = "testhost"
