@@ -12,9 +12,9 @@ module AttrMethods
   end
   
   def initialize
-  	gen_array_methods(self, @@array_methods[self.class]) if @@array_methods.has_key?(self.class)
-  	gen_hash_methods(self, @@hash_methods[self.class])  if @@hash_methods.has_key?(self.class)
-  	super()
+    gen_array_methods(self, @@array_methods[self.class]) if @@array_methods.has_key?(self.class)
+    gen_hash_methods(self, @@hash_methods[self.class])  if @@hash_methods.has_key?(self.class)
+    super()
   end
 
 private
