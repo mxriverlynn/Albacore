@@ -26,6 +26,8 @@ module Logging
   def create_logger(device, level)
     @current_log_device = device
     @logger = Logger.new(device)
+    
+    level = Logger::DEBUG if Albacore::log_level == :verbose
     @logger.level = level
   end
   

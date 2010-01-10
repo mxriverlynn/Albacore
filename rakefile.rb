@@ -122,6 +122,10 @@ end
 
 namespace :albacore do  
   require 'lib/albacore'
+  
+  #global configuration options
+  Albacore::yaml_config_folder = "spec/support/yamlconfig"
+  Albacore::log_level = :verbose
 
   desc "Run a complete Albacore build sample"
   task :sample => ['albacore:assemblyinfo',
@@ -133,13 +137,8 @@ namespace :albacore do
                      'albacore:nunit',
                      'albacore:xunit']
   
-  desc "Run a sample build using the MSBuildTask"
-  msbuild do |msb|
-  	msb.log_level = :verbose
-    msb.properties :configuration => :release, :platform => 'Any CPU'
-    msb.targets :clean, :build
-    msb.solution = "spec/support/TestSolution/TestSolution.sln"
-  end
+  desc "Run a sample MSBuild with YAML autoconfig"
+  msbuild
   
   desc "Run a sample assembly info generator"
   assemblyinfo do |asm|
