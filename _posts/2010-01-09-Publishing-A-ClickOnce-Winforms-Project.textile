@@ -1,0 +1,29 @@
+---
+layout: post
+title: "Publishing A ClickOnce Winforms Project"
+---
+
+Today's tidbit of awesomeness comes to you from ["Kevin Berridge":http://kevin-berridge.blogspot.com]. Ths was originally a discussion / support request over at the ["Google Group":http://groups.google.com/group/albacoredev/browse_thread/thread/e836d3f62898f456] and Kevin ["turned it into a blog post":http://kevin-berridge.blogspot.com/2010/01/publish-clickonce-with-albacore-and.html]. I added a little formatting, but the content of the 'publishing a ClickOnce project' section is entirely Kevin's.
+
+h2. Publishing A ClickOnce Winforms Project, via Kevin Berridge
+
+To set it up, get the ClickOnce publish working in Visual Studio first.  With that done, write a rake script like this:
+
+<pre><code>desc "Publish ClickOnce"
+msbuildtask("publish") do |msb|
+  msb.properties = {
+    "configuration" => "Release",
+    "PublishDir" => "C:/temp/",
+    "PublishUrl" => "C:/temp/",
+    "InstallUrl" => "C:/temp/"
+  }
+  msb.targets [:Publish]
+  msb.solution = "slnFile.sln"
+end
+</code></pre>
+
+h2. Thanks, Kevin
+
+You'll want to know about the gotcha's that Kevin ran into, as well. So head on over to ["his blog post":http://kevin-berridge.blogspot.com/2010/01/publish-clickonce-with-albacore-and.html] for a little more information and some good tips on making this work!
+
+Thanks for taking the time to blog this, Kevin. Every example we get will make the project that much more valuable.
