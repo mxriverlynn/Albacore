@@ -13,8 +13,6 @@ module YAMLConfig
   def configure_if_config_exists(task_name)
     task_config = task_name + '.yml'
     task_config = File.join(Albacore::yaml_config_folder, task_config) unless Albacore::yaml_config_folder.nil?
-    puts "----------- YAML CONFIG: #{task_config}"
-    puts "----------- YAML CONFIG EXISTS: #{File.exists?(task_config)}"
     configure(task_config) if File.exists?(task_config)
   end
   
