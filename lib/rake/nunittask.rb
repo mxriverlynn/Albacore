@@ -6,8 +6,9 @@ end
   
 module Albacore
   class NUnitTask < Albacore::AlbacoreTask
-    def execute(task_args)
+    def execute(name, task_args)
       @nunit = NUnitTestRunner.new
+      @nunit.load_config_by_task_name(name)
       @block.call(@nunit, *task_args) unless @block.nil?
       @nunit.execute
       fail if @nunit.failed

@@ -7,12 +7,13 @@ module Albacore
     def initialize(name, *args, &block)
       @block = block
       @args = args.insert(0, name)
+      @name = name
       define
     end
     
     def define
       task *@args do |task, task_args|
-        execute task_args
+        execute @name.to_s, task_args
       end
     end
   end

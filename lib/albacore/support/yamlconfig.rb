@@ -2,16 +2,16 @@ require 'yaml'
 
 module YAMLConfig  
   def initialize
-    configure_if_config_exists(self.class.to_s.downcase)
+    load_config_by_task_name(self.class.to_s.downcase)
     super()
   end
   
   def YAMLConfig.extend_object(obj)
-    obj.configure_if_config_exists(obj.class.to_s.downcase)
+    obj.load_config_by_task_name(obj.class.to_s.downcase)
   end
   
-  def configure_if_config_exists(task_name)
-    task_config = task_name + '.yml'
+  def load_config_by_task_name(task_name)
+    task_config = "#{task_name}.yml"
     task_config = File.join(Albacore::yaml_config_folder, task_config) unless Albacore::yaml_config_folder.nil?
     configure(task_config) if File.exists?(task_config)
   end

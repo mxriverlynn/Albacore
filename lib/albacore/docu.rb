@@ -3,6 +3,7 @@ require 'albacore/support/albacore_helper'
 class Docu
   extend AttrMethods
   include RunCommand
+  include YAMLConfig
   
   attr_accessor :output_location
   attr_array :assemblies, :xml_files

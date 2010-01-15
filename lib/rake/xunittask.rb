@@ -6,9 +6,10 @@ end
   
 module Albacore
   class XUnitTask < Albacore::AlbacoreTask
-    def execute(task_args)
+    def execute(name, task_args)
       @xunit = XUnitTestRunner.new
-        @block.call(@xunit, *task_args) unless @block.nil?
+      @xunit.load_config_by_task_name(name)
+      @block.call(@xunit, *task_args) unless @block.nil?
       @xunit.execute
       fail if @xunit.failed
     end
