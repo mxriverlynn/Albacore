@@ -2,12 +2,7 @@ require 'yaml'
 
 module YAMLConfig  
   def initialize
-    load_config_by_task_name(self.class.to_s.downcase)
     super()
-  end
-  
-  def YAMLConfig.extend_object(obj)
-    obj.load_config_by_task_name(obj.class.to_s.downcase)
   end
   
   def load_config_by_task_name(task_name)

@@ -31,37 +31,7 @@ describe YAMLConfig, "when configuring with yaml" do
   end  
 end
 
-describe YAMLConfig, "when included yamlconfig in a class" do
-  
-  class YAML_AutoConfig_Test
-    include YAMLConfig
-  end
-  
-  before :all do
-    @yamltest = YAML_AutoConfig_Test.new
-  end
-  
-  it "should automatically configure the class through a yaml file named after the class" do
-    @yamltest.this_attr_was_automatically_added_by.should == "the yaml auto config"
-  end
-end
-
-describe YAMLConfig, "when extending a class with yamlconfig" do
-  
-  class YAML_AutoConfig_Test
-  end
-  
-  before :all do
-    @yamltest = YAML_AutoConfig_Test.new
-    @yamltest.extend YAMLConfig
-  end
-  
-  it "should automatically configure the class through a yaml file named after the class" do
-    @yamltest.this_attr_was_automatically_added_by.should == "the yaml auto config"
-  end
-end
-
-describe YAMLConfig, "when including yamlconfig and specifying a yaml config folder" do
+describe YAMLConfig, "when specifying a yaml config folder and configuring" do
   class YAML_AutoConfig_Test
   	include YAMLConfig
   end
@@ -69,21 +39,7 @@ describe YAMLConfig, "when including yamlconfig and specifying a yaml config fol
   before :all do
   	Albacore::yaml_config_folder = File.join(File.dirname(__FILE__), 'support', 'yamlconfig')
     @yamltest = YAML_AutoConfig_Test.new
-  end
-  
-  it "should automatically configure the class from the yaml file in the specified folder" do
-    @yamltest.some_attribute.should == "this value was loaded from a folder, specified by Albacore::yaml_config_folder"
-  end
-end
-
-describe YAMLConfig, "when extending yamlconfig and specifying a yaml config folder" do
-  class YAML_AutoConfig_Test
-  end
-  
-  before :all do
-  	Albacore::yaml_config_folder = File.join(File.dirname(__FILE__), 'support', 'yamlconfig')
-    @yamltest = YAML_AutoConfig_Test.new
-    @yamltest.extend(YAMLConfig)
+    @yamltest.load_config_by_task_name("yaml_autoconfig_test")
   end
   
   it "should automatically configure the class from the yaml file in the specified folder" do
