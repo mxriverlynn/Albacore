@@ -6,8 +6,9 @@ end
 
 module Albacore
   class NAntTask < Albacore::AlbacoreTask
-    def execute(task_args)
+    def execute(name, task_args)
       nant = NAnt.new
+      nant.load_config_by_task_name(name)
       @block.call(nant, *task_args) unless @block.nil? 
       nant.run
       fail if nant.failed
