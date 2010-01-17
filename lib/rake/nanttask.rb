@@ -1,22 +1,16 @@
 require 'rake/tasklib'
 
+def nant(name=:nant, *args, &block)
+  Albacore::NAntTask.new(name, *args, &block)
+end
+
 module Albacore
-  class NAntTask < Rake::TaskLib
-    attr_accessor :name
-    
-    def initialize(name=:nant, &block)
-      @name = name
-      @nant = NAnt.new
-      @block = block
-      define
+  class NAntTask < Albacore::AlbacoreTask
+    def execute(task_args)
+      nant = NAnt.new
+      @block.call(nant, *task_args) unless @block.nil? 
+      nant.run
+      fail if nant.failed
     end
-    
-    def define
-      task name do
-        @block.call(@nant) unless @block.nil?
-        #@nant.run
-        fail if @nant.failed
-      end
-    end		
   end
 end
