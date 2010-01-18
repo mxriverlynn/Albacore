@@ -9,8 +9,8 @@ require 'albacore/nunittestrunner'
 describe NUnitTestRunner, "the command parameters for an nunit runner" do
   before :all do
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << [@@test_assembly, @@failing_test_assembly]
-    nunit.options << @@output_option
+    nunit.assemblies @@test_assembly, @@failing_test_assembly
+    nunit.options @@output_option
     
     @command_parameters = nunit.get_command_parameters
   end
@@ -31,8 +31,8 @@ end
 describe NUnitTestRunner, "the command line string for an nunit runner" do
   before :all do
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << @@test_assembly
-    nunit.options << @@output_option
+    nunit.assemblies @@test_assembly
+    nunit.options @@output_option
     
     @command_line = nunit.get_command_line
     @command_parameters = nunit.get_command_parameters.join(" ")
@@ -51,8 +51,8 @@ end
 describe NUnitTestRunner, "when configured correctly" do
   before :all do
     nunit = NUnitTestRunner.new(@@nunitpath)
-    nunit.assemblies << @@test_assembly
-    nunit.options << '/noshadow'
+    nunit.assemblies @@test_assembly
+    nunit.options '/noshadow'
     
     nunit.execute
     @failed = nunit.failed
