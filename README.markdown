@@ -74,9 +74,11 @@ Anyone can fork the main repository and submit patches, as well. And lastly, the
 Many thanks for contributions to Albacore are due (in alphabetical order):
 
 * [Andreone](http://github.com/Andreone): Significant Wiki contributions, questions and contributions on the google group
-* [Ben Hall](http://github.com/benhall): SSH, SFTP, ZipDirectory, Rename, YAML auto config, Wiki pages, and many other great additions
+* [Ben Hall](http://github.com/benhall): Primary contributor. SSH, SFTP, ZipDirectory, Rename, YAML auto config, Wiki pages, and many other great additions
 * [Brian Donahue](http://github.com/briandonahue): Inspiration and initial code for the ExpandTemplates task
+* [Hibri](http://github.com/hibri): the PLink task
+* [James Gregory](http://github.com/jagregory): the Docu task
 * [Kevin Colyar](http://github.com/kevincolyar): Testing and updating of MSBuild to work with Cygwin
-* [MarkWilk](http://github.com/markwilk): VB.NET Language Generator For The AssemblyInfo Task
+* [Mark Wilkins](http://github.com/markwilk): VB.NET Language Generator For The AssemblyInfo Task
 * [Sean Biefeld](http://github.com/seanbiefeld): MSpecTestRunner for NCoverConsole
-* [Steven Harman](http://github.com/stevenharman): Finding some wicked bugs, patching nunit test runner, and working on the nant task
+* [Steven Harman](http://github.com/stevenharman): Finding some wicked bugs, patching nunit test runner, and the nant task
