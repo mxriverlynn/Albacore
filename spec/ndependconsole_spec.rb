@@ -25,4 +25,11 @@ describe "when executing Ndepend console" do
     @ndepend.run
     @ndepend.failed.should be_true
   end
+
+  it "should accept other parameters" do
+    expected_params = "/ViewReport /Silent /Help"
+    @ndepend.parameters << expected_params
+    @ndepend.run
+    @ndepend.system_command.should include(expected_params)
+  end
 end

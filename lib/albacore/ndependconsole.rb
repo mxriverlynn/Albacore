@@ -3,20 +3,24 @@ class NDependConsole
   include RunCommand
   include Logging
 
-	attr_accessor :path_to_command, :project_file
+  attr_accessor :path_to_command, :project_file , :parameters
   def initialize()
     super()
+    @parameters =[]
     @require_valid_command = true
   end
-	def run()
+  def run
     check_comand
     return if @failed
-	  run_command @path_to_command, @project_file
-	end
+    params = []
+    params << @project_file
+    params << @parameters.join(" ")
+    run_command @path_to_command, params.join(" ")
+  end
 
   def check_comand
     return if @project_file
-		fail_with_message 'A ndepend project file is required'
+    fail_with_message 'A ndepend project file is required'
   end
 
 end
