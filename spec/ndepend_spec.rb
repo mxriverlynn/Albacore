@@ -6,8 +6,8 @@ describe "when executing Ndepend console" do
   before :all do
     @msbuild = MSBuild.new
     @msbuild.properties = {:configuration => :Debug}
-    @msbuild.targets [:Clean, :Build]
-    @msbuild.solution = "lib/spec/support/TestSolution/TestSolution.sln"
+    @msbuild.targets = [:Clean, :Build]
+    @msbuild.solution = "spec/support/TestSolution/TestSolution.sln"
     @msbuild.build
   end
   before :each do
