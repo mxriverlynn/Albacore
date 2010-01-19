@@ -7,7 +7,7 @@ describe "when executing Ndepend console" do
     @ndepend.log_device = StringIO.new
     @ndepend.project_file = "support/projectfile.xml"
     @ndepend.extend(SystemPatch)
-    @ndepend.path_to_command = "support/NdependConsole.exe"
+    @ndepend.path_to_command = "support/tools/Ndepend-v2.12/NdependConsole.exe"
 
   end
   it "should execute NdependConsole.exe"do

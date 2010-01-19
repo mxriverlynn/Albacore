@@ -2,6 +2,7 @@ require "albacore/support/albacore_helper"
 class NDepend
   include RunCommand
   include Logging
+  include YAMLConfig
 
   attr_accessor :path_to_command, :project_file , :parameters
   def initialize()
