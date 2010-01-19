@@ -19,10 +19,10 @@ end
 
 describe Albacore::NAntTask, "when execution fails" do
   before :all do
-    @task = Albacore::NAntTask.new(:failingtask)
+    @task = Albacore::NAntTask.new(:nant_failingtask)
     @task.extend(TasklibPatch)
     @task.fail
-    Rake::Task[:failingtask].invoke
+    Rake::Task[:nant_failingtask].invoke
   end
   
   it "should fail the rake task" do
