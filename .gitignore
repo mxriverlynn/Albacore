@@ -25,6 +25,7 @@ spec/support/CodeCoverage/test-coverage.xml
 spec/support/zip/*.zip
 spec/support/expandtemplates/output
 spec/support/expandtemplates/working
+spec/support/TestSolution/NDependOut
 github-test.rb
 Albacore-*.gem
 Albacore.gemspec
