@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/ndependconsole'
+require 'albacore/ndepend'
 
 describe "when executing Ndepend console" do
   before :each do
-    @ndepend = NDependConsole.new
+    @ndepend = NDepend.new
     @ndepend.log_device = StringIO.new
     @ndepend.project_file = "support/projectfile.xml"
     @ndepend.extend(SystemPatch)
