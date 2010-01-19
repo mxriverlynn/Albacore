@@ -21,7 +21,7 @@ class NDepend
 
   def create_parameters
     params = []
-    params << @project_file
+    params << File.expand_path( @project_file)
     params << @parameters.join(" ")
     @logger.debug "NDependConsole Parameters" + @parameters.join(" ")
     return params

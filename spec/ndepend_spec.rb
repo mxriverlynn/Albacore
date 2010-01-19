@@ -1,23 +1,37 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/ndepend'
+require 'albacore/msbuild'
 
 describe "when executing Ndepend console" do
+  before :all do
+    @msbuild = MSBuild.new
+    @msbuild.properties = {:configuration => :Debug}
+    @msbuild.targets [:Clean, :Build]
+    @msbuild.solution = "lib/spec/support/TestSolution/TestSolution.sln"
+    @msbuild.build
+  end
   before :each do
     @ndepend = NDepend.new
     @ndepend.log_device = StringIO.new
-    @ndepend.project_file = "support/projectfile.xml"
-    @ndepend.extend(SystemPatch)
-    @ndepend.path_to_command = "support/tools/Ndepend-v2.12/NdependConsole.exe"
+    @ndepend.project_file = "spec/support/TestSolution/Ndependproject.xml"
+    @ndepend.path_to_command = "spec/support/tools/Ndepend-v2.12/NDepend.Console.exe"
+
+    @logger = StringIO.new
+    @ndepend.log_device = @logger
+    @log_data = @logger.string
+    @ndepend.log_level = :verbose
+
 
   end
   it "should execute NdependConsole.exe"do
     @ndepend.run
-    @ndepend.system_command.should include("NdependConsole.exe" )
+
+    @log_data.should include("NDepend.Console.exe" )
   end
 
   it "should include the Ndepend project file" do
     @ndepend.run
-    @ndepend.system_command.should include("projectfile.xml")
+    @log_data.should include("NDependProject.xml")
   end
 
   it "should fail when the project file is not given" do
@@ -30,6 +44,6 @@ describe "when executing Ndepend console" do
     expected_params = "/ViewReport /Silent /Help"
     @ndepend.parameters << expected_params
     @ndepend.run
-    @ndepend.system_command.should include(expected_params)
+    @log_data.should include(expected_params)
   end
 end
