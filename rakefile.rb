@@ -58,6 +58,12 @@ namespace :specs do
     t.spec_files = 'spec/plink*_spec.rb'
     t.spec_opts << @spec_opts
   end
+
+  desc "Ndepend functional specs"
+  Spec::Rake::SpecTask.new :ndepend do |t|
+    t.spec_files = 'spec/ndepend*_spec.rb'
+    t.spec_opts << @spec_opts
+  end
   
   desc "SFTP functional specs"
   Spec::Rake::SpecTask.new :sftp do |t|
