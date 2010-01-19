@@ -34,12 +34,19 @@ namespace :specs do
     t.spec_files = 'spec/sqlcmd*_spec.rb'
     t.spec_opts << @spec_opts
   end
+
+  
+  desc "Nant functional specs"
+  Spec::Rake::SpecTask.new :nant do |t|
+    t.spec_files = 'spec/nant*_spec.rb'
+    t.spec_opts << @spec_opts
+  end
   
   desc "NCover Console functional specs"
   Spec::Rake::SpecTask.new :ncoverconsole do |t|
     t.spec_files = 'spec/ncoverconsole*_spec.rb'
     t.spec_opts << @spec_opts
-  end  
+  end
   
   desc "NCover Report functional specs"
   Spec::Rake::SpecTask.new :ncoverreport do |t|

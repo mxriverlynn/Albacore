@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<project name="Test Solution" default="build">
+  <property name="debug" value="true"/>
+  <property name="version" value="0.0.1"/>
+  <property name="build.mode" value="debug"/>
+  <property name="out.file.dir" value="out/${version}/${build.mode}"/>
+
+  <target name="clean">
+    <delete>
+      <fileset>
+        <include name="out/**"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="build">
+    <mkdir dir="${out.file.dir}" />
+    <echo message="I am an output file." file="${out.file.dir}/buildfile.txt" append="false"/>
+  </target>
+  
+  <target name="other">
+    <mkdir dir="${out.file.dir}" if="${not directory::exists('${out.file.dir}')}" />
+    <echo message="I am the extra file." file="${out.file.dir}/otherfile.txt" append="false"/>
+  </target>
+</project>

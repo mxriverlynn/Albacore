@@ -27,8 +27,8 @@ module RunCommand
   end
   
   def valid_command_exists
-    return true if File.exist?(@path_to_command)
-    msg = 'Command not found: ' + @path_to_command
+    return true if File.exist?(@path_to_command || "")
+    msg = "Command not found: #{@path_to_command}"
     @logger.fatal msg
   end
   
