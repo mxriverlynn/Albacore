@@ -81,7 +81,6 @@ class AssemblyInfo
     
     ns = ''
     @namespaces.each do |n|
-      puts "----------------#{n}"
       ns << @lang_engine.build_using_statement(n)
     end
     

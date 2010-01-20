@@ -238,7 +238,7 @@ namespace :albacore do
   desc "XUnit Test Runner Example"
   xunit do |xunit|
     xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
-    xunit.assemblies "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
+    xunit.assembly = "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
   end   
   
   desc "Exec Task Example"
