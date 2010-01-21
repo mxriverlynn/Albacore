@@ -1,0 +1,42 @@
+---
+layout: post
+title: "v0.1.0: Experimental IronRuby Support"
+---
+
+With ["IronRuby":http://ironruby.net] in 1.0 RC1 status, there's a lot of potential value in getting Albacore set up and running fully on it and only a little risk in terms of change and support, at this point. I'm happy to say that v0.1.0 of Albacore, while not fully functional on IronRuby, does have some support for it! 
+
+h2. The Failures and Issues
+
+There are a few known issues. If you discount the tests for SSH and SFTP (see below) then there are 244 tests being run against IronRuby. Of these 244, 7 are failing. That's not too bad, I suppose - but I'm not going to be satisfied until I have 100% tests passing.
+
+Here is the list of tasks that will not work at all, or may not fully function in IronRuby RC1. 
+
+h3. SSH and SFTP Don't Work. At All.
+
+I'm not sure what's going on with this, but these two gems - that's right, the gems themselves - don't play well with IronRuby. Every time I try to even <code>include 'net/ssh'</code> or <code>include 'net/sftp'</code> I get a very strange error about a file called "dl" not being found. 
+
+To prevent this error from occuring in the IronRuby runtime environment, I have disabled the SSH and SFP tasks, entirely. They cannot be used from IronRuby.
+
+I'm hoping to correct this in a near-future release, and get support for SSH and SFTP in IronRuby.
+
+h3. ZipDirectory Doesn't Work
+
+There's a bug somewhere in the Zip Directory task that prevents it from running at all. I haven't been able to figure out if it's the RubyZip gem or if it's how we are using it.
+
+This one is fairly important, though. A lot of build / release projects that I've worked on in the past have used an archiving process to package up files and distribute them somewhere. I'm hoping to get this working in the near-future, too.
+
+h3. Expand Templates - No Include File Support
+
+The YAML parser in IronRuby is very strict, apparently. Or the YAML parser in the standard RubyInstaller package is very loose. Either way, the use of the <code>@Include: somefile.yml</code> syntax in an Expand Template YAML file is clobbering this task. 
+
+If you would like to use the Expand Template functionality in IronRuby, be sure to stay away from @Include.
+
+h3. NDepend Console - A Failing Test In This Release. Oops.
+
+There is 1 failing test in the NDepend Console test suite. However, this was a typo / capitalization error. Sorry about that - the capitalization has been corrected and the test is passing in IronRuby on my development machine.
+
+In spite of this failing test in the v0.1.0 release, the NDepend Console task does work.
+
+h2. The Future Of IronRuby
+
+I have high hopes for IronRuby, honestly. No, I don't think it's going to save the world. But I do think it's going to give the average .NET developer very little excuse for not learning Ruby. I'm also hopeful that Albacore will gain more and more popularity and support as IronRuby begins to make it's way out into the masses. With these hopes, it's clear that we _must_ get IronRuby support baked fully into Albacore, soon.
