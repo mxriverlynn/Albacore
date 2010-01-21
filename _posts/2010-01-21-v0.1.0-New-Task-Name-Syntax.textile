@@ -1,0 +1,41 @@
+---
+layout: post
+title: "v0.1.0: The New Task Name Syntax - Dropping 'task'"
+---
+
+Starting in v0.0.9, the syntax to call an Albacore task had been changed to be more Rake-like. Tasks that were previously called by initializing an object: <code>Albacore::MSBuild.new(:build) do |msb| ... end </code> were now called by a simple naming convention: <code>msbuildtask :build do |msb| ... end</code>. 
+
+This new syntax greatly simplified the process of calling an Albacore task, while also introducing support for the complete rake task syntax. However, it still had an issue - namely the use of "task" at the end of every task. 
+
+h2. Dropping The Word 'task'
+
+In v0.1.0, all task names have bee shortened to remove the word "task". This means that <code>msbuildtask</code> is now <code>msbuild</code>. This change was made in order to fit just a little more into the standard Ruby conventions. You don't typically see ruby methods, objects, or variables being named after the type of code that they represent - which is really was the word "task" was. Rather, you see these things being named after what they are, in simple terms. 
+
+h3. The New Task List
+
+Every Albacore task has been affect. Here is the complete list of tasks, with the full name and the shorter syntax:
+
+* Assembly Info Task: <code>assemblyinfo</code>
+* Docu Task: <code>docu</code>
+* Exec Task: <code>exec</code>
+* Expand Templates Task: <code>expandtemplates</code>
+* MSBuild Task: <code>msbuild</code>
+* MSpec Task: <code>mspec</code>
+* NAnt Task: <code>nant</code>
+* NCover Console Task: <code>ncoverconsole</code>
+* NCover Report Task: <code>ncoverreport</code>
+* NDepend Task: <code>ndepend</code>
+* NUnit Task: <code>nunit</code>
+* PLink Task: <code>plink</code>
+* Rename Task: <code>rename</code>
+* SFTP Task: <code>sftp</code>
+* SQLCmd Task: <code>sqlcmd</code>
+* SSH Task: <code>ssh</code>
+* Unzip Task: <code>unzip</code>
+* XBuild Task: <code>xbuild</code>
+* Zip Task: <code>zip</code>
+
+h2. More Conventional Ruby
+
+As Albacore progresses and changes, we are introducing more and more of the standard Ruby idioms and conventions. While I don't expect the task names to change again, I do expect other aspects of the Albacore syntax and API to continue to evolve. Be sure to keep an eye on the blog and the wiki for all of the latest and greatest news and changes, as time goes by.
+

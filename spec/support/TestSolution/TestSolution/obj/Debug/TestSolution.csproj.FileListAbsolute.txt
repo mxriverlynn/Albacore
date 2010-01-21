@@ -1,0 +1,5 @@
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution\bin\Debug\TestSolution.dll
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution\bin\Debug\TestSolution.pdb
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution\obj\Debug\ResolveAssemblyReference.cache
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution\obj\Debug\TestSolution.dll
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution\obj\Debug\TestSolution.pdb

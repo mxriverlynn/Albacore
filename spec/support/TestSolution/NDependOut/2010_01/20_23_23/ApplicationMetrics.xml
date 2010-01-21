@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ApplicationMetrics NAsm="5" NbLinesOfCode="15" NbLinesOfComment="85" PercentageComment="85" NType="6" NClass="6" NAbstractClass="0" NInterface="0" NValueType="0" NExceptionType="0" NAttributeType="0" NDelegateType="0" NEnumType="0" NGenericMethodsDefinition="0" NGenericTypesDefinition="0" NILInstruction="101" PercentPublicType="100" PercentPublicMethod="78.57" PercentClassWithAtLeastOnePublicField="0">
+  <PropertyOnInterface Occ="0" Avg="0" StdDev="0" MaxVal="-1" MaxName="" />
+  <MethodOnInterface Occ="0" Avg="0" StdDev="0" MaxVal="-1" MaxName="" />
+  <ArgOnMethodOnInterface Occ="0" Avg="0" StdDev="0" MaxVal="-1" MaxName="" />
+  <PublicPropertyOnClass Occ="6" Avg="0" StdDev="0" MaxVal="0" MaxName="TestSolution.Tests.SomeTestFixture" />
+  <PublicMethodOnClass Occ="6" Avg="1.83" StdDev="0.37" MaxVal="2" MaxName="TestSolution.Tests.SomeTestFixture" />
+  <ArgOnPublicMethodOnClass Occ="11" Avg="0" StdDev="0" MaxVal="0" MaxName="TestSolution.Tests.SomeTestFixture.foo()" />
+  <ILInstructionInNonAbstractMethods Occ="14" Avg="7.21" StdDev="7.87" MaxVal="34" MaxName="TestSolution.MSpecTests.SomeSpecTest..ctor()" />
+  <TypeWithTheMostILInstruction Occ="6" Avg="16.83" StdDev="14.17" MaxVal="48" MaxName="TestSolution.MSpecTests.SomeSpecTest" />
+  <MethodCC Occ="14" Avg="1.21" StdDev="0.77" MaxVal="4" MaxName="TestSolution.MSpecTests.SomeSpecTest..ctor()" />
+</ApplicationMetrics>

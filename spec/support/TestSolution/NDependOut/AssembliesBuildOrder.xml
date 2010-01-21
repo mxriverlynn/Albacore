@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<AssemblySortForCompilOrObfusk>
+  <Assembly Assembly="TestSolution">2</Assembly>
+  <Assembly Assembly="TestSolution.Tests">3</Assembly>
+  <Assembly Assembly="TestSolution.FailingTests">4</Assembly>
+  <Assembly Assembly="TestSolution.XUnitTests">6</Assembly>
+  <Assembly Assembly="TestSolution.MSpecTests">9</Assembly>
+</AssemblySortForCompilOrObfusk>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<AssembliesMetrics>
+  <Assembly Assembly="TestSolution v1.0.0.0" NTypes="1" NAbstractTypes="0" NILInstructionInAsm="9" NbLinesOfCodeInAsm="1" NbLinesOfCommentInAsm="17" PercentageCommentInAsm="94" AfferentCoupling="3" EfferentCoupling="3" RelationalCohesion="1" Instability="0.5" Abstractness="0" DistFrMainSeq="0.35" NormDistFrMainSeq="0.5" />
+  <Assembly Assembly="TestSolution.Tests v1.0.0.0" NTypes="1" NAbstractTypes="0" NILInstructionInAsm="14" NbLinesOfCodeInAsm="3" NbLinesOfCommentInAsm="17" PercentageCommentInAsm="85" AfferentCoupling="0" EfferentCoupling="4" RelationalCohesion="1" Instability="1" Abstractness="0" DistFrMainSeq="0" NormDistFrMainSeq="0" />
+  <Assembly Assembly="TestSolution.FailingTests v1.0.0.0" NTypes="1" NAbstractTypes="0" NILInstructionInAsm="8" NbLinesOfCodeInAsm="1" NbLinesOfCommentInAsm="17" PercentageCommentInAsm="94" AfferentCoupling="0" EfferentCoupling="3" RelationalCohesion="1" Instability="1" Abstractness="0" DistFrMainSeq="0" NormDistFrMainSeq="0" />
+  <Assembly Assembly="TestSolution.XUnitTests v1.0.0.0" NTypes="2" NAbstractTypes="0" NILInstructionInAsm="22" NbLinesOfCodeInAsm="4" NbLinesOfCommentInAsm="17" PercentageCommentInAsm="80" AfferentCoupling="0" EfferentCoupling="7" RelationalCohesion="0.5" Instability="1" Abstractness="0" DistFrMainSeq="0" NormDistFrMainSeq="0" />
+  <Assembly Assembly="TestSolution.MSpecTests v1.0.0.0" NTypes="1" NAbstractTypes="0" NILInstructionInAsm="48" NbLinesOfCodeInAsm="6" NbLinesOfCommentInAsm="17" PercentageCommentInAsm="73" AfferentCoupling="0" EfferentCoupling="11" RelationalCohesion="1" Instability="1" Abstractness="0" DistFrMainSeq="0" NormDistFrMainSeq="0" />
+</AssembliesMetrics>

@@ -1,0 +1,9 @@
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\bin\Debug\TestSolution.XUnitTests.dll
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\bin\Debug\TestSolution.XUnitTests.pdb
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\bin\Debug\TestSolution.dll
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\bin\Debug\xunit.dll
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\bin\Debug\xunit.xml
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\bin\Debug\TestSolution.pdb
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\obj\Debug\ResolveAssemblyReference.cache
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\obj\Debug\TestSolution.XUnitTests.dll
+d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.XUnitTests\obj\Debug\TestSolution.XUnitTests.pdb
