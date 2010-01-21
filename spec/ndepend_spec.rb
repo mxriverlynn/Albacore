@@ -31,7 +31,7 @@ describe "when executing Ndepend console" do
 
   it "should include the Ndepend project file" do
     @ndepend.run
-    @log_data.should include("NDependProject.xml")
+    @log_data.should include("Ndependproject.xml")
   end
 
   it "should fail when the project file is not given" do
