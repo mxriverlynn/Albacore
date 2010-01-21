@@ -1,6 +1,0 @@
-d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.FailingTests\bin\Debug\TestSolution.FailingTests.dll
-d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.FailingTests\bin\Debug\TestSolution.FailingTests.pdb
-d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.FailingTests\bin\Debug\nunit.framework.dll
-d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.FailingTests\obj\Debug\ResolveAssemblyReference.cache
-d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.FailingTests\obj\Debug\TestSolution.FailingTests.dll
-d:\Dev\Derick-Github\albacore\spec\support\TestSolution\TestSolution.FailingTests\obj\Debug\TestSolution.FailingTests.pdb
