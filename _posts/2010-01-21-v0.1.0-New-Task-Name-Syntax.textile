@@ -33,6 +33,7 @@ Every Albacore task has been affected, so here is the complete list of tasks wit
 * SSH Task: <code>ssh</code>
 * Unzip Task: <code>unzip</code>
 * XBuild Task: <code>xbuild</code>
+* XUnit Task: <code>xunit</code>
 * Zip Task: <code>zip</code>
 
 h2. More Convention-based Ruby
