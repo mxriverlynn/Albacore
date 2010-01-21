@@ -1,0 +1,82 @@
+---
+layout: post
+title: "v0.1.0: New Syntax For Array And Hash Values"
+---
+
+Starting in Albacore v0.1.0, all Array and Hash values for any attribute on any task object, will have the same syntax options. This is a significant improvement over the various styles that hav shown up in the different task objects, previously.
+
+h2. The Overview and Background
+
+A month or so ago, Scott Bellware suggested that we standardize our syntax for all Array and Hash values in the framework. You can read the full discussion on this over at the Google Groups discussion (starting ["here":http://groups.google.com/group/albacoredev/browse_thread/thread/6ab6fcb89e3dd6eb] and moving here ["here":http://groups.google.com/group/albacoredev/browse_thread/thread/33af0c5c0dda6c2e/f5798cbf76e7a098]). The end result is that we decided Scott's suggestion was a good one, and we moved forward with the changes.
+
+The core of the change is that we now have all Array and Hash values being set through methods, without the = sign, using the splat (*) parameters syntax for the method parmeter. The end result of this change is that you will no longer need to use the = sign to set the value of an Array or Hash. Rather, you can simply specify the values after the method name.
+
+h2. Changing The Array Syntax
+
+The Hash syntax in previous versions allowed you to write code like this:
+
+<pre><code>msb.target << :Clean
+msb.target << :Build
+</code></pre>
+
+as well as code like this:
+
+<pre><code>msb.target = [:Clean, :Build]</code></pre>
+
+This syntax, while functional, is rather obtuse. It's not obvious which you should use, when, and to new-comers in using Albacore and/or Ruby in general, it is rather confusing.
+
+h3. The New Array Syntax
+
+The standard that seems to be permeating the Ruby language is to use the _*args_ syntax for methods that need Arrays and Hashes. With this new syntax in place, you will now want to write the above code like this:
+
+<pre><code>msb.target :Clean, :Build</code></pre>
+
+If you need to wrap an array around more than one line, you still don't need to worry about the square brackets. Rather, you can use the optional parenthesis that all Ruby methods support. 
+
+To wrap your array values around multiple lines, us this syntax:
+
+<pre><code>msb.target(
+  :Code,
+  :Build
+)
+</code></pre>
+
+Of course, you're free to choose where you put the parenthesis, as long as it is conformant to the standard Ruby method call syntax.
+
+h2. Changing The Hash Syntax
+
+The Hash syntax in previous versions allowed you to write code like this:
+
+<pre><code>msb.properties = {:Configuration => :Release, :OutputDir => "..\build\"}</code></pre>
+
+as well as code like this:
+
+<pre><code>msb.properties[:Configuration] = :Release
+msb.properties[:OutputDir] = "..\build\"
+</code></pre>
+
+The first syntax here is rather obtuse, like the old Array syntax. It's not obvious and to new-comers in using Albacore and/or Ruby in general, it is rather confusing.
+
+The second syntax is not quite so bad, but still requires a significant ammount of syntax noise, having to remember the square brackets and = sign.
+
+h3. The New Hash Syntax
+
+Like the Array syntax, the standard that seems to be permeating the Ruby language is to use the _*args_ syntax for methods that need Hashes. With this new syntax in place, you will now want to write the above code like this:
+
+<pre><code>msb.properties :Configuration => :Release, :OutputDir => "..\build\"</code></pre>
+
+If you need to wrap a hash set around more than one line, you still don't need to worry about the curley braces. Again like the Array syntax, you can use the optional parenthesis that all Ruby methods support. 
+
+To wrap your Hash values around multiple lines, us this syntax:
+
+<pre><code>msb.target(
+  :Configuration => :Release,
+  :OutputDir => "..\build\"
+)
+</code></pre>
+
+h2. Consistency Is Good
+
+We're hoping that the new syntax, being consistent across _all_ task objects, will help to alleviate some of the issues and questions that have popped up in the past. We know that the initial drop of this syntax will cause some questions, but over time, it should be a stable syntax and should alleviate questions on how to set Array and Hash values.
+
+... and just to be nice, I left a little = sign syntax in the mix, using some metaprogramming. You can still use an = sign if you really want to.

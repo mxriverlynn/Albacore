@@ -1,0 +1,15 @@
+---
+layout: post
+title: "v0.1.0 Release Notes Index"
+---
+
+Albacore v0.1.0 was just pushed up to ["Gemcutter":http://gemcutter.org/gems/albacore]. This release has a significant amount of new functionality in it, as well as a lot of syntax changes in the existing functionality.
+
+Rather than try to get all of the release notes done in one giant post, making it very hard to find what you need, I am going to do the release notes as a series of blog posts. This post will serve as the index where you can find links to the individual posts that cover an individual topic. 
+
+Hopefully by doing the release notes in this manner, we can cover the critical changes first, and get the information out quickly. Then we will follow up with the new functionality, but fixes, and other items.
+
+h2. Albacore v0.1.0 Release Notes: The Index
+
+* ["New Syntax For Array And Hash Values":/2010/01/20/v0.1.0-New-Syntax-For-Array-And-Hash-Values.html]
+
