@@ -3,27 +3,71 @@ layout: post
 title: "v0.1.0 A Handful Of New Tasks"
 ---
 
-There are several new tasks included in the 0.1.0 release of Albacore, including Docu, XBuild, Nant and more. This post will introduce each of the new tasks with a basic usage example. For complete documentation, though, see the ["Wiki":http://wiki.github.com/derickbailey/Albacore/].
+There are several new tasks included in the 0.1.0 release of Albacore, including Docu, XBuild, Nant and more. 
 
-h2. Docu - Document Generator
+h2. A Handful Of New Tasks
+
+This post will introduce each of the new tasks, alphabetically, with a basic usage example. For complete documentation, though, see the ["Wiki":http://wiki.github.com/derickbailey/Albacore/].
+
+h3. Docu - Document Generator
 
 ["James Gregory":http://github.com/jagregory]'s ["Docu":http://github.com/jagregory/docu] tool has a new task available in Albacore, created by James.
 
-<pre><code>
-	
+<pre><code>docu :gen_docs do |docu|
+  docu.path_to_command = "tool/docu/docu.exe"
+  docu.assemblies "my.assembly.dll", "another.assembly.dll"
+  docu.xml_files "my.assembly.xml", "another.assembly.xml"
+  docu.output_location = "build/docs/"
+end
 </code></pre>
 
-h2. NAnt - Run "Legacy" Build Scripts With Nant
+h3. NAnt - Run "Legacy" Build Scripts With Nant
 
+["Steve Harman":http://github.com/stevenharman] built an ["NAnt":http://nant.sourceforge.net/] task that allows you to leverage your existing NAnt build scripts. This should help in migrating away from NAnt without having to rebuild everything in Rake + Albacore immediately.
 
-h2. PLink - Remote Execution With PuTTY / PLink
+<pre><code>nant :legacy_build do |nant|
+  nant.path_to_command = "tools/nant/nant.exe"
+  nant.build_file = "default.build"
+  nant.targets :my_target, :another_target
+  nant.properties :version => "0.0.0.0", :debug => false
+end
+</code></pre>
 
+h3. NDepend Console - Run Static Analysis
 
-h2. NDepend Console - Run Static Analysis
+["Hibri Marzook":http://github.com/hibri] created a basic ["NDepend Console":http://www.ndepend.com/] task to allow static analysis to be run on projects.
 
+<pre><code>ndepend :analysis do |ndep|
+  ndep.path_to_command = "tools/ndepend/NDepend.Console.exe"
+  ndep.project_file = "my_ndepend_project.xml"
+  ndep.parameters "/ViewReport", "/Silent"
+end
+</code></pre>
 
-h2. XBuild - Build Mono Projects
+h3. PLink - Remote Execution With PuTTY / PLink
 
+["Hibri":http://github.com/hibri] also created a PLink task for remote execution against a ["PuTTY":http://www.chiark.greenend.org.uk/~sgtatham/putty/] server.
 
-h2. 
+<pre><code>plink :remote_execute do |plink|
+  plink.path_to_command = "tools/putty/plink.exe"
+  plink.host = "myServer"
+  plink.port = 2200
+  plink.commands "my.exe"
+end
+</code></pre>
 
+h3. XBuild - Build Mono Projects
+
+["Ben Hall":http://github.com/benhall] created an ["XBuild":http://www.mono-project.com/Microsoft.Build] task to build Mono projects. That's right! We have some support for ["Mono":http://www.mono-project.com], now!
+
+<pre><code>xbuild :build do |xbuild|
+  xbuild.path_to_command = "tools/xbuild/xbuild.exe"
+  xbuild.solution = "src/project.sln"
+  xbuild.targets :clean, :build
+  xbuild.targets :configuration => "Release"
+end
+</code></pre>
+
+h2. What Else Do You Need?
+
+There's a good list of tasks built into Albacore, at this point. Not every task supports every option for the underlying system, though. We have only been implementing the features that people are asking for, based on their needs. If you see a need for a new task or need an update to an existing task, please ["drop us a line":http://groups.google.com/group/albacoredev], fork ["the repository":http://github.com/derickbailey/Albacore] and submit patches, or find some other way to get our attention and help us improve Albacore!
