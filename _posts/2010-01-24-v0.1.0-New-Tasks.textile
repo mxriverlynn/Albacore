@@ -1,0 +1,29 @@
+---
+layout: post
+title: "v0.1.0 A Handful Of New Tasks"
+---
+
+There are several new tasks included in the 0.1.0 release of Albacore, including Docu, XBuild, Nant and more. This post will introduce each of the new tasks with a basic usage example. For complete documentation, though, see the ["Wiki":http://wiki.github.com/derickbailey/Albacore/].
+
+h2. Docu - Document Generator
+
+["James Gregory":http://github.com/jagregory]'s ["Docu":http://github.com/jagregory/docu] tool has a new task available in Albacore, created by James.
+
+<pre><code>
+	
+</code></pre>
+
+h2. NAnt - Run "Legacy" Build Scripts With Nant
+
+
+h2. PLink - Remote Execution With PuTTY / PLink
+
+
+h2. NDepend Console - Run Static Analysis
+
+
+h2. XBuild - Build Mono Projects
+
+
+h2. 
+
