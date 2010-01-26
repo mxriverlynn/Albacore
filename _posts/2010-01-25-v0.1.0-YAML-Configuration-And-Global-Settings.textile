@@ -1,0 +1,59 @@
+---
+layout: post
+title: "v0.1.0: YAML Configuration Changes And Global Settings"
+---
+
+The YAML configuration process has a few changes to it for the v0.1.0 release, which should make it more flexible and allow better organization of the YAML data files. We also added a few global configuration options to Albacore - these are options you can set once to affect all tasks. 
+
+h2. YAML Configuration Changes
+
+I received some great feedback about the YAML configuration after the last release, in the form of people telling us how it didn't support what they wanted to do with it. 
+
+h3. Specify Folder To Load YAML From
+
+Several people wanted to use the convention based configuration so that they did not have to specify the file names, but found that they could not store the YAML data files in any folder other than the one where the rakefile lived. The workaround was to manually specify the YAML file to use, which allowed you to specify the folder as well: <code>msb.configure "folder/msbuild.yml"</code>
+
+To correct this, we introduced our first global setting <code>Albacore::yaml_config_folder</code>. This setting allows you to specify the folder that all of the convention based YAML files will be loaded from, for your tasks.
+
+Now, when you call an Albacore task and you have set this option, the YAML files will load form the folder you specified.
+
+<pre><code>require 'albacore'
+Albacore::yaml_config_folder = "/some/arbitrary/folder/"
+
+msbuild :build do |msb|
+ #YAML is loaded from "/some/arbitrary/folder/build.yml"
+end
+</code></pre>
+
+h3. Load YAML File By Task Name
+
+Several people also ran into an issue where they had multiple instances of the same task in their buildfile, and the tasks were loading up the same YAML data file. This was causing problems because the two calls to the same task were meant to have differe configurations. For example:
+
+<pre><code>msbuild :build do |msb| 
+  # want to configure for building the code, here
+end
+
+msbuild :deploy do |msb|
+  # want to configure for deploying web project, here
+end
+</code></pre>
+
+In this sitution, you would have to manually specify the YAML file to load, to get the right configuration. To fix this, as well as to standardize the naming of the YAML files (some tasks had slightly odd names for various reasons), we the convention that the YAML configuration uses for the default file to load.
+
+*All Albacore tasks will now be configured with a YAML file that is named after the task.*
+
+So in the situation stated previously, the <code>:build</code> task would be configured with a <code>build.yml</code> file, and the <code>:deploy</code> task would be configured with a <code>deploy.yml</code> file. This lets you have as many instances of the same task as you need, without having to manually specify the YAML file.
+
+h2. Global Option: Logging Verbosity
+
+The other global option that we added to Albacore was <code>Albacore::log_level</code>. This setting allows you to turn on <code>:verbose</code> logging at the root of your rakefile, and have all tasks log in verbose mode.
+
+<pre><code>require 'albacore'
+Albacore::log_level = :verbose
+
+msbuild :build do |msb|
+  # is now logging in verbose mode, with the global setting
+end
+</code></pre>
+
+This makes it easier to change your logging level for every task, to get additional information from your build process.

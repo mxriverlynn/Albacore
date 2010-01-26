@@ -15,5 +15,6 @@ h2. Albacore v0.1.0 Release Notes: The Index
 * ["Experimental IronRuby Support":/2010/01/20/v0.1.0-Experimental-IronRuby-Support.html]
 * ["The New Task Name Syntax - Dropping 'task'":/2010/01/21/v0.1.0-New-Task-Name-Syntax.html]
 * ["A Handful Of New Tasks":/2010/01/24/v0.1.0-New-Tasks.html]
+* ["YAML Configuration And Global Settings":/2010/01/25/v0.1.0-YAML-Configuration-And-Global-Settings.html]
 
 Be sure to check back often, or subscribe to the RSS feed, to get the latest and greatest release notes for v0.1.0!

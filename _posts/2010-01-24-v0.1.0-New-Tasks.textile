@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "v0.1.0 A Handful Of New Tasks"
+title: "v0.1.0: A Handful Of New Tasks"
 ---
 
 There are several new tasks included in the 0.1.0 release of Albacore, including Docu, XBuild, Nant and more. 
