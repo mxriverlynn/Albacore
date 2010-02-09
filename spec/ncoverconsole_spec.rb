@@ -31,6 +31,34 @@ describe NCoverConsole, "when specifying assemblies to cover" do
   end
 end
 
+describe NCoverConsole, "when specifying assemblies with spaces in the name" do
+  before :all do
+  	@testdata = NCoverConsoleTestData.new
+    File.delete(@testdata.xml_coverage_output) if File.exist?(@testdata.xml_coverage_output)
+    
+    @ncc = NCoverConsole.new()
+    
+    @ncc.extend(SystemPatch)
+    @ncc.log_level = :verbose
+    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.output :xml => @testdata.xml_coverage_output
+    @ncc.working_directory = @testdata.working_directory
+    @ncc.cover_assemblies "with spaces/TestSolution"
+    
+    nunit = NUnitTestRunner.new(@testdata.nunitpath)
+    nunit.assemblies @testdata.test_assembly_with_spaces
+    nunit.options '/noshadow'
+    
+    @ncc.testrunner = nunit
+    @ncc.run
+  end
+
+  it "should provide coverage for the specified assemblies" do
+    @ncc.system_command.should include("//assemblies \"with spaces/TestSolution\"")
+  end
+  
+end
+
 describe NCoverConsole, "when specifying assemblies to ignore" do
   before :all do
   	@testdata = NCoverConsoleTestData.new
