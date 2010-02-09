@@ -3,7 +3,7 @@ layout: post
 title: "v0.1.1 Release Notes: AssemblyInfo Config, Arbitrary Parameters, and TeamCity"
 ---
 
-Albacore v0.1.1 was just pushed up to Gemcutter. This release has no new functionality in it. It contains a bug fix for the ["YAML configuration":http://wiki.github.com/derickbailey/Albacore/yamlconfig] of the ["AssemblyInfo task":http://wiki.github.com/derickbailey/Albacore/assemblyinfotask], and a little better support for running NUnit / ["NCoverConsole":http://wiki.github.com/derickbailey/Albacore/ncoverconsoletask] from TeamCity. 
+Albacore v0.1.1 was just pushed up to Gemcutter. It contains a bug fix for the ["YAML configuration":http://wiki.github.com/derickbailey/Albacore/yamlconfig] of the ["AssemblyInfo task":http://wiki.github.com/derickbailey/Albacore/assemblyinfotask], the ability to pass any arbitrary command line parameters you want to a task that runs a command line tool, and a little better support for running NUnit / ["NCoverConsole":http://wiki.github.com/derickbailey/Albacore/ncoverconsoletask] from TeamCity. 
 
 h2. Fixing The YAML Configuration For AssemblyInfo
 
