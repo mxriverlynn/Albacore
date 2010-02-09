@@ -19,7 +19,7 @@ module RunCommand
       return false unless valid_command_exists
     end
 
-    command_parameters = command_parameters + "#{@parameters.join(' ')}"
+    command_parameters = command_parameters + " #{@parameters.join(' ')}"
     
     command = "\"#{@path_to_command}\" #{command_parameters}"
     @logger.debug "Executing #{command_name}: #{command}"
