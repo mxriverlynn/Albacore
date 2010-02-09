@@ -18,8 +18,7 @@ module RunCommand
     if @require_valid_command
       return false unless valid_command_exists
     end
-    puts "1. #{@parameters.inspect}"
-    puts "2. #{command_parameters.inspect}"
+
     command_parameters = command_parameters + "#{@parameters.join(' ')}"
     
     command = "\"#{@path_to_command}\" #{command_parameters}"
