@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "v0.1.1 Release Notes: A YAML, TeamCity, and NCoverConsole"
+title: "v0.1.1 Release Notes: AssemblyInfo Config, Arbitrary Parameters, and TeamCity"
 ---
 
 Albacore v0.1.1 was just pushed up to Gemcutter. This release has no new functionality in it. It contains a bug fix for the ["YAML configuration":http://wiki.github.com/derickbailey/Albacore/yamlconfig] of the ["AssemblyInfo task":http://wiki.github.com/derickbailey/Albacore/assemblyinfotask], and a little better support for running NUnit / ["NCoverConsole":http://wiki.github.com/derickbailey/Albacore/ncoverconsoletask] from TeamCity. 
@@ -11,15 +11,19 @@ In the v0.1.0 release of Albacore, we ["changed the convention used for YAML con
 
 This task definition, <code>assemblyinfo :versioning</code>, will look for a file called <code>versioning.yml</code>.
 
-h2. An NCoverConsole Bug In Assembly Paths
+h2. Allow Any Aribtrary Parameters For Command Line Tasks
 
-Sean Biefeld pointed out a bug in the NCoverConsole task, concerning paths with spaces in the files names. This has been corrected and the NCoverConsole task now loads the assemblies correctly.
+Many of the tasks in Albacore will compile the various options that you specify into a command line parameter set for the executable that you are trying to run. For example, the <code>msbuild</code> task will call out to the "msbuild.exe" with properties and targets set. 
 
-<pre><code>ncoverconsole :coverage do |ncc|
+In order to make these tasks more flexible and capable of running with options that are not yet supported by the task configuration, directly, we have added a generic <code>.parameters</code> attribute to all tasks that run a command line tool. This will allows you to use any arbitrary parameters that you want, when calling the task. For example:
+
+<pre><code>msbuild :build do |msb|
   #... other options here
-  ncc.assemblies "my solution/my project/tests.dll"
+  msb.parameters "i'm a parameter!", "/some:value", "/whatever=idontknow"
 end
 </code></pre>
+
+Of course, this example won't actually execute since these are not valid options... the point is that you can now specify any command line parameters you want on any task that has a <code>.path_to_command</code> setting.
 
 h2. A Little More Support For TeamCity
 
