@@ -1,0 +1,32 @@
+---
+layout: post
+title: "v0.1.1 Release Notes: A YAML, TeamCity, and NCoverConsole"
+---
+
+Albacore v0.1.1 was just pushed up to Gemcutter. This release has no new functionality in it. It contains a bug fix for the ["YAML configuration":http://wiki.github.com/derickbailey/Albacore/yamlconfig] of the ["AssemblyInfo task":http://wiki.github.com/derickbailey/Albacore/assemblyinfotask], and a little better support for running NUnit / ["NCoverConsole":http://wiki.github.com/derickbailey/Albacore/ncoverconsoletask] from TeamCity. 
+
+h2. Fixing The YAML Configuration For AssemblyInfo
+
+In the v0.1.0 release of Albacore, we ["changed the convention used for YAML configuration of tasks":{{ site.url }}/2010/01/25/v0.1.0-YAML-Configuration-And-Global-Settings.html]. Unfortunately there was a small bug in the AssemblyInfo task and it was still trying to load YAML files based on the object type instead of the task name. This has been corrected in v0.1.1 and the AssemblyInfo task is now loading YAML files by the task name, correctly.
+
+This task definition, <code>assemblyinfo :versioning</code>, will look for a file called <code>versioning.yml</code>.
+
+h2. An NCoverConsole Bug In Assembly Paths
+
+Sean Biefeld pointed out a bug in the NCoverConsole task, concerning paths with spaces in the files names. This has been corrected and the NCoverConsole task now loads the assemblies correctly.
+
+<pre><code>ncoverconsole :coverage do |ncc|
+  #... other options here
+  ncc.assemblies "my solution/my project/tests.dll"
+end
+</code></pre>
+
+h2. A Little More Support For TeamCity
+
+This was supposed to be released with v0.1.0 but I missed it. Andreone ["pointed out an issue and solution for running NUnit and NCoverConsole with TeamCity":http://groups.google.com/group/albacoredev/browse_thread/thread/72f19975fa1c0f3f]. The solution was to swap the order of arguments that are passed to the command line. 
+
+This fix will provide a little more support for the TeamCity CI server and it's built in metrics and reporting capabilities.
+
+h2. Future Releases
+
+There has been a lot of great discussion on the future of Albacore over at the ["discussion group":http://groups.google.com/group/albacoredev]. We haven't yet committed to any direction or functionality for the next release, though. We'd really like to hear what you are wanting and needing out of Albacore so that we can be sure to include those needs.
