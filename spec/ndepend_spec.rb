@@ -42,7 +42,7 @@ describe "when executing Ndepend console" do
 
   it "should accept other parameters" do
     expected_params = "/ViewReport /Silent /Help"
-    @ndepend.parameters << expected_params
+    @ndepend.parameters expected_params
     @ndepend.run
     @log_data.should include(expected_params)
   end

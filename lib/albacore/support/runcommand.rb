@@ -1,13 +1,16 @@
 require 'albacore/support/failure'
 
 module RunCommand
+  extend AttrMethods
   include Failure
   
   attr_accessor :path_to_command, :require_valid_command, :command_directory
+  attr_array :parameters
   
   def initialize
     @require_valid_command = true
     @command_directory = Dir.pwd
+    @parameters = []
     super()
   end
   
@@ -15,6 +18,9 @@ module RunCommand
     if @require_valid_command
       return false unless valid_command_exists
     end
+    puts "1. #{@parameters.inspect}"
+    puts "2. #{command_parameters.inspect}"
+    command_parameters = command_parameters + "#{@parameters.join(' ')}"
     
     command = "\"#{@path_to_command}\" #{command_parameters}"
     @logger.debug "Executing #{command_name}: #{command}"

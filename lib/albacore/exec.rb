@@ -1,12 +1,9 @@
 require 'albacore/support/albacore_helper'
 
 class Exec
-  extend AttrMethods
   include RunCommand
   include YAMLConfig
   include Logging
-  
-  attr_array :parameters
   
   def initialize
     @path_to_command=''
