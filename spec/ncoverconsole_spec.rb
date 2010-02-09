@@ -208,8 +208,12 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
     @ncc.system_command.should include(@testdata.nunitpath)
   end
   
-  it "should pass the specified arguments to the test runner" do
-    @ncc.system_command.should include("TestSolution.Tests.dll /noshadow")
+  it "should pass the specified assembly to the test runner" do
+    @ncc.system_command.should include("TestSolution.Tests.dll")
+  end
+  
+  it "should tell nunit to use the noshadow option" do
+  	@ncc.system_command.should include("/noshadow")
   end
     
   it "should write the coverage data to the specified file" do
