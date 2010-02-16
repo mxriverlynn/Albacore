@@ -29,3 +29,17 @@ describe Albacore::AssemblyInfoTask, "when execution fails" do
     @task.task_failed.should == true
   end
 end
+
+describe Albacore::AssemblyInfoTask, "when task args are used" do
+  before :all do
+    @task = Albacore::AssemblyInfoTask.new(:assemblytask_withargs, [:arg1]) do |t, args|
+      @args = args
+    end
+    @task.extend(TasklibPatch)
+    Rake::Task["assemblytask_withargs"].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
+  end
+end
