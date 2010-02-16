@@ -13,9 +13,6 @@ module Albacore
     
     def define
       task *@args do |task, task_args|
-      	puts "task: #{task.inspect}"
-      	puts "@args: #{@args.inspect}"
-      	puts "task args: #{task_args.inspect}"
         execute @name.to_s, task_args
       end
     end

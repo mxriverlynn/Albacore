@@ -5,11 +5,11 @@ require 'tasklib_patch'
 
 describe Albacore::AssemblyInfoTask, "when running" do
   before :all do
-    @task = Albacore::AssemblyInfoTask.new(:task) do |t|
+    @task = Albacore::AssemblyInfoTask.new(:assemblytask) do |t|
       @yielded_object = t
     end
     @task.extend(TasklibPatch)
-    Rake::Task["task"].invoke
+    Rake::Task["assemblytask"].invoke
   end
   
   it "should yield the assembly info api" do
