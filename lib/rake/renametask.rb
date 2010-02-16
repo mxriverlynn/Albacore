@@ -9,7 +9,7 @@ module Albacore
     attr_accessor :actual_name, :target_name
     
     def execute(name, task_args)
-      @block.call(self, *task_args) unless @block.nil?
+      @block.call(self, task_args) unless @block.nil?
       if (@actual_name.nil? || @target_name.nil?)
         fail
       else

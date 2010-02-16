@@ -9,7 +9,7 @@ module Albacore
     def execute(name, task_args)
       @zip = Unzip.new
       @zip.load_config_by_task_name(name)
-      @block.call(@zip, *task_args) unless @block.nil?
+      @block.call(@zip, task_args) unless @block.nil?
       @zip.unzip
       fail if @zip.failed
     end    

@@ -9,7 +9,7 @@ module Albacore
     def execute(name, task_args)
       @ssh = Ssh.new
       @ssh.load_config_by_task_name(name)
-      @block.call(@ssh, *task_args) unless @block.nil?
+      @block.call(@ssh, task_args) unless @block.nil?
       @ssh.execute
     end
   end

@@ -9,7 +9,7 @@ module Albacore
     def execute(name, task_args)
       @sftp = Sftp.new
       @sftp.load_config_by_task_name(name)
-      @block.call(@sftp, *task_args) unless @block.nil?
+      @block.call(@sftp, task_args) unless @block.nil?
       @sftp.upload
     end
   end

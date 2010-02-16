@@ -1,3 +1,5 @@
+require 'lib/albacore'
+
 task :default => ['albacore:sample']
 
 namespace :specs do
@@ -134,8 +136,6 @@ namespace :specs do
 end
 
 namespace :albacore do  
-  require 'lib/albacore'
-  
   #global configuration options
   Albacore::yaml_config_folder = "spec/support/yamlconfig"
   Albacore::log_level = :verbose
@@ -258,11 +258,11 @@ namespace :jeweler do
   require 'jeweler'  
   Jeweler::Tasks.new do |gs|
     gs.name = "albacore"
-    gs.summary = "A Suite of Rake Build Tasks For .Net Solutions"
-    gs.description = "Easily build your .NET solutions with rake, using this suite of rake tasks."
+    gs.summary = "Dolphin-Safe Rake Tasks For .NET Systems"
+    gs.description = "Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks."
     gs.email = "derickbailey@gmail.com"
     gs.homepage = "http://albacorebuild.net"
-    gs.authors = ["Derick Bailey", "Ben Hall", "Steven Harman"]
+    gs.authors = ["Derick Bailey", "Ben Hall"]
     gs.has_rdoc = false  
     gs.files.exclude("albacore.gemspec", ".gitignore", "spec/support/Tools")
 

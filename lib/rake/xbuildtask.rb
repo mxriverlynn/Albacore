@@ -13,7 +13,7 @@ module Albacore
     def execute(name, task_args)
       @xbuild = XBuild.new
       @xbuild.load_config_by_task_name(name)
-      @block.call(@xbuild, *task_args) unless @block.nil? 
+      @block.call(@xbuild, task_args) unless @block.nil? 
       @xbuild.build
       fail if @xbuild.failed
     end    

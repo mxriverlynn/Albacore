@@ -10,7 +10,7 @@ module Albacore
     def execute(name, task_args)
       cmd = NDepend.new()
       cmd.load_config_by_task_name(name)
-      @block.call(cmd, *task_args) unless @block.nil?
+      @block.call(cmd, task_args) unless @block.nil?
       cmd.run
       fail if cmd.failed
     end
