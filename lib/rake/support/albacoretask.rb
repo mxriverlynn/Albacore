@@ -7,12 +7,13 @@ module Albacore
     def initialize(name, *args, &block)
       @block = block
       args = args.insert(0, name)
-      define(args)
+      define name, args
     end
     
     def define(name, args)
       task *args do |task, task_args|
-        execute name.to_s, task_args
+      	@task_args = task_args
+        execute name.to_s
       end
     end
     
@@ -21,7 +22,7 @@ module Albacore
       	if @block.arity == 1
       	  @block.call(@asm)
         else
-      	  @block.call(@asm, task_args)
+      	  @block.call(@asm, @task_args)
   	    end
   	  end
     end
