@@ -3,12 +3,12 @@ require 'albacore/xunittestrunner'
 require 'rake/xunittask'
 require 'fail_patch'
 
-describe Albacore::XUnitTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::XUnitTask.new(:xunit) do |t|
+    xunit :xunit do |t|
+      t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:xunit].invoke
   end
 
@@ -17,15 +17,16 @@ describe Albacore::XUnitTask, "when running" do
   end
 end
 
-describe Albacore::XUnitTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::XUnitTask.new(:failingtask)
-    @task.extend(FailPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
+    xunit :xunit_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:xunit_fail].invoke
   end
 
   it "should fail the rake task" do
-    @task.task_failed.should == true
+    $task_failed.should == true
   end
 end

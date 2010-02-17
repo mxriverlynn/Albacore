@@ -3,13 +3,13 @@ require 'albacore/zipdirectory'
 require 'rake/ziptask'
 require 'fail_patch'
 
-describe Albacore::ZipTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::ZipTask.new(:zip) do |t|
-    t.output_file = 'test.zip'
+    zip :zip do |t|
+      t.extend(FailPatch)
+      t.output_file = 'test.zip'
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:zip].invoke
   end
   
@@ -18,15 +18,16 @@ describe Albacore::ZipTask, "when running" do
   end
 end
 
-describe Albacore::ZipTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::ZipTask.new(:failingtask)
-    @task.extend(FailPatch)
-    Rake::Task["failingtask"].invoke
-    @task.fail
+    zip :zip_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:zip_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should == true
+    $task_failed.should == true
   end
 end
