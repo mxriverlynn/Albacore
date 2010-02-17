@@ -3,12 +3,12 @@ require 'albacore/msbuild'
 require 'rake/msbuildtask'
 require 'fail_patch'
 
-describe Albacore::MSBuildTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::MSBuildTask.new(:msbuild) do |t|
+    msbuild :msbuild do |t|
+      t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:msbuild].invoke
   end
   
@@ -17,15 +17,30 @@ describe Albacore::MSBuildTask, "when running" do
   end
 end
 
-describe Albacore::MSBuildTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::MSBuildTask.new(:failingtask)
-    @task.extend(FailPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
+    msbuild :msbuild_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:msbuild_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should == true
+    $task_failed.should == true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    msbuild :msbuildtask_withargs, [:arg1] do |t, args|
+      t.extend(FailPatch)
+      @args = args
+  	end
+    Rake::Task[:msbuildtask_withargs].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
   end
 end

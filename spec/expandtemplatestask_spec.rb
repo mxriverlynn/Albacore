@@ -3,12 +3,12 @@ require 'albacore/expandtemplates'
 require 'rake/expandtemplatestask'
 require 'fail_patch'
 
-describe Albacore::ExpandTemplatesTask, "when running" do
+describe "when running" do
   before :each do
-    task = Albacore::ExpandTemplatesTask.new(:expandtemplates) do |t|
+    expandtemplates :expandtemplates do |t|
+      t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:expandtemplates].invoke
   end
   
@@ -17,15 +17,30 @@ describe Albacore::ExpandTemplatesTask, "when running" do
   end
 end
 
-describe Albacore::ExpandTemplatesTask, "when execution fails" do
+describe "when execution fails" do
   before :each do
-    @task = Albacore::ExpandTemplatesTask.new(:failingtask)
-    @task.extend(FailPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
+  	expandtemplates :expand_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:expand_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should be_true
+    $task_failed.should be_true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    expandtemplates :expandtask_withargs, [:arg1] do |t, args|
+      t.extend(FailPatch)
+      @args = args
+  	end
+    Rake::Task[:expandtask_withargs].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
   end
 end
