@@ -8,6 +8,7 @@ describe Exec, "when executing a command with parameters" do
     @cmd = Exec.new
     @cmd.log_level = :verbose
     @cmd.extend(SystemPatch)
+    @cmd.extend(FailPatch)
     @cmd.path_to_command = @@nunit
     @cmd.parameters "--help"
     @cmd.execute
@@ -18,6 +19,6 @@ describe Exec, "when executing a command with parameters" do
   end
   
   it "should not fail" do
-    @cmd.failed.should be_false
+    $task_failed.should be_false
   end
 end

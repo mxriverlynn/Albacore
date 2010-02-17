@@ -46,6 +46,8 @@ describe AssemblyInfo, "when generating an assembly info file without an output 
   before :all do
     @tester = AssemblyInfoTester.new
     asm = AssemblyInfo.new
+    asm.extend(FailPatch)
+    
     strio = StringIO.new
     asm.log_device = strio
     
