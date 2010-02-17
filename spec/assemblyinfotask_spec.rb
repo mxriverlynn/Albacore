@@ -3,43 +3,18 @@ require 'albacore/assemblyinfo'
 require 'rake/assemblyinfotask'
 require 'tasklib_patch'
 
-describe Albacore::AssemblyInfoTask, "when running" do
+describe "when running" do
   before :all do
-    @task = Albacore::AssemblyInfoTask.new(:assemblytask) do |t|
-      @yielded_object = t
-    end
-    @task.extend(TasklibPatch)
-    Rake::Task["assemblytask"].invoke
+  	assemblyinfo :assemblyinfo do |asm|
+  	  puts "::::::::::::::::::::::#{asm}"
+  	  @yielded_object = asm
+  	end
+    @task = Rake::Task["assemblyinfo"]
+    @task.extend(TasklibPatch)    
+    @task.invoke
   end
   
   it "should yield the assembly info api" do
     @yielded_object.kind_of?(AssemblyInfo).should == true 
-  end
-end
-
-describe Albacore::AssemblyInfoTask, "when execution fails" do
-  before :all do
-    @task = Albacore::AssemblyInfoTask.new(:failingtask)
-    @task.extend(TasklibPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
-  end
-  
-  it "should fail the rake task" do
-    @task.task_failed.should == true
-  end
-end
-
-describe Albacore::AssemblyInfoTask, "when task args are used" do
-  before :all do
-    @task = Albacore::AssemblyInfoTask.new(:assemblytask_withargs, [:arg1]) do |t, args|
-      @args = args
-    end
-    @task.extend(TasklibPatch)
-    Rake::Task["assemblytask_withargs"].invoke("test")
-  end
-  
-  it "should provide the task args" do
-    @args.arg1.should == "test"
   end
 end
