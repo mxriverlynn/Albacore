@@ -26,7 +26,7 @@ class NUnitTestRunner
   def get_command_parameters
     command_params = []
     command_params << @options.join(" ") unless @options.nil?
-    command_params << @assemblies.join(" ") unless @assemblies.nil?
+    command_params << @assemblies.map{|asm| "\"#{asm}\""}.join(' ') unless @assemblies.nil?
     command_params
   end
   

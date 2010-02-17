@@ -43,7 +43,7 @@ describe NCoverConsole, "when specifying assemblies with spaces in the name" do
     @ncc.path_to_command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
-    @ncc.cover_assemblies "with spaces/TestSolution"
+    @ncc.cover_assemblies "assemblies/with spaces/TestSolution"
     
     nunit = NUnitTestRunner.new(@testdata.nunitpath)
     nunit.assemblies @testdata.test_assembly_with_spaces
@@ -54,7 +54,7 @@ describe NCoverConsole, "when specifying assemblies with spaces in the name" do
   end
 
   it "should provide coverage for the specified assemblies" do
-    @ncc.system_command.should include("//assemblies \"with spaces/TestSolution\"")
+    @ncc.system_command.should include("//assemblies \"assemblies/with spaces/TestSolution\"")
   end
   
 end
@@ -92,6 +92,8 @@ describe NCoverConsole, "when running with the defaults" do
     @ncc = NCoverConsole.new
     
     @ncc.extend(SystemPatch)
+    @ncc.extend(FailPatch)
+    
     @ncc.path_to_command = @testdata.ncoverpath
     @ncc.testrunner = NUnitTestRunner.new
     
@@ -109,6 +111,8 @@ describe NCoverConsole, "when opting out of registering the ncover dll" do
     @ncc = NCoverConsole.new
     
     @ncc.extend(SystemPatch)
+    @ncc.extend(FailPatch)
+    
     @ncc.path_to_command = @testdata.ncoverpath
     @ncc.no_registration
     @ncc.testrunner = NUnitTestRunner.new
@@ -158,6 +162,8 @@ describe NCoverConsole, "when analyzing a test suite with failing tests" do
     ncc.log_device = strio
     
     ncc.extend(SystemPatch)
+    ncc.extend(FailPatch)
+    
     ncc.log_level = :verbose
     ncc.path_to_command = @testdata.ncoverpath
     ncc.output :xml => @testdata.xml_coverage_output
@@ -170,12 +176,11 @@ describe NCoverConsole, "when analyzing a test suite with failing tests" do
     ncc.testrunner = nunit
     
     ncc.run
-    @failed = ncc.failed
     @log_data = strio.string
   end
   
   it "should return a failure code" do
-    @failed.should == true
+    $task_failed.should == true
   end
   
   it "should log a failure message" do
@@ -187,10 +192,11 @@ describe NCoverConsole, "when running without a testrunner" do
   before :all do
   	@testdata = NCoverConsoleTestData.new
     ncc = NCoverConsole.new()
+    ncc.extend(FailPatch)
     strio = StringIO.new
     ncc.log_device = strio
     
-    @result = ncc.run
+    ncc.run
     @log_data = strio.string
   end
 
@@ -198,8 +204,8 @@ describe NCoverConsole, "when running without a testrunner" do
     @log_data.should include("testrunner cannot be nil.")
   end
   
-  it "should return a failure code" do
-    @result.should == false
+  it "should fail the task" do
+    $task_failed.should be_true
   end
 end
 
@@ -287,6 +293,8 @@ describe NCoverConsole, "when producing a report with machine.specifications" do
     @ncc = NCoverConsole.new()
     
     @ncc.extend(SystemPatch)
+    @ncc.extend(FailPatch)
+    
     @ncc.log_level = :verbose
     @ncc.path_to_command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
@@ -301,7 +309,7 @@ describe NCoverConsole, "when producing a report with machine.specifications" do
   end
 
   it "should not fail" do
-    @ncc.failed.should be_false
+    $task_failed.should be_false
   end
 
   it "should produce the html report" do

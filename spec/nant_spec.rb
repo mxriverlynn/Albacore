@@ -19,12 +19,13 @@ describe NAnt, "when a nant path is not specified" do
   it_should_behave_like "prepping nant"
   
   before :all do
+  	@nant.extend(FailPatch)
     @log_data = @strio.string
     @nant.run
   end
   
   it "should fail" do
-  	@nant.failed.should == true
+  	$task_failed.should == true
   end
   
   it "should log the missing command path" do
