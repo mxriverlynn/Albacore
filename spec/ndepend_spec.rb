@@ -36,13 +36,15 @@ describe "when executing Ndepend console" do
 
   it "should fail when the project file is not given" do
     @ndepend.project_file = nil
+    @ndepend.extend(FailPatch)
     @ndepend.run
-    @ndepend.failed.should be_true
+    $task_failed.should be_true
   end
 
   it "should accept other parameters" do
     expected_params = "/ViewReport /Silent /Help"
     @ndepend.parameters expected_params
+    @ndepend.extend(FailPatch)
     @ndepend.run
     @log_data.should include(expected_params)
   end
