@@ -1,7 +1,4 @@
-create_task :plink do |name|
-  cmd = PLink.new()
-  cmd.load_config_by_task_name(name)
-  call_task_block(cmd)
+create_task :plink, PLink.new() do |cmd|
   cmd.run
   fail if cmd.failed
 end  
