@@ -3,16 +3,16 @@ require 'albacore/ssh'
 require 'rake/sshtask'
 require 'fail_patch'
 
-describe Albacore::SshTask, "when running" do
+describe "when running" do
   before :all do
     Net::SSH.stub_method(:start, &lambda{}).yields(@sshstub)
   end
   
   before :each do
-    task = Albacore::SshTask.new(:ssh) do |t|
+    ssh :ssh do |t|
+      t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:ssh].invoke
   end
   
@@ -21,19 +21,20 @@ describe Albacore::SshTask, "when running" do
   end
 end
 
-describe Albacore::SshTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
     Net::SSH.stub_method(:start, &lambda{}).yields(@sshstub)
   end
   
   before :each do
-    @task = Albacore::SshTask.new(:failingtask)
-    @task.extend(FailPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
+    ssh :ssh_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:ssh_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should be_true
+    $task_failed.should be_true
   end
 end
