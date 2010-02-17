@@ -3,12 +3,12 @@ require 'albacore/nant'
 require 'rake/nanttask'
 require 'fail_patch'
 
-describe Albacore::NAntTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::NAntTask.new(:nant) do |t|
+    nant :nant do |t|
+      t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:nant].invoke
   end
   
@@ -17,15 +17,30 @@ describe Albacore::NAntTask, "when running" do
   end
 end
 
-describe Albacore::NAntTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::NAntTask.new(:nant_failingtask)
-    @task.extend(FailPatch)
-    @task.fail
+    nant :nant_failingtask do |t|
+      t.extend(FailPatch)
+      t.fail
+    end    
     Rake::Task[:nant_failingtask].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should == true
+    $task_failed.should == true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    nant :nanttask_withargs, [:arg1] do |t, args|
+      t.extend(FailPatch)
+      @args = args
+  	end
+    Rake::Task[:nanttask_withargs].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
   end
 end
