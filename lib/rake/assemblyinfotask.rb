@@ -1,21 +1,22 @@
 require 'rake/tasklib'
 
 def create_task(taskname, &execute_body)
-  taskclass = :"Albacore_TaskFor_#{taskname}"
+  taskclass = :"#{taskname}Task"
   taskmethod = taskname.to_s.downcase.to_sym
-
-  Object.class_eval(<<-EOF, __FILE__, __LINE__)
-    def #{taskmethod}(name, *args, &block)
-      Albacore.const_get("#{taskclass}").new(name, *args, &block)
+  # open up the metaclass for main
+  (class << self; self; end).class_eval do
+    # can't pass a default to a block parameter in ruby18
+    define_method(taskmethod) do |*args, &block|
+      # set default name if none given
+      args << taskmethod if args.empty?
+      Albacore.const_get(taskclass).new(*args, &block)
     end
-  EOF
-
-  Albacore.class_eval do
-    const_set(taskclass, Class.new(Albacore::AlbacoreTask) do
-      define_method(:execute, &execute_body)
-    end)
   end
+  Albacore.const_set(taskclass, Class.new(Albacore::AlbacoreTask) do
+    define_method(:execute, &execute_body)
+  end)
 end
+
 
 create_task :assemblyinfo do |name|
 	puts ":::::::::::NAME: #{name}"
