@@ -2,18 +2,17 @@ require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/docu'
 require 'rake/docutask'
 require 'tasklib_patch'
+require 'system_patch'
 require 'docu_patch'
 
-describe Albacore::DocuTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::DocuTask.new(:successful_task) do |t|
-	  t.assemblies << 'test.dll'
-      t.command_result = true
-      @yielded_object = t
-    end
-    
-    task.extend(TasklibPatch)
-    Rake::Task[:successful_task].invoke
+  	docu :docu do |d|
+	  d.assemblies 'test.dll'
+      d.command_result = true
+      @yielded_object = d
+  	end
+    Rake::Task[:docu].invoke
   end
   
   it "should yield the docu api" do
@@ -21,19 +20,33 @@ describe Albacore::DocuTask, "when running" do
   end
 end
 
-describe Albacore::DocuTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::DocuTask.new(:failing_task) do |t|
-	  t.command_result = false
-      t.assemblies << 'test.dll'
-    end
-
-    @task.extend(TasklibPatch)
-
-    Rake::Task[:failing_task].invoke
+  	docu :docu_fail do |d|
+  	  d.extend(TasklibPatch)
+	  d.assemblies 'test.dll'
+      d.command_result = true
+	  d.fail
+  	end
+    Rake::Task[:docu_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should == true
+    $task_failed.should be_true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    docu :docutask_withargs, [:arg1] do |d, args|
+	  d.assemblies 'test.dll'
+      d.command_result = true
+      @args = args
+  	end
+    Rake::Task["docutask_withargs"].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
   end
 end

@@ -23,8 +23,7 @@ describe "when execution fails" do
   	  asm.extend(TasklibPatch)
   	  asm.fail
   	end
-    task = Rake::Task["failingtask"]
-    task.invoke
+    Rake::Task["failingtask"].invoke
   end
   
   it "should fail the rake task" do

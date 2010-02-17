@@ -1,8 +1,5 @@
 module TasklibPatch
-  attr_accessor :task_failed
-  
-  def initialize
-    super()
+  def self.extended(obj)
     $task_failed = false
   end
   
