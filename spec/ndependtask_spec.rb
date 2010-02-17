@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/ndepend'
 require 'rake/ndependtask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::NDependTask, "when running" do
 	before :all do
 		task = Albacore::NDependTask.new(:command) do |t|
 			@yielded_object = t
 		end
-		task.extend(TasklibPatch)
+		task.extend(FailPatch)
 		Rake::Task[:command].invoke
 	end
 
@@ -20,7 +20,7 @@ end
 describe Albacore::NDependTask, "when execution fails" do
 	before :all do
 		@task = Albacore::NDependTask.new(:failingtask)
-		@task.extend(TasklibPatch)
+		@task.extend(FailPatch)
 		@task.fail
 		Rake::Task["failingtask"].invoke
 	end

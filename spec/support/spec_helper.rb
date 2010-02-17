@@ -11,7 +11,7 @@ require 'lib/rake/support/createtask.rb'
 require 'lib/albacore/support/globalconfig.rb'
 require 'not_a_mock'
 require 'system_patch'
-require 'tasklib_patch'
+require 'fail_patch'
 
 Spec::Runner.configure do |config|
   config.mock_with NotAMock::RspecMockFrameworkAdapter

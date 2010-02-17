@@ -1,4 +1,4 @@
-module TasklibPatch
+module FailPatch
   def self.extended(obj)
     $task_failed = false
   end

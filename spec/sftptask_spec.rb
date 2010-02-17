@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/sftp'
 require 'rake/sftptask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::SftpTask, "when running" do
   before :all do
@@ -13,7 +13,7 @@ describe Albacore::SftpTask, "when running" do
     task = Albacore::SftpTask.new(:sftp) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:sftp].invoke
   end
   
@@ -30,7 +30,7 @@ describe Albacore::SftpTask, "when execution fails" do
   
   before :each do
     @task = Albacore::SftpTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task["failingtask"].invoke
   end

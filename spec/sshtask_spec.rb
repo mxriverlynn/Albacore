@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/ssh'
 require 'rake/sshtask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::SshTask, "when running" do
   before :all do
@@ -12,7 +12,7 @@ describe Albacore::SshTask, "when running" do
     task = Albacore::SshTask.new(:ssh) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:ssh].invoke
   end
   
@@ -28,7 +28,7 @@ describe Albacore::SshTask, "when execution fails" do
   
   before :each do
     @task = Albacore::SshTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task["failingtask"].invoke
   end

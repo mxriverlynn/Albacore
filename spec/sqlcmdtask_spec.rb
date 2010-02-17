@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/sqlcmd'
 require 'rake/sqlcmdtask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::SQLCmdTask, "when running" do
   before :all do
     task = Albacore::SQLCmdTask.new(:sqlcmd) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:sqlcmd].invoke
   end
   
@@ -20,7 +20,7 @@ end
 describe Albacore::SQLCmdTask, "when execution fails" do
   before :all do
     @task = Albacore::SQLCmdTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task["failingtask"].invoke
   end

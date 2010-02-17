@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/mspectestrunner'
 require 'rake/mspectask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::MSpecTask, "when running" do
   before :all do
     task = Albacore::MSpecTask.new(:mspec) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:mspec].invoke
   end
   
@@ -20,7 +20,7 @@ end
 describe Albacore::MSpecTask, "when execution fails" do
   before :all do
     @task = Albacore::MSpecTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task["failingtask"].invoke
   end

@@ -1,12 +1,12 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/assemblyinfo'
 require 'rake/assemblyinfotask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe "when running" do
   before :all do
   	assemblyinfo :assemblyinfo do |asm|
-      asm.extend(TasklibPatch)    
+      asm.extend(FailPatch)    
   	  @yielded_object = asm
   	end
     Rake::Task["assemblyinfo"].invoke
@@ -20,7 +20,7 @@ end
 describe "when execution fails" do
   before :all do
   	assemblyinfo :failingtask do |asm|
-  	  asm.extend(TasklibPatch)
+  	  asm.extend(FailPatch)
   	  asm.fail
   	end
     Rake::Task["failingtask"].invoke
@@ -34,7 +34,7 @@ end
 describe "when task args are used" do
   before :all do
     assemblyinfo :assemblytask_withargs, [:arg1] do |asm, args|
-      asm.extend(TasklibPatch)
+      asm.extend(FailPatch)
       @args = args
   	end
     Rake::Task["assemblytask_withargs"].invoke("test")

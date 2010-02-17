@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/zipdirectory'
 require 'rake/ziptask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::ZipTask, "when running" do
   before :all do
@@ -9,7 +9,7 @@ describe Albacore::ZipTask, "when running" do
     t.output_file = 'test.zip'
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:zip].invoke
   end
   
@@ -21,7 +21,7 @@ end
 describe Albacore::ZipTask, "when execution fails" do
   before :all do
     @task = Albacore::ZipTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     Rake::Task["failingtask"].invoke
     @task.fail
   end

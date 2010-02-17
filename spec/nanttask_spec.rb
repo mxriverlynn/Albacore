@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/nant'
 require 'rake/nanttask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::NAntTask, "when running" do
   before :all do
     task = Albacore::NAntTask.new(:nant) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:nant].invoke
   end
   
@@ -20,7 +20,7 @@ end
 describe Albacore::NAntTask, "when execution fails" do
   before :all do
     @task = Albacore::NAntTask.new(:nant_failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task[:nant_failingtask].invoke
   end

@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/ncoverreport'
 require 'rake/ncoverreporttask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::NCoverReportTask, "when running" do
   before :all do
     task = Albacore::NCoverReportTask.new(:ncoverreport) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:ncoverreport].invoke
   end
   
@@ -20,7 +20,7 @@ end
 describe Albacore::NCoverReportTask, "when execution fails" do
   before :all do
     @task = Albacore::NCoverReportTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task["failingtask"].invoke
   end

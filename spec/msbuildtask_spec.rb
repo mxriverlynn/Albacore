@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/msbuild'
 require 'rake/msbuildtask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::MSBuildTask, "when running" do
   before :all do
     task = Albacore::MSBuildTask.new(:msbuild) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:msbuild].invoke
   end
   
@@ -20,7 +20,7 @@ end
 describe Albacore::MSBuildTask, "when execution fails" do
   before :all do
     @task = Albacore::MSBuildTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task["failingtask"].invoke
   end

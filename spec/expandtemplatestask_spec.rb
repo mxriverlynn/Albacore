@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/expandtemplates'
 require 'rake/expandtemplatestask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::ExpandTemplatesTask, "when running" do
   before :each do
     task = Albacore::ExpandTemplatesTask.new(:expandtemplates) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:expandtemplates].invoke
   end
   
@@ -20,7 +20,7 @@ end
 describe Albacore::ExpandTemplatesTask, "when execution fails" do
   before :each do
     @task = Albacore::ExpandTemplatesTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task["failingtask"].invoke
   end

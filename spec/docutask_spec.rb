@@ -1,7 +1,7 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/docu'
 require 'rake/docutask'
-require 'tasklib_patch'
+require 'fail_patch'
 require 'system_patch'
 require 'docu_patch'
 
@@ -23,7 +23,7 @@ end
 describe "when execution fails" do
   before :all do
   	docu :docu_fail do |d|
-  	  d.extend(TasklibPatch)
+  	  d.extend(FailPatch)
 	  d.assemblies 'test.dll'
       d.command_result = true
 	  d.fail

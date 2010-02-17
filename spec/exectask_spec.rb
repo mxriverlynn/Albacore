@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/exec'
 require 'rake/exectask'
-require 'tasklib_patch'
+require 'fail_patch'
 
-describe Albacore::ExecTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::ExecTask.new(:exec) do |t|
+  	exec :exec do |t|
+  	  t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
     Rake::Task[:exec].invoke
   end
   
@@ -17,15 +17,16 @@ describe Albacore::ExecTask, "when running" do
   end
 end
 
-describe Albacore::ExecTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::ExecTask.new(:failingtask)
-    @task.extend(TasklibPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
+  	exec :exec_fail do |t|
+  	  t.extend(FailPatch)
+      @yielded_object = t
+    end
+    Rake::Task[:exec_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should be_true
+    $task_failed.should be_true
   end
 end

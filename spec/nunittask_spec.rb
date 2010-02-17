@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/nunittestrunner'
 require 'rake/nunittask'
-require 'tasklib_patch'
+require 'fail_patch'
 
 describe Albacore::NUnitTask, "when running" do
   before :all do
     task = Albacore::NUnitTask.new(:nunit) do |t|
       @yielded_object = t
     end
-    task.extend(TasklibPatch)
+    task.extend(FailPatch)
     Rake::Task[:nunit].invoke
   end
   
@@ -20,7 +20,7 @@ end
 describe Albacore::NUnitTask, "when execution fails" do
   before :all do
     @task = Albacore::NUnitTask.new(:failingtask)
-    @task.extend(TasklibPatch)
+    @task.extend(FailPatch)
     @task.fail
     Rake::Task["failingtask"].invoke
   end
