@@ -7,11 +7,11 @@ end
 module Albacore
   class AssemblyInfoTask < Albacore::AlbacoreTask
     def execute(name)
-      @asm = AssemblyInfo.new
-      @asm.load_config_by_task_name(name)
-      call_task_block
-      @asm.write
-      fail if @asm.failed
+      asm = AssemblyInfo.new
+      asm.load_config_by_task_name(name)
+      call_task_block(asm)
+      asm.write
+      fail if asm.failed
     end
   end
 end

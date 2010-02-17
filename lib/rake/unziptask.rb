@@ -6,12 +6,12 @@ end
   
 module Albacore
   class UnZipTask < Albacore::AlbacoreTask
-    def execute(name, task_args)
-      @zip = Unzip.new
-      @zip.load_config_by_task_name(name)
-      @block.call(@zip, task_args) unless @block.nil?
-      @zip.unzip
-      fail if @zip.failed
+    def execute(name)
+      zip = Unzip.new
+      zip.load_config_by_task_name(name)
+      call_task_block(zip)
+      zip.unzip
+      fail if zip.failed
     end    
   end
 end

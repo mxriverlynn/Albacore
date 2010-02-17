@@ -17,12 +17,12 @@ module Albacore
       end
     end
     
-    def call_task_block
+    def call_task_block(obj)
       if !@block.nil?
       	if @block.arity == 1
-      	  @block.call(@asm)
+      	  @block.call(obj)
         else
-      	  @block.call(@asm, @task_args)
+      	  @block.call(obj, @task_args)
   	    end
   	  end
     end

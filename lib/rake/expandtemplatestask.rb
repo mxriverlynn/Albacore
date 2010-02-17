@@ -6,11 +6,11 @@ end
   
 module Albacore  
   class ExpandTemplatesTask < Albacore::AlbacoreTask
-    def execute(name, task_args)
-      @exp = ExpandTemplates.new
-      @exp.load_config_by_task_name(name)
-      @block.call(@exp, task_args) unless @block.nil?
-      @exp.expand
+    def execute(name)
+      exp = ExpandTemplates.new
+      exp.load_config_by_task_name(name)
+      call_task_block(exp)
+      exp.expand
     end  
   end
 end

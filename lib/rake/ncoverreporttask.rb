@@ -6,12 +6,12 @@ end
   
 module Albacore
   class NCoverReportTask < Albacore::AlbacoreTask
-    def execute(name, task_args)
-      @ncoverreport = NCoverReport.new
-      @ncoverreport.load_config_by_task_name(name)
-      @block.call(@ncoverreport, task_args) unless @block.nil?
-      @ncoverreport.run
-      fail if @ncoverreport.failed
+    def execute(name)
+      ncoverreport = NCoverReport.new
+      ncoverreport.load_config_by_task_name(name)
+      call_task_block(ncoverreport)
+      ncoverreport.run
+      fail if ncoverreport.failed
     end    
   end
 end

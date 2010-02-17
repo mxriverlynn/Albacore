@@ -9,10 +9,10 @@ module Albacore
   class PLinkTask < Albacore::AlbacoreTask
     attr_accessor :remote_parameters, :remote_path_to_command
 
-    def execute(name, task_args)
+    def execute(name)
       cmd = PLink.new()
       cmd.load_config_by_task_name(name)
-      @block.call(cmd, task_args) unless @block.nil?
+      call_task_block(cmd)
       cmd.run
       fail if cmd.failed
     end  

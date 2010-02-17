@@ -8,8 +8,8 @@ module Albacore
   class RenameTask < Albacore::AlbacoreTask
     attr_accessor :actual_name, :target_name
     
-    def execute(name, task_args)
-      @block.call(self, task_args) unless @block.nil?
+    def execute(name)
+      call_task_block(self)
       if (@actual_name.nil? || @target_name.nil?)
         fail
       else

@@ -6,11 +6,11 @@ end
   
 module Albacore
   class SshTask < Albacore::AlbacoreTask
-    def execute(name, task_args)
-      @ssh = Ssh.new
-      @ssh.load_config_by_task_name(name)
-      @block.call(@ssh, task_args) unless @block.nil?
-      @ssh.execute
+    def execute(name)
+      ssh = Ssh.new
+      ssh.load_config_by_task_name(name)
+      call_task_block(ssh)
+      ssh.execute
     end
   end
 end

@@ -6,12 +6,12 @@ end
 
 module Albacore
   class DocuTask < Albacore::AlbacoreTask
-    def execute(name, task_args)
-      @docu = Docu.new
-      @docu.load_config_by_task_name(name)
-      @block.call(@docu, task_args) unless @block.nil?
-      @docu.execute
-      fail if @docu.failed
+    def execute(name)
+      docu = Docu.new
+      docu.load_config_by_task_name(name)
+      call_task_block(docu)
+      docu.execute
+      fail if docu.failed
     end
   end
 end
