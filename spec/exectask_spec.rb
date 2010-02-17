@@ -33,8 +33,8 @@ end
 
 describe "when task args are used" do
   before :all do
-    exec :exectask_withargs, [:arg1] do |exe, args|
-      exe.extend(FailPatch)
+    exec :exectask_withargs, [:arg1] do |exec, args|
+      exec.extend(FailPatch)
       @args = args
   	end
     Rake::Task["exectask_withargs"].invoke("test")
