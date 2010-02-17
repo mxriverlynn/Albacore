@@ -17,8 +17,7 @@ class NCoverReport
   end
   
   def run
-    check_command
-    return if @failed
+    return unless check_command
     
     command_parameters = []
     command_parameters << build_coverage_files unless @coverage_files.empty?
@@ -33,8 +32,9 @@ class NCoverReport
   end
   
   def check_command
-    return if @path_to_command
+    return true if @path_to_command
     fail_with_message 'NCoverReport.path_to_command cannot be nil.'
+    return false
   end
   
   def build_filters

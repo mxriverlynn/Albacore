@@ -3,12 +3,12 @@ require 'albacore/ncoverreport'
 require 'rake/ncoverreporttask'
 require 'fail_patch'
 
-describe Albacore::NCoverReportTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::NCoverReportTask.new(:ncoverreport) do |t|
+    ncoverreport :ncoverreport do |t|
+      t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:ncoverreport].invoke
   end
   
@@ -17,15 +17,30 @@ describe Albacore::NCoverReportTask, "when running" do
   end
 end
 
-describe Albacore::NCoverReportTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::NCoverReportTask.new(:failingtask)
-    @task.extend(FailPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
+    ncoverreport :ncoverreport_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:ncoverreport_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should == true
+    $task_failed.should == true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    ncoverreport :ncoverreporttask_withargs, [:arg1] do |t, args|
+      t.extend(FailPatch)
+      @args = args
+  	end
+    Rake::Task[:ncoverreporttask_withargs].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
   end
 end
