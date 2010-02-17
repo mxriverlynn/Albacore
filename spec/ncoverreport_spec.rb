@@ -5,11 +5,12 @@ require 'ncoverreporttestdata'
 describe NCoverReport, "when runnign without the ncover report location specified" do
   before :all do
     @ncover = NCoverReport.new
+    @ncover.extend(FailPatch)
     @ncover.run
   end
   
   it "should fail execution" do
-    @ncover.failed.should be_true
+    $task_failed.should be_true
   end
 end
 
@@ -112,6 +113,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -133,7 +135,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
   end
   
   it "should not fail the execution" do
-    @ncover.failed.should be_false
+    $task_failed.should be_false
   end
   
   it "should produce the report" do
@@ -147,6 +149,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -168,7 +171,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
   end
   
   it "should fail the execution" do
-    @ncover.failed.should be_true
+    $task_failed.should be_true
   end
   
   it "should produce the report" do
@@ -182,6 +185,7 @@ describe NCoverReport, "when specifying the coverage item type to check" do
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -214,6 +218,7 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -249,7 +254,7 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
   end  
   
   it "should fail the execution" do
-    @ncover.failed.should be_true
+    $task_failed.should be_true
   end
 end
 
@@ -259,6 +264,7 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -294,7 +300,7 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
   end  
   
   it "should not fail the execution" do
-    @ncover.failed.should be_false
+    $task_failed.should be_false
   end
 end
 
@@ -304,6 +310,7 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -334,7 +341,7 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
   end  
   
   it "should fail the execution" do
-    @ncover.failed.should be_true
+    $task_failed.should be_true
   end
 end
 
@@ -344,6 +351,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity highe
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -364,7 +372,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity highe
   end
   
   it "should fail the execution" do
-    @ncover.failed.should be_true
+    $task_failed.should be_true
   end
   
   it "should produce the report" do
@@ -378,6 +386,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity under
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -398,7 +407,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity under
   end
   
   it "should not fail the execution" do
-    @ncover.failed.should be_false
+    $task_failed.should be_false
   end
   
   it "should produce the report" do
@@ -412,6 +421,7 @@ describe NCoverReport, "when filtering on Assembly coverage data" do
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -439,7 +449,7 @@ describe NCoverReport, "when filtering on Assembly coverage data" do
   end
   
   it "should not fail" do
-    @ncover.failed.should be_false
+    $task_failed.should be_false
   end
 end
 
@@ -449,6 +459,7 @@ describe NCoverReport, "when filtering on Namespace coverage data" do
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -476,7 +487,7 @@ describe NCoverReport, "when filtering on Namespace coverage data" do
   end
   
   it "should not fail" do
-    @ncover.failed.should be_false
+    $task_failed.should be_false
   end
 end
 
@@ -486,6 +497,7 @@ describe NCoverReport, "when filtering on Class coverage data" do
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -513,7 +525,7 @@ describe NCoverReport, "when filtering on Class coverage data" do
   end
   
   it "should not fail" do
-    @ncover.failed.should be_false
+    $task_failed.should be_false
   end
 end
 
@@ -523,6 +535,7 @@ describe NCoverReport, "when filtering on Method coverage data" do
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -550,7 +563,7 @@ describe NCoverReport, "when filtering on Method coverage data" do
   end
   
   it "should not fail" do
-    @ncover.failed.should be_false
+    $task_failed.should be_false
   end
 end
 
@@ -560,6 +573,7 @@ describe NCoverReport, "when filtering on Document coverage data" do
     
     @ncover = NCoverReport.new
     @ncover.extend(SystemPatch)
+    @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
     @ncover.path_to_command = NCoverReportTestData.path_to_command
@@ -587,6 +601,6 @@ describe NCoverReport, "when filtering on Document coverage data" do
   end
   
   it "should not fail" do
-    @ncover.failed.should be_false
+    $task_failed.should be_false
   end
 end
