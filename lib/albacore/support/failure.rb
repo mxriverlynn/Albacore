@@ -6,12 +6,7 @@ module Failure
   attr_accessor :failed
   
   def initialize
-    @failed = false
     super()
-  end
-  
-  def fail
-    @failed = true
   end
   
   def fail_with_message(msg)

@@ -27,8 +27,7 @@ class NCoverConsole
   end
   
   def run
-    check_testrunner
-    return false if @failed
+    return unless check_for_testrunner
     
     command_parameters = []
     command_parameters << "//reg" if @register_dll
@@ -45,11 +44,12 @@ class NCoverConsole
     fail_with_message failure_msg if !result
   end
   
-  def check_testrunner
-    return if (!@testrunner.nil?)
+  def check_for_testrunner
+    return true if (!@testrunner.nil?)
     msg = 'testrunner cannot be nil.'
     @logger.info msg
     fail
+    return false
   end
   
   def build_output_options(output)

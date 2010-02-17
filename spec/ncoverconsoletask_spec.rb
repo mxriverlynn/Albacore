@@ -3,12 +3,12 @@ require 'albacore/ncoverconsole'
 require 'rake/ncoverconsoletask'
 require 'fail_patch'
 
-describe Albacore::NCoverConsoleTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::NCoverConsoleTask.new(:ncoverconsole) do |t|
+    ncoverconsole :ncoverconsole do |t|
+      t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:ncoverconsole].invoke
   end
   
@@ -17,15 +17,30 @@ describe Albacore::NCoverConsoleTask, "when running" do
   end
 end
 
-describe Albacore::NCoverConsoleTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::NCoverConsoleTask.new(:failingtask)
-    @task.extend(FailPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
+    ncoverconsole :ncoverconsole_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:ncoverconsole_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should == true
+    $task_failed.should == true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    ncoverconsole :ncoverconsoletask_withargs, [:arg1] do |t, args|
+      t.extend(FailPatch)
+      @args = args
+  	end
+    Rake::Task[:ncoverconsoletask_withargs].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
   end
 end
