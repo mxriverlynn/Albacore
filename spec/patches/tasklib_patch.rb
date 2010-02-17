@@ -3,10 +3,10 @@ module TasklibPatch
   
   def initialize
     super()
-    @task_failed = false
+    $task_failed = false
   end
   
   def fail
-    @task_failed = true
+    $task_failed = true
   end
 end
