@@ -11,8 +11,7 @@ class NDepend
   end
   
   def run
-    check_comand
-    return if @failed
+    return unless check_comand
     result = run_command @path_to_command, create_parameters.join(" ")
     failure_message = 'Command Failed. See Build Log For Detail'
     fail_with_message failure_message if !result
@@ -25,8 +24,9 @@ class NDepend
   end
 
   def check_comand
-    return if @project_file
+    return true if @project_file
     fail_with_message 'A ndepend project file is required'
+    return false
   end
 
 end

@@ -3,29 +3,44 @@ require 'albacore/ndepend'
 require 'rake/ndependtask'
 require 'fail_patch'
 
-describe Albacore::NDependTask, "when running" do
-	before :all do
-		task = Albacore::NDependTask.new(:command) do |t|
-			@yielded_object = t
-		end
-		task.extend(FailPatch)
-		Rake::Task[:command].invoke
-	end
+describe "when running" do
+  before :all do
+    ndepend :ndepend do |t|
+      t.extend(FailPatch)
+      @yielded_object = t
+    end
+    Rake::Task[:ndepend].invoke
+  end
 
-	it "should yield the command api" do
-		@yielded_object.kind_of?(NDepend).should == true
-	end
+  it "should yield the command api" do
+    @yielded_object.kind_of?(NDepend).should == true
+  end
 end
 
-describe Albacore::NDependTask, "when execution fails" do
-	before :all do
-		@task = Albacore::NDependTask.new(:failingtask)
-		@task.extend(FailPatch)
-		@task.fail
-		Rake::Task["failingtask"].invoke
-	end
+describe "when execution fails" do
+  before :all do
+    ndepend :ndepend_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:ndepend_fail].invoke
+  end
 
-	it "should fail the rake task" do
-		@task.task_failed.should be_true
-	end
+  it "should fail the rake task" do
+    $task_failed.should be_true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    ndepend :ndependtask_withargs, [:arg1] do |t, args|
+      t.extend(FailPatch)
+      @args = args
+    end
+    Rake::Task[:ndependtask_withargs].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
+  end
 end
