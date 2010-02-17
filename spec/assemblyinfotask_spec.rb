@@ -36,7 +36,7 @@ describe "when task args are used" do
     assemblyinfo :assemblytask_withargs, [:arg1] do |t, args|
       t.extend(FailPatch)
       @args = args
-  	end
+    end
     Rake::Task[:assemblytask_withargs].invoke("test")
   end
   

@@ -18,8 +18,8 @@ class PLink
   end
 
   def run()
-    check_command
-    return if @failed
+    return unless check_command
+    
     parameters = create_parameters
     result = run_command "Plink", parameters.join(" ")
     failure_message = 'Command Failed. See Build Log For Detail'
@@ -42,7 +42,8 @@ class PLink
   end
 
   def check_command
-    return if @path_to_command
+    return true if @path_to_command
     fail_with_message 'Plink.path_to_command cannot be nil.'
+    return false
   end
 end

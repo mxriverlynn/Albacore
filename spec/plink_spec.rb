@@ -5,6 +5,7 @@ describe PLink, 'when executing a command over plink' do
   before :each do
     @cmd = PLink.new
     @cmd.extend(SystemPatch)
+	@cmd.extend(FailPatch)
     @cmd.path_to_command ="C:\\plink.exe"
     @cmd.host = "testhost"
 

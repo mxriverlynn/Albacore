@@ -3,29 +3,44 @@ require 'albacore/plink'
 require 'rake/plinktask'
 require 'fail_patch'
 
-describe Albacore::PLinkTask, "when running" do
-	before :all do
-		task = Albacore::PLinkTask.new(:plink) do |t|
-			@yielded_object = t
-		end
-		task.extend(FailPatch)
-		Rake::Task[:plink].invoke
-	end
+describe "when running" do
+  before :all do
+    plink :plink do |t|
+      t.extend(FailPatch)
+      @yielded_object = t
+    end
+    Rake::Task[:plink].invoke
+  end
 
-	it "should yield the command api" do
-		@yielded_object.kind_of?(PLink).should == true 
-	end
+  it "should yield the command api" do
+    @yielded_object.kind_of?(PLink).should == true 
+  end
 end
 
-describe Albacore::PLinkTask, "when execution fails" do
-	before :all do
-		@task = Albacore::PLinkTask.new(:plink_failingtask)
-		@task.extend(FailPatch)
-		@task.fail
-		Rake::Task[:plink_failingtask].invoke
-	end
+describe "when execution fails" do
+  before :all do
+    plink :plink_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:plink_fail].invoke
+  end
 
-	it "should fail the rake task" do
-		@task.task_failed.should be_true
-	end
+  it "should fail the rake task" do
+    $task_failed.should be_true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    plink :plinktask_withargs, [:arg1] do |t, args|
+      t.extend(FailPatch)
+      @args = args
+    end
+    Rake::Task[:plinktask_withargs].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
+  end
 end

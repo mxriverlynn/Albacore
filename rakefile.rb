@@ -151,7 +151,7 @@ namespace :albacore do
                      'albacore:xunit']
   
   desc "Run a sample MSBuild with YAML autoconfig"
-  msbuild
+  msbuild :msbuild
   
   desc "Run a sample assembly info generator"
   assemblyinfo do |asm|
