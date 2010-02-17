@@ -20,7 +20,7 @@ describe NUnitTestRunner, "the command parameters for an nunit runner" do
   end
   
   it "should include the list of assemblies" do
-    @command_parameters.should include("#{@@test_assembly} #{@@failing_test_assembly}")
+    @command_parameters.should include("\"#{@@test_assembly}\" \"#{@@failing_test_assembly}\"")
   end
   
   it "should include the list of options" do
@@ -51,14 +51,14 @@ end
 describe NUnitTestRunner, "when configured correctly" do
   before :all do
     nunit = NUnitTestRunner.new(@@nunitpath)
+    nunit.extend(FailPatch)
     nunit.assemblies @@test_assembly
     nunit.options '/noshadow'
     
     nunit.execute
-    @failed = nunit.failed
   end
   
   it "should execute" do
-    @failed.should be_false
+    $task_failed.should be_false
   end
 end
