@@ -3,12 +3,12 @@ require 'albacore/nunittestrunner'
 require 'rake/nunittask'
 require 'fail_patch'
 
-describe Albacore::NUnitTask, "when running" do
+describe "when running" do
   before :all do
-    task = Albacore::NUnitTask.new(:nunit) do |t|
+    nunit :nunit do |t|
+      t.extend(FailPatch)
       @yielded_object = t
     end
-    task.extend(FailPatch)
     Rake::Task[:nunit].invoke
   end
   
@@ -17,15 +17,30 @@ describe Albacore::NUnitTask, "when running" do
   end
 end
 
-describe Albacore::NUnitTask, "when execution fails" do
+describe "when execution fails" do
   before :all do
-    @task = Albacore::NUnitTask.new(:failingtask)
-    @task.extend(FailPatch)
-    @task.fail
-    Rake::Task["failingtask"].invoke
+    nunit :nunit_fail do |t|
+      t.extend(FailPatch)
+      t.fail
+    end
+    Rake::Task[:nunit_fail].invoke
   end
   
   it "should fail the rake task" do
-    @task.task_failed.should == true
+    $task_failed.should == true
+  end
+end
+
+describe "when task args are used" do
+  before :all do
+    nunit :nunittask_withargs, [:arg1] do |t, args|
+      t.extend(FailPatch)
+      @args = args
+  	end
+    Rake::Task[:nunittask_withargs].invoke("test")
+  end
+  
+  it "should provide the task args" do
+    @args.arg1.should == "test"
   end
 end
