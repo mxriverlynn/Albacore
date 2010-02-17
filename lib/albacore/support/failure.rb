@@ -11,7 +11,7 @@ module Failure
   
   def fail_with_message(msg)
     @logger.fatal msg
-    fail
+    fail msg
   end
 end
 

@@ -17,8 +17,7 @@ class SQLCmd
   end
   
   def run
-    check_command
-    return if @failed
+    return unless check_command
     
     cmd_params=[]
     cmd_params << build_parameter("S", @server) unless @server.nil?
@@ -35,8 +34,9 @@ class SQLCmd
   end
   
   def check_command
-    return if @path_to_command
+    return true if (!@path_to_command.nil?)
     fail_with_message 'SQLCmd.path_to_command cannot be nil.'
+    return false
   end
   
   def build_script_list

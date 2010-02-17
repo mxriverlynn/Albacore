@@ -3,7 +3,7 @@ module FailPatch
     $task_failed = false
   end
   
-  def fail
+  def fail(*args)
     $task_failed = true
   end
 end

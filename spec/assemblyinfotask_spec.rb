@@ -30,17 +30,3 @@ describe "when execution fails" do
     $task_failed.should == true
   end
 end
-
-describe "when task args are used" do
-  before :all do
-    assemblyinfo :assemblytask_withargs, [:arg1] do |t, args|
-      t.extend(FailPatch)
-      @args = args
-    end
-    Rake::Task[:assemblytask_withargs].invoke("test")
-  end
-  
-  it "should provide the task args" do
-    @args.arg1.should == "test"
-  end
-end
