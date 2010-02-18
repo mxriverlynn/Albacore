@@ -50,6 +50,7 @@ describe SQLCmd, "when running with no command path specified" do
     @cmd.log_level = :verbose
     @cmd.log_device = strio
     @cmd.extend(SystemPatch)
+    @cmd.extend(FailPatch)
     @cmd.disable_system = true
     
     @cmd.run
@@ -57,7 +58,7 @@ describe SQLCmd, "when running with no command path specified" do
   end
   
   it "should fail" do
-    @cmd.failed.should be_true
+    $task_failed.should be_true
   end
   
   it "should log a failure message" do
@@ -73,6 +74,7 @@ describe SQLCmd, "when execution of sqlcmd fails" do
     @cmd.log_level = :verbose
     @cmd.log_device = strio
     @cmd.extend(SystemPatch)
+    @cmd.extend(FailPatch)
     @cmd.disable_system = true
     @cmd.force_system_failure = true
     
@@ -82,7 +84,7 @@ describe SQLCmd, "when execution of sqlcmd fails" do
   
   
   it "should fail" do
-    @cmd.failed.should be_true
+    $task_failed.should be_true
   end
   
   it "should log a failure message" do

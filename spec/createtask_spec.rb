@@ -1,44 +1,47 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/support/albacore_helper'
 require 'fail_patch'
-require 'yamlconfig_patch'
 
-class SampleObject < OpenStruct
+class SampleObject
   include Failure
   include YAMLConfig
 end
 
-create_task :sampletask, SampleObject.new do |obj|
-  obj.task_created = true
-  $create_task_obj = obj
-end
-
 describe "when defining a task" do
   before :all do
+    @sample_object = SampleObject.stub_instance()
+    @sample_object.stub_method(:load_config_by_task_name){ |name|
+    	@task_name = name
+    }
+    create_task :sampletask, @sample_object do |obj|
+      @task_obj = obj
+    end
+
   	sampletask :sample do |x|
       x.extend(FailPatch)
-      x.configured = true
-  	  @yielded_object = x
+  	  @config_obj = x
   	end
     Rake::Task[:sample].invoke
   end
   
   it "should yield the object for configuration" do
-    @yielded_object.configured.should be_true
+    @config_obj.should == @sample_object
   end
   
   it "should yield the object for execution" do
-  	$create_task_obj.task_created.should be_true
+  	@task_obj.should == @sample_object
   end
   
   it "should call the yaml configuration by task name" do
-  	$create_task_obj.yamlconfig_name.should == "sample"
+  	@task_name.should == "sample"
   end
 end
 
 describe "when execution fails" do
   before :all do
-  	sampletask :sample_fail do |x|
+    create_task :failing_task, SampleObject.new
+
+  	failing_task :sample_fail do |x|
   	  x.extend(FailPatch)
   	  x.fail
   	end
@@ -52,7 +55,9 @@ end
 
 describe "when task args are used" do
   before :all do
-    sampletask :sampletask_withargs, [:arg1] do |t, args|
+    create_task :task_with_args, SampleObject.new
+
+    task_with_args :sampletask_withargs, [:arg1] do |t, args|
       t.extend(FailPatch)
       @args = args
     end

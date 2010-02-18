@@ -52,12 +52,12 @@ describe XUnitTestRunner, "when configured correctly" do
     xunit = XUnitTestRunner.new(@@xunitpath)
     xunit.assembly = @@test_assembly
     xunit.options '/noshadow'
+    xunit.extend(FailPatch)
     
     xunit.execute
-    @failed = xunit.failed
   end
   
   it "should execute" do
-    @failed.should be_false
+    $task_failed.should be_false
   end
 end
