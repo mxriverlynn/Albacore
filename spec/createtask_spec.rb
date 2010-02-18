@@ -68,3 +68,55 @@ describe "when task args are used" do
     @args.arg1.should == "test"
   end
 end
+
+describe "when calling a task method without providing a task name" do
+  before :all do
+    create_task :task_without_name, SampleObject.new
+
+    task_without_name do |t|
+      @task_without_name_called = true
+    end
+    
+    Rake::Task[:task_without_name].invoke
+  end
+  
+  it "should create the the task by the task method's name" do
+    @task_without_name_called = true
+  end
+end
+
+describe "when calling a task method without providing a task parameter" do
+  before :all do
+    create_task :task_without_param, SampleObject.new
+
+    task_without_param do
+      @task_without_param_called = true
+    end
+    
+    Rake::Task[:task_without_param].invoke
+  end
+  
+  it "should execute the task with no parameter provided" do
+    @task_without_param_called = true
+  end
+end
+
+describe "when calling a task without a task definition block" do
+	
+  before :all do
+    create_task :task_without_body, SampleObject.new
+    
+    task_without_body
+    
+    begin
+      Rake::Task[:task_without_body].invoke
+      @failed = false
+    rescue
+      @failed = true
+    end
+  end		
+	
+  it "should execute the task" do
+  	@failed.should be_false
+  end
+end
