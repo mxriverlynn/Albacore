@@ -1,0 +1,57 @@
+---
+layout: post
+title: "v0.1.2 Release Notes: Rake Task Parameters And NCoverConsole"
+---
+
+Albacore v0.1.2 was just pushed up to Gemcutter. It contains a bug fix for the use of Rake task parameters and a bug fix for the ["NCover Console task":http://wiki.github.com/derickbailey/Albacore/ncoverconsoletask]. 
+
+h2. Fixing The Rake Task Parameter Support
+
+["Andrew Bullock":http://twitter.com/trullock] found a bug in the syntax for all of the Albacore tasks, that prevented the Rake task parameter syntax from working. The bug has been fixed, and our support for the full Rake task syntax has been restored.
+
+This is the syntax that allows you to pass parameters to a specific task. You can define a parameter for a task, and access it like this:
+
+<pre><code>task :task_name, [:something, :whatever] do |msb, args|
+  #args.something is now available, and contains the value passed into the :something parameter
+  puts args.something
+  
+  #args.whatever is now available, and contains the value passed into the :something parameter
+  puts args.whatever
+end
+</code></pre>
+
+You can then call the task with values specified for these parameters, like this: <code>rake task_name[foo, bar]</code> and the task will spit out "foo" and "bar" to the console window. 
+
+A better example would be to call msbuild with a parameter to tell you what configuration to build in... debug or release. You may also want to provide a default value, in case none are specified when calling the task.
+
+<pre><code>msbuild :build, [:build_mode] do |msb, args|
+  #setup the default in case no value is provided
+  args.with_defaults :build_mode => :debug
+  
+  msb.properties :configuration => args.build_mode
+
+  #... other msbuild configuration here
+end
+</code></pre>
+
+Then you can call this task with the configuration you want: <code>rake build[release]</code>
+
+h2. NCover Console And Assembly Paths With Spaces
+
+["Sean Biefeld":http://twitter.com/seanbiefeld] found a bug in the ["NCover Console":http://wiki.github.com/derickbailey/Albacore/ncoverconsoletask] task a while back. If an assembly being run covered by NCover had a space in the file path, the space would cause problems and prevent the assembly from being found. This has been fixed now, and you can safely specify spaces in your file paths, now:
+
+<pre><code>ncoverconsole :ncover do |ncover|
+  nunit = NUnitTestRunner.new("... path to ncover-console.exe")  
+  
+  nunit.assemblies "some path/with spaces/TestSolution.Tests.dll"
+  
+  ncover.testrunner = nunit
+  #... other ncover configuration here
+end
+</code></pre>
+
+h2. Misc. Cleanup
+
+In the process of fixing the task parameter bug, there were several other behind-the-scenes bugs found and squashed. This related mostly to code duplication and strange behaviors due to accidental monekypatching of some existing Ruby methods (like 'fail'). A lot of refactoring was done to clean up these remaining issues, but we should not have affected any functionality in the process of doing this cleanup. 
+
+Of course, if you do find bugs of any kind, please drop us a line. You can add a ticket to ["the issue list":http://github.com/derickbailey/Albacore/issues], drop a question in the ["Google group":http://groups.google.com/group/albacoredev], or tweet your issue to ["@albacorebuild":http://twitter.com/albacorebuild].
