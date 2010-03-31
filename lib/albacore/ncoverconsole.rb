@@ -6,7 +6,7 @@ class NCoverConsole
   include YAMLConfig
   
   attr_accessor :testrunner, :working_directory
-  attr_array :cover_assemblies, :ignore_assemblies, :coverage
+  attr_array :cover_assemblies, :ignore_assemblies, :coverage, :exclude_attributes
   attr_hash :output
   
   def initialize
@@ -14,6 +14,7 @@ class NCoverConsole
     @output = {}
     @cover_assemblies = []
     @ignore_assemblies = []
+    @exclude_attributes = []
     @coverage = []
     super()
   end
@@ -33,8 +34,9 @@ class NCoverConsole
     command_parameters << "//reg" if @register_dll
     command_parameters << build_output_options(@output) unless @output.nil?
     command_parameters << @working_directory unless @working_directory.nil?
-    command_parameters << build_assembly_list("assemblies", @cover_assemblies) unless @cover_assemblies.empty?
-    command_parameters << build_assembly_list("exclude-assemblies", @ignore_assemblies) unless @ignore_assemblies.empty?
+    command_parameters << build_parameter_list("assemblies", @cover_assemblies) unless @cover_assemblies.empty?
+    command_parameters << build_parameter_list("exclude-assemblies", @ignore_assemblies) unless @ignore_assemblies.empty?
+    command_parameters << build_parameter_list("exclude-attributes", @exclude_attributes) unless @exclude_attributes.empty?
     command_parameters << build_coverage_list(@coverage) unless @coverage.empty?
     command_parameters << @testrunner.get_command_line
     
@@ -60,9 +62,9 @@ class NCoverConsole
     options.join(" ")
   end
   
-  def build_assembly_list(param_name, list)
-    assembly_list = list.map{|asm| "\"#{asm}\""}.join(';')
-    "//#{param_name} #{assembly_list}"
+  def build_parameter_list(param_name, list)
+    list = list.map{|asm| "\"#{asm}\""}.join(';')
+    "//#{param_name} #{list}"
   end
   
   def build_coverage_list(coverage)
