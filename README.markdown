@@ -55,9 +55,9 @@ After installing Albacore, you only need to
 in your rakefile. This will allow you to use the tasks that Albacore includes. 
 
     desc "Run a sample build using the MSBuildTask"
-    msbuildtask do |msb|
-        msb.properties = {:configuration => :Debug}
-        msb.targets [:Clean, :Build]
+    msbuild do |msb|
+        msb.properties :configuration => :Debug
+        msb.targets :Clean, :Build
         msb.solution = "spec/support/TestSolution/TestSolution.sln"
     end
 
