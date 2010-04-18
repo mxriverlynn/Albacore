@@ -14,14 +14,14 @@ module RunCommand
     super()
   end
   
-  def run_command(command_name="Command Line", command_parameters="")
+  def run_command(command_name="Command Line", command_parameters=nil)
     if @require_valid_command
       return false unless valid_command_exists
     end
 
-    command_parameters = command_parameters + " #{@parameters.join(' ')}"
+	@parameters = @parameters.push(command_parameters) unless command_parameters.nil?
     
-    command = "\"#{@path_to_command}\" #{command_parameters}"
+    command = "\"#{@path_to_command}\" #{@parameters.join(' ')}"
     @logger.debug "Executing #{command_name}: #{command}"
     
     set_working_directory    

@@ -18,7 +18,13 @@ describe Exec, "when executing a command with parameters" do
     @cmd.system_command.should include("\"#{@@nunit}\" --help")
   end
   
+  it "should specify the parameters only once" do
+  	@cmd.system_command.scan(/--help/).count.should be(1)
+  end
+  
   it "should not fail" do
     $task_failed.should be_false
   end
 end
+
+
