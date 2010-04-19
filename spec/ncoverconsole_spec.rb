@@ -71,7 +71,7 @@ describe NCoverConsole, "when specifying assemblies to ignore" do
     @ncc.path_to_command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
-    @ncc.ignore_assemblies "TestSolution.*"
+    @ncc.exclude_assemblies "TestSolution.*"
     
     nunit = NUnitTestRunner.new(@testdata.nunitpath)
     nunit.assemblies @testdata.test_assembly
