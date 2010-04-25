@@ -5,6 +5,8 @@ $: << File.join(@root_dir, "spec")
 $: << File.join(@root_dir, "spec/patches")
 $: << File.join(@root_dir, "spec/support")
 
+require 'rubygems'
+require 'spec'
 require 'rake/tasklib'
 require 'lib/rake/support/albacoretask.rb'
 require 'lib/rake/support/createtask.rb'

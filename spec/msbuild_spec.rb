@@ -181,5 +181,4 @@ describe MSBuild, "when specifying multiple configuration properties" do
   it "should output the solution's binaries" do
     File.exist?(@testdata.output_path).should == true
   end
-
 end

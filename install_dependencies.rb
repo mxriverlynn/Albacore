@@ -3,7 +3,7 @@ require 'rubygems/gem_runner'
 require 'rubygems/exceptions'
 
 #http://gist.github.com/236148
-required_version = Gem::Requirement.new "> 1.8.3"
+required_version = Gem::Requirement.new "> 1.8.5"
 
 unless required_version.satisfied_by? Gem.ruby_version then
   abort "Expected Ruby Version #{required_version}, was #{Gem.ruby_version}"
@@ -22,20 +22,7 @@ def install(lib)
   end
 end
 
-def add_source(url)
-  begin
-    if Gem.sources.include?(url)
-      puts "Found #{url} gem source = skipping"
-    else
-      puts "Adding #{url} gem source."
-    Gem::GemRunner.new.run ['sources', '-a', url]
-  end
-  rescue Gem::SystemExitException => e
-  end
-end
-
 puts "Installing required dependencies"
-add_source 'http://gemcutter.org'
 install 'rake'
 install 'net-ssh'
 install 'net-sftp'
