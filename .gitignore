@@ -1,5 +1,4 @@
-*.rb.swp
-*.rb~
+*.swp
 *~
 .DS_Store
 pkg

@@ -1,3 +1,5 @@
-properties: {:configuration: :release, :platform: 'Any CPU'}
+properties: 
+  :configuration: :release
+  :platform: 'Any CPU'
 targets: [:clean, :build]
 solution: "spec/support/TestSolution/TestSolution.sln"
