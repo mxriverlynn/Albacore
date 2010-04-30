@@ -13,7 +13,7 @@ describe "when setting an array attribute value without the equal sign" do
   end
 
   it "should set the array to the specified values" do
-    @test.test.count.should be(4)
+    @test.test.length.should be(4)
   end
 end
 
@@ -29,7 +29,7 @@ describe "when setting an array attribute with a params list, using the equal si
   end
 
   it "should set the array to the specified values" do
-    @test.test.count.should be(4)
+    @test.test.length.should be(4)
   end
 end
 
@@ -46,7 +46,7 @@ describe "when setting an array attribute to an array variable using the equal s
   end
 
   it "should set the array to the values contained in the variable" do
-    @test.test.count.should be(5)
+    @test.test.length.should be(5)
   end
 end
 
@@ -62,7 +62,7 @@ describe "when setting a hash attribute value without the equal sign" do
   end
 
   it "should set the hash to the specified values" do
-    @test.test.count.should be(2)
+    @test.test.length.should be(2)
   end
 end
 
@@ -78,7 +78,7 @@ describe "when setting a hash attribute with a params list, using the equal sign
   end
 
   it "should set the hash to the specified values" do
-    @test.test.count.should be(2)
+    @test.test.length.should be(2)
   end
 end
 
@@ -95,6 +95,6 @@ describe "when setting a hash attribute to an array variable using the equal sig
   end
 
   it "should set the hash to the values contained in the variable" do
-    @test.test.count.should be(3)
+    @test.test.length.should be(3)
   end
 end

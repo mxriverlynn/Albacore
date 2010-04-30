@@ -19,7 +19,7 @@ describe Exec, "when executing a command with parameters" do
   end
   
   it "should specify the parameters only once" do
-  	@cmd.system_command.scan(/--help/).count.should be(1)
+  	@cmd.system_command.scan(/--help/).length.should be(1)
   end
   
   it "should not fail" do
