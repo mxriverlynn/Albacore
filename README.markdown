@@ -88,3 +88,4 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 * [Mark Wilkins](http://github.com/markwilk): VB.NET Language Generator For The AssemblyInfo Task
 * [Sean Biefeld](http://github.com/seanbiefeld): MSpecTestRunner for NCoverConsole
 * [Steven Harman](http://github.com/stevenharman): Finding some wicked bugs, patching nunit test runner, and the nant task
+* [Panda Wood](http://github.com/pandawood): NCover Console options and wiki edits
