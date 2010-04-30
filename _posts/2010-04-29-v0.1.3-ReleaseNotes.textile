@@ -1,0 +1,19 @@
+---
+layout: post
+title: "v0.1.3 Release Notes: Bug Fixes And An NCover Console Feature"
+---
+
+Albacore v0.1.3 was just pushed up to RubyGems.org. It contains a few bug fixes, some additional behind-the-scenes tests to ensure quality in the future, and a small enahncement to the NCover Console task. ["NCover Console task":http://wiki.github.com/derickbailey/Albacore/ncoverconsoletask]. 
+
+h2. Adding exclude_attributes To NCover Console
+
+["Panda Wood":http://github.com/PandaWood] added the syntax to support exclude_attributes to the NCover Console task. This option allows you to not run coverage against attributes in your codebase. Dave Laribee has a pretty good write-up about this feature. If you are interesting in knowing what this does and why, ["check out his blog post":http://laribee.com/using-attributes-to-exclude-code-from-coverage].
+
+h2. Rename ignore_assemblies To exclude_assemblies For NCover Console
+
+Chalk this one up to "why did I do that?!" The option to exclude assemblies in the NCover Console was aptly named ignore_assemblies in the previous releases. This is not the naming convention that NCover itself uses, and didn't make sense once Panda Wood added the exclude_attributes functionality. So, the ignore_assemblies attribute has been renamed to exclude_assemblies.
+
+h2. Bug: Exec Task Duplicates All Parameters
+
+["Dave The Ninja":http://twitter.com/davetheninja] found this one. I'm honestly surprised no one else found it - including me. The ["Exec Task":http://wiki.github.com/derickbailey/Albacore/exec-task] was duplicating every parameter that was specified, when executing. This has been fixed and tests have been put in place to ensure it doesn't happen again.
+
