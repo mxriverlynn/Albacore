@@ -4,6 +4,7 @@ require 'albacore/xunittestrunner'
 @@xunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'XUnit-v1.5', 'xunit.console.exe')
 @@test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'xunit', 'assemblies', 'TestSolution.XUnitTests.dll')
 @@output_option = "/out=xunit.results.html"
+@@html_output = File.join(File.dirname(__FILE__), 'support','xunit','working','TestSolution.XUnitTests.dll.html')
 
 describe XUnitTestRunner, "the command parameters for an xunit runner" do
   before :all do
@@ -16,10 +17,6 @@ describe XUnitTestRunner, "the command parameters for an xunit runner" do
     
   it "should not include the path to the command" do
     @command_parameters.should_not include(@@xunitpath)
-  end
-  
-  it "should include the list of assemblies" do
-    @command_parameters.should include("\"#{@@test_assembly}\"")
   end
   
   it "should include the list of options" do
@@ -59,5 +56,84 @@ describe XUnitTestRunner, "when configured correctly" do
   
   it "should execute" do
     $task_failed.should be_false
+  end
+end
+
+describe XUnitTestRunner, "when multiple assemblies are passed to xunit runner" do
+  before :all do
+    xunit = XUnitTestRunner.new(@@xunitpath)
+    xunit.assemblies = @@test_assembly,@@test_assembly
+    xunit.options '/noshadow'
+    xunit.extend(FailPatch)
+    
+    xunit.execute
+  end
+  
+  it "should execute" do
+    $task_failed.should be_false
+  end
+end
+
+describe XUnitTestRunner, "when zero assemblies are passed to xunit runner" do
+  before :all do
+    xunit = XUnitTestRunner.new(@@xunitpath)    
+    xunit.options '/noshadow'
+    xunit.extend(FailPatch)
+    
+    xunit.execute
+  end
+  
+  it "should fail" do
+    $task_failed.should be_true
+  end
+end
+
+describe XUnitTestRunner, "when html_output is specified" do
+  before :all do
+    xunit = XUnitTestRunner.new(@@xunitpath)
+    xunit.assemblies = @@test_assembly    
+	xunit.html_output = File.dirname(@@html_output)
+    xunit.extend(FailPatch)
+    
+    xunit.execute
+  end
+  
+  it "should execute" do
+    $task_failed.should be_false
+  end
+  
+  it "should write output html" do
+    File.exist?(@@html_output).should be_true
+  end
+  
+  after:all do
+	FileUtils.rm @@html_output if File.exist? @@html_output
+  end
+end
+
+describe XUnitTestRunner, "when html_output is not a directory" do
+  before :all do
+	strio = StringIO.new
+    xunit = XUnitTestRunner.new(@@xunitpath)
+	xunit.log_level = :verbose
+    xunit.log_device = strio
+    xunit.assemblies = @@test_assembly    
+	xunit.html_output = @@html_output
+    xunit.extend(FailPatch)
+    
+    xunit.execute
+	@log_data = strio.string
+  end
+  
+  it "should fail" do
+    $task_failed.should be_true
+  end
+  
+  it "should log a message" do
+	@log_data.should include('Directory is required for html_output')    
+  end
+  
+  after:all do
+	FileUtils.rm @@html_output if File.exist? @@html_output
   end
 end
