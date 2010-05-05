@@ -9,128 +9,128 @@ namespace :specs do
 
   desc "Run functional specs for Albacore"
   Spec::Rake::SpecTask.new :all do |t|
-    t.spec_files = 'spec/**/*_spec.rb'
+    t.spec_files = FileList['spec/**/*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
   desc "Run rake task specs for Albacore"
   Spec::Rake::SpecTask.new :tasks do |t|
-    t.spec_files = 'spec/**/*task_spec.rb'
+    t.spec_files = FileList['spec/**/*task_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "Assembly info functional specs"
   Spec::Rake::SpecTask.new :assemblyinfo do |t|
-    t.spec_files = 'spec/assemblyinfo*_spec.rb'
+    t.spec_files = FileList['spec/assemblyinfo*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
   desc "MSBuild functional specs"
   Spec::Rake::SpecTask.new :msbuild do |t|
-    t.spec_files = 'spec/msbuild*_spec.rb'
+    t.spec_files = FileList['spec/msbuild*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "SQLServer SQLCmd functional specs" 
   Spec::Rake::SpecTask.new :sqlcmd do |t|
-    t.spec_files = 'spec/sqlcmd*_spec.rb'
+    t.spec_files = FileList['spec/sqlcmd*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   
   desc "Nant functional specs"
   Spec::Rake::SpecTask.new :nant do |t|
-    t.spec_files = 'spec/nant*_spec.rb'
+    t.spec_files = FileList['spec/nant*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
   desc "NCover Console functional specs"
   Spec::Rake::SpecTask.new :ncoverconsole do |t|
-    t.spec_files = 'spec/ncoverconsole*_spec.rb'
+    t.spec_files = FileList['spec/ncoverconsole*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
   desc "NCover Report functional specs"
   Spec::Rake::SpecTask.new :ncoverreport do |t|
-    t.spec_files = 'spec/ncoverreport*_spec.rb'
+    t.spec_files = FileList['spec/ncoverreport*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "SSH functional specs"
   Spec::Rake::SpecTask.new :ssh do |t|
-    t.spec_files = 'spec/ssh*_spec.rb'
+    t.spec_files = FileList['spec/ssh*_spec.rb']
     t.spec_opts << @spec_opts
   end  
 
   desc "Plink functional specs"
   Spec::Rake::SpecTask.new :plink do |t|
-    t.spec_files = 'spec/plink*_spec.rb'
+    t.spec_files = FileList['spec/plink*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "Ndepend functional specs"
   Spec::Rake::SpecTask.new :ndepend do |t|
-    t.spec_files = 'spec/ndepend*_spec.rb'
+    t.spec_files = FileList['spec/ndepend*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
   desc "SFTP functional specs"
   Spec::Rake::SpecTask.new :sftp do |t|
-    t.spec_files = 'spec/sftp*_spec.rb'
+    t.spec_files = FileList['spec/sftp*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "Expand Templates functional specs"
   Spec::Rake::SpecTask.new :templates do |t|
-    t.spec_files = 'spec/expandtemplates*_spec.rb'
+    t.spec_files = FileList['spec/expandtemplates*_spec.rb']
     t.spec_opts << @spec_opts
     end
 
   desc "Zip functional specs"
   Spec::Rake::SpecTask.new :zip do |t|
-    t.spec_files = 'spec/zip*_spec.rb'
+    t.spec_files = FileList['spec/zip*_spec.rb']
     t.spec_opts << @spec_opts
     end
 
   desc "XUnit functional specs"
   Spec::Rake::SpecTask.new :xunit do |t|
-    t.spec_files = 'spec/xunit*_spec.rb'
+    t.spec_files = FileList['spec/xunit*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "NUnit functional specs"
   Spec::Rake::SpecTask.new :nunit do |t|
-    t.spec_files = 'spec/nunit*_spec.rb'
+    t.spec_files = FileList['spec/nunit*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "MSpec functional specs"
   Spec::Rake::SpecTask.new :mspec do |t|
-    t.spec_files = 'spec/mspec*_spec.rb'
+    t.spec_files = FileList['spec/mspec*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "Exec functional specs"
   Spec::Rake::SpecTask.new :exec do |t|
-    t.spec_files = 'spec/exec*_spec.rb'
+    t.spec_files = FileList['spec/exec*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
   desc "Rename functional specs"
   Spec::Rake::SpecTask.new :rename do |t|
-    t.spec_files = 'spec/rename*_spec.rb'
+    t.spec_files = FileList['spec/rename*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
   desc "Docu functional specs"
   Spec::Rake::SpecTask.new :docu do |t|
-    t.spec_files = 'spec/docu*_spec.rb'
+    t.spec_files = FileList['spec/docu*_spec.rb']
     t.spec_opts << @spec_opts
   end
 
   desc "YAML Config functional specs"
   Spec::Rake::SpecTask.new :yamlconfig do |t|
-    t.spec_files = 'spec/yaml*_spec.rb'
+    t.spec_files = FileList['spec/yaml*_spec.rb']
     t.spec_opts << @spec_opts
   end
 end
