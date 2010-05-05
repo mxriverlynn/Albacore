@@ -78,6 +78,7 @@ class AssemblyInfo
     
     @namespaces << "System.Reflection"
     @namespaces << "System.Runtime.InteropServices"
+    @namespaces.uniq!
     
     ns = ''
     @namespaces.each do |n|
