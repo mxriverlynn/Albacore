@@ -1,4 +1,5 @@
 require 'albacore/support/failure'
+require 'albacore/support/attrmethods.rb'
 
 module RunCommand
   extend AttrMethods
