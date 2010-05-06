@@ -25,7 +25,9 @@ describe "when defining a task" do
     @sample_object.stub_method(:load_config_by_task_name){ |name|
     	@task_name = name
     }
-    create_task :sampletask, @sample_object do |obj|
+    
+    task_object_proc = Proc.new { @sample_object }
+    create_task :sampletask, task_object_proc do |obj|
       @task_obj = obj
     end
 
@@ -51,7 +53,7 @@ end
 
 describe "when execution fails" do
   before :all do
-    create_task :failing_task, SampleObject.new
+    create_task :failing_task, Proc.new { SampleObject.new }
 
   	failing_task :sample_fail do |x|
   	  x.extend(FailPatch)
@@ -67,7 +69,7 @@ end
 
 describe "when task args are used" do
   before :all do
-    create_task :task_with_args, SampleObject.new
+    create_task :task_with_args, Proc.new { SampleObject.new }
 
     task_with_args :sampletask_withargs, [:arg1] do |t, args|
       t.extend(FailPatch)
@@ -83,7 +85,7 @@ end
 
 describe "when calling a task method without providing a task name" do
   before :all do
-    create_task :task_without_name, SampleObject.new
+    create_task :task_without_name, Proc.new { SampleObject.new }
 
     task_without_name do |t|
       @task_without_name_called = true
@@ -99,7 +101,7 @@ end
 
 describe "when calling a task method without providing a task parameter" do
   before :all do
-    create_task :task_without_param, SampleObject.new
+    create_task :task_without_param, Proc.new { SampleObject.new }
 
     task_without_param do
       @task_without_param_called = true
@@ -116,7 +118,7 @@ end
 describe "when calling a task without a task definition block" do
 	
   before :all do
-    create_task :task_without_body, SampleObject.new
+    create_task :task_without_body, Proc.new { SampleObject.new }
     
     task_without_body
     
@@ -135,7 +137,7 @@ end
 
 describe "when creating two tasks and executing them" do
   before :all do
-    create_task :multiple_instance_task, SampleObject.new do |mi|
+    create_task :multiple_instance_task, Proc.new { SampleObject.new } do |mi|
       @array_values = mi.get_array
       @hash_values = mi.get_hash
     end

@@ -1,3 +1,3 @@
-create_task :mspec, MSpecTestRunner.new do |mspec|
+create_task :mspec, Proc.new { MSpecTestRunner.new } do |mspec|
   mspec.execute
 end

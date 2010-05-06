@@ -1,3 +1,3 @@
-create_task :zip, ZipDirectory.new do |z|
+create_task :zip, Proc.new { ZipDirectory.new } do |z|
   z.package
 end

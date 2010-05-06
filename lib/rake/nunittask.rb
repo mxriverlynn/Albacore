@@ -1,3 +1,3 @@
-create_task :nunit, NUnitTestRunner.new do |n|
+create_task :nunit, Proc.new { NUnitTestRunner.new } do |n|
   n.execute
 end    

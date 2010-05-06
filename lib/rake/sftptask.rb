@@ -1,3 +1,3 @@
-create_task :sftp, Sftp.new do |cmd|
+create_task :sftp, Proc.new { Sftp.new } do |cmd|
   cmd.upload
 end

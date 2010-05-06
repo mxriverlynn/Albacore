@@ -1,3 +1,3 @@
-create_task :ndepend, NDepend.new do |cmd|
+create_task :ndepend, Proc.new { NDepend.new } do |cmd|
   cmd.run
 end

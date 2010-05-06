@@ -1,3 +1,3 @@
-create_task :nant, NAnt.new do |nant|
+create_task :nant, Proc.new { NAnt.new } do |nant|
   nant.run
 end

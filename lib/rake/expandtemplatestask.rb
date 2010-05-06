@@ -1,3 +1,3 @@
-create_task :expandtemplates, ExpandTemplates.new do |exp|
+create_task :expandtemplates, Proc.new { ExpandTemplates.new } do |exp|
   exp.expand
 end

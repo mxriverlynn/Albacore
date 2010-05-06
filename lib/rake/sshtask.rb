@@ -1,3 +1,3 @@
-create_task :ssh, Ssh.new do |cmd|
+create_task :ssh, Proc.new { Ssh.new } do |cmd|
   cmd.execute
 end
