@@ -4,7 +4,8 @@ require 'albacore/xunittestrunner'
 @@xunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'XUnit-v1.5', 'xunit.console.exe')
 @@test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'xunit', 'assemblies', 'TestSolution.XUnitTests.dll')
 @@output_option = "/out=xunit.results.html"
-@@html_output = File.join(File.dirname(__FILE__), 'support','xunit','working','TestSolution.XUnitTests.dll.html')
+@@working_dir =File.join(File.dirname(__FILE__), 'support','xunit')
+@@html_output = File.join(@@working_dir,'TestSolution.XUnitTests.dll.html')
 
 describe XUnitTestRunner, "the command parameters for an xunit runner" do
   before :all do
@@ -90,7 +91,8 @@ describe XUnitTestRunner, "when zero assemblies are passed to xunit runner" do
 end
 
 describe XUnitTestRunner, "when html_output is specified" do
-  before :all do
+  before :each do
+	FileUtils.mkdir @@working_dir
     xunit = XUnitTestRunner.new(@@xunitpath)
     xunit.assemblies = @@test_assembly    
 	xunit.html_output = File.dirname(@@html_output)
@@ -107,13 +109,14 @@ describe XUnitTestRunner, "when html_output is specified" do
     File.exist?(@@html_output).should be_true
   end
   
-  after:all do
-	FileUtils.rm @@html_output if File.exist? @@html_output
+  after:each do
+	FileUtils.rm_r @@working_dir if File.exist? @@working_dir
   end
 end
 
 describe XUnitTestRunner, "when html_output is not a directory" do
-  before :all do
+  before :each do
+	FileUtils.mkdir @@working_dir
 	strio = StringIO.new
     xunit = XUnitTestRunner.new(@@xunitpath)
 	xunit.log_level = :verbose
@@ -134,7 +137,7 @@ describe XUnitTestRunner, "when html_output is not a directory" do
 	@log_data.should include('Directory is required for html_output')    
   end
   
-  after:all do
-	FileUtils.rm @@html_output if File.exist? @@html_output
+  after:each do
+	FileUtils.rm_r @@working_dir if File.exist? @@working_dir
   end
 end
