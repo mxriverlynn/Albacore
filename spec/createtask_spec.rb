@@ -3,8 +3,20 @@ require 'albacore/support/albacore_helper'
 require 'fail_patch'
 
 class SampleObject
+  extend AttrMethods
   include Failure
   include YAMLConfig
+
+  attr_array :array
+  attr_hash :hash
+
+  def get_array
+    @array
+  end
+
+  def get_hash
+    @hash
+  end
 end
 
 describe "when defining a task" do
@@ -118,5 +130,41 @@ describe "when calling a task without a task definition block" do
 	
   it "should execute the task" do
   	@failed.should be_false
+  end
+end
+
+describe "when creating two tasks and executing them" do
+  before :all do
+    create_task :multiple_instance_task, SampleObject.new do |mi|
+      @array_values = mi.get_array
+      @hash_values = mi.get_hash
+    end
+
+    multiple_instance_task :multi_instance_1 do |mi|
+      mi.array 1, 2
+      mi.hash = { :a => :b, :c => :d }
+      @instance_1 = mi
+    end
+
+    multiple_instance_task :multi_instance_2 do |mi|
+      mi.array 3, 4
+      mi.hash = { :e => :f, :g => :h }
+      @instance_2 = mi
+    end
+
+    Rake::Task[:multi_instance_1].invoke
+    Rake::Task[:multi_instance_2].invoke 
+  end
+
+  it "should specify the array values once per task" do
+    @array_values.should == [3, 4]
+  end
+
+  it "should specify the hash values once per task" do
+    @hash_values.should == { :e => :f, :g => :h }
+  end
+
+  it "should create two separate instances of the task object" do
+    @instance_1.object_id.should_not == @instance_2.object_id
   end
 end
