@@ -68,11 +68,13 @@ describe AssemblyInfo, "when providing a custom namespace without specifiying th
     
     asm.namespaces 'My.Name.Space'
 
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should default to c# for the generated assemby info" do
-    @filedata.should include("using My.Name.Space;")
+    @filedata.scan('using My.Name.Space;').length.should == 1
   end
 end
 
@@ -85,12 +87,14 @@ describe AssemblyInfo, "when providing custom namespaces and specifying C#" do
     
     asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
 
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should write the namespaces into the using statements" do
-    @filedata.should include("using My.Name.Space;")
-    @filedata.should include("using Another.Namespace.GoesHere;")
+    @filedata.scan('using My.Name.Space;').length.should == 1
+    @filedata.scan('using Another.Namespace.GoesHere;').length.should == 1
   end
 end
 
@@ -103,12 +107,14 @@ describe AssemblyInfo, "when providing custom namespaces and specifying VB.NET" 
     
     asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
 
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should write the namespaces into the imports statements" do
-    @filedata.should include("Imports My.Name.Space")
-    @filedata.should include("Imports Another.Namespace.GoesHere")
+    @filedata.scan('Imports My.Name.Space').length.should == 1
+    @filedata.scan('Imports Another.Namespace.GoesHere').length.should == 1
   end
 end
 
@@ -119,12 +125,14 @@ describe AssemblyInfo, "when providing custom attributes without specifying a la
     
     asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
 
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should write the custom attributes to the assembly info file" do
-    @filedata.should include("[assembly: CustomAttribute(\"custom attribute data\")]")
-    @filedata.should include("[assembly: AnotherAttribute(\"more data here\")]")
+    @filedata.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
+    @filedata.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
   end
 end
 
@@ -137,12 +145,14 @@ describe AssemblyInfo, "when providing custom attributes and specifying C#" do
     
     asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
 
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should write the custom attributes to the assembly info file" do
-    @filedata.should include("[assembly: CustomAttribute(\"custom attribute data\")]")
-    @filedata.should include("[assembly: AnotherAttribute(\"more data here\")]")
+    @filedata.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
+    @filedata.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
   end
 end
 
@@ -155,12 +165,14 @@ describe AssemblyInfo, "when providing custom attributes and specifying VB.NET" 
     
     asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
 
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should write the custom attributes to the assembly info file" do
-    @filedata.should include("<assembly: CustomAttribute(\"custom attribute data\")>")
-    @filedata.should include("<assembly: AnotherAttribute(\"more data here\")>")
+    @filedata.scan('<assembly: CustomAttribute("custom attribute data")>').length.should == 1
+    @filedata.scan('<assembly: AnotherAttribute("more data here")>').length.should == 1
   end
 end
 
@@ -171,11 +183,13 @@ describe AssemblyInfo, "when specifying a custom attribute with no data" do
     
     asm.custom_attributes :NoArgsAttribute => nil
 
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should write the attribute with an empty argument list" do
-    @filedata.should include("[assembly: NoArgsAttribute()]")
+    @filedata.scan('[assembly: NoArgsAttribute()]').length.should == 1
   end
 end
 
@@ -186,11 +200,13 @@ describe AssemblyInfo, "when specifying an attribute with non-string data" do
     
     asm.custom_attributes :NonStringAttribute => true
 
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should write the attribute data without quotes" do
-    @filedata.should include("[assembly: NonStringAttribute(true)]")
+    @filedata.scan('[assembly: NonStringAttribute(true)]').length.should == 1
   end
 end
 
@@ -210,52 +226,54 @@ describe AssemblyInfo, "when generating an assembly info file with the built in 
     asm.file_version = @tester.file_version
     asm.trademark = @tester.trademark
     
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should use the system.reflection namespace" do
-    @filedata.should include("using System.Reflection;")
+    @filedata.scan('using System.Reflection;').length.should == 1
   end
   
   it "should use the system.runtime.interopservices namespace" do
-    @filedata.should include("using System.Runtime.InteropServices;")
+    @filedata.scan('using System.Runtime.InteropServices;').length.should == 1
   end
   
   it "should contain the specified version information" do
-    @filedata.should include("[assembly: AssemblyVersion(\"#{@tester.version}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).length.should == 1
   end
   
   it "should contain the assembly title" do
-    @filedata.should include("[assembly: AssemblyTitle(\"#{@tester.title}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyTitle("#{@tester.title}")]|).length.should == 1
   end
   
   it "should contain the assembly description" do
-    @filedata.should include("[assembly: AssemblyDescription(\"#{@tester.description}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyDescription("#{@tester.description}")|).length.should == 1
   end
   
   it "should contain the copyright information" do
-    @filedata.should include("[assembly: AssemblyCopyright(\"#{@tester.copyright}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyCopyright("#{@tester.copyright}")]|).length.should == 1
   end
   
   it "should contain the com visible information" do
-    @filedata.should include("[assembly: ComVisible(#{@tester.com_visible})]")
-    @filedata.should include("[assembly: Guid(\"#{@tester.com_guid}\")]")
+    @filedata.scan(%Q|[assembly: ComVisible(#{@tester.com_visible})]|).length.should == 1
+    @filedata.scan(%Q|[assembly: Guid("#{@tester.com_guid}")]|).length.should == 1
   end
   
   it "should contain the company name information" do
-    @filedata.should include("[assembly: AssemblyCompany(\"#{@tester.company_name}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyCompany("#{@tester.company_name}")]|).length.should == 1
   end
   
   it "should contain the product information" do
-    @filedata.should include("[assembly: AssemblyProduct(\"#{@tester.product_name}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyProduct("#{@tester.product_name}")]|).length.should == 1
   end
   
   it "should contain the file version information" do
-    @filedata.should include("[assembly: AssemblyFileVersion(\"#{@tester.file_version}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
   end
   
   it "should contain the trademark information" do
-    @filedata.should include("[assembly: AssemblyTrademark(\"#{@tester.trademark}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyTrademark("#{@tester.trademark}")]|).length.should == 1
   end
 end
 
@@ -277,52 +295,54 @@ describe AssemblyInfo, "when generating an assembly info file with the built in 
     asm.file_version = @tester.file_version
     asm.trademark = @tester.trademark
     
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should use the system.reflection namespace" do
-    @filedata.should include("using System.Reflection;")
+    @filedata.scan('using System.Reflection;').length.should == 1
   end
   
   it "should use the system.runtime.interopservices namespace" do
-    @filedata.should include("using System.Runtime.InteropServices;")
+    @filedata.scan('using System.Runtime.InteropServices;').length.should == 1
   end
   
   it "should contain the specified version information" do
-    @filedata.should include("[assembly: AssemblyVersion(\"#{@tester.version}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).length.should == 1
   end
   
   it "should contain the assembly title" do
-    @filedata.should include("[assembly: AssemblyTitle(\"#{@tester.title}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyTitle("#{@tester.title}")]|).length.should == 1
   end
   
   it "should contain the assembly description" do
-    @filedata.should include("[assembly: AssemblyDescription(\"#{@tester.description}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyDescription("#{@tester.description}")]|).length.should == 1
   end
   
   it "should contain the copyright information" do
-    @filedata.should include("[assembly: AssemblyCopyright(\"#{@tester.copyright}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyCopyright("#{@tester.copyright}")]|).length.should == 1
   end
   
   it "should contain the com visible information" do
-    @filedata.should include("[assembly: ComVisible(#{@tester.com_visible})]")
-    @filedata.should include("[assembly: Guid(\"#{@tester.com_guid}\")]")
+    @filedata.scan(%Q|[assembly: ComVisible(#{@tester.com_visible})]|).length.should == 1
+    @filedata.scan(%Q|[assembly: Guid("#{@tester.com_guid}")]|).length.should == 1
   end
   
   it "should contain the company name information" do
-    @filedata.should include("[assembly: AssemblyCompany(\"#{@tester.company_name}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyCompany("#{@tester.company_name}")]|).length.should == 1
   end
   
   it "should contain the product information" do
-    @filedata.should include("[assembly: AssemblyProduct(\"#{@tester.product_name}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyProduct("#{@tester.product_name}")]|).length.should == 1
   end
   
   it "should contain the file version information" do
-    @filedata.should include("[assembly: AssemblyFileVersion(\"#{@tester.file_version}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
   end
   
   it "should contain the trademark information" do
-    @filedata.should include("[assembly: AssemblyTrademark(\"#{@tester.trademark}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyTrademark("#{@tester.trademark}")]|).length.should == 1
   end
 end
 
@@ -344,52 +364,54 @@ describe AssemblyInfo, "when generating an assembly info file with the built in 
     asm.file_version = @tester.file_version
     asm.trademark = @tester.trademark
     
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should use the system.reflection namespace" do
-    @filedata.should include("Imports System.Reflection")
+    @filedata.scan('Imports System.Reflection').length.should == 1
   end
   
   it "should use the system.runtime.interopservices namespace" do
-    @filedata.should include("Imports System.Runtime.InteropServices")
+    @filedata.scan('Imports System.Runtime.InteropServices').length.should == 1
   end
   
   it "should contain the specified version information" do
-    @filedata.should include("<assembly: AssemblyVersion(\"#{@tester.version}\")>")
+    @filedata.scan(%Q|<assembly: AssemblyVersion("#{@tester.version}")>|).length.should == 1
   end
   
   it "should contain the assembly title" do
-    @filedata.should include("<assembly: AssemblyTitle(\"#{@tester.title}\")>")
+    @filedata.scan(%Q|<assembly: AssemblyTitle("#{@tester.title}")>|).length.should == 1
   end
   
   it "should contain the assembly description" do
-    @filedata.should include("<assembly: AssemblyDescription(\"#{@tester.description}\")>")
+    @filedata.scan(%Q|<assembly: AssemblyDescription("#{@tester.description}")>|).length.should == 1
   end
   
   it "should contain the copyright information" do
-    @filedata.should include("<assembly: AssemblyCopyright(\"#{@tester.copyright}\")>")
+    @filedata.scan(%Q|<assembly: AssemblyCopyright("#{@tester.copyright}")>|).length.should == 1
   end
   
   it "should contain the com visible information" do
-    @filedata.should include("<assembly: ComVisible(#{@tester.com_visible})>")
-    @filedata.should include("<assembly: Guid(\"#{@tester.com_guid}\")>")
+    @filedata.scan(%Q|<assembly: ComVisible(#{@tester.com_visible})>|).length.should == 1
+    @filedata.scan(%Q|<assembly: Guid("#{@tester.com_guid}")>|).length.should == 1
   end
   
   it "should contain the company name information" do
-    @filedata.should include("<assembly: AssemblyCompany(\"#{@tester.company_name}\")>")
+    @filedata.scan(%Q|<assembly: AssemblyCompany("#{@tester.company_name}")>|).length.should == 1
   end
   
   it "should contain the product information" do
-    @filedata.should include("<assembly: AssemblyProduct(\"#{@tester.product_name}\")>")
+    @filedata.scan(%Q|<assembly: AssemblyProduct("#{@tester.product_name}")>|).length.should == 1
   end
   
   it "should contain the file version information" do
-    @filedata.should include("<assembly: AssemblyFileVersion(\"#{@tester.file_version}\")>")
+    @filedata.scan(%Q|<assembly: AssemblyFileVersion("#{@tester.file_version}")>|).length.should == 1
   end
   
   it "should contain the trademark information" do
-    @filedata.should include("<assembly: AssemblyTrademark(\"#{@tester.trademark}\")>")
+    @filedata.scan(%Q|<assembly: AssemblyTrademark("#{@tester.trademark}")>|).length.should == 1
   end
 end
 
@@ -398,44 +420,46 @@ describe AssemblyInfo, "when generating an assembly info file with no attributes
     @tester = AssemblyInfoTester.new
     asm = AssemblyInfo.new
     
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
   it "should not contain the specified version information" do
-    @filedata.should_not include("[assembly: AssemblyVersion(\"#{@tester.version}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).should be_empty
   end
   
   it "should not contain the assembly title" do
-    @filedata.should_not include("[assembly: AssemblyTitle(\"#{@tester.title}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyTitle("#{@tester.title}")]|).should be_empty
   end
   
   it "should not contain the assembly description" do
-    @filedata.should_not include("[assembly: AssemblyDescription(\"#{@tester.description}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyDescription("#{@tester.description}")]|).should be_empty
   end
   
   it "should not contain the copyright information" do
-    @filedata.should_not include("[assembly: AssemblyCopyright(\"#{@tester.copyright}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyCopyright("#{@tester.copyright}")]|).should be_empty
   end
   
   it "should not contain the com visible information" do
-    @filedata.should_not include("[assembly: ComVisible(#{@tester.com_visible})]")
-    @filedata.should_not include("[assembly: Guid(\"#{@tester.com_guid}\")]")
+    @filedata.scan(%Q|[assembly: ComVisible(#{@tester.com_visible})]|).should be_empty
+    @filedata.scan(%Q|[assembly: Guid("#{@tester.com_guid}")]|).should be_empty
   end
 
   it "should not contain the company name information" do
-    @filedata.should_not include("[assembly: AssemblyCompany(\"#{@tester.company_name}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyCompany("#{@tester.company_name}")]|).should be_empty
   end
 
   it "should not contain the product information" do
-    @filedata.should_not include("[assembly: AssemblyProduct(\"#{@tester.product_name}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyProduct("#{@tester.product_name}")]|).should be_empty
   end
     
   it "should not contain the file version information" do
-    @filedata.should_not include("[assembly: AssemblyFileVersion(\"#{@tester.file_version}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).should be_empty
   end
 
   it "should not contain the trademark information" do
-    @filedata.should_not include("[assembly: AssemblyTrademark(\"#{@tester.trademark}\")]")
+    @filedata.scan(%Q|[assembly: AssemblyTrademark("#{@tester.trademark}")]|).should be_empty
   end
 end
 
