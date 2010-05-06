@@ -6,10 +6,6 @@ class RunCommandObject
   include YAMLConfig
   include RunCommand
 
-  def initialize
-    super()
-  end
-
   def execute
     @require_valid_command = false
     result = run_command "Run Command Test Object"
