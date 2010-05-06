@@ -1,3 +1,3 @@
-create_task :xunit, XUnitTestRunner.new do |x|
+create_task :xunit, Proc.new { XUnitTestRunner.new } do |x|
   x.execute
 end

@@ -1,3 +1,3 @@
-create_task :sqlcmd, SQLCmd.new do |cmd|
+create_task :sqlcmd, Proc.new { SQLCmd.new } do |cmd|
   cmd.run
 end

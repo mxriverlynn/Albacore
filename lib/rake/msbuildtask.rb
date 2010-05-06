@@ -1,3 +1,3 @@
-create_task :msbuild, MSBuild.new do |msbuild|
+create_task :msbuild, Proc.new { MSBuild.new } do |msbuild|
   msbuild.build
 end

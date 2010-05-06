@@ -1,3 +1,3 @@
-create_task :rename, Renamer.new do |ren|
+create_task :rename, Proc.new { Renamer.new } do |ren|
   ren.rename
 end

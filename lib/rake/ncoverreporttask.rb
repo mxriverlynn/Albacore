@@ -1,3 +1,3 @@
-create_task :ncoverreport, NCoverReport.new do |ncoverreport|
+create_task :ncoverreport, Proc.new { NCoverReport.new } do |ncoverreport|
   ncoverreport.run
 end

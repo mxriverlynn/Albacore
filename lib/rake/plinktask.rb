@@ -1,3 +1,3 @@
-create_task :plink, PLink.new() do |cmd|
+create_task :plink, Proc.new { PLink.new() } do |cmd|
   cmd.run
 end  

@@ -43,7 +43,6 @@ describe XUnitTestRunner, "the command line string for an xunit runner" do
   end
 end
 
-
 describe XUnitTestRunner, "when configured correctly" do
   before :all do
     xunit = XUnitTestRunner.new(@@xunitpath)

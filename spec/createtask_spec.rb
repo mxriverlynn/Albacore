@@ -3,8 +3,20 @@ require 'albacore/support/albacore_helper'
 require 'fail_patch'
 
 class SampleObject
+  extend AttrMethods
   include Failure
   include YAMLConfig
+
+  attr_array :array
+  attr_hash :hash
+
+  def get_array
+    @array
+  end
+
+  def get_hash
+    @hash
+  end
 end
 
 describe "when defining a task" do
@@ -13,7 +25,9 @@ describe "when defining a task" do
     @sample_object.stub_method(:load_config_by_task_name){ |name|
     	@task_name = name
     }
-    create_task :sampletask, @sample_object do |obj|
+    
+    task_object_proc = Proc.new { @sample_object }
+    create_task :sampletask, task_object_proc do |obj|
       @task_obj = obj
     end
 
@@ -39,7 +53,7 @@ end
 
 describe "when execution fails" do
   before :all do
-    create_task :failing_task, SampleObject.new
+    create_task :failing_task, Proc.new { SampleObject.new }
 
   	failing_task :sample_fail do |x|
   	  x.extend(FailPatch)
@@ -55,7 +69,7 @@ end
 
 describe "when task args are used" do
   before :all do
-    create_task :task_with_args, SampleObject.new
+    create_task :task_with_args, Proc.new { SampleObject.new }
 
     task_with_args :sampletask_withargs, [:arg1] do |t, args|
       t.extend(FailPatch)
@@ -71,7 +85,7 @@ end
 
 describe "when calling a task method without providing a task name" do
   before :all do
-    create_task :task_without_name, SampleObject.new
+    create_task :task_without_name, Proc.new { SampleObject.new }
 
     task_without_name do |t|
       @task_without_name_called = true
@@ -87,7 +101,7 @@ end
 
 describe "when calling a task method without providing a task parameter" do
   before :all do
-    create_task :task_without_param, SampleObject.new
+    create_task :task_without_param, Proc.new { SampleObject.new }
 
     task_without_param do
       @task_without_param_called = true
@@ -104,7 +118,7 @@ end
 describe "when calling a task without a task definition block" do
 	
   before :all do
-    create_task :task_without_body, SampleObject.new
+    create_task :task_without_body, Proc.new { SampleObject.new }
     
     task_without_body
     
@@ -118,5 +132,41 @@ describe "when calling a task without a task definition block" do
 	
   it "should execute the task" do
   	@failed.should be_false
+  end
+end
+
+describe "when creating two tasks and executing them" do
+  before :all do
+    create_task :multiple_instance_task, Proc.new { SampleObject.new } do |mi|
+      @array_values = mi.get_array
+      @hash_values = mi.get_hash
+    end
+
+    multiple_instance_task :multi_instance_1 do |mi|
+      mi.array 1, 2
+      mi.hash = { :a => :b, :c => :d }
+      @instance_1 = mi
+    end
+
+    multiple_instance_task :multi_instance_2 do |mi|
+      mi.array 3, 4
+      mi.hash = { :e => :f, :g => :h }
+      @instance_2 = mi
+    end
+
+    Rake::Task[:multi_instance_1].invoke
+    Rake::Task[:multi_instance_2].invoke 
+  end
+
+  it "should specify the array values once per task" do
+    @array_values.should == [3, 4]
+  end
+
+  it "should specify the hash values once per task" do
+    @hash_values.should == { :e => :f, :g => :h }
+  end
+
+  it "should create two separate instances of the task object" do
+    @instance_1.object_id.should_not == @instance_2.object_id
   end
 end

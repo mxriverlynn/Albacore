@@ -28,6 +28,7 @@ spec/support/zip/*.zip
 spec/support/expandtemplates/output
 spec/support/expandtemplates/working
 spec/support/TestSolution/NDependOut
+spec/support/zip/*.zip.*
 github-test.rb
 Albacore-*.gem
 Albacore.gemspec
