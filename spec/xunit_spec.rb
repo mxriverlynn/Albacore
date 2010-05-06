@@ -49,6 +49,7 @@ describe XUnitTestRunner, "when configured correctly" do
     xunit.assembly = @@test_assembly
     xunit.options '/noshadow'
     xunit.extend(FailPatch)
+    xunit.log_level = :verbose
     
     xunit.execute
   end
@@ -61,9 +62,10 @@ end
 describe XUnitTestRunner, "when multiple assemblies are passed to xunit runner" do
   before :all do
     xunit = XUnitTestRunner.new(@@xunitpath)
-    xunit.assemblies = @@test_assembly,@@test_assembly
+    xunit.assemblies = @@test_assembly, @@test_assembly
     xunit.options '/noshadow'
     xunit.extend(FailPatch)
+    xunit.log_level = :verbose
     
     xunit.execute
   end
