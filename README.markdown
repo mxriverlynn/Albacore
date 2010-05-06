@@ -86,6 +86,7 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 * [James Gregory](http://github.com/jagregory): the Docu task
 * [Kevin Colyar](http://github.com/kevincolyar): Testing and updating of MSBuild to work with Cygwin
 * [Mark Wilkins](http://github.com/markwilk): VB.NET Language Generator For The AssemblyInfo Task
+* [Mike Nichols](http://github.com/mnichols): XUnit contributions, bug reports, etc
 * [Nils Jonsson](http://github.com/njonsson): AssemblyInfo corrections, rakefile corrections
 * [Sean Biefeld](http://github.com/seanbiefeld): MSpecTestRunner for NCoverConsole
 * [Steven Harman](http://github.com/stevenharman): Finding some wicked bugs, patching nunit test runner, and the nant task
