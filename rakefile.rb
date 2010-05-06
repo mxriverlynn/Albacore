@@ -4,12 +4,15 @@ task :default => ['albacore:sample']
 
 namespace :specs do
   require 'spec/rake/spectask'
+  runtime_is_ironruby = (!defined?(IRONRUBY_VERSION).nil?)
 
   @spec_opts = '--colour --format specdoc'
 
   desc "Run functional specs for Albacore"
   Spec::Rake::SpecTask.new :all do |t|
-    t.spec_files = FileList['spec/**/*_spec.rb']
+    t.spec_files = FileList['spec/**/*_spec.rb'].exclude{ |f| 
+      f if runtime_is_ironruby && (f.include?("ssh") || f.include?("sftp")) 
+    }
     t.spec_opts << @spec_opts
   end
   
