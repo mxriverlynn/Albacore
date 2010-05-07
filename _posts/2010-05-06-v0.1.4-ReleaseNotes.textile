@@ -1,0 +1,42 @@
+---
+layout: post
+title: "v0.1.4 Release Notes: More Bug Fixes And An XUnit Update"
+---
+
+Albacore v0.1.4 was just pushed up to RubyGems.org. It contains a few significant bug fixes and a nice improvement to the xunit task.
+ 
+h2. Testing Multiple Assemblies With XUnit
+
+Xunit, by default, does not allow you to run more than one test assembly. ["Mike Nichols":http://github.com/mnichols] added in support to the xunit task to allow multiple assemblies to be tested from a single xunit task definition, though. This is done by iterating over the list of assemblies that are provided and calling xunit for each assembly. 
+
+To take advantage of this functionality, you can specify an array of assemblies in the .assemblies attribute (as opposed to the single .assembly attribute) like this:
+
+<pre><code>xunit :tests do |x|
+  x.assemblies "mytests.dll", "moretests.dll", "etc.dll"
+  # other settings here
+end
+</code></pre>
+
+(Note: the .assembly attribute still exists, too)
+
+h3. Breaking Change: html_output Assumes A Folder
+
+With the ability to run multiple assemblies from a single xunit task, we had to make a breaking change in how the .html_output attribute is used. Previously, it allowed you to specify the entire path - folder and file name - of the report that was produced. With the new syntax, this attribute now assumes that you pointing it to a folder and it will append the name of the test dll as the html report name.
+
+For example:
+
+<pre><code>xunit :tests do |x|
+  x.assemblies "mytests.dll"
+  x.html_output "some\folder\here\"
+end
+</code></pre>
+
+This will produce an html report at <code>some\folder\here\mytests.html</code>
+
+h2. Bug Fixes: Duplicate Parameters On Many Tasks
+
+With the release of v0.1.3 there were several bug fixes that unknowingly uncovered several other bugs that were waiting to be exposed. The largest of these bugs involved all of the tasks that call out to an external command, such as msbuild, xunit, ncoverconsole, etc. With these, if you specified more than one instance of the task in your rakefile, the parameters that you supplied to each of the tasks would append to the previous task rather than create a new set of parameters. This had the result of crashing most of the calls and causing strange behavior with other calls when multiple instances of a task were present.
+
+There were several bugs related to this and they have all been corrected now. No tasks will append the parameters from previous instances of that task.
+
+Although I have less to say about this particular bug than I did about the xunit changes, the bug fix alone is the primary driver of this release. It was a significant bug that affected almost ever task, and required a small design change in every task plus a few other changes in some supporting modules to correct. Moving forward, though, there are regression tests in place that will prevent this bug from being re-introduced.
