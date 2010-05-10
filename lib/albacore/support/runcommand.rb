@@ -5,7 +5,7 @@ module RunCommand
   extend AttrMethods
   include Failure
   
-  attr_accessor :path_to_command, :require_valid_command, :command_directory
+  attr_accessor :command, :require_valid_command, :command_directory
   attr_array :parameters
   
   def initialize
@@ -23,7 +23,7 @@ module RunCommand
     combine_parameters = @parameters.collect
     combine_parameters.push(command_parameters) unless command_parameters.nil?
     
-    command = "\"#{@path_to_command}\" #{combine_parameters.join(' ')}"
+    command = "\"#{@command}\" #{combine_parameters.join(' ')}"
     @logger.debug "Executing #{command_name}: #{command}"
     
     set_working_directory    
@@ -34,8 +34,8 @@ module RunCommand
   end
   
   def valid_command_exists
-    return true if File.exist?(@path_to_command || "")
-    msg = "Command not found: #{@path_to_command}"
+    return true if File.exist?(@command || "")
+    msg = "Command not found: #{@command}"
     @logger.fatal msg
   end
   

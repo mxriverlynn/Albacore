@@ -4,7 +4,7 @@ require 'albacore/sqlcmd'
 describe SQLCmd, "when running a script file against a database with authentication information" do
   before :all do
     @cmd = SQLCmd.new
-    @cmd.path_to_command = "sqlcmd.exe"
+    @cmd.command = "sqlcmd.exe"
     @cmd.log_level = :verbose
     @cmd.extend(SystemPatch)
     @cmd.disable_system = true
@@ -62,7 +62,7 @@ describe SQLCmd, "when running with no command path specified" do
   end
   
   it "should log a failure message" do
-    @log_data.should include('SQLCmd.path_to_command cannot be nil.')
+    @log_data.should include('SQLCmd.command cannot be nil.')
   end
 end
 
@@ -70,7 +70,7 @@ describe SQLCmd, "when execution of sqlcmd fails" do
   before :all do
     strio = StringIO.new
     @cmd = SQLCmd.new
-    @cmd.path_to_command="sqlcmd.exe"
+    @cmd.command="sqlcmd.exe"
     @cmd.log_level = :verbose
     @cmd.log_device = strio
     @cmd.extend(SystemPatch)
@@ -95,7 +95,7 @@ end
 describe SQLCmd, "when running multiple script files" do
   before :all do
     @cmd = SQLCmd.new
-    @cmd.path_to_command = "sqlcmd.exe"
+    @cmd.command = "sqlcmd.exe"
     @cmd.log_level = :verbose
     @cmd.extend(SystemPatch)
     @cmd.disable_system = true
@@ -121,7 +121,7 @@ end
 describe SQLCmd, "when running with variables specified" do
   before :all do
     @cmd = SQLCmd.new
-    @cmd.path_to_command = "sqlcmd.exe"
+    @cmd.command = "sqlcmd.exe"
     @cmd.log_level = :verbose
     @cmd.extend(SystemPatch)
     @cmd.disable_system = true

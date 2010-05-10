@@ -8,15 +8,15 @@ class XUnitTestRunner
   attr_accessor :html_output
   attr_array :options,:assembly,:assemblies
 
-  def initialize(path_to_command='')
-    @path_to_command = path_to_command
+  def initialize(command='')
+    @command = command
     @options=[]
     super()
   end
 
   def get_command_line
     command_params = []
-    command_params << @path_to_command
+    command_params << @command
     command_params << get_command_parameters
     commandline = command_params.join(" ")
     @logger.debug "Build XUnit Test Runner Command Line: " + commandline

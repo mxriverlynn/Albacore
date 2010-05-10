@@ -13,7 +13,7 @@ describe NCoverConsole, "when specifying assemblies to cover" do
     
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
     @ncc.cover_assemblies "TestSolution"
@@ -40,7 +40,7 @@ describe NCoverConsole, "when specifying assemblies with spaces in the name" do
     
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
     @ncc.cover_assemblies "assemblies/with spaces/TestSolution"
@@ -68,7 +68,7 @@ describe NCoverConsole, "when specifying assemblies to ignore" do
     
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
     @ncc.exclude_assemblies "TestSolution.*"
@@ -95,7 +95,7 @@ describe NCoverConsole, "when specifying attributes to exclude" do
 
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
     @ncc.exclude_attributes "excludeme", "excludeme_too"
@@ -121,7 +121,7 @@ describe NCoverConsole, "when running with the defaults" do
     @ncc.extend(SystemPatch)
     @ncc.extend(FailPatch)
     
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.testrunner = NUnitTestRunner.new
     
     @ncc.run
@@ -140,7 +140,7 @@ describe NCoverConsole, "when opting out of registering the ncover dll" do
     @ncc.extend(SystemPatch)
     @ncc.extend(FailPatch)
     
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.no_registration
     @ncc.testrunner = NUnitTestRunner.new
     
@@ -161,7 +161,7 @@ describe NCoverConsole, "when specifying the types of coverage to analyze" do
     
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
     @ncc.coverage :Symbol, :Branch, :MethodVisits, :CyclomaticComplexity
@@ -192,7 +192,7 @@ describe NCoverConsole, "when analyzing a test suite with failing tests" do
     ncc.extend(FailPatch)
     
     ncc.log_level = :verbose
-    ncc.path_to_command = @testdata.ncoverpath
+    ncc.command = @testdata.ncoverpath
     ncc.output :xml => @testdata.xml_coverage_output
     ncc.working_directory = @testdata.working_directory
     
@@ -245,7 +245,7 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
     
     @ncc.extend(SystemPatch)
     @ncc.log_level = :verbose
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
     
@@ -292,7 +292,7 @@ describe NCoverConsole, "when specifying an html report and an xml coverage repo
     
     ncc.extend(SystemPatch)
     ncc.log_level = :verbose
-    ncc.path_to_command = @testdata.ncoverpath
+    ncc.command = @testdata.ncoverpath
     ncc.output :xml => @testdata.xml_coverage_output, :html => @testdata.html_coverage_output
     ncc.working_directory = @testdata.working_directory
     
@@ -323,7 +323,7 @@ describe NCoverConsole, "when producing a report with machine.specifications" do
     @ncc.extend(FailPatch)
     
     @ncc.log_level = :verbose
-    @ncc.path_to_command = @testdata.ncoverpath
+    @ncc.command = @testdata.ncoverpath
     @ncc.output :xml => @testdata.xml_coverage_output
     @ncc.working_directory = @testdata.working_directory
     

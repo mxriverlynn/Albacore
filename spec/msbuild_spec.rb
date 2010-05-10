@@ -48,7 +48,7 @@ describe MSBuild, "when an msbuild path is not specified" do
   end
   
   it "should default to the .net framework v3.5" do
-    @msbuild.path_to_command.should == @testdata.msbuild_path
+    @msbuild.command.should == @testdata.msbuild_path
   end
 end
 
@@ -59,7 +59,7 @@ describe MSBuild, "when an msbuild path is specified" do
   end
   
   it "should use the specified path for the msbuild exe" do
-    @msbuild.path_to_command.should == "Some Path"
+    @msbuild.command.should == "Some Path"
   end  
 end
 

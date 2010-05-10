@@ -8,15 +8,15 @@ class MSpecTestRunner
   attr_accessor :html_output
   attr_array :assemblies, :options
   
-  def initialize(path_to_command='')
-    @path_to_command = path_to_command
+  def initialize(command='')
+    @command = command
     @assemblies=[]
     super()
   end
   
   def get_command_line
     command = []
-    command << @path_to_command
+    command << @command
     command << get_command_parameters
     cmd = command.join(" ")
     @logger.debug "Build MSpec Test Runner Command Line: " + cmd

@@ -7,8 +7,8 @@ class NUnitTestRunner
   
   attr_array :assemblies, :options
   
-  def initialize(path_to_command='')
-    @path_to_command = path_to_command
+  def initialize(command='')
+    @command = command
     @options=[]
     @assemblies=[]
     super()
@@ -16,7 +16,7 @@ class NUnitTestRunner
   
   def get_command_line
     command_params = []
-    command_params << @path_to_command
+    command_params << @command
     command_params << get_command_parameters
     commandline = command_params.join(" ")
     @logger.debug "Build NUnit Test Runner Command Line: " + commandline

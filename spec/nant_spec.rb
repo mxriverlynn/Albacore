@@ -37,7 +37,7 @@ describe NAnt, "when running a nant build file" do
   it_should_behave_like "prepping nant"
   
   before :all do
-    @nant.path_to_command = @testdata.nant_path
+    @nant.command = @testdata.nant_path
     @nant.build_file = @testdata.build_file_path
     @nant.run
   end
@@ -51,7 +51,7 @@ describe NAnt, "when running specific targets" do
   it_should_behave_like "prepping nant"
   
   before :all do
-    @nant.path_to_command = @testdata.nant_path
+    @nant.command = @testdata.nant_path
     @nant.build_file = @testdata.build_file_path
     @nant.targets :build, :other
     @nant.run
@@ -73,7 +73,7 @@ describe NAnt, "when specifying multiple configuration properties" do
     @nant = @testdata.nant
     @strio = StringIO.new
     @nant.log_device = @strio
-    @nant.path_to_command = @testdata.nant_path
+    @nant.command = @testdata.nant_path
     @nant.build_file = @testdata.build_file_path
     
     @nant.properties :version => "1.2.3", "build.mode" => :fast, :debug => false

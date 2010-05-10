@@ -32,8 +32,8 @@ class NCoverReport
   end
   
   def check_command
-    return true if @path_to_command
-    fail_with_message 'NCoverReport.path_to_command cannot be nil.'
+    return true if @command
+    fail_with_message 'NCoverReport.command cannot be nil.'
     return false
   end
   

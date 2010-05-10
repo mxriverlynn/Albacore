@@ -42,8 +42,8 @@ class PLink
   end
 
   def check_command
-    return true if @path_to_command
-    fail_with_message 'Plink.path_to_command cannot be nil.'
+    return true if @command
+    fail_with_message 'Plink.command cannot be nil.'
     return false
   end
 end

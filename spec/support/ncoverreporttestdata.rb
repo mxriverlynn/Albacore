@@ -2,7 +2,7 @@ class NCoverReportTestData
   @filedir = File.dirname(__FILE__)
   @output_folder = File.expand_path(File.join(@filedir, "CodeCoverage", "report", "output"))
   
-  def self.path_to_command
+  def self.command
     File.expand_path(File.join(@filedir, "Tools", "NCover-v3.3", "NCover.Reporting.exe"))
   end
   

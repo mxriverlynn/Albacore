@@ -5,14 +5,14 @@ class NDepend
   include Logging
   include YAMLConfig
 
-  attr_accessor :path_to_command, :project_file
+  attr_accessor :project_file
   def initialize()
     super()
   end
   
   def run
     return unless check_comand
-    result = run_command @path_to_command, create_parameters.join(" ")
+    result = run_command @command, create_parameters.join(" ")
     failure_message = 'Command Failed. See Build Log For Detail'
     fail_with_message failure_message if !result
   end

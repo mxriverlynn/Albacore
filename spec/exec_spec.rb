@@ -9,7 +9,7 @@ describe Exec, "when executing a command with parameters" do
     @cmd.log_level = :verbose
     @cmd.extend(SystemPatch)
     @cmd.extend(FailPatch)
-    @cmd.path_to_command = @@nunit
+    @cmd.command = @@nunit
     @cmd.parameters "--help"
     @cmd.execute
   end

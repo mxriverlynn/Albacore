@@ -175,7 +175,7 @@ namespace :albacore do
     File.delete(@xml_coverage) if File.exist?(@xml_coverage)
     
     ncc.log_level = :verbose
-    ncc.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Console.exe"
+    ncc.command = "spec/support/Tools/NCover-v3.3/NCover.Console.exe"
     ncc.output :xml => @xml_coverage
     ncc.working_directory = "spec/support/CodeCoverage/nunit"
     
@@ -191,7 +191,7 @@ namespace :albacore do
   ncoverreport :ncoverreport => :ncoverconsole do |ncr|
     @xml_coverage = "spec/support/CodeCoverage/test-coverage.xml"
     
-    ncr.path_to_command = "spec/support/Tools/NCover-v3.3/NCover.Reporting.exe"
+    ncr.command = "spec/support/Tools/NCover-v3.3/NCover.Reporting.exe"
     ncr.coverage_files @xml_coverage
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -228,19 +228,19 @@ namespace :albacore do
    
   desc "MSpec Test Runner Example"
   mspec do |mspec|
-    mspec.path_to_command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
+    mspec.command = "spec/support/Tools/Machine.Specification-v0.2/Machine.Specifications.ConsoleRunner.exe"
     mspec.assemblies "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll"
   end
 
   desc "NUnit Test Runner Example"
   nunit do |nunit|
-    nunit.path_to_command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
+    nunit.command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
     nunit.assemblies "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
   end
 
   desc "XUnit Test Runner Example"
   xunit do |xunit|
-    xunit.path_to_command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
+    xunit.command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
     xunit.assembly = "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll"
   end   
   

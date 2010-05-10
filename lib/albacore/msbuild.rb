@@ -11,11 +11,11 @@ class MSBuild
   attr_hash :properties
   
   def initialize
-    @path_to_command = build_path_to_command
+    @command = build_command
     super()
   end
   
-  def build_path_to_command
+  def build_command
     win_dir = ENV['windir'] || ENV['WINDIR']
     win_dir = 'C:/Windows' if win_dir.nil?
     

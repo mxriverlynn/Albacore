@@ -11,7 +11,7 @@ class XBuild
   attr_hash :properties
   
   def initialize
-    @path_to_command = 'xbuild'
+    @command = 'xbuild'
     super()
   end
   

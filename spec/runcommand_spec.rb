@@ -20,14 +20,14 @@ describe "when running two instances of a command line task" do
 
   	run_command_task :one do |x|
       x.extend(SystemPatch)
-      x.path_to_command = "set"
+      x.command = "set"
       x.parameters "_albacore_test = test_one"
       @one = x
   	end
 
     run_command_task :two do |x|
       x.extend(SystemPatch)
-      x.path_to_command = "set"
+      x.command = "set"
       x.parameters "_another_albacore_test = test_two"
       @two = x
     end

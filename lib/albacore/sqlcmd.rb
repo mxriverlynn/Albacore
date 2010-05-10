@@ -34,8 +34,8 @@ class SQLCmd
   end
   
   def check_command
-    return true if (!@path_to_command.nil?)
-    fail_with_message 'SQLCmd.path_to_command cannot be nil.'
+    return true if (!@command.nil?)
+    fail_with_message 'SQLCmd.command cannot be nil.'
     return false
   end
   

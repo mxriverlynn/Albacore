@@ -8,8 +8,8 @@ class Docu
   attr_accessor :output_location
   attr_array :assemblies, :xml_files
   
-  def initialize(path_to_command='docu.exe')
-    @path_to_command = path_to_command
+  def initialize(command='docu.exe')
+    @command = command
     @assemblies = []
     @xml_files = []
     @output_location = ""

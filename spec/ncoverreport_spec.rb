@@ -22,7 +22,7 @@ describe NCoverReport, "when running a full coverage report with a specified out
     @ncover.extend(SystemPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new()
@@ -33,7 +33,7 @@ describe NCoverReport, "when running a full coverage report with a specified out
   end
 
   it "should execute ncover.reporting" do
-    @ncover.system_command.should include(NCoverReportTestData.path_to_command)
+    @ncover.system_command.should include(NCoverReportTestData.command)
   end
   
   it "should tell ncover.reporting to produce a full coverage html report in the specified folder" do
@@ -53,7 +53,7 @@ describe NCoverReport, "when running a summary report with a specified output fo
     @ncover.extend(SystemPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     summaryreport = NCover::SummaryReport.new()
@@ -64,7 +64,7 @@ describe NCoverReport, "when running a summary report with a specified output fo
   end
 
   it "should execute ncover.reporting" do
-    @ncover.system_command.should include(NCoverReportTestData.path_to_command)
+    @ncover.system_command.should include(NCoverReportTestData.command)
   end
   
   it "should tell ncover.reporting to produce a summary html report in the specified folder" do
@@ -84,7 +84,7 @@ describe NCoverReport, "when running multiple ncover reports - a summary and a f
     @ncover.extend(SystemPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     summaryreport = NCover::SummaryReport.new()
@@ -116,7 +116,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -152,7 +152,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -188,7 +188,7 @@ describe NCoverReport, "when specifying the coverage item type to check" do
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     report = NCover::SummaryReport.new
@@ -221,7 +221,7 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -267,7 +267,7 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -313,7 +313,7 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -354,7 +354,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity highe
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -389,7 +389,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity under
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -424,7 +424,7 @@ describe NCoverReport, "when filtering on Assembly coverage data" do
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -462,7 +462,7 @@ describe NCoverReport, "when filtering on Namespace coverage data" do
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -500,7 +500,7 @@ describe NCoverReport, "when filtering on Class coverage data" do
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -538,7 +538,7 @@ describe NCoverReport, "when filtering on Method coverage data" do
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new
@@ -576,7 +576,7 @@ describe NCoverReport, "when filtering on Document coverage data" do
     @ncover.extend(FailPatch)
     @ncover.log_level = :verbose
     
-    @ncover.path_to_command = NCoverReportTestData.path_to_command
+    @ncover.command = NCoverReportTestData.command
     @ncover.coverage_files NCoverReportTestData.coverage_file
     
     fullcoveragereport = NCover::FullCoverageReport.new

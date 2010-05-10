@@ -14,7 +14,7 @@ describe "when executing Ndepend console" do
     @ndepend = NDepend.new
     @ndepend.log_device = StringIO.new
     @ndepend.project_file = "spec/support/TestSolution/NDependProject.xml"
-    @ndepend.path_to_command = "spec/support/tools/Ndepend-v2.12/NDepend.Console.exe"
+    @ndepend.command = "spec/support/tools/Ndepend-v2.12/NDepend.Console.exe"
 
     @logger = StringIO.new
     @ndepend.log_device = @logger
