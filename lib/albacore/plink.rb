@@ -10,7 +10,6 @@ class PLink
   attr_array :commands
 
   def initialize()
-      @require_valid_command = false
       @port = 22
       @verbose = false
       @commands = []
