@@ -5,12 +5,12 @@ module RunCommand
   extend AttrMethods
   include Failure
   
-  attr_accessor :command, :require_valid_command, :command_directory
+  attr_accessor :command, :require_valid_command, :working_directory
   attr_array :parameters
   
   def initialize
     @require_valid_command = true
-    @command_directory = Dir.pwd
+    @working_directory = Dir.pwd
     @parameters = []
     super()
   end
@@ -41,8 +41,8 @@ module RunCommand
   
   def set_working_directory
     @original_directory = Dir.pwd
-    return if @command_directory == @original_directory
-    Dir.chdir(@command_directory)
+    return if @working_directory == @original_directory
+    Dir.chdir(@working_directory)
   end
   
   def reset_working_directory

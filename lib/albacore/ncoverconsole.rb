@@ -5,7 +5,7 @@ class NCoverConsole
   include RunCommand
   include YAMLConfig
   
-  attr_accessor :testrunner, :working_directory
+  attr_accessor :testrunner
   attr_array :cover_assemblies, :exclude_assemblies, :coverage, :exclude_attributes
   attr_hash :output
   
@@ -19,10 +19,6 @@ class NCoverConsole
     super()
   end
   
-  def working_directory=(working_dir)
-    @working_directory = "//working-directory " + working_dir
-  end
-  
   def no_registration
     @register_dll = false
   end
@@ -33,7 +29,6 @@ class NCoverConsole
     command_parameters = []
     command_parameters << "//reg" if @register_dll
     command_parameters << build_output_options(@output) unless @output.nil?
-    command_parameters << @working_directory unless @working_directory.nil?
     command_parameters << build_parameter_list("assemblies", @cover_assemblies) unless @cover_assemblies.empty?
     command_parameters << build_parameter_list("exclude-assemblies", @exclude_assemblies) unless @exclude_assemblies.empty?
     command_parameters << build_parameter_list("exclude-attributes", @exclude_attributes) unless @exclude_attributes.empty?
