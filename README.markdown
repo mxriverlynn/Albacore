@@ -89,5 +89,5 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 * [Mike Nichols](http://github.com/mnichols): XUnit contributions, bug reports, etc
 * [Nils Jonsson](http://github.com/njonsson): AssemblyInfo corrections, rakefile corrections
 * [Sean Biefeld](http://github.com/seanbiefeld): MSpecTestRunner for NCoverConsole
-* [Steven Harman](http://github.com/stevenharman): Finding some wicked bugs, patching nunit test runner, and the nant task
+* [Steven Harman](http://github.com/stevenharman): Primary contributor. Nant task, issue tickets, disucssions, and much much more.
 * [Panda Wood](http://github.com/pandawood): NCover Console options and wiki edits
