@@ -28,12 +28,6 @@ module RunCommand
     result
   end
   
-  def valid_command_exists
-    return true if File.exist?(@command || "")
-    msg = "Command not found: #{@command}"
-    @logger.fatal msg
-  end
-  
   def set_working_directory
     @original_directory = Dir.pwd
     return if @working_directory == @original_directory
