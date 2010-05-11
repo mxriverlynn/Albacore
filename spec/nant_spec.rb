@@ -27,10 +27,6 @@ describe NAnt, "when a nant path is not specified" do
   it "should fail" do
   	$task_failed.should == true
   end
-  
-  it "should log the missing command path" do
-    @log_data.should include("Command not found: ")
-  end
 end
 
 describe NAnt, "when running a nant build file" do

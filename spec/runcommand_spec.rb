@@ -7,7 +7,6 @@ class RunCommandObject
   include RunCommand
 
   def execute
-    @require_valid_command = false
     result = run_command "Run Command Test Object"
   end
 end
