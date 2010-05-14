@@ -4,13 +4,13 @@ module AttrMethods
     names.each do |n|
       self.send :define_method, n do |*value|
         if value.nil? || value.empty?
-          return instance_variable_get "@#{n}"
+          return instance_variable_get("@#{n}")
         else
-          instance_variable_set "@#{n}", value
+          instance_variable_set("@#{n}", value)
         end
       end
       self.send :define_method, "#{n}=" do |value|
-        instance_variable_set "@#{n}", value
+        instance_variable_set("@#{n}", value)
       end
     end
   end
@@ -19,13 +19,13 @@ module AttrMethods
   	names.each do |n|
       self.send :define_method, n do |value|
         if value.nil? || value.empty?
-          instance_variable_get "@#{n}"
+          instance_variable_get("@#{n}")
         else
-          instance_variable_set "@#{n}", value
+          instance_variable_set("@#{n}", value)
         end
       end
       self.send :define_method, "#{n}=" do |value|
-        instance_variable_set "@#{n}", value
+        instance_variable_set("@#{n}", value)
       end
     end
   end
