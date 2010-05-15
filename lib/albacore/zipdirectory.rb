@@ -45,10 +45,30 @@ class ZipDirectory
   end
   
   def is_excluded(f)
-    @exclusions.any? do |e|
+    expanded_exclusions.any? do |e|
       return true if e.respond_to? '~' and f =~ e
       e == f
     end
+  end
+
+  def expanded_exclusions
+    return @expanded_exclusions unless @expanded_exclusions.nil?
+
+    regexp_exclusions, string_exclusions = @exclusions.partition {|x| x.respond_to? '~' }
+    @expanded_exclusions = [].concat(regexp_exclusions)
+    
+    @directories_to_zip.each do |dir|
+      Dir.chdir(dir) do
+        string_exclusions.each do |ex|
+          exclusions = Dir.glob(ex)
+          exclusions = exclusions.map {|x| File.join(dir, x) } unless exclusions[0] == ex
+          exclusions << ex if exclusions.empty?
+          @expanded_exclusions += exclusions
+        end
+      end
+    end
+
+    @expanded_exclusions
   end
   
   def zip_name()
