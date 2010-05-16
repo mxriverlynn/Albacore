@@ -44,4 +44,3 @@ describe "when running two instances of a command line task" do
   end
 end
 
-
