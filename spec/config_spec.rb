@@ -69,3 +69,15 @@ describe "when requesting the command for a task that has not been registered" d
     @error_message.to_s.should == "The 'has_not_been_configured' task has not been configured"
   end
 end
+
+describe "when registering a task with only a command parameter" do
+  before :each do
+    Albacore.configure do |config|
+      config.oneparam "one/parameter.exe"
+    end
+  end
+
+  it "should use the command parameter as the path and command" do
+    Albacore.configuration.get_command(:oneparam).should == "one/parameter.exe"
+  end
+end
