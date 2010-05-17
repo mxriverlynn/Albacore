@@ -91,3 +91,24 @@ describe "when setting and then re-setting a named command to execute" do
     @runme.system_command.should == "\"./second.exe\""
   end
 end
+
+describe "when executing a runcommand object twice" do
+  before :all do
+    @runmeone = RunCommandObject.new
+    @runmetwo = @runmeone
+    @runmeone.extend SystemPatch
+    @runmeone.command = "test.exe"
+    @runmeone.parameters "1", "2", "3"
+
+    @runmeone.execute
+    @runmetwo.execute
+  end
+
+  it "should only pass the parameters to the command once for the first execution" do
+    @runmeone.system_command.should == "\"test.exe\" 1 2 3"
+  end
+
+  it "should only pass the parameters to the command once for the second execution" do
+    @runmetwo.system_command.should == "\"test.exe\" 1 2 3"
+  end
+end
