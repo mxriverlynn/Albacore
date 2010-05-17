@@ -73,17 +73,17 @@ end
 
 describe "when setting and then re-setting a named command to execute" do
   before :all do
+    @runme = RunCommandObject.new
+    @runme.extend SystemPatch
+
+    @runme.command = :doesnotexist
+
     Albacore.configure do |config|
       config.firstcommand "./first.exe"
       config.secondcommand "./second.exe"
     end
 
-    @runme = RunCommandObject.new
-    @runme.extend SystemPatch
-
-    @runme.command = :firstcommand
     @runme.command = :secondcommand
-
     @runme.execute
   end
 
