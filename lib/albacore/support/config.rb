@@ -38,6 +38,10 @@ module Albacore
       cmd.fullpath 
     end
 
+    def has_command?(name)
+      @commands.include? name
+    end
+
     def method_missing(symbol, *args)
       case args.count
         when 1

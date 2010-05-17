@@ -19,6 +19,15 @@ class SampleObject
   end
 end
 
+class RunCommandObject
+  include YAMLConfig
+  include RunCommand
+
+  def execute
+    result = run_command "Run Command Test Object"
+  end
+end
+
 describe "when defining a task" do
   before :all do
     @sample_object = SampleObject.stub_instance()
@@ -170,3 +179,37 @@ describe "when creating two tasks and executing them" do
     @instance_1.object_id.should_not == @instance_2.object_id
   end
 end
+
+describe "when running two instances of a command line task" do
+  before :all do
+    create_task :run_command_task, Proc.new { RunCommandObject.new } do |ex|
+      ex.execute
+    end
+
+  	run_command_task :one do |x|
+      x.extend(SystemPatch)
+      x.command = "set"
+      x.parameters "_albacore_test = test_one"
+      @one = x
+  	end
+
+    run_command_task :two do |x|
+      x.extend(SystemPatch)
+      x.command = "set"
+      x.parameters "_another_albacore_test = test_two"
+      @two = x
+    end
+    
+    Rake::Task[:one].invoke
+    Rake::Task[:two].invoke
+  end
+  
+  it "should only pass the parameters specified to the first command" do
+    @one.system_command.should == "\"set\" _albacore_test = test_one"
+  end
+  
+  it "should only pass the parameters specified to the second command" do
+    @two.system_command.should == "\"set\" _another_albacore_test = test_two"
+  end
+end
+
