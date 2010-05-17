@@ -11,36 +11,83 @@ class RunCommandObject
   end
 end
 
-describe "when running two instances of a command line task" do
+describe "when setting the command" do
   before :all do
-    create_task :run_command_task, Proc.new { RunCommandObject.new } do |ex|
-      ex.execute
-    end
+    @runme = RunCommandObject.new
+    @runme.extend SystemPatch
 
-  	run_command_task :one do |x|
-      x.extend(SystemPatch)
-      x.command = "set"
-      x.parameters "_albacore_test = test_one"
-      @one = x
-  	end
+    @runme.command = "test.exe"
+    @runme.execute
+  end
 
-    run_command_task :two do |x|
-      x.extend(SystemPatch)
-      x.command = "set"
-      x.parameters "_another_albacore_test = test_two"
-      @two = x
-    end
-    
-    Rake::Task[:one].invoke
-    Rake::Task[:two].invoke
-  end
-  
-  it "should only pass the parameters specified to the first command" do
-    @one.system_command.should == "\"set\" _albacore_test = test_one"
-  end
-  
-  it "should only pass the parameters specified to the second command" do
-    @two.system_command.should == "\"set\" _another_albacore_test = test_two"
+  it "should execute the specified command, quoted" do
+    @runme.system_command.should == "\"test.exe\""
   end
 end
 
+describe "when specifying a parmaeter to a command" do
+  before :all do
+    @runme = RunCommandObject.new
+    @runme.extend SystemPatch
+    @runme.command = "test.exe"
+    @runme.parameters "param1"
+    @runme.execute
+  end
+
+  it "should separate the parameters from the command" do
+    @runme.system_command.should == "\"test.exe\" param1"
+  end
+end
+
+describe "when specifying multiple parameters to a command" do
+  before :all do
+    @runme = RunCommandObject.new
+    @runme.extend SystemPatch
+    @runme.command = "test.exe"
+    @runme.parameters "param1", "param2", "param3"
+    @runme.execute
+  end
+
+  it "should separate all parameters by a space" do
+    @runme.system_command.should == "\"test.exe\" param1 param2 param3"
+  end
+end
+
+describe "when setting a named command to execute" do
+  before :all do
+    Albacore.configure do |config|
+      config.add_path :somepath, "./"
+      config.somecommand :somepath, "somecommand.exe"
+    end
+
+    @runme = RunCommandObject.new
+    @runme.extend SystemPatch
+    @runme.command = :somecommand
+    @runme.execute
+  end
+
+  it "should execute the combined path and command for the named command" do
+    @runme.system_command.should == "\"./somecommand.exe\""
+  end
+end
+
+describe "when setting and then re-setting a named command to execute" do
+  before :all do
+    Albacore.configure do |config|
+      config.firstcommand "./first.exe"
+      config.secondcommand "./second.exe"
+    end
+
+    @runme = RunCommandObject.new
+    @runme.extend SystemPatch
+
+    @runme.command = :firstcommand
+    @runme.command = :secondcommand
+
+    @runme.execute
+  end
+
+  it "should delay retrieving the command until just before executing the command" do
+    @runme.system_command.should == "\"./second.exe\""
+  end
+end

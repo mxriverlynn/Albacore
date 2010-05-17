@@ -14,18 +14,34 @@ module RunCommand
     super()
   end
   
-  def run_command(command_name="Command Line", command_parameters=nil)
-    combine_parameters = @parameters.collect
-    combine_parameters.push(command_parameters) unless command_parameters.nil?
+  def run_command(name="Command Line", params=nil)
+    params = combine_parameters(@parameters, params)
     
-    command = "\"#{@command}\" #{combine_parameters.join(' ')}"
-    @logger.debug "Executing #{command_name}: #{command}"
+    command = get_command(params)
+    @logger.debug "Executing #{name}: #{command}"
     
-    set_working_directory    
+    set_working_directory
     result = system command
     reset_working_directory
     
     result
+  end
+
+  def get_command(params)
+    if Albacore.configuration.has_command? @command
+      command = Albacore.configuration.get_command @command 
+    else
+      command = @command
+    end
+    command = "\"#{command}\""
+    command +=" #{params.join(' ')}" if params.count > 0
+    command
+  end
+
+  def combine_parameters(params1, params2)
+    combined = params1.collect
+    combined = combined.push(params2) unless params2.nil?
+    combined
   end
   
   def set_working_directory
