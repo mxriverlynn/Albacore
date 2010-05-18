@@ -81,3 +81,26 @@ describe "when registering a task with only a command parameter" do
     Albacore.configuration.get_command(:oneparam).should == "one/parameter.exe"
   end
 end
+
+describe "when providing a configuration method to the configuration api" do
+  before :all do
+    class Test
+      attr_accessor :test
+    end
+
+    Albacore.configure do |config|
+      @configdata = Test.new
+      config.add_configuration :testfoo, @configdata
+    end
+
+    Albacore.configure do |config|
+      config.testfoo do |test|
+        test.test = "this is config data"
+      end
+    end
+  end
+
+  it "should accept a parameter for configuration data" do
+    @configdata.test.should == "this is config data"
+  end
+end
