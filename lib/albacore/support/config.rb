@@ -4,7 +4,6 @@ module Albacore
   	attr_accessor :log_level
 
     def configure
-      @configuration = Configuration.new
       yield(configuration) if block_given?
     end
 
@@ -17,6 +16,17 @@ module Albacore
     def initialize
       @paths = {}
       @commands = {}
+      @configs = {}
+    end
+
+    def add_configuration(name, config)
+      @configs[name] = config
+      instance_eval(<<-EOM, __FILE__, __LINE__)
+        def #{name}(&block)
+          config = @configs[:#{name}]
+          block.call(config)
+        end
+      EOM
     end
 
     def add_path(name, path)
