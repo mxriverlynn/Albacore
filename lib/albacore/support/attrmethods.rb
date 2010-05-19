@@ -14,14 +14,14 @@ module AttrMethods
       end
     end
   end
-  
+
   def attr_hash(*names)
   	names.each do |n|
-      self.send :define_method, n do |value|
+      self.send :define_method, n do |*value|
         if value.nil? || value.empty?
           instance_variable_get "@#{n}"
         else
-          instance_variable_set "@#{n}", value
+          instance_variable_set "@#{n}", value[0]
         end
       end
       self.send :define_method, "#{n}=" do |value|

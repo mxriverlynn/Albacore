@@ -20,8 +20,8 @@ module RunCommand
       return false unless valid_command_exists
     end
 
-    combine_parameters = @parameters.collect
-    combine_parameters.push(command_parameters) unless command_parameters.nil?
+    combine_parameters = Array.new(@parameters)
+    combine_parameters << command_parameters
     
     command = "\"#{@path_to_command}\" #{combine_parameters.join(' ')}"
     @logger.debug "Executing #{command_name}: #{command}"
