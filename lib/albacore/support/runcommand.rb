@@ -21,7 +21,7 @@ module RunCommand
     end
 
     combine_parameters = Array.new(@parameters)
-    combine_parameters << command_parameters
+    combine_parameters << command_parameters unless command_parameters.nil?
     
     command = "\"#{@path_to_command}\" #{combine_parameters.join(' ')}"
     @logger.debug "Executing #{command_name}: #{command}"
