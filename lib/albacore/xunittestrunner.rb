@@ -31,7 +31,7 @@ class XUnitTestRunner
   end
 
   def execute()    		
-    @assemblies = [] unless !@assemblies.nil?
+    @assemblies = [] if @assemblies.nil?
     @assemblies << @assembly unless @assembly.nil?
     fail_with_message 'At least one assembly is required for assemblies attr' if @assemblies.length==0	
     failure_message = 'XUnit Failed. See Build Log For Detail'		

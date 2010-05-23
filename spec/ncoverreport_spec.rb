@@ -433,8 +433,8 @@ describe NCoverReport, "when filtering on Assembly coverage data" do
     @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
     @ncover.filters(
-    	NCover::AssemblyFilter.new(:filter_type => :exclude, :filter => ["nunit.*"]),
-    	NCover::AssemblyFilter.new(:filter_type => :include, :filter => ["TestSolution.*"])
+    	NCover::AssemblyFilter.new(:filter_type => :exclude, :filter => "nunit.*"),
+    	NCover::AssemblyFilter.new(:filter_type => :include, :filter => "TestSolution.*")
     )
     
     @ncover.run
@@ -471,8 +471,8 @@ describe NCoverReport, "when filtering on Namespace coverage data" do
     @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
     @ncover.filters(
-    	NCover::NamespaceFilter.new(:filter_type => :exclude, :filter => ["nunit.*"]),
-    	NCover::NamespaceFilter.new(:filter_type => :include, :filter => ["TestSolution.*"])
+    	NCover::NamespaceFilter.new(:filter_type => :exclude, :filter => "nunit.*"),
+    	NCover::NamespaceFilter.new(:filter_type => :include, :filter => "TestSolution.*")
     )
     
     @ncover.run
@@ -509,8 +509,8 @@ describe NCoverReport, "when filtering on Class coverage data" do
     @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
     @ncover.filters(
-    	NCover::ClassFilter.new(:filter_type => :exclude, :filter => ["Foo"]),
-    	NCover::ClassFilter.new(:filter_type => :include, :filter => ["Bar"])
+    	NCover::ClassFilter.new(:filter_type => :exclude, :filter => "Foo"),
+    	NCover::ClassFilter.new(:filter_type => :include, :filter => "Bar")
     )
     
     @ncover.run
@@ -547,8 +547,8 @@ describe NCoverReport, "when filtering on Method coverage data" do
     @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
     @ncover.filters(
-    	NCover::MethodFilter.new(:filter_type => :exclude, :filter => ["Foo"]),
-    	NCover::MethodFilter.new(:filter_type => :include, :filter => ["Bar"])
+    	NCover::MethodFilter.new(:filter_type => :exclude, :filter => "Foo"),
+    	NCover::MethodFilter.new(:filter_type => :include, :filter => "Bar")
     )
     
     @ncover.run
@@ -585,8 +585,8 @@ describe NCoverReport, "when filtering on Document coverage data" do
     @ncover.required_coverage NCover::SymbolCoverage.new(:minimum => 0)
     
     @ncover.filters(
-    	NCover::DocumentFilter.new(:filter_type => :exclude, :filter => ["Foo"]),
-    	NCover::DocumentFilter.new(:filter_type => :include, :filter => ["Bar"])
+    	NCover::DocumentFilter.new(:filter_type => :exclude, :filter => "Foo"),
+    	NCover::DocumentFilter.new(:filter_type => :include, :filter => "Bar")
     )
     
     @ncover.run

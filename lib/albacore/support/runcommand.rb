@@ -15,8 +15,8 @@ module RunCommand
   end
   
   def run_command(command_name="Command Line", command_parameters=nil)
-    combine_parameters = @parameters.collect
-    combine_parameters.push(command_parameters) unless command_parameters.nil?
+    combine_parameters = Array.new(@parameters)
+    combine_parameters << command_parameters unless command_parameters.nil?
     
     command = "\"#{@command}\" #{combine_parameters.join(' ')}"
     @logger.debug "Executing #{command_name}: #{command}"
