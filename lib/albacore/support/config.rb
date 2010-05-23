@@ -16,17 +16,16 @@ module Albacore
     def initialize
       @paths = {}
       @commands = {}
-      @configs = {}
     end
 
-    def add_configuration(name, config)
-      @configs[name] = config
-      instance_eval(<<-EOM, __FILE__, __LINE__)
-        def #{name}(&block)
-          config = @configs[:#{name}]
-          block.call(config)
-        end
-      EOM
+    def metaclass
+      class << self
+        self
+      end
+    end
+
+    def add_configuration(name, &block)
+      self.class.send(:define_method, name, &block) 
     end
 
     def add_path(name, path)

@@ -89,13 +89,15 @@ describe "when providing a configuration method to the configuration api" do
     end
 
     Albacore.configure do |config|
-      @configdata = Test.new
-      config.add_configuration :testfoo, @configdata
+      config.add_configuration :testfoo do |&block| 
+        block.call(Test.new) unless block.nil?
+      end
     end
 
     Albacore.configure do |config|
-      config.testfoo do |test|
-        test.test = "this is config data"
+      config.testfoo do |testdata|
+        testdata.test = "this is config data"
+        @configdata = testdata
       end
     end
   end
