@@ -21,7 +21,7 @@ module AttrMethods
         if value.nil? || value.empty?
           instance_variable_get("@#{n}")
         else
-          instance_variable_set("@#{n}"), value[0]
+          instance_variable_set("@#{n}", value[0])
         end
       end
       self.send :define_method, "#{n}=" do |value|
