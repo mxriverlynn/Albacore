@@ -8,6 +8,11 @@ namespace :specs do
 
   @spec_opts = '--colour --format specdoc'
 
+  desc "Run watchr testing script"
+  Spec::Rake::SpecTask.new :watchr do |t|
+    sh "watchr watchrtesting.rb"
+  end
+
   desc "Run functional specs for Albacore"
   Spec::Rake::SpecTask.new :all do |t|
     t.spec_files = FileList['spec/**/*_spec.rb'].exclude{ |f| 
@@ -270,13 +275,14 @@ namespace :jeweler do
     gs.files.exclude("albacore.gemspec", ".gitignore", "spec/support/Tools")
 
     gs.add_dependency('rake', '>= 0.8.7')
-    gs.add_dependency('net-ssh', '>= 2.0.15')
-    gs.add_dependency('net-sftp', '>= 2.0.2')
-    gs.add_dependency('rubyzip', '>= 0.9.1')
+    gs.add_dependency('net-ssh', '>= 2.0.22')
+    gs.add_dependency('net-sftp', '>= 2.0.4')
+    gs.add_dependency('rubyzip', '>= 0.9.4')
 
-    gs.add_development_dependency('rspec', '>= 1.2.8')
-    gs.add_development_dependency('jeweler', '>= 1.2.1')
+    gs.add_development_dependency('rspec', '>= 1.3.0')
+    gs.add_development_dependency('jeweler', '>= 1.4.0')
     gs.add_development_dependency('derickbailey-notamock', '>= 0.0.1')
-    gs.add_development_dependency('jekyll', '>= 0.5.4')
+    gs.add_development_dependency('jekyll', '>= 0.5.7')
+    gs.add_development_dependency('watchr', '>= 0.6')
   end
 end
