@@ -8,11 +8,6 @@ namespace :specs do
 
   @spec_opts = '--colour --format specdoc'
 
-  desc "Run watchr testing script"
-  Spec::Rake::SpecTask.new :watchr do |t|
-    sh "watchr watchrtesting.rb"
-  end
-
   desc "Run functional specs for Albacore"
   Spec::Rake::SpecTask.new :all do |t|
     t.spec_files = FileList['spec/**/*_spec.rb'].exclude{ |f| 
