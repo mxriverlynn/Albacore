@@ -29,12 +29,7 @@ module RunCommand
   end
 
   def get_command(params)
-    if Albacore.configuration.has_command? @command
-      command = Albacore.configuration.get_command @command 
-    else
-      command = @command
-    end
-    command = "\"#{command}\""
+    command = "\"#{@command}\""
     command +=" #{params.join(' ')}" if params.count > 0
     command
   end

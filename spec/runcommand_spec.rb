@@ -53,45 +53,6 @@ describe "when specifying multiple parameters to a command" do
   end
 end
 
-describe "when setting a named command to execute" do
-  before :all do
-    Albacore.configure do |config|
-      config.add_path :somepath, "./"
-      config.somecommand :somepath, "somecommand.exe"
-    end
-
-    @runme = RunCommandObject.new
-    @runme.extend SystemPatch
-    @runme.command = :somecommand
-    @runme.execute
-  end
-
-  it "should execute the combined path and command for the named command" do
-    @runme.system_command.should == "\"./somecommand.exe\""
-  end
-end
-
-describe "when setting and then re-setting a named command to execute" do
-  before :all do
-    @runme = RunCommandObject.new
-    @runme.extend SystemPatch
-
-    @runme.command = :doesnotexist
-
-    Albacore.configure do |config|
-      config.firstcommand "./first.exe"
-      config.secondcommand "./second.exe"
-    end
-
-    @runme.command = :secondcommand
-    @runme.execute
-  end
-
-  it "should delay retrieving the command until just before executing the command" do
-    @runme.system_command.should == "\"./second.exe\""
-  end
-end
-
 describe "when executing a runcommand object twice" do
   before :all do
     @runmeone = RunCommandObject.new
