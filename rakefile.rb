@@ -22,6 +22,12 @@ namespace :specs do
     t.spec_opts << @spec_opts
   end
 
+  desc "CSharp compiler (csc.exe) specs" 
+  Spec::Rake::SpecTask.new :csc do |t|
+    t.spec_files = FileList['spec/csc*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+
   desc "Assembly info functional specs"
   Spec::Rake::SpecTask.new :assemblyinfo do |t|
     t.spec_files = FileList['spec/assemblyinfo*_spec.rb']

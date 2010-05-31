@@ -4,27 +4,26 @@ Albacore.configure do |config|
   config.add_path :csc, "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319"
 end
 
-class CSCConfig
+class CSC
   extend AttrMethods
   include YAMLConfig
-  include Logging
-
-  attr_array :compile
-end
-
-class CSC
   include RunCommand
   include Logging
+
+  attr_accessor :output, :target
+  attr_array :compile
 
   def initialize
     @command = File.join(Albacore.configuration.get_path(:csc), "csc.exe")
     super()
   end
 
-  def execute(config)
+  def execute
     params = []
-    puts "---------------#{config.compile.inspect}"
-    params = config.compile.map{|f| "\"#{f}\""}
+    params << "\"/out:#{@output}\"" unless @output.nil?
+    params << "/target:#{@target}" unless @target.nil?
+    params << @compile.map{|f| "\"#{f}\"".gsub("/", "\\")} unless @compile.nil?
+
     result = run_command "CSC", params
     
     failure_message = 'CSC Failed. See Build Log For Detail'
