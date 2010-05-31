@@ -6,7 +6,7 @@ module AttrMethods
         if value.nil? || value.empty?
           return instance_variable_get("@#{n}")
         else
-          instance_variable_set("@#{n}", value)
+          self.send "#{n}=".to_sym, value.to_ary.flatten
         end
       end
       self.send :define_method, "#{n}=" do |value|

@@ -18,20 +18,20 @@ module RunCommand
     params = Array.new(@parameters)
     params << parameters unless parameters.nil?
     
-    command = get_command(params)
-    @logger.debug "Executing #{name}: #{command}"
+    cmd = get_command(params)
+    @logger.debug "Executing #{name}: #{cmd}"
     
     set_working_directory
-    result = system command
+    result = system cmd
     reset_working_directory
     
     result
   end
 
   def get_command(params)
-    command = "\"#{@command}\""
-    command +=" #{params.join(' ')}" if params.count > 0
-    command
+    cmd = "\"#{@command}\""
+    cmd +=" #{params.join(' ')}" if params.count > 0
+    cmd
   end
 
   def combine_parameters(params1, params2)

@@ -50,6 +50,22 @@ describe "when setting an array attribute to an array variable using the equal s
   end
 end
 
+describe "when setting an array attribute to an array without the equal sign" do
+  before :each do
+    class TestClass
+      extend AttrMethods
+      attr_array :test
+    end
+
+    @test = TestClass.new
+    @test.test [1, 2, 3, 4, 5, 6]
+  end
+
+  it "should set the array to the values specified" do
+    @test.test.length.should be(6)
+  end
+end
+
 describe "when setting a hash attribute value without the equal sign" do
   before :each do 
    class Test_Class
@@ -82,7 +98,7 @@ describe "when setting a hash attribute with a params list, using the equal sign
   end
 end
 
-describe "when setting a hash attribute to an array variable using the equal sign" do
+describe "when setting a hash attribute to an hash variable using the equal sign" do
   before :each do
     class TestClass
       extend AttrMethods
