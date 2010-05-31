@@ -30,7 +30,7 @@ module RunCommand
 
   def get_command(params)
     cmd = "\"#{@command}\""
-    cmd +=" #{params.join(' ')}" if params.count > 0
+    cmd +=" #{params.join(' ')}" if params.length > 0
     cmd
   end
 
