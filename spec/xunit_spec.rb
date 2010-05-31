@@ -116,6 +116,7 @@ describe XUnitTestRunner, "when html_output is specified" do
   end
   
   it "should write output html" do
+    sleep(2)
     File.exist?(@html_output).should be_true
   end
   
