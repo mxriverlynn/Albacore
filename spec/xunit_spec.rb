@@ -102,7 +102,7 @@ end
 describe XUnitTestRunner, "when html_output is specified" do
   it_should_behave_like "xunit paths"
   before :each do
-	FileUtils.mkdir @working_dir
+    FileUtils.mkdir @working_dir unless File.exist?(@working_dir)
     xunit = XUnitTestRunner.new(@xunitpath)
     xunit.assembly = @test_assembly    
     xunit.html_output = File.dirname(@html_output)
@@ -127,7 +127,7 @@ end
 describe XUnitTestRunner, "when html_output is not a directory" do
   it_should_behave_like "xunit paths"
   before :each do
-    FileUtils.mkdir @working_dir
+    FileUtils.mkdir @working_dir unless File.exist?(@working_dir)
     strio = StringIO.new
     xunit = XUnitTestRunner.new(@xunitpath)
     xunit.log_level = :verbose
