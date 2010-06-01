@@ -35,3 +35,19 @@ describe CSC, "when targeting a library and an output file" do
     File.exist?(File.join(@folder, "output", "File1.dll")).should be_true
   end
 end
+
+describe CSC, "when referencing existing assemblies" do
+  let :csc do
+    csc = CSC.new
+    csc.references "foobar.dll"
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should specify the reference on the command line" do
+    csc.system_command.should include("\"/reference:foobar.dll\"")
+  end
+end

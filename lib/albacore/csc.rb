@@ -11,7 +11,7 @@ class CSC
   include Logging
 
   attr_accessor :output, :target
-  attr_array :compile
+  attr_array :compile, :references
 
   def initialize
     @command = File.join(Albacore.configuration.get_path(:csc), "csc.exe")
@@ -22,6 +22,7 @@ class CSC
     params = []
     params << "\"/out:#{@output}\"" unless @output.nil?
     params << "/target:#{@target}" unless @target.nil?
+    params << @references.map{|r| "\"/reference:#{r.gsub("/","\\")}\""} unless @references.nil?
     params << @compile.map{|f| "\"#{f}\"".gsub("/", "\\")} unless @compile.nil?
 
     result = run_command "CSC", params
