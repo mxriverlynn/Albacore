@@ -7,8 +7,9 @@ class SpecFlowRunner
   
   attr_array :projects, :options
   
-  def initialize(path_to_command='')
+  def initialize(path_to_command='',report='nunitexecutionreport')
   	@path_to_command = path_to_command
+  	@report = report
     @options=[]
     @projects =[]
     super()
@@ -23,20 +24,30 @@ class SpecFlowRunner
     commandline
   end
   
-  def get_command_parameters
-    command_params = []
-    if @projects.empty? then
+  def get_projects
+  	if @projects.empty? then
     	failure_message = "SpecFlow Expects at list one project file"
     	@logger.debug failure_message
     	fail_with_message failure_message
 	else
-    	command_params << @projects.map{|asm| "\"#{asm}\""}.join(' ')
+    	@projects.map{|asm| "\"#{asm}\""}.join(' ')
 	end
-    if @options.empty? then
-    	command_params << "/xmlTestResult:TestResult.xml /out:specs.html"
+  end
+  
+  def get_options  	
+  	if @options.empty? then
+    	 "/xmlTestResult:TestResult.xml /out:specs.html"
 	else
-		command_params << @options.join(" ") 
-	end 
+		@options.join(" ") 
+	end
+  end
+  	
+  
+  def get_command_parameters
+    command_params = []
+    command_params << @report
+    command_params << get_projects
+	command_params << get_options
     command_params
   end
   
