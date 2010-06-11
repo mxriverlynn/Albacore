@@ -1,13 +1,13 @@
 require 'albacore/support/albacore_helper'
 
-class SpecFlowRunner
+class SpecFlowReport
   extend AttrMethods
   include RunCommand
   include YAMLConfig
   
-  attr_array :projects, :options
+  attr_array :projects, :options, :report
   
-  def initialize(path_to_command='',report='nunitexecutionreport')
+  def initialize(path_to_command='specflow.exe',report='nunitexecutionreport')
   	@path_to_command = path_to_command
   	@report = report
     @options=[]
@@ -42,7 +42,6 @@ class SpecFlowRunner
 	end
   end
   	
-  
   def get_command_parameters
     command_params = []
     command_params << @report
@@ -55,7 +54,7 @@ class SpecFlowRunner
     command_params = get_command_parameters
     result = run_command "specflow.exe", command_params.join(" ")
     
-    failure_message = 'SpecFlow Failed. See Build Log For Detail.'
+    failure_message = 'SpecFlow Failed. See Build Log For Detail. ' +  command_params.join(" ")
     fail_with_message failure_message if !result
   end  
 end
