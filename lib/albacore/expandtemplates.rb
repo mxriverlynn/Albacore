@@ -8,9 +8,12 @@ class ExpandTemplates
   
   attr_accessor :data_file
   attr_hash :expand_files
-  
+
+  attr_accessor :supplements  
+
   def initialize
     @expand_files = {}
+    @supplements = {}
     super()
   end
   
@@ -41,7 +44,13 @@ private
       @logger.debug "Found \"\#{#{$1}}\": Replacing with \"#{value}\"."
       value
     }
-    
+
+    template_data.gsub!(/\#\{(.*?)\}/) {|match|
+	value = @supplements[$1]
+	@logger.debug "Found \"\#{#{$1}}\": Replacing with \"#{value}\"."
+	value
+    }    
+
     File.open(output_file, "w") {|output|
         output.write(template_data)
     }
