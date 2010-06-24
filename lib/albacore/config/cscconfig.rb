@@ -22,6 +22,9 @@ module Configuration
       csc.path = File.join(get_net_version(netversion), "csc.exe")
     end
 
-    Albacore.configuration.extend(self)
   end
+end
+
+class Albacore::Configuration
+  include Configuration::CSC
 end

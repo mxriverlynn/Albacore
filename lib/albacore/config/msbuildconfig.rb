@@ -21,7 +21,9 @@ module Configuration
     def use(netversion)
       msbuild.path = File.join(get_net_version(netversion), "MSBuild.exe")
     end
-
-    Albacore.configuration.extend(self)
   end
+end
+
+class Albacore::Configuration
+  include Configuration::MSBuild
 end

@@ -4,11 +4,9 @@ module Albacore
   	attr_accessor :log_level
 
     def configure
-      yield(configuration) if block_given?
-    end
-
-    def configuration 
       @configuration ||= Configuration.new
+      yield(@configuration) if block_given?
+      @configuration
     end
   end
 
