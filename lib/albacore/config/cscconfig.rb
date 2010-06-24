@@ -2,24 +2,24 @@ require 'ostruct'
 require 'albacore/config/netversion'
 
 module Configuration
-  module MSBuild
+  module CSC
     include ::Configuration::NetVersion
 
-    @config = OpenStruct.new.extend(MSBuild)
-    def self.msbuildconfig
+    @config = OpenStruct.new.extend(CSC)
+    def self.cscconfig
       @config
     end
 
-    def msbuild
-      @config ||= MSBuild.msbuildconfig
+    def csc
+      @config ||= CSC.cscconfig
     end
 
     def self.included(mod)
-      self.msbuildconfig.use :net40
+      self.cscconfig.use :net40
     end
 
     def use(netversion)
-      msbuild.path = File.join(get_net_version(netversion), "MSBuild.exe")
+      csc.path = File.join(get_net_version(netversion), "csc.exe")
     end
 
     Albacore.configuration.extend(self)

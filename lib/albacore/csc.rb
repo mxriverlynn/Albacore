@@ -1,20 +1,17 @@
 require 'albacore/support/albacore_helper'
 
-Albacore.configure do |config|
-  config.add_path :csc, "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319"
-end
-
 class CSC
   extend AttrMethods
   include YAMLConfig
   include RunCommand
   include Logging
+  include ::Configuration::CSC
 
   attr_accessor :output, :target
   attr_array :compile, :references
 
   def initialize
-    @command = File.join(Albacore.configuration.get_path(:csc), "csc.exe")
+    @command = csc.path
     super()
   end
 
