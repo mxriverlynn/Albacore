@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/msbuild'
+require 'albacore/config/msbuildconfig'
 require 'msbuildtestdata'
 
 shared_examples_for "prepping msbuild" do
@@ -9,7 +10,7 @@ shared_examples_for "prepping msbuild" do
     @strio = StringIO.new
     @msbuild.log_device = @strio
     @msbuild.log_level = :verbose
-  end
+ end
 end
 
 describe MSBuild, "when building a solution with verbose logging turned on" do  
@@ -23,7 +24,7 @@ describe MSBuild, "when building a solution with verbose logging turned on" do
   end
 
   it "should log the msbuild command line being called" do
-    @log_data.should include("Executing MSBuild: \"C:\\Windows/Microsoft.NET/Framework/v3.5/MSBuild.exe\"")
+    @log_data.should include("Executing MSBuild: \"C:\\Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe\"")
   end
 end
 
@@ -47,7 +48,7 @@ describe MSBuild, "when an msbuild path is not specified" do
     @msbuild = @testdata.msbuild
   end
   
-  it "should default to the .net framework v3.5" do
+  it "should default to the .net framework v4" do
     @msbuild.command.should == @testdata.msbuild_path
   end
 end
@@ -61,6 +62,21 @@ describe MSBuild, "when an msbuild path is specified" do
   it "should use the specified path for the msbuild exe" do
     @msbuild.command.should == "Some Path"
   end  
+end
+
+describe MSBuild, "when msbuild is configured to use a specific .net version" do
+  before :all do
+    Albacore.configure do |config|
+      config.msbuild.use :net35
+    end
+    @testdata = MSBuildTestData.new
+    @msbuild = @testdata.msbuild
+ end
+
+  it "should use the specified version" do
+   win_dir = ENV['windir'] || ENV['WINDIR'] || "C:/Windows"
+   @msbuild.command.should == File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
+  end
 end
 
 describe MSBuild, "when building a visual studio solution" do

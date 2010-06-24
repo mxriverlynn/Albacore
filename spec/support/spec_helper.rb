@@ -4,6 +4,7 @@ $: << File.join(@root_dir, "lib")
 $: << File.join(@root_dir, "spec")
 $: << File.join(@root_dir, "spec/patches")
 $: << File.join(@root_dir, "spec/support")
+$: << File.join(@root_dir, "lib/albacore/config")
 
 require 'rubygems'
 require 'spec'

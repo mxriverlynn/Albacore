@@ -6,7 +6,7 @@ class MSBuildTestData
   
   def initialize(config_mode='Debug')
     @solution_path = File.join(File.dirname(__FILE__), "../", "support", "TestSolution", "TestSolution.sln")
-    @msbuild_path = "C:\\Windows/Microsoft.NET/Framework/v3.5/MSBuild.exe"
+    @msbuild_path = "C:\\Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe"
     @config_mode = config_mode
     
     setup_output

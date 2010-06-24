@@ -1,25 +1,20 @@
 require 'albacore/support/albacore_helper'
+require 'albacore/config/msbuildconfig.rb'
 
 class MSBuild
   extend AttrMethods
   include RunCommand
   include YAMLConfig
   include Logging
+  include Configuration::MSBuild
   
   attr_accessor :solution, :verbosity
   attr_array :targets
   attr_hash :properties
   
   def initialize
-    @command = build_command
+    @command = msbuild.path
     super()
-  end
-  
-  def build_command
-    win_dir = ENV['windir'] || ENV['WINDIR']
-    win_dir = 'C:/Windows' if win_dir.nil?
-    
-    File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
   end
   
   def build
