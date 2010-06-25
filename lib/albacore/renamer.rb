@@ -1,8 +1,7 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class Renamer
-  include YAMLConfig
-  include Failure
+  include AlbacoreModel
   
   attr_accessor :actual_name, :target_name
   

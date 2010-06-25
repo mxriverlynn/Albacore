@@ -1,10 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class NAnt 
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
-  include Logging
   
   attr_accessor :build_file
   attr_array :targets

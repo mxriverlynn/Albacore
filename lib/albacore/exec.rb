@@ -1,9 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class Exec
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
-  include Logging
     
   def execute
     result = run_command "Exec"

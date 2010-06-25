@@ -1,9 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class NCoverConsole
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
   
   attr_accessor :testrunner
   attr_array :cover_assemblies, :exclude_assemblies, :coverage, :exclude_attributes

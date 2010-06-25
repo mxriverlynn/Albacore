@@ -1,11 +1,9 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'albacore/config/msbuildconfig.rb'
 
 class MSBuild
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
-  include Logging
   include Configuration::MSBuild
   
   attr_accessor :solution, :verbosity

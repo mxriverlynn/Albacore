@@ -1,10 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class XBuild
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
-  include Logging
   
   attr_accessor :solution, :verbosity
   attr_array :targets

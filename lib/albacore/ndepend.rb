@@ -1,9 +1,8 @@
-require "albacore/support/albacore_helper"
+require 'albacore/albacoremodel'
+
 class NDepend
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include Logging
-  include YAMLConfig
 
   attr_accessor :project_file
   def initialize()

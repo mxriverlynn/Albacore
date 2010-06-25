@@ -1,9 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class NUnitTestRunner
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
   
   attr_array :assemblies, :options
   

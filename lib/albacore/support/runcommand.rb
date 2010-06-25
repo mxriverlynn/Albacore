@@ -1,9 +1,7 @@
-require 'albacore/support/failure'
-require 'albacore/support/attrmethods.rb'
+require 'albacore/support/attrmethods'
 
 module RunCommand
   extend AttrMethods
-  include Failure
   
   attr_accessor :command, :working_directory
   attr_array :parameters

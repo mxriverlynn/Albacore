@@ -1,9 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class XUnitTestRunner
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
 
   attr_accessor :html_output
   attr_array :options,:assembly,:assemblies

@@ -1,10 +1,9 @@
 Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'ncoverreports/*.rb')).each {|f| require f }
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class NCoverReport
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
   
   attr_array :coverage_files, :reports, :required_coverage, :filters
   

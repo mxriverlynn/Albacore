@@ -1,11 +1,9 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'fail_patch'
 
 class SampleObject
-  extend AttrMethods
-  include Failure
-  include YAMLConfig
+  include AlbacoreModel
 
   attr_array :array
   attr_hash :hash
@@ -20,7 +18,7 @@ class SampleObject
 end
 
 class RunCommandObject
-  include YAMLConfig
+  include AlbacoreModel
   include RunCommand
 
   def execute

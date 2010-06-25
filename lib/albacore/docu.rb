@@ -1,9 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class Docu
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
   
   attr_accessor :output_location
   attr_array :assemblies, :xml_files

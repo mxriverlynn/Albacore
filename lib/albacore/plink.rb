@@ -1,10 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class PLink
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
-  include Logging
 
   attr_accessor :host, :port, :user, :key, :verbose
   attr_array :commands

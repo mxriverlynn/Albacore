@@ -1,10 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'net/ssh'
 
 class Ssh
-  extend AttrMethods
-  include YAMLConfig
-  include Logging
+  include AlbacoreModel
   
   attr_accessor :server, :username, :password, :port, :key, :debug
   attr_array :commands

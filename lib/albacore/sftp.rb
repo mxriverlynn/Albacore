@@ -1,11 +1,9 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'net/sftp'
 
 class Sftp
-  extend AttrMethods
-  include YAMLConfig
-  include Logging
-  
+  include AlbacoreModel
+
   attr_accessor :server, :username, :password, :port, :key, :debug
   attr_hash :upload_files
   

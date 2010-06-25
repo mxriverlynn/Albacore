@@ -1,5 +1,4 @@
 module AttrMethods
-  
   def attr_array(*names)
     names.each do |n|
       self.send :define_method, n do |*value|
@@ -16,7 +15,7 @@ module AttrMethods
   end
 
   def attr_hash(*names)
-  	names.each do |n|
+    names.each do |n|
       self.send :define_method, n do |*value|
         if value.nil? || value.empty?
           instance_variable_get("@#{n}")

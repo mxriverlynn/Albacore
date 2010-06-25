@@ -1,10 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'yaml'
 
 class ExpandTemplates
-  extend AttrMethods
-  include YAMLConfig
-  include Logging
+  include AlbacoreModel
   
   attr_accessor :data_file
   attr_hash :expand_files

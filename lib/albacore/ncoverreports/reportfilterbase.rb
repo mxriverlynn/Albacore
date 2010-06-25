@@ -1,4 +1,4 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 module NCover
   class ReportFilterBase

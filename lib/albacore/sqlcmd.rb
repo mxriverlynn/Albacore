@@ -1,9 +1,8 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 
 class SQLCmd
-  extend AttrMethods
+  include AlbacoreModel
   include RunCommand
-  include YAMLConfig
   
   attr_accessor :server, :database, :username, :password
   attr_array :scripts

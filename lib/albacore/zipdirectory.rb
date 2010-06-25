@@ -1,12 +1,10 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'zip/zip'
 require 'zip/zipfilesystem'
 include Zip
 
 class ZipDirectory
-  extend AttrMethods
-  include YAMLConfig
-  include Failure
+  include AlbacoreModel
   
   attr_accessor :output_path, :output_file
   attr_accessor :flatten_zip

@@ -1,11 +1,10 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
+require 'albacore/config/cscconfig'
 
 class CSC
-  extend AttrMethods
-  include YAMLConfig
+  include AlbacoreModel
   include RunCommand
-  include Logging
-  include ::Configuration::CSC
+  include Configuration::CSC
 
   attr_accessor :output, :target
   attr_array :compile, :references

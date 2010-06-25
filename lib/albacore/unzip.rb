@@ -1,11 +1,10 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'zip/zip'
 require 'zip/zipfilesystem'
 include Zip
 
 class Unzip
-  include YAMLConfig
-  include Failure
+  include AlbacoreModel
   
   attr_accessor :unzip_path, :zip_file
 

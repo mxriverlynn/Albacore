@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'system_patch'
 
 class RunCommandObject
-  include YAMLConfig
+  include AlbacoreModel
   include RunCommand
 
   def execute

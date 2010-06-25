@@ -1,11 +1,9 @@
-require 'albacore/support/albacore_helper'
+require 'albacore/albacoremodel'
 require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
 
 class AssemblyInfo
-  extend AttrMethods
-  include Failure
-  include YAMLConfig
+  include AlbacoreModel
   
   attr_accessor :version, :title, :description, :output_file, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
