@@ -48,4 +48,12 @@ describe "when executing Ndepend console" do
     @ndepend.run
     @log_data.should include(expected_params)
   end
+
+  it "should order command line properly by including ndepend project file first" do
+    expected_params = "/Help"
+    @ndepend.parameters expected_params
+    @ndepend.extend(FailPatch)
+    @ndepend.run
+    @log_data.should =~ /.*NDepend.Console.exe.*NDependProject.xml.*Help.*/
+  end
 end

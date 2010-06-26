@@ -13,8 +13,9 @@ module RunCommand
   end
   
   def run_command(name="Command Line", parameters=nil)
-    params = Array.new(@parameters)
+    params = Array.new
     params << parameters unless parameters.nil?
+    params << @parameters unless (@parameters.nil? || @parameters.length==0)
     
     cmd = get_command(params)
     @logger.debug "Executing #{name}: #{cmd}"
