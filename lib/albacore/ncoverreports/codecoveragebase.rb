@@ -2,7 +2,7 @@ require 'albacore/albacoremodel'
 
 module NCover
   class CodeCoverageBase
-    include YAMLConfig
+    include AlbacoreModel
     
     attr_accessor :coverage_type, :minimum, :item_type 
     
@@ -10,7 +10,7 @@ module NCover
       @coverage_type = coverage_type
       @minimum = 0
       @item_type = :View
-      parse_config(params) unless params.nil?
+      update_attributes(params) unless params.nil?
       super()
     end
     

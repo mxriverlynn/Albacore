@@ -2,7 +2,7 @@ require 'albacore/albacoremodel'
 
 module NCover
   class ReportFilterBase
-    include YAMLConfig
+    include AlbacoreModel
     
     attr_accessor :filter, :filter_type, :item_type, :is_regex
     
@@ -11,7 +11,7 @@ module NCover
       @item_type = item_type
       @is_regex = false
       @filter_type = :exclude
-      parse_config(params) unless params.nil?
+      update_attributes(params) unless params.nil?
       super()
     end
   

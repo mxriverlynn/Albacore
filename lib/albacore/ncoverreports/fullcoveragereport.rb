@@ -2,7 +2,7 @@ require 'albacore/albacoremodel'
 
 module NCover
   class FullCoverageReport
-    include YAMLConfig
+    include AlbacoreModel
     
     attr_accessor :output_path
     

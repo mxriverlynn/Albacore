@@ -2,14 +2,14 @@ require 'albacore/albacoremodel'
 
 module NCover
   class CyclomaticComplexity
-    include YAMLConfig
+    include AlbacoreModel
     
     attr_accessor :maximum, :item_type 
     
     def initialize(params={})
       @maximum = 100
       @item_type = :View
-      parse_config(params) unless params.nil?
+      update_attributes(params) unless params.nil?
       super()
     end
     
