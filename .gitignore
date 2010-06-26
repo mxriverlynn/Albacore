@@ -34,9 +34,7 @@ spec/support/TestSolution/NDependOut
 spec/support/zip/*.zip.*
 github-test.rb
 Albacore-*.gem
-Albacore.gemspec
 albacore-*.gem
-albacore.gemspec
 .idea
 web.config.example
 albacore_example.zip
