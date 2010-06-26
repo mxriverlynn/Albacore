@@ -1,15 +1,18 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/nunitconfig'
 
 class NUnitTestRunner
   include AlbacoreModel
   include RunCommand
+  include Configuration::NUnit
   
   attr_array :assemblies, :options
   
-  def initialize(command='')
-    @command = command
+  def initialize(command=nil)
     @options=[]
     @assemblies=[]
+    update_attributes nunit.to_hash
+    @command = command unless command.nil?
     super()
   end
   

@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Derick Bailey", "Ben Hall", "Steve Harman", "etc"]
-  s.date = %q{2010-06-25}
+  s.date = %q{2010-06-26}
   s.description = %q{Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks.}
   s.email = %q{derickbailey@gmail.com}
   s.extra_rdoc_files = [
@@ -30,6 +30,7 @@ Gem::Specification.new do |s|
      "lib/albacore/config/cscconfig.rb",
      "lib/albacore/config/msbuildconfig.rb",
      "lib/albacore/config/netversion.rb",
+     "lib/albacore/config/nunitconfig.rb",
      "lib/albacore/csc.rb",
      "lib/albacore/docu.rb",
      "lib/albacore/exec.rb",
@@ -57,6 +58,7 @@ Gem::Specification.new do |s|
      "lib/albacore/plink.rb",
      "lib/albacore/renamer.rb",
      "lib/albacore/sftp.rb",
+     "lib/albacore/specflowreport.rb",
      "lib/albacore/sqlcmd.rb",
      "lib/albacore/ssh.rb",
      "lib/albacore/support/attrmethods.rb",
@@ -84,6 +86,7 @@ Gem::Specification.new do |s|
      "lib/rake/plinktask.rb",
      "lib/rake/renametask.rb",
      "lib/rake/sftptask.rb",
+     "lib/rake/specflowreporttask.rb",
      "lib/rake/sqlcmdtask.rb",
      "lib/rake/sshtask.rb",
      "lib/rake/support/albacoretask.rb",
@@ -129,6 +132,8 @@ Gem::Specification.new do |s|
      "spec/sftp_spec.rb",
      "spec/sftptask_spec.rb",
      "spec/spec.opts",
+     "spec/specflowreport_spec.rb",
+     "spec/specflowreporttask_spec.rb",
      "spec/sqlcmd_spec.rb",
      "spec/sqlcmdtask_spec.rb",
      "spec/ssh_spec.rb",
@@ -152,13 +157,25 @@ Gem::Specification.new do |s|
      "spec/support/CodeCoverage/xunit/assemblies/TestSolution.dll",
      "spec/support/CodeCoverage/xunit/assemblies/xunit.dll",
      "spec/support/CodeCoverage/xunit/assemblies/xunit.xml",
+     "spec/support/SpecFlow/TechTalk.SpecFlow.dll",
+     "spec/support/SpecFlow/TestSolution.SpecFlow.dll",
+     "spec/support/SpecFlow/TestSolution.SpecFlow.pdb",
+     "spec/support/SpecFlow/TestSolution.dll",
+     "spec/support/SpecFlow/TestSolution.pdb",
+     "spec/support/SpecFlow/nunit.framework.dll",
      "spec/support/TestSolution/NDependProject.xml",
+     "spec/support/TestSolution/TestSolution.5.0.ReSharper.user",
      "spec/support/TestSolution/TestSolution.FailingTests/FailingTestFixture.cs",
      "spec/support/TestSolution/TestSolution.FailingTests/Properties/AssemblyInfo.cs",
      "spec/support/TestSolution/TestSolution.FailingTests/TestSolution.FailingTests.csproj",
      "spec/support/TestSolution/TestSolution.MSpecTests/Properties/AssemblyInfo.cs",
      "spec/support/TestSolution/TestSolution.MSpecTests/SomeSpecTest.cs",
      "spec/support/TestSolution/TestSolution.MSpecTests/TestSolution.MSpecTests.csproj",
+     "spec/support/TestSolution/TestSolution.SpecFlow/OneFeature.feature",
+     "spec/support/TestSolution/TestSolution.SpecFlow/OneFeature.feature.cs",
+     "spec/support/TestSolution/TestSolution.SpecFlow/Properties/AssemblyInfo.cs",
+     "spec/support/TestSolution/TestSolution.SpecFlow/StepDefinition.cs",
+     "spec/support/TestSolution/TestSolution.SpecFlow/TestSolution.SpecFlow.csproj",
      "spec/support/TestSolution/TestSolution.Tests/Properties/AssemblyInfo.cs",
      "spec/support/TestSolution/TestSolution.Tests/SomeTestFixture.cs",
      "spec/support/TestSolution/TestSolution.Tests/TestSolution.Tests.csproj",
@@ -246,6 +263,8 @@ Gem::Specification.new do |s|
      "spec/runcommand_spec.rb",
      "spec/sftptask_spec.rb",
      "spec/sftp_spec.rb",
+     "spec/specflowreporttask_spec.rb",
+     "spec/specflowreport_spec.rb",
      "spec/sqlcmdtask_spec.rb",
      "spec/sqlcmd_spec.rb",
      "spec/sshtask_spec.rb",

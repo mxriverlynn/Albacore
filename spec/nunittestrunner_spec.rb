@@ -72,3 +72,51 @@ describe NUnitTestRunner, "when configured correctly" do
     $task_failed.should be_false
   end
 end
+
+describe NUnitTestRunner, "when using the configuration command and not providing a command in the intializer" do
+  it_should_behave_like "nunit paths"
+
+  before :all do
+    Albacore.configure do |config|
+      config.nunit.command = "configured command"
+    end
+    @nunit = NUnitTestRunner.new
+  end
+
+  it "should use the configuration command" do
+    @nunit.command.should == "configured command"
+  end
+end
+
+describe NUnitTestRunner, "when the command has been set through configuration and providing a command in the intializer" do
+  it_should_behave_like "nunit paths"
+
+  before :all do
+    Albacore.configure do |config|
+      config.nunit.command = "configured command"
+    end
+    @nunit = NUnitTestRunner.new("initializer command")
+  end
+
+  it "should use the initializer command" do
+    @nunit.command.should == "initializer command"
+  end
+end
+
+describe NUnitTestRunner, "when configuration has been provided" do
+  before :all do
+    Albacore.configure do |config|
+      config.nunit do |nunit|
+        nunit.assemblies = ["foo.dll", "bar.dll"]
+        nunit.options = ["/noshadow"]
+      end
+    end
+
+    @nunit = NUnitTestRunner.new
+  end
+
+  it "should use the provided configuration" do
+    @nunit.assemblies.should == ["foo.dll", "bar.dll"]
+    @nunit.options.should == ["/noshadow"]
+  end
+end
