@@ -10,7 +10,7 @@ class CSC
   attr_array :compile, :references
 
   def initialize
-    @command = csc.path
+    update_attributes csc.to_hash
     super()
   end
 

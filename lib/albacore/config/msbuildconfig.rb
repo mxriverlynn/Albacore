@@ -1,17 +1,20 @@
 require 'ostruct'
 require 'albacore/config/netversion'
+require 'albacore/support/openstruct'
 
 module Configuration
   module MSBuild
-    include ::Configuration::NetVersion
+    include Configuration::NetVersion
 
-    @config = OpenStruct.new.extend(MSBuild)
+    @config = OpenStruct.new.extend(OpenStructToHash).extend(MSBuild)
     def self.msbuildconfig
       @config
     end
 
     def msbuild
       @config ||= MSBuild.msbuildconfig
+      yield(@config) if block_given?
+      @config
     end
 
     def self.included(mod)
@@ -19,7 +22,7 @@ module Configuration
     end
 
     def use(netversion)
-      msbuild.path = File.join(get_net_version(netversion), "MSBuild.exe")
+      msbuild.command = File.join(get_net_version(netversion), "MSBuild.exe")
     end
   end
 end

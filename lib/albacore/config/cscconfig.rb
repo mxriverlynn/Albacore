@@ -1,17 +1,20 @@
 require 'ostruct'
 require 'albacore/config/netversion'
+require 'albacore/support/openstruct'
 
 module Configuration
   module CSC
-    include ::Configuration::NetVersion
+    include Configuration::NetVersion
 
-    @config = OpenStruct.new.extend(CSC)
+    @config = OpenStruct.new.extend(OpenStructToHash).extend(CSC)
     def self.cscconfig
       @config
     end
 
     def csc
       @config ||= CSC.cscconfig
+      yield(@config) if block_given?
+      @config
     end
 
     def self.included(mod)
@@ -19,7 +22,7 @@ module Configuration
     end
 
     def use(netversion)
-      csc.path = File.join(get_net_version(netversion), "csc.exe")
+      csc.command = File.join(get_net_version(netversion), "csc.exe")
     end
 
   end

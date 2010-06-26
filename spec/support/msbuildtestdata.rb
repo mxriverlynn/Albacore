@@ -22,7 +22,7 @@ class MSBuildTestData
     
     if (path_to_msbuild)
       @msbuild_path = path_to_msbuild
-      (@msbuild.command = path_to_msbuild)
+      @msbuild.command = path_to_msbuild
     end
     
     @msbuild.extend(SystemPatch)
