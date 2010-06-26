@@ -178,3 +178,66 @@ describe ExpandTemplates, "when when external data includes at least part of the
     @output_file_data.should include("first instance of 'the real value' is here.")
   end
 end
+
+describe ExpandTemplates, "when supplemental values are specified and a data file is not" do 
+  it_should_behave_like "prepping the sample templates"
+  
+  before :all do
+    @templates.expand_files @testdata.sample_template_file => @testdata.sample_output_file
+		@templates.supplements["value"] = "the real value"
+    @templates.expand
+    
+    @output_file_data = @testdata.read_file(@testdata.sample_output_file)
+  end
+  
+  it "should replace the \#{value} placeholder with 'the real value'" do
+    @output_file_data.should include("the real value")
+  end
+  
+  it "should write to the specified output file" do
+    File.exist?(@testdata.sample_output_file).should be_true
+  end
+
+end
+
+describe ExpandTemplates, "when supplemental values and a data file is specified" do 
+  it_should_behave_like "prepping the sample templates"
+ 
+ before :all do
+    @templates.expand_files @testdata.multiplevalues_template_file => @testdata.multiplevalues_output_file
+    @templates.data_file = @testdata.multiplevalues_data_file
+		@templates.supplements["c"] = "things"
+    @templates.expand
+    
+    @output_file_data = @testdata.read_file(@testdata.multiplevalues_output_file)
+  end
+  
+  it "should have supplemental values override values in the file" do
+    @output_file_data.should include("this is a template file with multiple things")
+  end
+  
+  it "should write to the specified output file" do
+    File.exist?(@testdata.multiplevalues_output_file).should be_true
+  end
+end
+
+describe ExpandTemplates, "when supplemental values that do not override the data file" do 
+  it_should_behave_like "prepping the sample templates"
+ 
+ before :all do
+    @templates.expand_files @testdata.supplemental_template_file => @testdata.sample_output_file
+		@templates.data_file = @testdata.sample_data_file
+		@templates.supplements["supplemental"] = "a fake value"
+    @templates.expand
+    
+    @output_file_data = @testdata.read_file(@testdata.sample_output_file)
+  end
+  
+  it "should have both supplemental values and values from the data file" do
+    @output_file_data.should include("this is the real value and this other thing is a fake value")
+  end
+  
+  it "should write to the specified output file" do
+    File.exist?(@testdata.sample_output_file).should be_true
+  end
+end

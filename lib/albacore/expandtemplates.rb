@@ -6,21 +6,32 @@ class ExpandTemplates
   
   attr_accessor :data_file
   attr_hash :expand_files
-  
+
+  attr_accessor :supplements  
+
   def initialize
     @expand_files = {}
+    @supplements = {}
     super()
   end
   
   def expand
-    return if @data_file.nil?
+    return if @data_file.nil? && @supplements.length == 0
     return if @expand_files.empty?
     
-    config = read_config(@data_file)
-    @expand_files.each { |template_file, output_file| 
-      file_config = get_config_for_file config, template_file
-      expand_template template_file, output_file, file_config
-    }
+	  if !@data_file.nil? 
+			config = read_config(@data_file)
+			config.merge!(@supplements)
+		else
+			config = @supplements
+		end 
+		
+		@expand_files.each { |template_file, output_file| 
+				file_config = get_config_for_file config, template_file
+				expand_template template_file, output_file, file_config
+		}
+
+		
   end
   
 private
@@ -34,12 +45,18 @@ private
     }
     template_data
 
+#		@supplements.each_key { |key| 
+#			template_data.gsub!("\#{#{key}}", @supplements[key]) 
+#		}
+		
     template_data.gsub!(/\#\{(.*?)\}/) {|match|
       value = config[$1]
       @logger.debug "Found \"\#{#{$1}}\": Replacing with \"#{value}\"."
       value
-    }
-    
+    } 
+
+	@logger.debug "template data: #{template_data}"
+	
     File.open(output_file, "w") {|output|
         output.write(template_data)
     }

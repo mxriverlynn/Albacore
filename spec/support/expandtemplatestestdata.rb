@@ -30,6 +30,10 @@ class ExpandTemplatesTestData
     File.join(@workingfolder, "multipleinstance.config")
   end
   
+  def supplemental_template_file
+    File.join(@workingfolder, "supplemental.config")
+  end  
+  
   def sample_output_file
     File.join(@workingfolder, "this_is_an_output_file.config")
   end
