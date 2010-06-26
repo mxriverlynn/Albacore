@@ -20,7 +20,7 @@ describe SpecFlowReport, "when running without specifying command path" do
   end
 
   it "should try to run in same folder" do
-    @spec.path_to_command.should eql('specflow.exe')
+    @spec.command.should eql('specflow.exe')
   end
 end
 
@@ -47,7 +47,7 @@ describe SpecFlowReport, "When passing a command" do
 	end
 	
 	it "should not include specflow.exe" do
-		@spec.path_to_command.should eql('/path_to_command/')
+		@spec.command.should eql('/path_to_command/')
 	end
 end
 
@@ -88,7 +88,7 @@ describe SpecFlowReport, "When a report is specified" do
 	end
 	
 	it "should include the specified report in the command line" do
-		@spec.get_command_line.should include ("assigned report")
+		@spec.get_command_line.should include("assigned report")
 	end
 end
 
@@ -100,7 +100,7 @@ describe SpecFlowReport, "When no report is specified" do
 	end
 	
 	it "should include the nunit report in the command line" do
-		@spec.get_command_line.should include ("nunitexecutionreport")
+		@spec.get_command_line.should include("nunitexecutionreport")
 	end
 end
 
