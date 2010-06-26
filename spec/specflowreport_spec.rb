@@ -109,7 +109,7 @@ describe SpecFlowReport, "when configured correctly" do
 
   before :all do
   	nunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'NUnit-v2.5', 'nunit-console-x86.exe')
-    test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'TestSolution', 'TestSolution.SpecFlow', 'bin','debug', 'TestSolution.SpecFlow.dll')
+    test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'SpecFlow', 'TestSolution.SpecFlow.dll')
 
   	nunit = NUnitTestRunner.new(nunitpath)
     nunit.extend(FailPatch)
