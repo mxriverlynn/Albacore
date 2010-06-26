@@ -51,3 +51,34 @@ describe CSC, "when referencing existing assemblies" do
     csc.system_command.should include("\"/reference:foobar.dll\"")
   end
 end
+
+describe CSC, "when configuring the version to use" do
+  let :csc do
+    Albacore.configure do |config|
+      config.csc.use :net35
+    end
+    csc = CSC.new
+    csc
+  end
+
+  it "should use the configured version" do
+   win_dir = ENV['windir'] || ENV['WINDIR'] || "C:/Windows"
+   csc.command.should == File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'csc.exe')
+  end
+end
+
+describe CSC, "when version to use has been configured and overriding" do
+  let :csc do
+    Albacore.configure do |config|
+      config.csc.use :net35
+    end
+    csc = CSC.new
+    csc.use :net40
+    csc
+  end
+
+  it "should use the override version" do
+   win_dir = ENV['windir'] || ENV['WINDIR'] || "C:/Windows"
+   csc.command.should == File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v4.0.30319', 'csc.exe')
+  end
+end

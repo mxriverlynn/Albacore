@@ -73,9 +73,25 @@ describe MSBuild, "when msbuild is configured to use a specific .net version" do
     @msbuild = @testdata.msbuild
  end
 
-  it "should use the specified version" do
+  it "should use the configured version" do
    win_dir = ENV['windir'] || ENV['WINDIR'] || "C:/Windows"
    @msbuild.command.should == File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
+  end
+end
+
+describe MSBuild, "when msbuild is configured to use a specific .net version, and overriding for a specific instance" do
+  before :all do
+    Albacore.configure do |config|
+      config.msbuild.use :net35
+    end
+    @testdata = MSBuildTestData.new
+    @msbuild = @testdata.msbuild
+    @msbuild.use :net40
+ end
+
+  it "should use the override version" do
+   win_dir = ENV['windir'] || ENV['WINDIR'] || "C:/Windows"
+   @msbuild.command.should == File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v4.0.30319', 'MSBuild.exe')
   end
 end
 

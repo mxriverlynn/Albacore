@@ -6,15 +6,15 @@ module Configuration
   module MSBuild
     include Configuration::NetVersion
 
-    @config = OpenStruct.new.extend(OpenStructToHash).extend(MSBuild)
+    @msbuildconfig = OpenStruct.new.extend(OpenStructToHash).extend(MSBuild)
     def self.msbuildconfig
-      @config
+      @msbuildconfig
     end
 
     def msbuild
-      @config ||= MSBuild.msbuildconfig
-      yield(@config) if block_given?
-      @config
+      config = MSBuild.msbuildconfig
+      yield(config) if block_given?
+      config
     end
 
     def self.included(mod)
@@ -22,7 +22,7 @@ module Configuration
     end
 
     def use(netversion)
-      msbuild.command = File.join(get_net_version(netversion), "MSBuild.exe")
+      self.command = File.join(get_net_version(netversion), "MSBuild.exe")
     end
   end
 end
