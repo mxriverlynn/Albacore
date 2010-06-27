@@ -475,3 +475,20 @@ describe AssemblyInfo, "when configuring the assembly info generator with a yaml
     @asm.company_name.should == "some company name"
   end
 end
+
+describe AssemblyInfo, "when assembly info configuration is provided" do
+  let :asm do
+    Albacore.configure do |config|
+      config.assemblyinfo do |asm|
+        asm.company_name = "foo"
+        asm.version = "bar"
+      end
+    end
+    asm = AssemblyInfo.new
+    asm
+  end
+  it "should use the supplied info" do
+    asm.company_name.should == "foo"
+    asm.version.should == "bar"
+  end
+end
