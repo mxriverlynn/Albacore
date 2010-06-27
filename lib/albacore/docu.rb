@@ -1,17 +1,20 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/docuconfig'
 
 class Docu
   include AlbacoreModel
   include RunCommand
+  include Configuration::Docu
   
   attr_accessor :output_location
   attr_array :assemblies, :xml_files
   
-  def initialize(command='docu.exe')
-    @command = command
+  def initialize(command=nil)
     @assemblies = []
     @xml_files = []
     @output_location = ""
+    update_attributes docu.to_hash
+    @command = command unless command.nil?
     super()
   end
   

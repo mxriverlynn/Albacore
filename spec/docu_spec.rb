@@ -68,3 +68,45 @@ describe Docu, "when building docs with an output location specified" do
     @docu.command_parameters.should include('--output="output_location"')
   end
 end
+
+describe Docu, "when the command has been provided through configuration" do
+  let :docu do
+    Albacore.configure do |config|
+      config.docu.command = "configured"
+    end
+    docu = Docu.new
+    docu
+  end
+
+  it "should use the configured command" do
+    docu.command.should == "configured"
+  end
+end
+
+describe Docu, "when the command has been provided through configuration and is overriden through the initializer" do
+  let :docu do
+    Albacore.configure do |config|
+      config.docu.command = "configured"
+    end
+    docu = Docu.new("override")
+    docu
+  end
+
+  it "should use the override" do
+    docu.command.should == "override"
+  end
+end
+
+describe Docu, "when no command has been specified" do
+  let :docu do
+    class Albacore::Configuration
+      include Configuration::Docu
+    end
+    docu = Docu.new
+    docu
+  end
+
+  it "should default to the standard docu.exe" do
+    docu.command.should == "Docu.exe"
+  end
+end
