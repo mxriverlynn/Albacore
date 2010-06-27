@@ -15,11 +15,7 @@ module Configuration
     end
 
     def self.included(obj)
-<<<<<<< HEAD
-      self.docuconfig.command = "Docu.exe"
-=======
       docuconfig.command = "Docu.exe"
->>>>>>> added docu configuration module
     end
   end
 end
