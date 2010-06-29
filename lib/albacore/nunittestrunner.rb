@@ -11,9 +11,9 @@ class NUnitTestRunner
   def initialize(command=nil)
     @options=[]
     @assemblies=[]
+    super()
     update_attributes nunit.to_hash
     @command = command unless command.nil?
-    super()
   end
   
   def get_command_line

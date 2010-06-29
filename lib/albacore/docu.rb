@@ -13,9 +13,9 @@ class Docu
     @assemblies = []
     @xml_files = []
     @output_location = ""
+    super()
     update_attributes docu.to_hash
     @command = command unless command.nil?
-    super()
   end
   
   def execute

@@ -1,8 +1,10 @@
 require 'albacore/albacoremodel'
 require 'yaml'
+require 'albacore/config/expandtemplatesconfig'
 
 class ExpandTemplates
   include AlbacoreModel
+  include Configuration::ExpandTemplates
   
   attr_accessor :data_file
   attr_hash :expand_files
@@ -13,6 +15,7 @@ class ExpandTemplates
     @expand_files = {}
     @supplements = {}
     super()
+    update_attributes expandtemplates.to_hash
   end
   
   def expand

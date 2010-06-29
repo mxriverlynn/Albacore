@@ -241,3 +241,16 @@ describe ExpandTemplates, "when supplemental values that do not override the dat
     File.exist?(@testdata.sample_output_file).should be_true
   end
 end
+
+describe ExpandTemplates, "when providing configuration" do
+  let :exp do
+    Albacore.configure do |config|
+      config.expandtemplates.expand_files = {"test" => "result"}
+    end
+    exp = ExpandTemplates.new
+  end
+
+  it "should use the configuration" do
+    exp.expand_files.should == {"test" => "result"}
+  end
+end

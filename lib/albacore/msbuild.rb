@@ -11,8 +11,8 @@ class MSBuild
   attr_hash :properties
   
   def initialize
-    update_attributes msbuild.to_hash
     super()
+    update_attributes msbuild.to_hash
   end
   
   def build

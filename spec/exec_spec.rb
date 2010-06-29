@@ -27,4 +27,19 @@ describe Exec, "when executing a command with parameters" do
   end
 end
 
+describe Exec, "when providing configuration" do 
+  let :exec do
+    Albacore.configure do |config|
+      config.exec do |exe|
+        exe.command = "foo.exe"
+        exe.parameters = ["bar", "baz"]
+      end
+    end
+    exec = Exec.new
+  end
 
+  it "should use the configuration" do
+    exec.command.should == "foo.exe"
+    exec.parameters.should == ["bar", "baz"]
+  end
+end
