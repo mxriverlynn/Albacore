@@ -1,9 +1,11 @@
 Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'ncoverreports/*.rb')).each {|f| require f }
 require 'albacore/albacoremodel'
+require 'albacore/config/ncoverreportconfig'
 
 class NCoverReport
   include AlbacoreModel
   include RunCommand
+  include Configuration::NCoverReport
   
   attr_array :coverage_files, :reports, :required_coverage, :filters
   
@@ -13,6 +15,7 @@ class NCoverReport
     @required_coverage = []
     @filters = []
     super()
+    update_attributes ncoverreport.to_hash
   end
   
   def run

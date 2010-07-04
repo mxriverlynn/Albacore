@@ -604,3 +604,16 @@ describe NCoverReport, "when filtering on Document coverage data" do
     $task_failed.should be_false
   end
 end
+
+describe NCoverReport, "when providing configuration values" do
+  let :ncoverreport do
+    Albacore.configure do |config|
+      config.ncoverreport.command = "configured"
+    end
+    ncoverreport = NCoverReport.new
+  end
+
+  it "should use the configured values" do
+    ncoverreport.command.should == "configured"
+  end
+end
