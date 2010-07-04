@@ -5,7 +5,7 @@ describe PLink, 'when executing a command over plink' do
   before :each do
     @cmd = PLink.new
     @cmd.extend(SystemPatch)
-	@cmd.extend(FailPatch)
+    @cmd.extend(FailPatch)
     @cmd.command ="C:\\plink.exe"
     @cmd.host = "testhost"
 
@@ -58,5 +58,18 @@ describe PLink, 'when executing a command over plink' do
     @cmd.commands expected_remote_exe
     @cmd.run
     @cmd.system_command.should include(expected_remote_exe)
+  end
+end
+
+describe PLink, "when providing configuration" do
+  let :plink do
+    Albacore.configure do |config|
+      config.plink.command = "configured"
+    end
+    plink = PLink.new
+  end
+
+  it "should use the configured values" do
+    plink.command.should == "configured"
   end
 end

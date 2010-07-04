@@ -1,8 +1,10 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/plinkconfig'
 
 class PLink
   include AlbacoreModel
   include RunCommand
+  include Configuration::PLink
 
   attr_accessor :host, :port, :user, :key, :verbose
   attr_array :commands
@@ -12,6 +14,7 @@ class PLink
       @verbose = false
       @commands = []
       super()
+      update_attributes plink.to_hash
   end
 
   def run()
