@@ -1,8 +1,10 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/ncoverconsoleconfig'
 
 class NCoverConsole
   include AlbacoreModel
   include RunCommand
+  include Configuration::NCoverConsole
   
   attr_accessor :testrunner
   attr_array :cover_assemblies, :exclude_assemblies, :coverage, :exclude_attributes
@@ -16,6 +18,7 @@ class NCoverConsole
     @exclude_attributes = []
     @coverage = []
     super()
+    update_attributes ncoverconsole.to_hash
   end
   
   def no_registration

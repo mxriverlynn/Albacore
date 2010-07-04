@@ -1,16 +1,19 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/mspecconfig'
 
 class MSpecTestRunner
   include AlbacoreModel
   include RunCommand
+  include Configuration::MSpec
   
   attr_accessor :html_output
   attr_array :assemblies, :options
   
-  def initialize(command='')
-    @command = command
+  def initialize(command=nil)
     @assemblies=[]
     super()
+    update_attributes mspec.to_hash
+    @command = command unless command.nil?
   end
   
   def get_command_line

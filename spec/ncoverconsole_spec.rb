@@ -342,5 +342,17 @@ describe NCoverConsole, "when producing a report with machine.specifications" do
   it "should produce the html report" do
     File.exist?(@testdata.mspec_html_output.to_s).should be_true
   end
+end
 
+describe NCoverConsole, "when providing configuration" do
+  let :ncoverconsole do
+    Albacore.configure do |config|
+      config.ncoverconsole.command = "configured"
+    end
+    ncoverconsole = NCoverConsole.new
+  end
+
+  it "should use the configuration values" do
+    ncoverconsole.command.should == "configured"
+  end
 end

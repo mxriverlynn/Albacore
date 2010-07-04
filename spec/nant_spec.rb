@@ -96,3 +96,15 @@ describe NAnt, "when specifying multiple configuration properties" do
     @testdata.clean_output
   end
 end
+
+describe NAnt, "when providing configuration for nant" do
+  let :nant do
+    Albacore.configure do |config|
+      config.nant.command = "configured"
+    end
+    nant = NAnt.new
+  end
+  it "should use the configured value" do
+    nant.command.should == "configured"
+  end
+end
