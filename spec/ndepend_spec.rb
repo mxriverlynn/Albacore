@@ -57,3 +57,16 @@ describe "when executing Ndepend console" do
     @log_data.should =~ /.*NDepend.Console.exe.*NDependProject.xml.*Help.*/
   end
 end
+
+describe NDepend, "when providing configuration" do
+  let :ndepend do
+    Albacore.configure do |config|
+      config.ndepend.command = "configured"
+    end
+    ndepend = NDepend.new
+  end
+
+  it "should use the configured values" do
+    ndepend.command.should == "configured"
+  end
+end

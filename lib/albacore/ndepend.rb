@@ -1,12 +1,16 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/ndependconfig'
 
 class NDepend
   include AlbacoreModel
   include RunCommand
+  include Configuration::NDepend
 
   attr_accessor :project_file
+
   def initialize()
     super()
+    update_attributes ndepend.to_hash
   end
   
   def run
