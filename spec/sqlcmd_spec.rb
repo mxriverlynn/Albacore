@@ -137,3 +137,16 @@ describe SQLCmd, "when running with variables specified" do
     @cmd.system_command.should include("-v another_var=another_value")
   end
 end
+
+describe SQLCmd, "when providing configuration" do
+  let :sqlcmd do
+    Albacore.configure do |config|
+      config.sqlcmd.command = "configured"
+    end
+    sqlcmd = SQLCmd.new
+  end
+
+  it "should use the configured values" do
+    sqlcmd.command.should == "configured"
+  end
+end

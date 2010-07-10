@@ -1,8 +1,10 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/sqlcmdconfig'
 
 class SQLCmd
   include AlbacoreModel
   include RunCommand
+  include Configuration::SQLCmd
   
   attr_accessor :server, :database, :username, :password
   attr_array :scripts
@@ -13,6 +15,7 @@ class SQLCmd
     @scripts=[]
     @variables={}
     super()
+    update_attributes sqlcmd.to_hash
   end
   
   def run
