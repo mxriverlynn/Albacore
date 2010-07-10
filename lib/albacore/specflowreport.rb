@@ -1,17 +1,20 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/specflowreportconfig'
 
 class SpecFlowReport
   include AlbacoreModel
   include RunCommand
+  include Configuration::SpecFlowReport
   
   attr_array :projects, :options, :report
   
-  def initialize(command='specflow.exe',report='nunitexecutionreport')
-  	@command = command
-  	@report = report
+  def initialize(command=nil, report=nil)
     @options=[]
     @projects =[]
     super()
+    update_attributes specflowreport.to_hash
+  	@command = command unless command.nil?
+  	@report = report unless command.nil?
   end
   
   def get_command_line

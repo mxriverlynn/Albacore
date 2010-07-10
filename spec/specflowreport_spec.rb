@@ -128,3 +128,19 @@ describe SpecFlowReport, "when configured correctly" do
     $task_failed.should be_false
   end
 end
+
+describe SpecFlowReport, "when providing configuration" do
+  let :specflow do
+    Albacore.configure do |config|
+      config.specflowreport.command = "configured"
+      config.specflowreport.report = "configured report"
+    end
+    specflow = SpecFlowReport.new
+  end
+
+  it "should use the configured values" do
+    specflow.command.should == "configured"
+    specflow.report.should == "configured report"
+  end
+end
+
