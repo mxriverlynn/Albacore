@@ -42,6 +42,17 @@ describe Ssh, "when executing multiple commands over ssh" do
   it "should execute all of the specified commands" do
     @sshstub.should have_received(:exec!).twice
   end
-  
 end
 
+describe Ssh, "when providing configuration" do
+  let :ssh do
+    Albacore.configure do |config|
+      config.ssh.server = "configured"
+    end
+    ssh = Ssh.new
+  end
+
+  it "should use the configured values" do
+    ssh.server.should == "configured"
+  end
+end

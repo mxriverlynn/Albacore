@@ -1,8 +1,10 @@
 require 'albacore/albacoremodel'
 require 'net/ssh'
+require 'albacore/config/sshconfig'
 
 class Ssh
   include AlbacoreModel
+  include Configuration::Ssh
   
   attr_accessor :server, :username, :password, :port, :key, :debug
   attr_array :commands
@@ -10,6 +12,7 @@ class Ssh
   def initialize
     @commands = []
     super()
+    update_attributes ssh.to_hash
   end
   
     def get_connection_options
