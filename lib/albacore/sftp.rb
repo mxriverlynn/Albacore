@@ -1,8 +1,10 @@
 require 'albacore/albacoremodel'
 require 'net/sftp'
+require 'albacore/config/sftpconfig'
 
 class Sftp
   include AlbacoreModel
+  include Configuration::Sftp
 
   attr_accessor :server, :username, :password, :port, :key, :debug
   attr_hash :upload_files
@@ -10,6 +12,7 @@ class Sftp
   def initialize
     @upload_files = {}
     super()
+    update_attributes sftp.to_hash
   end  
   
   def get_connection_options

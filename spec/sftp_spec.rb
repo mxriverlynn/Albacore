@@ -28,3 +28,16 @@ describe Sftp, 'when uploading files over sftp' do
     @sftpstub.should have_received(:upload!).with("another.file", "another/folder/another.file")
   end
 end
+
+describe Sftp, "when providing configuration" do
+  let :sftp do
+    Albacore.configure do |config|
+      config.sftp.server = "configured"
+    end
+    sftp = Sftp.new
+  end
+
+  it "should use the configured values" do
+    sftp.server.should == "configured"
+  end
+end
