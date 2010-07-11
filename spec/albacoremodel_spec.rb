@@ -30,6 +30,6 @@ describe "when updating an object attributes with an invalid hash key" do
   end
 
   it "should warn about the attribute not being found" do
-    @log.should include "something is not a settable attribute on ModelTest"
+    @log.should include("something is not a settable attribute on ModelTest")
   end
 end

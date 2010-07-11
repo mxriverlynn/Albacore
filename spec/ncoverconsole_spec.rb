@@ -128,7 +128,7 @@ describe NCoverConsole, "when running with the defaults" do
   end
   
   it "should include the register flag in the command" do
-    @ncc.system_command.should include "//reg"
+    @ncc.system_command.should include("//reg")
   end
 end
 
@@ -148,7 +148,7 @@ describe NCoverConsole, "when opting out of registering the ncover dll" do
   end
   
   it "should not include the register flag in the command" do
-    @ncc.system_command.should_not include "//reg"
+    @ncc.system_command.should_not include("//reg")
   end
 end
 

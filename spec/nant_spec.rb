@@ -39,7 +39,7 @@ describe NAnt, "when running a nant build file" do
   end
   
   it "should execute the default task" do
-    File.exists?("#{@testdata.output_path}/buildfile.txt").should be true
+    File.exists?("#{@testdata.output_path}/buildfile.txt").should be_true
   end
 end
 
@@ -54,11 +54,11 @@ describe NAnt, "when running specific targets" do
   end
   
   it "should execute the first task" do
-    File.exists?("#{@testdata.output_path}/buildfile.txt").should be true
+    File.exists?("#{@testdata.output_path}/buildfile.txt").should be_true
   end
   
   it "should execute the second task" do
-    File.exists?("#{@testdata.output_path}/otherfile.txt").should be true
+    File.exists?("#{@testdata.output_path}/otherfile.txt").should be_true
   end
 end
 
@@ -89,7 +89,7 @@ describe NAnt, "when specifying multiple configuration properties" do
   end
   
   it "should create the output file" do
-    File.exists?("#{@testdata.output_path}/buildfile.txt").should be true
+    File.exists?("#{@testdata.output_path}/buildfile.txt").should be_true
   end
   
   after :all do
