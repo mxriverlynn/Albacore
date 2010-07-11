@@ -237,8 +237,6 @@ namespace :jeweler do
     gs.files.exclude("albacore.gemspec", ".gitignore", "spec/support/Tools")
 
     gs.add_dependency('rake', '>= 0.8.7')
-    gs.add_dependency('net-ssh', '>= 2.0.22')
-    gs.add_dependency('net-sftp', '>= 2.0.4')
     gs.add_dependency('rubyzip', '>= 0.9.4')
 
     gs.add_development_dependency('rspec', '>= 1.3.0')

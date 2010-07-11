@@ -24,8 +24,6 @@ end
 
 puts "Installing required dependencies"
 install 'rake'
-install 'net-ssh'
-install 'net-sftp'
 install 'rubyzip'
 install 'jeweler'
 install 'rspec'
