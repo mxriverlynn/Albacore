@@ -1,8 +1,5 @@
 module Albacore
   class << self
-  	attr_accessor :yaml_config_folder
-  	attr_accessor :log_level
-
     def configure
       @configuration ||= Configuration.new
       yield(@configuration) if block_given?
@@ -11,5 +8,7 @@ module Albacore
   end
 
   class Configuration
-  end
+   	attr_accessor :yaml_config_folder
+  	attr_accessor :log_level
+ end
 end

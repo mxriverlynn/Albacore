@@ -115,9 +115,10 @@ namespace :specs do
 end
 
 namespace :albacore do  
-  #global configuration options
-  Albacore::yaml_config_folder = "spec/support/yamlconfig"
-  Albacore::log_level = :verbose
+  Albacore.configure do |config|
+    config.yaml_config_folder = "spec/support/yamlconfig"
+    config.log_level = :verbose
+  end
 
   desc "Run a complete Albacore build sample"
   task :sample => ['albacore:assemblyinfo',

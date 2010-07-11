@@ -38,12 +38,12 @@ describe YAMLConfig, "when specifying a yaml config folder and configuring" do
   end
   
   before :all do
-  	Albacore::yaml_config_folder = File.join(File.dirname(__FILE__), 'support', 'yamlconfig')
+  	Albacore.configure.yaml_config_folder = File.join(File.dirname(__FILE__), 'support', 'yamlconfig')
     @yamltest = YAML_AutoConfig_Test.new
     @yamltest.load_config_by_task_name("yaml_autoconfig_test")
   end
   
   it "should automatically configure the class from the yaml file in the specified folder" do
-    @yamltest.some_attribute.should == "this value was loaded from a folder, specified by Albacore::yaml_config_folder"
+    @yamltest.some_attribute.should == "this value was loaded from a folder, specified by Albacore.configure.yaml_config_folder"
   end
 end

@@ -1,6 +1,9 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/csc'
-Albacore::log_level = :verbose
+
+Albacore.configure do |config|
+  config.log_level = :verbose
+end
 
 describe CSC, "when supplying a file list with 2 files to compile" do
   let :csc do
