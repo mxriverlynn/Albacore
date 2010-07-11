@@ -1,8 +1,10 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/xbuildconfig'
 
 class XBuild
   include AlbacoreModel
   include RunCommand
+  include Configuration::XBuild
   
   attr_accessor :solution, :verbosity
   attr_array :targets
@@ -11,6 +13,7 @@ class XBuild
   def initialize
     @command = 'xbuild'
     super()
+    update_attributes xbuild.to_hash
   end
   
   def build

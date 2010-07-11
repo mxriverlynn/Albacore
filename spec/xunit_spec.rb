@@ -153,3 +153,16 @@ describe XUnitTestRunner, "when html_output is not a directory" do
     FileUtils.rm_r @working_dir if File.exist? @working_dir
   end
 end
+
+describe XUnitTestRunner, "when providing configuration" do
+  let :xunit do
+    Albacore.configure do |config|
+      config.xunit.command = "configured"
+    end
+    xunit = XUnitTestRunner.new
+  end
+
+  it "should use the configured values" do
+    xunit.command.should == "configured"
+  end
+end

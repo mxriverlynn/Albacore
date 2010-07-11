@@ -1,26 +1,29 @@
 require 'albacore/albacoremodel'
 require 'zip/zip'
 require 'zip/zipfilesystem'
+require 'albacore/config/unzipconfig'
 include Zip
 
 class Unzip
   include AlbacoreModel
+  include Configuration::Unzip
   
-  attr_accessor :unzip_path, :zip_file
+  attr_accessor :destination, :file
 
   def initialize
     super()
+    update_attributes unzip.to_hash
   end
     
-  def unzip()
-    fail_with_message 'Zip File cannot be empty' if @zip_file.nil?
-    return if @zip_file.nil?
+  def execute()
+    fail_with_message 'Zip File cannot be empty' if @file.nil?
+    return if @file.nil?
   
-    Zip::ZipFile.open(@zip_file) do |zip_file|
-        zip_file.each do |file|
-           out_path = File.join(@unzip_path, file.name)
+    Zip::ZipFile.open(@file) do |file|
+        zip_f.each do |f|
+           out_path = File.join(@destination, f.name)
            FileUtils.mkdir_p(File.dirname(out_path))
-           zip_file.extract(file, out_path) unless File.exist?(out_path)
+           file.extract(f, out_path) unless File.exist?(out_path)
         end
       end
   end

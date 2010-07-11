@@ -1,16 +1,19 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/xunitconfig'
 
 class XUnitTestRunner
   include AlbacoreModel
   include RunCommand
+  include Configuration::XUnit
 
   attr_accessor :html_output
   attr_array :options,:assembly,:assemblies
 
-  def initialize(command='')
-    @command = command
+  def initialize(command=nil)
     @options=[]
     super()
+    update_attributes xunit.to_hash
+    @command = command unless command.nil?
   end
 
   def get_command_line
