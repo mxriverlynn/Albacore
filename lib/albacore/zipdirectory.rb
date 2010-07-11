@@ -1,10 +1,12 @@
 require 'albacore/albacoremodel'
+require 'albacore/config/zipconfig'
 require 'zip/zip'
 require 'zip/zipfilesystem'
 include Zip
 
 class ZipDirectory
   include AlbacoreModel
+  include Configuration::Zip
   
   attr_accessor :output_path, :output_file
   attr_accessor :flatten_zip
@@ -14,6 +16,7 @@ class ZipDirectory
     @flatten_zip = true
     @exclusions = []
     super()
+    update_attributes zip.to_hash
   end
     
   def package()

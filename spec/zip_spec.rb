@@ -25,9 +25,9 @@ describe ZipDirectory, 'when zipping a directory with string exclusions' do
     zip.package
     
     unzip = Unzip.new
-    unzip.zip_file = File.join(ZipTestData.folder, 'test.zip')
-    unzip.unzip_path = ZipTestData.output_folder
-    unzip.unzip
+    unzip.file = File.join(ZipTestData.folder, 'test.zip')
+    unzip.destination = ZipTestData.output_folder
+    unzip.execute
   end
   
   after :each do
@@ -48,9 +48,9 @@ describe ZipDirectory, 'when zipping a directory of files with regexp exclusions
     zip.package
     
     unzip = Unzip.new
-    unzip.zip_file = File.join(ZipTestData.folder, 'test.zip')
-    unzip.unzip_path = ZipTestData.output_folder
-    unzip.unzip
+    unzip.file = File.join(ZipTestData.folder, 'test.zip')
+    unzip.destination = ZipTestData.output_folder
+    unzip.execute
   end
   
   after :each do
@@ -71,9 +71,9 @@ describe ZipDirectory, 'when zipping a directory of files with glob string exclu
     zip.package
 
     unzip = Unzip.new
-    unzip.zip_file = File.join(ZipTestData.folder, 'test.zip')
-    unzip.unzip_path = ZipTestData.output_folder
-    unzip.unzip
+    unzip.file = File.join(ZipTestData.folder, 'test.zip')
+    unzip.destination = ZipTestData.output_folder
+    unzip.execute
   end
 
   after :each do
@@ -87,5 +87,18 @@ describe ZipDirectory, 'when zipping a directory of files with glob string exclu
   it 'should zip the files that don\'t match the globs' do
     File.exist?(File.join(ZipTestData.output_folder, 'files', 'subfolder')).should be_true
     File.exist?(File.join(ZipTestData.output_folder, 'files', 'testfile.txt')).should be_true
+  end
+end
+
+describe ZipDirectory, "when providing configuration" do
+  let :zip do
+    Albacore.configure do |config|
+      config.zip.output_file = "configured"
+    end
+    zip = ZipDirectory.new
+  end
+
+  it "should use the configured values" do
+    zip.output_file.should == "configured"
   end
 end
