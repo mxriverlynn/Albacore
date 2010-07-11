@@ -1,5 +1,0 @@
-@include: template_specific_include.yml
-
-multipleinstance.config:
-  value: 'the real value'
-  a: data

@@ -65,36 +65,12 @@ namespace :specs do
     t.spec_opts << @spec_opts
   end
 
-  desc "SSH functional specs"
-  Spec::Rake::SpecTask.new :ssh do |t|
-    t.spec_files = FileList['spec/ssh*_spec.rb']
-    t.spec_opts << @spec_opts
-  end  
-
-  desc "Plink functional specs"
-  Spec::Rake::SpecTask.new :plink do |t|
-    t.spec_files = FileList['spec/plink*_spec.rb']
-    t.spec_opts << @spec_opts
-  end
-
   desc "Ndepend functional specs"
   Spec::Rake::SpecTask.new :ndepend do |t|
     t.spec_files = FileList['spec/ndepend*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
-  desc "SFTP functional specs"
-  Spec::Rake::SpecTask.new :sftp do |t|
-    t.spec_files = FileList['spec/sftp*_spec.rb']
-    t.spec_opts << @spec_opts
-  end
-
-  desc "Expand Templates functional specs"
-  Spec::Rake::SpecTask.new :templates do |t|
-    t.spec_files = FileList['spec/expandtemplates*_spec.rb']
-    t.spec_opts << @spec_opts
-    end
-
   desc "Zip functional specs"
   Spec::Rake::SpecTask.new :zip do |t|
     t.spec_files = FileList['spec/zip*_spec.rb']
@@ -125,12 +101,6 @@ namespace :specs do
     t.spec_opts << @spec_opts
   end
   
-  desc "Rename functional specs"
-  Spec::Rake::SpecTask.new :rename do |t|
-    t.spec_files = FileList['spec/rename*_spec.rb']
-    t.spec_opts << @spec_opts
-  end
-  
   desc "Docu functional specs"
   Spec::Rake::SpecTask.new :docu do |t|
     t.spec_files = FileList['spec/docu*_spec.rb']
@@ -154,7 +124,6 @@ namespace :albacore do
                      'albacore:msbuild',
                      'albacore:ncoverconsole',
                      'albacore:ncoverreport',
-                     'albacore:rename',  
                      'albacore:mspec',
                      'albacore:nunit',
                      'albacore:xunit']
@@ -210,14 +179,6 @@ namespace :albacore do
     )
   end
 
-  desc "Run the sample for renaming a File"
-  rename do |rename|
-    FileUtils.touch 'web.uat.config.example'
-     
-    rename.actual_name = 'web.uat.config.example'
-    rename.target_name = 'web.config.example'
-  end
-   
   desc "Run ZipDirectory example"
   zip do |zip|
     zip.output_path = File.dirname(__FILE__)
