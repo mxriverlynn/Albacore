@@ -16,6 +16,8 @@ _ReSharper.*
 ~$*
 *.tmp
 *.eprj
+*.bkp
+/coverage.xml
 spec/support/AssemblyInfo/AssemblyInfo.cs
 spec/support/AssemblyInfo/AssemblyInfo.*
 spec/support/csc/output/*.exe

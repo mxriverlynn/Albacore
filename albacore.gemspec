@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{albacore}
-  s.version = "0.2.0.pre1"
+  s.version = "0.2.0.preview1"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Derick Bailey", "Ben Hall", "Steve Harman", "etc"]
-  s.date = %q{2010-06-26}
+  s.date = %q{2010-07-13}
   s.description = %q{Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks.}
   s.email = %q{derickbailey@gmail.com}
   s.extra_rdoc_files = [
@@ -26,15 +26,28 @@ Gem::Specification.new do |s|
      "lib/albacore/assemblyinfo.rb",
      "lib/albacore/assemblyinfolanguages/csharpengine.rb",
      "lib/albacore/assemblyinfolanguages/vbnetengine.rb",
+     "lib/albacore/config/assemblyinfoconfig.rb",
      "lib/albacore/config/config.rb",
      "lib/albacore/config/cscconfig.rb",
+     "lib/albacore/config/docuconfig.rb",
+     "lib/albacore/config/execconfig.rb",
      "lib/albacore/config/msbuildconfig.rb",
+     "lib/albacore/config/mspecconfig.rb",
+     "lib/albacore/config/nantconfig.rb",
+     "lib/albacore/config/ncoverconsoleconfig.rb",
+     "lib/albacore/config/ncoverreportconfig.rb",
+     "lib/albacore/config/ndependconfig.rb",
      "lib/albacore/config/netversion.rb",
      "lib/albacore/config/nunitconfig.rb",
+     "lib/albacore/config/specflowreportconfig.rb",
+     "lib/albacore/config/sqlcmdconfig.rb",
+     "lib/albacore/config/unzipconfig.rb",
+     "lib/albacore/config/xbuildconfig.rb",
+     "lib/albacore/config/xunitconfig.rb",
+     "lib/albacore/config/zipconfig.rb",
      "lib/albacore/csc.rb",
      "lib/albacore/docu.rb",
      "lib/albacore/exec.rb",
-     "lib/albacore/expandtemplates.rb",
      "lib/albacore/msbuild.rb",
      "lib/albacore/mspectestrunner.rb",
      "lib/albacore/nant.rb",
@@ -55,17 +68,14 @@ Gem::Specification.new do |s|
      "lib/albacore/ncoverreports/symbolcoverage.rb",
      "lib/albacore/ndepend.rb",
      "lib/albacore/nunittestrunner.rb",
-     "lib/albacore/plink.rb",
-     "lib/albacore/renamer.rb",
-     "lib/albacore/sftp.rb",
      "lib/albacore/specflowreport.rb",
      "lib/albacore/sqlcmd.rb",
-     "lib/albacore/ssh.rb",
      "lib/albacore/support/attrmethods.rb",
      "lib/albacore/support/failure.rb",
      "lib/albacore/support/logging.rb",
      "lib/albacore/support/openstruct.rb",
      "lib/albacore/support/runcommand.rb",
+     "lib/albacore/support/supportlinux.rb",
      "lib/albacore/support/yamlconfig.rb",
      "lib/albacore/unzip.rb",
      "lib/albacore/xbuild.rb",
@@ -75,7 +85,6 @@ Gem::Specification.new do |s|
      "lib/rake/csctask.rb",
      "lib/rake/docutask.rb",
      "lib/rake/exectask.rb",
-     "lib/rake/expandtemplatestask.rb",
      "lib/rake/msbuildtask.rb",
      "lib/rake/mspectask.rb",
      "lib/rake/nanttask.rb",
@@ -83,12 +92,8 @@ Gem::Specification.new do |s|
      "lib/rake/ncoverreporttask.rb",
      "lib/rake/ndependtask.rb",
      "lib/rake/nunittask.rb",
-     "lib/rake/plinktask.rb",
-     "lib/rake/renametask.rb",
-     "lib/rake/sftptask.rb",
      "lib/rake/specflowreporttask.rb",
      "lib/rake/sqlcmdtask.rb",
-     "lib/rake/sshtask.rb",
      "lib/rake/support/albacoretask.rb",
      "lib/rake/support/createtask.rb",
      "lib/rake/unziptask.rb",
@@ -100,6 +105,7 @@ Gem::Specification.new do |s|
      "spec/assemblyinfo_spec.rb",
      "spec/assemblyinfotask_spec.rb",
      "spec/attrmethods_spec.rb",
+     "spec/config_spec.rb",
      "spec/createtask_spec.rb",
      "spec/csc_spec.rb",
      "spec/csctask_spec.rb",
@@ -107,10 +113,9 @@ Gem::Specification.new do |s|
      "spec/docutask_spec.rb",
      "spec/exec_spec.rb",
      "spec/exectask_spec.rb",
-     "spec/expandtemplates_spec.rb",
-     "spec/expandtemplatestask_spec.rb",
      "spec/msbuild_spec.rb",
      "spec/msbuildtask_spec.rb",
+     "spec/mspec_spec.rb",
      "spec/mspectask_spec.rb",
      "spec/nant_spec.rb",
      "spec/nanttask_spec.rb",
@@ -125,19 +130,12 @@ Gem::Specification.new do |s|
      "spec/patches/docu_patch.rb",
      "spec/patches/fail_patch.rb",
      "spec/patches/system_patch.rb",
-     "spec/plink_spec.rb",
-     "spec/plinktask_spec.rb",
-     "spec/renametask_spec.rb",
      "spec/runcommand_spec.rb",
-     "spec/sftp_spec.rb",
-     "spec/sftptask_spec.rb",
      "spec/spec.opts",
      "spec/specflowreport_spec.rb",
      "spec/specflowreporttask_spec.rb",
      "spec/sqlcmd_spec.rb",
      "spec/sqlcmdtask_spec.rb",
-     "spec/ssh_spec.rb",
-     "spec/sshtask_spec.rb",
      "spec/support/AssemblyInfo/assemblyinfo.yml",
      "spec/support/CodeCoverage/mspec/assemblies/Machine.Specifications.NUnit.dll",
      "spec/support/CodeCoverage/mspec/assemblies/Machine.Specifications.dll",
@@ -192,17 +190,6 @@ Gem::Specification.new do |s|
      "spec/support/csc/File1.cs",
      "spec/support/csc/File2.cs",
      "spec/support/csc/output/ignorethis.txt",
-     "spec/support/expandtemplates/datafiles/multiplevalues.yml",
-     "spec/support/expandtemplates/datafiles/multitemplate-specificfile.yml",
-     "spec/support/expandtemplates/datafiles/multitemplate.yml",
-     "spec/support/expandtemplates/datafiles/sample.yml",
-     "spec/support/expandtemplates/datafiles/sample_with_include.yml",
-     "spec/support/expandtemplates/datafiles/template_specific_data_file_with_include.yml",
-     "spec/support/expandtemplates/datafiles/template_specific_include.yml",
-     "spec/support/expandtemplates/templates/multipleinstance.config",
-     "spec/support/expandtemplates/templates/multiplevalues.config",
-     "spec/support/expandtemplates/templates/sample.config",
-     "spec/support/expandtemplatestestdata.rb",
      "spec/support/msbuildtestdata.rb",
      "spec/support/nanttestdata.rb",
      "spec/support/ncoverconsoletestdata.rb",
@@ -214,6 +201,8 @@ Gem::Specification.new do |s|
      "spec/support/zip/files/subfolder/sub file.txt",
      "spec/support/zip/files/testfile.txt",
      "spec/support/ziptestdata.rb",
+     "spec/unzip_spec.rb",
+     "spec/xbuild_spec.rb",
      "spec/xunit_spec.rb",
      "spec/xunittask_spec.rb",
      "spec/yamlconfig_spec.rb",
@@ -225,13 +214,14 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://albacorebuild.net}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Dolphin-Safe Rake Tasks For .NET Systems}
   s.test_files = [
     "spec/albacoremodel_spec.rb",
      "spec/assemblyinfotask_spec.rb",
      "spec/assemblyinfo_spec.rb",
      "spec/attrmethods_spec.rb",
+     "spec/config_spec.rb",
      "spec/createtask_spec.rb",
      "spec/csctask_spec.rb",
      "spec/csc_spec.rb",
@@ -239,11 +229,10 @@ Gem::Specification.new do |s|
      "spec/docu_spec.rb",
      "spec/exectask_spec.rb",
      "spec/exec_spec.rb",
-     "spec/expandtemplatestask_spec.rb",
-     "spec/expandtemplates_spec.rb",
      "spec/msbuildtask_spec.rb",
      "spec/msbuild_spec.rb",
      "spec/mspectask_spec.rb",
+     "spec/mspec_spec.rb",
      "spec/nanttask_spec.rb",
      "spec/nant_spec.rb",
      "spec/ncoverconsoletask_spec.rb",
@@ -257,26 +246,20 @@ Gem::Specification.new do |s|
      "spec/patches/docu_patch.rb",
      "spec/patches/fail_patch.rb",
      "spec/patches/system_patch.rb",
-     "spec/plinktask_spec.rb",
-     "spec/plink_spec.rb",
-     "spec/renametask_spec.rb",
      "spec/runcommand_spec.rb",
-     "spec/sftptask_spec.rb",
-     "spec/sftp_spec.rb",
      "spec/specflowreporttask_spec.rb",
      "spec/specflowreport_spec.rb",
      "spec/sqlcmdtask_spec.rb",
      "spec/sqlcmd_spec.rb",
-     "spec/sshtask_spec.rb",
-     "spec/ssh_spec.rb",
      "spec/support/assemblyinfotester.rb",
-     "spec/support/expandtemplatestestdata.rb",
      "spec/support/msbuildtestdata.rb",
      "spec/support/nanttestdata.rb",
      "spec/support/ncoverconsoletestdata.rb",
      "spec/support/ncoverreporttestdata.rb",
      "spec/support/spec_helper.rb",
      "spec/support/ziptestdata.rb",
+     "spec/unzip_spec.rb",
+     "spec/xbuild_spec.rb",
      "spec/xunittask_spec.rb",
      "spec/xunit_spec.rb",
      "spec/yamlconfig_spec.rb",
@@ -288,10 +271,8 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
-      s.add_runtime_dependency(%q<net-ssh>, [">= 2.0.22"])
-      s.add_runtime_dependency(%q<net-sftp>, [">= 2.0.4"])
       s.add_runtime_dependency(%q<rubyzip>, [">= 0.9.4"])
       s.add_development_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_development_dependency(%q<jeweler>, [">= 1.4.0"])
@@ -300,8 +281,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<watchr>, [">= 0.6"])
     else
       s.add_dependency(%q<rake>, [">= 0.8.7"])
-      s.add_dependency(%q<net-ssh>, [">= 2.0.22"])
-      s.add_dependency(%q<net-sftp>, [">= 2.0.4"])
       s.add_dependency(%q<rubyzip>, [">= 0.9.4"])
       s.add_dependency(%q<rspec>, [">= 1.3.0"])
       s.add_dependency(%q<jeweler>, [">= 1.4.0"])
@@ -311,8 +290,6 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<rake>, [">= 0.8.7"])
-    s.add_dependency(%q<net-ssh>, [">= 2.0.22"])
-    s.add_dependency(%q<net-sftp>, [">= 2.0.4"])
     s.add_dependency(%q<rubyzip>, [">= 0.9.4"])
     s.add_dependency(%q<rspec>, [">= 1.3.0"])
     s.add_dependency(%q<jeweler>, [">= 1.4.0"])
