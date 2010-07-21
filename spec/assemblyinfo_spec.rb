@@ -492,3 +492,21 @@ describe AssemblyInfo, "when assembly info configuration is provided" do
     asm.version.should == "bar"
   end
 end
+
+describe AssemblyInfo, "when specifying custom data" do
+  before :all do
+    @tester = AssemblyInfoTester.new
+    asm = AssemblyInfo.new
+    
+    asm.custom_data "// foo", "// bar"
+
+    # Generate the same file twice.
+    @tester.build_and_read_assemblyinfo_file asm
+    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  end
+  
+  it "should write data unmodified to the output" do
+    @filedata.scan('// foo').length.should == 1
+    @filedata.scan('// bar').length.should == 1
+  end
+end

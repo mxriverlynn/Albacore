@@ -9,10 +9,11 @@ class AssemblyInfo
   
   attr_accessor :version, :title, :description, :output_file, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-  attr_accessor :file_version, :trademark, :lang_engine
+  attr_accessor :file_version, :trademark, :lang_engine, :custom_data
   
   attr_array :namespaces
   attr_hash :custom_attributes
+  attr_array :custom_data
   
   def initialize
     @namespaces = []
@@ -69,6 +70,10 @@ class AssemblyInfo
       attributes = build_custom_attributes()
       asm_data << attributes.join
       asm_data << "\n"
+    end
+    
+    if @custom_data != nil
+      @custom_data.each{|data| asm_data << data + "\n"}
     end
     
     asm_data
