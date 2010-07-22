@@ -73,3 +73,22 @@ describe "when executing a runcommand object twice" do
     @runmetwo.system_command.should == "\"test.exe\" 1 2 3"
   end
 end
+
+describe "when the command exists relative to the project root" do
+  before :all do
+    @runme = RunCommandObject.new
+    @runme.extend SystemPatch
+
+    File.open('test.exe', 'w') {}
+    @runme.command = "test.exe"
+    @runme.execute
+  end
+
+  after :all do
+    FileUtils.rm_f('test.exe')
+  end
+
+  it "should expand the path" do
+    @runme.system_command.should == "\"#{File.expand_path('test.exe')}\""
+  end
+end

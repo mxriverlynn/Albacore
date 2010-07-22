@@ -28,7 +28,8 @@ module RunCommand
   end
 
   def get_command(params)
-    cmd = "\"#{@command}\""
+    executable = File.exists?(@command) ? File.expand_path(@command) : @command
+    cmd = "\"#{executable}\""
     cmd +=" #{params.join(' ')}" if params.length > 0
     cmd
   end
