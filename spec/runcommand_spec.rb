@@ -25,7 +25,7 @@ describe "when setting the command" do
   end
 end
 
-describe "when specifying a parmaeter to a command" do
+describe "when specifying a parameter to a command" do
   before :all do
     @runme = RunCommandObject.new
     @runme.extend SystemPatch
