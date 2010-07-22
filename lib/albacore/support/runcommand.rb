@@ -20,11 +20,9 @@ module RunCommand
     cmd = get_command(params)
     @logger.debug "Executing #{name}: #{cmd}"
     
-    set_working_directory
-    result = system cmd
-    reset_working_directory
-    
-    result
+    Dir.chdir(@working_directory) do
+      return system cmd
+    end
   end
 
   def get_command(params)
@@ -38,16 +36,5 @@ module RunCommand
     combined = params1.collect
     combined = combined.push(params2) unless params2.nil?
     combined
-  end
-  
-  def set_working_directory
-    @original_directory = Dir.pwd
-    return if @working_directory == @original_directory
-    Dir.chdir(@working_directory)
-  end
-  
-  def reset_working_directory
-    return if Dir.pwd == @original_directory
-    Dir.chdir(@original_directory)
   end
 end
