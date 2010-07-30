@@ -4,7 +4,6 @@ require 'albacore/sqlcmd'
 describe SQLCmd, "when running a script the easy way" do
   before :all do
     @cmd = SQLCmd.new
-    @cmd.path_to_command = "sqlcmd.exe"
     @cmd.log_level = :verbose
     @cmd.extend(SystemPatch)
     @cmd.disable_system = true
@@ -34,7 +33,7 @@ describe SQLCmd, "when running a script the easy way" do
 	@cmd.system_command.should_not include("-P")
   end
 
-  it "should specify the location of the sqlcmd exe" do
+  it "should find the location of the sqlcmd exe for the user" do
     @cmd.system_command.should include("sqlcmd.exe")
   end
   
