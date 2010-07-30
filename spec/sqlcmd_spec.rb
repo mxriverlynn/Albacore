@@ -1,6 +1,52 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/sqlcmd'
 
+describe SQLCmd, "when running a script the easy way" do
+  before :all do
+    @cmd = SQLCmd.new
+    @cmd.path_to_command = "sqlcmd.exe"
+    @cmd.log_level = :verbose
+    @cmd.extend(SystemPatch)
+    @cmd.disable_system = true
+    
+    @cmd.scripts "somescript.sql"
+    
+    @cmd.run
+  end
+
+  it "should use localhost as server default" do
+	@cmd.system_command.should include("-S \".\"")
+  end
+  
+  it "should have no database designation (because it could be embedded in the sql file)" do
+	@cmd.system_command.should_not include("-d")
+  end
+  
+  it "should use integrated security instead of username/password" do
+	@cmd.system_command.should include("-E")
+  end
+
+  it "should not include username" do
+	@cmd.system_command.should_not include("-U")
+  end
+
+  it "should not include password" do
+	@cmd.system_command.should_not include("-P")
+  end
+
+  it "should specify the location of the sqlcmd exe" do
+    @cmd.system_command.should include("sqlcmd.exe")
+  end
+  
+  it "should specify the script file" do
+    @cmd.system_command.should include("-i \"somescript.sql\"")
+  end
+  
+  it "should not contain the -b option" do
+    @cmd.system_command.should_not include("-b")
+  end
+end
+
 describe SQLCmd, "when running a script file against a database with authentication information" do
   before :all do
     @cmd = SQLCmd.new
@@ -61,12 +107,14 @@ describe SQLCmd, "when running with no command path specified" do
     @log_data = strio.string
   end
   
-  it "should fail" do
-    $task_failed.should be_true
-  end
+  it "should find sqlcmd in the standard places or bail" do
+	$task_failed.should be_false if (File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','100','tools','binn', 'sqlcmd.exe')))
+	$task_failed.should be_false if (File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','90','tools','binn', 'sqlcmd.exe')))
+	$task_failed.should be_true if ((!(File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','100','tools','binn', 'sqlcmd.exe')))) and (!(File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','90','tools','binn', 'sqlcmd.exe')))))
+	end
   
-  it "should log a failure message" do
-    @log_data.should include('SQLCmd.path_to_command cannot be nil.')
+  it "should log a failure message if it cannot find sqlcmd in the standard places" do
+    @log_data.should include('SQLCmd.path_to_command cannot be nil.') if ((!(File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','100','tools','binn', 'sqlcmd.exe')))) and (!(File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','90','tools','binn', 'sqlcmd.exe')))))
   end
 end
 
