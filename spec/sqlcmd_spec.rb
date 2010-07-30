@@ -41,6 +41,10 @@ describe SQLCmd, "when running a script file against a database with authenticat
   it "should specify the password" do
     @cmd.system_command.should include("-P \"shh! it's a secret!\"")
   end
+  
+  it "should not contain the -b option" do
+    @cmd.system_command.should_not include("-b")
+  end
 end
 
 describe SQLCmd, "when running with no command path specified" do
@@ -120,6 +124,11 @@ describe SQLCmd, "when running multiple script files" do
   it "should specify the third script file" do
     @cmd.system_command.should include("-i \"i sent you.sql\"")
   end
+  
+  it "should include the -b option" do
+    @cmd.system_command.should include("-b")
+  end
+  
 end
 
 describe SQLCmd, "when running with variables specified" do

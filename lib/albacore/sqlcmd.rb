@@ -25,6 +25,7 @@ class SQLCmd
     cmd_params << build_parameter("U", @username) unless @username.nil?
     cmd_params << build_parameter("P", @password) unless @password.nil?
     cmd_params << build_variable_list if @variables.length > 0
+    cmd_params << "-b" if @scripts.length > 1
     cmd_params << build_script_list if @scripts.length > 0
     
     result = run_command "SQLCmd", cmd_params.join(" ")
