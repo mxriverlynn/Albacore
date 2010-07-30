@@ -100,7 +100,11 @@ describe SQLCmd, "when running multiple script files" do
     @cmd.extend(SystemPatch)
     @cmd.disable_system = true
     
-    @cmd.scripts "did you get.sql", "that thing.sql", "i sent you.sql"
+    scriptnames = Array.new
+    scriptnames << "did you get.sql\r\n"
+    scriptnames << "that thing.sql"
+    scriptnames << "i sent you.sql\r\n"
+    @cmd.scripts = scriptnames
     
     @cmd.run
   end

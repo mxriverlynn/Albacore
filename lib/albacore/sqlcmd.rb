@@ -40,7 +40,7 @@ class SQLCmd
   end
   
   def build_script_list
-    @scripts.map{|s| "-i \"#{s}\""}.join(" ")
+    @scripts.map{|s| "-i \"#{s.strip}\""}.join(" ")
   end
   
   def build_parameter(param_name, param_value)
