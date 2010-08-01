@@ -29,15 +29,15 @@ class RunCommandObject
   end
 end
 
+class ConfigByNameOverride < SampleObject
+  attr_accessor :task_name
+  def load_config_by_task_name(name)
+    @task_name = name
+  end
+end
+
 describe "when defining a task" do
   before :all do
-    class ConfigByNameOverride < SampleObject
-      attr_accessor :task_name
-      def load_config_by_task_name(name)
-        @task_name = name
-      end
-    end
-    
     create_task :sampletask, ConfigByNameOverride
 
   	sampletask :sample do |x|
