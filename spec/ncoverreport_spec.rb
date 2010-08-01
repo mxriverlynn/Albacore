@@ -6,7 +6,7 @@ describe NCoverReport, "when runnign without the ncover report location specifie
   before :all do
     @ncover = NCoverReport.new
     @ncover.extend(FailPatch)
-    @ncover.run
+    @ncover.execute
   end
   
   it "should fail execution" do
@@ -29,7 +29,7 @@ describe NCoverReport, "when running a full coverage report with a specified out
     fullcoveragereport.output_path = NCoverReportTestData.output_folder
     @ncover.reports fullcoveragereport
     
-    @ncover.run
+    @ncover.execute
   end
 
   it "should execute ncover.reporting" do
@@ -60,7 +60,7 @@ describe NCoverReport, "when running a summary report with a specified output fo
     summaryreport.output_path = NCoverReportTestData.summary_output_file
     @ncover.reports summaryreport
     
-    @ncover.run
+    @ncover.execute
   end
 
   it "should execute ncover.reporting" do
@@ -95,7 +95,7 @@ describe NCoverReport, "when running multiple ncover reports - a summary and a f
     fullcoveragereport.output_path = @fullcoverage_output_folder
     @ncover.reports summaryreport, fullcoveragereport
 
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to produce a full coverage html report in the specified folder" do
@@ -127,7 +127,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
     symbolcoverage.minimum = 10
     @ncover.required_coverage symbolcoverage
     
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to check for the specified minimum coverage" do
@@ -163,7 +163,7 @@ describe NCoverReport, "when running a report with a specified minimum symbol co
     symbolcoverage.minimum = 100
     @ncover.required_coverage symbolcoverage
     
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to check for the specified minimum coverage" do
@@ -200,7 +200,7 @@ describe NCoverReport, "when specifying the coverage item type to check" do
     symbolcoverage.item_type = :Class
     @ncover.required_coverage symbolcoverage
     
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to check for the specified item type" do
@@ -234,7 +234,7 @@ describe NCoverReport, "when checking more than one type of coverage and all fai
     	NCover::MethodCoverage.new(:minimum => 100, :item_type => :Class)
     )
 
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to check for the symbol coverage" do
@@ -280,7 +280,7 @@ describe NCoverReport, "when checking more than one type of coverage and all pas
     	NCover::MethodCoverage.new(:minimum => 0, :item_type => :Class)
     )
 
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to check for the symbol coverage" do
@@ -325,7 +325,7 @@ describe NCoverReport, "when checking more than one type of coverage and one fai
     	NCover::BranchCoverage.new(:minimum => 0, :item_type => :Class)
     )
 
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to check for the symbol coverage" do
@@ -364,7 +364,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity highe
     coverage = NCover::CyclomaticComplexity.new(:maximum => 1, :item_type => :Class)
     @ncover.required_coverage coverage
     
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to check for the maximum cyclomatic complexity" do
@@ -399,7 +399,7 @@ describe NCoverReport, "when running a report with a cyclomatic complexity under
     coverage = NCover::CyclomaticComplexity.new(:maximum => 1000)
     @ncover.required_coverage coverage
     
-    @ncover.run
+    @ncover.execute
   end
 
   it "should tell ncover.reporting to check for the maximum cyclomatic complexity" do
@@ -437,7 +437,7 @@ describe NCoverReport, "when filtering on Assembly coverage data" do
     	NCover::AssemblyFilter.new(:filter_type => :include, :filter => "TestSolution.*")
     )
     
-    @ncover.run
+    @ncover.execute
   end
   
   it "should exclude the specified assemblies data" do
@@ -475,7 +475,7 @@ describe NCoverReport, "when filtering on Namespace coverage data" do
     	NCover::NamespaceFilter.new(:filter_type => :include, :filter => "TestSolution.*")
     )
     
-    @ncover.run
+    @ncover.execute
   end
   
   it "should exclude the specified data" do
@@ -513,7 +513,7 @@ describe NCoverReport, "when filtering on Class coverage data" do
     	NCover::ClassFilter.new(:filter_type => :include, :filter => "Bar")
     )
     
-    @ncover.run
+    @ncover.execute
   end
   
   it "should exclude the specified data" do
@@ -551,7 +551,7 @@ describe NCoverReport, "when filtering on Method coverage data" do
     	NCover::MethodFilter.new(:filter_type => :include, :filter => "Bar")
     )
     
-    @ncover.run
+    @ncover.execute
   end
   
   it "should exclude the specified data" do
@@ -589,7 +589,7 @@ describe NCoverReport, "when filtering on Document coverage data" do
     	NCover::DocumentFilter.new(:filter_type => :include, :filter => "Bar")
     )
     
-    @ncover.run
+    @ncover.execute
   end
   
   it "should exclude the specified data" do
