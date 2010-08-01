@@ -13,7 +13,7 @@ class NDepend
     update_attributes ndepend.to_hash
   end
   
-  def run
+  def execute
     return unless check_command
     result = run_command @command, create_parameters.join(" ")
     failure_message = 'Command Failed. See Build Log For Detail'

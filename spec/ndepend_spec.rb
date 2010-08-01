@@ -8,7 +8,7 @@ describe "when executing Ndepend console" do
     @msbuild.properties = {:configuration => :Debug}
     @msbuild.targets = [:Clean, :Build]
     @msbuild.solution = "spec/support/TestSolution/TestSolution.sln"
-    @msbuild.build
+    @msbuild.execute
   end
   before :each do
     @ndepend = NDepend.new
@@ -24,20 +24,20 @@ describe "when executing Ndepend console" do
 
   end
   it "should execute NdependConsole.exe"do
-    @ndepend.run
+    @ndepend.execute
 
     @log_data.should include("NDepend.Console.exe" )
   end
 
   it "should include the Ndepend project file" do
-    @ndepend.run
+    @ndepend.execute
     @log_data.should include("NDependProject.xml")
   end
 
   it "should fail when the project file is not given" do
     @ndepend.project_file = nil
     @ndepend.extend(FailPatch)
-    @ndepend.run
+    @ndepend.execute
     $task_failed.should be_true
   end
 
@@ -45,7 +45,7 @@ describe "when executing Ndepend console" do
     expected_params = "/ViewReport /Silent /Help"
     @ndepend.parameters expected_params
     @ndepend.extend(FailPatch)
-    @ndepend.run
+    @ndepend.execute
     @log_data.should include(expected_params)
   end
 
@@ -53,7 +53,7 @@ describe "when executing Ndepend console" do
     expected_params = "/Help"
     @ndepend.parameters expected_params
     @ndepend.extend(FailPatch)
-    @ndepend.run
+    @ndepend.execute
     @log_data.should =~ /.*NDepend.Console.exe.*NDependProject.xml.*Help.*/
   end
 end
