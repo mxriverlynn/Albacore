@@ -15,7 +15,7 @@ class NAnt
     update_attributes nant.to_hash
   end
   
-  def run
+  def execute
     command_parameters = []
     command_parameters << "-buildfile:#{@build_file}" unless @build_file.nil?
     command_parameters << "#{build_properties}" unless @properties.nil?

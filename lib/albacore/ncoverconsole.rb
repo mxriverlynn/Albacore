@@ -25,7 +25,7 @@ class NCoverConsole
     @register_dll = false
   end
   
-  def run
+  def execute
     return unless check_for_testrunner
     
     command_parameters = []

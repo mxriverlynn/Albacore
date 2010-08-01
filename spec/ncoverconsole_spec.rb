@@ -23,7 +23,7 @@ describe NCoverConsole, "when specifying assemblies to cover" do
     nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
-    @ncc.run
+    @ncc.execute
   end
 
   it "should provide coverage for the specified assemblies" do
@@ -50,7 +50,7 @@ describe NCoverConsole, "when specifying assemblies with spaces in the name" do
     nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
-    @ncc.run
+    @ncc.execute
   end
 
   it "should provide coverage for the specified assemblies" do
@@ -78,7 +78,7 @@ describe NCoverConsole, "when specifying assemblies to ignore" do
     nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
-    @ncc.run
+    @ncc.execute
   end
 
   it "should provide coverage for the specified assemblies" do
@@ -105,7 +105,7 @@ describe NCoverConsole, "when specifying attributes to exclude" do
     nunit.options '/noshadow'
 
     @ncc.testrunner = nunit
-    @ncc.run
+    @ncc.execute
   end
 
   it "should not provide coverage for the excluded attributes" do
@@ -124,7 +124,7 @@ describe NCoverConsole, "when running with the defaults" do
     @ncc.command = @testdata.ncoverpath
     @ncc.testrunner = NUnitTestRunner.new
     
-    @ncc.run
+    @ncc.execute
   end
   
   it "should include the register flag in the command" do
@@ -144,7 +144,7 @@ describe NCoverConsole, "when opting out of registering the ncover dll" do
     @ncc.no_registration
     @ncc.testrunner = NUnitTestRunner.new
     
-    @ncc.run
+    @ncc.execute
   end
   
   it "should not include the register flag in the command" do
@@ -171,7 +171,7 @@ describe NCoverConsole, "when specifying the types of coverage to analyze" do
     nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
-    @ncc.run
+    @ncc.execute
   end
     
   it "should only run coverage for those metrics" do
@@ -202,7 +202,7 @@ describe NCoverConsole, "when analyzing a test suite with failing tests" do
     
     ncc.testrunner = nunit
     
-    ncc.run
+    ncc.execute
     @log_data = strio.string
   end
   
@@ -223,7 +223,7 @@ describe NCoverConsole, "when running without a testrunner" do
     strio = StringIO.new
     ncc.log_device = strio
     
-    ncc.run
+    ncc.execute
     @log_data = strio.string
   end
 
@@ -254,7 +254,7 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
     nunit.options '/noshadow'
     
     @ncc.testrunner = nunit
-    @ncc.run
+    @ncc.execute
   end
   
   it "should execute ncover.console from the specified path" do
@@ -301,7 +301,7 @@ describe NCoverConsole, "when specifying an html report and an xml coverage repo
     nunit.options '/noshadow'
     
     ncc.testrunner = nunit
-    ncc.run
+    ncc.execute
   end
 
   
@@ -332,7 +332,7 @@ describe NCoverConsole, "when producing a report with machine.specifications" do
     mspec.html_output = @testdata.mspec_html_output
     
     @ncc.testrunner = mspec
-    @ncc.run
+    @ncc.execute
   end
 
   it "should not fail" do
