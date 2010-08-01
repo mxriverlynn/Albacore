@@ -15,6 +15,9 @@ class SampleObject
   def get_hash
     @hash
   end
+
+  def execute
+  end
 end
 
 class RunCommandObject
@@ -28,25 +31,23 @@ end
 
 describe "when defining a task" do
   before :all do
-    @sample_object = SampleObject.stub_instance()
-    @sample_object.stub_method(:load_config_by_task_name){ |name|
-    	@task_name = name
-    }
-    
-    task_object_proc = Proc.new { @sample_object }
-    create_task :sampletask, task_object_proc do |obj|
-      @task_obj = obj
+    class ConfigByNameOverride < SampleObject
+      attr_accessor :task_name
+      def load_config_by_task_name(name)
+        @task_name = name
+      end
     end
+    
+    create_task :sampletask, ConfigByNameOverride
 
   	sampletask :sample do |x|
-      x.extend(FailPatch)
   	  @config_obj = x
   	end
     Rake::Task[:sample].invoke
   end
   
   it "should yield the object for configuration" do
-    @config_obj.should == @sample_object
+    @config_obj.class.should == ConfigByNameOverride
   end
   
   it "should yield the object for execution" do
@@ -54,13 +55,13 @@ describe "when defining a task" do
   end
   
   it "should call the yaml configuration by task name" do
-  	@task_name.should == "sample"
+  	@config_obj.task_name.should == :sample
   end
 end
 
 describe "when execution fails" do
   before :all do
-    create_task :failing_task, Proc.new { SampleObject.new }
+    create_task :failing_task, SampleObject
 
   	failing_task :sample_fail do |x|
   	  x.extend(FailPatch)
@@ -76,12 +77,12 @@ end
 
 describe "when task args are used" do
   before :all do
-    create_task :task_with_args, Proc.new { SampleObject.new }
+    create_task :task_with_args, SampleObject
 
     task_with_args :sampletask_withargs, [:arg1] do |t, args|
-      t.extend(FailPatch)
       @args = args
     end
+
     Rake::Task[:sampletask_withargs].invoke("test")
   end
   
@@ -92,7 +93,7 @@ end
 
 describe "when calling a task method without providing a task name" do
   before :all do
-    create_task :task_without_name, Proc.new { SampleObject.new }
+    create_task :task_without_name, SampleObject
 
     task_without_name do |t|
       @task_without_name_called = true
@@ -108,7 +109,7 @@ end
 
 describe "when calling a task method without providing a task parameter" do
   before :all do
-    create_task :task_without_param, Proc.new { SampleObject.new }
+    create_task :task_without_param, SampleObject
 
     task_without_param do
       @task_without_param_called = true
@@ -125,7 +126,7 @@ end
 describe "when calling a task without a task definition block" do
 	
   before :all do
-    create_task :task_without_body, Proc.new { SampleObject.new }
+    create_task :task_without_body, SampleObject
     
     task_without_body
     
@@ -144,10 +145,7 @@ end
 
 describe "when creating two tasks and executing them" do
   before :all do
-    create_task :multiple_instance_task, Proc.new { SampleObject.new } do |mi|
-      @array_values = mi.get_array
-      @hash_values = mi.get_hash
-    end
+    create_task :multiple_instance_task, SampleObject
 
     multiple_instance_task :multi_instance_1 do |mi|
       mi.array 1, 2
@@ -166,11 +164,13 @@ describe "when creating two tasks and executing them" do
   end
 
   it "should specify the array values once per task" do
-    @array_values.should == [3, 4]
+    @instance_1.array.should == [1, 2]
+    @instance_2.array.should == [3, 4]
   end
 
   it "should specify the hash values once per task" do
-    @hash_values.should == { :e => :f, :g => :h }
+    @instance_1.hash.should == { :a => :b, :c => :d }
+    @instance_2.hash.should == { :e => :f, :g => :h }
   end
 
   it "should create two separate instances of the task object" do
@@ -180,7 +180,7 @@ end
 
 describe "when running two instances of a command line task" do
   before :all do
-    create_task :run_command_task, Proc.new { RunCommandObject.new } do |ex|
+    create_task :run_command_task, RunCommandObject do |ex|
       ex.execute
     end
 
