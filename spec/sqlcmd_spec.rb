@@ -15,7 +15,7 @@ describe SQLCmd, "when running a script file against a database with authenticat
     @cmd.password="shh! it's a secret!"
     @cmd.scripts "somescript.sql"
     
-    @cmd.run
+    @cmd.execute
   end
   
   it "should specify the location of the sqlcmd exe" do
@@ -53,7 +53,7 @@ describe SQLCmd, "when running with no command path specified" do
     @cmd.extend(FailPatch)
     @cmd.disable_system = true
     
-    @cmd.run
+    @cmd.execute
     @log_data = strio.string
   end
   
@@ -78,7 +78,7 @@ describe SQLCmd, "when execution of sqlcmd fails" do
     @cmd.disable_system = true
     @cmd.force_system_failure = true
     
-    @cmd.run
+    @cmd.execute
     @log_data = strio.string
   end
   
@@ -102,7 +102,7 @@ describe SQLCmd, "when running multiple script files" do
     
     @cmd.scripts "did you get.sql", "that thing.sql", "i sent you.sql"
     
-    @cmd.run
+    @cmd.execute
   end
   
   it "should specify the first script file" do
@@ -129,7 +129,7 @@ describe SQLCmd, "when running with variables specified" do
     
     @cmd.variables :myvar => "my value", :another_var => :another_value
     
-    @cmd.run
+    @cmd.execute
   end
   
   it "should supply the variables to sqlcmd" do

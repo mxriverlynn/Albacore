@@ -16,7 +16,7 @@ class XBuild
     update_attributes xbuild.to_hash
   end
   
-  def build
+  def execute
     build_solution(@solution)
   end
   

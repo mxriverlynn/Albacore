@@ -19,7 +19,7 @@ class ZipDirectory
     update_attributes zip.to_hash
   end
     
-  def package()
+  def execute()
     fail_with_message 'Output File cannot be empty' if @output_file.nil?
     return if @output_file.nil?
         
