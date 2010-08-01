@@ -51,7 +51,7 @@ describe AssemblyInfo, "when generating an assembly info file without an output 
     strio = StringIO.new
     asm.log_device = strio
     
-    asm.write
+    asm.execute
 
     @log_data = strio.string
   end
@@ -92,7 +92,7 @@ describe AssemblyInfo, "when providing custom namespaces and specifying C#" do
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
-  it "should write the namespaces into the using statements" do
+  it "should.execute the namespaces into the using statements" do
     @filedata.scan('using My.Name.Space;').length.should == 1
     @filedata.scan('using Another.Namespace.GoesHere;').length.should == 1
   end
@@ -112,7 +112,7 @@ describe AssemblyInfo, "when providing custom namespaces and specifying VB.NET" 
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
-  it "should write the namespaces into the imports statements" do
+  it "should.execute the namespaces into the imports statements" do
     @filedata.scan('Imports My.Name.Space').length.should == 1
     @filedata.scan('Imports Another.Namespace.GoesHere').length.should == 1
   end
@@ -130,7 +130,7 @@ describe AssemblyInfo, "when providing custom attributes without specifying a la
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
-  it "should write the custom attributes to the assembly info file" do
+  it "should.execute the custom attributes to the assembly info file" do
     @filedata.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
     @filedata.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
   end
@@ -150,7 +150,7 @@ describe AssemblyInfo, "when providing custom attributes and specifying C#" do
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
-  it "should write the custom attributes to the assembly info file" do
+  it "should.execute the custom attributes to the assembly info file" do
     @filedata.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
     @filedata.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
   end
@@ -170,7 +170,7 @@ describe AssemblyInfo, "when providing custom attributes and specifying VB.NET" 
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
-  it "should write the custom attributes to the assembly info file" do
+  it "should.execute the custom attributes to the assembly info file" do
     @filedata.scan('<assembly: CustomAttribute("custom attribute data")>').length.should == 1
     @filedata.scan('<assembly: AnotherAttribute("more data here")>').length.should == 1
   end
@@ -188,7 +188,7 @@ describe AssemblyInfo, "when specifying a custom attribute with no data" do
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
-  it "should write the attribute with an empty argument list" do
+  it "should.execute the attribute with an empty argument list" do
     @filedata.scan('[assembly: NoArgsAttribute()]').length.should == 1
   end
 end
@@ -205,7 +205,7 @@ describe AssemblyInfo, "when specifying an attribute with non-string data" do
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
   
-  it "should write the attribute data without quotes" do
+  it "should.execute the attribute data without quotes" do
     @filedata.scan('[assembly: NonStringAttribute(true)]').length.should == 1
   end
 end
