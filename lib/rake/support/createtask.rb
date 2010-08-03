@@ -6,9 +6,9 @@ def create_task(taskname, task_object)
   # so that limitation is worked around with string eval
   Object.class_eval(<<-EOF, __FILE__, __LINE__)
     def #{taskname}(name=:#{taskname}, *args, &configblock)
-      Rake::Task.define_task name, *args do |t, task_args|
+      task name, *args do |t, task_args|
         obj = #{task_object}.new
-        obj.load_config_by_task_name(name)
+        obj.load_config_by_task_name(name) if obj.respond_to?(:load_config_by_task_name)
 
         if !configblock.nil?
           case configblock.arity

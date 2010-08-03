@@ -211,3 +211,26 @@ describe "when running two instances of a command line task" do
   end
 end
 
+describe "when adding prerequisites through the rake api" do
+  let :obj do
+    create_task :dependency_task, Object
+
+    require 'ostruct'
+    obj = OpenStruct.new
+
+    task :first_task
+    task :second_task do
+      obj.dependency_called = true
+    end
+
+    firsttask = Rake::Task[:first_task]
+    firsttask.enhance [:second_task]
+    firsttask.invoke
+
+    obj
+  end
+
+  it "should call the dependent tasks" do
+    obj.dependency_called.should be_true
+  end
+end
