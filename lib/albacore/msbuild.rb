@@ -15,7 +15,7 @@ class MSBuild
     update_attributes msbuild.to_hash
   end
   
-  def build
+  def execute
     build_solution(@solution)
   end
   

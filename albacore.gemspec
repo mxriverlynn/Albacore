@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{albacore}
-  s.version = "0.2.0.preview1"
+  s.version = "0.2.0.preview2"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Derick Bailey", "Ben Hall", "Steve Harman", "etc"]
-  s.date = %q{2010-07-13}
+  s.date = %q{2010-08-01}
   s.description = %q{Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks.}
   s.email = %q{derickbailey@gmail.com}
   s.extra_rdoc_files = [
@@ -94,127 +94,19 @@ Gem::Specification.new do |s|
      "lib/rake/nunittask.rb",
      "lib/rake/specflowreporttask.rb",
      "lib/rake/sqlcmdtask.rb",
-     "lib/rake/support/albacoretask.rb",
      "lib/rake/support/createtask.rb",
      "lib/rake/unziptask.rb",
      "lib/rake/xbuildtask.rb",
      "lib/rake/xunittask.rb",
      "lib/rake/ziptask.rb",
      "rakefile.rb",
-     "spec/albacoremodel_spec.rb",
-     "spec/assemblyinfo_spec.rb",
-     "spec/assemblyinfotask_spec.rb",
-     "spec/attrmethods_spec.rb",
-     "spec/config_spec.rb",
-     "spec/createtask_spec.rb",
-     "spec/csc_spec.rb",
-     "spec/csctask_spec.rb",
-     "spec/docu_spec.rb",
-     "spec/docutask_spec.rb",
-     "spec/exec_spec.rb",
-     "spec/exectask_spec.rb",
-     "spec/msbuild_spec.rb",
-     "spec/msbuildtask_spec.rb",
-     "spec/mspec_spec.rb",
-     "spec/mspectask_spec.rb",
-     "spec/nant_spec.rb",
-     "spec/nanttask_spec.rb",
-     "spec/ncoverconsole_spec.rb",
-     "spec/ncoverconsoletask_spec.rb",
-     "spec/ncoverreport_spec.rb",
-     "spec/ncoverreporttask_spec.rb",
-     "spec/ndepend_spec.rb",
-     "spec/ndependtask_spec.rb",
-     "spec/nunittask_spec.rb",
-     "spec/nunittestrunner_spec.rb",
-     "spec/patches/docu_patch.rb",
-     "spec/patches/fail_patch.rb",
-     "spec/patches/system_patch.rb",
-     "spec/runcommand_spec.rb",
-     "spec/spec.opts",
-     "spec/specflowreport_spec.rb",
-     "spec/specflowreporttask_spec.rb",
-     "spec/sqlcmd_spec.rb",
-     "spec/sqlcmdtask_spec.rb",
-     "spec/support/AssemblyInfo/assemblyinfo.yml",
-     "spec/support/CodeCoverage/mspec/assemblies/Machine.Specifications.NUnit.dll",
-     "spec/support/CodeCoverage/mspec/assemblies/Machine.Specifications.dll",
-     "spec/support/CodeCoverage/mspec/assemblies/TestSolution.MSpecTests.dll",
-     "spec/support/CodeCoverage/mspec/assemblies/TestSolution.dll",
-     "spec/support/CodeCoverage/mspec/assemblies/nunit.framework.dll",
-     "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll",
-     "spec/support/CodeCoverage/nunit/assemblies/TestSolution.dll",
-     "spec/support/CodeCoverage/nunit/assemblies/nunit.framework.dll",
-     "spec/support/CodeCoverage/nunit/assemblies/with spaces/TestSolution.Tests.dll",
-     "spec/support/CodeCoverage/nunit/assemblies/with spaces/TestSolution.dll",
-     "spec/support/CodeCoverage/nunit/assemblies/with spaces/nunit.framework.dll",
-     "spec/support/CodeCoverage/nunit/failing_assemblies/TestSolution.FailingTests.dll",
-     "spec/support/CodeCoverage/nunit/failing_assemblies/nunit.framework.dll",
-     "spec/support/CodeCoverage/report/coverage.xml",
-     "spec/support/CodeCoverage/xunit/assemblies/TestSolution.XUnitTests.dll",
-     "spec/support/CodeCoverage/xunit/assemblies/TestSolution.dll",
-     "spec/support/CodeCoverage/xunit/assemblies/xunit.dll",
-     "spec/support/CodeCoverage/xunit/assemblies/xunit.xml",
-     "spec/support/SpecFlow/TechTalk.SpecFlow.dll",
-     "spec/support/SpecFlow/TestSolution.SpecFlow.dll",
-     "spec/support/SpecFlow/TestSolution.SpecFlow.pdb",
-     "spec/support/SpecFlow/TestSolution.dll",
-     "spec/support/SpecFlow/TestSolution.pdb",
-     "spec/support/SpecFlow/nunit.framework.dll",
-     "spec/support/TestSolution/NDependProject.xml",
-     "spec/support/TestSolution/TestSolution.5.0.ReSharper.user",
-     "spec/support/TestSolution/TestSolution.FailingTests/FailingTestFixture.cs",
-     "spec/support/TestSolution/TestSolution.FailingTests/Properties/AssemblyInfo.cs",
-     "spec/support/TestSolution/TestSolution.FailingTests/TestSolution.FailingTests.csproj",
-     "spec/support/TestSolution/TestSolution.MSpecTests/Properties/AssemblyInfo.cs",
-     "spec/support/TestSolution/TestSolution.MSpecTests/SomeSpecTest.cs",
-     "spec/support/TestSolution/TestSolution.MSpecTests/TestSolution.MSpecTests.csproj",
-     "spec/support/TestSolution/TestSolution.SpecFlow/OneFeature.feature",
-     "spec/support/TestSolution/TestSolution.SpecFlow/OneFeature.feature.cs",
-     "spec/support/TestSolution/TestSolution.SpecFlow/Properties/AssemblyInfo.cs",
-     "spec/support/TestSolution/TestSolution.SpecFlow/StepDefinition.cs",
-     "spec/support/TestSolution/TestSolution.SpecFlow/TestSolution.SpecFlow.csproj",
-     "spec/support/TestSolution/TestSolution.Tests/Properties/AssemblyInfo.cs",
-     "spec/support/TestSolution/TestSolution.Tests/SomeTestFixture.cs",
-     "spec/support/TestSolution/TestSolution.Tests/TestSolution.Tests.csproj",
-     "spec/support/TestSolution/TestSolution.XUnitTests/Class1.cs",
-     "spec/support/TestSolution/TestSolution.XUnitTests/FailingTestFixture.cs",
-     "spec/support/TestSolution/TestSolution.XUnitTests/Properties/AssemblyInfo.cs",
-     "spec/support/TestSolution/TestSolution.XUnitTests/TestSolution.XUnitTests.csproj",
-     "spec/support/TestSolution/TestSolution.build",
-     "spec/support/TestSolution/TestSolution.sln",
-     "spec/support/TestSolution/TestSolution/Class1.cs",
-     "spec/support/TestSolution/TestSolution/Properties/AssemblyInfo.cs",
-     "spec/support/TestSolution/TestSolution/TestSolution.csproj",
-     "spec/support/assemblyinfotester.rb",
-     "spec/support/csc/File1.cs",
-     "spec/support/csc/File2.cs",
-     "spec/support/csc/output/ignorethis.txt",
-     "spec/support/msbuildtestdata.rb",
-     "spec/support/nanttestdata.rb",
-     "spec/support/ncoverconsoletestdata.rb",
-     "spec/support/ncoverreporttestdata.rb",
-     "spec/support/spec_helper.rb",
-     "spec/support/test.yml",
-     "spec/support/yamlconfig/msbuild.yml",
-     "spec/support/yamlconfig/yaml_autoconfig_test.yml",
-     "spec/support/zip/files/subfolder/sub file.txt",
-     "spec/support/zip/files/testfile.txt",
-     "spec/support/ziptestdata.rb",
-     "spec/unzip_spec.rb",
-     "spec/xbuild_spec.rb",
-     "spec/xunit_spec.rb",
-     "spec/xunittask_spec.rb",
-     "spec/yamlconfig_spec.rb",
-     "spec/zip_spec.rb",
-     "spec/ziptask_spec.rb",
      "watchrtesting.rb",
      "yaml_autoconfig_test.yml"
   ]
   s.homepage = %q{http://albacorebuild.net}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Dolphin-Safe Rake Tasks For .NET Systems}
   s.test_files = [
     "spec/albacoremodel_spec.rb",
@@ -271,7 +163,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rake>, [">= 0.8.7"])
       s.add_runtime_dependency(%q<rubyzip>, [">= 0.9.4"])
       s.add_development_dependency(%q<rspec>, [">= 1.3.0"])

@@ -21,7 +21,7 @@ class AssemblyInfo
     update_attributes assemblyinfo.to_hash
   end
   
-  def write
+  def execute
     @lang_engine = CSharpEngine.new unless check_lang_engine
     write_assemblyinfo @output_file
   end

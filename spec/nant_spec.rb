@@ -21,7 +21,7 @@ describe NAnt, "when a nant path is not specified" do
   before :all do
   	@nant.extend(FailPatch)
     @log_data = @strio.string
-    @nant.run
+    @nant.execute
   end
   
   it "should fail" do
@@ -35,7 +35,7 @@ describe NAnt, "when running a nant build file" do
   before :all do
     @nant.command = @testdata.nant_path
     @nant.build_file = @testdata.build_file_path
-    @nant.run
+    @nant.execute
   end
   
   it "should execute the default task" do
@@ -50,7 +50,7 @@ describe NAnt, "when running specific targets" do
     @nant.command = @testdata.nant_path
     @nant.build_file = @testdata.build_file_path
     @nant.targets :build, :other
-    @nant.run
+    @nant.execute
   end
   
   it "should execute the first task" do
@@ -73,7 +73,7 @@ describe NAnt, "when specifying multiple configuration properties" do
     @nant.build_file = @testdata.build_file_path
     
     @nant.properties :version => "1.2.3", "build.mode" => :fast, :debug => false
-    @nant.run
+    @nant.execute
   end
   
   it "should spedify the first property" do

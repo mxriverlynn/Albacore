@@ -18,7 +18,7 @@ describe MSBuild, "when building a solution with verbose logging turned on" do
   
   before :all do
     @msbuild.solution = @testdata.solution_path
-    @msbuild.build
+    @msbuild.execute
     
     @log_data = @strio.string
   end
@@ -33,7 +33,7 @@ describe MSBuild, "when building with no solution specified" do
 
   before :all do
     @msbuild.extend(FailPatch)
-    @msbuild.build
+    @msbuild.execute
     @log_data = @strio.string
   end
   
@@ -100,7 +100,7 @@ describe MSBuild, "when building a visual studio solution" do
 
   before :all do
     @msbuild.solution = @testdata.solution_path
-    @msbuild.build
+    @msbuild.execute
   end
   
   it "should output the solution's binaries" do
@@ -114,7 +114,7 @@ describe MSBuild, "when building a visual studio solution with a single target" 
   before :all do
     @msbuild.solution = @testdata.solution_path
     @msbuild.targets :Rebuild
-    @msbuild.build
+    @msbuild.execute
   end
   
   it "should output the solution's binaries" do
@@ -129,7 +129,7 @@ describe MSBuild, "when building a visual studio solution for a specified config
     
     @msbuild.properties :configuration => :Release
     @msbuild.solution = @testdata.solution_path
-    @msbuild.build
+    @msbuild.execute
   end
   
   it "should build with the specified configuration as a property" do
@@ -147,7 +147,7 @@ describe MSBuild, "when specifying targets to build" do
   before :all do
     @msbuild.targets :Clean, :Build
     @msbuild.solution = @testdata.solution_path
-    @msbuild.build
+    @msbuild.execute
   end
 
   it "should build the targets" do
@@ -162,7 +162,7 @@ describe MSBuild, "when building a solution with a specific msbuild verbosity" d
   before :all do
     @msbuild.verbosity = "normal"
     @msbuild.solution = @testdata.solution_path
-    @msbuild.build
+    @msbuild.execute
   end
 
   it "should call msbuild with the specified verbosity" do
@@ -179,7 +179,7 @@ describe MSBuild, "when specifying multiple configuration properties" do
     @msbuild.targets :Clean, :Build
     @msbuild.properties :configuration => :Debug, :DebugSymbols => true 
     @msbuild.solution = @testdata.solution_path
-    @msbuild.build
+    @msbuild.execute
   end
 
   it "should specify the first property" do

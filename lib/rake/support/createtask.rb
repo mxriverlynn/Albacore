@@ -1,21 +1,28 @@
-def create_task(taskname, task_object_proc, &execute_body)
-  taskclass = :"Albacore_TaskFor_#{taskname}"
-  taskmethod = taskname.to_s.downcase.to_sym
-
+def create_task(taskname, task_object)
+  # this style of creating tasks is not really what i
+  # want to do. but it's necessary for ruby 1.8.6
+  # because that version doesn't support the foo do |*args, &block|
+  # block signature. it supports *args, but not &block.
+  # so that limitation is worked around with string eval
   Object.class_eval(<<-EOF, __FILE__, __LINE__)
-    def #{taskmethod}(name=:#{taskname}, *args, &block)
-      Albacore.const_get("#{taskclass}").new(name, *args, &block)
+    def #{taskname}(name=:#{taskname}, *args, &configblock)
+      task name, *args do |t, task_args|
+        obj = #{task_object}.new
+        obj.load_config_by_task_name(name) if obj.respond_to?(:load_config_by_task_name)
+
+        if !configblock.nil?
+          case configblock.arity
+            when 0
+              configblock.call
+            when 1
+              configblock.call(obj)
+            when 2
+              configblock.call(obj, task_args)
+          end
+        end
+
+        obj.execute if obj.respond_to?(:execute)
+      end
     end
   EOF
-
-  Albacore.class_eval do
-    const_set(taskclass, Class.new(Albacore::AlbacoreTask) do
-      define_method :execute do |name|
-        task_object = task_object_proc.call
-        task_object.load_config_by_task_name(name)
-        call_task_block(task_object)
-      	execute_body.call(task_object) unless execute_body.nil?
-      end
-    end)
-  end
 end

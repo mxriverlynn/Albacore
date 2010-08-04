@@ -3,7 +3,7 @@ require 'rubygems/gem_runner'
 require 'rubygems/exceptions'
 
 #http://gist.github.com/236148
-required_version = Gem::Requirement.new "> 1.8.7"
+required_version = Gem::Requirement.new "> 1.8.6"
 
 unless required_version.satisfied_by? Gem.ruby_version then
   abort "Expected Ruby Version #{required_version}, was #{Gem.ruby_version}"

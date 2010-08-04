@@ -1,3 +1,1 @@
-create_task :assemblyinfo, Proc.new { AssemblyInfo.new } do |asm|
-  asm.write
-end
+create_task :assemblyinfo, AssemblyInfo

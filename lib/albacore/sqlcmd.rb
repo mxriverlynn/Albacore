@@ -18,7 +18,7 @@ class SQLCmd
     update_attributes sqlcmd.to_hash
   end
   
-  def run
+  def execute
     return unless check_command
     
     cmd_params=[]

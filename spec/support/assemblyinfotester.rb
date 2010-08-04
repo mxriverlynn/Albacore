@@ -28,7 +28,7 @@ class AssemblyInfoTester < AssemblyInfo
     setup_assemblyinfo_file
 
     assemblyinfo.output_file = @assemblyinfo_file
-    assemblyinfo.write
+    assemblyinfo.execute
 
     contents = ''
     File.open(@assemblyinfo_file, "r") do |f|

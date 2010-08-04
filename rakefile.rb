@@ -235,7 +235,13 @@ namespace :jeweler do
     gs.homepage = "http://albacorebuild.net"
     gs.authors = ["Derick Bailey", "Ben Hall", "Steve Harman", "etc"]
     gs.has_rdoc = false  
-    gs.files.exclude("albacore.gemspec", ".gitignore", "spec/support/Tools")
+    gs.files.exclude(
+      "albacore.gemspec", 
+      ".gitignore", 
+      "spec/",
+      "pkg/",
+      "albacore/"
+    )
 
     gs.add_dependency('rake', '>= 0.8.7')
     gs.add_dependency('rubyzip', '>= 0.9.4')

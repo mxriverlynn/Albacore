@@ -1,3 +1,1 @@
-create_task :csc, Proc.new { CSC.new } do |csharp|
-  csharp.execute
-end
+create_task :csc, CSC

@@ -18,7 +18,7 @@ class NCoverReport
     update_attributes ncoverreport.to_hash
   end
   
-  def run
+  def execute
     return unless check_command
     
     command_parameters = []

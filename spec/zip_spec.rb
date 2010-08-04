@@ -8,7 +8,7 @@ describe ZipDirectory, 'when zipping a directory of files' do
     zip = ZipDirectory.new
     zip.directories_to_zip ZipTestData.folder
     zip.output_file = "test.zip"
-    zip.package
+    zip.execute
   end
   
   it "should produce a zip file" do
@@ -22,7 +22,7 @@ describe ZipDirectory, 'when zipping a directory with string exclusions' do
     zip.directories_to_zip ZipTestData.folder
     zip.output_file = 'test.zip'
     zip.exclusions File.join(ZipTestData.folder, 'files', 'testfile.txt')
-    zip.package
+    zip.execute
     
     unzip = Unzip.new
     unzip.file = File.join(ZipTestData.folder, 'test.zip')
@@ -45,7 +45,7 @@ describe ZipDirectory, 'when zipping a directory of files with regexp exclusions
     zip.directories_to_zip ZipTestData.folder
     zip.output_file = 'test.zip'
     zip.exclusions /testfile/
-    zip.package
+    zip.execute
     
     unzip = Unzip.new
     unzip.file = File.join(ZipTestData.folder, 'test.zip')
@@ -68,7 +68,7 @@ describe ZipDirectory, 'when zipping a directory of files with glob string exclu
     zip.directories_to_zip ZipTestData.folder
     zip.output_file = 'test.zip'
     zip.exclusions "**/subfolder/*"
-    zip.package
+    zip.execute
 
     unzip = Unzip.new
     unzip.file = File.join(ZipTestData.folder, 'test.zip')
