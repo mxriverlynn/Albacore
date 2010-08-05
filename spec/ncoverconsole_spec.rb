@@ -258,7 +258,7 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
   end
   
   it "should execute ncover.console from the specified path" do
-    @ncc.system_command.should include(@testdata.ncoverpath)
+    @ncc.system_command.should include(File.expand_path(@testdata.ncoverpath))
   end
   
   it "should execute with the specified working directory" do

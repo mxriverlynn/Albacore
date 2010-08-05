@@ -24,7 +24,7 @@ describe MSBuild, "when building a solution with verbose logging turned on" do
   end
 
   it "should log the msbuild command line being called" do
-    @log_data.should include("Executing MSBuild: \"C:\\Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe\"")
+    @log_data.should include("Executing MSBuild: \"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe\"")
   end
 end
 
