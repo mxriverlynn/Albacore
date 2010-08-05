@@ -1,14 +1,6 @@
-require 'albacore/albacoremodel'
-
 module NCover
   class FullCoverageReport
-    include AlbacoreModel
-    
     attr_accessor :output_path
-    
-    def initialize
-      super()
-    end
     
     def report_type
       :FullCoverageReport

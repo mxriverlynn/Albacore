@@ -5,6 +5,7 @@ require 'zip/zipfilesystem'
 include Zip
 
 class ZipDirectory
+  @task_name = :zip
   include AlbacoreModel
   include Configuration::Zip
   

@@ -3,26 +3,29 @@ require 'albacore/support/failure'
 require 'albacore/support/logging'
 require 'albacore/support/yamlconfig'
 require 'albacore/support/runcommand'
+require 'albacore/support/updateattributes'
 require 'rake/createtask'
 require 'albacore/config/config'
+
+module AlbacoreModel
+  module TaskName
+    def task_name
+      @task_name
+    end
+  end
+end
 
 module AlbacoreModel
   include Failure
   include Logging
   include YAMLConfig
+  include UpdateAttributes
 
   def self.included(mod)
     mod.extend AttrMethods
+    mod.extend AlbacoreModel::TaskName
     self.mixin_config_module mod
     self.create_rake_task mod
-  end
-
-  def update_attributes(attrs)
-    attrs.each do |key, value|
-      setter = "#{key}="
-      send(setter, value) if respond_to?(setter)
-      @logger.warn "#{key} is not a settable attribute on #{self.class}" unless respond_to?(setter)
-    end
   end
 
   def self.mixin_config_module(objtoconfig)
@@ -42,11 +45,11 @@ module AlbacoreModel
 
   def self.create_rake_task(mod)
     if mod.class == Class
-      create_task mod.name.downcase, mod
+      tasknames = Array.new
+      tasknames << (mod.task_name || mod.name.downcase)
+      tasknames.flatten.each do |taskname|
+        create_task taskname, mod
+      end
     end
-  end
-
-  def <<(attrs)
-    update_attributes attrs
   end
 end

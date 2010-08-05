@@ -1,8 +1,8 @@
-require 'albacore/albacoremodel'
+require 'albacore/support/updateattributes'
 
 module NCover
   class CodeCoverageBase
-    include AlbacoreModel
+    include UpdateAttributes
     
     attr_accessor :coverage_type, :minimum, :item_type 
     

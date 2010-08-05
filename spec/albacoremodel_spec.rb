@@ -8,6 +8,11 @@ class ModelTest
   attr_array :a_array
 end
 
+class NamedTaskExample
+  @task_name = [:namedtask, :anothername]
+  include AlbacoreModel
+end
+
 describe "when updating object attributes with a valid set of hash keys" do
   before :each do
     @model = ModelTest.new
@@ -37,5 +42,12 @@ end
 describe "when an class includes albacoremodel" do
   it "should create a rake task for that class" do
     respond_to?(:modeltest).should be_true
+  end
+end
+
+describe "when an albacoremodel class specifies task names" do
+  it "should create a task with the specified names" do
+    respond_to?(:namedtask).should be_true
+    respond_to?(:anothername).should be_true
   end
 end

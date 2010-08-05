@@ -1,8 +1,8 @@
-require 'albacore/albacoremodel'
+require 'albacore/support/updateattributes'
 
 module NCover
   class CyclomaticComplexity
-    include AlbacoreModel
+    include UpdateAttributes
     
     attr_accessor :maximum, :item_type 
     

@@ -1,8 +1,8 @@
-require 'albacore/albacoremodel'
+require 'albacore/support/updateattributes'
 
 module NCover
   class ReportFilterBase
-    include AlbacoreModel
+    include UpdateAttributes
     
     attr_accessor :filter, :filter_type, :item_type, :is_regex
     

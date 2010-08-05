@@ -1,9 +1,5 @@
-require 'albacore/albacoremodel'
-
 module NCover
   class SummaryReport
-    include AlbacoreModel
-    
     attr_accessor :output_path
     
     def initialize
