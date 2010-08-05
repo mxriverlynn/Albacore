@@ -3,6 +3,7 @@ require 'albacore/support/failure'
 require 'albacore/support/logging'
 require 'albacore/support/yamlconfig'
 require 'albacore/support/runcommand'
+require 'rake/support/createtask'
 require 'albacore/config/config'
 
 module AlbacoreModel
@@ -10,9 +11,10 @@ module AlbacoreModel
   include Logging
   include YAMLConfig
 
-  def self.included(obj)
-    obj.extend AttrMethods
-    self.mixin_config_module obj
+  def self.included(mod)
+    mod.extend AttrMethods
+    self.mixin_config_module mod
+    self.create_rake_task mod
   end
 
   def update_attributes(attrs)
@@ -35,6 +37,12 @@ module AlbacoreModel
         configmodule = Kernel.const_get modulename
         objtoconfig.send(:include, configmodule)
       end
+    end
+  end
+
+  def self.create_rake_task(mod)
+    if mod.class == Class
+      create_task mod.name.downcase, mod
     end
   end
 

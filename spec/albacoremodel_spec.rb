@@ -33,3 +33,9 @@ describe "when updating an object attributes with an invalid hash key" do
     @log.should include("something is not a settable attribute on ModelTest")
   end
 end
+
+describe "when an class includes albacoremodel" do
+  it "should create a rake task for that class" do
+    respond_to?(:modeltest).should be_true
+  end
+end

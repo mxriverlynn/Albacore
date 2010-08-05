@@ -22,7 +22,7 @@ module RunCommand
       @logger.debug "Executing #{name}: #{cmd}"
       
       Dir.chdir(@working_directory) do
-        return system cmd
+        return system(cmd)
       end
 
     rescue Exception => e
