@@ -8,7 +8,7 @@ namespace :specs do
 
   @spec_opts = '--colour --format specdoc'
 
-  desc "Run functional specs for Albacore"
+  desc "Run all specs for albacore"
   Spec::Rake::SpecTask.new :all do |t|
     t.spec_files = FileList['spec/**/*_spec.rb'].exclude{ |f| 
       f if runtime_is_ironruby && (f.include?("ssh") || f.include?("sftp")) 
@@ -16,12 +16,6 @@ namespace :specs do
     t.spec_opts << @spec_opts
   end
   
-  desc "Run rake task specs for Albacore"
-  Spec::Rake::SpecTask.new :tasks do |t|
-    t.spec_files = FileList['spec/**/*task_spec.rb']
-    t.spec_opts << @spec_opts
-  end
-
   desc "CSharp compiler (csc.exe) specs" 
   Spec::Rake::SpecTask.new :csc do |t|
     t.spec_files = FileList['spec/csc*_spec.rb']

@@ -9,7 +9,7 @@ $: << File.join(@root_dir, "lib/albacore/config")
 require 'rubygems'
 require 'spec'
 require 'rake/tasklib'
-require 'lib/rake/support/createtask.rb'
+require 'lib/rake/createtask.rb'
 require 'lib/albacore/config/config.rb'
 require 'not_a_mock'
 require 'system_patch'

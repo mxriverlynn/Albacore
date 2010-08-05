@@ -3,7 +3,7 @@ require 'albacore/support/failure'
 require 'albacore/support/logging'
 require 'albacore/support/yamlconfig'
 require 'albacore/support/runcommand'
-require 'rake/support/createtask'
+require 'rake/createtask'
 require 'albacore/config/config'
 
 module AlbacoreModel
