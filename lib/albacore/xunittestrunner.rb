@@ -2,7 +2,7 @@ require 'albacore/albacoremodel'
 require 'albacore/config/xunitconfig'
 
 class XUnitTestRunner
-  @task_name = :xunit
+  TaskName = :xunit
   include AlbacoreModel
   include RunCommand
   include Configuration::XUnit

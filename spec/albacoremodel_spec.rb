@@ -9,7 +9,7 @@ class ModelTest
 end
 
 class NamedTaskExample
-  @task_name = [:namedtask, :anothername]
+  TaskName = [:namedtask, :anothername]
   include AlbacoreModel
 end
 

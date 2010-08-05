@@ -8,14 +8,6 @@ require 'rake/createtask'
 require 'albacore/config/config'
 
 module AlbacoreModel
-  module TaskName
-    def task_name
-      @task_name
-    end
-  end
-end
-
-module AlbacoreModel
   include Failure
   include Logging
   include YAMLConfig
@@ -23,14 +15,19 @@ module AlbacoreModel
 
   def self.included(mod)
     mod.extend AttrMethods
-    mod.extend AlbacoreModel::TaskName
     self.create_rake_task mod
   end
 
   def self.create_rake_task(mod)
     if mod.class == Class
       tasknames = Array.new
-      tasknames << (mod.task_name || mod.name.downcase)
+
+      if mod.const_defined?("TaskName")
+        tasknames << eval("#{mod}::TaskName")
+      else
+       tasknames << mod.name.downcase
+      end
+
       tasknames.flatten.each do |taskname|
         create_task taskname, mod
       end
