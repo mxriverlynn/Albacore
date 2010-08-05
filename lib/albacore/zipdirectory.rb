@@ -1,4 +1,4 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/zipconfig'
 require 'zip/zip'
 require 'zip/zipfilesystem'
@@ -6,7 +6,7 @@ include Zip
 
 class ZipDirectory
   TaskName = :zip
-  include AlbacoreModel
+  include AlbacoreTask
   include Configuration::Zip
   
   attr_accessor :output_path, :output_file

@@ -1,9 +1,9 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/nunitconfig'
 
 class NUnitTestRunner
   TaskName = :nunit
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
   include Configuration::NUnit
   

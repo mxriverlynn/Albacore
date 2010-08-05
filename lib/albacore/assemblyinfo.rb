@@ -1,10 +1,10 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
 require 'albacore/config/assemblyinfoconfig'
 
 class AssemblyInfo
-  include AlbacoreModel
+  include AlbacoreTask
   include Configuration::AssemblyInfo
   
   attr_accessor :version, :title, :description, :output_file, :custom_attributes

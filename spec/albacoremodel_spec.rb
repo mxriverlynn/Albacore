@@ -1,8 +1,8 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 
 class ModelTest
-  include AlbacoreModel
+  include AlbacoreTask
   attr_accessor :foo, :bar
   attr_hash :a_hash
   attr_array :a_array
@@ -10,7 +10,7 @@ end
 
 class NamedTaskExample
   TaskName = [:namedtask, :anothername]
-  include AlbacoreModel
+  include AlbacoreTask
 end
 
 describe "when updating object attributes with a valid set of hash keys" do
@@ -39,13 +39,13 @@ describe "when updating an object attributes with an invalid hash key" do
   end
 end
 
-describe "when an class includes albacoremodel" do
+describe "when an class includes albacoretask" do
   it "should create a rake task for that class" do
     respond_to?(:modeltest).should be_true
   end
 end
 
-describe "when an albacoremodel class specifies task names" do
+describe "when an albacoretask class specifies task names" do
   it "should create a task with the specified names" do
     respond_to?(:namedtask).should be_true
     respond_to?(:anothername).should be_true

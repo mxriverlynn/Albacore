@@ -1,8 +1,8 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 
 class ConfigTest
-  include AlbacoreModel
+  include AlbacoreTask
 end
 
 describe "when configuring log level to verbose" do

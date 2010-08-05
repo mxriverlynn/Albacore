@@ -1,11 +1,11 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'zip/zip'
 require 'zip/zipfilesystem'
 require 'albacore/config/unzipconfig'
 include Zip
 
 class Unzip
-  include AlbacoreModel
+  include AlbacoreTask
   include Configuration::Unzip
   
   attr_accessor :destination, :file

@@ -7,7 +7,7 @@ require 'albacore/support/updateattributes'
 require 'rake/createtask'
 require 'albacore/config/config'
 
-module AlbacoreModel
+module AlbacoreTask
   include Failure
   include Logging
   include YAMLConfig

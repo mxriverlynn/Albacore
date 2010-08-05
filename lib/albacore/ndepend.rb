@@ -1,8 +1,8 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/ndependconfig'
 
 class NDepend
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
   include Configuration::NDepend
 

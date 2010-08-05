@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'fail_patch'
 
 class SampleObject
-  include AlbacoreModel
+  include AlbacoreTask
 
   attr_array :array
   attr_hash :hash
@@ -21,7 +21,7 @@ class SampleObject
 end
 
 class RunCommandObject
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
 
   def execute

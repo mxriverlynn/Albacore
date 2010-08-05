@@ -1,9 +1,9 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/xbuildconfig'
 
 class XBuild
   TaskName = [:xbuild, :mono]
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
   include Configuration::XBuild
   

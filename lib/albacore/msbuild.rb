@@ -1,8 +1,8 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/msbuildconfig.rb'
 
 class MSBuild
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
   include Configuration::MSBuild
   

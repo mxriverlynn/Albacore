@@ -1,8 +1,8 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 
 class YamlTest
-  include AlbacoreModel
+  include AlbacoreTask
   attr_accessor :some_name, :another_name, :a_hash, :what_ever
 end
 
@@ -33,7 +33,7 @@ end
 
 describe YAMLConfig, "when specifying a yaml config folder and configuring" do
   class YAML_AutoConfig_Test
-  	include AlbacoreModel
+  	include AlbacoreTask
     attr_accessor :some_attribute
   end
   

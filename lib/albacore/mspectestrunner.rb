@@ -1,9 +1,9 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/mspecconfig'
 
 class MSpecTestRunner
   TaskName = :mspec
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
   include Configuration::MSpec
   

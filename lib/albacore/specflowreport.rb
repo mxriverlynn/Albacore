@@ -1,8 +1,8 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/specflowreportconfig'
 
 class SpecFlowReport
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
   include Configuration::SpecFlowReport
   

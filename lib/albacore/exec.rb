@@ -1,8 +1,8 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/execconfig'
 
 class Exec
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
   include Configuration::Exec
 

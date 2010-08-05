@@ -1,9 +1,9 @@
-require 'albacore/albacoremodel'
+require 'albacore/albacoretask'
 require 'albacore/config/cscconfig'
 require 'albacore/support/supportlinux'
 
 class CSC
-  include AlbacoreModel
+  include AlbacoreTask
   include RunCommand
   include Configuration::CSC
   include SupportsLinuxEnvironment
