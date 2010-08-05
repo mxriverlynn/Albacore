@@ -7,11 +7,6 @@ module Albacore
 
   class ConfigData
    	attr_accessor :yaml_config_folder, :log_level
-    attr_accessor :plugindir
-
-    def initialize
-      @plugindir = File.expand_path(File.join(Dir.pwd, "albacore"))
-    end
   end
 
   class << self

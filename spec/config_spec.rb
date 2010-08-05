@@ -18,16 +18,3 @@ describe "when configuring log level to verbose" do
   end
 end
 
-describe "when ruby files are present in the plugin directory (defaulted to {pwd}/albacore)" do
-  let :obj do
-    TestPlugin.new
-  end
-
-  it "should load the files" do
-    obj.should_not be_nil
-  end
-
-  it "should load the config module for the plugins" do
-    obj.configured.should be_true
-  end
-end
