@@ -69,6 +69,17 @@ describe Docu, "when building docs with an output location specified" do
   end
 end
 
+describe Docu, "when no command has been specified" do
+  let :docu do
+    docu = Docu.new
+    docu
+  end
+
+  it "should default to the standard docu.exe" do
+    docu.command.should == "Docu.exe"
+  end
+end
+
 describe Docu, "when the command has been provided through configuration" do
   let :docu do
     Albacore.configure do |config|
@@ -94,16 +105,5 @@ describe Docu, "when the command has been provided through configuration and is 
 
   it "should use the override" do
     docu.command.should == "override"
-  end
-end
-
-describe Docu, "when no command has been specified" do
-  let :docu do
-    docu = Docu.new
-    docu
-  end
-
-  it "should default to the standard docu.exe" do
-    docu.command.should == "Docu.exe"
   end
 end
