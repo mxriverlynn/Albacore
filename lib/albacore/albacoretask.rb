@@ -4,7 +4,7 @@ require 'albacore/support/logging'
 require 'albacore/support/yamlconfig'
 require 'albacore/support/runcommand'
 require 'albacore/support/updateattributes'
-require 'rake/createtask'
+require 'albacore/support/createtask'
 require 'albacore/config/config'
 
 module AlbacoreTask
@@ -29,7 +29,7 @@ module AlbacoreTask
       end
 
       tasknames.flatten.each do |taskname|
-        create_task taskname, mod
+        Albacore.create_task taskname, mod
       end
     end
   end

@@ -38,7 +38,7 @@ end
 
 describe "when defining a task" do
   before :all do
-    create_task :sampletask, ConfigByNameOverride
+    Albacore.create_task :sampletask, ConfigByNameOverride
 
   	sampletask :sample do |x|
   	  @config_obj = x
@@ -61,7 +61,7 @@ end
 
 describe "when execution fails" do
   before :all do
-    create_task :failing_task, SampleObject
+    Albacore.create_task :failing_task, SampleObject
 
   	failing_task :sample_fail do |x|
   	  x.extend(FailPatch)
@@ -77,7 +77,7 @@ end
 
 describe "when task args are used" do
   before :all do
-    create_task :task_with_args, SampleObject
+    Albacore.create_task :task_with_args, SampleObject
 
     task_with_args :sampletask_withargs, [:arg1] do |t, args|
       @args = args
@@ -93,7 +93,7 @@ end
 
 describe "when calling a task method without providing a task name" do
   before :all do
-    create_task :task_without_name, SampleObject
+    Albacore.create_task :task_without_name, SampleObject
 
     task_without_name do |t|
       @task_without_name_called = true
@@ -109,7 +109,7 @@ end
 
 describe "when calling a task method without providing a task parameter" do
   before :all do
-    create_task :task_without_param, SampleObject
+    Albacore.create_task :task_without_param, SampleObject
 
     task_without_param do
       @task_without_param_called = true
@@ -126,7 +126,7 @@ end
 describe "when calling a task without a task definition block" do
 	
   before :all do
-    create_task :task_without_body, SampleObject
+    Albacore.create_task :task_without_body, SampleObject
     
     task_without_body
     
@@ -145,7 +145,7 @@ end
 
 describe "when creating two tasks and executing them" do
   before :all do
-    create_task :multiple_instance_task, SampleObject
+    Albacore.create_task :multiple_instance_task, SampleObject
 
     multiple_instance_task :multi_instance_1 do |mi|
       mi.array 1, 2
@@ -180,7 +180,7 @@ end
 
 describe "when running two instances of a command line task" do
   before :all do
-    create_task :run_command_task, RunCommandObject do |ex|
+    Albacore.create_task :run_command_task, RunCommandObject do |ex|
       ex.execute
     end
 
@@ -213,7 +213,7 @@ end
 
 describe "when adding prerequisites through the rake api" do
   let :obj do
-    create_task :dependency_task, Object
+    Albacore.create_task :dependency_task, Object
 
     require 'ostruct'
     obj = OpenStruct.new
