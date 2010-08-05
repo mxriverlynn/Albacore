@@ -37,7 +37,7 @@ describe "when task args are used" do
       exec.extend(FailPatch)
       @args = args
   	end
-    Rake::Task["exectask_withargs"].invoke("test")
+    Rake::Task[:exectask_withargs].invoke("test")
   end
   
   it "should provide the task args" do

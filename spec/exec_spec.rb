@@ -15,7 +15,7 @@ describe Exec, "when executing a command with parameters" do
   end
   
   it "should run the command with the parameters" do
-    @cmd.system_command.should include("\"#{@nunit}\" --help")
+    @cmd.system_command.should include("\"#{File.expand_path(@nunit)}\" --help")
   end
   
   it "should specify the parameters only once" do

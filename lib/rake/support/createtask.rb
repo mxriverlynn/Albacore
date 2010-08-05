@@ -1,4 +1,4 @@
-def create_task(taskname, task_object)
+def create_task(taskname, taskclass)
   # this style of creating tasks is not really what i
   # want to do. but it's necessary for ruby 1.8.6
   # because that version doesn't support the foo do |*args, &block|
@@ -7,7 +7,7 @@ def create_task(taskname, task_object)
   Object.class_eval(<<-EOF, __FILE__, __LINE__)
     def #{taskname}(name=:#{taskname}, *args, &configblock)
       task name, *args do |t, task_args|
-        obj = #{task_object}.new
+        obj = #{taskclass}.new
         obj.load_config_by_task_name(name) if obj.respond_to?(:load_config_by_task_name)
 
         if !configblock.nil?
