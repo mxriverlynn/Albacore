@@ -3,9 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module Docu
-    @docuconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
+    
     def self.docuconfig
-      @docuconfig
+      @docuconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def docu
@@ -20,6 +21,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::Docu
-end

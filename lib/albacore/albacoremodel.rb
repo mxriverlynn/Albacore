@@ -24,23 +24,7 @@ module AlbacoreModel
   def self.included(mod)
     mod.extend AttrMethods
     mod.extend AlbacoreModel::TaskName
-    self.mixin_config_module mod
     self.create_rake_task mod
-  end
-
-  def self.mixin_config_module(objtoconfig)
-    configdir = File.expand_path(File.join(Albacore.configure.plugindir, "config"))
-    classname = objtoconfig.to_s
-    configfilename = File.expand_path(File.join(configdir, "#{classname.downcase}config.rb"))
-    modulename = classname + "Config"
-
-    if File.exist? configfilename
-      begin
-        require "#{configfilename}"
-        configmodule = Kernel.const_get modulename
-        objtoconfig.send(:include, configmodule)
-      end
-    end
   end
 
   def self.create_rake_task(mod)

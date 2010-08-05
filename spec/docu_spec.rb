@@ -99,9 +99,6 @@ end
 
 describe Docu, "when no command has been specified" do
   let :docu do
-    class Albacore::Configuration
-      include Configuration::Docu
-    end
     docu = Docu.new
     docu
   end

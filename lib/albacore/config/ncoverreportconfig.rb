@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module NCoverReport
-    @ncoverreportconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.ncoverreportconfig
-      @ncoverreportconfig
+      @ncoverreportconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def ncoverreport
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::NCoverReport
-end

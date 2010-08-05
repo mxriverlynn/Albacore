@@ -4,11 +4,11 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module MSBuild
+    include Albacore::Configuration
     include Configuration::NetVersion
 
-    @msbuildconfig = OpenStruct.new.extend(OpenStructToHash).extend(MSBuild)
     def self.msbuildconfig
-      @msbuildconfig
+      @msbuildconfig ||= OpenStruct.new.extend(OpenStructToHash).extend(MSBuild)
     end
 
     def msbuild
@@ -27,6 +27,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::MSBuild
-end

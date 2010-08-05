@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module XBuild
-    @xbuildconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.xbuildconfig
-      @xbuildconfig
+      @xbuildconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def xbuild
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::XBuild
-end

@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module SpecFlowReport
-    @specflowreportconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.specflowreportconfig
-      @specflowreportconfig
+      @specflowreportconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def specflowreport
@@ -22,6 +22,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::SpecFlowReport
-end

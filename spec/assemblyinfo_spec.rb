@@ -36,10 +36,6 @@ describe AssemblyInfo, "when generating an assembly info file in verbose mode" d
   it "should log the name of the output file" do
     @log_data.should include(@tester.assemblyinfo_file)
   end
-  
-  it "should log the supplied attribute information" do
-    @log_data.should include("[assembly: AssemblyVersion(\"#{@tester.version}\")]")
-  end
 end
 
 describe AssemblyInfo, "when generating an assembly info file without an output file specified" do

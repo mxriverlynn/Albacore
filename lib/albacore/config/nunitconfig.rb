@@ -2,9 +2,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module NUnit
-    @config = OpenStruct.new.extend(OpenStructToHash).extend(NUnit)
+    include Albacore::Configuration
+
     def self.nunitconfig
-      @config
+      @config ||= OpenStruct.new.extend(OpenStructToHash).extend(NUnit)
     end
 
     def nunit
@@ -15,6 +16,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::NUnit
-end

@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module Unzip
-    @unzipconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.unzipconfig
-      @unzipconfig
+      @unzipconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def unzip
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::Unzip
-end

@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module NAnt
-    @nantconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.nantconfig
-      @nantconfig
+      @nantconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def nant
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::NAnt
-end

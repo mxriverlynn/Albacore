@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module NDepend
-    @ndependconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.ndependconfig
-      @ndependconfig
+      @ndependconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def ndepend
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::NDepend
-end

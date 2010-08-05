@@ -1,6 +1,5 @@
 module Configuration
   module NetVersion
-
     def win_dir
       @win_dir ||= ENV['windir'] || ENV['WINDIR'] || "C:/Windows"
     end
@@ -18,6 +17,5 @@ module Configuration
       end
       File.join(win_dir.dup, 'Microsoft.NET', 'Framework', version)
     end
-
   end
 end

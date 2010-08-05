@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module XUnit
-    @xunitconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.xunitconfig
-      @xunitconfig
+      @xunitconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def xunit
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::XUnit
-end

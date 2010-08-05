@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module Exec
-    @execconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.execconfig
-      @execconfig
+      @execconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def exec
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::Exec
-end

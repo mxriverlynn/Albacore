@@ -3,9 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module AssemblyInfo
-    @asmconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
+
     def self.asmconfig
-      @asmconfig
+      @asmconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def assemblyinfo
@@ -14,8 +15,4 @@ module Configuration
       config
     end
   end
-end
-
-class Albacore::Configuration
-  include Configuration::AssemblyInfo
 end

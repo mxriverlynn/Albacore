@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module Zip
-    @zipconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.zipconfig
-      @zipconfig
+      @zipconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def zip
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::Zip
-end

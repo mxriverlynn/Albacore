@@ -3,10 +3,10 @@ require 'albacore/support/openstruct'
 
 module Configuration
   module NCoverConsole
-    @ncoverconsoleconfig = OpenStruct.new.extend(OpenStructToHash)
+    include Albacore::Configuration
 
     def self.ncoverconsoleconfig
-      @ncoverconsoleconfig
+      @ncoverconsoleconfig ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def ncoverconsole
@@ -17,6 +17,3 @@ module Configuration
   end
 end
 
-class Albacore::Configuration
-  include Configuration::NCoverConsole
-end
