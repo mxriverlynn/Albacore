@@ -178,6 +178,42 @@ describe SQLCmd, "when running multiple script files" do
   
 end
 
+describe SQLCmd, "when running multiple script files with batch_abort set to false" do
+  before :all do
+    @cmd = SQLCmd.new
+    @cmd.command = "sqlcmd.exe"
+    @cmd.log_level = :verbose
+    @cmd.extend(SystemPatch)
+    @cmd.disable_system = true
+    @cmd.batch_abort = false
+    
+    scriptnames = Array.new
+    scriptnames << "did you get.sql\r\n"
+    scriptnames << "that thing.sql"
+    scriptnames << "i sent you.sql\r\n"
+    @cmd.scripts = scriptnames
+    
+    @cmd.execute
+  end
+  
+  it "should specify the first script file" do
+    @cmd.system_command.should include("-i \"did you get.sql\"")
+  end
+
+  it "should specify the second script file" do
+    @cmd.system_command.should include("-i \"that thing.sql\"")
+  end
+  
+  it "should specify the third script file" do
+    @cmd.system_command.should include("-i \"i sent you.sql\"")
+  end
+  
+  it "should not include the -b option" do
+    @cmd.system_command.should_not include("-b")
+  end
+  
+end
+
 describe SQLCmd, "when running with variables specified" do
   before :all do
     @cmd = SQLCmd.new
