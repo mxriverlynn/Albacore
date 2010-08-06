@@ -4,6 +4,5 @@ $: << File.join(albacore_root, "albacore")
 $: << File.join(albacore_root, "albacore", 'support')
 $: << File.join(albacore_root, "albacore", 'config')
 
-require 'logging'
 runtime_is_ironruby = (!defined?(IRONRUBY_VERSION).nil?)
 Dir.glob(File.join(albacore_root, 'albacore/*.rb')).each {|f| require f }

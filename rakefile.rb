@@ -233,8 +233,7 @@ namespace :jeweler do
       "albacore.gemspec", 
       ".gitignore", 
       "spec/",
-      "pkg/",
-      "albacore/"
+      "pkg/"
     )
 
     gs.add_dependency('rake', '>= 0.8.7')
