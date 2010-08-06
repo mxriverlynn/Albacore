@@ -1,8 +1,17 @@
 require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
 require 'albacore/albacoretask'
+require 'albacore/config/config'
 
 class ConfigTest
   include AlbacoreTask
+end
+
+module ConfigModuleTest
+  include Albacore::Configuration
+
+  def mixin_worked
+    true
+  end
 end
 
 describe "when configuring log level to verbose" do
@@ -18,3 +27,8 @@ describe "when configuring log level to verbose" do
   end
 end
 
+describe "when including Albacore::Configuration in a module" do
+  it "should mix the module into the Albacore.configuration" do
+    Albacore.configuration.mixin_worked.should be_true
+  end
+end

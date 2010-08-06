@@ -6,7 +6,7 @@ module Configuration
     include Albacore::Configuration
 
     def self.asmconfig
-      @asmconfig ||= OpenStruct.new.extend(OpenStructToHash)
+      @config ||= OpenStruct.new.extend(OpenStructToHash)
     end
 
     def assemblyinfo

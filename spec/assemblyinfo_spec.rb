@@ -480,8 +480,7 @@ describe AssemblyInfo, "when assembly info configuration is provided" do
         asm.version = "bar"
       end
     end
-    asm = AssemblyInfo.new
-    asm
+    AssemblyInfo.new
   end
   it "should use the supplied info" do
     asm.company_name.should == "foo"
