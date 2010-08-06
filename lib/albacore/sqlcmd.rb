@@ -12,7 +12,7 @@ class SQLCmd
     @require_valid_command = false
     @scripts=[]
     @variables={}
-    @trusted_connection = nil
+    @trusted_connection = true
     @batch_abort = true
     super()
     update_attributes Albacore.configuration.sqlcmd.to_hash
@@ -41,7 +41,7 @@ class SQLCmd
   end
 
   def get_authentication_params
-    integratedParam = "-E"
+    integratedParam = "-E" if @trusted_connection
     if ((!(@username.nil?)) and (!(@password.nil?)))
       integratedParam = build_parameter("U", @username) + " " + build_parameter("P", @password)
     end

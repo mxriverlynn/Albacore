@@ -46,6 +46,52 @@ describe SQLCmd, "when running a script the easy way" do
   end
 end
 
+describe SQLCmd, "when turning off trusted_connection" do
+  before :all do
+    @cmd = SQLCmd.new
+    @cmd.log_level = :verbose
+    @cmd.extend(SystemPatch)
+    @cmd.disable_system = true
+    
+    @cmd.scripts "somescript.sql"
+    @cmd.trusted_connection = false
+    
+    @cmd.execute
+  end
+
+  it "should not specify the -E option" do
+    @cmd.system_command.should_not include("-E")
+  end
+end
+
+describe SQLCmd, "when using a trusted connection with a username and password" do
+  before :all do
+    @cmd = SQLCmd.new
+    @cmd.log_level = :verbose
+    @cmd.extend(SystemPatch)
+    @cmd.disable_system = true
+    
+    @cmd.scripts "somescript.sql"
+    @cmd.trusted_connection = true
+    @cmd.username = "user"
+    @cmd.password = "password"
+    
+    @cmd.execute
+  end
+
+  it "should override the trusted connection and not specify the -E option" do
+    @cmd.system_command.should_not include("-E")
+  end
+
+  it "should specify the username" do
+    @cmd.system_command.should include("-U \"user\"")
+  end
+  
+  it "should specify the password" do
+    @cmd.system_command.should include("-P \"password\"")
+  end
+end
+
 describe SQLCmd, "when running a script file against a database with authentication information" do
   before :all do
     @cmd = SQLCmd.new
