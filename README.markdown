@@ -81,7 +81,9 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 
 * [Andreone](http://github.com/Andreone): Significant Wiki contributions, questions and contributions on the google group
 * [Ben Hall](http://github.com/benhall): Primary contributor. SSH, SFTP, ZipDirectory, Rename, YAML auto config, Wiki pages, and many other great additions
+* [Brett Veenstra](http://github.com/brettveenstra): SQLCmd options (truted connection, batch abort), etc
 * [Brian Donahue](http://github.com/briandonahue): Inspiration and initial code for the ExpandTemplates task
+* [Tobias Grimm](http://github.com/e-tobi): AssemblyInfo custom_data, working directory code refactoring, relative project paths for executables
 * [Hibri Marzook](http://github.com/hibri): the PLink and NDepend tasks
 * [James Gregory](http://github.com/jagregory): the Docu task
 * [Kevin Colyar](http://github.com/kevincolyar): Testing and updating of MSBuild to work with Cygwin
