@@ -84,12 +84,15 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 * [Brett Veenstra](http://github.com/brettveenstra): SQLCmd options (truted connection, batch abort), etc
 * [Brian Donahue](http://github.com/briandonahue): Inspiration and initial code for the ExpandTemplates task
 * [Tobias Grimm](http://github.com/e-tobi): AssemblyInfo custom_data, working directory code refactoring, relative project paths for executables
-* [Hibri Marzook](http://github.com/hibri): the PLink and NDepend tasks
-* [James Gregory](http://github.com/jagregory): the Docu task
+* [Hernan Garcia](http://github.com/hgarcia/): Specflow Report task
+* [Hibri Marzook](http://github.com/hibri): PLink (deprecated) and NDepend tasks
+* [James Gregory](http://github.com/jagregory): Docu task, zip task contributions
 * [Kevin Colyar](http://github.com/kevincolyar): Testing and updating of MSBuild to work with Cygwin
+* [Louis Salin](http://github.com/louissalin): Support for *nix path separators in CSC task
 * [Mark Wilkins](http://github.com/markwilk): VB.NET Language Generator For The AssemblyInfo Task
 * [Mike Nichols](http://github.com/mnichols): XUnit contributions, bug reports, etc
 * [Nils Jonsson](http://github.com/njonsson): AssemblyInfo corrections, rakefile corrections
 * [Sean Biefeld](http://github.com/seanbiefeld): MSpecTestRunner for NCoverConsole
 * [Steven Harman](http://github.com/stevenharman): Primary contributor. Nant task, issue tickets, disucssions, and much much more.
+* [Steven Johnson](http://github.com/2020steve): Expand Templates (deprecated task) supplimental data, etc
 * [Panda Wood](http://github.com/pandawood): NCover Console options and wiki edits
