@@ -1,5 +1,4 @@
 require 'albacore/albacoretask'
-require 'albacore/config/zipconfig'
 require 'zip/zip'
 require 'zip/zipfilesystem'
 include Zip
@@ -7,7 +6,6 @@ include Zip
 class ZipDirectory
   TaskName = :zip
   include AlbacoreTask
-  include Configuration::Zip
   
   attr_accessor :output_path, :output_file
   attr_accessor :flatten_zip
@@ -17,7 +15,7 @@ class ZipDirectory
     @flatten_zip = true
     @exclusions = []
     super()
-    update_attributes zip.to_hash
+    update_attributes Albacore.configuration.zip.to_hash
   end
     
   def execute()

@@ -1,11 +1,9 @@
 require 'albacore/albacoretask'
-require 'albacore/config/mspecconfig'
 
 class MSpecTestRunner
   TaskName = :mspec
   include AlbacoreTask
   include RunCommand
-  include Configuration::MSpec
   
   attr_accessor :html_output
   attr_array :assemblies, :options
@@ -13,7 +11,7 @@ class MSpecTestRunner
   def initialize(command=nil)
     @assemblies=[]
     super()
-    update_attributes mspec.to_hash
+    update_attributes Albacore.configuration.mspec.to_hash
     @command = command unless command.nil?
   end
   
@@ -23,7 +21,7 @@ class MSpecTestRunner
     command << get_command_parameters
     cmd = command.join(" ")
     @logger.debug "Build MSpec Test Runner Command Line: " + cmd
-        return cmd
+    return cmd
   end
   
   def get_command_parameters

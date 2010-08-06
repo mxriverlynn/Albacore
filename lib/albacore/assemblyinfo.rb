@@ -1,11 +1,9 @@
 require 'albacore/albacoretask'
 require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
-require 'albacore/config/assemblyinfoconfig'
 
 class AssemblyInfo
   include AlbacoreTask
-  include Configuration::AssemblyInfo
   
   attr_accessor :version, :title, :description, :output_file, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
@@ -18,7 +16,7 @@ class AssemblyInfo
   def initialize
     @namespaces = []
     super()
-    update_attributes assemblyinfo.to_hash
+    update_attributes Albacore.configuration.assemblyinfo.to_hash
   end
   
   def execute

@@ -1,18 +1,16 @@
 require 'albacore/albacoretask'
 require 'zip/zip'
 require 'zip/zipfilesystem'
-require 'albacore/config/unzipconfig'
 include Zip
 
 class Unzip
   include AlbacoreTask
-  include Configuration::Unzip
   
   attr_accessor :destination, :file
 
   def initialize
     super()
-    update_attributes unzip.to_hash
+    update_attributes Albacore.configuration.unzip.to_hash
   end
     
   def execute()

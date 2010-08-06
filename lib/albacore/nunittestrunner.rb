@@ -1,11 +1,9 @@
 require 'albacore/albacoretask'
-require 'albacore/config/nunitconfig'
 
 class NUnitTestRunner
   TaskName = :nunit
   include AlbacoreTask
   include RunCommand
-  include Configuration::NUnit
   
   attr_array :assemblies, :options
   
@@ -13,7 +11,7 @@ class NUnitTestRunner
     @options=[]
     @assemblies=[]
     super()
-    update_attributes nunit.to_hash
+    update_attributes Albacore.configuration.nunit.to_hash
     @command = command unless command.nil?
   end
   

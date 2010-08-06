@@ -1,11 +1,9 @@
 require 'albacore/albacoretask'
-require 'albacore/config/xunitconfig'
 
 class XUnitTestRunner
   TaskName = :xunit
   include AlbacoreTask
   include RunCommand
-  include Configuration::XUnit
 
   attr_accessor :html_output
   attr_array :options,:assembly,:assemblies
@@ -13,7 +11,7 @@ class XUnitTestRunner
   def initialize(command=nil)
     @options=[]
     super()
-    update_attributes xunit.to_hash
+    update_attributes Albacore.configuration.xunit.to_hash
     @command = command unless command.nil?
   end
 

@@ -5,14 +5,10 @@ module Configuration
   module SQLCmd
     include Albacore::Configuration
 
-    def self.sqlcmdconfig
-      @sqlcmdconfig ||= OpenStruct.new.extend(OpenStructToHash)
-    end
-
     def sqlcmd
-      config = SQLCmd.sqlcmdconfig
-      yield(config) if block_given?
-      config
+      @sqlcmdconfig ||= OpenStruct.new.extend(OpenStructToHash)
+      yield(@sqlcmdconfig) if block_given?
+      @sqlcmdconfig
     end
   end
 end

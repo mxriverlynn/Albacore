@@ -1,10 +1,8 @@
 require 'albacore/albacoretask'
-require 'albacore/config/nantconfig'
 
 class NAnt 
   include AlbacoreTask
   include RunCommand
-  include Configuration::NAnt
   
   attr_accessor :build_file
   attr_array :targets
@@ -12,7 +10,7 @@ class NAnt
   
   def initialize
     super()
-    update_attributes nant.to_hash
+    update_attributes Albacore.configuration.nant.to_hash
   end
   
   def execute

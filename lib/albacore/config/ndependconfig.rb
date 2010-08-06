@@ -5,14 +5,10 @@ module Configuration
   module NDepend
     include Albacore::Configuration
 
-    def self.ndependconfig
-      @ndependconfig ||= OpenStruct.new.extend(OpenStructToHash)
-    end
-
     def ndepend
-      config = NDepend.ndependconfig
-      yield(config) if block_given?
-      config
+      @ndependconfig ||= OpenStruct.new.extend(OpenStructToHash)
+      yield(@ndependconfig) if block_given?
+      @ndependconfig
     end
   end
 end

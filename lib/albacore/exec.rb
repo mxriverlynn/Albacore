@@ -1,14 +1,12 @@
 require 'albacore/albacoretask'
-require 'albacore/config/execconfig'
 
 class Exec
   include AlbacoreTask
   include RunCommand
-  include Configuration::Exec
 
   def initialize
     super()
-    update_attributes exec.to_hash
+    update_attributes Albacore.configuration.exec.to_hash
   end
     
   def execute

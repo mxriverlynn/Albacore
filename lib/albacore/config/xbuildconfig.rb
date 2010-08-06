@@ -5,14 +5,10 @@ module Configuration
   module XBuild
     include Albacore::Configuration
 
-    def self.xbuildconfig
-      @xbuildconfig ||= OpenStruct.new.extend(OpenStructToHash)
-    end
-
     def xbuild
-      config = XBuild.xbuildconfig
-      yield(config) if block_given?
-      config
+      @xbuildconfig ||= OpenStruct.new.extend(OpenStructToHash)
+      yield(@xbuildconfig) if block_given?
+      @xbuildconfig
     end
   end
 end

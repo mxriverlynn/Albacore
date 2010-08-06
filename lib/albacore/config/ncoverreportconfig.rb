@@ -5,14 +5,10 @@ module Configuration
   module NCoverReport
     include Albacore::Configuration
 
-    def self.ncoverreportconfig
-      @ncoverreportconfig ||= OpenStruct.new.extend(OpenStructToHash)
-    end
-
     def ncoverreport
-      config = NCoverReport.ncoverreportconfig
-      yield(config) if block_given?
-      config
+      @ncoverreportconfig ||= OpenStruct.new.extend(OpenStructToHash)
+      yield(@ncoverreportconfig) if block_given?
+      @ncoverreportconfig
     end
   end
 end

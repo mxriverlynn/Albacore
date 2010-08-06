@@ -73,15 +73,15 @@ end
 describe CSC, "when version to use has been configured and overriding" do
   let :csc do
     Albacore.configure do |config|
-      config.csc.use :net35
+      config.csc.use :net2
     end
     csc = CSC.new
-    csc.use :net40
+    csc.use :net35
     csc
   end
 
   it "should use the override version" do
    win_dir = ENV['windir'] || ENV['WINDIR'] || "C:/Windows"
-   csc.command.should == File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v4.0.30319', 'csc.exe')
+   csc.command.should == File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'csc.exe')
   end
 end

@@ -5,14 +5,10 @@ module Configuration
   module Unzip
     include Albacore::Configuration
 
-    def self.unzipconfig
-      @unzipconfig ||= OpenStruct.new.extend(OpenStructToHash)
-    end
-
     def unzip
-      config = Unzip.unzipconfig
-      yield(config) if block_given?
-      config
+      @unzipconfig ||= OpenStruct.new.extend(OpenStructToHash)
+      yield(@unzipconfig) if block_given?
+      @unzipconfig
     end
   end
 end

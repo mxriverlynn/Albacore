@@ -1,10 +1,8 @@
 require 'albacore/albacoretask'
-require 'albacore/config/sqlcmdconfig'
 
 class SQLCmd
   include AlbacoreTask
   include RunCommand
-  include Configuration::SQLCmd
   
   attr_accessor :server, :database, :username, :password
   attr_array :scripts
@@ -15,22 +13,22 @@ class SQLCmd
     @scripts=[]
     @variables={}
     super()
-    update_attributes sqlcmd.to_hash
+    update_attributes Albacore.configuration.sqlcmd.to_hash
   end
   
   def execute
     return unless check_command
     
     cmd_params=[]
-	serverParam = @server.nil? ? build_parameter("S", ".") : build_parameter("S", @server)
-	cmd_params << serverParam
+    serverParam = @server.nil? ? build_parameter("S", ".") : build_parameter("S", @server)
+    cmd_params << serverParam
     cmd_params << build_parameter("d", @database) unless @database.nil?
     integratedParam = "-E"
-	if ((!(@username.nil?)) and (!(@password.nil?)))
-		integratedParam = build_parameter("U", @username) + " " + build_parameter("P", @password)
-	end
-	cmd_params << integratedParam
-	cmd_params << build_variable_list if @variables.length > 0
+    if ((!(@username.nil?)) and (!(@password.nil?)))
+      integratedParam = build_parameter("U", @username) + " " + build_parameter("P", @password)
+    end
+    cmd_params << integratedParam
+    cmd_params << build_variable_list if @variables.length > 0
     cmd_params << "-b" if @scripts.length > 1
     cmd_params << build_script_list if @scripts.length > 0
     

@@ -5,14 +5,10 @@ module Configuration
   module Exec
     include Albacore::Configuration
 
-    def self.execconfig
-      @execconfig ||= OpenStruct.new.extend(OpenStructToHash)
-    end
-
     def exec
-      config = Exec.execconfig
-      yield(config) if block_given?
-      config
+      @execconfig ||= OpenStruct.new.extend(OpenStructToHash)
+      yield(@execconfig) if block_given?
+      @execconfig
     end
   end
 end

@@ -16,6 +16,13 @@ module AlbacoreTask
   def self.included(mod)
     mod.extend AttrMethods
     self.create_rake_task mod
+    self.include_config mod, caller[0]
+  end
+
+  def self.include_config(mod, calledby)
+    dir = File.dirname(calledby)
+    configfile = File.join(dir, "config", "#{mod.name.downcase}config.rb")
+    require configfile if File.exist?(configfile)
   end
 
   def self.create_rake_task(mod)

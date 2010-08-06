@@ -1,11 +1,9 @@
 require 'albacore/albacoretask'
-require 'albacore/config/xbuildconfig'
 
 class XBuild
   TaskName = [:xbuild, :mono]
   include AlbacoreTask
   include RunCommand
-  include Configuration::XBuild
   
   attr_accessor :solution, :verbosity
   attr_array :targets
@@ -14,7 +12,7 @@ class XBuild
   def initialize
     @command = 'xbuild'
     super()
-    update_attributes xbuild.to_hash
+    update_attributes Albacore.configuration.xbuild.to_hash
   end
   
   def execute
