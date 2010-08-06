@@ -85,3 +85,135 @@ describe CSC, "when version to use has been configured and overriding" do
    csc.command.should == File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'csc.exe')
   end
 end
+
+describe CSC, "when specifying 2 resources to include" do
+  let :csc do
+    csc = CSC.new
+    csc.resources "../some/file.resource", "another.resource"
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should include the first resource" do
+    csc.system_command.should include("/res:../some/file.resource")
+  end
+
+  it "should include the second resource" do
+    csc.system_command.should include("/res:another.resource")
+  end
+end
+
+describe CSC, "when specifying the optimize option" do
+  let :csc do
+    csc = CSC.new
+    csc.optimize = true
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should supply the optimize parameter" do
+    csc.system_command.should include("/optimize")
+  end
+end
+
+describe CSC, "when specifying debug information be generated" do
+  let :csc do
+    csc = CSC.new
+    csc.debug = true
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should provide the debug parameter" do
+    csc.system_command.should include("/debug")
+  end
+end
+
+describe CSC, "when specifying full debug information be generated" do
+  let :csc do
+    csc = CSC.new
+    csc.debug = :full
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should provide the full debug parameter" do
+    csc.system_command.should include("/debug:full")
+  end
+end
+
+describe CSC, "when specifying pdbonly debug information be generated" do
+  let :csc do
+    csc = CSC.new
+    csc.debug = :pdbonly
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should provide the pdbonly debug parameter" do
+    csc.system_command.should include("/debug:pdbonly")
+  end
+end
+
+describe CSC, "when specifying debug information not be generated" do
+  let :csc do
+    csc = CSC.new
+    csc.debug = false
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should not provide the debug parameter" do
+    csc.system_command.should_not include("/debug")
+  end
+end
+
+describe CSC, "when specifying an xml document to generate" do
+  let :csc do
+    csc = CSC.new
+    csc.doc = "../path/to/docfile.xml"
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should provide the documentation parmaeter" do
+    csc.system_command.should include("/doc:../path/to/docfile.xml")
+  end
+end
+
+describe CSC, "when defining processor symbols" do
+  let :csc do
+    csc = CSC.new
+    csc.define :symbol1, :symbol2
+
+    csc.extend(SystemPatch)
+    csc.disable_system = true
+    csc.execute
+    csc
+  end
+
+  it "should specify the defined symbols" do
+    csc.system_command.should include("/define:symbol1;symbol2")
+  end
+end
