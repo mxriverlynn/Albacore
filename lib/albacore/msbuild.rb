@@ -7,7 +7,7 @@ class MSBuild
   include Logging
   
   attr_accessor :solution, :verbosity
-  attr_array :targets
+  attr_array :targets, :consoleloggerparameters
   attr_hash :properties
   
   def initialize
@@ -34,7 +34,8 @@ class MSBuild
     command_parameters << "\"/verbosity:#{@verbosity}\"" if @verbosity != nil
     command_parameters << build_properties if @properties != nil
     command_parameters << "\"/target:#{build_targets}\"" if @targets != nil
-    
+    command_parameters << "\"/consoleloggerparameters:#{build_consoleloggerparameters}\"" if @consoleloggerparameters != nil
+	
     result = run_command "MSBuild", command_parameters.join(" ")
     
     failure_message = 'MSBuild Failed. See Build Log For Detail'
@@ -49,6 +50,10 @@ class MSBuild
   
   def build_targets
     @targets.join ";"
+  end
+  
+  def build_consoleloggerparameters
+    @consoleloggerparameters.join ";"
   end
 
   def build_properties
