@@ -92,6 +92,7 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 * [Mark Wilkins](http://github.com/markwilk): VB.NET Language Generator For The AssemblyInfo Task
 * [Mike Nichols](http://github.com/mnichols): XUnit contributions, bug reports, etc
 * [Nils Jonsson](http://github.com/njonsson): AssemblyInfo corrections, rakefile corrections
+* [Prabir Shrestha](http://github.com/prabirshrestha): Bug fixes for xunit test runner, etc.
 * [Sean Biefeld](http://github.com/seanbiefeld): MSpecTestRunner for NCoverConsole
 * [Steven Harman](http://github.com/stevenharman): Primary contributor. Nant task, issue tickets, disucssions, and much much more.
 * [Steven Johnson](http://github.com/2020steve): Expand Templates (deprecated task) supplimental data, etc
