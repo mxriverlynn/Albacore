@@ -47,6 +47,6 @@ class XUnitTestRunner
 
   def build_html_output			
     fail_with_message 'Directory is required for html_output' if !File.directory?(File.expand_path(@html_output))
-    "/html #{File.join(File.expand_path(@html_output),"%s.html")}" 	
+    "/html \"#{File.join(File.expand_path(@html_output),"%s.html")}\""
   end
 end

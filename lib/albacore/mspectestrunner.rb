@@ -45,6 +45,6 @@ class MSpecTestRunner
   end
   
   def build_html_output
-    "--html #{@html_output}"
+    "--html \"#{@html_output}\""
   end
 end
