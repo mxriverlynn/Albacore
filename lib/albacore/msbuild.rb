@@ -6,12 +6,13 @@ class MSBuild
   include YAMLConfig
   include Logging
   
-  attr_accessor :solution, :verbosity
+  attr_accessor :solution, :verbosity, :version
   attr_array :targets
   attr_hash :properties
   
   def initialize
     @path_to_command = build_path_to_command
+    self.version = "v3.5"
     super()
   end
   
@@ -19,10 +20,11 @@ class MSBuild
     win_dir = ENV['windir'] || ENV['WINDIR']
     win_dir = 'C:/Windows' if win_dir.nil?
     
-    File.join(win_dir.dup, 'Microsoft.NET', 'Framework', 'v3.5', 'MSBuild.exe')
+    File.join(win_dir.dup, 'Microsoft.NET', 'Framework', self.version, 'MSBuild.exe')
   end
   
   def build
+    @path_to_command = build_path_to_command
     build_solution(@solution)
   end
   
