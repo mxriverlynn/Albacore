@@ -11,8 +11,8 @@ class MSBuild
   attr_hash :properties
   
   def initialize
-    @path_to_command = build_path_to_command
     self.version = "v3.5"
+    @path_to_command = build_path_to_command
     super()
   end
   
