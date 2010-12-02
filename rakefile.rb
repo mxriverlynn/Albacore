@@ -1,3 +1,4 @@
+$: << './'
 require 'lib/albacore'
 
 task :default => ['albacore:sample']
