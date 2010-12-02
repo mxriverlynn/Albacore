@@ -20,9 +20,14 @@ module AlbacoreTask
   end
 
   def self.include_config(mod, calledby)
-    dir = File.dirname(calledby)
-    configfile = File.join(dir, "config", "#{mod.name.downcase}config.rb")
+    dir = clean_dirname(calledby)
+    configfile = File.expand_path(File.join(dir, "config", "#{mod.name.downcase}config.rb"))
     require configfile if File.exist?(configfile)
+  end
+
+  def self.clean_dirname(file)
+    last = file.rindex "/"
+    file[0..last]
   end
 
   def self.create_rake_task(mod)
