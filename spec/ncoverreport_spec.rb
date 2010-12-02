@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'spec_helper'
 require 'albacore/ncoverreport'
 require 'ncoverreporttestdata'
 

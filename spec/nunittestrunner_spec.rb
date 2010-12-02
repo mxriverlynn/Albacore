@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require 'spec_helper'
 require 'albacore/nunittestrunner'
 
 shared_examples_for "nunit paths" do
