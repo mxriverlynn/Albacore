@@ -1,12 +1,12 @@
-require File.join(File.dirname(__FILE__), 'support', 'spec_helper')
+require File.expand_path(File.join(File.dirname(__FILE__), 'support', 'spec_helper'))
 require 'albacore/albacoretask'
 
-class YamlTest
+class ::YamlTest
   include AlbacoreTask
   attr_accessor :some_name, :another_name, :a_hash, :what_ever
 end
 
-describe YAMLConfig, "when configuring with yaml" do
+describe "when configuring with yaml" do
   before :all do
     @yml = YamlTest.new
     @yml.configure File.join(File.dirname(__FILE__), 'support', 'test.yml')
@@ -31,14 +31,14 @@ describe YAMLConfig, "when configuring with yaml" do
   end  
 end
 
-describe YAMLConfig, "when specifying a yaml config folder and configuring" do
-  class YAML_AutoConfig_Test
-  	include AlbacoreTask
+describe "when specifying a yaml config folder and configuring" do
+  class ::YAML_AutoConfig_Test
+    include AlbacoreTask
     attr_accessor :some_attribute
   end
   
   before :all do
-  	Albacore.configure.yaml_config_folder = File.join(File.dirname(__FILE__), 'support', 'yamlconfig')
+    Albacore.configure.yaml_config_folder = File.join(File.dirname(__FILE__), 'support', 'yamlconfig')
     @yamltest = YAML_AutoConfig_Test.new
     @yamltest.load_config_by_task_name("yaml_autoconfig_test")
   end
