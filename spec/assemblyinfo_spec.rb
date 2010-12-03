@@ -15,7 +15,7 @@ describe AssemblyInfo, "when generating an assembly info file" do
   end
   
   it "should log the name of the output file" do
-    @log_data.should include(@tester.assemblyinfo_file)
+    @log_data.downcase.should include(@tester.assemblyinfo_file.downcase)
   end
 end
 
@@ -34,7 +34,7 @@ describe AssemblyInfo, "when generating an assembly info file in verbose mode" d
   end
   
   it "should log the name of the output file" do
-    @log_data.should include(@tester.assemblyinfo_file)
+    @log_data.downcase.should include(@tester.assemblyinfo_file.downcase)
   end
 end
 

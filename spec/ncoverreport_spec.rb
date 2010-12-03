@@ -37,7 +37,7 @@ describe NCoverReport, "when running a full coverage report with a specified out
   end
   
   it "should tell ncover.reporting to produce a full coverage html report in the specified folder" do
-    @ncover.system_command.should include("//or FullCoverageReport:Html:\"#{NCoverReportTestData.output_folder}\"")
+    @ncover.system_command.downcase.should include("//or FullCoverageReport:Html:\"#{NCoverReportTestData.output_folder}\"".downcase)
   end
   
   it "should produce the report" do
@@ -68,7 +68,7 @@ describe NCoverReport, "when running a summary report with a specified output fo
   end
   
   it "should tell ncover.reporting to produce a summary html report in the specified folder" do
-    @ncover.system_command.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"")
+    @ncover.system_command.downcase.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"".downcase)
   end
   
   it "should produce the report" do
@@ -99,11 +99,11 @@ describe NCoverReport, "when running multiple ncover reports - a summary and a f
   end
 
   it "should tell ncover.reporting to produce a full coverage html report in the specified folder" do
-    @ncover.system_command.should include("//or FullCoverageReport:Html:\"#{@fullcoverage_output_folder}\"")
+    @ncover.system_command.downcase.should include("//or FullCoverageReport:Html:\"#{@fullcoverage_output_folder}\"".downcase)
   end
   
   it "should tell ncover.reporting to produce a summary html report in the specified folder" do
-    @ncover.system_command.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"")
+    @ncover.system_command.downcase.should include("//or Summary:Html:\"#{NCoverReportTestData.summary_output_file}\"".downcase)
   end
 end
 

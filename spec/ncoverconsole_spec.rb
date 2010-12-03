@@ -262,7 +262,7 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
   end
   
   it "should execute the test runner from the specified path" do
-    @ncc.system_command.should include(@testdata.nunitpath)
+    @ncc.system_command.downcase.should include(@testdata.nunitpath.downcase)
   end
   
   it "should pass the specified assembly to the test runner" do
