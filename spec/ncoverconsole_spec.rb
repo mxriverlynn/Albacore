@@ -261,10 +261,6 @@ describe NCoverConsole, "when producing an xml coverage report with nunit" do
     @ncc.system_command.should include(File.expand_path(@testdata.ncoverpath))
   end
   
-  it "should execute with the specified working directory" do
-    @ncc.system_command.should include(@testdata.working_directory)
-  end
-  
   it "should execute the test runner from the specified path" do
     @ncc.system_command.should include(@testdata.nunitpath)
   end
@@ -303,7 +299,6 @@ describe NCoverConsole, "when specifying an html report and an xml coverage repo
     ncc.testrunner = nunit
     ncc.execute
   end
-
   
   it "should produce the xml report" do
     File.exist?(@testdata.xml_coverage_output).should == true
