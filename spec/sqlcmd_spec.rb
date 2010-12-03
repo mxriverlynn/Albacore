@@ -34,7 +34,7 @@ describe SQLCmd, "when running a script the easy way" do
   end
 
   it "should find the location of the sqlcmd exe for the user" do
-    @cmd.system_command.should include("SQLCMD.EXE")
+    @cmd.system_command.downcase.should include("sqlcmd.exe")
   end
   
   it "should specify the script file" do
@@ -110,7 +110,7 @@ describe SQLCmd, "when running a script file against a database with authenticat
   end
   
   it "should specify the location of the sqlcmd exe" do
-    @cmd.system_command.should include("SQLCMD.EXE")
+    @cmd.system_command.downcase.should include("sqlcmd.exe")
   end
   
   it "should specify the script file" do
