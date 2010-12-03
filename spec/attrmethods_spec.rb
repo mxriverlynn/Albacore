@@ -114,3 +114,23 @@ describe "when setting a hash attribute to an hash variable using the equal sign
     @test.test.length.should be(3)
   end
 end
+
+describe "when setting a hash attribute to a hash across multiple lines" do
+   before :each do
+    class TestClass
+      extend AttrMethods
+      attr_hash :test
+    end
+
+    @test = TestClass.new
+    @test.test( 
+      :a => "b", 
+      :c => "d", 
+      :e => "f"
+    )
+  end
+
+  it "should set the hash to the values" do
+    @test.test.length.should be(3)
+  end
+end 
