@@ -2,8 +2,8 @@ require 'albacore/albacoretask'
 require 'albacore/config/msbuildconfig.rb'
 
 class MSBuild
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   include Configuration::MSBuild
   
   attr_accessor :solution, :verbosity

@@ -30,5 +30,4 @@ module AttrMethods
       end
     end
   end
-
 end

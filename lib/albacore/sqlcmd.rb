@@ -1,8 +1,8 @@
 require 'albacore/albacoretask'
 
 class SQLCmd
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   
   attr_accessor :server, :database, :username, :password, :trusted_connection, :batch_abort
   attr_array :scripts

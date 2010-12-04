@@ -2,8 +2,8 @@ require 'albacore/albacoretask'
 
 class XUnitTestRunner
   TaskName = :xunit
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
 
   attr_accessor :html_output
   attr_array :options,:assembly,:assemblies

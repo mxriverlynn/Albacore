@@ -1,8 +1,8 @@
 require 'albacore/albacoretask'
 
 class NAnt 
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   
   attr_accessor :build_file
   attr_array :targets

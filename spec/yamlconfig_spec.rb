@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'albacore/albacoretask'
 
 class ::YamlTest
-  include AlbacoreTask
+  include Albacore::Task
   attr_accessor :some_name, :another_name, :a_hash, :what_ever
 end
 
@@ -33,7 +33,7 @@ end
 
 describe "when specifying a yaml config folder and configuring" do
   class ::YAML_AutoConfig_Test
-    include AlbacoreTask
+    include Albacore::Task
     attr_accessor :some_attribute
   end
   

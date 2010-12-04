@@ -1,8 +1,8 @@
 require 'albacore/albacoretask'
 
 class NDepend
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
 
   attr_accessor :project_file
 

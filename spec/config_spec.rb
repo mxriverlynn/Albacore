@@ -3,7 +3,7 @@ require 'albacore/albacoretask'
 require 'albacore/config/config'
 
 class ConfigTest
-  include AlbacoreTask
+  include Albacore::Task
 end
 
 module ConfigModuleTest

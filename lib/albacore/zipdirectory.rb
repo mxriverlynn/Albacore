@@ -5,7 +5,7 @@ include Zip
 
 class ZipDirectory
   TaskName = :zip
-  include AlbacoreTask
+  include Albacore::Task
   
   attr_accessor :output_path, :output_file
   attr_accessor :flatten_zip

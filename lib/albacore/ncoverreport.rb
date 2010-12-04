@@ -2,8 +2,8 @@ Dir.glob(File.join(File.expand_path(File.dirname(__FILE__)), 'ncoverreports/*.rb
 require 'albacore/albacoretask'
 
 class NCoverReport
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   
   attr_array :coverage_files, :reports, :required_coverage, :filters
   

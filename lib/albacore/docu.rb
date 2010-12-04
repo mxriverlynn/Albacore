@@ -2,8 +2,8 @@ require 'albacore/albacoretask'
 require 'albacore/config/docuconfig'
 
 class Docu
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   include Configuration::Docu
   
   attr_accessor :output_location

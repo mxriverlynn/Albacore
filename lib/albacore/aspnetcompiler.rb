@@ -3,8 +3,8 @@ require 'albacore/config/aspnetcompilerconfig'
 require 'albacore/support/supportlinux'
 
 class AspNetCompiler
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   include Configuration::AspNetCompiler
   include SupportsLinuxEnvironment
 

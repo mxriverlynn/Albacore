@@ -1,8 +1,8 @@
 require 'albacore/albacoretask'
 
 class NCoverConsole
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   
   attr_accessor :testrunner
   attr_array :cover_assemblies, :exclude_assemblies, :coverage, :exclude_attributes

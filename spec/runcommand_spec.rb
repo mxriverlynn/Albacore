@@ -3,8 +3,8 @@ require 'albacore/albacoretask'
 require 'system_patch'
 
 class RunCommandObject
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
 
   def execute
     result = run_command "Run Command Test Object"

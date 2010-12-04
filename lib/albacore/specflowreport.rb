@@ -2,8 +2,8 @@ require 'albacore/albacoretask'
 require 'albacore/config/specflowreportconfig'
 
 class SpecFlowReport
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   include Configuration::SpecFlowReport
   
   attr_array :projects, :options, :report

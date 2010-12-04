@@ -3,7 +3,7 @@ require 'albacore/albacoretask'
 require 'fail_patch'
 
 class SampleObject
-  include AlbacoreTask
+  include Albacore::Task
 
   attr_array :array
   attr_hash :hash
@@ -21,8 +21,8 @@ class SampleObject
 end
 
 class RunCommandObject
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
 
   def execute
     result = run_command "Run Command Test Object"

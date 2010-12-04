@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'albacore/albacoretask'
 
 class ModelTest
-  include AlbacoreTask
+  include Albacore::Task
   attr_accessor :foo, :bar
   attr_hash :a_hash
   attr_array :a_array
@@ -10,7 +10,7 @@ end
 
 class NamedTaskExample
   TaskName = [:namedtask, :anothername]
-  include AlbacoreTask
+  include Albacore::Task
 end
 
 describe "when updating object attributes with a valid set of hash keys" do

@@ -3,7 +3,7 @@ require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
 
 class AssemblyInfo
-  include AlbacoreTask
+  include Albacore::Task
   
   attr_accessor :version, :title, :description, :output_file, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name

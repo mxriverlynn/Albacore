@@ -2,8 +2,8 @@ require 'albacore/albacoretask'
 
 class MSpecTestRunner
   TaskName = :mspec
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
   
   attr_accessor :html_output
   attr_array :assemblies, :options

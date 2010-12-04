@@ -1,8 +1,8 @@
 require 'albacore/albacoretask'
 
 class Exec
-  include AlbacoreTask
-  include RunCommand
+  include Albacore::Task
+  include Albacore::RunCommand
 
   def initialize
     super()

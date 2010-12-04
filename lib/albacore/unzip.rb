@@ -4,7 +4,7 @@ require 'zip/zipfilesystem'
 include Zip
 
 class Unzip
-  include AlbacoreTask
+  include Albacore::Task
   
   attr_accessor :destination, :file
 
