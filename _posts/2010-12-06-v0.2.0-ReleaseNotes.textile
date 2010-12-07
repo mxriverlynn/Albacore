@@ -1,0 +1,8 @@
+---
+layout: post
+title: "v0.2.0 Release Notes: A Major Overhaul"
+---
+
+Albacore v0.2.0 has been pushed up to RubyGems.org. It contains what is possibly the largest number of changes for a single release in the project, including a complete rewrite of the task creation code, many common attributes on tasks, removal of several tasks that were not adding value, and the introduction of a plug-in system allowing you to easily create your own tasks.
+ 
+
