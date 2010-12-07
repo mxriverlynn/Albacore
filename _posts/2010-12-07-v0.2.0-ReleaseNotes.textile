@@ -1,0 +1,180 @@
+---
+layout: post
+title: "v0.2.0 Release Notes: A Major Overhaul"
+---
+
+Albacore v0.2.0 has been pushed up to RubyGems.org. It contains what is possibly the largest number of changes for a single release in the project, including a complete rewrite of the task creation code, many common attributes on tasks, removal of several tasks that were not adding value, and the introduction of a plug-in system allowing you to easily create your own tasks.
+ 
+h2. A Few Tasks Have Been Killed
+
+There are a few tasks that don't add significant value, in the previous releases. They are either duplicating functionality from somewhere else, or muddying the functionality that was intended.
+
+Here are the tasks that have been killed, and why:
+
+* rename: provides no value. just use 'FileUtils.mv' in a regular task. you get more options and better support from the ruby community with the FileUtils module
+* ssh: deploy related, which is not albacore's "core". albacore is a build related framework, not deployment. suggest users switch to capistrano and webistrano if the want ssh stuff.
+* sftp: same as ssh
+* expandtemplates: while this is (mostly) functional and does provide some value, it's a hack that i put together because i wasn't aware of the existing templating solutions out there. For example, ERB is built into to ruby and there are so many more available if people want them. I would suggest a switch to ERB or one of the other template systems if you need a templating solution. (See the "Custom Tasks" section of the release notes for an example on creating your own Expand Templates task with ERB.)
+
+h2. A Few New Tasks
+
+The CSC task allows you to call the C-Sharp Compile directly, insteading of using a tool like MSBuild. For example:
+
+<pre><code>csc :build do |csc|
+  csc.command = "csc.exe"
+  csc.compile FileList["src/**/*.cs"].exclude("src/**/*Specs.cs")
+  csc.output = "myproject.dll"
+  csc.target = :library
+end
+ 
+csc :build_tests => [:build] do |csc|
+  csc.command = "csc.exe"
+  csc.compile FileList["src/**/*Specs.cs"]
+  csc.output = "myproject.specs.dll"
+  csc.target = :library
+  csc.references "myproject.dll", "nunit.framework.dll"
+end
+ 
+nunit :test => [:build_tests] do |nunit|
+  nunit.command = "nunit-console.exe"
+  nunit.assemblies "myproject.specs.dll"
+end
+</code></pre>
+
+The SpecflowReport task that let’s you run reports from specflow.
+
+<pre><code>specflowreport :specflow do |sfr|
+  sfr.command = "path/to/specflow.exe"
+  sfr.projects "path/to/something.csproj"
+  sfr.reports "nunitexecutionreport"
+  sfr.options "/out:specs.html"
+end
+</code></pre>
+
+h2. Reduced Syntax For Several Attributes
+
+Many of the tasks that Albacore includes are what we call 'command line tasks' these are tasks that call out to a command line tool. In previous releases, all of these tasks had their command line executable (or script or whatever) set through an attribute called '.path_to_command'. This lengthy name is hard to type and hard to remember if you don't use it on a regular basis. With that in mind, we reduced the attribute to '.command'. For example:
+
+<pre></code>nunit :test do |nunit|
+  nunit.command = "tools/nunit/nunit-console.exe"
+  # other settings here
+end
+</code></pre>
+
+A few other tasks have had similar overhauls to specific attributes. the Unzip task, for example, has attributes renamed to '.file' and '.destination' to represent the zip file you want to unzip and where you want the contents sent. These changes should simplify your tasks a little and make them easier to read. For more information on what attributes are available for each task, see the ["albacore wiki":http://github.com/derickbailey/Albacore/wiki].
+
+h2. Default To .NET 4 For MSBuild And CSC
+
+Albacore now defaults to .NET 4 for the MSBuild and CSC tasks.
+
+Not using .NET 4? Don't worry! v0.2.0 will make your life easier, still! You can easily change framework versions with one simple statement in your task definition:
+
+<pre><code>msbuild :build do |msb|
+  msb.use :net35
+  # other configuration here
+end
+</code></pre>
+
+The .use(version) method is now available on the MSBuild and CSC tasks and lets you specify which version of .NET you want to use when calling out to the command line. Here’s the current list of supported versions:
+
+* :net2 or :net20 for v2.0.50727
+* :net35 for v3.5
+* :net4 or :net40 for v4.0.30319
+
+Need another version? Drop us a line or submit a patch and we'll get it added. (I know that this isn't anywhere near the complete list. This is what I have on my machine, right now.)
+
+
+h2. A New Configuration System
+
+There is a new configuration system that lets you configure defaults for any attribute of any task in one simple place. Always using .Net 3.5 with MSBuild and dont want to specify it in every msbuild task? no problem... Always want to use the same .command or .options with nunit? No problem... want to set the .log_level for every task? no problem...
+
+<pre><code>Albacore.configure do |config|
+  config.log_level = :verbose
+  config.msbuild.use :net35
+  config.nunit do |nunit|
+    nunit.command = "path/to/nunit-console.exe"
+    nunit.options "/noshadow"
+  end
+
+  # additional task configuration here
+
+end
+</code></pre>
+
+This Albacore.configure method can be called at the top of your rakefile and it will set the specified attributes for the specified tasks, on every instance of that task, to this default. Of course, you can still override any individual setting within any individual task definition.
+
+In addition to the .configure method, this release of Albacore also makes it easy to configure any specific task through code, using a hash.
+
+<pre><code>msbuild_settings = {
+  :properties => {:configuration => :release},
+  :targets => [:clean, :build]
+}
+
+msbuild do |msb|
+  msb.update_attributes msbuild_settings
+end
+</code></pre>
+
+Now you can set virtually any attribute of any task through code, outside of the task definition. You only need to provide a hash to the .update_attributes method on the task object.
+
+h2. Custom Tasks
+
+It's now easier than ever to create your own tasks that take advantage of the Albacore infrastructure. To create your own task, you need to do a few things in a standard ruby class:
+
+* "include Albacore::Task". this module will bring most of the albacore functionality into your class and it will create a custom rake task for you, using the name of your class.
+* a no-args initializer. all albacore task classes need to have an initializer that can be run with no parameters. you can allow optional parameters if you want.
+* an execute method. all albacore task classes need to have an execute method - again, with no parameters - so that the task can call .execute on your class
+
+For example, to create a replacement for the now-deleted ExpandTemplates task, using ERB as the template system, the following code can be used:
+
+<pre><code>require 'erb'
+
+class ExpandTemplate
+  module GetBinding
+    def get_binding
+      binding
+    end
+  end
+
+  include Albacore::Task
+
+  attr_accessor :template, :output
+  attr_hash :settings
+
+  def execute
+    expand_template(@template, @output, @settings)
+  end
+
+  def expand_template(template_file, output_file, settings)
+    template = File.read template_file
+
+    vars = OpenStruct.new(settings)
+    vars.extend GetBinding
+    vars_binding = vars.get_binding
+
+    erb = ERB.new template
+    output = erb.result(vars_binding)
+
+    File.open(output_file, "w") do |file|
+      puts "Generating #{file.path}"
+      file.write(output)
+    end
+  end
+end
+</code></pre>
+
+Once you have this class defined in a file, you only need to "require" it in your rakefile (or you can put this class directly in your rakefile if you want). The inclusion of "Albacore::Task" on line 4 will automatically create an "expandtemplate" task for you. You can then call the task like any other albacore or other rake task:
+
+<pre><code>expandtemplate :appconfig do |tmp|
+  tmp.template = "templates/app.config.template"
+  tmp.output = Files[:output] + ".config"
+  tmp.settings( 
+    :mysetting => "this is some settings",
+    :connectionstring => "some connection string"
+  )
+end
+</code></pre>
+
+To see this example in action, take a look at the ["vimbacore project on github":http://github.com/derickbailey/vimbacore]. It is my playground where I test out a lot of the new features and functionality of albacore, and I've included this (and a config example) in that project.
+
+For more information on creating your own tasks, naming the task method, including configuration, etc, see the ["albacore wiki":http://github.com/derickbailey/Albacore/wiki].
