@@ -2,11 +2,9 @@
 
 albacore is a professional quality suite of Rake tasks to help automate the process of building a .NET based system. 
 
-## How To Install albacore From Gemcutter Gems:
+## How To Install albacore:
 
 If you would like to install the current, stable release of albacore, you can do so easily through the standard RubyGems.org server. Follow these simple instructions and you will be good to go.
-
-**Step 1:** Install the albacore gem
 
 > gem install albacore
 
@@ -24,19 +22,21 @@ Use your Github account to fork albacore, or clone it directly from my public cl
 
 **Step 2:** Install Required Dependencies
 
-In your local clone of albacore, run the "install_dependencies.rb" script:
+You will need the Bundler gem installed, to install the other albacore dependencies
 
-> ruby install_dependencies.rb
+> gem install bundler
 
-This will install all of the gem dependencies that you need, to build the albacore gem.
+In your local clone of albacore, run bundler
+
+> bundle install
+
+This will install all of the gem dependencies that you need to build the albacore gem and add your own contributions to albacore.
 
 **Step 3:** Build the gem
 
 In your local clone of albacore, use the jeweler rake tasks to build the latest version of the albacore code into a gem.
 
-> rake jeweler:gemspec
->
-> rake jeweler:build
+> rake jeweler:gemspec jeweler:build
 
 this will produce an 'albacore-#.#.#.gem' file in the 'pkg' folder, where '#.#.#' is the version number. For example 'albacore-0.1.2.gem'.
 
@@ -50,7 +50,7 @@ where '#.#.#' is the version number of the gem. For example 'albacore-0.1.2.gem'
 
 ## How To Use albacore
 
-On systems do not have the "RUBYOPT" environment variable set to automatically include rubygems, you will also need to add
+On systems do not have the "RUBYOPT" environment variable set to automatically include rubygems, you may need to add
 
     require 'rubygems'
 
@@ -60,7 +60,7 @@ to the top of your rakefile. Then, you can add
 
 to your rakefile. This will allow you to use the tasks that albacore includes.  
 
-    desc "Run a sample build using the MSBuildTask"
+    desc "Run a sample build using the MSBuild Task"
     msbuild do |msb|
         msb.properties :configuration => :Debug
         msb.targets :Clean, :Build
