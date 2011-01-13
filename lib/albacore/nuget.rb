@@ -8,7 +8,7 @@ class NuGet
   include Configuration::NuGet
   include SupportsLinuxEnvironment
   
-  attr_accessor  :nuspec_file,
+  attr_accessor  :nuspec,
                  :output,
                  :base_folder,
                  :command
@@ -22,11 +22,11 @@ class NuGet
 
   def execute
   
-    fail_with_message 'nuspec_file must be specified.' if @nuspec_file.nil?
+    fail_with_message 'nuspec must be specified.' if @nuspec.nil?
     
     params = []
     params << "pack"
-    params << "#{nuspec_file}"
+    params << "#{nuspec}"
     params << "-b #{base_folder}" unless @base_folder.nil?
     params << "-o #{output}" unless @output.nil?
     
