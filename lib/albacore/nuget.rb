@@ -13,11 +13,10 @@ class NuGet
                  :base_folder,
                  :command
 
-  def initialize(command = nil)
+  def initialize(command = "NuGet.exe") # users might have put the NuGet.exe in path
     super()
     update_attributes nuget.to_hash
-    @command = command unless command.nil?
-    @command = "NuGet" if @command.nil? # users might have put the NuGet.exe in path
+    @command = command
   end
 
   def execute
@@ -32,7 +31,7 @@ class NuGet
     
     merged_params = params.join(' ')
     
-    @logger.debug "Build NuGet pack Command Line: #{merged_params}" 
+    @logger.debug "Build NuGet pack Command Line: #{merged_params}"
     result = run_command "NuGet", merged_params
     
     failure_message = 'NuGet Failed. See Build Log For Detail'
