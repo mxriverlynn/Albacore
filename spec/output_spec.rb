@@ -97,4 +97,20 @@ describe Output, 'when having a from and to set' do
         File.exist?("#{OutputTestData.to}/subdir/foo/test.txt").should be_false
       end
     end
+    
+    describe 'and when using erb, should have templated output' do
+      before :each do
+        subdir = "#{OutputTestData.from}/subdir/foo"
+        FileUtils.mkdir_p(subdir) unless File.exists? subdir
+        File.open("#{OutputTestData.from}/subdir/foo/web.config.erb", "w"){|f| f.write "test_sub <%= my_value %>" }
+      end
+      
+      it "should rename and create entire path if nested deeply" do
+        @o.erb 'subdir/foo/web.config.erb', :as => 'subdir/foo/web.config', :locals => { :my_value => 'hello' }
+        @o.execute
+        
+        File.exist?("#{OutputTestData.to}/subdir/foo").should be_true
+        File.exist?("#{OutputTestData.to}/subdir/foo/web.config").should be_true
+      end
+    end
 end
