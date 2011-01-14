@@ -111,6 +111,7 @@ describe Output, 'when having a from and to set' do
         
         File.exist?("#{OutputTestData.to}/subdir/foo").should be_true
         File.exist?("#{OutputTestData.to}/subdir/foo/web.config").should be_true
+        File.read("#{OutputTestData.to}/subdir/foo/web.config").should == "test_sub hello"
       end
     end
 end
