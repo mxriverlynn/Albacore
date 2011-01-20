@@ -2,15 +2,15 @@ require 'ostruct'
 require 'albacore/support/openstruct'
 
 module Configuration
-  module NuGet
+  module NuGetPack
     include Albacore::Configuration
 
-    def self.nugetconfig
-      @config ||= OpenStruct.new.extend(OpenStructToHash).extend(NuGet)
+    def self.nugetpackconfig
+      @config ||= OpenStruct.new.extend(OpenStructToHash).extend(NuGetPack)
     end
 
-    def nuget
-      @config ||= NuGet.nugetconfig
+    def nugetpack
+      @config ||= NuGetPack.nugetpackconfig
       yield(@config) if block_given?
       @config
     end

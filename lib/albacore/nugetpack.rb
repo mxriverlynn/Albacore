@@ -1,11 +1,11 @@
 require 'albacore/albacoretask'
-require 'albacore/config/nugetconfig'
+require 'albacore/config/nugetpackconfig'
 require 'albacore/support/supportlinux'
 
-class NuGet
+class NuGetPack
   include Albacore::Task
   include Albacore::RunCommand
-  include Configuration::NuGet
+  include Configuration::NuGetPack
   include SupportsLinuxEnvironment
   
   attr_accessor  :nuspec,
@@ -15,7 +15,7 @@ class NuGet
 
   def initialize(command = "NuGet.exe") # users might have put the NuGet.exe in path
     super()
-    update_attributes nuget.to_hash
+    update_attributes nugetpack.to_hash
     @command = command
   end
 
