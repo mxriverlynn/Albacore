@@ -40,7 +40,6 @@ namespace :specs do
     t.spec_files = FileList['spec/sqlcmd*_spec.rb']
     t.spec_opts << @spec_opts
   end
-
   
   desc "Nant functional specs"
   Spec::Rake::SpecTask.new :nant do |t|
@@ -227,9 +226,9 @@ namespace :albacore do
   end
 
   desc "FluentMigrator Test Runner Example"
-  fluentmigrator do |fluentmigrator|
-    fluentmigrator.command = "spec/support/Tools/FluentMigrator-0.9/Migrate.exe"
-    fluentmigrator.target "spec/support/CodeCoverage/fluentmigrator/assemblies/TestSolution.Tests.dll"
+  fluentmigrator do |migrator|
+    migrator.command = "spec/support/Tools/FluentMigrator-0.9/Migrate.exe"
+    migrator.target "spec/support/CodeCoverage/fluentmigrator/assemblies/TestSolution.Tests.dll"
   end
 end
 
