@@ -227,9 +227,15 @@ namespace :albacore do
 
   desc "FluentMigrator Test Runner Example"
   fluentmigrator do |migrator|
+    db_file = "#{ENV['TEMP']}/fluentmigrator.sqlite3"
+    File.delete(db_file) if File.exist?(db_file) 
+    
     migrator.command = "spec/support/Tools/FluentMigrator-0.9/Migrate.exe"
-    migrator.target "spec/support/CodeCoverage/fluentmigrator/assemblies/TestSolution.Tests.dll"
+    migrator.target = "spec/support/FluentMigrator/TestSolution.FluentMigrator.dll"
+    migrator.provider = "sqlite"
+    migrator.connection = "Data Source=#{db_file};"
   end
+
 end
 
 namespace :jeweler do

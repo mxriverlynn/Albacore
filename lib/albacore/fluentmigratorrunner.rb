@@ -21,17 +21,17 @@ class FluentMigratorRunner
   end
 
 	def get_command_parameters
-    params = " /target #{@target}"
+    params = " /target \"#{@target}\""
     params << " /provider #{@provider}"
-    params << " /connection #{@connection}"
+    params << " /connection \"#{@connection}\""
     params << " /ns #{@namespace}" unless @namespace.nil?
     params << " /out #{@output}" unless @output.nil?
     params << " /preview #{@preview}" unless @preview.nil?
     params << " /steps #{@steps}" unless @steps.nil? || @steps == 0
-    params << " /task #{@task}" 
+    params << " /task #{@task}" unless @task.nil?
     params << " /version #{@version}" unless @version.nil? || @version == 0
     params << " /verbose #{@verbose}" unless @verbose.nil?
-    params << " /wd #{@script_directory}" unless @script_directory.nil?
+    params << " /wd \"#{@script_directory}\"" unless @script_directory.nil?
     params << " /profile #{@profile}" unless @profile.nil?
     params << " /timeout #{@timeout}" unless @timeout.nil?
     params
