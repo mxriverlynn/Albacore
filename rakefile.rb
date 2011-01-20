@@ -107,6 +107,12 @@ namespace :specs do
     t.spec_files = FileList['spec/yaml*_spec.rb']
     t.spec_opts << @spec_opts
   end
+
+  desc "FluenMigrator functional specs"
+  Spec::Rake::SpecTask.new :fluentmigrator do |t|
+    t.spec_files = FileList['spec/fluentmigrator*_spec.rb']
+    t.spec_opts << @spec_opts
+  end	
 end
 
 namespace :albacore do  
@@ -122,7 +128,8 @@ namespace :albacore do
                      'albacore:ncoverreport',
                      'albacore:mspec',
                      'albacore:nunit',
-                     'albacore:xunit']
+                     'albacore:xunit',
+										 'albacore:fluentmigrator']
   
   desc "Run a sample MSBuild with YAML autoconfig"
   msbuild :msbuild
@@ -217,6 +224,12 @@ namespace :albacore do
     xbuild.properties :configuration => :release, :platform => 'Any CPU'
     xbuild.targets :clean, :build
     xbuild.solution = "spec/support/TestSolution/TestSolution.sln"
+  end
+
+  desc "FluentMigrator Test Runner Example"
+  fluentmigrator do |fluentmigrator|
+    fluentmigrator.command = "spec/support/Tools/FluentMigrator-0.9/Migrate.exe"
+    fluentmigrator.target "spec/support/CodeCoverage/fluentmigrator/assemblies/TestSolution.Tests.dll"
   end
 end
 
