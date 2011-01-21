@@ -1,17 +1,52 @@
 require 'albacore/albacoretask'
 require 'nokogiri'
 
-class Nuget
+class NuspecFile
+  def initialize(src, target) 
+    @src = src
+	@target = target
+  end
+  
+  def render(xml) 
+    node = xml.file
+	node['src'] = @src
+	node['target'] = @target if !@target.nil?
+  end
+end
+
+class NuspecDependency
+  def initialize(id, version)
+    @id = id
+	@version = version
+  end
+  
+  def render( xml )
+    node = xml.dependency
+	node['id'] = @id
+	node['version'] = @version if !@version.nil?
+  end
+end
+
+class Nuspec
   include Albacore::Task
-  include Albacore::RunCommand
   
   attr_accessor :id, :version, :authors, :description, :language, :licenseUrl, :projectUrl, :output_file,
-                :owners, :summary, :iconUrl, :requireLicenseAcceptance, :tags
-
+                :owners, :summary, :iconUrl, :requireLicenseAcceptance, :tags, :working_directory
+				
   def initialize()
+	@dependencies = Array.new
+	@files = Array.new
     super()
   end
 
+  def dependency(id, version=nil)
+	@dependencies.push NuspecDependency.new(id, version)
+  end
+  
+  def file(src, target=nil)
+    @files.push NuspecFile.new(src, target)
+  end
+  
   def execute
     valid = check_output_file @output_file
     check_required_field(@id, "id")
@@ -25,34 +60,40 @@ class Nuget
       @working_output_file = @output_file
     end
 
-    return if !valid 
-
     builder = Nokogiri::XML::Builder.new do |xml|
       build(xml)
     end
 
     File.open(@working_output_file, 'w') {|f| f.write(builder.to_xml) }
-    result = run_command "NuGet.exe", "pack #{@output_file}"
-    
   end
 
   def build(xml)
-         xml.package{
-	   xml.metadata{
-	     xml.id @id
-             xml.version @version
-             xml.authors @authors
-             xml.description @description
-             xml.language @language if !@language.nil?
-             xml.licenseUrl @licenseUrl if !@licenseUrl.nil?
-             xml.projectUrl @projectUrl if !@projectUrl.nil?
-             xml.owners @owners if !@owners.nil?
-             xml.summary @summary if !@summary.nil?
-             xml.iconUrl @iconUrl if !@iconUrl.nil?
-             xml.requireLicenseAcceptance @requireLicenseAcceptance if !@requireLicenseAcceptance.nil?
-             xml.tags @tags if !@tags.nil?
-           }
-         }
+    xml.package{
+      xml.metadata{
+	    xml.id @id
+        xml.version @version
+        xml.authors @authors
+        xml.description @description
+        xml.language @language if !@language.nil?
+        xml.licenseUrl @licenseUrl if !@licenseUrl.nil?
+        xml.projectUrl @projectUrl if !@projectUrl.nil?
+        xml.owners @owners if !@owners.nil?
+        xml.summary @summary if !@summary.nil?
+        xml.iconUrl @iconUrl if !@iconUrl.nil?
+        xml.requireLicenseAcceptance @requireLicenseAcceptance if !@requireLicenseAcceptance.nil?
+        xml.tags @tags if !@tags.nil?
+        if @dependencies.length > 0
+          xml.dependencies{
+            @dependencies.each {|x| x.render(xml)}
+          }
+        end
+        if @files.length > 0
+          xml.files{
+            @files.each {|x| x.render(xml)}
+          }
+        end
+     }
+   }
   end
 
   def check_output_file(file)
@@ -65,5 +106,4 @@ class Nuget
     return true if !field.nil?
     raise "Nuget: required field '#{fieldname}' is not defined"
   end
-  
 end
