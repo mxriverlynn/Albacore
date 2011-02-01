@@ -112,6 +112,13 @@ namespace :specs do
     t.spec_files = FileList['spec/fluentmigrator*_spec.rb']
     t.spec_opts << @spec_opts
   end	
+  
+  desc "Output functional specs"
+  Spec::Rake::SpecTask.new :output do |t|
+    t.spec_files = FileList['spec/output*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+    
 end
 
 namespace :albacore do  
