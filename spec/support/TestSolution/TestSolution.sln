@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSolution.XUnitTests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSolution.SpecFlow", "TestSolution.SpecFlow\TestSolution.SpecFlow.csproj", "{57F50D38-0EA8-401F-AD2A-CA50738F4F14}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSolution.FluentMigrator", "TestSolution.FluentMigrator\TestSolution.FluentMigrator.csproj", "{EC5A688A-19D1-4B1B-BA8F-804A5D460695}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{57F50D38-0EA8-401F-AD2A-CA50738F4F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F50D38-0EA8-401F-AD2A-CA50738F4F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F50D38-0EA8-401F-AD2A-CA50738F4F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5A688A-19D1-4B1B-BA8F-804A5D460695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5A688A-19D1-4B1B-BA8F-804A5D460695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5A688A-19D1-4B1B-BA8F-804A5D460695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5A688A-19D1-4B1B-BA8F-804A5D460695}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
