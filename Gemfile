@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rake', '0.8.7' 
 gem 'rubyzip', '0.9.4' 
-gem 'nokogiri', '1.4.4'
+gem 'nokogiri', '1.4.4.1'
  
 group :development do
   gem 'version_bumper', '0.1.0'
