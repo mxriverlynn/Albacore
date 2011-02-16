@@ -1,5 +1,6 @@
 $: << './'
 require 'lib/albacore'
+require 'version_bumper'
 
 task :default => ['albacore:sample']
 
@@ -261,8 +262,5 @@ namespace :jeweler do
       "spec/",
       "pkg/"
     )
-
-    gs.add_dependency('rake', '>= 0.8.7')
-    gs.add_dependency('rubyzip', '>= 0.9.4')
   end
 end
