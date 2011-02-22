@@ -33,6 +33,7 @@ GEM
     watchr (0.7)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
