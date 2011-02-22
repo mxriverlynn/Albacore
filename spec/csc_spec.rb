@@ -24,12 +24,13 @@ describe CSC, "when supplying a file list with 2 files to compile" do
   end
 end
 
-# TODO: Remove: This has external contract dependencies which this class isn't directly responsible for.
+# TODO: If designed by contract this is an unncessary responsibility of the class.
 # It should be removed and only validate that the parameter is being specified as CSC expects it.
 describe CSC, "when targeting a library and an output file" do 
   before :each do
     @folder = File.join(File.expand_path(File.dirname(__FILE__)), "support", "csc")
     csc = CSC.new
+
     csc.compile FileList[File.join(@folder, "File1.cs")]
     csc.target = :library
     csc.output = File.join(@folder, "output", "File1.dll")
