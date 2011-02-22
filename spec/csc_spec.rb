@@ -24,6 +24,8 @@ describe CSC, "when supplying a file list with 2 files to compile" do
   end
 end
 
+# TODO: Remove: This has external contract dependencies which this class isn't directly responsible for.
+# It should be removed and only validate that the parameter is being specified as CSC expects it.
 describe CSC, "when targeting a library and an output file" do 
   before :each do
     @folder = File.join(File.expand_path(File.dirname(__FILE__)), "support", "csc")
@@ -216,4 +218,35 @@ describe CSC, "when defining processor symbols" do
   it "should specify the defined symbols" do
     csc.system_command.should include("/define:symbol1;symbol2")
   end
+end
+
+describe CSC, "when specifying main entry point be generated" do
+	let :csc do
+		csc = CSC.new
+		csc.main = "Program.Main"
+
+		csc.extend(SystemPatch)
+		csc.disable_system = true
+		csc.execute
+		csc
+	end
+
+	it "should provide the main parameter" do
+		csc.system_command.should include("/main:Program.Main")
+	end
+end
+
+describe CSC, "when specifying main entry point not be generated" do
+	let :csc do
+		csc = CSC.new
+
+		csc.extend(SystemPatch)
+		csc.disable_system = true
+		csc.execute
+		csc
+	end
+
+	it "should not provide the main parameter" do
+		csc.system_command.should_not include("/main")
+	end
 end
