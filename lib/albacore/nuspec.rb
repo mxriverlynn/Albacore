@@ -73,8 +73,7 @@ class Nuspec
     document << REXML::XMLDecl.new
 
     package = document.add_element('package')
-    package.add_attribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
-    package.add_attribute("xmlns:xsd", "http://www.w3.org/2001/XMLSchema")
+    package.add_attribute("xmlns", "http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd")
 
     metadata = package.add_element('metadata')
     
