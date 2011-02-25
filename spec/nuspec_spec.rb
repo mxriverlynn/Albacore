@@ -1,11 +1,22 @@
+require 'fileutils'
 require 'spec_helper.rb'
 require 'albacore/nuspec.rb'
-require 'support\nokogiri_validator'
+
+if IS_IRONRUBY
+  require 'support\ironruby_validator'
+else
+  require 'support\nokogiri_validator'
+end
 
 describe Nuspec, 'when creating a file with minimum requirements' do
-  let(:working_dir) { File.expand_path(File.join(File.dirname(__FILE__), 'support/nuspec/')) }
+  let(:working_dir) do
+    wd = File.expand_path(File.join(File.dirname(__FILE__), 'support/nuspec/output')) 
+    FileUtils.mkdir(wd) unless File.exist?(wd)
+    wd
+  end
+
   let(:nuspec_output) { File.join(working_dir, 'nuspec_test.nuspec') }
-  let(:schema_file) { File.join(working_dir, 'nuspec.xsd') }
+  let(:schema_file) { File.expand_path(File.join(working_dir, '../', 'nuspec.xsd')) }
 
   let(:nuspec) do
     nuspec = Nuspec.new

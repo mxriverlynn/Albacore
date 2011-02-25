@@ -21,3 +21,4 @@ Spec::Runner.configure do |config|
   config.mock_with NotAMock::RspecMockFrameworkAdapter
 end
 
+IS_IRONRUBY = (defined?(RUBY_ENGINE) && RUBY_ENGINE == "ironruby")

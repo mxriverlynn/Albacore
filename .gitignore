@@ -34,7 +34,7 @@ spec/support/expandtemplates/output
 spec/support/expandtemplates/working
 spec/support/TestSolution/NDependOut
 spec/support/zip/*.zip.*
-spec/support/nuspec
+spec/support/nuspec/output
 github-test.rb
 Albacore-*.gem
 albacore-*.gem
