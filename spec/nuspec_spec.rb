@@ -1,31 +1,33 @@
-require 'rubygems'
-require '../lib/albacore/nuspec.rb'
-require 'spec/rake/spectask'
-require 'nokogiri'
-
-#require 'spec_helper.rb'
+require 'spec_helper.rb'
+require 'albacore/nuspec.rb'
+require 'support\nokogiri_validator'
 
 describe Nuspec, 'when creating a file with minimum requirements' do
-  before :each do
-    @nuspec = Nuspec.new
-    @nuspec.id="nuspec_test"
-    @nuspec.output_file = "nuspec_test.nuspec"
-    @nuspec.version = "1.2.3"
-    @nuspec.authors = "Author Name"
-    @nuspec.description = "test_xml_document"
-    @nuspec.working_directory = 'support/nuspec'
-    @nuspec.execute
+  let(:working_dir) { File.expand_path(File.join(File.dirname(__FILE__), 'support/nuspec/')) }
+  let(:nuspec_output) { File.join(working_dir, 'nuspec_test.nuspec') }
+  let(:schema_file) { File.join(working_dir, 'nuspec.xsd') }
+
+  let(:nuspec) do
+    nuspec = Nuspec.new
+    nuspec.id="nuspec_test"
+    nuspec.output_file = "nuspec_test.nuspec"
+    nuspec.version = "1.2.3"
+    nuspec.authors = "Author Name"
+    nuspec.description = "test_xml_document"
+    nuspec.working_directory = working_dir
+    nuspec
+  end
+
+  before do
+    nuspec.execute
+  end
+
+  it "should produce the nuspec xml" do
+    File.exist?(nuspec_output).should be_true
   end
 
   it "should produce a valid xml file" do
-    File.exist?("support/nuspec/nuspec_test.nuspec").should be_true
-    schema = Nokogiri::XML::Schema(File.open('support/nuspec/nuspec.xsd'))
-    doc = Nokogiri::XML(File.open('support/nuspec/nuspec_test.nuspec'))
-  
-    schema.validate(doc.xpath("//package").to_s).each do |error|
-      puts error.message
-    end
-    schema.validate(doc).length.should == 0
+    is_valid = XmlValidator.validate(nuspec_output, schema_file)
+    is_valid.should be_true
   end
 end
-

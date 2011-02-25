@@ -49,11 +49,11 @@ class Nuspec
   end
   
   def execute
-    valid = check_output_file @output_file
-    check_required_field(@id, "id")
-    check_required_field(@version, "version")
-    check_required_field(@authors, "authors")
-    check_required_field(@description, "description")
+    check_required_field @output_file, "output_file"
+    check_required_field @id, "id" 
+    check_required_field @version, "version" 
+    check_required_field @authors, "authors" 
+    check_required_field @description, "description" 
     
     if(! @working_directory.nil?)
       @working_output_file = File.join(@working_directory, @output_file)
@@ -61,7 +61,7 @@ class Nuspec
       @working_output_file = @output_file
     end
 
-    builder =  Document.new
+    builder = REXML::Document.new
     build(builder)
     output=""
     builder.write(output)
@@ -94,12 +94,6 @@ class Nuspec
       files = package.add_element('files')
       @files.each {|x| x.render(files)}
     end
-  end
-
-  def check_output_file(file)
-    return true if file
-    fail_with_message 'output_file cannot be nil'
-    return false
   end
 
   def check_required_field(field, fieldname)
