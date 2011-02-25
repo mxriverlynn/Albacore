@@ -70,6 +70,7 @@ class Nuspec
   end
 
   def build(document)
+    document << REXML::XMLDecl.new
     package = document.add_element('package')
     metadata = package.add_element('metadata')
     metadata.add_element('id').add_text(@id)
