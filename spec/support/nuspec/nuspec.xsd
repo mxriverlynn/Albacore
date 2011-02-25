@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema 
+<xs:schema id="nuspec"
     elementFormDefault="qualified"
     xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
     xmlns:mstns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
