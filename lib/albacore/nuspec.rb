@@ -1,6 +1,5 @@
 require 'albacore/albacoretask'
 require 'rexml/document'
-include REXML
 
 class NuspecFile
   def initialize(src, target) 
