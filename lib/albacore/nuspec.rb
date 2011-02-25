@@ -71,8 +71,13 @@ class Nuspec
 
   def build(document)
     document << REXML::XMLDecl.new
+
     package = document.add_element('package')
+    package.add_attribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
+    package.add_attribute("xmlns:xsd", "http://www.w3.org/2001/XMLSchema")
+
     metadata = package.add_element('metadata')
+    
     metadata.add_element('id').add_text(@id)
     metadata.add_element('version').add_text(@version)
     metadata.add_element('authors').add_text(@authors)

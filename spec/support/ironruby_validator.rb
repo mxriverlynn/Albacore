@@ -4,9 +4,10 @@ class XmlValidator
 
   include System::Xml
   include System::Xml::Schema
-  include System::IO
 
-  def self.validate(xml, xsd_file)
+  def self.validate(xml_file, xsd_file)
+    xml = File.read(xml_file)
+
     settings = XmlReaderSettings.new
     settings.validation_type = ValidationType.Schema;
     settings.schemas.add(nil, xsd_file)
@@ -16,7 +17,7 @@ class XmlValidator
       is_valid = false if e.severity == XmlSeverityType.error
     }
 
-    reader = XmlReader.create(StringReader.new(xml), settings)
+    reader = XmlReader.create(System::IO::StringReader.new(xml), settings)
     while reader.read
     end
 
