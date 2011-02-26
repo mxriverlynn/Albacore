@@ -17,6 +17,7 @@ _ReSharper.*
 *.tmp
 *.eprj
 *.bkp
+Gemfile.lock
 /coverage.xml
 spec/support/AssemblyInfo/AssemblyInfo.cs
 spec/support/AssemblyInfo/AssemblyInfo.*
