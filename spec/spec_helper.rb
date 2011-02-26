@@ -15,5 +15,3 @@ require 'lib/albacore/config/config.rb'
 require 'lib/albacore'
 require 'system_patch'
 require 'fail_patch'
-
-IS_IRONRUBY = (defined?(RUBY_ENGINE) && RUBY_ENGINE == "ironruby")
