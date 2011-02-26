@@ -120,6 +120,11 @@ namespace :specs do
     t.spec_opts << @spec_opts
   end
     
+  desc "NChurn functional specs"
+  Spec::Rake::SpecTask.new :nchurn do |t|
+    t.spec_files = FileList['spec/nchurn*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
 end
 
 namespace :albacore do  
