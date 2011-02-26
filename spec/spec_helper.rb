@@ -13,12 +13,7 @@ require 'rake/tasklib'
 require 'lib/albacore/support/createtask.rb'
 require 'lib/albacore/config/config.rb'
 require 'lib/albacore'
-require 'not_a_mock'
 require 'system_patch'
 require 'fail_patch'
-
-Spec::Runner.configure do |config|
-  config.mock_with NotAMock::RspecMockFrameworkAdapter
-end
 
 IS_IRONRUBY = (defined?(RUBY_ENGINE) && RUBY_ENGINE == "ironruby")
