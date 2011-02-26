@@ -31,7 +31,7 @@ class AssemblyInfo
     asm_data = build_assembly_info_data
 
     @logger.info "Generating Assembly Info File At: " + File.expand_path(assemblyinfo_file)
-    File.open(assemblyinfo_file, 'w') do |f|      
+    File.open(assemblyinfo_file, 'w:UTF-8') do |f|      
       f.write asm_data
     end
   end
