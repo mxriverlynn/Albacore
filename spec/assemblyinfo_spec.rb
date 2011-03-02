@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 require 'assemblyinfotester'
 require 'albacore/assemblyinfo'
@@ -9,13 +10,11 @@ describe AssemblyInfo, "when generating fields with unicode characters" do
     
     asm.copyright = "A Test Copyright ©2011 Something Something Something."
     
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
     @filedata = @tester.build_and_read_assemblyinfo_file asm
   end
 
   it "should generate the character correctly" do
-    @filedata.downcase.should include("�")
+    @filedata.downcase.should include("©")
   end
 end
 

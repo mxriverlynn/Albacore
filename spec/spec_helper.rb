@@ -1,3 +1,4 @@
+# encoding: UTF-8
 @root_dir = File.expand_path(File.join(File.dirname(__FILE__), "../"))
 
 $: << './'

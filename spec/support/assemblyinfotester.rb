@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'albacore/assemblyinfo'
 
 class AssemblyInfoTester < AssemblyInfo
@@ -20,7 +21,7 @@ class AssemblyInfoTester < AssemblyInfo
   def setup_assemblyinfo_file
     @lang_engine = CSharpEngine.new unless check_lang_engine
 
-    @assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.test")
+    @assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.test") unless @assemblyinfo_file
     File.delete @assemblyinfo_file if File.exist? @assemblyinfo_file
   end
   
@@ -31,7 +32,7 @@ class AssemblyInfoTester < AssemblyInfo
     assemblyinfo.execute
 
     contents = ''
-    File.open(@assemblyinfo_file, "r") do |f|
+    File.open(@assemblyinfo_file, "r:UTF-8") do |f|
         contents = f.read
     end
     contents    
