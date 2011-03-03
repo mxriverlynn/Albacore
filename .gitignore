@@ -18,6 +18,7 @@ _ReSharper.*
 *.eprj
 *.bkp
 Gemfile.lock
+nchurn-test.txt
 /coverage.xml
 spec/support/AssemblyInfo/AssemblyInfo.cs
 spec/support/AssemblyInfo/AssemblyInfo.*
