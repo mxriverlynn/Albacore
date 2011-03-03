@@ -19,6 +19,10 @@ class AssemblyInfo
     super()
     update_attributes Albacore.configuration.assemblyinfo.to_hash
   end
+
+  def use(file)
+    @input_file = @output_file = file
+  end
   
   def execute
     @lang_engine = CSharpEngine.new unless check_lang_engine
@@ -44,9 +48,9 @@ class AssemblyInfo
     data = []
     return data if file.nil?
 
-    File.open(file, 'r') do |f|
-        f.each_line do |l|
-            data << l.strip
+    File.open(file, 'r') do |file|
+        file.each_line do |line|
+            data << line.strip
         end
     end
 
