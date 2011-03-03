@@ -514,6 +514,8 @@ describe AssemblyInfo, "when an input file is provided" do
        asm.version = @tester.version
        asm.file_version = @tester.file_version
 
+       asm.custom_data "// foo", "// baz"
+
        # make it use existing file
        @tester.use_input_file
        
@@ -526,5 +528,14 @@ describe AssemblyInfo, "when an input file is provided" do
     end
     it "shoud leave comment untouched" do
        @filedata.scan(%Q|// A comment we want to see maintained|).length.should == 1
+    end
+    it "should introduce a new fileversion attribute" do
+       @filedata.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
+    end
+    it "should still leave custom data that's already in there intact" do
+       @filedata.scan(%Q|// foo|).length.should == 1
+    end
+    it "should add custom data that's still missing" do
+       @filedata.scan(%Q|// baz|).length.should == 1
     end
 end

@@ -46,7 +46,7 @@ class AssemblyInfo
 
     File.open(file, 'r') do |f|
         f.each_line do |l|
-            data << l
+            data << l.strip
         end
     end
 
@@ -90,7 +90,9 @@ class AssemblyInfo
     end
 
     if @custom_data != nil
-      @custom_data.each{|cdata| data << cdata }
+      @custom_data.each do |cdata| 
+        data << cdata unless data.include? cdata
+      end
     end
     
     data

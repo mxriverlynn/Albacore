@@ -5,3 +5,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Albacore")]
 [assembly: AssemblyVersion("0.2.2.0")]
 
+// foo
