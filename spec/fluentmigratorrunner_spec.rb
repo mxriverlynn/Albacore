@@ -110,7 +110,7 @@ describe FluentMigratorRunner, "the command line string for an fluentmigrator ru
   end
   
   it "includes the command parameters" do
-    @command_line.should include(@command_parameters)
+    @command_line.downcase.should include(@command_parameters.downcase)
   end
 end
 

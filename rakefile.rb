@@ -11,7 +11,9 @@ namespace :specs do
 
   desc "Run all specs for albacore"
   Spec::Rake::SpecTask.new :all do |t|
-    t.spec_files = FileList['spec/**/*_spec.rb']
+    t.spec_files = FileList['spec/**/*_spec.rb'].exclude{ |f| 
+      f if IS_IRONRUBY && (f.include?("zip")) 
+    }
     t.spec_opts << @spec_opts
   end
   
