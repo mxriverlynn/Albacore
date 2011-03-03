@@ -1,0 +1,20 @@
+---
+layout: post
+title: "v0.2.3 Release Notes: Nuget Tasks And More!"
+---
+
+Albacore v0.2.3 has been pushed up to RubyGems.org. It contains a handful of new tasks, including support for building and packaging Nuget packages! 
+
+Rather than take the time to spell out all of the details of each task in one long blog post, though, I'm only going to give a list of the things that have been done in this release. For details on the new and modified tasks, please check out the ["albacore wiki":http://github.com/derickbailey/Albacore/wiki]. The wiki pages are still in progress for some of the tasks and changes. Please check back often and contribute your own changes to them.
+
+h2. What has changed
+
+* Nuspec task: generate .nuspec file that can be packaged with ...
+* Nupack task: package your .nuspec files into .nuget packages
+* Fluent Migrator task: run FluentMigrator database migrations
+* NChurn task: run the NChurn project against your code
+* Output: a consolidation of common output tasks, such as file copying and template expansion
+* CSC task: add "/main" option
+* SQLCmd task: fixed various bugs and have it search x86 for standard program files for sqlcmd.exe
+
+If you would like to see a more detailed list of everything that changed in each of these items, check out the ["albacore closed issues":https://github.com/derickbailey/Albacore/issues/closed] list and look for the v0.2.3 tag.
