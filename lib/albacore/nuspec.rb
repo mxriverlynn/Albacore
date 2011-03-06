@@ -10,7 +10,7 @@ class NuspecFile
   def render(xml) 
     depend = xml.add_element 'file', { 'src' => @src }
     
-    depend.add_attribute( 'target', @target ) if @target.to_s == 0
+    depend.add_attribute( 'target', @target ) unless @target.nil?
   end
 end
 
