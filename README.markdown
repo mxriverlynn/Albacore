@@ -80,20 +80,25 @@ Anyone can fork the main repository and submit patches, as well. And lastly, the
 Many thanks for contributions to albacore are due (in alphabetical order):
 
 * [Andreone](http://github.com/Andreone): Significant Wiki contributions, questions and contributions on the google group
+* [Andrew Vos](http://github.com/AndrewVos): Fixes and additions to SQLCmd task
 * [Ben Hall](http://github.com/benhall): Primary contributor. SSH, SFTP, ZipDirectory, Rename, YAML auto config, Wiki pages, and many other great additions
 * [Brett Veenstra](http://github.com/brettveenstra): SQLCmd options (truted connection, batch abort), etc
 * [Brian Donahue](http://github.com/briandonahue): Inspiration and initial code for the ExpandTemplates task
-* [Tobias Grimm](http://github.com/e-tobi): AssemblyInfo custom_data, working directory code refactoring, relative project paths for executables
-* [Hernan Garcia](http://github.com/hgarcia/): Specflow Report task
+* [Dotan Nahum](http://github.com/jondot): NChurn task, Output task
+* [Hernan Garcia](http://github.com/hgarcia): Specflow Report task
 * [Hibri Marzook](http://github.com/hibri): PLink (deprecated) and NDepend tasks
 * [James Gregory](http://github.com/jagregory): Docu task, zip task contributions
 * [Kevin Colyar](http://github.com/kevincolyar): Testing and updating of MSBuild to work with Cygwin
 * [Louis Salin](http://github.com/louissalin): Support for *nix path separators in CSC task
+* [Mark Boltuc](http://github.com/mboltuc): Fluent Migrator task
 * [Mark Wilkins](http://github.com/markwilk): VB.NET Language Generator For The AssemblyInfo Task
 * [Mike Nichols](http://github.com/mnichols): XUnit contributions, bug reports, etc
+* [Nathan Fisher](:http://github.com/nfisher): additions to CSC task
 * [Nils Jonsson](http://github.com/njonsson): AssemblyInfo corrections, rakefile corrections
-* [Prabir Shrestha](http://github.com/prabirshrestha): Bug fixes for xunit test runner, etc.
+* [Prabir Shrestha](http://github.com/prabirshrestha): Nupack task, bug fixes for xunit test runner, etc.
+* [Panda Wood](http://github.com/pandawood): NCover Console options and wiki edits
 * [Sean Biefeld](http://github.com/seanbiefeld): MSpecTestRunner for NCoverConsole
 * [Steven Harman](http://github.com/stevenharman): Primary contributor. Nant task, issue tickets, disucssions, and much much more.
+* [Steve Hebert](http://github.com/stevehebert): Nuspec task
 * [Steven Johnson](http://github.com/2020steve): Expand Templates (deprecated task) supplimental data, etc
-* [Panda Wood](http://github.com/pandawood): NCover Console options and wiki edits
+* [Tobias Grimm](http://github.com/e-tobi): AssemblyInfo custom_data, working directory code refactoring, relative project paths for executables
