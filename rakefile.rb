@@ -134,13 +134,14 @@ namespace :albacore do
 
   desc "Run a complete Albacore build sample"
   task :sample => ['albacore:assemblyinfo',
-                     'albacore:msbuild',
-                     'albacore:ncoverconsole',
-                     'albacore:ncoverreport',
-                     'albacore:mspec',
-                     'albacore:nunit',
-                     'albacore:xunit',
-										 'albacore:fluentmigrator']
+                   'albacore:assemblyinfo_modify',
+                   'albacore:msbuild',
+                   'albacore:ncoverconsole',
+                   'albacore:ncoverreport',
+                   'albacore:mspec',
+                   'albacore:nunit',
+                   'albacore:xunit',
+                   'albacore:fluentmigrator']
   
   desc "Run a sample MSBuild with YAML autoconfig"
   msbuild :msbuild
@@ -156,6 +157,19 @@ namespace :albacore do
     asm.custom_attributes :SomeAttribute => "some value goes here", :AnotherAttribute => "with some data"
     
     asm.output_file = "spec/support/AssemblyInfo/AssemblyInfo.cs"
+  end
+
+  desc "Run a sample assembly info modifier"
+  assemblyinfo :assemblyinfo_modify do|asm|
+    # modify existing
+    asm.version = "0.1.2.3"
+    asm.company_name = "a test company"
+
+    # new attribute
+    asm.file_version = "4.5.6.7"
+
+    asm.input_file = "spec/support/AssemblyInfo/AssemblyInfoInput.test"
+    asm.output_file = "spec/support/AssemblyInfo/AssemblyInfoOutput.cs"
   end
   
   desc "Run a sample NCover Console code coverage"
