@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{albacore}
-  s.version = "0.2.3"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Derick Bailey", "Ben Hall", "Steve Harman", "etc"]
-  s.date = %q{2011-03-03}
+  s.date = %q{2011-03-06}
   s.description = %q{Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks.}
   s.email = %q{derickbailey@gmail.com}
   s.extra_rdoc_files = [
