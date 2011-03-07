@@ -1,0 +1,18 @@
+---
+layout: post
+title: "v0.2.4 Release Notes: Nuspec bug, Assemblyinfo, and last release to support Ruby 1.8.6 and Ruby 1.9.1"
+---
+
+Albacore v0.2.4 has been pushed up to RubyGems.org. It contains no new tasks, but has a significant bug fix for the Nuspec task and an addition to the AssemblyInfo task.
+
+h2. Nuspec file targets
+
+There was a bug in the nuspec task that prevented file targets from being set. This has been corrected. Now when you add a file and specify a target folder, the target will be set correctly in the resulting .nuspec file.
+
+h2. Assembly Info
+
+The assemblyinfo task has been updated so that it can read and modify an existing assembly info file. You no longer need to generate the entire file from scratch.
+
+h2. Final Release With Ruby 1.8.6 And Ruby 1.9.1 Support
+
+The RubyInstaller.org team has ["dropped support for Ruby 1.8.6 and Ruby 1.9.1":http://groups.google.com/group/rubyinstaller/browse_thread/thread/d0a85c150c53790d/aca4a122cd882ab8]. You will no longer find those releases on their website. With this happening, we felt it was time to drop support for these two versions in Albacore as well. v0.2.4 will be the final release that officially supports Ruby Installer v1.8.6 and v1.9.1. This does not mean that albacore will instantly stop working on these versions. It does mean that as new features, new tasks, bug fixes, etc. are added, we will no longer be testing those changes against these versions. Dropping support for these versions will allow us to move forward with better code, internally, as well.
