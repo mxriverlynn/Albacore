@@ -3,9 +3,8 @@ require 'albacore/mstesttestrunner'
 
 shared_examples_for "mstest paths" do
   before :all do
-    @mstestpath = 'mstest.exe'
-    @test_assembly = 'Passing.dll'
-    @failing_test_assembly = "Failing.dll"
+    @mstestpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'MSTest-2008', 'mstest.exe')
+    @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'mstest', 'TestSolution.MSTestTests.dll')
     @test_option = "/test:Test"
   end
 end
@@ -15,8 +14,9 @@ describe MSTestTestRunner, "the command parameters for an mstest runner" do
 
   before :all do
     mstest = MSTestTestRunner.new(@mstestpath)
-    mstest.assemblies @test_assembly, @failing_test_assembly
+    mstest.assemblies @test_assembly
     mstest.options @test_option
+    mstest.tests 'APassingTest', 'AFailingTest'
     
     @command_parameters = mstest.get_command_parameters
   end
@@ -26,7 +26,11 @@ describe MSTestTestRunner, "the command parameters for an mstest runner" do
   end
   
   it "should include the list of assemblies" do
-    @command_parameters.should include("/testcontainer:\"#{@test_assembly}\" /testcontainer:\"#{@failing_test_assembly}\"")
+    @command_parameters.should include("/testcontainer:\"#{@test_assembly}\"")
+  end
+
+  it "should include the specific set of tests" do
+    @command_parameters.should include("/test:APassingTest /test:AFailingTest")
   end
   
   it "should include the list of options" do
@@ -62,13 +66,30 @@ describe MSTestTestRunner, "when configured correctly" do
     mstest = MSTestTestRunner.new(@mstestpath)
     mstest.extend(FailPatch)
     mstest.assemblies @test_assembly
-    mstest.options '/noshadow'
-    
+    mstest.log_level = :verbose
+    mstest.tests "APassingTest"
     mstest.execute
   end
   
   it "should execute" do
     $task_failed.should be_false
+  end
+end
+
+describe MSTestTestRunner, "when configured correctly, but a test fails" do
+  it_should_behave_like "mstest paths"
+
+  before :all do
+    mstest = MSTestTestRunner.new(@mstestpath)
+    mstest.extend(FailPatch)
+    mstest.assemblies @test_assembly
+    mstest.log_level = :verbose
+    mstest.tests "AFailingTest"
+    mstest.execute
+  end
+
+  it "should fail" do
+    $task_failed.should be_true
   end
 end
 

@@ -147,6 +147,7 @@ namespace :albacore do
                    'albacore:mspec',
                    'albacore:nunit',
                    'albacore:xunit',
+                   'albacore:mstest',
                    'albacore:fluentmigrator']
   
   desc "Run a sample MSBuild with YAML autoconfig"
@@ -237,6 +238,12 @@ namespace :albacore do
   nunit do |nunit|
     nunit.command = "spec/support/Tools/NUnit-v2.5/nunit-console.exe"
     nunit.assemblies "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
+  end
+
+  desc "MSTest Test Runner Example"
+  mstest do |mstest|
+    mstest.command = "spec/support/Tools/MSTest-2008/mstest.exe"
+    mstest.assemblies "spec/support/CodeCoverage/mstest/TestSolution.MsTestTests.dll"
   end
 
   desc "XUnit Test Runner Example"

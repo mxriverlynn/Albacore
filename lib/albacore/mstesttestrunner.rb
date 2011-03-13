@@ -5,11 +5,12 @@ class MSTestTestRunner
   include Albacore::Task
   include Albacore::RunCommand
   
-  attr_array :assemblies, :options
+  attr_array :assemblies, :tests, :options
   
   def initialize(command=nil)
     @options=[]
     @assemblies=[]
+    @tests=[]
     super()
     update_attributes Albacore.configuration.mstest.to_hash
     @command = command unless command.nil?
@@ -28,6 +29,7 @@ class MSTestTestRunner
     command_params = []
     command_params << @options.join(" ") unless @options.nil?
     command_params << @assemblies.map{|asm| "/testcontainer:\"#{asm}\""}.join(' ') unless @assemblies.nil?
+    command_params << @tests.map{|test| "/test:#{test}"}.join(' ') unless @tests.nil?
     command_params
   end
   
