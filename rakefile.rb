@@ -83,6 +83,12 @@ namespace :specs do
     t.spec_opts << @spec_opts
   end
 
+  desc "MSTest functional specs"
+  Spec::Rake::SpecTask.new :mstest do |t|
+    t.spec_files = FileList['spec/mstest*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+
   desc "MSpec functional specs"
   Spec::Rake::SpecTask.new :mspec do |t|
     t.spec_files = FileList['spec/mspec*_spec.rb']
