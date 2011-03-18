@@ -312,3 +312,23 @@ describe SQLCmd, "when providing configuration" do
     sqlcmd.command.should == "configured"
   end
 end
+
+describe SQLCmd, "when severity it set" do
+  before :all do
+    @cmd = SQLCmd.new
+    @cmd.extend(SystemPatch)
+    @cmd.disable_system = true
+    @cmd.scripts "somescript.sql"
+
+    @cmd.severity = 1
+    
+    @cmd.execute
+  end
+
+  it "should have severity option set" do
+    @cmd.system_command.should include("-V")
+  end
+  it "should have severity set to correct file" do
+    @cmd.system_command.should include("-V \"1\"")
+  end
+end    
