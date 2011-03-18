@@ -328,7 +328,7 @@ describe SQLCmd, "when severity it set" do
   it "should have severity option set" do
     @cmd.system_command.should include("-V")
   end
-  it "should have severity set to correct file" do
+  it "should have severity set to correct value" do
     @cmd.system_command.should include("-V \"1\"")
   end
 end    
