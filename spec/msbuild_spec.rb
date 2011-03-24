@@ -9,7 +9,7 @@ shared_examples_for "prepping msbuild" do
     @msbuild = @testdata.msbuild
     @strio = StringIO.new
     @msbuild.log_device = @strio
-    @msbuild.log_level = :verbose
+    @msbuild.log_level = :diagnostic
  end
 end
 
@@ -194,3 +194,22 @@ describe MSBuild, "when specifying multiple configuration properties" do
     File.exist?(@testdata.output_path).should == true
   end
 end
+
+describe MSBuild, "when specifying a loggermodule" do  
+  it_should_behave_like "prepping msbuild"
+  
+  before :all do
+    @msbuild.solution = @testdata.solution_path
+    @msbuild.loggermodule = "FileLogger,Microsoft.Build.Engine;logfile=MyLog.log"
+    @msbuild.execute
+    
+    @log_data = @strio.string
+  end
+
+  it "should log the msbuild logger being used" do
+    puts @msbuild.system_command
+    @msbuild.system_command.should include("/logger:FileLogger,Microsoft.Build.Engine;logfile=MyLog.log")
+  end
+end
+
+
