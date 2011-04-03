@@ -50,6 +50,7 @@ describe Nuspec do
       nuspec = Nuspec.new
       nuspec.id="nuspec_test"
       nuspec.output_file = "nuspec_test.nuspec"
+      nuspec.title = "Title"
       nuspec.version = "1.2.3"
       nuspec.authors = "Author Name"
       nuspec.description = "test_xml_document"
