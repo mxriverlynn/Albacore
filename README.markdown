@@ -1,79 +1,16 @@
 # Welcome to the albacore project.
 
-albacore is a professional quality suite of Rake tasks to help automate the process of building a .NET based system. 
-
-## How To Install albacore:
-
-If you would like to install the current, stable release of albacore, you can do so easily through the standard RubyGems.org server. Follow these simple instructions and you will be good to go.
-
-> gem install albacore
-
-That's it! You're now equiped with everything you need to get up and running with albacore!
-
-## How To Manually Build And Install The albacore Gem
-
-If you would like to install the latest source code for albacore, and get all the new features and functionality (possibly in an unstable form), you can manually build and install the albacore gem. Follow these simple instructions and you will be good to go.
-
-**Step 1:** Clone albacore
-
-Use your Github account to fork albacore, or clone it directly from my public clone URL.
-
-> git clone git://github.com/derickbailey/albacore.git albacore
-
-**Step 2:** Install Required Dependencies
-
-You will need the Bundler gem installed, to install the other albacore dependencies
-
-> gem install bundler
-
-In your local clone of albacore, run bundler
-
-> bundle install
-
-This will install all of the gem dependencies that you need to build the albacore gem and add your own contributions to albacore.
-
-**Step 3:** Build the gem
-
-In your local clone of albacore, use the jeweler rake tasks to build the latest version of the albacore code into a gem.
-
-> rake jeweler:gemspec jeweler:build
-
-this will produce an 'albacore-#.#.#.gem' file in the 'pkg' folder, where '#.#.#' is the version number. For example 'albacore-0.1.2.gem'.
-
-**Step 4:** Install the gem
-
-After building the gem, you can install it from your local file system.
-
-> gem install -l pkg/albacore-#.#.#.gem
-
-where '#.#.#' is the version number of the gem. For example 'albacore-0.1.2.gem'
+albacore is a suite of Rake tasks to automate the process of building a .NET based system. It's like MSBuild or Nant... but without all the stabby-bracket xmlhell.
 
 ## How To Use albacore
 
-On systems do not have the "RUBYOPT" environment variable set to automatically include rubygems, you may need to add
+Check out the [albacore Wiki](http://wiki.github.com/derickbailey/albacore) for detailed instructions on how to use the built in tasks and their options. 
 
-    require 'rubygems'
-
-to the top of your rakefile. Then, you can add
-
-    require 'albacore'
-
-to your rakefile. This will allow you to use the tasks that albacore includes.  
-
-    desc "Run a sample build using the MSBuild Task"
-    msbuild do |msb|
-        msb.properties :configuration => :Debug
-        msb.targets :Clean, :Build
-        msb.solution = "spec/support/TestSolution/TestSolution.sln"
-    end
-
-Beyond the simple example, check out the [albacore Wiki](http://wiki.github.com/derickbailey/albacore) for detailed instructions on how to use the built in tasks and their options.
+If you are new to Ruby and Rake, head over to the [getting started](https://github.com/derickbailey/Albacore/wiki/Getting-Started) wiki page.
 
 ## How To Contribute, Collaborate, Communicate
 
-If you'd like to get involved with the albacore framework, we have a discussion group over at google: **[AlbacoreDev](http://groups.google.com/group/albacoredev)**
-
-Anyone can fork the main repository and submit patches, as well. And lastly, the [wiki](http://wiki.github.com/derickbailey/albacore) and [issues list](http://github.com/derickbailey/albacore/issues) are also open for additions, edits, and discussion.
+See the wiki page for [contributing to albacore](https://github.com/derickbailey/Albacore/wiki/HowToContribute)
 
 ## Contributors
 
@@ -104,4 +41,28 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 * [Steve Hebert](http://github.com/stevehebert): Nuspec task
 * [Steven Johnson](http://github.com/2020steve): Expand Templates (deprecated task) supplimental data, etc
 * [thomasvm](http://github.com/thomasvm): AssemblyInfo read / update existing file, MSSql additions
-* [Tobias Grimm](http://github.com/e-tobi): AssemblyInfo custom_data, working directory code refactoring, relative project paths for executables
+* [Tobias Grimm](http://github.com/e-tobi): AssemblyInfo custom\_data, working directory code refactoring, relative project paths for executables
+
+And to anyone and everyone else who has contributed in any way, to the mailing list, spreading the word, blog posts, etc: thank you!
+
+## Legal Mumbo Jumbo (MIT License)
+
+Copyright (c) 2011 Derick Bailey
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
