@@ -17,6 +17,7 @@ _ReSharper.*
 *.tmp
 *.eprj
 *.bkp
+MyLog.log
 Gemfile.lock
 nchurn-test.txt
 /coverage.xml
