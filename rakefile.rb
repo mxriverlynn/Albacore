@@ -283,9 +283,9 @@ namespace :jeweler do
     gs.name = "albacore"
     gs.summary = "Dolphin-Safe Rake Tasks For .NET Systems"
     gs.description = "Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks."
-    gs.email = "derickbailey@gmail.com"
+    gs.email = "albacorebuild@gmail.com"
     gs.homepage = "http://albacorebuild.net"
-    gs.authors = ["Derick Bailey", "Ben Hall", "Steve Harman", "etc"]
+    gs.authors = ["Derick Bailey", "etc"]
     gs.has_rdoc = false  
     gs.files.exclude(
       "albacore.gemspec", 

@@ -84,12 +84,14 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 * [Ben Hall](http://github.com/benhall): Primary contributor. SSH, SFTP, ZipDirectory, Rename, YAML auto config, Wiki pages, and many other great additions
 * [Brett Veenstra](http://github.com/brettveenstra): SQLCmd options (truted connection, batch abort), etc
 * [Brian Donahue](http://github.com/briandonahue): Inspiration and initial code for the ExpandTemplates task
-* [Dotan Nahum](http://github.com/jondot): NChurn task, Output task
+* [ChrisAnn](http://github.com/ChrisAnn): MSBuild logger module settings
+* [Chris Geihsler](http://github.com/geihsler): MSTest task
+* [Dotan Nahum](http://github.com/jondot): NChurn task, Output task, wiki updates, etc
 * [Hernan Garcia](http://github.com/hgarcia): Specflow Report task
 * [Hibri Marzook](http://github.com/hibri): PLink (deprecated) and NDepend tasks
-* [James Gregory](http://github.com/jagregory): Docu task, zip task contributions
+* [James Gregory](http://github.com/jagregory): Docu task, zip task contributions, nuspec contributions, etc
 * [Kevin Colyar](http://github.com/kevincolyar): Testing and updating of MSBuild to work with Cygwin
-* [Louis Salin](http://github.com/louissalin): Support for *nix path separators in CSC task
+* [Louis Salin](http://github.com/louissalin): Support for nix path separators in CSC task
 * [Mark Boltuc](http://github.com/mboltuc): Fluent Migrator task
 * [Mark Wilkins](http://github.com/markwilk): VB.NET Language Generator For The AssemblyInfo Task
 * [Mike Nichols](http://github.com/mnichols): XUnit contributions, bug reports, etc
@@ -101,4 +103,5 @@ Many thanks for contributions to albacore are due (in alphabetical order):
 * [Steven Harman](http://github.com/stevenharman): Primary contributor. Nant task, issue tickets, disucssions, and much much more.
 * [Steve Hebert](http://github.com/stevehebert): Nuspec task
 * [Steven Johnson](http://github.com/2020steve): Expand Templates (deprecated task) supplimental data, etc
+* [thomasvm](http://github.com/thomasvm): AssemblyInfo read / update existing file, MSSql additions
 * [Tobias Grimm](http://github.com/e-tobi): AssemblyInfo custom_data, working directory code refactoring, relative project paths for executables
