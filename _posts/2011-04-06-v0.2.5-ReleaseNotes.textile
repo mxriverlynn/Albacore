@@ -1,0 +1,23 @@
+---
+layout: post
+title: "v0.2.5 Release Notes: MSTest, Nuspec, Output, MSBuild, SQLCmd
+---
+
+Albacore v0.2.5 has been pushed up to RubyGems.org. It contains one new task, mstest, and several additions and bug fixes for other tasks.
+
+h2. MSTest
+
+There have been a lot of requests for this task, and it's finally here thanks to Chris Geihsler! Check out the ["MSTest Task":https://github.com/derickbailey/Albacore/wiki/MSTest-Task] wiki page for documentation on how to use it.
+
+h2. Additions And Bug Fixes
+
+Several tasks have a few additions:
+
+* Nuspec now has a .title attribute, to specify the title of your package. The title is uses by nuget.org and other package repositories.
+* The Output task has a fix to require fileutils correctly
+* MSBuild has a new .loggermodule attribute to specify a logger
+* SQLCmd has a .severity option, now
+
+h2. No Longer Tested With Ruby 1.8.6 Or Ruby 1.9.1
+
+As stated in the previous release, we are no longer testing albacore against Ruby 1.8.6 or 1.9.1, from ["RubyInstaller.org":http://rubyinstaller.org]. Again, this does not mean that albacore will not work - only that we will not be fixing any bugs that arise due to these specific versions of ruby. You are encouraged to upgrade to ruby 1.8.7 or better yet, 1.9.2.
