@@ -28,6 +28,20 @@ class NuspecDependency
   end
 end
 
+class NuspecFrameworkAssembly
+
+  attr_accessor :name, :target_framework
+
+  def initialize(name, target_framework)
+    @name = name
+    @target_framework = target_framework
+  end
+
+  def render( xml )
+    depend = xml.add_element 'frameworkAssembly', {'assemblyName' => @name, 'targetFramework' => @target_framework}
+  end
+end
+
 class Nuspec
   include Albacore::Task
   
@@ -46,6 +60,10 @@ class Nuspec
   
   def file(src, target=nil)
     @files.push NuspecFile.new(src, target)
+  end
+
+  def framework_assembly(name, target_framework)
+    @frameworkAssemblies.push NuspecFrameworkAssembly.new(name, target_framework)
   end
   
   def execute
@@ -99,6 +117,11 @@ class Nuspec
     if @files.length > 0
       files = package.add_element('files')
       @files.each {|x| x.render(files)}
+    end
+	
+    if @frameworkAssemblies.length > 0
+       depend = metadata.add_element('frameworkAssemblies')
+       @frameworkAssemblies.each {|x| x.render(depend)}
     end
   end
 
