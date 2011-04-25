@@ -47,10 +47,10 @@ class Nuspec
   
   attr_accessor :id, :version, :title, :authors, :description, :language, :licenseUrl, :projectUrl, :output_file,
                 :owners, :summary, :iconUrl, :requireLicenseAcceptance, :tags, :working_directory
-				
+
   def initialize()
-	@dependencies = Array.new
-	@files = Array.new
+    @dependencies = Array.new
+    @files = Array.new
     @frameworkAssemblies = Array.new
     super()
   end
