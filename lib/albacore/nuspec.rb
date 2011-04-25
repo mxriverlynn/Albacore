@@ -51,6 +51,7 @@ class Nuspec
   def initialize()
 	@dependencies = Array.new
 	@files = Array.new
+    @frameworkAssemblies = Array.new
     super()
   end
 
