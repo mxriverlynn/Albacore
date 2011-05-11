@@ -40,12 +40,13 @@ describe FluentMigratorRunner, "the command parameters for an migrator runner" d
   context "Optional options" do
     before :all do
       @migrator.namespace = 'namespace'
-      @migrator.output = 'output.txt'
-      @migrator.preview = 1
+      @migrator.output = true
+      @migrator.output_filename = "output.txt"
+      @migrator.preview = true
       @migrator.steps = 1
       @migrator.task = 'migrate:up'
       @migrator.version = '001'
-      @migrator.verbose = 1
+      @migrator.verbose = true
       @migrator.script_directory = 'c:\scripts'
       @migrator.profile = 'MyProfile'
       @migrator.timeout = 90
@@ -56,9 +57,13 @@ describe FluentMigratorRunner, "the command parameters for an migrator runner" d
       @command_parameters.should include('/ns')
     end
 
-    it "includes ouy" do
+    it "includes out" do
       @command_parameters.should include('/out')
     end
+
+    it "includes outfile" do
+      @command_parameters.should include('/outfile')
+    end 
 
     it "includes preview" do
       @command_parameters.should include('/preview')
@@ -90,6 +95,70 @@ describe FluentMigratorRunner, "the command parameters for an migrator runner" d
 
     it "includes timeout" do
       @command_parameters.should include('/timeout')
+    end
+    
+    it "excludes help" do
+      @command_parameters.should_not include("/?")
+    end
+  end
+  
+  context "Help option" do
+    it "includes help flag when specifed" do
+      @migrator.show_help = true
+      command_parameters = @migrator.get_command_parameters
+      command_parameters.should == " /?"
+    end
+
+    it "excludes help flag when not specifed" do
+      @migrator.show_help = false
+      command_parameters = @migrator.get_command_parameters
+      command_parameters.should_not include "/?"
+    end
+  end
+
+  context "Boolean options" do
+    before :all do
+      @migrator.output = false
+      @migrator.preview = false
+      @migrator.verbose = false
+    end
+
+    it "includes /out when output is true" do
+      @migrator.output = true
+      @migrator.get_command_parameters.should include "/out"
+    end
+    
+    it "excludes /out when output not true" do
+      @migrator.output = false
+      @migrator.get_command_parameters.should_not include "/out"
+      @migrator.output = "a"
+      @migrator.get_command_parameters.should_not include "/out"
+    end
+
+    it "includes /preview when preview is true" do
+      @migrator.preview = true
+      @migrator.get_command_parameters.should include "/preview"
+    end
+
+    it "excludes /preview when preview is not true" do
+      @migrator.preview = false
+      @migrator.get_command_parameters.should_not include "/preview"
+
+      @migrator.preview = "a"
+      @migrator.get_command_parameters.should_not include "/preview"
+    end
+
+    it "includes /verbose when verbose is true" do
+      @migrator.verbose = true
+      @migrator.get_command_parameters.should include "/verbose=true"
+    end
+
+    it "excludes /verbose when verbose is not true" do
+      @migrator.verbose = false
+      @migrator.get_command_parameters.should_not include "/verbose="
+
+      @migrator.verbose = "a"
+      @migrator.get_command_parameters.should_not include "/verbose="
     end
   end
 end
