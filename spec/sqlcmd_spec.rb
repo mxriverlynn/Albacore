@@ -147,19 +147,39 @@ describe SQLCmd, "when running with no command path specified" do
     @cmd.extend(SystemPatch)
     @cmd.extend(FailPatch)
     @cmd.disable_system = true
-    
+
     @cmd.execute
     @log_data = strio.string
+
+    @all_possible_sqlcmd_paths = []
+
+    ["program files", "program files (x86)"].each do |program_files|
+      ["90", "100"].each do |sql_version|
+        sqlcmd_path = File.join(ENV['SystemDrive'], program_files,'microsoft sql server', sql_version, 'tools','binn', 'sqlcmd.exe')
+        @all_possible_sqlcmd_paths << sqlcmd_path
+      end
+    end
   end
-  
+
   it "should find sqlcmd in the standard places or bail" do
-	$task_failed.should be_false if (File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','100','tools','binn', 'sqlcmd.exe')))
-	$task_failed.should be_false if (File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','90','tools','binn', 'sqlcmd.exe')))
-	$task_failed.should be_true if ((!(File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','100','tools','binn', 'sqlcmd.exe')))) and (!(File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','90','tools','binn', 'sqlcmd.exe')))))
-	end
-  
+    any_sqlcmd_exists = false
+
+    @all_possible_sqlcmd_paths.each do |sqlcmd_path|
+      sqlcmd_exists = File.exists?(sqlcmd_path)
+      any_sqlcmd_exists = true if sqlcmd_exists
+      $task_failed.should be_false if sqlcmd_exists
+    end
+    $task_failed.should be_true if any_sqlcmd_exists == false
+  end
+
   it "should log a failure message if it cannot find sqlcmd in the standard places" do
-    @log_data.should include('SQLCmd.command cannot be nil.') if ((!(File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','100','tools','binn', 'sqlcmd.exe')))) and (!(File.exists?(File.join(ENV['SystemDrive'],'program files','microsoft sql server','90','tools','binn', 'sqlcmd.exe')))))
+    any_sqlcmd_exists = false
+
+    @all_possible_sqlcmd_paths.each do |sqlcmd_path|
+      sqlcmd_exists = File.exists?(sqlcmd_path)
+      any_sqlcmd_exists = true if File.exists?(sqlcmd_path)
+    end
+    @log_data.should include('SQLCmd.command cannot be nil.') if any_sqlcmd_exists == false
   end
 end
 
@@ -292,3 +312,23 @@ describe SQLCmd, "when providing configuration" do
     sqlcmd.command.should == "configured"
   end
 end
+
+describe SQLCmd, "when severity it set" do
+  before :all do
+    @cmd = SQLCmd.new
+    @cmd.extend(SystemPatch)
+    @cmd.disable_system = true
+    @cmd.scripts "somescript.sql"
+
+    @cmd.severity = 1
+    
+    @cmd.execute
+  end
+
+  it "should have severity option set" do
+    @cmd.system_command.should include("-V")
+  end
+  it "should have severity set to correct value" do
+    @cmd.system_command.should include("-V \"1\"")
+  end
+end    

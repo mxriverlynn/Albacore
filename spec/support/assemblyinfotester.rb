@@ -1,7 +1,7 @@
 require 'albacore/assemblyinfo'
 
 class AssemblyInfoTester < AssemblyInfo
-  
+ 
   attr_accessor :assemblyinfo_file
   
   def initialize(lang_engine = nil)
@@ -15,6 +15,8 @@ class AssemblyInfoTester < AssemblyInfo
     @product_name = "my product, yo."
     @file_version = "1.0.0.0"
     @trademark = "some trademark info goes here"
+
+    @input_file = nil
   end
   
   def setup_assemblyinfo_file
@@ -23,10 +25,15 @@ class AssemblyInfoTester < AssemblyInfo
     @assemblyinfo_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfo.test")
     File.delete @assemblyinfo_file if File.exist? @assemblyinfo_file
   end
+
+  def use_input_file
+    @input_file = File.join(File.dirname(__FILE__), "AssemblyInfo", "AssemblyInfoInput.test")
+  end
   
   def build_and_read_assemblyinfo_file(assemblyinfo)
     setup_assemblyinfo_file
 
+    assemblyinfo.input_file = @input_file unless @input_file.nil?
     assemblyinfo.output_file = @assemblyinfo_file
     assemblyinfo.execute
 

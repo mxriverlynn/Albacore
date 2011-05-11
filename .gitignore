@@ -17,6 +17,9 @@ _ReSharper.*
 *.tmp
 *.eprj
 *.bkp
+MyLog.log
+Gemfile.lock
+nchurn-test.txt
 /coverage.xml
 spec/support/AssemblyInfo/AssemblyInfo.cs
 spec/support/AssemblyInfo/AssemblyInfo.*
@@ -34,6 +37,7 @@ spec/support/expandtemplates/output
 spec/support/expandtemplates/working
 spec/support/TestSolution/NDependOut
 spec/support/zip/*.zip.*
+spec/support/nuspec/output
 github-test.rb
 Albacore-*.gem
 albacore-*.gem
@@ -45,3 +49,4 @@ temp
 unziptask
 /spec/support/Tools/NDepend-v2.12/NDependProLicense.xml
 specs.html
+TestResults

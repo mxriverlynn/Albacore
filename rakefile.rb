@@ -1,18 +1,18 @@
 $: << './'
 require 'lib/albacore'
+require 'version_bumper'
 
 task :default => ['albacore:sample']
 
 namespace :specs do
   require 'spec/rake/spectask'
-  runtime_is_ironruby = (!defined?(IRONRUBY_VERSION).nil?)
 
   @spec_opts = '--colour --format specdoc'
 
   desc "Run all specs for albacore"
   Spec::Rake::SpecTask.new :all do |t|
     t.spec_files = FileList['spec/**/*_spec.rb'].exclude{ |f| 
-      f if runtime_is_ironruby && (f.include?("ssh") || f.include?("sftp")) 
+      f if IS_IRONRUBY && (f.include?("zip")) 
     }
     t.spec_opts << @spec_opts
   end
@@ -83,6 +83,12 @@ namespace :specs do
     t.spec_opts << @spec_opts
   end
 
+  desc "MSTest functional specs"
+  Spec::Rake::SpecTask.new :mstest do |t|
+    t.spec_files = FileList['spec/mstest*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+
   desc "MSpec functional specs"
   Spec::Rake::SpecTask.new :mspec do |t|
     t.spec_files = FileList['spec/mspec*_spec.rb']
@@ -112,6 +118,18 @@ namespace :specs do
     t.spec_files = FileList['spec/fluentmigrator*_spec.rb']
     t.spec_opts << @spec_opts
   end	
+  
+  desc "Output functional specs"
+  Spec::Rake::SpecTask.new :output do |t|
+    t.spec_files = FileList['spec/output*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+    
+  desc "NChurn functional specs"
+  Spec::Rake::SpecTask.new :nchurn do |t|
+    t.spec_files = FileList['spec/nchurn*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
 end
 
 namespace :albacore do  
@@ -122,13 +140,15 @@ namespace :albacore do
 
   desc "Run a complete Albacore build sample"
   task :sample => ['albacore:assemblyinfo',
-                     'albacore:msbuild',
-                     'albacore:ncoverconsole',
-                     'albacore:ncoverreport',
-                     'albacore:mspec',
-                     'albacore:nunit',
-                     'albacore:xunit',
-										 'albacore:fluentmigrator']
+                   'albacore:assemblyinfo_modify',
+                   'albacore:msbuild',
+                   'albacore:ncoverconsole',
+                   'albacore:ncoverreport',
+                   'albacore:mspec',
+                   'albacore:nunit',
+                   'albacore:xunit',
+                   'albacore:mstest',
+                   'albacore:fluentmigrator']
   
   desc "Run a sample MSBuild with YAML autoconfig"
   msbuild :msbuild
@@ -144,6 +164,19 @@ namespace :albacore do
     asm.custom_attributes :SomeAttribute => "some value goes here", :AnotherAttribute => "with some data"
     
     asm.output_file = "spec/support/AssemblyInfo/AssemblyInfo.cs"
+  end
+
+  desc "Run a sample assembly info modifier"
+  assemblyinfo :assemblyinfo_modify do|asm|
+    # modify existing
+    asm.version = "0.1.2.3"
+    asm.company_name = "a test company"
+
+    # new attribute
+    asm.file_version = "4.5.6.7"
+
+    asm.input_file = "spec/support/AssemblyInfo/AssemblyInfoInput.test"
+    asm.output_file = "spec/support/AssemblyInfo/AssemblyInfoOutput.cs"
   end
   
   desc "Run a sample NCover Console code coverage"
@@ -207,6 +240,12 @@ namespace :albacore do
     nunit.assemblies "spec/support/CodeCoverage/nunit/assemblies/TestSolution.Tests.dll"
   end
 
+  desc "MSTest Test Runner Example"
+  mstest do |mstest|
+    mstest.command = "spec/support/Tools/MSTest-2008/mstest.exe"
+    mstest.assemblies "spec/support/CodeCoverage/mstest/TestSolution.MsTestTests.dll"
+  end
+
   desc "XUnit Test Runner Example"
   xunit do |xunit|
     xunit.command = "spec/support/Tools/XUnit-v1.5/xunit.console.exe"
@@ -244,9 +283,9 @@ namespace :jeweler do
     gs.name = "albacore"
     gs.summary = "Dolphin-Safe Rake Tasks For .NET Systems"
     gs.description = "Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks."
-    gs.email = "derickbailey@gmail.com"
+    gs.email = "albacorebuild@gmail.com"
     gs.homepage = "http://albacorebuild.net"
-    gs.authors = ["Derick Bailey", "Ben Hall", "Steve Harman", "etc"]
+    gs.authors = ["Derick Bailey", "etc"]
     gs.has_rdoc = false  
     gs.files.exclude(
       "albacore.gemspec", 
@@ -254,8 +293,5 @@ namespace :jeweler do
       "spec/",
       "pkg/"
     )
-
-    gs.add_dependency('rake', '>= 0.8.7')
-    gs.add_dependency('rubyzip', '>= 0.9.4')
   end
 end

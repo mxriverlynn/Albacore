@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="..\..\CodeCoverage\assemblies\TestSolution.Tests.dll" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2009-09-30" time="13:56:33">
-  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4927" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="D:\Dev\Derick-GitHub\Albacore\lib\spec\support\Tools\NUnit-v2.5" machine-name="MATDEV09S" user="derickb" user-domain="MAT" />
+<test-results name="..\..\CodeCoverage\nunit\assemblies\TestSolution.Tests.dll" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2011-03-13" time="17:56:26">
+  <environment nunit-version="2.5.2.9222" clr-version="2.0.50727.4952" os-version="Microsoft Windows NT 6.1.7600.0" platform="Win32NT" cwd="c:\Users\cg\code\Albacore\spec\support\Tools\NUnit-v2.5" machine-name="CRAPTOP-7" user="cg" user-domain="craptop-7" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite name="..\..\CodeCoverage\assemblies\TestSolution.Tests.dll" executed="True" success="True" time="0.019" asserts="0">
+  <test-suite name="" executed="True" success="True" time="0.336" asserts="0">
     <results>
-      <test-suite name="TestSolution" executed="True" success="True" time="0.016" asserts="0">
+      <test-suite name="..\..\CodeCoverage\nunit\assemblies\TestSolution.Tests.dll" executed="True" success="True" time="0.068" asserts="0">
         <results>
-          <test-suite name="Tests" executed="True" success="True" time="0.015" asserts="0">
+          <test-suite name="TestSolution" executed="True" success="True" time="0.064" asserts="0">
             <results>
-              <test-suite name="Class1" executed="True" success="True" time="0.013" asserts="0">
+              <test-suite name="Tests" executed="True" success="True" time="0.064" asserts="0">
                 <results>
-                  <test-case name="TestSolution.Tests.Class1.foo" executed="True" success="True" time="0.006" asserts="1" />
+                  <test-suite name="SomeTestFixture" executed="True" success="True" time="0.047" asserts="0">
+                    <results>
+                      <test-case name="TestSolution.Tests.SomeTestFixture.foo" executed="True" success="True" time="0.034" asserts="1" />
+                    </results>
+                  </test-suite>
                 </results>
               </test-suite>
             </results>
           </test-suite>
         </results>
+      </test-suite>
+      <test-suite name="..\..\CodeCoverage\nunit\assemblies\TestSolution.dll" executed="False">
+        <reason>
+          <message><![CDATA[Has no TestFixtures]]></message>
+        </reason>
       </test-suite>
     </results>
   </test-suite>
