@@ -12,9 +12,9 @@ module Configuration
     end
 
     def aspnetcompiler
-      @config ||= AspNetCompiler.aspnetcompilerconfig
-      yield(@config) if block_given?
-      @config
+      config ||= AspNetCompiler.aspnetcompilerconfig
+      yield(config) if block_given?
+      config
     end
 
     def self.included(mod)
