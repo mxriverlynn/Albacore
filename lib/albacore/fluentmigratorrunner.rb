@@ -5,7 +5,7 @@ class FluentMigratorRunner
 	include Albacore::Task
 	include Albacore::RunCommand
 
-	attr_accessor :target, :provider, :connection, :namespace, :output, :preview, :steps, :task, :version, :verbose, :script_directory, :profile, :timeout
+	attr_accessor :target, :provider, :connection, :namespace, :output, :output_filename, :preview, :steps, :task, :version, :verbose, :script_directory, :profile, :timeout, :show_help
 
 	def initialize(command=nil)
 		super()
@@ -21,19 +21,24 @@ class FluentMigratorRunner
   end
 
 	def get_command_parameters
-    params = " /target \"#{@target}\""
-    params << " /provider #{@provider}"
-    params << " /connection \"#{@connection}\""
-    params << " /ns #{@namespace}" unless @namespace.nil?
-    params << " /out #{@output}" unless @output.nil?
-    params << " /preview #{@preview}" unless @preview.nil?
-    params << " /steps #{@steps}" unless @steps.nil? || @steps == 0
-    params << " /task #{@task}" unless @task.nil?
-    params << " /version #{@version}" unless @version.nil? || @version == 0
-    params << " /verbose #{@verbose}" unless @verbose.nil?
-    params << " /wd \"#{@script_directory}\"" unless @script_directory.nil?
-    params << " /profile #{@profile}" unless @profile.nil?
-    params << " /timeout #{@timeout}" unless @timeout.nil?
+    if @show_help
+      params = " /?"
+    else
+      params = " /target=\"#{@target}\""
+      params << " /provider=#{@provider}"
+      params << " /connection=\"#{@connection}\""
+      params << " /ns=#{@namespace}" unless @namespace.nil?
+      params << " /out" if @output == true
+      params << " /outfile=\"#{@output_filename}\"" unless @output_filename.nil?
+      params << " /preview" if @preview == true
+      params << " /steps=#{@steps}" unless @steps.nil?
+      params << " /task=#{@task}" unless @task.nil?
+      params << " /version=#{@version}" unless @version.nil?
+      params << " /verbose=#{@verbose}" if @verbose == true
+      params << " /wd=\"#{@script_directory}\"" unless @script_directory.nil?
+      params << " /profile=#{@profile}" unless @profile.nil?
+      params << " /timeout=#{@timeout}" unless @timeout.nil?
+    end 
     params
 	end
 
