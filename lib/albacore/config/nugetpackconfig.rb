@@ -10,9 +10,9 @@ module Configuration
     end
 
     def nugetpack
-      @config ||= NuGetPack.nugetpackconfig
-      yield(@config) if block_given?
-      @config
+      config ||= NuGetPack.nugetpackconfig
+      yield(config) if block_given?
+      config
     end
     
   end
