@@ -5,7 +5,7 @@ class XUnitTestRunner
   include Albacore::Task
   include Albacore::RunCommand
 
-  attr_accessor :html_output
+  attr_accessor :html_output, :skip_test_fail
   attr_array :options,:assembly,:assemblies
 
   def initialize(command=nil)
@@ -41,7 +41,7 @@ class XUnitTestRunner
       command_params = get_command_parameters.collect{ |p| p % File.basename(assm) }
       command_params.insert(0,assm)	
       result = run_command "XUnit", command_params.join(" ")
-      fail_with_message failure_message if !result
+      fail_with_message failure_message if !result && (!@skip_test_fail || $?.exitstatus > 1)
     end       
   end
 

@@ -25,6 +25,26 @@ module Albacore
           obj.execute if obj.respond_to?(:execute)
         end
       end
+
+      def #{taskname}!(name=:#{taskname}, *args, &configblock)
+        task name, *args do |t, task_args|
+          obj = #{taskclass}.new
+          obj.load_config_by_task_name(name) if obj.respond_to?(:load_config_by_task_name)
+
+          if !configblock.nil?
+            case configblock.arity
+              when 0
+                configblock.call
+              when 1
+                configblock.call(obj)
+              when 2
+                configblock.call(obj, task_args)
+            end
+          end
+
+          obj.execute if obj.respond_to?(:execute)
+        end.invoke
+      end
     EOF
   end
 end
