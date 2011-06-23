@@ -8,7 +8,8 @@ class CSC
   include Configuration::CSC
   include SupportsLinuxEnvironment
 
-  attr_accessor :output, :target, :optimize, :debug, :doc, :main
+  attr_accessor :output, :target, :optimize, :debug, :doc, :main,
+    :keyfile, :keycontainer, :delaysign # strong name flags
   attr_array :compile, :references, :resources, :define
 
   def initialize
@@ -25,6 +26,9 @@ class CSC
     params << "\"/out:#{@output}\"" unless @output.nil?
     params << "/target:#{@target}" unless @target.nil?
     params << "/optimize+" if @optimize
+    params << "\"/keyfile:#{@keyfile}\"" unless @keyfile.nil?
+    params << "\"/keycontainer:#{@keycontainer}\"" unless @keycontainer.nil?
+    params << "/delaysign+" if @delaysign
     params << get_debug_param unless @debug.nil?
     params << "/doc:#{@doc}" unless @doc.nil?
     params << get_define_params unless @define.nil?
