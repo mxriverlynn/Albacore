@@ -12,9 +12,9 @@ module Configuration
     end
 
     def csc
-      @config ||= CSC.cscconfig
-      yield(@config) if block_given?
-      @config
+      config ||= CSC.cscconfig
+      yield(config) if block_given?
+      config
     end
 
     def self.included(mod)
