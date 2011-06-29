@@ -8,9 +8,32 @@ Check out the [albacore Wiki](http://wiki.github.com/derickbailey/albacore) for 
 
 If you are new to Ruby and Rake, head over to the [getting started](https://github.com/derickbailey/Albacore/wiki/Getting-Started) wiki page.
 
-## How To Contribute, Collaborate, Communicate
+## Supported Versions Of Ruby And Rake
 
-See the wiki page for [contributing to albacore](https://github.com/derickbailey/Albacore/wiki/HowToContribute)
+Albacore has been tested against the following versions of rake:
+
+* Rake v0.8.7
+* Rake v0.9.2
+
+Albacore has been tested against the following versions of Ruby for Windows:
+
+* RubyInstaller v1.8.7
+* RubyInstaller v1.9.2
+* IronRuby v1.0
+* IronRuby v1.1
+* IronRuby v1.1.1
+* IronRuby v1.1.2
+
+### Unsupported Versions Of Ruby
+
+Support for the following versions of ruby has been dropped. Albacore will no longer be tested against, or have code written to work with these versions of ruby. Use these versions at your own risk.
+
+* RubyInstaller v1.8.6
+* RubyInstaller v1.9.1
+
+### Notes About IronRuby
+
+Due to an incompatibility with the Rubyzip gem, IronRuby does not support the ‘zip’ and ‘unzip’ tasks. If you need zip / unzip support, look into using a third party tool such as [7-zip](http://7-zip.org) or [SharpZipLib](http://sharpdevelop.net/OpenSource/SharpZipLib/).
 
 ## Contributors
 
