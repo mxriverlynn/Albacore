@@ -1,0 +1,27 @@
+---
+layout: post
+title: "v0.2.6 Release Notes: Nuget, CSC, XUnit, FluentMigrator tasks; Rake and IronRuby Versions
+---
+
+Albacore v0.2.6 is now available via RubyGems.org
+
+h2. Nuget
+
+Several additions have been made to the Nuget related tasks. Nuspec now supports the 'frameworkAssemblies' attribute, and two nu (haha!) tasks have been added: nugetpush and nugetpublish. Nugetpush will upload a nuget package to the gallery and optionally publish it. If you wish to upload without publishing and later publish the package, the nugetpublish task will take care of that for you.
+
+h2. CSC
+
+The csc task has a few additions for 'keyfile', 'keycontainer', and 'delaysign', allowing you to deslay strong name signing of your assemblies.
+
+h2. xUnit
+
+the xunit task now has a 'skip_test_fail' that prevents rake from aborting the build when an xunit test fails. This is useful in continuous integration scenarios, such as running with TeamCity.
+
+
+h2. Ruby, Rake, and IronRuby Versions
+
+The readme on the albacore project page of github now lists the officially supported versions of Ruby and Rake, including IronRuby.
+
+h2. Other
+
+Along with these changes, a few minor bug fixes and bug preventions have been put in place. As always, be sure to check the wiki for the latest documentation on task options and albacore use.
