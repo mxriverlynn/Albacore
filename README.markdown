@@ -23,6 +23,7 @@ Albacore has been tested against the following versions of Ruby for Windows:
 * IronRuby v1.1
 * IronRuby v1.1.1
 * IronRuby v1.1.2
+* IronRuby v1.1.3
 
 ### Unsupported Versions Of Ruby
 
