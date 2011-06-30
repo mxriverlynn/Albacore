@@ -102,3 +102,59 @@ describe ZipDirectory, "when providing configuration" do
     zip.output_file.should == "configured"
   end
 end
+
+describe ZipDirectory, 'when zipping a directory of files with additional files' do
+  describe 'and additional file is given as an array' do
+    before :each do
+      zip = ZipDirectory.new
+      zip.directories_to_zip ZipTestData.folder
+      zip.output_file = 'test.zip'
+      zip.exclusions "**/subfolder/*"
+      zip.additional_files = [File.join(File.dirname(__FILE__), 'support', 'test.yml')]
+      zip.execute
+      
+      unzip = Unzip.new
+      unzip.file = File.join(ZipTestData.folder, 'test.zip')
+      unzip.destination = ZipTestData.output_folder
+      unzip.execute
+    end
+
+    after :each do
+      FileUtils.rm_rf ZipTestData.output_folder if File.exist? ZipTestData.output_folder
+    end
+
+    it "should add additional file" do
+      File.exist?(File.join(ZipTestData.folder, "test.zip")).should be_true
+      File.exist?(File.join(ZipTestData.output_folder, 'files', 'subfolder')).should be_true
+      File.exist?(File.join(ZipTestData.output_folder, 'files', 'testfile.txt')).should be_true
+      File.exist?(File.join(ZipTestData.output_folder, 'test.yml')).should be_true
+    end
+  end
+  
+  describe 'and additional file is given as a string' do
+    before :each do
+      zip = ZipDirectory.new
+      zip.directories_to_zip ZipTestData.folder
+      zip.output_file = 'test.zip'
+      zip.exclusions "**/subfolder/*"
+      zip.additional_files = File.join(File.dirname(__FILE__), 'support', 'test.yml')
+      zip.execute
+      
+      unzip = Unzip.new
+      unzip.file = File.join(ZipTestData.folder, 'test.zip')
+      unzip.destination = ZipTestData.output_folder
+      unzip.execute
+    end
+
+    after :each do
+      FileUtils.rm_rf ZipTestData.output_folder if File.exist? ZipTestData.output_folder
+    end
+    
+    it "should add additional file" do
+      File.exist?(File.join(ZipTestData.folder, "test.zip")).should be_true
+      File.exist?(File.join(ZipTestData.output_folder, 'files', 'subfolder')).should be_true
+      File.exist?(File.join(ZipTestData.output_folder, 'files', 'testfile.txt')).should be_true
+      File.exist?(File.join(ZipTestData.output_folder, 'test.yml')).should be_true
+    end
+  end
+end
