@@ -1,0 +1,10 @@
+---
+layout: post
+title: "v0.2.7 Release Notes: Fixed Gemspec
+---
+
+Albacore v0.2.7 is available via RubyGems.org
+
+The only work done in this release was to fix the gemspec so that rubyzip is listed
+as a dependency. To do this, Jeweler, the gem used to create the albacore gem, was updated
+to v1.6.4 and the albacore gem was repackaged and pushed to rubygems.org.
