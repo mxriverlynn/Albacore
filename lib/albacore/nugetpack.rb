@@ -11,7 +11,8 @@ class NuGetPack
   attr_accessor  :nuspec,
                  :output,
                  :base_folder,
-                 :command
+                 :command,
+				 :symbols
 
   def initialize(command = "NuGet.exe") # users might have put the NuGet.exe in path
     super()
@@ -25,9 +26,10 @@ class NuGetPack
     
     params = []
     params << "pack"
+	params << "-Symbols" if @symbols
     params << "#{nuspec}"
-    params << "-b #{base_folder}" unless @base_folder.nil?
-    params << "-o #{output}" unless @output.nil?
+    params << "-BasePath #{base_folder}" unless @base_folder.nil?
+    params << "-OutputDirectory #{output}" unless @output.nil?
     
     merged_params = params.join(' ')
     
