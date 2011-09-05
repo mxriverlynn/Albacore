@@ -12,6 +12,8 @@ class NuGetPack
                  :output,
                  :base_folder,
                  :command
+                 
+  attr_hash :properties
 
   def initialize(command = "NuGet.exe") # users might have put the NuGet.exe in path
     super()
@@ -26,8 +28,9 @@ class NuGetPack
     params = []
     params << "pack"
     params << "#{nuspec}"
-    params << "-b #{base_folder}" unless @base_folder.nil?
-    params << "-o #{output}" unless @output.nil?
+    params << "-BasePath #{base_folder}" unless @base_folder.nil?
+    params << "-OutputDirectory #{output}" unless @output.nil?
+    params << build_properties unless @properties.nil? || @properties.empty?
     
     merged_params = params.join(' ')
     
@@ -36,6 +39,14 @@ class NuGetPack
     
     failure_message = 'NuGet Failed. See Build Log For Detail'
     fail_with_message failure_message if !result
+  end
+  
+  def build_properties
+    option_text = []
+    @properties.each do |key, value|
+      option_text << "#{key}=\"#{value}\""
+    end
+    '-Properties ' + option_text.join(";")
   end
   
 end
