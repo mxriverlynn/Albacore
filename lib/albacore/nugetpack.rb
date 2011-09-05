@@ -28,8 +28,8 @@ class NuGetPack
     params = []
     params << "pack"
     params << "#{nuspec}"
-    params << "-b #{base_folder}" unless @base_folder.nil?
-    params << "-o #{output}" unless @output.nil?
+    params << "-BasePath #{base_folder}" unless @base_folder.nil?
+    params << "-OutputDirectory #{output}" unless @output.nil?
     params << build_properties unless @properties.nil? || @properties.empty?
     
     merged_params = params.join(' ')
@@ -46,7 +46,7 @@ class NuGetPack
     @properties.each do |key, value|
       option_text << "#{key}=\"#{value}\""
     end
-    '-Prop ' + option_text.join(";")
+    '-Properties ' + option_text.join(";")
   end
   
 end
