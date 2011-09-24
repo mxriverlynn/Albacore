@@ -72,7 +72,7 @@ describe Nuspec do
     end
 
     it "should contain the file and it's target" do
-      @filedata.should include("<file src='C:/dev/albacore/spec/support/nuspec/somedll.dll' target='lib'/>")
+      @filedata.downcase().should include(("<file src='" + dll + "' target='lib'/>").downcase())
     end
   end
 end

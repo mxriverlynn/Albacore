@@ -242,7 +242,7 @@ namespace :albacore do
 
   desc "MSTest Test Runner Example"
   mstest do |mstest|
-    mstest.command = "spec/support/Tools/MSTest-2008/mstest.exe"
+    mstest.command = "spec/support/Tools/MSTest-2010/mstest.exe"
     mstest.assemblies "spec/support/CodeCoverage/mstest/TestSolution.MsTestTests.dll"
   end
 

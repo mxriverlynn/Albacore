@@ -3,7 +3,7 @@ require 'albacore/mstesttestrunner'
 
 shared_examples_for "mstest paths" do
   before :all do
-    @mstestpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'MSTest-2008', 'mstest.exe')
+    @mstestpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'MSTest-2010', 'mstest.exe')
     @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'mstest', 'TestSolution.MSTestTests.dll')
     @test_option = "/test:Test"
   end
