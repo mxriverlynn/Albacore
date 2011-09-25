@@ -1,7 +1,0 @@
-<TestRunner>
-	<FriendlyName>MSTest {0}.{1}</FriendlyName>
-	<AssemblyPath>..\PrivateAssemblies\TestDriven.MSTestRunner.10.0.dll</AssemblyPath>
-	<TypeName>TestDriven.MSTestRunner.UnitTestRunner</TypeName>
-	<TargetResolution>Reference</TargetResolution>
-	<ApartmentState>STA</ApartmentState>
-</TestRunner>

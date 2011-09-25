@@ -4,8 +4,8 @@ require 'albacore/mstesttestrunner'
 shared_examples_for "mstest paths" do
   before :all do
     @mstestpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'MSTest-2010', 'mstest.exe')
-    @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'mstest', 'TestSolution.MSTestTests.dll')
-    @test_option = "/test:Test"
+    @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'mstest', 'TestSolution.MSTestTests.NET40.dll')
+    @test_option = "/test:Test /noisolation /noresults"
   end
 end
 
@@ -67,6 +67,7 @@ describe MSTestTestRunner, "when configured correctly" do
     mstest.extend(FailPatch)
     mstest.assemblies @test_assembly
     mstest.log_level = :verbose
+    mstest.options "/noisolation /noresults"
     mstest.tests "APassingTest"
     mstest.execute
   end
@@ -84,6 +85,7 @@ describe MSTestTestRunner, "when configured correctly, but a test fails" do
     mstest.extend(FailPatch)
     mstest.assemblies @test_assembly
     mstest.log_level = :verbose
+    mstest.options "/noisolation /noresults"
     mstest.tests "AFailingTest"
     mstest.execute
   end
