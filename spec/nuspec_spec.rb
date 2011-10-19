@@ -25,6 +25,7 @@ describe Nuspec do
       nuspec.version = "1.2.3"
       nuspec.authors = "Author Name"
       nuspec.description = "test_xml_document"
+      nuspec.copyright = "copyright 2011"
       nuspec.working_directory = working_dir
       nuspec
     end
@@ -54,6 +55,7 @@ describe Nuspec do
       nuspec.version = "1.2.3"
       nuspec.authors = "Author Name"
       nuspec.description = "test_xml_document"
+      nuspec.copyright = "copyright 2011"
       nuspec.working_directory = working_dir
       nuspec.file(dll, "lib")
       nuspec
