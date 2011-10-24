@@ -74,17 +74,18 @@ describe AssemblyInfo, "when providing a custom namespace without specifiying th
   end
 end
 
-shared_context "language engines", :subject => :subject do
-  before do
-  end
-end
+#shared_context "language engines", :subject => :subject do
+#  before do
+#  end
+#end
 
 describe CSharpEngine, "when providing custom namespaces and specifying C#" do
-  include_context "language engines"
+
+  #include_context "language engines"
 
   before :all do
     @tester = AssemblyInfoTester.new
-    @tester.lang_engine = c.new
+    @tester.lang_engine = CSharpEngine.new
     asm = AssemblyInfo.new
     asm.lang_engine = CSharpEngine.new
     

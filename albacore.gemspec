@@ -121,7 +121,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<nokogiri>, ["~> 1.4"])
       s.add_development_dependency(%q<version_bumper>, ["~> 0.3"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
-      s.add_development_dependency(%q<rspec>, ["~> 1.2"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.7"])
       s.add_development_dependency(%q<jekyll>, ["~> 0.8"])
       s.add_development_dependency(%q<watchr>, ["~> 0.7"])
     else
@@ -129,7 +129,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<nokogiri>, ["~> 1.4"])
       s.add_dependency(%q<version_bumper>, ["~> 0.3"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
-      s.add_dependency(%q<rspec>, ["~> 1.2"])
+      s.add_dependency(%q<rspec>, ["~> 2.7"])
       s.add_dependency(%q<jekyll>, ["~> 0.8"])
       s.add_dependency(%q<watchr>, ["~> 0.7"])
     end
@@ -138,7 +138,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<nokogiri>, ["~> 1.4"])
     s.add_dependency(%q<version_bumper>, ["~> 0.3"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
-    s.add_dependency(%q<rspec>, ["~> 1.2"])
+    s.add_dependency(%q<rspec>, ["~> 2.7"])
     s.add_dependency(%q<jekyll>, ["~> 0.8"])
     s.add_dependency(%q<watchr>, ["~> 0.7"])
   end

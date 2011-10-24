@@ -8,7 +8,6 @@ $: << File.join(@root_dir, "spec/support")
 $: << File.join(@root_dir, "lib/albacore/config")
 
 require 'rubygems'
-require 'spec'
 require 'rake/tasklib'
 require 'lib/albacore/support/createtask.rb'
 require 'lib/albacore/config/config.rb'
