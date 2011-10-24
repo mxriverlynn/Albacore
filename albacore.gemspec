@@ -5,10 +5,18 @@
 
 Gem::Specification.new do |s|
   s.name = %q{albacore}
-  s.version = "0.2.7"
+  s.version = "0.2.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Derick Bailey", "etc"]
+  s.authors = ["Derick Bailey", "Ben Hall", "Steven Harman",
+               "Hibri Marzook", "Mark Wilkins", "Prabir Shrestha",
+               "Thomas Van Machelen", "Mark Boltuc", "Ivan Eryshov",
+               "Dotan J. Nahum", "Hernan Garcia", "James Gregory",
+               "Steve Hebert", "Mike Nichols", "Henrik Feldt",
+               "Chris Geihsler", "Brett Veenstra", "Steven H Johnson",
+               "Nils Jonsson", "Kevin Colyar", "Peter van der Woude",
+               "Chris O'Dell", "Sean Biefeld", "Andrew Vos",
+               "Louis Salin"]
   s.date = %q{2011-07-10}
   s.description = %q{Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks.}
   s.email = %q{albacorebuild@gmail.com}
@@ -29,6 +37,7 @@ Gem::Specification.new do |s|
     "lib/albacore/assemblyinfolanguages/cppcliengine.rb",
     "lib/albacore/assemblyinfolanguages/csharpengine.rb",
     "lib/albacore/assemblyinfolanguages/vbnetengine.rb",
+    "lib/albacore/assemblyinfolanguages/fsharpengine.rb",
     "lib/albacore/config/aspnetcompilerconfig.rb",
     "lib/albacore/config/assemblyinfoconfig.rb",
     "lib/albacore/config/config.rb",
@@ -121,7 +130,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<nokogiri>, ["~> 1.4"])
       s.add_development_dependency(%q<version_bumper>, ["~> 0.3"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
-      s.add_development_dependency(%q<rspec>, ["~> 1.2"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.7"])
       s.add_development_dependency(%q<jekyll>, ["~> 0.8"])
       s.add_development_dependency(%q<watchr>, ["~> 0.7"])
     else
@@ -129,7 +138,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<nokogiri>, ["~> 1.4"])
       s.add_dependency(%q<version_bumper>, ["~> 0.3"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
-      s.add_dependency(%q<rspec>, ["~> 1.2"])
+      s.add_dependency(%q<rspec>, ["~> 2.7"])
       s.add_dependency(%q<jekyll>, ["~> 0.8"])
       s.add_dependency(%q<watchr>, ["~> 0.7"])
     end
@@ -138,7 +147,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<nokogiri>, ["~> 1.4"])
     s.add_dependency(%q<version_bumper>, ["~> 0.3"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
-    s.add_dependency(%q<rspec>, ["~> 1.2"])
+    s.add_dependency(%q<rspec>, ["~> 2.7"])
     s.add_dependency(%q<jekyll>, ["~> 0.8"])
     s.add_dependency(%q<watchr>, ["~> 0.7"])
   end

@@ -1,11 +1,14 @@
 require 'albacore/albacoretask'
 require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
+require 'albacore/assemblyinfolanguages/fsharpengine'
+require 'albacore/assemblyinfolanguages/cppcliengine'
 
 class AssemblyInfo
   include Albacore::Task
   
   attr_accessor :input_file, :output_file
+  attr_accessor :language
   attr_accessor :version, :title, :description, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
   attr_accessor :file_version, :trademark, :lang_engine, :custom_data
@@ -48,8 +51,8 @@ class AssemblyInfo
     data = []
     return data if file.nil?
 
-    File.open(file, 'r') do |file|
-        file.each_line do |line|
+    File.open(file, 'r') do |f|
+        f.each_line do |line|
             data << line.strip
         end
     end
@@ -60,31 +63,36 @@ class AssemblyInfo
   def check_output_file(file)
     return true if file
     fail_with_message 'output_file cannot be nil'
-    return false
+    false
   end
   
   def check_lang_engine
-    return !@lang_engine.nil?
+    !@lang_engine.nil?
   end
 
   def build_assembly_info_data(data)
+    # data < []
+    # requires: @lang_engine.nil? == false
+
     if data.empty?
-        data = build_using_statements
+        data = build_header
     end
 
-    build_attribute(data, "AssemblyTitle", @title) if @title != nil
-    build_attribute(data, "AssemblyDescription", @description) if @description != nil
-    build_attribute(data, "AssemblyCompany", @company_name) if @company_name != nil
-    build_attribute(data, "AssemblyProduct", @product_name) if @product_name != nil
+    data.concat build_using_statements
+
+    build_attribute(data, "AssemblyTitle", @title)
+    build_attribute(data, "AssemblyDescription", @description)
+    build_attribute(data, "AssemblyCompany", @company_name)
+    build_attribute(data, "AssemblyProduct", @product_name)
     
-    build_attribute(data, "AssemblyCopyright", @copyright) if @copyright != nil
-    build_attribute(data, "AssemblyTrademark", @trademark) if @trademark != nil
+    build_attribute(data, "AssemblyCopyright", @copyright)
+    build_attribute(data, "AssemblyTrademark", @trademark)
     
-    build_attribute(data, "ComVisible", @com_visible) if @com_visible != nil
-    build_attribute(data, "Guid", @com_guid) if @com_guid != nil
+    build_attribute(data, "ComVisible", @com_visible)
+    build_attribute(data, "Guid", @com_guid)
     
-    build_attribute(data, "AssemblyVersion", @version) if @version != nil
-    build_attribute(data, "AssemblyFileVersion", @file_version) if @file_version != nil
+    build_attribute(data, "AssemblyVersion", @version)
+    build_attribute(data, "AssemblyFileVersion", @file_version)
     
     data << ""
     if @custom_attributes != nil
@@ -98,11 +106,22 @@ class AssemblyInfo
         data << cdata unless data.include? cdata
       end
     end
+
+    data.concat build_footer
     
     data
   end
 
+  def build_header
+    @lang_engine.respond_to?(:before) ? [@lang_engine.before()] : []
+  end
+
+  def build_footer
+    @lang_engine.respond_to?(:after) ? [@lang_engine.after()] : []
+  end
+
   def build_attribute(data, attr_name, attr_data)
+    if attr_data.nil? then return end
     attr_value = @lang_engine.build_attribute(attr_name, attr_data)
     attr_re = @lang_engine.build_attribute_re(attr_name)
     result = nil
