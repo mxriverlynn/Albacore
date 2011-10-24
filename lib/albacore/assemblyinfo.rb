@@ -28,7 +28,9 @@ class AssemblyInfo
   end
   
   def execute
-    @lang_engine = CSharpEngine.new unless check_lang_engine
+    unless check_lang_engine then
+      @lang_engine = from_language
+    end
     write_assemblyinfo @output_file, @input_file
   end
   
@@ -65,7 +67,16 @@ class AssemblyInfo
     fail_with_message 'output_file cannot be nil'
     false
   end
-  
+
+  def from_language
+    ({
+      "F#" => lambda { FSharpEngine.new },
+      "C#" => lambda { CSharpEngine.new },
+      "C++.Net" => lambda { CppCliEngine.new },
+      "VB.Net" => lambda { VbNetEngine.new }
+    }[@language] || lambda { CSharpEngine.new }).call
+  end
+
   def check_lang_engine
     !@lang_engine.nil?
   end
