@@ -52,128 +52,6 @@ describe AssemblyInfo, "when generating an assembly info file without an output 
   end
 end
 
-describe AssemblyInfo, "when providing a custom namespace without specifiying the language" do
-
-  include_context "asminfo task"
-
-  before :all do
-    @asm.namespaces 'My.Name.Space'
-  end
-
-  subject {@tester.build_and_read_assemblyinfo_file @asm}
-
-  it "should default to c# for the generated assemby info" do
-    subject.scan('using My.Name.Space;').length.should == 1
-  end
-end
-
-describe CSharpEngine, "when providing custom namespaces and specifying C#" do
-
-  include_context "language engines"
-
-  before :all do
-    using_engine CSharpEngine.new
-  end
-
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
-
-  it "should.execute the namespaces into the using statements" do
-    subject.scan('using My.Name.Space;').length.should == 1
-    subject.scan('using Another.Namespace.GoesHere;').length.should == 1
-  end
-end
-
-describe VbNetEngine, "when providing custom namespaces and specifying VB.NET" do
-
-  include_context "language engines"
-
-  before :all do
-    using_engine VbNetEngine.new
-  end
-
-  subject {@filedata = @tester.build_and_read_assemblyinfo_file @asm}
-
-  it "should.execute the namespaces into the imports statements" do
-    subject.scan('Imports My.Name.Space').length.should == 1
-    subject.scan('Imports Another.Namespace.GoesHere').length.should == 1
-  end
-end
-
-describe FSharpEngine, "when providing custom namespaces and specifying F#" do
-
-  include_context "language engines"
-
-  before :all do
-    using_engine FSharpEngine.new
-  end
-
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
-
-  it "should output the correct open statements" do
-    subject.scan("open My.Name.Space").length.should == 1
-    subject.scan("open Another.Namespace.GoesHere").length.should == 1
-  end
-
-end
-
-describe AssemblyInfo, "when providing custom attributes without specifying a language" do
-
-  include_context "specifying custom attributes"
-
-  it "should print the custom attributes to the assembly info file" do
-    subject.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
-    subject.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
-  end
-
-end
-
-describe CSharpEngine, "when providing custom attributes and specifying C#" do
-
-  include_context "language engines"
-  include_context "specifying custom attributes"
-
-  before :all do
-    using_engine CSharpEngine.new
-  end
-
-  it "should print the custom attributes to the assembly info file" do
-    subject.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
-    subject.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
-  end
-
-end
-
-describe VbNetEngine, "when providing custom attributes and specifying VB.NET" do
-
-  include_context "language engines"
-  include_context "specifying custom attributes"
-
-  before :all do
-    using_engine VbNetEngine.new
-  end
-
-  it "should print the custom attributes to the assembly info file" do
-    subject.scan('<assembly: CustomAttribute("custom attribute data")>').length.should == 1
-    subject.scan('<assembly: AnotherAttribute("more data here")>').length.should == 1
-  end
-end
-
-describe FSharpEngine, "when providing custom attributes and specifying F#" do
-
-  include_context "language engines"
-  include_context "specifying custom attributes"
-
-  before :all do
-    using_engine FSharpEngine.new
-  end
-
-  it "should print the custom attributes to the assembly info file" do
-    subject.scan('[<assembly: CustomAttribute("custom attribute data")>]').length.should == 1
-    subject.scan('[<assembly: AnotherAttribute("more data here")>]').length.should == 1
-  end
-end
-
-
 describe AssemblyInfo, "when specifying a custom attribute with no data" do
 
   include_context "asminfo task"
@@ -207,7 +85,8 @@ end
 { :no => { :engine => nil,              :lang => "no", :start_token => "[", :end_token => "]",     :using => "using " },
   :cs => { :engine => CSharpEngine.new, :lang => "C#", :start_token => "[", :end_token => "]",     :using => "using " },
   :vb => { :engine => VbNetEngine.new,  :lang => "VB.Net", :start_token => "<", :end_token => ">", :using => "Imports " },
-  :fs => { :engine => FSharpEngine.new, :lang => "F#", :start_token => "[<", :end_token => ">]",   :using => "open " }
+  :fs => { :engine => FSharpEngine.new, :lang => "F#", :start_token => "[<", :end_token => ">]",   :using => "open " },
+  :cpp=> { :engine => CppCliEngine.new, :lang => "C++", :start_token => "[", :end_token => "]",    :using => "using namespace ", :nsdelim => "::" }
 }.each do |key, settings|
 
   describe AssemblyInfo, "when generating an assembly info file with the built in attributes and #{settings[:lang]} language specified" do
@@ -232,15 +111,24 @@ end
     let(:s) { settings[:start_token] }
     let(:e) { settings[:end_token] }
     let(:using) { settings[:using] }
+    let(:d) { settings[:nsdelim] || '.' }
 
     subject { @tester.build_and_read_assemblyinfo_file @asm }
 
     it "should use the system.reflection namespace" do
-      subject.scan(%Q|#{using}System.Reflection|).length.should == 1
+      subject.scan(%Q|#{using}System#{d}Reflection|).length.should == 1
     end
 
     it "should use the system.runtime.interopservices namespace" do
-      subject.scan(%Q|#{using}System.Runtime.InteropServices|).length.should == 1
+      subject.scan(%Q|#{using}System#{d}Runtime#{d}InteropServices|).length.should == 1
+    end
+
+    it "should use custom namespaces" do
+      subject.scan(%Q|#{using}My#{d}Name#{d}Space|).length.should == 1
+    end
+
+    it "shold be using the other custom namespace, too" do
+      subject.scan(%Q|#{using}Another#{d}Namespace#{d}GoesHere|).length.should == 1
     end
 
     it "should contain the specified version information" do
