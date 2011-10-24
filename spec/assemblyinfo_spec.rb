@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'assemblyinfotester'
+require 'support/assemblyinfotester'
 require 'albacore/assemblyinfo'
 
 describe AssemblyInfo, "when generating an assembly info file" do
@@ -74,10 +74,17 @@ describe AssemblyInfo, "when providing a custom namespace without specifiying th
   end
 end
 
-describe AssemblyInfo, "when providing custom namespaces and specifying C#" do 
+shared_context "language engines", :subject => :subject do
+  before do
+  end
+end
+
+describe CSharpEngine, "when providing custom namespaces and specifying C#" do
+  include_context "language engines"
+
   before :all do
     @tester = AssemblyInfoTester.new
-    @tester.lang_engine = CSharpEngine.new
+    @tester.lang_engine = c.new
     asm = AssemblyInfo.new
     asm.lang_engine = CSharpEngine.new
     
@@ -111,6 +118,12 @@ describe AssemblyInfo, "when providing custom namespaces and specifying VB.NET" 
   it "should.execute the namespaces into the imports statements" do
     @filedata.scan('Imports My.Name.Space').length.should == 1
     @filedata.scan('Imports Another.Namespace.GoesHere').length.should == 1
+  end
+end
+
+describe AssemblyInfo, "when providing custom namespaces and specifying F#" do
+  before :all do
+
   end
 end
 
