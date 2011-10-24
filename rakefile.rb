@@ -1,8 +1,12 @@
 $: << './'
+require 'psych'
 require 'lib/albacore'
 require 'version_bumper'
 
 task :default => ['albacore:sample']
+task :install => ['jeweler:gemspec', 'jeweler:build'] do
+  sh "gem install -l pkg/albacore-#{File.open('VERSION', 'rb').read}.gem"
+end
 
 namespace :specs do
   require 'rspec/core/rake_task'
