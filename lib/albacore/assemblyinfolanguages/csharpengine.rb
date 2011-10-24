@@ -1,5 +1,5 @@
 class CSharpEngine
-def build_attribute_re(attr_name)
+  def build_attribute_re(attr_name)
     /^\[assembly: #{attr_name}(.+)/  
   end
 
