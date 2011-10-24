@@ -82,11 +82,32 @@ describe AssemblyInfo, "when specifying an attribute with non-string data" do
   end
 end
 
+describe FSharpEngine, "when generating assembly info" do
+
+  include_context "language engines"
+
+  before :all do
+    using_engine FSharpEngine.new
+  end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
+  it "should output a module definition" do
+    subject.scan('module AssemblyInfo').length.should == 1
+  end
+
+  it "should output '()' at the bottom" do
+    subject.scan('()').length.should == 1
+  end
+
+end
+
+
 { :no => { :engine => nil,              :lang => "no", :start_token => "[", :end_token => "]",     :using => "using " },
-  :cs => { :engine => CSharpEngine.new, :lang => "C#", :start_token => "[", :end_token => "]",     :using => "using " },
-  :vb => { :engine => VbNetEngine.new,  :lang => "VB.Net", :start_token => "<", :end_token => ">", :using => "Imports " },
-  :fs => { :engine => FSharpEngine.new, :lang => "F#", :start_token => "[<", :end_token => ">]",   :using => "open " },
-  :cpp=> { :engine => CppCliEngine.new, :lang => "C++", :start_token => "[", :end_token => "]",    :using => "using namespace ", :nsdelim => "::" }
+  :cs => { :engine => CSharpEngine.new, :lang => "the C#", :start_token => "[", :end_token => "]",     :using => "using " },
+  :vb => { :engine => VbNetEngine.new,  :lang => "the VB.Net", :start_token => "<", :end_token => ">", :using => "Imports " },
+  :fs => { :engine => FSharpEngine.new, :lang => "the F#", :start_token => "[<", :end_token => ">]",   :using => "open " },
+  :cpp=> { :engine => CppCliEngine.new, :lang => "the C++", :start_token => "[", :end_token => "]",    :using => "using namespace ", :nsdelim => "::" }
 }.each do |key, settings|
 
   describe AssemblyInfo, "when generating an assembly info file with the built in attributes and #{settings[:lang]} language specified" do
