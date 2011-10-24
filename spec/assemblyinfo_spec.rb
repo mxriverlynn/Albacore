@@ -2,16 +2,35 @@ require 'spec_helper'
 require 'support/assemblyinfotester'
 require 'albacore/assemblyinfo'
 
-describe AssemblyInfo, "when generating an assembly info file" do
+shared_context "StringIO logging" do
+  before :all do
+    @strio = StringIO.new
+  end
+
+  def logwith_strio task, level = :diagnostic
+    task.log_device = @strio
+    task.log_level = level
+  end
+end
+
+shared_context "asminfo task" do
+
+  include_context "StringIO logging"
+
   before :all do
     @tester = AssemblyInfoTester.new
-    asm = AssemblyInfo.new
-    strio = StringIO.new
-    asm.log_device = strio
-    
-    @tester.build_and_read_assemblyinfo_file asm
-    
-    @log_data = strio.string
+    @asm = AssemblyInfo.new
+    logwith_strio @asm
+  end
+end
+
+describe AssemblyInfo, "when generating an assembly info file" do
+
+  include_context "asminfo task"
+
+  before :all do
+    @tester.build_and_read_assemblyinfo_file @asm
+    @log_data = @strio.string
   end
   
   it "should log the name of the output file" do
@@ -20,270 +39,278 @@ describe AssemblyInfo, "when generating an assembly info file" do
 end
 
 describe AssemblyInfo, "when generating an assembly info file in verbose mode" do
+
+  include_context "asminfo task"
+
   before :all do
-    @tester = AssemblyInfoTester.new
-    asm = AssemblyInfo.new
-    strio = StringIO.new
-    asm.log_device = strio
-    asm.log_level = :verbose
-    
-    asm.version = @tester.version
-    
-    @tester.build_and_read_assemblyinfo_file asm
-    @log_data = strio.string
+    @asm.version = @tester.version
+    @tester.build_and_read_assemblyinfo_file @asm
   end
+
+  subject { @strio.string }
   
   it "should log the name of the output file" do
-    @log_data.downcase.should include(@tester.assemblyinfo_file.downcase)
+    subject.downcase.should include(@tester.assemblyinfo_file.downcase)
   end
 end
 
 describe AssemblyInfo, "when generating an assembly info file without an output file specified" do
-  before :all do
-    @tester = AssemblyInfoTester.new
-    asm = AssemblyInfo.new
-    asm.extend(FailPatch)
-    
-    strio = StringIO.new
-    asm.log_device = strio
-    
-    asm.execute
 
-    @log_data = strio.string
+  include_context "asminfo task"
+
+  before :all do
+    @asm.extend(FailPatch)
+    @asm.execute
   end
+
+  subject { @strio.string }
   
   it "should log an error message saying the output file is required" do
-    @log_data.should include("output_file cannot be nil")
+    subject.should include("output_file cannot be nil")
   end
 end
 
-describe AssemblyInfo, "when providing a custom namespace without specifiying the language" do 
+describe AssemblyInfo, "when providing a custom namespace without specifiying the language" do
+
+  include_context "asminfo task"
+
   before :all do
-    @tester = AssemblyInfoTester.new
-    asm = AssemblyInfo.new    
-    
-    asm.namespaces 'My.Name.Space'
-
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
+    @asm.namespaces 'My.Name.Space'
   end
-  
+
+  subject {@tester.build_and_read_assemblyinfo_file @asm}
+
   it "should default to c# for the generated assemby info" do
-    @filedata.scan('using My.Name.Space;').length.should == 1
+    subject.scan('using My.Name.Space;').length.should == 1
   end
 end
 
-#shared_context "language engines", :subject => :subject do
-#  before do
-#  end
-#end
+shared_context "language engines" do
+
+  include_context "asminfo task"
+
+  before :all do
+    @asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
+  end
+
+  def using_engine engine
+    @tester.lang_engine = @asm.lang_engine = engine
+  end
+
+end
 
 describe CSharpEngine, "when providing custom namespaces and specifying C#" do
 
-  #include_context "language engines"
+  include_context "language engines"
 
   before :all do
-    @tester = AssemblyInfoTester.new
-    @tester.lang_engine = CSharpEngine.new
-    asm = AssemblyInfo.new
-    asm.lang_engine = CSharpEngine.new
-    
-    asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
-
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
+    using_engine CSharpEngine.new
   end
-  
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
   it "should.execute the namespaces into the using statements" do
-    @filedata.scan('using My.Name.Space;').length.should == 1
-    @filedata.scan('using Another.Namespace.GoesHere;').length.should == 1
+    subject.scan('using My.Name.Space;').length.should == 1
+    subject.scan('using Another.Namespace.GoesHere;').length.should == 1
   end
 end
 
-describe AssemblyInfo, "when providing custom namespaces and specifying VB.NET" do 
-  before :all do
-    @tester = AssemblyInfoTester.new
-    @tester.lang_engine = VbNetEngine.new
-    asm = AssemblyInfo.new
-    asm.lang_engine = VbNetEngine.new
-    
-    asm.namespaces 'My.Name.Space', 'Another.Namespace.GoesHere'
+describe VbNetEngine, "when providing custom namespaces and specifying VB.NET" do
 
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  include_context "language engines"
+
+  before :all do
+    using_engine VbNetEngine.new
   end
-  
+
+  subject {@filedata = @tester.build_and_read_assemblyinfo_file @asm}
+
   it "should.execute the namespaces into the imports statements" do
-    @filedata.scan('Imports My.Name.Space').length.should == 1
-    @filedata.scan('Imports Another.Namespace.GoesHere').length.should == 1
+    subject.scan('Imports My.Name.Space').length.should == 1
+    subject.scan('Imports Another.Namespace.GoesHere').length.should == 1
   end
 end
 
-describe AssemblyInfo, "when providing custom namespaces and specifying F#" do
+describe FSharpEngine, "when providing custom namespaces and specifying F#" do
+
+  include_context "language engines"
+
   before :all do
-
+    using_engine FSharpEngine.new
   end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
+  it "should output the correct open statements" do
+    subject.scan("open My.Name.Space").length.should == 1
+    subject.scan("open Another.Namespace.GoesHere").length.should == 1
+  end
+
 end
 
-describe AssemblyInfo, "when providing custom attributes without specifying a language" do  
+shared_context "specifying custom attributes" do
+
+  include_context "asminfo task"
+
   before :all do
-    @tester = AssemblyInfoTester.new
-    asm = AssemblyInfo.new
-    
-    asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
+    @asm.custom_attributes :CustomAttribute => "custom attribute data",
+                           :AnotherAttribute => "more data here"
+  end
 
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
-  end
-  
-  it "should.execute the custom attributes to the assembly info file" do
-    @filedata.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
-    @filedata.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
-  end
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
 end
 
-describe AssemblyInfo, "when providing custom attributes and specifying C#" do  
+describe AssemblyInfo, "when providing custom attributes without specifying a language" do
+
+  include_context "specifying custom attributes"
+
+  it "should print the custom attributes to the assembly info file" do
+    subject.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
+    subject.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
+  end
+
+end
+
+describe CSharpEngine, "when providing custom attributes and specifying C#" do
+
+  include_context "language engines"
+  include_context "specifying custom attributes"
+
   before :all do
-    @tester = AssemblyInfoTester.new
-    @tester.lang_engine = CSharpEngine.new
-    asm = AssemblyInfo.new
-    asm.lang_engine = CSharpEngine.new
-    
-    asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
+    using_engine CSharpEngine.new
+  end
 
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  it "should print the custom attributes to the assembly info file" do
+    subject.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
+    subject.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
   end
-  
-  it "should.execute the custom attributes to the assembly info file" do
-    @filedata.scan('[assembly: CustomAttribute("custom attribute data")]').length.should == 1
-    @filedata.scan('[assembly: AnotherAttribute("more data here")]').length.should == 1
-  end
+
 end
 
-describe AssemblyInfo, "when providing custom attributes and specifying VB.NET" do  
+describe VbNetEngine, "when providing custom attributes and specifying VB.NET" do
+
+  include_context "language engines"
+  include_context "specifying custom attributes"
+
   before :all do
-    @tester = AssemblyInfoTester.new
-    @tester.lang_engine = VbNetEngine.new
-    asm = AssemblyInfo.new
-    asm.lang_engine = VbNetEngine.new
-    
-    asm.custom_attributes :CustomAttribute => "custom attribute data", :AnotherAttribute => "more data here"
-
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
+    using_engine VbNetEngine.new
   end
-  
-  it "should.execute the custom attributes to the assembly info file" do
-    @filedata.scan('<assembly: CustomAttribute("custom attribute data")>').length.should == 1
-    @filedata.scan('<assembly: AnotherAttribute("more data here")>').length.should == 1
+
+  it "should print the custom attributes to the assembly info file" do
+    subject.scan('<assembly: CustomAttribute("custom attribute data")>').length.should == 1
+    subject.scan('<assembly: AnotherAttribute("more data here")>').length.should == 1
   end
 end
+
+describe FSharpEngine, "when providing custom attributes and specifying F#" do
+
+  include_context "language engines"
+  include_context "specifying custom attributes"
+
+  before :all do
+    using_engine FSharpEngine.new
+  end
+
+  it "should print the custom attributes to the assembly info file" do
+    subject.scan('[<assembly: CustomAttribute("custom attribute data")>]').length.should == 1
+    subject.scan('[<assembly: AnotherAttribute("more data here")>]').length.should == 1
+  end
+end
+
 
 describe AssemblyInfo, "when specifying a custom attribute with no data" do
-  before :all do
-    @tester = AssemblyInfoTester.new
-    asm = AssemblyInfo.new
-    
-    asm.custom_attributes :NoArgsAttribute => nil
 
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  include_context "asminfo task"
+
+  before :all do
+    @asm.custom_attributes :NoArgsAttribute => nil
   end
-  
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
   it "should.execute the attribute with an empty argument list" do
-    @filedata.scan('[assembly: NoArgsAttribute()]').length.should == 1
+    subject.scan('[assembly: NoArgsAttribute()]').length.should == 1
   end
 end
 
 describe AssemblyInfo, "when specifying an attribute with non-string data" do
-  before :all do
-    @tester = AssemblyInfoTester.new
-    asm = AssemblyInfo.new
-    
-    asm.custom_attributes :NonStringAttribute => true
 
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
+  include_context "asminfo task"
+
+  before :all do
+    @asm.custom_attributes :NonStringAttribute => true
   end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
   
   it "should.execute the attribute data without quotes" do
-    @filedata.scan('[assembly: NonStringAttribute(true)]').length.should == 1
+    subject.scan('[assembly: NonStringAttribute(true)]').length.should == 1
   end
 end
 
 describe AssemblyInfo, "when generating an assembly info file with the built in attributes and no language specified" do
+
+  include_context "asminfo task"
+
   before :all do
-    @tester = AssemblyInfoTester.new
-    asm = AssemblyInfo.new
-    
-    asm.company_name = @tester.company_name
-    asm.product_name = @tester.product_name
-    asm.version = @tester.version
-    asm.title = @tester.title
-    asm.description = @tester.description
-    asm.copyright = @tester.copyright
-    asm.com_visible = @tester.com_visible
-    asm.com_guid = @tester.com_guid
-    asm.file_version = @tester.file_version
-    asm.trademark = @tester.trademark
-    
-    # Generate the same file twice.
-    @tester.build_and_read_assemblyinfo_file asm
-    @filedata = @tester.build_and_read_assemblyinfo_file asm
+    @asm.product_name = @tester.product_name
+    @asm.version = @tester.version
+    @asm.title = @tester.title
+    @asm.description = @tester.description
+    @asm.copyright = @tester.copyright
+    @asm.com_visible = @tester.com_visible
+    @asm.com_guid = @tester.com_guid
+    @asm.file_version = @tester.file_version
+    @asm.trademark = @tester.trademark
+    @asm.company_name = @tester.company_name
   end
-  
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
   it "should use the system.reflection namespace" do
-    @filedata.scan('using System.Reflection;').length.should == 1
+    subject.scan('using System.Reflection;').length.should == 1
   end
   
   it "should use the system.runtime.interopservices namespace" do
-    @filedata.scan('using System.Runtime.InteropServices;').length.should == 1
+    subject.scan('using System.Runtime.InteropServices;').length.should == 1
   end
   
   it "should contain the specified version information" do
-    @filedata.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).length.should == 1
   end
   
   it "should contain the assembly title" do
-    @filedata.scan(%Q|[assembly: AssemblyTitle("#{@tester.title}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyTitle("#{@tester.title}")]|).length.should == 1
   end
   
   it "should contain the assembly description" do
-    @filedata.scan(%Q|[assembly: AssemblyDescription("#{@tester.description}")|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyDescription("#{@tester.description}")|).length.should == 1
   end
   
   it "should contain the copyright information" do
-    @filedata.scan(%Q|[assembly: AssemblyCopyright("#{@tester.copyright}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyCopyright("#{@tester.copyright}")]|).length.should == 1
   end
   
   it "should contain the com visible information" do
-    @filedata.scan(%Q|[assembly: ComVisible(#{@tester.com_visible})]|).length.should == 1
-    @filedata.scan(%Q|[assembly: Guid("#{@tester.com_guid}")]|).length.should == 1
+    subject.scan(%Q|[assembly: ComVisible(#{@tester.com_visible})]|).length.should == 1
+    subject.scan(%Q|[assembly: Guid("#{@tester.com_guid}")]|).length.should == 1
   end
   
   it "should contain the company name information" do
-    @filedata.scan(%Q|[assembly: AssemblyCompany("#{@tester.company_name}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyCompany("#{@tester.company_name}")]|).length.should == 1
   end
   
   it "should contain the product information" do
-    @filedata.scan(%Q|[assembly: AssemblyProduct("#{@tester.product_name}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyProduct("#{@tester.product_name}")]|).length.should == 1
   end
   
   it "should contain the file version information" do
-    @filedata.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
   end
   
   it "should contain the trademark information" do
-    @filedata.scan(%Q|[assembly: AssemblyTrademark("#{@tester.trademark}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyTrademark("#{@tester.trademark}")]|).length.should == 1
   end
 end
 

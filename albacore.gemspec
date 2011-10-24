@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/albacore/assemblyinfolanguages/cppcliengine.rb",
     "lib/albacore/assemblyinfolanguages/csharpengine.rb",
     "lib/albacore/assemblyinfolanguages/vbnetengine.rb",
+    "lib/albacore/assemblyinfolanguages/fsharpengine.rb",
     "lib/albacore/config/aspnetcompilerconfig.rb",
     "lib/albacore/config/assemblyinfoconfig.rb",
     "lib/albacore/config/config.rb",

@@ -1,6 +1,7 @@
 require 'albacore/albacoretask'
 require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
+require 'albacore/assemblyinfolanguages/fsharpengine'
 
 class AssemblyInfo
   include Albacore::Task
