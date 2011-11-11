@@ -137,6 +137,12 @@ namespace :specs do
     t.spec_files = FileList['spec/nchurn*_spec.rb']
     t.spec_opts << @spec_opts
   end
+    
+  desc "Nuspec functional specs"
+  Spec::Rake::SpecTask.new :nuspec do |t|
+    t.spec_files = FileList['spec/nuspec*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
 end
 
 namespace :albacore do  

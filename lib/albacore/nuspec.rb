@@ -2,15 +2,17 @@ require 'albacore/albacoretask'
 require 'rexml/document'
 
 class NuspecFile
-  def initialize(src, target) 
+  def initialize(src, target, exclude)
     @src = src
-    @target = target 
+    @target = target
+    @exclude = exclude
   end
   
   def render(xml) 
     depend = xml.add_element 'file', { 'src' => @src }
     
     depend.add_attribute( 'target', @target ) unless @target.nil?
+    depend.add_attribute( 'exclude', @exclude ) unless @exclude.nil?
   end
 end
 
@@ -42,49 +44,85 @@ class NuspecFrameworkAssembly
   end
 end
 
+class NuspecReference
+
+  attr_accessor :file
+
+  def initialize(file)
+    @file = file
+  end
+
+  def render( xml )
+    depend = xml.add_element 'reference', {'file' => @file}
+  end
+end
+
 class Nuspec
   include Albacore::Task
   
-  attr_accessor :id, :version, :title, :authors, :description, :language, :licenseUrl, :projectUrl, :output_file,
-                :owners, :summary, :iconUrl, :requireLicenseAcceptance, :tags, :working_directory
+  attr_accessor :id, :version, :title, :authors, :description, :language, :license_url, :project_url, :output_file,
+                :owners, :summary, :icon_url, :require_license_acceptance, :tags, :working_directory, :release_notes,
+                :copyright
+  
+  # Keep these around for backwards compatibility
+  alias :licenseUrl :license_url
+  alias :licenseUrl= :license_url=
+  alias :projectUrl :project_url
+  alias :projectUrl= :project_url=
+  alias :iconUrl :icon_url
+  alias :iconUrl= :icon_url=
+  alias :requireLicenseAcceptance :require_license_acceptance
+  alias :requireLicenseAcceptance= :require_license_acceptance=
 
   def initialize()
-    @dependencies = Array.new
-    @files = Array.new
-    @frameworkAssemblies = Array.new
+    @dependencies = []
+    @files = []
+    @frameworkAssemblies = []
+    @references = []
     super()
+  end
+  
+  attr_writer :pretty_formatting
+  def pretty_formatting?
+    @pretty_formatting
   end
 
   def dependency(id, version)
     @dependencies.push NuspecDependency.new(id, version)
   end
   
-  def file(src, target=nil)
-    @files.push NuspecFile.new(src, target)
+  def file(src, target = nil, exclude = nil)
+    @files.push NuspecFile.new(src, target, exclude)
   end
 
-  def framework_assembly(name, target_framework)
+  def framework_assembly(file)
     @frameworkAssemblies.push NuspecFrameworkAssembly.new(name, target_framework)
+  end
+  
+  def reference
+    @references.push NuspecReference.new(file)
   end
   
   def execute
     check_required_field @output_file, "output_file"
-    check_required_field @id, "id" 
-    check_required_field @version, "version" 
-    check_required_field @authors, "authors" 
-    check_required_field @description, "description" 
+    check_required_field @id, "id"
+    check_required_field @version, "version"
+    check_required_field @authors, "authors"
+    check_required_field @description, "description"
     
-    if(! @working_directory.nil?)
-      @working_output_file = File.join(@working_directory, @output_file)
-    else
+    if(@working_directory.nil?)
       @working_output_file = @output_file
+    else
+      @working_output_file = File.join(@working_directory, @output_file)
     end
 
     builder = REXML::Document.new
     build(builder)
-    output=""
-    builder.write(output)
+    output = ""
+    builder.write(output, self.pretty_formatting? ? 2 : -1)
 
+    @logger.debug "Writing #{@working_output_file}"
+    
     File.open(@working_output_file, 'w') {|f| f.write(output) }
   end
 
@@ -98,17 +136,19 @@ class Nuspec
     
     metadata.add_element('id').add_text(@id)
     metadata.add_element('version').add_text(@version)
-    metadata.add_element('title').add_text(@title)
+    metadata.add_element('title').add_text(@title) unless @title.nil?
     metadata.add_element('authors').add_text(@authors)
     metadata.add_element('description').add_text(@description)
-    metadata.add_element('language').add_text(@language) if !@language.nil?
-    metadata.add_element('licenseUrl').add_text(@licenseUrl) if !@licenseUrl.nil?
-    metadata.add_element('projectUrl').add_text(@projectUrl) if !@projectUrl.nil?
-    metadata.add_element('owners').add_text(@owners) if !@owners.nil?
-    metadata.add_element('summary').add_text(@summary) if !@summary.nil?
-    metadata.add_element('iconUrl').add_text(@iconUrl) if !@iconUrl.nil?
-    metadata.add_element('requireLicenseAcceptance').add_text(@requireLicenseAcceptance) if !@requireLicenseAcceptance.nil?
-    metadata.add_element('tags').add_text(@tags) if !@tags.nil?
+    metadata.add_element('releaseNotes').add_text(@release_notes) unless @release_notes.nil?
+    metadata.add_element('language').add_text(@language) unless @language.nil?
+    metadata.add_element('licenseUrl').add_text(@license_url) unless @license_url.nil?
+    metadata.add_element('copyright').add_text(@copyright) unless @copyright.nil?
+    metadata.add_element('projectUrl').add_text(@project_url) unless @project_url.nil?
+    metadata.add_element('owners').add_text(@owners) unless @owners.nil?
+    metadata.add_element('summary').add_text(@summary) unless @summary.nil?
+    metadata.add_element('iconUrl').add_text(@iconUrl) unless @iconUrl.nil?
+    metadata.add_element('requireLicenseAcceptance').add_text(@require_license_acceptance.to_s) unless @require_license_acceptance.nil?
+    metadata.add_element('tags').add_text(@tags) unless @tags.nil?
 
     if @dependencies.length > 0
       depend = metadata.add_element('dependencies')
@@ -124,10 +164,15 @@ class Nuspec
        depend = metadata.add_element('frameworkAssemblies')
        @frameworkAssemblies.each {|x| x.render(depend)}
     end
+	
+    if @references.length > 0
+       depend = metadata.add_element('references')
+       @references.each {|x| x.render(depend)}
+    end
   end
 
   def check_required_field(field, fieldname)
-    return true if !field.nil?
-    raise "Nuget: required field '#{fieldname}' is not defined"
+    return true unless field.nil?
+    raise "Nuspec: required field '#{fieldname}' is not defined"
   end
 end
