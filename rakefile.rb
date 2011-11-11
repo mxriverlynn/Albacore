@@ -1,4 +1,5 @@
 $: << './'
+require 'psych'
 require 'lib/albacore'
 require 'version_bumper'
 
@@ -128,6 +129,12 @@ namespace :specs do
   desc "NChurn functional specs"
   Spec::Rake::SpecTask.new :nchurn do |t|
     t.spec_files = FileList['spec/nchurn*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+    
+  desc "Nuspec functional specs"
+  Spec::Rake::SpecTask.new :nuspec do |t|
+    t.spec_files = FileList['spec/nuspec*_spec.rb']
     t.spec_opts << @spec_opts
   end
 end
