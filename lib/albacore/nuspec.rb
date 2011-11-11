@@ -2,15 +2,17 @@ require 'albacore/albacoretask'
 require 'rexml/document'
 
 class NuspecFile
-  def initialize(src, target) 
+  def initialize(src, target, exclude = nil)
     @src = src
-    @target = target 
+    @target = target
+    @exclude = exclude
   end
   
   def render(xml) 
     depend = xml.add_element 'file', { 'src' => @src }
     
     depend.add_attribute( 'target', @target ) unless @target.nil?
+    depend.add_attribute( 'exclude', @exclude ) unless @exclude.nil?
   end
 end
 
@@ -45,13 +47,23 @@ end
 class Nuspec
   include Albacore::Task
   
-  attr_accessor :id, :version, :title, :authors, :description, :language, :licenseUrl, :projectUrl, :output_file,
-                :owners, :summary, :iconUrl, :requireLicenseAcceptance, :tags, :working_directory
+  attr_accessor :id, :version, :title, :authors, :description, :language, :license_url, :project_url, :output_file,
+                :owners, :summary, :icon_url, :require_license_acceptance, :tags, :working_directory
+  
+  # Keep these around for backwards compatibility
+  alias :licenseUrl :license_url
+  alias :licenseUrl= :license_url=
+  alias :projectUrl :project_url
+  alias :projectUrl= :project_url=
+  alias :iconUrl :icon_url
+  alias :iconUrl= :icon_url=
+  alias :requireLicenseAcceptance :require_license_acceptance
+  alias :requireLicenseAcceptance= :require_license_acceptance=
 
   def initialize()
-    @dependencies = Array.new
-    @files = Array.new
-    @frameworkAssemblies = Array.new
+    @dependencies = []
+    @files = []
+    @frameworkAssemblies = []
     super()
   end
 
@@ -74,15 +86,15 @@ class Nuspec
     check_required_field @authors, "authors" 
     check_required_field @description, "description" 
     
-    if(! @working_directory.nil?)
-      @working_output_file = File.join(@working_directory, @output_file)
-    else
+    if(@working_directory.nil?)
       @working_output_file = @output_file
+    else
+      @working_output_file = File.join(@working_directory, @output_file)
     end
 
     builder = REXML::Document.new
     build(builder)
-    output=""
+    output = ""
     builder.write(output)
 
     File.open(@working_output_file, 'w') {|f| f.write(output) }
@@ -101,14 +113,14 @@ class Nuspec
     metadata.add_element('title').add_text(@title)
     metadata.add_element('authors').add_text(@authors)
     metadata.add_element('description').add_text(@description)
-    metadata.add_element('language').add_text(@language) if !@language.nil?
-    metadata.add_element('licenseUrl').add_text(@licenseUrl) if !@licenseUrl.nil?
-    metadata.add_element('projectUrl').add_text(@projectUrl) if !@projectUrl.nil?
-    metadata.add_element('owners').add_text(@owners) if !@owners.nil?
-    metadata.add_element('summary').add_text(@summary) if !@summary.nil?
-    metadata.add_element('iconUrl').add_text(@iconUrl) if !@iconUrl.nil?
-    metadata.add_element('requireLicenseAcceptance').add_text(@requireLicenseAcceptance) if !@requireLicenseAcceptance.nil?
-    metadata.add_element('tags').add_text(@tags) if !@tags.nil?
+    metadata.add_element('language').add_text(@language) unless @language.nil?
+    metadata.add_element('licenseUrl').add_text(@license_url) unless @license_url.nil?
+    metadata.add_element('projectUrl').add_text(@project_url) unless @project_url.nil?
+    metadata.add_element('owners').add_text(@owners) unless @owners.nil?
+    metadata.add_element('summary').add_text(@summary) unless @summary.nil?
+    metadata.add_element('iconUrl').add_text(@iconUrl) unless @iconUrl.nil?
+    metadata.add_element('requireLicenseAcceptance').add_text(@require_license_acceptance) unless @require_license_acceptance.nil?
+    metadata.add_element('tags').add_text(@tags) unless @tags.nil?
 
     if @dependencies.length > 0
       depend = metadata.add_element('dependencies')
@@ -127,7 +139,7 @@ class Nuspec
   end
 
   def check_required_field(field, fieldname)
-    return true if !field.nil?
-    raise "Nuget: required field '#{fieldname}' is not defined"
+    return true unless field.nil?
+    raise "Nuspec: required field '#{fieldname}' is not defined"
   end
 end
