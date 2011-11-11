@@ -44,7 +44,7 @@ class NuspecFrameworkAssembly
   end
 end
 
-class NuspecFrameworkAssembly
+class NuspecReference
 
   attr_accessor :file
 
@@ -96,11 +96,11 @@ class Nuspec
   end
 
   def framework_assembly(file)
-    @frameworkAssemblies.push NuspecReference.new(name, target_framework)
+    @frameworkAssemblies.push NuspecFrameworkAssembly.new(name, target_framework)
   end
   
   def reference
-    @references.push NuspecFrameworkAssembly.new(file)
+    @references.push NuspecReference.new(file)
   end
   
   def execute
@@ -121,6 +121,8 @@ class Nuspec
     output = ""
     builder.write(output, self.pretty_formatting? ? 2 : -1)
 
+    @logger.debug "Writing #{@working_output_file}"
+    
     File.open(@working_output_file, 'w') {|f| f.write(output) }
   end
 
