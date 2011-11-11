@@ -1,4 +1,5 @@
 $: << './'
+require 'psych'
 require 'lib/albacore'
 require 'version_bumper'
 
@@ -62,6 +63,12 @@ namespace :specs do
   desc "Ndepend functional specs"
   Spec::Rake::SpecTask.new :ndepend do |t|
     t.spec_files = FileList['spec/ndepend*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+
+  desc "NuGet functional specs"
+  Spec::Rake::SpecTask.new :nuget do |t|
+    t.spec_files = FileList['spec/nuget*_spec.rb']
     t.spec_opts << @spec_opts
   end
   
@@ -128,6 +135,12 @@ namespace :specs do
   desc "NChurn functional specs"
   Spec::Rake::SpecTask.new :nchurn do |t|
     t.spec_files = FileList['spec/nchurn*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+    
+  desc "Nuspec functional specs"
+  Spec::Rake::SpecTask.new :nuspec do |t|
+    t.spec_files = FileList['spec/nuspec*_spec.rb']
     t.spec_opts << @spec_opts
   end
 end
@@ -278,7 +291,7 @@ namespace :albacore do
 end
 
 namespace :jeweler do
-  require 'jeweler'  
+  require 'jeweler'
   Jeweler::Tasks.new do |gs|
     gs.name = "albacore"
     gs.summary = "Dolphin-Safe Rake Tasks For .NET Systems"

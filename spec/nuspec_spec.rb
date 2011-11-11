@@ -56,6 +56,7 @@ describe Nuspec do
       nuspec.description = "test_xml_document"
       nuspec.working_directory = working_dir
       nuspec.file(dll, "lib")
+      nuspec.file(dll, "lib\\net40", "*.xml")
       nuspec
     end
 
@@ -72,7 +73,11 @@ describe Nuspec do
     end
 
     it "should contain the file and it's target" do
-      @filedata.should include("<file src='C:/dev/albacore/spec/support/nuspec/somedll.dll' target='lib'/>")
+      @filedata.should include("<file src='#{dll}' target='lib'/>")
+    end
+
+    it "should contain the file and it's target and an exclude" do
+      @filedata.should include("<file exclude='*.xml' src='#{dll}' target='lib\\net40'/>")
     end
   end
 end
