@@ -130,6 +130,12 @@ namespace :specs do
     t.spec_files = FileList['spec/nchurn*_spec.rb']
     t.spec_opts << @spec_opts
   end
+    
+  desc "ILMerge unit tests"
+  Spec::Rake::SpecTask.new :ilmerge do |t|
+    t.spec_files = FileList['spec/ilmerge*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
 end
 
 namespace :albacore do  
