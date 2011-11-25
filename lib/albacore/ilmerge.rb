@@ -17,6 +17,11 @@ module Albacore
 		end
 
 		def resolve
+			if File.exists? %q{C:\Program Files\Microsoft\ILMerge\ilmerge.exe}
+				%q{C:\Program Files\Microsoft\ILMerge\ilmerge.exe}
+			elsif File.exists? %q{C:\Program Files (x86)\Microsoft\ILMerge\ilmerge.exe}
+				%q{C:\Program Files (x86)\Microsoft\ILMerge\ilmerge.exe}
+			end
 		end
 
 	end
