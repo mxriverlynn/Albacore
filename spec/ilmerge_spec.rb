@@ -4,11 +4,10 @@ require 'albacore/ilmerge'
 describe IlMerge do
 
 	shared_examples_for "normal usages of IlMerge" do
-		
 		before :each do
-			@me = IlMerge.new
+			resolver = Albacore::IlMergeResolver.new 'ilmerge'
+			@me = IlMerge.new resolver
 		end
-
 	end
 
 	context 'when setting #assemblies with empty list' do
@@ -20,9 +19,20 @@ describe IlMerge do
 	end
 
 	context 'when setting #assemblies with 1 item' do
+		it_should_behave_like "normal usages of IlMerge"
+
+		it "raises an ArgumentError" do
+			expect { @me.assemblies 'assy_1' }.to raise_error(ArgumentError)
+		end
 	end
 
 	context 'when setting #assemblies with 2 items' do
+		it_should_behave_like "normal usages of IlMerge"
+
+		it "has parameters that contains all assemblies listed" do
+			@me.assemblies 'assy_1.dll', 'assy_2.dll'
+			@me.parameters.should == %w{ilmerge assy_1.dll assy_2.dll}
+		end
 	end
 
 end
