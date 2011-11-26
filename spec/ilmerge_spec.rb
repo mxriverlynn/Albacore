@@ -44,6 +44,12 @@ describe IlMerge do
 		end
 	end
 
+	context 'when creating with defaults' do
+		it "can initialize a new object with default parameters" do
+			IlMerge.new.should_not be_nil
+		end
+	end
+
 end
 
 describe Albacore::IlMergeResolver, "Global Albacore#configure configuration" do
