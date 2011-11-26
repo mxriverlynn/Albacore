@@ -40,7 +40,7 @@ describe IlMerge do
 
 		it "has parameters that contains all assemblies listed" do
 			@me.assemblies 'assy_1.dll', 'assy_2.dll'
-			@me.build_parameters.should == %w{/out:output.dll assy_1.dll assy_2.dll}
+			@me.build_parameters.should == %w{/out:"output.dll" assy_1.dll assy_2.dll}
 		end
 	end
 

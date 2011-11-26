@@ -5,11 +5,15 @@ class IlMerge
 	include Albacore::Task
 	include Albacore::RunCommand
 
-	attr_accessor :output
+	attr_accessor :output, :path
 
 	def initialize(resolver = nil)
 		@resolver = resolver || Albacore::IlMergeResolver.new
 		super()
+	end
+
+	def command=(cmd)
+		@resolver.path = cmd
 	end
 
 	def assemblies(*assys)
@@ -18,15 +22,16 @@ class IlMerge
 	end
 
 	def build_parameters
-		params = Array.new @parameters
-		params << "/out:#{output}"
+		params = Array.new @parameters.map{|x| %W("#{x}") }
+		params << %Q{/out:"#{output}"}
 		raise ArgumentError, "you are required to call assemblies" if @assemblies == nil
 		params += @assemblies
 		params
 	end
 
-	def run_command
-		super(command_path, build_parameters)
+	def execute
+		result = run_command path, build_parameters.join(' ')
+		puts result
 	end
 	
 end
