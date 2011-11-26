@@ -27,6 +27,14 @@ describe IlMerge do
 		end
 	end
 
+	context 'when #assemblies is never called' do
+		it_should_behave_like "normal usages of IlMerge"
+
+		it "raises an ArgumentError" do
+			expect { @me.build_parameters }.to raise_error(ArgumentError)
+		end
+	end
+
 	context 'when setting #assemblies with 2 items' do
 		it_should_behave_like "normal usages of IlMerge"
 
