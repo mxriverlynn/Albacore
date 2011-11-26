@@ -8,7 +8,7 @@ class IlMerge
 	attr_accessor :output
 
 	def initialize(resolver = nil)
-		@resolver = resolver || IlMergeResolver.new
+		@resolver = resolver || Albacore::IlMergeResolver.new
 		super()
 	end
 
