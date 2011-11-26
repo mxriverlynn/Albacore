@@ -13,13 +13,17 @@ module Albacore
 	class IlMergeResolver
 
 		def initialize(ilmerge_path=nil)
-			@ilmerge_path ||= Albacore.configuration.ilmerge_path
+			@ilmerge_path = ilmerge_path || Albacore.configuration.ilmerge_path
 		end
 
 		def resolve
-			m = ['', ' (x86)'].map{|x| "C:\\Program Files#{x}\\Microsoft\\ILMerge\\ilmerge.exe" }
-			m.keep_if{|x| File.exists? x}
-			m.first
+			if @ilmerge_path != nil
+				@ilmerge_path
+			else
+				m = ['', ' (x86)'].map{|x| "C:\\Program Files#{x}\\Microsoft\\ILMerge\\ilmerge.exe" }
+				m.keep_if{|x| File.exists? x}
+				m.first
+			end
 		end
 
 	end
