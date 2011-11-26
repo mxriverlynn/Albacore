@@ -20,6 +20,7 @@ class IlMerge
 	def build_parameters
 		params = Array.new @parameters
 		params << "/out:#{output}"
+		raise ArgumentError, "you are required to call assemblies" if @assemblies == nil
 		params += @assemblies
 		params
 	end
