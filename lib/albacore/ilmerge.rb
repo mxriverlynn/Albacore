@@ -17,11 +17,9 @@ module Albacore
 		end
 
 		def resolve
-			if File.exists? %q{C:\Program Files\Microsoft\ILMerge\ilmerge.exe}
-				%q{C:\Program Files\Microsoft\ILMerge\ilmerge.exe}
-			elsif File.exists? %q{C:\Program Files (x86)\Microsoft\ILMerge\ilmerge.exe}
-				%q{C:\Program Files (x86)\Microsoft\ILMerge\ilmerge.exe}
-			end
+			m = ['', ' (x86)'].map{|x| "C:\\Program Files#{x}\\Microsoft\\ILMerge\\ilmerge.exe" }
+			m.keep_if{|x| File.exists? x}
+			m.first
 		end
 
 	end
