@@ -1,7 +1,7 @@
 require 'albacore/albacoretask'
 
 class IlMerge 
-	TaskName = :ilmerge
+	TaskName = [:ilmerge, :ILMerge]
 	include Albacore::Task
 	include Albacore::RunCommand
 
@@ -27,7 +27,7 @@ class IlMerge
 
 	def execute
 		@command ||= @resolver.resolve
-		result = run_command command, build_parameters
+		result = run_command "ILMerge", build_parameters
 	end
 	
 end
