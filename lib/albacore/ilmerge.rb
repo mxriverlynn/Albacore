@@ -5,8 +5,19 @@ class IlMerge
 	include Albacore::Task
 	include Albacore::RunCommand
 
-	def assemblies(assys = [])
-		raise ArgumentError
+	def initialize(resolver = nil)
+		@resolver = resolver || IlMergeResolver.new
+	end
+
+	def assemblies(*assys)
+		raise ArgumentError, "expected at least 2 assemblies to merge" if assys.length < 2
+		@assemblies = assys
+	end
+
+	def parameters
+		params = [ @resolver.resolve ]
+		params += @assemblies
+		params
 	end
 	
 end
