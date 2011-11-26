@@ -7,6 +7,7 @@ class IlMerge
 
 	def initialize(resolver = nil)
 		@resolver = resolver || IlMergeResolver.new
+		super()
 	end
 
 	def assemblies(*assys)
@@ -14,10 +15,14 @@ class IlMerge
 		@assemblies = assys
 	end
 
-	def parameters
-		params = [ @resolver.resolve ]
+	def build_parameters
+		params = Array.new @parameters
 		params += @assemblies
 		params
+	end
+
+	def run_command
+		super(command_path, build_parameters)
 	end
 	
 end
@@ -28,6 +33,10 @@ module Albacore
 
 		def initialize(ilmerge_path=nil)
 			@ilmerge_path = ilmerge_path || Albacore.configuration.ilmerge_path
+		end
+
+		def path=(path)
+			@ilmerge_path = path
 		end
 
 		def resolve
