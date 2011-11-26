@@ -5,6 +5,9 @@ class IlMerge
 	include Albacore::Task
 	include Albacore::RunCommand
 
+	def assemblies(assys = [])
+		raise ArgumentError
+	end
 	
 end
 

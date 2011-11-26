@@ -3,7 +3,20 @@ require 'albacore/ilmerge'
 
 describe IlMerge do
 
+	shared_examples_for "normal usages of IlMerge" do
+		
+		before :each do
+			@me = IlMerge.new
+		end
+
+	end
+
 	context 'when setting #assemblies with empty list' do
+		it_should_behave_like "normal usages of IlMerge"
+
+		it "raises an ArgumentError" do
+			expect { @me.assemblies }.to raise_error(ArgumentError)
+		end
 	end
 
 	context 'when setting #assemblies with 1 item' do
