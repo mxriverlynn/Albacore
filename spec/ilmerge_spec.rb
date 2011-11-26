@@ -7,6 +7,7 @@ describe IlMerge do
 		before :each do
 			resolver = Albacore::IlMergeResolver.new 'ilmerge'
 			@me = IlMerge.new resolver
+			@me.output = 'output.dll'
 		end
 	end
 
@@ -31,7 +32,7 @@ describe IlMerge do
 
 		it "has parameters that contains all assemblies listed" do
 			@me.assemblies 'assy_1.dll', 'assy_2.dll'
-			@me.build_parameters.should == %w{assy_1.dll assy_2.dll}
+			@me.build_parameters.should == %w{/out:output.dll assy_1.dll assy_2.dll}
 		end
 	end
 

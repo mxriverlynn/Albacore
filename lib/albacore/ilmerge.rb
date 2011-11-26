@@ -5,6 +5,8 @@ class IlMerge
 	include Albacore::Task
 	include Albacore::RunCommand
 
+	attr_accessor :output
+
 	def initialize(resolver = nil)
 		@resolver = resolver || IlMergeResolver.new
 		super()
@@ -17,6 +19,7 @@ class IlMerge
 
 	def build_parameters
 		params = Array.new @parameters
+		params << "/out:#{output}"
 		params += @assemblies
 		params
 	end
