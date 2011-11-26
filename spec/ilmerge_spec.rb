@@ -21,9 +21,9 @@ describe Albacore::IlMergeResolver, "Global Albacore#configure configuration" do
 		context "and ilmerge.exe exists in Program Files" do
 			before :each do
 				@il_path = %q{C:\Program Files\Microsoft\ILMerge\ilmerge.exe}
+				set_file_exists %q{C:\Program Files (x86)\Microsoft\ILMerge\ilmerge.exe}, false 
 				set_file_exists @il_path, true
 				@me = Albacore::IlMergeResolver.new ''
-				puts 'before all'
 			end
 
 			subject { @me.resolve }
@@ -36,7 +36,6 @@ describe Albacore::IlMergeResolver, "Global Albacore#configure configuration" do
 				set_file_exists %q{C:\Program Files\Microsoft\ILMerge\ilmerge.exe}, false 
 				set_file_exists @il_path, true
 				@me = Albacore::IlMergeResolver.new ''
-				puts 'before all'
 			end
 
 			subject { @me.resolve }
@@ -45,7 +44,7 @@ describe Albacore::IlMergeResolver, "Global Albacore#configure configuration" do
 	end
 
 	def set_file_exists(path, exists)
-			File.stub!(:exists?).with(path).and_return(exists)
+			File.should_receive(:exists?).with(path).and_return(exists)
 	end
 
 end
