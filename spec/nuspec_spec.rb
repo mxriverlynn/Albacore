@@ -3,9 +3,9 @@ require 'spec_helper.rb'
 require 'albacore/nuspec.rb'
 
 if IS_IRONRUBY
-  require 'support\ironruby_validator'
+  require 'support/ironruby_validator'
 else
-  require 'support\nokogiri_validator'
+  require 'support/nokogiri_validator'
 end
 
 describe Nuspec do
