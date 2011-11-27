@@ -14,6 +14,7 @@ Albacore has been tested against the following versions of rake:
 
 * Rake v0.8.7
 * Rake v0.9.2
+* Rake v0.9.2.2
 
 Albacore has been tested against the following versions of Ruby for Windows:
 
@@ -38,7 +39,7 @@ Due to an incompatibility with the Rubyzip gem, IronRuby does not support the â€
 
 ## Legal Mumbo Jumbo (MIT License)
 
-Copyright (c) 2011 Derick Bailey
+Copyright (c) 2011 Derick Bailey, Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
