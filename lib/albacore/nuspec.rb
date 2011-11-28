@@ -121,6 +121,8 @@ class Nuspec
     output = ""
     builder.write(output, self.pretty_formatting? ? 2 : -1)
 
+    @logger.debug "Writing #{@working_output_file}"
+
     File.open(@working_output_file, 'w') {|f| f.write(output) }
   end
 
