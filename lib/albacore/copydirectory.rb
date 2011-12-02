@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'FileUtils'
+require 'albacore/albacoretask'
 
 class CopyDir
 	include Albacore::Task
@@ -9,14 +10,16 @@ class CopyDir
 	def initialize
 		@exclude = []
 		@delete_dest = false
+		super()
+		update_attributes Albacore.configuration.copydir.to_hash
 	end
 	
 	def execute
 		delete_dir @dest if @delete_dest && File.directory?(@dest)
-		copydir(@src, @dest)
+		copy_dir(@src, @dest)
 	end	
 		
-	def copydir(source, destination)		
+	def copy_dir(source, destination)		
 		FileUtils.mkdir destination unless File.exists? destination
 
 		Dir.foreach(source) do |file|
@@ -27,7 +30,7 @@ class CopyDir
 			destination_file = "#{destination}/#{file}"
 			
 			if File.directory?(source_file)
-				copydir source_file, destination_file
+				copy_dir source_file, destination_file
 			else
 				FileUtils.copy source_file, destination_file
 			end
