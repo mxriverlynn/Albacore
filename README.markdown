@@ -15,6 +15,7 @@ Albacore has been tested against the following versions of rake:
 * Rake v0.8.7
 * Rake v0.9.2
 * Rake v0.9.2.2
+* Rake v0.9.3
 
 Albacore has been tested against the following versions of Ruby for Windows:
 
