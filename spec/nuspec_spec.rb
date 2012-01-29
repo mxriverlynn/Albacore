@@ -58,6 +58,7 @@ describe Nuspec do
       nuspec.copyright = "copyright 2011"
       nuspec.working_directory = working_dir
       nuspec.file(dll, "lib")
+      nuspec.file(dll, "lib\\net40", "*.xml")
       nuspec
     end
 
@@ -74,7 +75,11 @@ describe Nuspec do
     end
 
     it "should contain the file and it's target" do
-      @filedata.downcase().should include(("<file src='" + dll + "' target='lib'/>").downcase())
+      @filedata.downcase.should include("<file src='#{dll}' target='lib'/>".downcase)
+    end
+
+    it "should contain the file and it's target and an exclude" do
+      @filedata.should include("<file exclude='*.xml' src='#{dll}' target='lib\\net40'/>")
     end
   end
 end
