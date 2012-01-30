@@ -5,6 +5,7 @@ require 'fileutils'
 
 class OutputBuilder
   include FileUtils
+  include Rake::DSL
   
   def initialize(dir_to, dir_from)
     @dir_to = dir_to
