@@ -6,17 +6,17 @@ require 'albacore/assemblyinfolanguages/cppcliengine'
 
 class AssemblyInfo
   include Albacore::Task
-  
+
   attr_accessor :input_file, :output_file
   attr_accessor :language
   attr_accessor :version, :title, :description, :custom_attributes
   attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
   attr_accessor :file_version, :trademark, :lang_engine, :custom_data
-  
+
   attr_array :namespaces
   attr_hash :custom_attributes
   attr_array :custom_data
-  
+
   def initialize
     @namespaces = []
     super()
@@ -26,12 +26,16 @@ class AssemblyInfo
   def use(file)
     @input_file = @output_file = file
   end
-  
+
+  def update(file)
+    @input_file = @output_file = file
+  end
+
   def execute
     @lang_engine = CSharpEngine.new unless check_lang_engine
     write_assemblyinfo @output_file, @input_file
   end
-  
+
   def write_assemblyinfo(assemblyinfo_file, input_file)
     valid = check_output_file assemblyinfo_file
     return if !valid
@@ -40,7 +44,7 @@ class AssemblyInfo
     asm_data = build_assembly_info_data input_data
 
     @logger.info "Generating Assembly Info File At: " + File.expand_path(assemblyinfo_file)
-    File.open(assemblyinfo_file, 'w') do |f|      
+    File.open(assemblyinfo_file, 'w') do |f|
       asm_data.each do |line|
         f.puts line
       end
@@ -59,13 +63,13 @@ class AssemblyInfo
 
     data
   end
-  
+
   def check_output_file(file)
     return true if file
     fail_with_message 'output_file cannot be nil'
     false
   end
-  
+
   def check_lang_engine
     !@lang_engine.nil?
   end
@@ -84,31 +88,30 @@ class AssemblyInfo
     build_attribute(data, "AssemblyDescription", @description)
     build_attribute(data, "AssemblyCompany", @company_name)
     build_attribute(data, "AssemblyProduct", @product_name)
-    
+
     build_attribute(data, "AssemblyCopyright", @copyright)
     build_attribute(data, "AssemblyTrademark", @trademark)
-    
+
     build_attribute(data, "ComVisible", @com_visible)
     build_attribute(data, "Guid", @com_guid)
-    
+
     build_attribute(data, "AssemblyVersion", @version)
     build_attribute(data, "AssemblyFileVersion", @file_version)
-    
+
     data << ""
     if @custom_attributes != nil
-      attributes = build_custom_attributes()
-      data += attributes
+      build_custom_attributes(data)
       data << ""
     end
 
     if @custom_data != nil
-      @custom_data.each do |cdata| 
+      @custom_data.each do |cdata|
         data << cdata unless data.include? cdata
       end
     end
 
     data.concat build_footer
-    
+
     data
   end
 
@@ -132,28 +135,26 @@ class AssemblyInfo
     end
     data << attr_value if result.nil?
   end
-  
+
   def build_using_statements
     @namespaces = [] if @namespaces.nil?
-    
+
     @namespaces << "System.Reflection"
     @namespaces << "System.Runtime.InteropServices"
     @namespaces.uniq!
-    
+
     ns = []
     @namespaces.each do |n|
       ns << @lang_engine.build_using_statement(n)
     end
-    
-    ns
-  end  
 
-  def build_custom_attributes()
-    attributes = []
-    @custom_attributes.each do |key, value|
-      attributes << @lang_engine.build_attribute(key, value)
-    end
-    attributes
+    ns
   end
-  
+
+  def build_custom_attributes(data)
+    @custom_attributes.each do |key, value|
+      build_attribute(data, key, value)
+    end
+  end
+
 end
