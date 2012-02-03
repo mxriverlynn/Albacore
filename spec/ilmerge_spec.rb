@@ -3,41 +3,31 @@ require 'albacore/ilmerge'
 
 describe IlMerge do
 
-	shared_examples_for "normal usages of IlMerge" do
-		before :each do
-			resolver = Albacore::IlMergeResolver.new 'ilmerge'
-			@me = IlMerge.new resolver
-			@me.output = 'output.dll'
-		end
-	end
+  before :each do
+    resolver = Albacore::IlMergeResolver.new 'ilmerge'
+    @me = IlMerge.new resolver
+    @me.output = 'output.dll'
+  end
 
 	context 'when setting #assemblies with empty list' do
-		it_should_behave_like "normal usages of IlMerge"
-
 		it "raises an ArgumentError" do
 			expect { @me.assemblies }.to raise_error(ArgumentError)
 		end
 	end
 
 	context 'when setting #assemblies with 1 item' do
-		it_should_behave_like "normal usages of IlMerge"
-
 		it "raises an ArgumentError" do
 			expect { @me.assemblies 'assy_1' }.to raise_error(ArgumentError)
 		end
 	end
 
 	context 'when #assemblies is never called' do
-		it_should_behave_like "normal usages of IlMerge"
-
 		it "raises an ArgumentError" do
 			expect { @me.build_parameters }.to raise_error(ArgumentError)
 		end
 	end
 
 	context 'when setting #assemblies with 2 items' do
-		it_should_behave_like "normal usages of IlMerge"
-
 		it "has parameters that contains all assemblies listed" do
 			@me.assemblies 'assy_1.dll', 'assy_2.dll'
 			@me.build_parameters.should == %w{/out:"output.dll" assy_1.dll assy_2.dll}
