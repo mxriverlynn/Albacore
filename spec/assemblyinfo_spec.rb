@@ -102,6 +102,37 @@ describe FSharpEngine, "when generating assembly info" do
 
 end
 
+describe FSharpEngine, "when setting language attribute" do
+
+  include_context "language engines"
+
+  before :all do
+    @tester.language = @asm.language = "F#"
+  end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
+  it "should use the system.reflection namespace" do
+    subject.scan(%Q|open System.Reflection|).length.should == 1
+  end
+
+  it "should not contain the assembly title" do
+    subject.scan(%Q|[assembly: AssemblyTitle("#{@tester.title}")]|).should be_empty
+  end
+
+  it "should output a module definition" do
+    subject.scan('module AssemblyInfo').length.should == 1
+  end
+
+  it "should output '()' at the bottom" do
+    subject.scan('()').length.should == 1
+  end
+
+end
+
+
+
+
 
 { :no => { :engine => nil,              :lang => "no", :start_token => "[", :end_token => "]",     :using => "using " },
   :cs => { :engine => CSharpEngine.new, :lang => "the C#", :start_token => "[", :end_token => "]",     :using => "using " },

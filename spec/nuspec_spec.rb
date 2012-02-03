@@ -3,9 +3,9 @@ require 'spec_helper.rb'
 require 'albacore/nuspec.rb'
 
 if IS_IRONRUBY
-  require 'support\ironruby_validator'
+  require 'support/ironruby_validator'
 else
-  require 'support\nokogiri_validator'
+  require 'support/nokogiri_validator'
 end
 
 describe Nuspec do
@@ -25,6 +25,7 @@ describe Nuspec do
       nuspec.version = "1.2.3"
       nuspec.authors = "Author Name"
       nuspec.description = "test_xml_document"
+      nuspec.copyright = "copyright 2011"
       nuspec.working_directory = working_dir
       nuspec
     end
@@ -54,8 +55,10 @@ describe Nuspec do
       nuspec.version = "1.2.3"
       nuspec.authors = "Author Name"
       nuspec.description = "test_xml_document"
+      nuspec.copyright = "copyright 2011"
       nuspec.working_directory = working_dir
       nuspec.file(dll, "lib")
+      nuspec.file(dll, "lib\\net40", "*.xml")
       nuspec
     end
 
@@ -72,7 +75,11 @@ describe Nuspec do
     end
 
     it "should contain the file and it's target" do
-      @filedata.should include("<file src='C:/dev/albacore/spec/support/nuspec/somedll.dll' target='lib'/>")
+      @filedata.downcase.should include("<file src='#{dll}' target='lib'/>".downcase)
+    end
+
+    it "should contain the file and it's target and an exclude" do
+      @filedata.should include("<file exclude='*.xml' src='#{dll}' target='lib\\net40'/>")
     end
   end
 end

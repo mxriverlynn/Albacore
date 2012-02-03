@@ -1,8 +1,12 @@
 $: << './'
+require 'psych'
 require 'lib/albacore'
 require 'version_bumper'
 
 task :default => ['albacore:sample']
+task :install => ['jeweler:gemspec', 'jeweler:build'] do
+  sh "gem install -l pkg/albacore-#{File.open('VERSION', 'rb').read}.gem"
+end
 
 namespace :specs do
   require 'rspec/core/rake_task'
@@ -66,6 +70,12 @@ namespace :specs do
     t.rspec_opts = @rspec_opts
   end
   
+  desc "NuSpec functional specs"
+  RSpec::Core::RakeTask.new :nuspec do |t|
+    t.pattern = 'spec/nuspec*_spec.rb'
+    t.rspec_opts = @rspec_opts
+  end
+
   desc "Zip functional specs"
   RSpec::Core::RakeTask.new :zip do |t|
     t.pattern = 'spec/zip*_spec.rb'
@@ -130,6 +140,18 @@ namespace :specs do
   RSpec::Core::RakeTask.new :nchurn do |t|
     t.pattern = 'spec/nchurn*_spec.rb'
     t.rspec_opts = @rspec_opts
+  end
+    
+  desc "ILMerge unit tests"
+  RSpec::Core::RakeTask.new :ilmerge do |t|
+    t.pattern = 'spec/ilmerge*_spec.rb'
+    t.rspec_opts = @rspec_opts
+  end
+    
+  desc "ILMerge unit tests"
+  Spec::Rake::SpecTask.new :ilmerge do |t|
+    t.spec_files = FileList['spec/ilmerge*_spec.rb']
+    t.spec_opts << @spec_opts
   end
 end
 
@@ -243,7 +265,7 @@ namespace :albacore do
 
   desc "MSTest Test Runner Example"
   mstest do |mstest|
-    mstest.command = "spec/support/Tools/MSTest-2008/mstest.exe"
+    mstest.command = "spec/support/Tools/MSTest-2010/mstest.exe"
     mstest.assemblies "spec/support/CodeCoverage/mstest/TestSolution.MsTestTests.dll"
   end
 
