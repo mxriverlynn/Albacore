@@ -1,3 +1,6 @@
+require 'ostruct'
+require 'albacore/support/openstruct'
+
 module Configuration
   module MSDeploy
     include Albacore::Configuration
