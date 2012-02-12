@@ -1,4 +1,4 @@
- require 'ostruct'
+require 'ostruct'
 require 'albacore/config/netversion'
 require 'albacore/support/openstruct'
 

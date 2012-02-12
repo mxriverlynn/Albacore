@@ -58,6 +58,7 @@ class MSDeploy
  end
  
  def get_package
+<<<<<<< HEAD
    #is it a direct file
    if(File.file?(@deploy_package))
      return "-source:package='#{File.expand_path(@deploy_package)}'"
@@ -66,6 +67,9 @@ class MSDeploy
    #try directory with zip in it
    Dir.glob("#{@deploy_package}/**.zip") do |zip|
      puts File.expand_path(zip)
+=======
+   Dir.glob("#{@deploy_package}/**.zip") do |zip|
+>>>>>>> Changes with spec tests
      return "-source:package='#{File.expand_path(zip)}'"
    end
    # must be an archive directory

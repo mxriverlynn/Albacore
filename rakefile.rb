@@ -42,6 +42,24 @@ namespace :specs do
     t.rspec_opts = @rspec_opts
   end
   
+  desc "Output functional specs"
+  RSpec::Core::RakeTask.new :output do |t|
+    t.pattern = 'spec/output*_spec.rb'
+    t.rspec_opts = @rspec_opts
+  end
+    
+  desc "NChurn functional specs"
+  RSpec::Core::RakeTask.new :nchurn do |t|
+    t.pattern = 'spec/nchurn*_spec.rb'
+    t.rspec_opts = @rspec_opts
+  end
+  
+  desc "MSDeploy functional specs"
+  RSpec::Core::RakeTask.new :msdeploy do |t|
+    t.pattern = 'spec/msdeploy*_spec.rb'
+    t.rspec_opts = @rspec_opts
+  end
+  
 end
 
 namespace :albacore do  
