@@ -5,10 +5,10 @@ class MSDeploy
   include Albacore::Task
   include Albacore::RunCommand
   
-  attr_accessor :package, :parameters_file, :server, :username, :password, :additional_parameters, :noop
+  attr_accessor :deploy_package, :parameters_file, :server, :username, :password, :additional_parameters, :noop
   
   def initialize
-    @package = Dir.pwd
+    @deploy_package = Dir.pwd
     @noop = false
     super()
     update_attributes Albacore.configuration.msdeploy.to_hash
@@ -50,11 +50,11 @@ class MSDeploy
  end
  
  def get_package
-   Dir.glob("#{@package}/**.zip") do |zip|
+   Dir.glob("#{@deploy_package}/**.zip") do |zip|
      return "-source:package='#{File.expand_path(zip)}'"
    end
    # must be an archive directory
-   package_location = "#{@package}/archive"
+   package_location = "#{@deploy_package}/archive"
    if(File.exists?(package_location))
      return "-source:archiveDir='#{File.expand_path(package_location)}'"
    end
@@ -78,11 +78,12 @@ end
 
  def get_parameters
    if (!@parameters_file.nil?)
-      Dir.glob("#{@parameters_file}/**.SetParameters.xml") do |parameters| 
+      Dir.glob("#{@parameters_file}") do |parameters| 
         return "-setParamFile:\"#{File.expand_path(parameters)}\""
-      end      
+      end 
+      fail_with_message 'Could not find parameter file specified.'
     else
-      Dir.glob("#{@package}/**.SetParameters.xml") do |parameters| 
+      Dir.glob("#{@deploy_package}/**.SetParameters.xml") do |parameters| 
         return "-setParamFile:\"#{File.expand_path(parameters)}\""
       end
     end

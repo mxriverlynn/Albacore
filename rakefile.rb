@@ -131,6 +131,13 @@ namespace :specs do
     t.pattern = 'spec/nchurn*_spec.rb'
     t.rspec_opts = @rspec_opts
   end
+  
+  desc "MSDeploy functional specs"
+  RSpec::Core::RakeTask.new :msdeploy do |t|
+    t.pattern = 'spec/msdeploy*_spec.rb'
+    t.rspec_opts = @rspec_opts
+  end
+  
 end
 
 namespace :albacore do  
@@ -275,33 +282,6 @@ namespace :albacore do
     migrator.provider = "sqlite"
     migrator.connection = "Data Source=#{db_file};"
   end
-
-desc "This is my Task"
-msdeploy :msdeploy do |msdeploy|
-  puts "Msdeploy task"
-  msdeploy.package = "spec/support/TestSolution/TestSolution.MSDeploy/TestSolution.MSDeploy/obj/Debug/Package"
-  msdeploy.noop = true
-  #msdeploy.parameters = "lol"
-end
-
-desc "This is my Task"
-msdeploy :msdeploy2 do |msdeploy|
-  puts "Msdeploy 2 task"
-  msdeploy.package = "spec/support/TestSolution/TestSolution.MSDeploy/TestSolution.MSDeploy/obj/Release/Package"
-  msdeploy.noop = true
-  #msdeploy.parameters = "lol"
-end
-
-desc "This is my Task"
-msdeploy :msdeploy3 do |msdeploy|
-  puts "Msdeploy 3 task"
-  msdeploy.package = "spec/support/TestSolution/TestSolution.MSDeploy/TestSolution.MSDeploy/obj/Release/Package"
-  msdeploy.username="testusername"
-  msdeploy.server="testserver"
-  msdeploy.password="testpassword"
-  msdeploy.noop = true
-  #msdeploy.parameters = "lol"
-end
 
 end
 
