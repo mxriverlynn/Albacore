@@ -253,6 +253,12 @@ namespace :albacore do
     mstest.command = "spec/support/Tools/MSTest-2008/mstest.exe"
     mstest.assemblies "spec/support/CodeCoverage/mstest/TestSolution.MsTestTests.dll"
   end
+  
+  desc "MSDeploy Example"
+  msdeploy do |msdeploy|
+    msdeploy.deploy_package = "spec/support/TestSolution/TestSolution.MSDeploy/TestSolution.MSDeploy/obj/Debug/Package"
+    msdeploy.noop = true    
+  end
 
   desc "XUnit Test Runner Example"
   xunit do |xunit|
