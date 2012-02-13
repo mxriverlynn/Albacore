@@ -1,5 +1,7 @@
 require 'spec_helper'
 require 'outputtestdata'
+include ::Rake::DSL if defined?(::Rake::DSL)
+
 describe Output, 'when having a from and to set' do 
 
       before :each do
