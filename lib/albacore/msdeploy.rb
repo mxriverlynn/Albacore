@@ -49,11 +49,7 @@ class MSDeploy
    return "#{msdeploy_path}msdeploy.exe"    
  end
  
- def get_package   
-   if(File.file?(@deploy_package) && (@deploy_package != Dir.pwd))
-     return "-source:package='#{File.expand_path(@deploy_package)}'"
-   end
-   
+ def get_package
    Dir.glob("#{@deploy_package}/**.zip") do |zip|
      return "-source:package='#{File.expand_path(zip)}'"
    end
@@ -103,6 +99,4 @@ end
  def get_constant_parameters
    return "-verb:sync  -disableLink:AppPoolExtension  -disableLink:ContentExtension  -disableLink:CertificateExtension "
  end
- 
- 
 end
