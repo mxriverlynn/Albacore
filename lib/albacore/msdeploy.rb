@@ -49,7 +49,11 @@ class MSDeploy
    return "#{msdeploy_path}msdeploy.exe"    
  end
  
- def get_package
+ def get_package   
+   if(File.file?(@deploy_package) && (@deploy_package != Dir.pwd))
+     return "-source:package='#{File.expand_path(@deploy_package)}'"
+   end
+   
    Dir.glob("#{@deploy_package}/**.zip") do |zip|
      return "-source:package='#{File.expand_path(zip)}'"
    end
