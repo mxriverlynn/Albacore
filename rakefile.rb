@@ -1,4 +1,4 @@
-$: << './'
+﻿$: << './'
 require 'psych'
 require 'lib/albacore'
 require 'version_bumper'
