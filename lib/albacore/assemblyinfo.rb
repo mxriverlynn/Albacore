@@ -1,4 +1,5 @@
 require 'albacore/albacoretask'
+require 'albacore/config/assemblyinfoconfig'
 require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
 require 'albacore/assemblyinfolanguages/fsharpengine'
@@ -6,21 +7,22 @@ require 'albacore/assemblyinfolanguages/cppcliengine'
 
 class AssemblyInfo
   include Albacore::Task
+  include Configuration::AssemblyInfo
   
-  attr_accessor :input_file, :output_file
-  attr_accessor :language
-  attr_accessor :version, :title, :description, :custom_attributes
-  attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-  attr_accessor :file_version, :trademark, :lang_engine, :custom_data
+  attr_accessor :input_file, :output_file, :language,
+   :version, :title, :description, :custom_attributes,
+   :copyright, :com_visible, :com_guid, :company_name, :product_name,
+   :file_version, :trademark, :lang_engine
   
-  attr_array :namespaces
+  attr_array :namespaces, :custom_data
   attr_hash :custom_attributes
-  attr_array :custom_data
   
   def initialize
     @namespaces = []
+    @custom_data = []
     super()
-    update_attributes Albacore.configuration.assemblyinfo.to_hash
+    puts assemblyinfo.to_hash
+    update_attributes assemblyinfo.to_hash
   end
 
   def use(file)
@@ -112,12 +114,10 @@ class AssemblyInfo
       data << ""
     end
 
-    if @custom_data != nil
-      @custom_data.each do |cdata| 
-        data << cdata unless data.include? cdata
-      end
+    @custom_data.each do |cdata| 
+      data << cdata unless data.include? cdata
     end
-
+    
     data.concat build_footer
     
     data

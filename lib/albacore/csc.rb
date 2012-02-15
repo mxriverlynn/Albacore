@@ -15,6 +15,7 @@ class CSC
   def initialize
     @optimize = false
     super()
+    puts csc.to_hash
     update_attributes csc.to_hash
   end
 

@@ -4,10 +4,17 @@ require 'albacore/support/openstruct'
 module Configuration
   module AssemblyInfo
     include Albacore::Configuration
-    def assemblyinfo
-      @asmconfig ||= OpenStruct.new.extend(OpenStructToHash)
-      yield(@asmconfig) if block_given?
-      @asmconfig
+    
+    def self.asmconfig
+      @config ||= OpenStruct.new.extend(OpenStructToHash).extend(AssemblyInfo)
     end
+    
+    # this is the key: Albacore.configure( hash => hash.assemblyinfo ) 
+    def assemblyinfo
+      config ||= AssemblyInfo.asmconfig
+      yield(config) if block_given?
+      config
+    end
+    
   end
 end
