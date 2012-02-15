@@ -10,12 +10,12 @@ class CSC
 
   attr_accessor :output, :target, :optimize, :debug, :doc, :main,
     :keyfile, :keycontainer, :delaysign # strong name flags
+    
   attr_array :compile, :references, :resources, :define
 
   def initialize
     @optimize = false
     super()
-    puts csc.to_hash
     update_attributes csc.to_hash
   end
 

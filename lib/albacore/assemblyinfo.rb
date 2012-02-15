@@ -21,7 +21,6 @@ class AssemblyInfo
     @namespaces = []
     @custom_data = []
     super()
-    puts assemblyinfo.to_hash
     update_attributes assemblyinfo.to_hash
   end
 
