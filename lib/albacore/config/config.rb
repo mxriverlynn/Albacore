@@ -6,7 +6,7 @@ module Albacore
   end
 
   class ConfigData
-   	attr_accessor :yaml_config_folder, :log_level
+    attr_accessor :yaml_config_folder, :log_level
   end
 
   class << self
