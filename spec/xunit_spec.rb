@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'albacore/xunittestrunner'
 
-shared_examples_for "xunit paths" do
+describe "xunit with defined paths" do
   before :all do
     @xunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'XUnit-v1.5', 'xunit.console.exe')
     @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'xunit', 'assemblies', 'TestSolution.XUnitTests.dll')
@@ -9,11 +9,9 @@ shared_examples_for "xunit paths" do
     @working_dir =File.join(File.dirname(__FILE__), 'support','xunit')
     @html_output = File.join(@working_dir,'TestSolution.XUnitTests.dll.html')
   end
-end
 
 describe XUnitTestRunner, "the command parameters for an xunit runner" do
-  it_should_behave_like "xunit paths"
-  before :all do
+  before :each do
     xunit = XUnitTestRunner.new(@xunitpath)
     xunit.assembly = @test_assembly
     xunit.options @output_option
@@ -31,7 +29,6 @@ describe XUnitTestRunner, "the command parameters for an xunit runner" do
 end
 
 describe XUnitTestRunner, "the command line string for an xunit runner" do
-  it_should_behave_like "xunit paths"
   before :all do
     xunit = XUnitTestRunner.new(@xunitpath)
     xunit.assembly = @test_assembly
@@ -51,7 +48,6 @@ describe XUnitTestRunner, "the command line string for an xunit runner" do
 end
 
 describe XUnitTestRunner, "when configured correctly" do
-  it_should_behave_like "xunit paths"
   before :all do
     xunit = XUnitTestRunner.new(@xunitpath)
     xunit.assembly = @test_assembly
@@ -68,7 +64,6 @@ describe XUnitTestRunner, "when configured correctly" do
 end
 
 describe XUnitTestRunner, "when multiple assemblies are passed to xunit runner" do
-  it_should_behave_like "xunit paths"
   before :all do
     xunit = XUnitTestRunner.new(@xunitpath)
     xunit.assemblies = @test_assembly, @test_assembly
@@ -85,7 +80,6 @@ describe XUnitTestRunner, "when multiple assemblies are passed to xunit runner" 
 end
 
 describe XUnitTestRunner, "when zero assemblies are passed to xunit runner" do
-  it_should_behave_like "xunit paths"
   before :all do
     xunit = XUnitTestRunner.new(@xunitpath)    
     xunit.options '/noshadow'
@@ -100,7 +94,6 @@ describe XUnitTestRunner, "when zero assemblies are passed to xunit runner" do
 end
 
 describe XUnitTestRunner, "when html_output is specified" do
-  it_should_behave_like "xunit paths"
   before :each do
     FileUtils.mkdir @working_dir unless File.exist?(@working_dir)
     xunit = XUnitTestRunner.new(@xunitpath)
@@ -126,7 +119,6 @@ describe XUnitTestRunner, "when html_output is specified" do
 end
 
 describe XUnitTestRunner, "when html_output is not a directory" do
-  it_should_behave_like "xunit paths"
   before :each do
     FileUtils.mkdir @working_dir unless File.exist?(@working_dir)
     strio = StringIO.new
@@ -165,4 +157,5 @@ describe XUnitTestRunner, "when providing configuration" do
   it "should use the configured values" do
     xunit.command.should == "configured"
   end
+end
 end
