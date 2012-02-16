@@ -38,8 +38,16 @@ class MSDeploy
     end
   
   def get_msdeploy_path
-    msdeploy_path = ENV['MSDeployPath']
-    if(msdeploy_path == nil)      
+    
+    #check path directory
+    ENV['PATH'].split(';').each do |folder| 
+      if(File.exists?(folder+'/msdeploy.exe'))
+        return folder+'/msdeploy.exe'
+      end      
+    end    
+    #check if it's in registry
+    msdeploy_path = ENV['MSDeployPath']    
+    if(msdeploy_path == nil || !File.exist?("#{msdeploy_path}msdeploy.exe"))      
       Win32::Registry::HKEY_LOCAL_MACHINE.open('SOFTWARE\Microsoft\IIS Extensions\MSDeploy\2') do |reg|
           reg_typ, reg_val = reg.read('InstallPath') # no checking for x86 here.
           msdeploy_path = reg_val
@@ -50,7 +58,14 @@ class MSDeploy
  end
  
  def get_package
+   #is it a direct file
+   if(File.file?(@deploy_package))
+     return "-source:package='#{File.expand_path(@deploy_package)}'"
+   end
+   
+   #try directory with zip in it
    Dir.glob("#{@deploy_package}/**.zip") do |zip|
+     puts File.expand_path(zip)
      return "-source:package='#{File.expand_path(zip)}'"
    end
    # must be an archive directory
