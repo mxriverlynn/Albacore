@@ -87,7 +87,7 @@ describe MSDeploy, "Deploying a package from a zip file" do
     @msdeploy.deploy_package = "spec/support/TestSolution/TestSolution.MSDeploy/TestSolution.MSDeploy/obj/Debug/Package/TestSolution.MSDeploy.zip"
   end
   
-   it "should deploy locally" do
+  it "should deploy locally" do
     lambda {@msdeploy.execute}.should_not raise_error(RuntimeError ,"MSDeploy Failed.  See build log for details")  
     p @msdeploy.deploy_package
     p @msdeploy.system_command
@@ -104,7 +104,7 @@ describe MSDeploy, "Deploying a package from a zip file" do
     @msdeploy.system_command.scan(/computerName='testserver',userName='testname',password='testpasssword'/).length.should be(1)
   end
     
-    it "with aditional parameters" do
+  it "with aditional parameters" do
     @msdeploy.additional_parameters = "-usechecksum"
     lambda {@msdeploy.execute}.should_not raise_error(RuntimeError ,"MSDeploy Failed.  See build log for details")  
     @msdeploy.system_command.scan(/-usechecksum/).length.should be(1)   
