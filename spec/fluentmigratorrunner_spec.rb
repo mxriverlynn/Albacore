@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'albacore/fluentmigratorrunner'
 
-shared_examples_for "fluentmigrator paths" do
+shared_context "fluentmigrator paths" do
   before :all do
     @fluent_migrator_path = File.join(File.dirname(__FILE__), 'support', 'Tools', 'FluentMigrator-0.9', 'Migrate.exe')
     @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'fluentmigrator', 'assemblies', 'TestSolution.FluentMigrator.dll')
@@ -9,7 +9,7 @@ shared_examples_for "fluentmigrator paths" do
 end
 
 describe FluentMigratorRunner, "the command parameters for an migrator runner" do
-  it_should_behave_like "fluentmigrator paths"
+  include_context "fluentmigrator paths"
  
   before :all do
     @migrator = FluentMigratorRunner.new(@fluent_migrator_path) 
@@ -129,7 +129,9 @@ describe FluentMigratorRunner, "the command parameters for an migrator runner" d
     end
     
     it "excludes /out when output not true" do
+
       @migrator.output = false
+      @migrator.output_filename = nil
       @migrator.get_command_parameters.should_not include "/out"
       @migrator.output = "a"
       @migrator.get_command_parameters.should_not include "/out"
@@ -164,7 +166,7 @@ describe FluentMigratorRunner, "the command parameters for an migrator runner" d
 end
 
 describe FluentMigratorRunner, "the command line string for an fluentmigrator runner" do
-  it_should_behave_like "fluentmigrator paths"
+  include_context "fluentmigrator paths"
 
   before :all do
     migrator = FluentMigratorRunner.new(@fluent_migrator_path)
@@ -184,7 +186,7 @@ describe FluentMigratorRunner, "the command line string for an fluentmigrator ru
 end
 
 describe FluentMigratorRunner, "when using the configuration command and not providing a command in the intializer" do
-  it_should_behave_like "fluentmigrator paths"
+  include_context "fluentmigrator paths"
 
   before :all do
     Albacore.configure do |config|
@@ -199,7 +201,7 @@ describe FluentMigratorRunner, "when using the configuration command and not pro
 end
 
 describe FluentMigratorRunner, "when the command has been set through configuration and providing a command in the intializer" do
-  it_should_behave_like "fluentmigrator paths"
+  include_context "fluentmigrator paths"
 
   before :all do
     Albacore.configure do |config|
