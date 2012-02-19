@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'albacore/albacoretask'
 require 'fail_patch'
+include ::Rake::DSL if defined?(::Rake::DSL)
 
 class SampleObject
   include Albacore::Task

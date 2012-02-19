@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'albacore/nant'
 require 'nanttestdata'
 
-shared_examples_for "prepping nant" do
+shared_context "prepping nant" do
   before :all do
     @testdata = NAntTestData.new
     @nant = @testdata.nant
@@ -16,7 +16,7 @@ shared_examples_for "prepping nant" do
 end
 
 describe NAnt, "when a nant path is not specified" do
-  it_should_behave_like "prepping nant"
+  include_context "prepping nant"
   
   before :all do
   	@nant.extend(FailPatch)
@@ -30,7 +30,7 @@ describe NAnt, "when a nant path is not specified" do
 end
 
 describe NAnt, "when running a nant build file" do
-  it_should_behave_like "prepping nant"
+  include_context "prepping nant"
   
   before :all do
     @nant.command = @testdata.nant_path
@@ -44,7 +44,7 @@ describe NAnt, "when running a nant build file" do
 end
 
 describe NAnt, "when running specific targets" do
-  it_should_behave_like "prepping nant"
+  include_context "prepping nant"
   
   before :all do
     @nant.command = @testdata.nant_path

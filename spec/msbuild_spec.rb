@@ -3,7 +3,8 @@ require 'albacore/msbuild'
 require 'albacore/config/msbuildconfig'
 require 'msbuildtestdata'
 
-shared_examples_for "prepping msbuild" do
+
+shared_context "prepping msbuild" do
   before :all do
     @testdata = MSBuildTestData.new
     @msbuild = @testdata.msbuild
@@ -14,22 +15,25 @@ shared_examples_for "prepping msbuild" do
 end
 
 describe MSBuild, "when building a solution with verbose logging turned on" do  
-  it_should_behave_like "prepping msbuild"
+  include_context "prepping msbuild"
   
   before :all do
     @msbuild.solution = @testdata.solution_path
+    @strio = StringIO.new
+    @msbuild.log_device = @strio
+    @msbuild.log_level = :verbose
     @msbuild.execute
     
     @log_data = @strio.string
   end
 
   it "should log the msbuild command line being called" do
-    @log_data.downcase().should include("Executing MSBuild: \"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe\"".downcase())
+ com = @log_data.downcase().should include("Executing MSBuild: \"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe\"".downcase())
   end
 end
 
 describe MSBuild, "when building with no solution specified" do
-  it_should_behave_like "prepping msbuild"
+  include_context "prepping msbuild"
 
   before :all do
     @msbuild.extend(FailPatch)
@@ -96,7 +100,7 @@ describe MSBuild, "when msbuild is configured to use a specific .net version, an
 end
 
 describe MSBuild, "when building a visual studio solution" do
-  it_should_behave_like "prepping msbuild"
+  include_context "prepping msbuild"
 
   before :all do
     @msbuild.solution = @testdata.solution_path
@@ -109,7 +113,7 @@ describe MSBuild, "when building a visual studio solution" do
 end
 
 describe MSBuild, "when building a visual studio solution with a single target" do
-  it_should_behave_like "prepping msbuild"
+  include_context "prepping msbuild"
 
   before :all do
     @msbuild.solution = @testdata.solution_path
@@ -142,7 +146,7 @@ describe MSBuild, "when building a visual studio solution for a specified config
 end
 
 describe MSBuild, "when specifying targets to build" do  
-  it_should_behave_like "prepping msbuild"
+  include_context "prepping msbuild"
 
   before :all do
     @msbuild.targets :Clean, :Build
@@ -157,7 +161,7 @@ describe MSBuild, "when specifying targets to build" do
 end
 
 describe MSBuild, "when building a solution with a specific msbuild verbosity" do
-  it_should_behave_like "prepping msbuild"
+  include_context "prepping msbuild"
 
   before :all do
     @msbuild.verbosity = "normal"
@@ -171,7 +175,7 @@ describe MSBuild, "when building a solution with a specific msbuild verbosity" d
 end
 
 describe MSBuild, "when specifying multiple configuration properties" do  
-  it_should_behave_like "prepping msbuild"
+  include_context "prepping msbuild"
 
   before :all do
     File.delete(@testdata.output_path) if File.exist?(@testdata.output_path)
@@ -196,7 +200,7 @@ describe MSBuild, "when specifying multiple configuration properties" do
 end
 
 describe MSBuild, "when specifying a loggermodule" do  
-  it_should_behave_like "prepping msbuild"
+  include_context "prepping msbuild"
   
   before :all do
     @msbuild.solution = @testdata.solution_path

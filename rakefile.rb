@@ -19,14 +19,21 @@ namespace :specs do
     t.rspec_opts = @rspec_opts
   end
 
+  exceptNCov = []
   # generate tasks for each *_spec.rb file in the root spec folder
   FileList['spec/*_spec.rb'].each do |fname|
     spec = $1 if /spec\/(.+)_spec\.rb/ =~ fname
+    exceptNCov << spec unless /ncover|ndepend/ =~ spec
     desc "Run #{spec} specs"
     RSpec::Core::RakeTask.new spec do |t|
       t.pattern = "spec/#{spec}*_spec.rb"
       t.rspec_opts = @spec_opts
     end
+  end
+
+  #quick hack to run all specs not in ncover or ndepend, to evaluate changes
+  desc "excludes ncover  and ndepend specs"
+  task :except_ncover => exceptNCov do
   end
 end
 
