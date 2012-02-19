@@ -4,7 +4,7 @@ require 'albacore/nunitrunner'
 
 shared_context("nunit task") {
   before(:all) {
-    @nunitpath = File.join 'support', 'Tools', 'NUnit-v2.5.10', 'nunit-console.exe'
+    @nunitpath = File.join 'support', 'Tools', 'NUnit-2.5.10', 'nunit-console.exe'
     @nunit = NUnitRunner.new @nunitpath
     @nunit.log_level = :verbose
   }
