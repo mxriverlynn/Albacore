@@ -1,19 +1,15 @@
 require 'spec_helper'
+require 'patches/fail_patch'
 require 'albacore/nunitrunner'
 
-shared_context "verbose logging" do
-  def logwith_verbose task ; task.log_device = STDOUT ; task.log_level = :verbose ; end
-end
-
-shared_context "nunit task" do
-  include_context "verbose logging"
-  before :all do
+shared_context("nunit task") {
+  before(:all) {
     @nunitpath = File.join 'support', 'Tools', 'NUnit-v2.5.10', 'nunit-console.exe'
-    @nunit = NUnitRunner.new @nunitpath 
-    logwith_verbose @nunit
-  end
+    @nunit = NUnitRunner.new @nunitpath
+    @nunit.log_level = :verbose
+  }
   subject { @nunit }
-end
+}
 
 describe "nunit with paths" do
 
@@ -68,14 +64,12 @@ describe "nunit with paths" do
 
 
   describe NUnitRunner, "when configured correctly" do
-
-    before :all do
-      nunit = NUnitRunner.new(@nunitpath)
-      #nunit.extend(FailPatch)
-      nunit.assemblies @test_assembly
-      nunit.options '/noshadow'
-      nunit.execute
-    end
+    before(:all) {
+      subject.extend(FailPatch)
+      subject.assemblies @test_assembly
+      subject.options '/noshadow'
+      subject.execute
+    }
 
     it "should execute" do
       $task_failed.should be_false
