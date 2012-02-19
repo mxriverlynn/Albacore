@@ -3,7 +3,7 @@ require 'albacore/xunittestrunner'
 
 describe "xunit with defined paths" do
   before :all do
-    @xunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'XUnit-v1.5', 'xunit.console.exe')
+    @xunitpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'XUnit-v1.9', 'xunit.console.exe')
     @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'xunit', 'assemblies', 'TestSolution.XUnitTests.dll')
     @output_option = "/out=xunit.results.html"
     @working_dir =File.join(File.dirname(__FILE__), 'support','xunit')
