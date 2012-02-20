@@ -51,7 +51,7 @@ describe "xunit with defined paths" do
     before :all do
       xunit = XUnitTestRunner.new(@xunitpath)
       xunit.assembly = @test_assembly
-      xunit.options '/noshadow'
+      xunit.options '/noshadow /trait "type=passing"'
       xunit.extend(FailPatch)
       xunit.log_level = :verbose
 
@@ -67,7 +67,7 @@ describe "xunit with defined paths" do
     before :all do
       xunit = XUnitTestRunner.new(@xunitpath)
       xunit.assemblies = @test_assembly, @test_assembly
-      xunit.options '/noshadow'
+      xunit.options '/noshadow /trait "type=passing"'
       xunit.extend(FailPatch)
       xunit.log_level = :verbose
 
@@ -100,6 +100,7 @@ describe "xunit with defined paths" do
       xunit.assembly = @test_assembly    
       xunit.html_output = File.dirname(@html_output)
       xunit.extend(FailPatch)
+      xunit.options '/noshadow /trait "type=passing"'
 
       xunit.execute
     end
