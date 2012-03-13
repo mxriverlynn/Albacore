@@ -141,6 +141,25 @@ describe MSBuild, "when building a visual studio solution for a specified config
   end
 end
 
+describe MSBuild, "when specifying interesting switches" do
+  before :all do
+    @testdata= MSBuildTestData.new("Release")
+    @msbuild = @testdata.msbuild
+    
+    @msbuild.other_switches :nologo => :true, :maxcpucount => 4
+    @msbuild.solution = @testdata.solution_path
+    @msbuild.execute
+  end
+  
+  it "should set the no logo pure switch" do
+    @msbuild.system_command.should include("/nologo")
+  end
+  
+  it "should set the max cpu count parameterized switch" do
+    @msbuild.system_command.should include("/maxcpucount:4")
+  end
+end
+
 describe MSBuild, "when specifying targets to build" do  
   it_should_behave_like "prepping msbuild"
 
@@ -211,5 +230,3 @@ describe MSBuild, "when specifying a loggermodule" do
     @msbuild.system_command.should include("/logger:FileLogger,Microsoft.Build.Engine;logfile=MyLog.log")
   end
 end
-
-
