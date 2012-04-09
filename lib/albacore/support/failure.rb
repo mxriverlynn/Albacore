@@ -1,7 +1,7 @@
 require 'albacore/support/logging'
 
 module Failure
-  include Logging
+  include Albacore::Logging
   
   def initialize
     super()
