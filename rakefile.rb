@@ -66,6 +66,12 @@ namespace :specs do
     t.rspec_opts = @rspec_opts
   end
   
+  desc "NuSpec functional specs"
+  Spec::Rake::SpecTask.new :nuspec do |t|
+    t.spec_files = FileList['spec/nuspec*_spec.rb']
+    t.spec_opts << @spec_opts
+  end
+
   desc "Zip functional specs"
   RSpec::Core::RakeTask.new :zip do |t|
     t.pattern = 'spec/zip*_spec.rb'
