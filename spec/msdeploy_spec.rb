@@ -9,7 +9,6 @@ describe MSDeploy, "Deploying a package without specifying anything" do
   
   it "Should raise excecption as package is not in the CWD" do
     lambda {@msdeploy.execute}.should raise_error(RuntimeError ,"Could not find the MSDeploy package to deploy.")
-    @msdeploy.system_command.should be_true  "Is MSDeploy installed on your machine?"
   end
 end
 
@@ -34,7 +33,7 @@ describe MSDeploy, "Deploying a package from a folder" do
     @msdeploy.server = "testserver"
     #assert
     lambda {@msdeploy.execute}.should raise_error(RuntimeError ,"MSDeploy Failed.  See build log for details")
-    @msdeploy.system_command.should be_true  "Is MSDeploy installed on your machine?"
+    @msdeploy.system_command.should be_true  
     @msdeploy.system_command.scan(/computerName='testserver',userName='testname',password='testpasssword'/).length.should be(1)
     end
 end
@@ -81,8 +80,7 @@ describe MSDeploy, "Deploying a package from a folder with a zip" do
   
   it "With specifying a bad parameter file, will throw an exception" do
     @msdeploy.parameters_file = "spec/support/TestSolution/TestSolution.MSDeploy/TestSolution.MSDeploy/TestSolution.MSDeploy.SetParameters.xml"
-    lambda {@msdeploy.execute}.should raise_error(RuntimeError ,"Could not find parameter file specified.")     
-    @msdeploy.system_command.should be_true       
+    lambda {@msdeploy.execute}.should raise_error(RuntimeError ,"Could not find parameter file specified.")         
   end
 end
 
@@ -131,7 +129,6 @@ describe MSDeploy, "Deploying a package from a zip file" do
   
   it "With specifying a bad parameter file, will throw an exception" do
       @msdeploy.parameters_file = "spec/support/TestSolution/TestSolution.MSDeploy/TestSolution.MSDeploy/TestSolution.MSDeploy.SetParameters.xml"
-    lambda {@msdeploy.execute}.should raise_error(RuntimeError ,"Could not find parameter file specified.")      
-    @msdeploy.system_command.should be_true   
+    lambda {@msdeploy.execute}.should raise_error(RuntimeError ,"Could not find parameter file specified.")       
   end
 end
