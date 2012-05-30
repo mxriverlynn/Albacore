@@ -1,5 +1,6 @@
 ﻿$: << './'
 require 'psych'
+require 'rake/dsl_definition'
 require 'lib/albacore'
 require 'version_bumper'
 
