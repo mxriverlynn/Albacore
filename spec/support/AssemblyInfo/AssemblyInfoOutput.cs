@@ -6,5 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("0.1.2.3")]
 
 // foo
+using System.Reflection;
+using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("4.5.6.7")]
 

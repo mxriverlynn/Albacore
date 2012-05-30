@@ -52,7 +52,7 @@ class MSDeploy
           reg_typ, reg_val = reg.read('InstallPath') # no checking for x86 here.
           msdeploy_path = reg_val
         end     
-   end
+      end
    fail_with_message 'MSDeploy could not be found is it installed?' if !File.exist?("#{msdeploy_path}msdeploy.exe")
    return "#{msdeploy_path}msdeploy.exe"    
  end

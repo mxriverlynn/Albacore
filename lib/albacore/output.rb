@@ -2,6 +2,7 @@ require 'albacore/albacoretask'
 require 'erb'
 require 'ostruct'
 require 'fileutils'
+require 'rake/dsl_definition'
 
 class OutputBuilder
   include FileUtils
