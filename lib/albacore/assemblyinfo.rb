@@ -1,4 +1,5 @@
 require 'albacore/albacoretask'
+require 'albacore/config/assemblyinfoconfig'
 require 'albacore/assemblyinfolanguages/csharpengine'
 require 'albacore/assemblyinfolanguages/vbnetengine'
 require 'albacore/assemblyinfolanguages/fsharpengine'
@@ -6,21 +7,21 @@ require 'albacore/assemblyinfolanguages/cppcliengine'
 
 class AssemblyInfo
   include Albacore::Task
+  include Configuration::AssemblyInfo
   
-  attr_accessor :input_file, :output_file
-  attr_accessor :language
-  attr_accessor :version, :title, :description, :custom_attributes
-  attr_accessor :copyright, :com_visible, :com_guid, :company_name, :product_name
-  attr_accessor :file_version, :trademark, :lang_engine, :custom_data
+  attr_accessor :input_file, :output_file, :language,
+   :version, :title, :description, :custom_attributes,
+   :copyright, :com_visible, :com_guid, :company_name, :product_name,
+   :file_version, :trademark, :lang_engine
   
-  attr_array :namespaces
+  attr_array :namespaces, :custom_data
   attr_hash :custom_attributes
-  attr_array :custom_data
   
   def initialize
     @namespaces = []
+    @custom_data = []
     super()
-    update_attributes Albacore.configuration.assemblyinfo.to_hash
+    update_attributes assemblyinfo.to_hash
   end
 
   def use(file)
@@ -28,7 +29,9 @@ class AssemblyInfo
   end
   
   def execute
-    @lang_engine = CSharpEngine.new unless check_lang_engine
+    unless check_lang_engine then
+      @lang_engine = from_language
+    end
     write_assemblyinfo @output_file, @input_file
   end
   
@@ -65,7 +68,16 @@ class AssemblyInfo
     fail_with_message 'output_file cannot be nil'
     false
   end
-  
+
+  def from_language
+    ({
+      "F#" => lambda { FSharpEngine.new },
+      "C#" => lambda { CSharpEngine.new },
+      "C++.Net" => lambda { CppCliEngine.new },
+      "VB.Net" => lambda { VbNetEngine.new }
+    }[@language] || lambda { CSharpEngine.new }).call
+  end
+
   def check_lang_engine
     !@lang_engine.nil?
   end
@@ -101,12 +113,10 @@ class AssemblyInfo
       data << ""
     end
 
-    if @custom_data != nil
-      @custom_data.each do |cdata| 
-        data << cdata unless data.include? cdata
-      end
+    @custom_data.each do |cdata| 
+      data << cdata unless data.include? cdata
     end
-
+    
     data.concat build_footer
     
     data

@@ -2,9 +2,11 @@ require 'albacore/albacoretask'
 require 'erb'
 require 'ostruct'
 require 'fileutils'
+require 'rake/dsl_definition'
 
 class OutputBuilder
   include FileUtils
+  include ::Rake::DSL if defined?(::Rake::DSL)
   
   def initialize(dir_to, dir_from)
     @dir_to = dir_to

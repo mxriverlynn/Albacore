@@ -14,6 +14,8 @@ Albacore has been tested against the following versions of rake:
 
 * Rake v0.8.7
 * Rake v0.9.2
+* Rake v0.9.2.2
+* Rake v0.9.3
 
 Albacore has been tested against the following versions of Ruby for Windows:
 
@@ -32,13 +34,17 @@ Support for the following versions of ruby has been dropped. Albacore will no lo
 * RubyInstaller v1.8.6
 * RubyInstaller v1.9.1
 
+### Contributing
+
+You are very welcome to submit pull requests - preferrably to the *dev* branch, which is merged with master at release-time.
+
 ### Notes About IronRuby
 
 Due to an incompatibility with the Rubyzip gem, IronRuby does not support the ‘zip’ and ‘unzip’ tasks. If you need zip / unzip support, look into using a third party tool such as [7-zip](http://7-zip.org) or [SharpZipLib](http://sharpdevelop.net/OpenSource/SharpZipLib/).
 
 ## Legal Mumbo Jumbo (MIT License)
 
-Copyright (c) 2011 Derick Bailey
+Copyright (c) 2011 Derick Bailey, Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -13,7 +13,7 @@ class NCoverConsoleTestData
     @test_assembly_with_spaces = File.join(File.expand_path(File.dirname(__FILE__)), '..', 'support', 'CodeCoverage', 'nunit', 'assemblies/with spaces/', 'TestSolution.Tests.dll')
     @failing_test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), '..', 'support', 'CodeCoverage', 'nunit', 'failing_assemblies', 'TestSolution.FailingTests.dll')
   
-    @mspecpath = File.join(File.dirname(__FILE__), '..', 'support', 'Tools', 'Machine.Specification-v0.2', 'Machine.Specifications.ConsoleRunner.exe')
+    @mspecpath = File.join(File.dirname(__FILE__), '..', 'support', 'Tools', 'Machine.Specifications-0.5.3', 'tools', 'mspec-x86-clr4.exe')
     @mspec_html_output = File.join(File.expand_path(File.dirname(__FILE__)), '..', 'support', 'CodeCoverage', 'mspec', 'html')
     @mspec_test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), '..', 'support', 'CodeCoverage', 'mspec', 'assemblies', 'TestSolution.MSpecTests.dll')
   end

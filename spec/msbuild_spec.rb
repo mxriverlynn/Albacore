@@ -24,7 +24,7 @@ describe MSBuild, "when building a solution with verbose logging turned on" do
   end
 
   it "should log the msbuild command line being called" do
-    @log_data.should include("Executing MSBuild: \"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe\"")
+    @log_data.downcase().should include("Executing MSBuild: \"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe\"".downcase())
   end
 end
 
@@ -49,7 +49,7 @@ describe MSBuild, "when an msbuild path is not specified" do
   end
   
   it "should default to the .net framework v4" do
-    @msbuild.command.should == @testdata.msbuild_path
+    @msbuild.command.downcase().should == @testdata.msbuild_path.downcase()
   end
 end
 
@@ -211,5 +211,3 @@ describe MSBuild, "when specifying a loggermodule" do
     @msbuild.system_command.should include("/logger:FileLogger,Microsoft.Build.Engine;logfile=MyLog.log")
   end
 end
-
-

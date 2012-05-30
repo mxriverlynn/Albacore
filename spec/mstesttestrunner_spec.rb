@@ -1,16 +1,24 @@
 require 'spec_helper'
 require 'albacore/mstesttestrunner'
 
+<<<<<<< HEAD
+shared_context "mstest paths" do
+=======
 shared_examples_for "mstest paths" do
+>>>>>>> changes from repo
   before :all do
-    @mstestpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'MSTest-2008', 'mstest.exe')
-    @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'mstest', 'TestSolution.MSTestTests.dll')
-    @test_option = "/test:Test"
+    @mstestpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'MSTest-2010', 'mstest.exe')
+    @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'mstest', 'TestSolution.MSTestTests.NET40.dll')
+    @test_option = "/test:Test /noisolation /noresults"
   end
 end
 
 describe MSTestTestRunner, "the command parameters for an mstest runner" do
+<<<<<<< HEAD
+  include_context "mstest paths"
+=======
   it_should_behave_like "mstest paths"
+>>>>>>> changes from repo
 
   before :all do
     mstest = MSTestTestRunner.new(@mstestpath)
@@ -39,7 +47,11 @@ describe MSTestTestRunner, "the command parameters for an mstest runner" do
 end
 
 describe MSTestTestRunner, "the command line string for an mstest runner" do
+<<<<<<< HEAD
+  include_context "mstest paths"
+=======
   it_should_behave_like "mstest paths"
+>>>>>>> changes from repo
 
   before :all do
     mstest = MSTestTestRunner.new(@mstestpath)
@@ -67,6 +79,7 @@ describe MSTestTestRunner, "when configured correctly" do
     mstest.extend(FailPatch)
     mstest.assemblies @test_assembly
     mstest.log_level = :verbose
+    mstest.options "/noisolation /noresults"
     mstest.tests "APassingTest"
     mstest.execute
   end
@@ -84,6 +97,7 @@ describe MSTestTestRunner, "when configured correctly, but a test fails" do
     mstest.extend(FailPatch)
     mstest.assemblies @test_assembly
     mstest.log_level = :verbose
+    mstest.options "/noisolation /noresults"
     mstest.tests "AFailingTest"
     mstest.execute
   end

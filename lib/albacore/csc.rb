@@ -10,6 +10,7 @@ class CSC
 
   attr_accessor :output, :target, :optimize, :debug, :doc, :main,
     :keyfile, :keycontainer, :delaysign # strong name flags
+    
   attr_array :compile, :references, :resources, :define
 
   def initialize
@@ -22,7 +23,7 @@ class CSC
     params = []
     params << @references.map{|r| format_reference(r)} unless @references.nil?
     params << @resources.map{|r| format_resource(r)} unless @resources.nil?
-		params << main_entry unless @main.nil?
+    params << main_entry unless @main.nil?
     params << "\"/out:#{@output}\"" unless @output.nil?
     params << "/target:#{@target}" unless @target.nil?
     params << "/optimize+" if @optimize
@@ -56,9 +57,9 @@ class CSC
     end
   end
 
-	def main_entry
-		"/main:#{@main}"
-	end
+    def main_entry
+      "/main:#{@main}"
+    end
 
   def format_resource(resource)
     "/res:#{resource}"

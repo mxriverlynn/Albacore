@@ -9,6 +9,7 @@ namespace TestSolution.XUnitTests
 	public class SomeTestFixture
 	{
 		[Fact]
+        [Trait("type","passing")]
 		public void foo()
 		{
 			Class1 c1 = new Class1();

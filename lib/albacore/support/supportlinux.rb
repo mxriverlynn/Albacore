@@ -16,8 +16,6 @@ module SupportsLinuxEnvironment
 
   def to_OS_format(input)
     formatted_input = @is_linux ? input : input.gsub("/", "\\")
-	formatted_input
+    formatted_input
   end
 end
-
-
