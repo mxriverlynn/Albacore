@@ -1,7 +1,11 @@
 require 'spec_helper'
 require 'albacore/mstesttestrunner'
 
+<<<<<<< HEAD
 shared_context "mstest paths" do
+=======
+shared_examples_for "mstest paths" do
+>>>>>>> changes from repo
   before :all do
     @mstestpath = File.join(File.dirname(__FILE__), 'support', 'Tools', 'MSTest-2010', 'mstest.exe')
     @test_assembly = File.join(File.expand_path(File.dirname(__FILE__)), 'support', 'CodeCoverage', 'mstest', 'TestSolution.MSTestTests.NET40.dll')
@@ -10,7 +14,11 @@ shared_context "mstest paths" do
 end
 
 describe MSTestTestRunner, "the command parameters for an mstest runner" do
+<<<<<<< HEAD
   include_context "mstest paths"
+=======
+  it_should_behave_like "mstest paths"
+>>>>>>> changes from repo
 
   before :all do
     mstest = MSTestTestRunner.new(@mstestpath)
@@ -39,7 +47,11 @@ describe MSTestTestRunner, "the command parameters for an mstest runner" do
 end
 
 describe MSTestTestRunner, "the command line string for an mstest runner" do
+<<<<<<< HEAD
   include_context "mstest paths"
+=======
+  it_should_behave_like "mstest paths"
+>>>>>>> changes from repo
 
   before :all do
     mstest = MSTestTestRunner.new(@mstestpath)
@@ -60,7 +72,7 @@ end
 
 
 describe MSTestTestRunner, "when configured correctly" do
-  include_context "mstest paths"
+  it_should_behave_like "mstest paths"
 
   before :all do
     mstest = MSTestTestRunner.new(@mstestpath)
@@ -78,7 +90,7 @@ describe MSTestTestRunner, "when configured correctly" do
 end
 
 describe MSTestTestRunner, "when configured correctly, but a test fails" do
-  include_context "mstest paths"
+  it_should_behave_like "mstest paths"
 
   before :all do
     mstest = MSTestTestRunner.new(@mstestpath)
@@ -96,7 +108,7 @@ describe MSTestTestRunner, "when configured correctly, but a test fails" do
 end
 
 describe MSTestTestRunner, "when using the configuration command and not providing a command in the intializer" do
-  include_context "mstest paths"
+  it_should_behave_like "mstest paths"
 
   before :all do
     Albacore.configure do |config|
@@ -111,7 +123,7 @@ describe MSTestTestRunner, "when using the configuration command and not providi
 end
 
 describe MSTestTestRunner, "when the command has been set through configuration and providing a command in the intializer" do
-  include_context "mstest paths"
+  it_should_behave_like "mstest paths"
 
   before :all do
     Albacore.configure do |config|
