@@ -90,7 +90,7 @@ class AssemblyInfo
         data = build_header
     end
 
-    data  = build_using_statements(data) + data
+    data = build_using_statements(data) + data
 
     build_attribute(data, "AssemblyTitle", @title)
     build_attribute(data, "AssemblyDescription", @description)
@@ -108,8 +108,7 @@ class AssemblyInfo
     
     data << ""
     if @custom_attributes != nil
-      attributes = build_custom_attributes()
-      data += attributes
+      build_custom_attributes(data)
       data << ""
     end
 
@@ -130,8 +129,8 @@ class AssemblyInfo
     @lang_engine.respond_to?(:after) ? [@lang_engine.after()] : []
   end
 
-  def build_attribute(data, attr_name, attr_data)
-    if attr_data.nil? then return end
+  def build_attribute(data, attr_name, attr_data, allow_empty_args = false)
+    if !allow_empty_args and attr_data.nil? then return end
     attr_value = @lang_engine.build_attribute(attr_name, attr_data)
     attr_re = @lang_engine.build_attribute_re(attr_name)
     result = nil
@@ -158,12 +157,10 @@ class AssemblyInfo
     ns
   end  
 
-  def build_custom_attributes()
-    attributes = []
+  def build_custom_attributes(data)
     @custom_attributes.each do |key, value|
-      attributes << @lang_engine.build_attribute(key, value)
+      build_attribute(data, key, value, true)
     end
-    attributes
   end
   
 end
