@@ -82,6 +82,51 @@ describe AssemblyInfo, "when specifying an attribute with non-string data" do
   end
 end
 
+describe AssemblyInfo, "when specifying an attribute with multiple parameters" do
+
+  include_context "asminfo task"
+
+  before :all do
+    @asm.custom_attributes :MultipleParameterAttribute => [true, 1, "abc"]
+  end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+  
+  it "should create the attribute correctly" do
+    subject.scan('[assembly: MultipleParameterAttribute(true, 1, "abc")]').length.should == 1
+  end
+end
+
+describe AssemblyInfo, "when specifying an attribute with named parameters" do
+
+  include_context "asminfo task"
+
+  before :all do
+    @asm.custom_attributes :NamedParameterAttribute => {:arg1 => "abc", :arg2 => false}
+  end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+  
+  it "should create the attribute correctly" do
+    subject.scan('[assembly: NamedParameterAttribute(arg1 = "abc", arg2 = false)]').length.should == 1
+  end
+end
+
+describe AssemblyInfo, "when specifying an attribute with multiple and named parameters" do
+
+  include_context "asminfo task"
+
+  before :all do
+    @asm.custom_attributes :UberParameterAttribute => [true, 1, "abc", {:arg1 => "abc", :arg2 => false}]
+  end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+  
+  it "should create the attribute correctly" do
+    subject.scan('[assembly: UberParameterAttribute(true, 1, "abc", arg1 = "abc", arg2 = false)]').length.should == 1
+  end
+end
+
 describe FSharpEngine, "when generating assembly info" do
 
   include_context "language engines"
@@ -129,10 +174,6 @@ describe FSharpEngine, "when setting language attribute" do
   end
 
 end
-
-
-
-
 
 { :no => { :engine => nil,              :lang => "no", :start_token => "[", :end_token => "]",     :using => "using " },
   :cs => { :engine => CSharpEngine.new, :lang => "the C#", :start_token => "[", :end_token => "]",     :using => "using " },
@@ -318,7 +359,8 @@ describe AssemblyInfo, "when an input file is provided" do
   before :all do
      @asm.version = @tester.version
      @asm.file_version = @tester.file_version
-
+     @asm.namespaces "My.Custom.Namespace"
+     @asm.custom_attributes :CustomAttribute => nil
      @asm.custom_data "// foo", "// baz"
 
      # make it use existing file
@@ -328,18 +370,42 @@ describe AssemblyInfo, "when an input file is provided" do
   subject { @tester.build_and_read_assemblyinfo_file @asm }
 
   it "should contain correct version attribute" do
-     subject.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).length.should == 1
   end
+  
   it "shoud leave comment untouched" do
-     subject.scan(%Q|// A comment we want to see maintained|).length.should == 1
+    subject.scan(%Q|// A comment we want to see maintained|).length.should == 1
   end
+  
   it "should introduce a new fileversion attribute" do
-     subject.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
   end
+  
   it "should still leave custom data that's already in there intact" do
-     subject.scan(%Q|// foo|).length.should == 1
+    subject.scan(%Q|// foo|).length.should == 1
   end
+  
   it "should add custom data that's still missing" do
-     subject.scan(%Q|// baz|).length.should == 1
+    subject.scan(%Q|// baz|).length.should == 1
+  end
+  
+  it "should add namespaces to the top of the file" do
+    # Top of file is assumed to be before the first attribute. Comments are ignored.
+    s = subject.split($/)
+    first_attr_line = s.index { |l| l =~ /^\[/ }
+    s.index(%Q|using My.Custom.Namespace;|).should be < first_attr_line
+    s.index(%Q|using System.Reflection;|).should be < first_attr_line
+    s.index(%Q|using System.Runtime.InteropServices;|).should be < first_attr_line
+  end
+  
+  it "should not duplicate namespaces" do
+    subject.scan(%Q|using My.Custom.Namespace;|).length.should == 1
+    subject.scan(%Q|using System.Reflection;|).length.should == 1
+    subject.scan(%Q|using System.Runtime.InteropServices;|).length.should == 1
+  end
+  
+  it "should update existing custom attributes" do
+    subject.scan(%Q|[assembly: CustomAttribute()]|).length.should == 1
+    subject.scan(%Q|[assembly: CustomAttribute(12345)]|).length.should == 0
   end
 end
