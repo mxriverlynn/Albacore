@@ -52,79 +52,115 @@ describe AssemblyInfo, "when generating an assembly info file without an output 
   end
 end
 
-describe AssemblyInfo, "when specifying a custom attribute with no data" do
+{ :cs => { :engine => CSharpEngine.new, :lang => "the C#",
+    :no_arg      => '[assembly: NoArgsAttribute()]',
+    :non_string  => '[assembly: NonStringAttribute(true)]',
+    :pos_param   => '[assembly: MultipleParameterAttribute(true, 1, "abc")]',
+    :named_param => '[assembly: NamedParameterAttribute(arg1 = "abc", arg2 = false)]',
+    :all_param   => '[assembly: UberParameterAttribute(true, 1, "abc", arg1 = "abc", arg2 = false)]' },
+    
+  :vb => { :engine => VbNetEngine.new, :lang => "the VB.Net",
+    :no_arg      => '<assembly: NoArgsAttribute()>',
+    :non_string  => '<assembly: NonStringAttribute(true)>',
+    :pos_param   => '<assembly: MultipleParameterAttribute(true, 1, "abc")>',
+    :named_param => '<assembly: NamedParameterAttribute(arg1 := "abc", arg2 := false)>',
+    :all_param   => '<assembly: UberParameterAttribute(true, 1, "abc", arg1 := "abc", arg2 := false)>' },
+    
+  :fs => { :engine => FSharpEngine.new, :lang => "the F#",
+    :no_arg      => '[<assembly: NoArgsAttribute()>]',
+    :non_string  => '[<assembly: NonStringAttribute(true)>]',
+    :pos_param   => '[<assembly: MultipleParameterAttribute(true, 1, "abc")>]',
+    :named_param => '[<assembly: NamedParameterAttribute(arg1 = "abc", arg2 = false)>]',
+    :all_param   => '[<assembly: UberParameterAttribute(true, 1, "abc", arg1 = "abc", arg2 = false)>]' },
+    
+  :cpp => { :engine => CppCliEngine.new, :lang => "the C++",
+    :no_arg      => '[assembly: NoArgsAttribute()]',
+    :non_string  => '[assembly: NonStringAttribute(true)]',
+    :pos_param   => '[assembly: MultipleParameterAttribute(true, 1, "abc")]',
+    :named_param => '[assembly: NamedParameterAttribute(arg1 = "abc", arg2 = false)]',
+    :all_param   => '[assembly: UberParameterAttribute(true, 1, "abc", arg1 = "abc", arg2 = false)]' },
+}.each do |key, settings|
 
-  include_context "asminfo task"
+  describe AssemblyInfo, "when specifying a custom attribute with no data and using #{settings[:lang]} language specification" do
 
-  before :all do
-    @asm.custom_attributes :NoArgsAttribute => nil
+    include_context "asminfo task"
+
+    before :all do
+      @asm.using_engine settings[:engine]
+      @asm.custom_attributes :NoArgsAttribute => nil
+    end
+
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+
+    it "should.execute the attribute with an empty argument list" do
+      subject.scan(settings[:no_arg]).length.should == 1
+    end
   end
 
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
+  describe AssemblyInfo, "when specifying an attribute with non-string data and using #{settings[:lang]} language specification" do
 
-  it "should.execute the attribute with an empty argument list" do
-    subject.scan('[assembly: NoArgsAttribute()]').length.should == 1
-  end
-end
+    include_context "asminfo task"
 
-describe AssemblyInfo, "when specifying an attribute with non-string data" do
+    before :all do
+      @asm.using_engine settings[:engine]
+      @asm.custom_attributes :NonStringAttribute => true
+    end
 
-  include_context "asminfo task"
-
-  before :all do
-    @asm.custom_attributes :NonStringAttribute => true
-  end
-
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
-  
-  it "should.execute the attribute data without quotes" do
-    subject.scan('[assembly: NonStringAttribute(true)]').length.should == 1
-  end
-end
-
-describe AssemblyInfo, "when specifying an attribute with multiple parameters" do
-
-  include_context "asminfo task"
-
-  before :all do
-    @asm.custom_attributes :MultipleParameterAttribute => [true, 1, "abc"]
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+    
+    it "should.execute the attribute data without quotes" do
+      subject.scan(settings[:non_string]).length.should == 1
+    end
   end
 
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
-  
-  it "should create the attribute correctly" do
-    subject.scan('[assembly: MultipleParameterAttribute(true, 1, "abc")]').length.should == 1
-  end
-end
+  describe AssemblyInfo, "when specifying an attribute with multiple parameters and using #{settings[:lang]} language specification" do
 
-describe AssemblyInfo, "when specifying an attribute with named parameters" do
+    include_context "asminfo task"
 
-  include_context "asminfo task"
+    before :all do
+      @asm.using_engine settings[:engine]
+      @asm.custom_attributes :MultipleParameterAttribute => [true, 1, "abc"]
+    end
 
-  before :all do
-    @asm.custom_attributes :NamedParameterAttribute => {:arg1 => "abc", :arg2 => false}
-  end
-
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
-  
-  it "should create the attribute correctly" do
-    subject.scan('[assembly: NamedParameterAttribute(arg1 = "abc", arg2 = false)]').length.should == 1
-  end
-end
-
-describe AssemblyInfo, "when specifying an attribute with multiple and named parameters" do
-
-  include_context "asminfo task"
-
-  before :all do
-    @asm.custom_attributes :UberParameterAttribute => [true, 1, "abc", {:arg1 => "abc", :arg2 => false}]
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+    
+    it "should create the attribute correctly" do
+      subject.scan(settings[:pos_param]).length.should == 1
+    end
   end
 
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
-  
-  it "should create the attribute correctly" do
-    subject.scan('[assembly: UberParameterAttribute(true, 1, "abc", arg1 = "abc", arg2 = false)]').length.should == 1
+  describe AssemblyInfo, "when specifying an attribute with named parameters and using #{settings[:lang]} language specification" do
+
+    include_context "asminfo task"
+
+    before :all do
+      @asm.using_engine settings[:engine]
+      @asm.custom_attributes :NamedParameterAttribute => {:arg1 => "abc", :arg2 => false}
+    end
+
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+    
+    it "should create the attribute correctly" do
+      subject.scan(settings[:named_param]).length.should == 1
+    end
   end
+
+  describe AssemblyInfo, "when specifying an attribute with multiple and named parameters and using #{settings[:lang]} language specification" do
+
+    include_context "asminfo task"
+
+    before :all do
+      @asm.using_engine settings[:engine]
+      @asm.custom_attributes :UberParameterAttribute => [true, 1, "abc", {:arg1 => "abc", :arg2 => false}]
+    end
+
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+    
+    it "should create the attribute correctly" do
+      subject.scan(settings[:all_param]).length.should == 1
+    end
+  end
+
 end
 
 describe FSharpEngine, "when generating assembly info" do
