@@ -90,7 +90,7 @@ class AssemblyInfo
         data = build_header
     end
 
-    data.concat build_using_statements
+    data  = build_using_statements(data) + data
 
     build_attribute(data, "AssemblyTitle", @title)
     build_attribute(data, "AssemblyDescription", @description)
@@ -143,7 +143,7 @@ class AssemblyInfo
     data << attr_value if result.nil?
   end
   
-  def build_using_statements
+  def build_using_statements(data)
     @namespaces = [] if @namespaces.nil?
     
     @namespaces << "System.Reflection"
@@ -152,7 +152,7 @@ class AssemblyInfo
     
     ns = []
     @namespaces.each do |n|
-      ns << @lang_engine.build_using_statement(n)
+      ns << @lang_engine.build_using_statement(n) unless data.index { |l| l.match n }
     end
     
     ns
