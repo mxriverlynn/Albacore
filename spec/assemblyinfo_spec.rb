@@ -52,48 +52,30 @@ describe AssemblyInfo, "when generating an assembly info file without an output 
   end
 end
 
-{ :cs => { :engine => CSharpEngine.new, :lang => "the C#",
-    :no_arg      => '[assembly: NoArgsAttribute()]',
-    :non_string  => '[assembly: NonStringAttribute(true)]',
-    :pos_param   => '[assembly: MultipleParameterAttribute(true, 1, "abc")]',
-    :named_param => '[assembly: NamedParameterAttribute(arg1 = "abc", arg2 = false)]',
-    :all_param   => '[assembly: UberParameterAttribute(true, 1, "abc", arg1 = "abc", arg2 = false)]' },
-    
-  :vb => { :engine => VbNetEngine.new, :lang => "the VB.Net",
-    :no_arg      => '<assembly: NoArgsAttribute()>',
-    :non_string  => '<assembly: NonStringAttribute(true)>',
-    :pos_param   => '<assembly: MultipleParameterAttribute(true, 1, "abc")>',
-    :named_param => '<assembly: NamedParameterAttribute(arg1 := "abc", arg2 := false)>',
-    :all_param   => '<assembly: UberParameterAttribute(true, 1, "abc", arg1 := "abc", arg2 := false)>' },
-    
-  :fs => { :engine => FSharpEngine.new, :lang => "the F#",
-    :no_arg      => '[<assembly: NoArgsAttribute()>]',
-    :non_string  => '[<assembly: NonStringAttribute(true)>]',
-    :pos_param   => '[<assembly: MultipleParameterAttribute(true, 1, "abc")>]',
-    :named_param => '[<assembly: NamedParameterAttribute(arg1 = "abc", arg2 = false)>]',
-    :all_param   => '[<assembly: UberParameterAttribute(true, 1, "abc", arg1 = "abc", arg2 = false)>]' },
-    
-  :cpp => { :engine => CppCliEngine.new, :lang => "the C++",
-    :no_arg      => '[assembly: NoArgsAttribute()]',
-    :non_string  => '[assembly: NonStringAttribute(true)]',
-    :pos_param   => '[assembly: MultipleParameterAttribute(true, 1, "abc")]',
-    :named_param => '[assembly: NamedParameterAttribute(arg1 = "abc", arg2 = false)]',
-    :all_param   => '[assembly: UberParameterAttribute(true, 1, "abc", arg1 = "abc", arg2 = false)]' },
+{ :no => { :engine => nil,              :lang => "no",         :start_token => "[",  :end_token => "]"},
+  :cs => { :engine => CSharpEngine.new, :lang => "the C#",     :start_token => "[",  :end_token => "]" },
+  :vb => { :engine => VbNetEngine.new,  :lang => "the VB.Net", :start_token => "<",  :end_token => ">", :assignment => ":=" },
+  :fs => { :engine => FSharpEngine.new, :lang => "the F#",     :start_token => "[<", :end_token => ">]" },
+  :cpp=> { :engine => CppCliEngine.new, :lang => "the C++",    :start_token => "[",  :end_token => "]" }
 }.each do |key, settings|
+
+  s = settings[:start_token]
+  e = settings[:end_token]
+  a = settings[:assignment] || '='
 
   describe AssemblyInfo, "when specifying a custom attribute with no data and using #{settings[:lang]} language specification" do
 
     include_context "asminfo task"
 
     before :all do
-      @asm.using_engine settings[:engine]
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
       @asm.custom_attributes :NoArgsAttribute => nil
     end
 
     subject { @tester.build_and_read_assemblyinfo_file @asm }
 
     it "should.execute the attribute with an empty argument list" do
-      subject.scan(settings[:no_arg]).length.should == 1
+      subject.scan(%Q|#{s}assembly: NoArgsAttribute()#{e}|).length.should == 1
     end
   end
 
@@ -102,14 +84,14 @@ end
     include_context "asminfo task"
 
     before :all do
-      @asm.using_engine settings[:engine]
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
       @asm.custom_attributes :NonStringAttribute => true
     end
 
     subject { @tester.build_and_read_assemblyinfo_file @asm }
     
     it "should.execute the attribute data without quotes" do
-      subject.scan(settings[:non_string]).length.should == 1
+      subject.scan(%Q|#{s}assembly: NonStringAttribute(true)#{e}|).length.should == 1
     end
   end
 
@@ -118,14 +100,14 @@ end
     include_context "asminfo task"
 
     before :all do
-      @asm.using_engine settings[:engine]
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
       @asm.custom_attributes :MultipleParameterAttribute => [true, 1, "abc"]
     end
 
     subject { @tester.build_and_read_assemblyinfo_file @asm }
     
     it "should create the attribute correctly" do
-      subject.scan(settings[:pos_param]).length.should == 1
+      subject.scan(%Q|#{s}assembly: MultipleParameterAttribute(true, 1, "abc")#{e}|).length.should == 1
     end
   end
 
@@ -134,14 +116,14 @@ end
     include_context "asminfo task"
 
     before :all do
-      @asm.using_engine settings[:engine]
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
       @asm.custom_attributes :NamedParameterAttribute => {:arg1 => "abc", :arg2 => false}
     end
 
     subject { @tester.build_and_read_assemblyinfo_file @asm }
     
     it "should create the attribute correctly" do
-      subject.scan(settings[:named_param]).length.should == 1
+      subject.scan(%Q|#{s}assembly: NamedParameterAttribute(arg1 #{a} "abc", arg2 #{a} false)#{e}|).length.should == 1
     end
   end
 
@@ -150,14 +132,14 @@ end
     include_context "asminfo task"
 
     before :all do
-      @asm.using_engine settings[:engine]
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
       @asm.custom_attributes :UberParameterAttribute => [true, 1, "abc", {:arg1 => "abc", :arg2 => false}]
     end
 
     subject { @tester.build_and_read_assemblyinfo_file @asm }
     
     it "should create the attribute correctly" do
-      subject.scan(settings[:all_param]).length.should == 1
+      subject.scan(%Q|#{s}assembly: UberParameterAttribute(true, 1, "abc", arg1 #{a} "abc", arg2 #{a} false)#{e}|).length.should == 1
     end
   end
 
