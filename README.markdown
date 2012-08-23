@@ -2,58 +2,18 @@
 
 albacore is a suite of Rake tasks to automate the process of building a .NET based system. It's like MSBuild or Nant... but without all the stabby-bracket xmlhell.
 
-## How To Use albacore
+# NOTICE OF PROJECT MOVE
 
-Check out the [albacore Wiki](http://wiki.github.com/derickbailey/albacore) for detailed instructions on how to use the built in tasks and their options. 
+Albacore has officially been moved to a new Github Organization and repository. Please update your
+forks and references to point to the new [Albacore/albacore](https://github.com/Albacore/albacore)
+repository.
 
-If you are new to Ruby and Rake, head over to the [getting started](https://github.com/derickbailey/Albacore/wiki/Getting-Started) wiki page.
+I (Derick Bailey) am no longer an active contributor to the Albacore project, and have handed it
+over to a small group of community members that are actively reviving this
+project and moving it forward.
 
-## Supported Versions Of Ruby And Rake
+## Moving Issues / Pull Requests
 
-Albacore has been tested against the following versions of rake:
-
-* Rake v0.8.7
-* Rake v0.9.2
-
-Albacore has been tested against the following versions of Ruby for Windows:
-
-* RubyInstaller v1.8.7
-* RubyInstaller v1.9.2
-* IronRuby v1.0
-* IronRuby v1.1
-* IronRuby v1.1.1
-* IronRuby v1.1.2
-* IronRuby v1.1.3
-
-### Unsupported Versions Of Ruby
-
-Support for the following versions of ruby has been dropped. Albacore will no longer be tested against, or have code written to work with these versions of ruby. Use these versions at your own risk.
-
-* RubyInstaller v1.8.6
-* RubyInstaller v1.9.1
-
-### Notes About IronRuby
-
-Due to an incompatibility with the Rubyzip gem, IronRuby does not support the ‘zip’ and ‘unzip’ tasks. If you need zip / unzip support, look into using a third party tool such as [7-zip](http://7-zip.org) or [SharpZipLib](http://sharpdevelop.net/OpenSource/SharpZipLib/).
-
-## Legal Mumbo Jumbo (MIT License)
-
-Copyright (c) 2011 Derick Bailey
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+If you have an open issue / pull request in my repository, please get in
+contact with the new organization through their issue list, and work with
+them to get the issue or pull request in to the new repository.
