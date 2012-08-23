@@ -343,3 +343,23 @@ describe AssemblyInfo, "when an input file is provided" do
      subject.scan(%Q|// baz|).length.should == 1
   end
 end
+
+describe AssemblyInfo, "when an input file is provided with no attributes" do
+
+  include_context "asminfo task"
+
+  before :all do
+    @asm.company_name = nil
+    @asm.version = nil
+
+    # make it use existing file
+    @tester.use_input_file
+  end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
+  # will give a false-positive if input file has no blank lines at the bottom
+  it "should output one blank line at the bottom" do
+    subject.scan(/[^\n]\n\z/).length.should == 1
+  end
+end
