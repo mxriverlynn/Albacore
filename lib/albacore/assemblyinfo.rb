@@ -118,8 +118,8 @@ class AssemblyInfo
     end
     
     data.concat build_footer
-    
-    data
+
+    data.slice(0..find_last_non_empty_index(data))
   end
 
   def build_header
@@ -128,6 +128,10 @@ class AssemblyInfo
 
   def build_footer
     @lang_engine.respond_to?(:after) ? [@lang_engine.after()] : []
+  end
+
+  def find_last_non_empty_index(data)
+    data.rindex {|line| !line.empty? } || 0
   end
 
   def build_attribute(data, attr_name, attr_data)
