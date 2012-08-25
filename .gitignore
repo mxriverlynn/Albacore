@@ -51,3 +51,4 @@ unziptask
 /spec/support/Tools/NDepend-v2.12/NDependProLicense.xml
 specs.html
 TestResults
+AssemblyInfoOutput.*
