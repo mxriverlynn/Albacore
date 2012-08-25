@@ -2,6 +2,8 @@
 
 albacore is a suite of Rake tasks to automate the process of building a .NET based system. It's like MSBuild or Nant... but without all the stabby-bracket xmlhell.
 
+See the current build at http://travis-ci.org/#!/Albacore/albacore
+
 ## How To Use albacore
 
 Check out the [albacore Wiki](http://wiki.github.com/derickbailey/albacore) for detailed instructions on how to use the built in tasks and their options. 
@@ -42,7 +44,7 @@ You are very welcome to submit pull requests - preferrably to the *dev* branch, 
 
 Due to an incompatibility with the Rubyzip gem, IronRuby does not support the ‘zip’ and ‘unzip’ tasks. If you need zip / unzip support, look into using a third party tool such as [7-zip](http://7-zip.org) or [SharpZipLib](http://sharpdevelop.net/OpenSource/SharpZipLib/).
 
-## Legal Mumbo Jumbo (MIT License)
+## MIT License
 
 Copyright (c) 2011 Derick Bailey, Contributors
 
