@@ -3,7 +3,7 @@ require 'psych'
 require 'lib/albacore'
 require 'version_bumper'
 
-task :default => ['albacore:sample']
+task :default => ['spec:all']
 task :install => ['jeweler:gemspec', 'jeweler:build'] do
   sh "gem install -l pkg/albacore-#{File.open('VERSION', 'rb').read}.gem"
 end
