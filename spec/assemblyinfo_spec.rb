@@ -52,34 +52,97 @@ describe AssemblyInfo, "when generating an assembly info file without an output 
   end
 end
 
-describe AssemblyInfo, "when specifying a custom attribute with no data" do
+{ :no => { :engine => nil,              :lang => "no",         :start_token => "[",  :end_token => "]"},
+  :cs => { :engine => CSharpEngine.new, :lang => "the C#",     :start_token => "[",  :end_token => "]" },
+  :vb => { :engine => VbNetEngine.new,  :lang => "the VB.Net", :start_token => "<",  :end_token => ">", :assignment => ":=" },
+  :fs => { :engine => FSharpEngine.new, :lang => "the F#",     :start_token => "[<", :end_token => ">]" },
+  :cpp=> { :engine => CppCliEngine.new, :lang => "the C++",    :start_token => "[",  :end_token => "]" }
+}.each do |key, settings|
 
-  include_context "asminfo task"
+  s = settings[:start_token]
+  e = settings[:end_token]
+  a = settings[:assignment] || '='
 
-  before :all do
-    @asm.custom_attributes :NoArgsAttribute => nil
+  describe AssemblyInfo, "when specifying a custom attribute with no data and using #{settings[:lang]} language specification" do
+
+    include_context "asminfo task"
+
+    before :all do
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
+      @asm.custom_attributes :NoArgsAttribute => nil
+    end
+
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+
+    it "should.execute the attribute with an empty argument list" do
+      subject.scan(%Q|#{s}assembly: NoArgsAttribute()#{e}|).length.should == 1
+    end
   end
 
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
+  describe AssemblyInfo, "when specifying an attribute with non-string data and using #{settings[:lang]} language specification" do
 
-  it "should.execute the attribute with an empty argument list" do
-    subject.scan('[assembly: NoArgsAttribute()]').length.should == 1
+    include_context "asminfo task"
+
+    before :all do
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
+      @asm.custom_attributes :NonStringAttribute => true
+    end
+
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+    
+    it "should.execute the attribute data without quotes" do
+      subject.scan(%Q|#{s}assembly: NonStringAttribute(true)#{e}|).length.should == 1
+    end
   end
-end
 
-describe AssemblyInfo, "when specifying an attribute with non-string data" do
+  describe AssemblyInfo, "when specifying an attribute with multiple parameters and using #{settings[:lang]} language specification" do
 
-  include_context "asminfo task"
+    include_context "asminfo task"
 
-  before :all do
-    @asm.custom_attributes :NonStringAttribute => true
+    before :all do
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
+      @asm.custom_attributes :MultipleParameterAttribute => [true, 1, "abc"]
+    end
+
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+    
+    it "should create the attribute correctly" do
+      subject.scan(%Q|#{s}assembly: MultipleParameterAttribute(true, 1, "abc")#{e}|).length.should == 1
+    end
   end
 
-  subject { @tester.build_and_read_assemblyinfo_file @asm }
-  
-  it "should.execute the attribute data without quotes" do
-    subject.scan('[assembly: NonStringAttribute(true)]').length.should == 1
+  describe AssemblyInfo, "when specifying an attribute with named parameters and using #{settings[:lang]} language specification" do
+
+    include_context "asminfo task"
+
+    before :all do
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
+      @asm.custom_attributes :NamedParameterAttribute => {:arg1 => "abc", :arg2 => false}
+    end
+
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+    
+    it "should create the attribute correctly" do
+      subject.scan(%Q|#{s}assembly: NamedParameterAttribute(arg1 #{a} "abc", arg2 #{a} false)#{e}|).length.should == 1
+    end
   end
+
+  describe AssemblyInfo, "when specifying an attribute with multiple and named parameters and using #{settings[:lang]} language specification" do
+
+    include_context "asminfo task"
+
+    before :all do
+      @tester.lang_engine = @asm.lang_engine = settings[:engine]
+      @asm.custom_attributes :UberParameterAttribute => [true, 1, "abc", {:arg1 => "abc", :arg2 => false}]
+    end
+
+    subject { @tester.build_and_read_assemblyinfo_file @asm }
+    
+    it "should create the attribute correctly" do
+      subject.scan(%Q|#{s}assembly: UberParameterAttribute(true, 1, "abc", arg1 #{a} "abc", arg2 #{a} false)#{e}|).length.should == 1
+    end
+  end
+
 end
 
 describe FSharpEngine, "when generating assembly info" do
@@ -129,10 +192,6 @@ describe FSharpEngine, "when setting language attribute" do
   end
 
 end
-
-
-
-
 
 { :no => { :engine => nil,              :lang => "no", :start_token => "[", :end_token => "]",     :using => "using " },
   :cs => { :engine => CSharpEngine.new, :lang => "the C#", :start_token => "[", :end_token => "]",     :using => "using " },
@@ -318,7 +377,8 @@ describe AssemblyInfo, "when an input file is provided" do
   before :all do
      @asm.version = @tester.version
      @asm.file_version = @tester.file_version
-
+     @asm.namespaces "My.Custom.Namespace"
+     @asm.custom_attributes :CustomAttribute => nil
      @asm.custom_data "// foo", "// baz"
 
      # make it use existing file
@@ -328,18 +388,62 @@ describe AssemblyInfo, "when an input file is provided" do
   subject { @tester.build_and_read_assemblyinfo_file @asm }
 
   it "should contain correct version attribute" do
-     subject.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyVersion("#{@tester.version}")]|).length.should == 1
   end
+  
   it "shoud leave comment untouched" do
-     subject.scan(%Q|// A comment we want to see maintained|).length.should == 1
+    subject.scan(%Q|// A comment we want to see maintained|).length.should == 1
   end
+  
   it "should introduce a new fileversion attribute" do
-     subject.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
+    subject.scan(%Q|[assembly: AssemblyFileVersion("#{@tester.file_version}")]|).length.should == 1
   end
+  
   it "should still leave custom data that's already in there intact" do
-     subject.scan(%Q|// foo|).length.should == 1
+    subject.scan(%Q|// foo|).length.should == 1
   end
+  
   it "should add custom data that's still missing" do
-     subject.scan(%Q|// baz|).length.should == 1
+    subject.scan(%Q|// baz|).length.should == 1
+  end
+  
+  it "should add namespaces to the top of the file" do
+    # Top of file is assumed to be before the first attribute. Comments are ignored.
+    s = subject.split($/)
+    first_attr_line = s.index { |l| l =~ /^\[/ }
+    s.index(%Q|using My.Custom.Namespace;|).should be < first_attr_line
+    s.index(%Q|using System.Reflection;|).should be < first_attr_line
+    s.index(%Q|using System.Runtime.InteropServices;|).should be < first_attr_line
+  end
+  
+  it "should not duplicate namespaces" do
+    subject.scan(%Q|using My.Custom.Namespace;|).length.should == 1
+    subject.scan(%Q|using System.Reflection;|).length.should == 1
+    subject.scan(%Q|using System.Runtime.InteropServices;|).length.should == 1
+  end
+  
+  it "should update existing custom attributes" do
+    subject.scan(%Q|[assembly: CustomAttribute()]|).length.should == 1
+    subject.scan(%Q|[assembly: CustomAttribute(12345)]|).length.should == 0
+  end
+end
+
+describe AssemblyInfo, "when an input file is provided with no attributes" do
+
+  include_context "asminfo task"
+
+  before :all do
+    @asm.company_name = nil
+    @asm.version = nil
+
+    # make it use existing file
+    @tester.use_input_file
+  end
+
+  subject { @tester.build_and_read_assemblyinfo_file @asm }
+
+  # will give a false-positive if input file has no blank lines at the bottom
+  it "should output one blank line at the bottom" do
+    subject.scan(/[^\n]\n\z/).length.should == 1
   end
 end
