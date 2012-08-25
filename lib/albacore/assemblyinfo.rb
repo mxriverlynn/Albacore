@@ -118,8 +118,13 @@ class AssemblyInfo
     end
     
     data.concat build_footer
-    
-    data
+
+    chomp data
+  end
+
+  def chomp(ary)
+    non_empty_rindex = ary.rindex {|line| !line.empty? } || 0
+    ary.slice(0..non_empty_rindex)
   end
 
   def build_header
