@@ -4,7 +4,7 @@ rvm:
   - 1.9.2
   - 1.9.3
   - jruby
-script: "bundle exec rake specs:assemblyinfo specs:albacoremodel"
+script: "bundle exec rake specs:assemblyinfo specs:albacoremodel specs:attrmethods"
 branches:
   only:
     - dev
