@@ -21,8 +21,10 @@ Albacore has been tested against the following versions of rake:
 
 Albacore has been tested against the following versions of Ruby for Windows:
 
-* RubyInstaller v1.8.7
-* RubyInstaller v1.9.2
+* MRI v1.8.7
+* MRI v1.9.2
+* MRI v1.9.3
+* JRuby v1.6.7
 * IronRuby v1.0
 * IronRuby v1.1
 * IronRuby v1.1.1
@@ -43,6 +45,10 @@ You are very welcome to submit pull requests - preferrably to the *dev* branch, 
 ### Notes About IronRuby
 
 Due to an incompatibility with the Rubyzip gem, IronRuby does not support the ‘zip’ and ‘unzip’ tasks. If you need zip / unzip support, look into using a third party tool such as [7-zip](http://7-zip.org) or [SharpZipLib](http://sharpdevelop.net/OpenSource/SharpZipLib/).
+
+### Progress on Linux/Mono and JRuby
+
+ * 2012-08-26 First few rspec categories running on travis with 1.8.7, 1.9.2, 1.9.3 and jruby.
 
 ## MIT License
 
