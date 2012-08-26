@@ -10,16 +10,9 @@ Check out the [albacore Wiki](http://wiki.github.com/derickbailey/albacore) for 
 
 If you are new to Ruby and Rake, head over to the [getting started](https://github.com/derickbailey/Albacore/wiki/Getting-Started) wiki page.
 
-## Supported Versions Of Ruby And Rake
+## Supported Versions Of Ruby
 
-Albacore has been tested against the following versions of rake:
-
-* Rake v0.8.7
-* Rake v0.9.2
-* Rake v0.9.2.2
-* Rake v0.9.3
-
-Albacore has been tested against the following versions of Ruby for Windows:
+Albacore has been tested against the following versions of Ruby for Windows and Linux:
 
 * MRI v1.8.7
 * MRI v1.9.2
