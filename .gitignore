@@ -21,3 +21,4 @@ _ReSharper.*
 *.bkp
 
 /spec/support/Tools/NDepend-v2.12/NDependProLicense.xml
+Gemfile.lock
