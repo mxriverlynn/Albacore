@@ -33,13 +33,18 @@ Support for the following versions of ruby has been dropped. Albacore will no lo
 
 ### Contributing
 
-You are very welcome to submit pull requests - preferrably to the *dev* branch, which is merged with master at release-time.
+You are very welcome to submit pull requests - preferrably to the *dev* branch, which is merged with master at release-time. You will be notified by Travis, our servant, whether your pull request passes all tests (and your *newly written* tests, too), in your pull request discussion area.
+
+When the code has been vetted and merged, it will be included in the next gem build.
 
 ### Notes About IronRuby
 
 Due to an incompatibility with the Rubyzip gem, IronRuby does not support the ‘zip’ and ‘unzip’ tasks. If you need zip / unzip support, look into using a third party tool such as [7-zip](http://7-zip.org) or [SharpZipLib](http://sharpdevelop.net/OpenSource/SharpZipLib/).
 
 ### Progress on Linux/Mono and JRuby
+
+Albacore is moving forward. Part of this is making sure it works on, for the .Net-crowd,
+alternative operating systems. 
 
  * 2012-08-26 First few rspec categories running on travis with 1.8.7, 1.9.2, 1.9.3 and jruby.
 
