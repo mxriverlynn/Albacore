@@ -28,8 +28,8 @@ Albacore has been tested against the following versions of Ruby for Windows and 
 
 Support for the following versions of ruby has been dropped. Albacore will no longer be tested against, or have code written to work with these versions of ruby. Use these versions at your own risk.
 
-* RubyInstaller v1.8.6
-* RubyInstaller v1.9.1
+* RMI v1.8.6
+* RMI v1.9.1
 
 ### Contributing
 
