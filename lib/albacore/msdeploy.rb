@@ -2,7 +2,6 @@ require 'albacore/albacoretask'
 begin
   require 'win32/registry'
 rescue LoadError => e
-  puts "Could not load Win32 lib, on unix machine?"
 end
 
 class MSDeploy
