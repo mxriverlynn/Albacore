@@ -9,5 +9,5 @@ group :development do
   gem 'rspec', '~>2.7' 
   gem 'jekyll', '~>0.8' 
   gem 'watchr', '~>0.7' 
-  gem 'psych'
+#  gem 'psych' # doesn't work with all rubies...
 end
