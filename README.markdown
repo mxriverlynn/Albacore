@@ -6,7 +6,7 @@ albacore is a suite of Rake tasks to automate the process of building a .NET bas
 
 ## How To Use albacore
 
-Check out the [albacore Wiki](https://github.com/Albacore/albacore) for detailed instructions on how to use the built in tasks and their options. 
+Check out the [albacore Wiki](https://github.com/Albacore/albacore/wiki) for detailed instructions on how to use the built in tasks and their options. 
 
 If you are new to Ruby and Rake, head over to the [getting started](https://github.com/Albacore/albacore/wiki/Getting-Started) wiki page.
 
