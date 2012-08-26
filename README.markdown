@@ -6,9 +6,9 @@ albacore is a suite of Rake tasks to automate the process of building a .NET bas
 
 ## How To Use albacore
 
-Check out the [albacore Wiki](http://wiki.github.com/derickbailey/albacore) for detailed instructions on how to use the built in tasks and their options. 
+Check out the [albacore Wiki](https://github.com/Albacore/albacore) for detailed instructions on how to use the built in tasks and their options. 
 
-If you are new to Ruby and Rake, head over to the [getting started](https://github.com/derickbailey/Albacore/wiki/Getting-Started) wiki page.
+If you are new to Ruby and Rake, head over to the [getting started](https://github.com/Albacore/albacore/wiki/Getting-Started) wiki page.
 
 ## Supported Versions Of Ruby
 
@@ -28,8 +28,8 @@ Albacore has been tested against the following versions of Ruby for Windows and 
 
 Support for the following versions of ruby has been dropped. Albacore will no longer be tested against, or have code written to work with these versions of ruby. Use these versions at your own risk.
 
-* RMI v1.8.6
-* RMI v1.9.1
+* MRI v1.8.6
+* MRI v1.9.1
 
 ### Contributing
 
