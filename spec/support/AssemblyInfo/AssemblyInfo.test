@@ -1,0 +1,9 @@
+using System.Reflection;
+using System.Runtime.InteropServices;
+
+// A comment we want to see maintained
+[assembly: AssemblyCompany("Albacore")]
+[assembly: AssemblyVersion("0.2.2.0")]
+[assembly: CustomAttribute(12345)]
+
+// foo
