@@ -1,50 +1,8 @@
-$: << './'
-#require 'psych'
-require 'lib/albacore'
-require 'version_bumper'
+$: << File.expand_path('../lib', __FILE__)
+require 'albacore'
 
-task :default => ['specs:all']
-task :install => ['jeweler:gemspec', 'jeweler:build'] do
-  sh "gem install -l pkg/albacore-#{File.open('VERSION', 'rb').read}.gem"
-end
+namespace :albacore do
 
-namespace :specs do
-  require 'rspec/core/rake_task'
-
-  @rspec_opts = ['--colour --format documentation']
-
-  desc "Run all specs for albacore"
-  RSpec::Core::RakeTask.new :all do |t|
-    t.pattern = 'spec/**/*_spec.rb'
-    t.rspec_opts = @rspec_opts
-  end
-
-  exceptNCov = []
-  # generate tasks for each *_spec.rb file in the root spec folder
-  FileList['spec/*_spec.rb'].each do |fname|
-    spec = $1 if /spec\/(.+)_spec\.rb/ =~ fname
-    exceptNCov << spec unless /ncover|ndepend/ =~ spec
-    desc "Run #{spec} specs"
-    RSpec::Core::RakeTask.new spec do |t|
-      t.pattern = "spec/#{spec}*_spec.rb"
-      t.rspec_opts = @spec_opts
-    end
-  end
-
-  #quick hack to run all specs not in ncover or ndepend, to evaluate changes
-  desc "excludes ncover  and ndepend specs"
-  task :except_ncover => exceptNCov do
-  end
-  
-  desc "MSDeploy functional specs"
-  RSpec::Core::RakeTask.new :msdeploy do |t|
-    t.pattern = 'spec/msdeploy*_spec.rb'
-    t.rspec_opts = @rspec_opts
-  end
-  
-end
-
-namespace :albacore do  
   Albacore.configure do |config|
     config.yaml_config_folder = "spec/support/yamlconfig"
     config.log_level = :verbose
@@ -193,23 +151,4 @@ namespace :albacore do
     migrator.connection = "Data Source=#{db_file};"
   end
 
-end
-
-namespace :jeweler do
-  require 'jeweler'  
-  Jeweler::Tasks.new do |gs|
-    gs.name = "albacore"
-    gs.summary = "Dolphin-Safe Rake Tasks For .NET Systems"
-    gs.description = "Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks."
-    gs.email = "albacorebuild@gmail.com"
-    gs.homepage = "http://albacorebuild.net"
-    gs.authors = ["Derick Bailey", "etc"]
-    gs.has_rdoc = false  
-    gs.files.exclude(
-      "albacore.gemspec", 
-      ".gitignore", 
-      "spec/",
-      "pkg/"
-    )
-  end
 end
