@@ -1,10 +1,11 @@
 # -*- encoding: utf-8 -*-
 
-require 'semver'
+$:.push File.expand_path("../lib", __FILE__)
+require 'version'
 
 Gem::Specification.new do |s|
   s.name        = 'albacore'
-  s.version     = SemVer.find.format "%M.%m.%p"
+  s.version     = Albacore::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Henrik Feldt', 'Anthony Mastrean']
   s.email       = 'henrik@haf.se'
@@ -13,7 +14,6 @@ Gem::Specification.new do |s|
   s.description = 'Easily build your .Net or Mono project using this collection of Rake tasks.'
 
   s.add_development_dependency 'nokogiri'
-  s.add_development_dependency 'semver2'
   s.add_development_dependency 'jekyll'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-rspec'
