@@ -26,7 +26,7 @@ namespace :specs do
     end
   end
 
-  #quick hack to run all specs not in ncover or ndepend, to evaluate changes
+  # quick hack to run all specs not in ncover or ndepend
   desc "excludes ncover  and ndepend specs"
   task :except_ncover => exceptNCov
 
