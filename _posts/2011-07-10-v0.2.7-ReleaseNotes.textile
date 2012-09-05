@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "v0.2.7 Release Notes: Fixed Gemspec
+title: "v0.2.7 Release Notes: Fixed Gemspec"
 ---
 
 Albacore v0.2.7 is available via RubyGems.org

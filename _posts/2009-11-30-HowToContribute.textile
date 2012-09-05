@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How To Contribute To Albacore
+title: "How To Contribute To Albacore"
 ---
 
 If you would like to contribute to the Albacore project, there are a number of things that you can do including code contributions, bug reports, idea submissions, user group discussions, etc.

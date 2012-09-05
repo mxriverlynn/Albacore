@@ -2,3 +2,4 @@
 #ruby-gemset=albacore-blog
 source "https://rubygems.org"
 gem "jekyll"
+gem "RedCloth"

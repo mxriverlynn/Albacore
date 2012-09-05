@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "v0.2.6 Release Notes: Nuget, CSC, XUnit, FluentMigrator tasks; Rake and IronRuby Versions
+title: "v0.2.6 Release Notes: Nuget, CSC, XUnit, FluentMigrator tasks; Rake and IronRuby Versions"
 ---
 
 Albacore v0.2.6 is now available via RubyGems.org

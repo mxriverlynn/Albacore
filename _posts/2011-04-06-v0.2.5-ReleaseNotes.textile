@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "v0.2.5 Release Notes: MSTest, Nuspec, Output, MSBuild, SQLCmd
+title: "v0.2.5 Release Notes: MSTest, Nuspec, Output, MSBuild, SQLCmd"
 ---
 
 Albacore v0.2.5 has been pushed up to RubyGems.org. It contains one new task, mstest, and several additions and bug fixes for other tasks.

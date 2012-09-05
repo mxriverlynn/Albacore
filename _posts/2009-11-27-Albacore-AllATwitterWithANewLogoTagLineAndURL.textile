@@ -1,6 +1,6 @@
 ---
 layout: post
-title: All A-Twitter With A New Logo, Tag Line, And URL
+title: "All A-Twitter With A New Logo, Tag Line, And URL"
 ---
 
 There’s been a lot of fun things happening with Albacore over the holiday weekend.

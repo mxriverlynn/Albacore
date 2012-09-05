@@ -3,8 +3,8 @@ layout: post
 title: "v0.1.5 Release Notes: Ruby 1.9.1 Support"
 ---
 
-Albacore v0.1.5 was just pushed up to RubyGems.org. It contains a number of bug fixes in the tasks and in the specs to better support ruby 1.9.1 syntax. Thanks to ["Jonas Follesø":http://jonas.follesoe.no/] for pointing out this ["stack overflow question":http://stackoverflow.com/questions/2806680/albacore-msbuild-task-problem/] from ["Dejan Fajfar":http://dejanfajfar.wordpress.com/]. 
- 
+Albacore v0.1.5 was just pushed up to RubyGems.org. It contains a number of bug fixes in the tasks and in the specs to better support ruby 1.9.1 syntax. Thanks to ["Jonas FollesÃ¸":http://jonas.follesoe.no/] for pointing out this ["stack overflow question":http://stackoverflow.com/questions/2806680/albacore-msbuild-task-problem/] from ["Dejan Fajfar":http://dejanfajfar.wordpress.com/].
+
 h2. SSH and SFTP
 
 The only tasks that are not currently working in a Ruby v1.91 environment are the SSH and SFTP tasks. These tasks rely on gem packages that have not yet been updated to run on the 1.9.x runtime. We either need to replace the gems being used or get them updated to work on 1.9.x... not sure which is going to happen first.
