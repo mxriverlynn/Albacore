@@ -10,7 +10,7 @@ require 'albacore/config/config'
 module Albacore
   module Task
     include Failure
-    include Logging
+    include Albacore::Logging
     include YAMLConfig
     include UpdateAttributes
 
