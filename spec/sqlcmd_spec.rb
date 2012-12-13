@@ -154,7 +154,7 @@ describe SQLCmd, "when running with no command path specified" do
     @all_possible_sqlcmd_paths = []
 
     ["program files", "program files (x86)"].each do |program_files|
-      ["90", "100"].each do |sql_version|
+      ["90", "100", "110"].each do |sql_version|
         sqlcmd_path = File.join(ENV['SystemDrive'], program_files,'microsoft sql server', sql_version, 'tools','binn', 'sqlcmd.exe')
         @all_possible_sqlcmd_paths << sqlcmd_path
       end
