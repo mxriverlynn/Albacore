@@ -8,16 +8,8 @@ Gem::Specification.new do |s|
   s.version = "0.2.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Derick Bailey", "Ben Hall", "Steven Harman",
-               "Hibri Marzook", "Mark Wilkins", "Prabir Shrestha",
-               "Thomas Van Machelen", "Mark Boltuc", "Ivan Eryshov",
-               "Dotan J. Nahum", "Hernan Garcia", "James Gregory",
-               "Steve Hebert", "Mike Nichols", "Henrik Feldt",
-               "Chris Geihsler", "Brett Veenstra", "Steven H Johnson",
-               "Nils Jonsson", "Kevin Colyar", "Peter van der Woude",
-               "Chris O'Dell", "Sean Biefeld", "Andrew Vos",
-               "Louis Salin"]
-  s.date = %q{2011-07-10}
+  s.authors = ["Derick Bailey", "etc"]
+  s.date = %q{2012-02-14}
   s.description = %q{Easily build your .NET solutions with Ruby and Rake, using this suite of Rake tasks.}
   s.email = %q{albacorebuild@gmail.com}
   s.extra_rdoc_files = [
@@ -36,8 +28,8 @@ Gem::Specification.new do |s|
     "lib/albacore/assemblyinfo.rb",
     "lib/albacore/assemblyinfolanguages/cppcliengine.rb",
     "lib/albacore/assemblyinfolanguages/csharpengine.rb",
-    "lib/albacore/assemblyinfolanguages/vbnetengine.rb",
     "lib/albacore/assemblyinfolanguages/fsharpengine.rb",
+    "lib/albacore/assemblyinfolanguages/vbnetengine.rb",
     "lib/albacore/config/aspnetcompilerconfig.rb",
     "lib/albacore/config/assemblyinfoconfig.rb",
     "lib/albacore/config/config.rb",
@@ -46,6 +38,7 @@ Gem::Specification.new do |s|
     "lib/albacore/config/execconfig.rb",
     "lib/albacore/config/fluentmigratorrunnerconfig.rb",
     "lib/albacore/config/msbuildconfig.rb",
+    "lib/albacore/config/msdeployconfig.rb",
     "lib/albacore/config/mspectestrunnerconfig.rb",
     "lib/albacore/config/mstesttestrunnerconfig.rb",
     "lib/albacore/config/nantconfig.rb",
@@ -70,6 +63,7 @@ Gem::Specification.new do |s|
     "lib/albacore/exec.rb",
     "lib/albacore/fluentmigratorrunner.rb",
     "lib/albacore/msbuild.rb",
+    "lib/albacore/msdeploy.rb",
     "lib/albacore/mspectestrunner.rb",
     "lib/albacore/mstesttestrunner.rb",
     "lib/albacore/nant.rb",
@@ -119,7 +113,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://albacorebuild.net}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.0}
+  s.rubygems_version = %q{1.7.2}
   s.summary = %q{Dolphin-Safe Rake Tasks For .NET Systems}
 
   if s.respond_to? :specification_version then

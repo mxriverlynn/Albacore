@@ -1,4 +1,5 @@
 $: << './'
+require 'psych'
 require 'lib/albacore'
 require 'version_bumper'
 
@@ -131,6 +132,13 @@ namespace :specs do
     t.pattern = 'spec/nchurn*_spec.rb'
     t.rspec_opts = @rspec_opts
   end
+  
+  desc "MSDeploy functional specs"
+  RSpec::Core::RakeTask.new :msdeploy do |t|
+    t.pattern = 'spec/msdeploy*_spec.rb'
+    t.rspec_opts = @rspec_opts
+  end
+  
 end
 
 namespace :albacore do  
@@ -245,6 +253,12 @@ namespace :albacore do
   mstest do |mstest|
     mstest.command = "spec/support/Tools/MSTest-2008/mstest.exe"
     mstest.assemblies "spec/support/CodeCoverage/mstest/TestSolution.MsTestTests.dll"
+  end
+  
+  desc "MSDeploy Example"
+  msdeploy do |msdeploy|
+    msdeploy.deploy_package = "spec/support/TestSolution/TestSolution.MSDeploy/TestSolution.MSDeploy/obj/Debug/Package"
+    msdeploy.noop = true    
   end
 
   desc "XUnit Test Runner Example"

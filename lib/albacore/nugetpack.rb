@@ -26,7 +26,7 @@ class NuGetPack
     params = []
     params << "pack"
     params << "#{nuspec}"
-    params << "-b #{base_folder}" unless @base_folder.nil?
+    params << "-BasePath #{base_folder}" unless @base_folder.nil?
     params << "-o #{output}" unless @output.nil?
     
     merged_params = params.join(' ')

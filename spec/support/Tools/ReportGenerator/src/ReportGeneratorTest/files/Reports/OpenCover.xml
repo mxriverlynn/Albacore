@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Modules>
+    <Module skippedDueTo="Filter" hash="A5-EF-7E-28-8B-3D-14-8B-8B-78-E2-F5-40-3B-EB-8A-B5-DC-15-66">
+      <FullName>C:\Windows\assembly\GAC_64\mscorlib\2.0.0.0__b77a5c561934e089\mscorlib.dll</FullName>
+      <ModuleName>mscorlib</ModuleName>
+    </Module>
+    <Module skippedDueTo="Filter" hash="F9-04-A8-31-CD-FB-23-72-95-63-5D-14-9A-A0-66-8E-7F-44-93-7A">
+      <FullName>C:\Windows\assembly\GAC_64\mscorlib\2.0.0.0__b77a5c561934e089\sorttbls.nlp</FullName>
+      <ModuleName>mscorlib</ModuleName>
+    </Module>
+    <Module hash="95-B0-F3-40-B8-68-ED-CE-CC-AC-F0-42-09-01-5C-FF-A6-2B-4D-41">
+      <FullName>C:\temp\Test.exe</FullName>
+      <ModuleName>Test</ModuleName>
+      <Files>
+        <File uid="1" fullPath="C:\temp\Program.cs" />
+        <File uid="2" fullPath="C:\temp\PartialClass.cs" />
+        <File uid="3" fullPath="C:\temp\PartialClass2.cs" />
+        <File uid="4" fullPath="C:\temp\TestClass2.cs" />
+        <File uid="6" fullPath="C:\temp\TestClass.cs" />
+        <File uid="8" fullPath="C:\temp\ClassWithExcludes.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <FullName>Test.Program</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void Test.Program::Main(System.String[])</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="1" ordinal="0" offset="0" sl="7" sc="9" el="7" ec="10" />
+                <SequencePoint vc="1" uspid="2" ordinal="1" offset="1" sl="8" sc="13" el="8" ec="46" />
+                <SequencePoint vc="1" uspid="3" ordinal="2" offset="12" sl="10" sc="13" el="10" ec="53" />
+                <SequencePoint vc="1" uspid="4" ordinal="3" offset="28" sl="11" sc="13" el="11" ec="61" />
+                <SequencePoint vc="1" uspid="5" ordinal="4" offset="49" sl="13" sc="13" el="13" ec="51" />
+                <SequencePoint vc="1" uspid="6" ordinal="5" offset="60" sl="14" sc="13" el="14" ec="51" />
+                <SequencePoint vc="1" uspid="7" ordinal="6" offset="71" sl="15" sc="13" el="15" ec="51" />
+                <SequencePoint vc="1" uspid="8" ordinal="7" offset="84" sl="17" sc="13" el="17" ec="69" />
+                <SequencePoint vc="1" uspid="9" ordinal="8" offset="100" sl="18" sc="13" el="18" ec="69" />
+                <SequencePoint vc="1" uspid="10" ordinal="9" offset="116" sl="20" sc="13" el="20" ec="48" />
+                <SequencePoint vc="1" uspid="11" ordinal="10" offset="132" sl="22" sc="13" el="22" ec="54" />
+                <SequencePoint vc="1" uspid="12" ordinal="11" offset="143" sl="23" sc="13" el="23" ec="54" />
+                <SequencePoint vc="1" uspid="13" ordinal="12" offset="154" sl="24" sc="9" el="24" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="1" ordinal="0" offset="0" sl="7" sc="9" el="7" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663298</MetadataToken>
+              <Name>System.Void Test.Program::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="14" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <FullName>Test.PartialClass</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <MetadataToken>100663301</MetadataToken>
+              <Name>System.Int32 Test.PartialClass::get_SomeProperty()</Name>
+              <FileRef uid="2" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="15" ordinal="0" offset="0" sl="21" sc="17" el="21" ec="18" />
+                <SequencePoint vc="0" uspid="16" ordinal="1" offset="1" sl="21" sc="19" el="21" ec="44" />
+                <SequencePoint vc="0" uspid="17" ordinal="2" offset="10" sl="21" sc="45" el="21" ec="46" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="15" ordinal="0" offset="0" sl="21" sc="17" el="21" ec="18" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="2" sequenceCoverage="66" branchCoverage="50" isConstructor="false" isStatic="false" isGetter="false" isSetter="true">
+              <MetadataToken>100663302</MetadataToken>
+              <Name>System.Void Test.PartialClass::set_SomeProperty(System.Int32)</Name>
+              <FileRef uid="2" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="18" ordinal="0" offset="0" sl="24" sc="13" el="24" ec="14" />
+                <SequencePoint vc="1" uspid="19" ordinal="1" offset="1" sl="25" sc="17" el="25" ec="31" />
+                <SequencePoint vc="1" uspid="20" ordinal="2" offset="12" sl="26" sc="17" el="26" ec="18" />
+                <SequencePoint vc="1" uspid="21" ordinal="3" offset="13" sl="27" sc="21" el="27" ec="43" />
+                <SequencePoint vc="1" uspid="22" ordinal="4" offset="20" sl="28" sc="17" el="28" ec="18" />
+                <SequencePoint vc="0" uspid="23" ordinal="5" offset="23" sl="30" sc="17" el="30" ec="18" />
+                <SequencePoint vc="0" uspid="24" ordinal="6" offset="24" sl="31" sc="21" el="31" ec="47" />
+                <SequencePoint vc="0" uspid="25" ordinal="7" offset="31" sl="32" sc="17" el="32" ec="18" />
+                <SequencePoint vc="1" uspid="26" ordinal="8" offset="32" sl="33" sc="13" el="33" ec="14" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="1" uspid="27" ordinal="0" offset="10" path="0" />
+                <BranchPoint vc="0" uspid="28" ordinal="1" offset="10" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="18" ordinal="0" offset="0" sl="24" sc="13" el="24" ec="14" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663299</MetadataToken>
+              <Name>System.Void Test.PartialClass::ExecutedMethod_1()</Name>
+              <FileRef uid="2" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="29" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="10" />
+                <SequencePoint vc="1" uspid="30" ordinal="1" offset="1" sl="9" sc="13" el="9" ec="39" />
+                <SequencePoint vc="1" uspid="31" ordinal="2" offset="12" sl="10" sc="9" el="10" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="29" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663300</MetadataToken>
+              <Name>System.Void Test.PartialClass::UnExecutedMethod_1()</Name>
+              <FileRef uid="2" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="32" ordinal="0" offset="0" sl="13" sc="9" el="13" ec="10" />
+                <SequencePoint vc="0" uspid="33" ordinal="1" offset="1" sl="14" sc="13" el="14" ec="39" />
+                <SequencePoint vc="0" uspid="34" ordinal="2" offset="12" sl="15" sc="9" el="15" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="32" ordinal="0" offset="0" sl="13" sc="9" el="13" ec="10" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663303</MetadataToken>
+              <Name>System.Void Test.PartialClass::ExecutedMethod_2()</Name>
+              <FileRef uid="3" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="35" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="10" />
+                <SequencePoint vc="1" uspid="36" ordinal="1" offset="1" sl="9" sc="13" el="9" ec="39" />
+                <SequencePoint vc="1" uspid="37" ordinal="2" offset="12" sl="10" sc="9" el="10" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="35" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663304</MetadataToken>
+              <Name>System.Void Test.PartialClass::UnExecutedMethod_2()</Name>
+              <FileRef uid="3" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="38" ordinal="0" offset="0" sl="13" sc="9" el="13" ec="10" />
+                <SequencePoint vc="0" uspid="39" ordinal="1" offset="1" sl="14" sc="13" el="14" ec="39" />
+                <SequencePoint vc="0" uspid="40" ordinal="2" offset="12" sl="15" sc="9" el="15" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="38" ordinal="0" offset="0" sl="13" sc="9" el="13" ec="10" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663305</MetadataToken>
+              <Name>System.Void Test.PartialClass::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="3" uspid="41" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <FullName>Test.TestClass2</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <MetadataToken>100663306</MetadataToken>
+              <Name>System.String Test.TestClass2::get_ExecutedProperty()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="42" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="true">
+              <MetadataToken>100663307</MetadataToken>
+              <Name>System.Void Test.TestClass2::set_ExecutedProperty(System.String)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="2" uspid="43" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <MetadataToken>100663308</MetadataToken>
+              <Name>System.String Test.TestClass2::get_UnExecutedProperty()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="44" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="true">
+              <MetadataToken>100663309</MetadataToken>
+              <Name>System.Void Test.TestClass2::set_UnExecutedProperty(System.String)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="45" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663310</MetadataToken>
+              <Name>System.Void Test.TestClass2::.ctor()</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="46" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="78" />
+                <SequencePoint vc="0" uspid="47" ordinal="1" offset="11" sl="17" sc="9" el="17" ec="28" />
+                <SequencePoint vc="0" uspid="48" ordinal="2" offset="18" sl="18" sc="9" el="18" ec="10" />
+                <SequencePoint vc="0" uspid="49" ordinal="3" offset="19" sl="19" sc="13" el="19" ec="34" />
+                <SequencePoint vc="0" uspid="50" ordinal="4" offset="30" sl="20" sc="13" el="20" ec="46" />
+                <SequencePoint vc="0" uspid="51" ordinal="5" offset="42" sl="21" sc="9" el="21" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="46" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="78" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663311</MetadataToken>
+              <Name>System.Void Test.TestClass2::.ctor(System.String)</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="2" uspid="52" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="78" />
+                <SequencePoint vc="2" uspid="53" ordinal="1" offset="11" sl="23" sc="9" el="23" ec="39" />
+                <SequencePoint vc="2" uspid="54" ordinal="2" offset="18" sl="24" sc="9" el="24" ec="10" />
+                <SequencePoint vc="2" uspid="55" ordinal="3" offset="19" sl="25" sc="13" el="25" ec="30" />
+                <SequencePoint vc="2" uspid="56" ordinal="4" offset="26" sl="26" sc="13" el="26" ec="49" />
+                <SequencePoint vc="2" uspid="57" ordinal="5" offset="40" sl="27" sc="9" el="27" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="2" uspid="52" ordinal="0" offset="0" sl="11" sc="9" el="11" ec="78" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663312</MetadataToken>
+              <Name>System.Void Test.TestClass2::ExecutedMethod()</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="58" ordinal="0" offset="0" sl="30" sc="9" el="30" ec="10" />
+                <SequencePoint vc="1" uspid="59" ordinal="1" offset="1" sl="31" sc="13" el="31" ec="42" />
+                <SequencePoint vc="1" uspid="60" ordinal="2" offset="13" sl="32" sc="13" el="32" ec="54" />
+                <SequencePoint vc="1" uspid="61" ordinal="3" offset="25" sl="33" sc="9" el="33" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="58" ordinal="0" offset="0" sl="30" sc="9" el="30" ec="10" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663313</MetadataToken>
+              <Name>System.Void Test.TestClass2::UnExecutedMethod()</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="62" ordinal="0" offset="0" sl="36" sc="9" el="36" ec="10" />
+                <SequencePoint vc="0" uspid="63" ordinal="1" offset="1" sl="37" sc="13" el="37" ec="42" />
+                <SequencePoint vc="0" uspid="64" ordinal="2" offset="13" sl="38" sc="13" el="38" ec="54" />
+                <SequencePoint vc="0" uspid="65" ordinal="3" offset="25" sl="39" sc="9" el="39" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="62" ordinal="0" offset="0" sl="36" sc="9" el="36" ec="10" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="5" sequenceCoverage="100" branchCoverage="62" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663314</MetadataToken>
+              <Name>System.Void Test.TestClass2::SampleFunction(System.String)</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="66" ordinal="0" offset="15" sl="42" sc="9" el="42" ec="10" />
+                <SequencePoint vc="1" uspid="67" ordinal="1" offset="16" sl="43" sc="13" el="43" ec="53" />
+                <SequencePoint vc="1" uspid="68" ordinal="2" offset="34" sl="45" sc="13" el="45" ec="53" />
+                <SequencePoint vc="1" uspid="69" ordinal="3" offset="72" sl="47" sc="13" el="47" ec="20" />
+                <SequencePoint vc="1" uspid="70" ordinal="4" offset="73" sl="47" sc="34" el="47" ec="41" />
+                <SequencePoint vc="4" uspid="71" ordinal="5" offset="83" sl="47" sc="22" el="47" ec="30" />
+                <SequencePoint vc="4" uspid="72" ordinal="6" offset="91" sl="48" sc="13" el="48" ec="14" />
+                <SequencePoint vc="4" uspid="73" ordinal="7" offset="92" sl="49" sc="17" el="49" ec="41" />
+                <SequencePoint vc="4" uspid="74" ordinal="8" offset="99" sl="50" sc="13" el="50" ec="14" />
+                <SequencePoint vc="5" uspid="75" ordinal="9" offset="100" sl="47" sc="31" el="47" ec="33" />
+                <SequencePoint vc="1" uspid="76" ordinal="10" offset="136" sl="52" sc="13" el="52" ec="76" />
+                <SequencePoint vc="1" uspid="77" ordinal="11" offset="174" sl="54" sc="13" el="54" ec="105" />
+                <SequencePoint vc="1" uspid="78" ordinal="12" offset="202" sl="55" sc="13" el="55" ec="14" />
+                <SequencePoint vc="1" uspid="79" ordinal="13" offset="203" sl="56" sc="17" el="56" ec="52" />
+                <SequencePoint vc="1" uspid="80" ordinal="14" offset="226" sl="57" sc="13" el="57" ec="14" />
+                <SequencePoint vc="1" uspid="81" ordinal="15" offset="227" sl="58" sc="9" el="58" ec="10" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="1" uspid="83" ordinal="0" offset="40" path="0" />
+                <BranchPoint vc="0" uspid="84" ordinal="1" offset="40" path="1" />
+                <BranchPoint vc="1" uspid="85" ordinal="2" offset="111" path="0" />
+                <BranchPoint vc="4" uspid="86" ordinal="3" offset="111" path="1" />
+                <BranchPoint vc="1" uspid="87" ordinal="4" offset="124" path="0" />
+                <BranchPoint vc="0" uspid="88" ordinal="5" offset="124" path="1" />
+                <BranchPoint vc="1" uspid="89" ordinal="6" offset="200" path="0" />
+                <BranchPoint vc="0" uspid="90" ordinal="7" offset="200" path="1" />
+              </BranchPoints>
+              <MethodPoint vc="1" uspid="82" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663315</MetadataToken>
+              <Name>System.String Test.TestClass2::DoSomething(System.String,System.String[],System.Guid,System.Collections.Generic.IEnumerable`1&lt;System.String&gt;,System.Collections.Generic.IList`1&lt;System.String&gt;,System.Decimal,System.Int32,System.Collections.Generic.Dictionary`2&lt;System.String,System.Int32&gt;,System.Int32&amp;,System.Single,System.Double,System.Boolean,System.Byte,System.Char,System.Object,System.SByte,System.Int16,System.UInt32,System.UInt64,System.UInt16)</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="91" ordinal="0" offset="0" sl="80" sc="9" el="80" ec="10" />
+                <SequencePoint vc="0" uspid="92" ordinal="1" offset="1" sl="81" sc="13" el="81" ec="19" />
+                <SequencePoint vc="0" uspid="93" ordinal="2" offset="5" sl="82" sc="13" el="82" ec="25" />
+                <SequencePoint vc="0" uspid="94" ordinal="3" offset="9" sl="83" sc="9" el="83" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="91" ordinal="0" offset="0" sl="80" sc="9" el="80" ec="10" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="true" isGetter="false" isSetter="false">
+              <MetadataToken>100663316</MetadataToken>
+              <Name>System.Int32 Test.TestClass2::&lt;SampleFunction&gt;b__0(System.Int32)</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="4" uspid="95" ordinal="0" offset="0" sl="45" sc="46" el="45" ec="51" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="4" uspid="95" ordinal="0" offset="0" sl="45" sc="46" el="45" ec="51" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <FullName>Test.TestClass2/&lt;&gt;c__DisplayClass3</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663337</MetadataToken>
+              <Name>System.Void Test.TestClass2/&lt;&gt;c__DisplayClass3::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="96" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663338</MetadataToken>
+              <Name>System.Boolean Test.TestClass2/&lt;&gt;c__DisplayClass3::&lt;SampleFunction&gt;b__1(System.String)</Name>
+              <FileRef uid="4" />
+              <SequencePoints>
+                <SequencePoint vc="3" uspid="97" ordinal="0" offset="0" sl="54" sc="45" el="54" ec="95" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="3" uspid="97" ordinal="0" offset="0" sl="54" sc="45" el="54" ec="95" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <FullName>Test.PartialClassWithAutoProperties</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <MetadataToken>100663317</MetadataToken>
+              <Name>System.String Test.PartialClassWithAutoProperties::get_Property2()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="98" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="true">
+              <MetadataToken>100663318</MetadataToken>
+              <Name>System.Void Test.PartialClassWithAutoProperties::set_Property2(System.String)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="99" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <MetadataToken>100663319</MetadataToken>
+              <Name>System.String Test.PartialClassWithAutoProperties::get_Property1()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="100" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="true">
+              <MetadataToken>100663320</MetadataToken>
+              <Name>System.Void Test.PartialClassWithAutoProperties::set_Property1(System.String)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="101" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663321</MetadataToken>
+              <Name>System.Void Test.PartialClassWithAutoProperties::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="2" uspid="102" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class skippedDueTo="Attribute">
+          <FullName>Test.CoverageExcludeAttribute</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <FullName>Test.TestClass</FullName>
+          <Methods>
+            <Method visited="true" cyclomaticComplexity="2" sequenceCoverage="72" branchCoverage="50" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663323</MetadataToken>
+              <Name>System.Void Test.TestClass::SampleFunction()</Name>
+              <FileRef uid="6" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="103" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="10" />
+                <SequencePoint vc="1" uspid="104" ordinal="1" offset="1" sl="9" sc="13" el="9" ec="47" />
+                <SequencePoint vc="1" uspid="105" ordinal="2" offset="12" sl="10" sc="13" el="10" ec="24" />
+                <SequencePoint vc="1" uspid="106" ordinal="3" offset="15" sl="12" sc="13" el="12" ec="23" />
+                <SequencePoint vc="1" uspid="107" ordinal="4" offset="26" sl="13" sc="13" el="13" ec="14" />
+                <SequencePoint vc="1" uspid="108" ordinal="5" offset="27" sl="14" sc="17" el="14" ec="61" />
+                <SequencePoint vc="1" uspid="109" ordinal="6" offset="49" sl="15" sc="13" el="15" ec="14" />
+                <SequencePoint vc="0" uspid="110" ordinal="7" offset="52" sl="17" sc="13" el="17" ec="14" />
+                <SequencePoint vc="0" uspid="111" ordinal="8" offset="53" sl="18" sc="17" el="18" ec="65" />
+                <SequencePoint vc="0" uspid="112" ordinal="9" offset="75" sl="19" sc="13" el="19" ec="14" />
+                <SequencePoint vc="1" uspid="113" ordinal="10" offset="76" sl="20" sc="9" el="20" ec="10" />
+              </SequencePoints>
+              <BranchPoints>
+                <BranchPoint vc="1" uspid="114" ordinal="0" offset="24" path="0" />
+                <BranchPoint vc="0" uspid="115" ordinal="1" offset="24" path="1" />
+              </BranchPoints>
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="103" ordinal="0" offset="0" sl="8" sc="9" el="8" ec="10" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663324</MetadataToken>
+              <Name>System.Void Test.TestClass::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="116" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <FullName>Test.TestClass/NestedClass</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663325</MetadataToken>
+              <Name>System.Void Test.TestClass/NestedClass::SampleFunction()</Name>
+              <FileRef uid="6" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="117" ordinal="0" offset="0" sl="25" sc="13" el="25" ec="14" />
+                <SequencePoint vc="0" uspid="118" ordinal="1" offset="1" sl="26" sc="17" el="26" ec="50" />
+                <SequencePoint vc="0" uspid="119" ordinal="2" offset="12" sl="27" sc="13" el="27" ec="14" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="117" ordinal="0" offset="0" sl="25" sc="13" el="25" ec="14" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663326</MetadataToken>
+              <Name>System.Void Test.TestClass/NestedClass::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="120" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <FullName>Test.SomeClass</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <MetadataToken>100663327</MetadataToken>
+              <Name>System.String Test.SomeClass::get_Property1()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="121" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="true">
+              <MetadataToken>100663328</MetadataToken>
+              <Name>System.Void Test.SomeClass::set_Property1(System.String)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="122" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663329</MetadataToken>
+              <Name>System.Void Test.SomeClass::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="123" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <FullName>Test.ClassWithExcludes</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <MetadataToken>100663330</MetadataToken>
+              <Name>System.String Test.ClassWithExcludes::get_IncludedProperty()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="124" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="true">
+              <MetadataToken>100663331</MetadataToken>
+              <Name>System.Void Test.ClassWithExcludes::set_IncludedProperty(System.String)</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="1" uspid="125" ordinal="0" offset="0" />
+            </Method>
+            <Method skippedDueTo="Attribute" visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="true" isSetter="false">
+              <MetadataToken>100663332</MetadataToken>
+              <Name>System.String Test.ClassWithExcludes::get_ExcludedProperty()</Name>
+            </Method>
+            <Method skippedDueTo="Attribute" visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="true">
+              <MetadataToken>100663333</MetadataToken>
+              <Name>System.Void Test.ClassWithExcludes::set_ExcludedProperty(System.String)</Name>
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="100" branchCoverage="100" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663334</MetadataToken>
+              <Name>System.Void Test.ClassWithExcludes::IncludedMethod()</Name>
+              <FileRef uid="8" />
+              <SequencePoints>
+                <SequencePoint vc="1" uspid="126" ordinal="0" offset="0" sl="12" sc="9" el="12" ec="10" />
+                <SequencePoint vc="1" uspid="127" ordinal="1" offset="1" sl="13" sc="13" el="13" ec="44" />
+                <SequencePoint vc="1" uspid="128" ordinal="2" offset="13" sl="14" sc="9" el="14" ec="10" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="1" uspid="126" ordinal="0" offset="0" sl="12" sc="9" el="12" ec="10" />
+            </Method>
+            <Method skippedDueTo="Attribute" visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663335</MetadataToken>
+              <Name>System.Void Test.ClassWithExcludes::ExcludedMethod()</Name>
+              <FileRef uid="8" />
+            </Method>
+            <Method visited="true" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663336</MetadataToken>
+              <Name>System.Void Test.ClassWithExcludes::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="2" uspid="129" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <FullName>&lt;PrivateImplementationDetails&gt;{40678224-B32E-42B0-9141-0FFBE25EF612}</FullName>
+          <Methods />
+        </Class>
+      </Classes>
+    </Module>
+    <Module skippedDueTo="Filter" hash="1C-9B-5E-9A-F4-F4-23-BF-A0-CE-8B-D4-76-DC-0D-FE-A0-82-A9-CF">
+      <FullName>C:\Windows\assembly\GAC_MSIL\System.Core\3.5.0.0__b77a5c561934e089\System.Core.dll</FullName>
+      <ModuleName>System.Core</ModuleName>
+    </Module>
+  </Modules>
+</CoverageSession>
