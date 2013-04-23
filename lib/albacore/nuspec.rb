@@ -46,7 +46,7 @@ class Nuspec
   include Albacore::Task
   
   attr_accessor :id, :version, :title, :authors, :description, :language, :licenseUrl, :projectUrl, :output_file,
-                :owners, :summary, :iconUrl, :requireLicenseAcceptance, :tags, :working_directory
+                :owners, :summary, :iconUrl, :requireLicenseAcceptance, :tags, :working_directory, :releaseNotes
 
   def initialize()
     @dependencies = Array.new
@@ -101,6 +101,7 @@ class Nuspec
     metadata.add_element('title').add_text(@title)
     metadata.add_element('authors').add_text(@authors)
     metadata.add_element('description').add_text(@description)
+    metadata.add_element('releaseNotes').add_text(@releaseNotes) if !@releaseNotes.nil?
     metadata.add_element('language').add_text(@language) if !@language.nil?
     metadata.add_element('licenseUrl').add_text(@licenseUrl) if !@licenseUrl.nil?
     metadata.add_element('projectUrl').add_text(@projectUrl) if !@projectUrl.nil?
