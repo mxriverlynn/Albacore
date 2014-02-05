@@ -7,6 +7,11 @@ module YAMLConfig
   
   def load_config_by_task_name(task_name)
     task_config = "#{task_name}.yml"
+    if task_name.is_a? Hash
+        task_name.each_key {|key| 
+            task_config = "#{key}.yml"
+        }
+    end
     task_config = File.join(Albacore.configure.yaml_config_folder, task_config) unless Albacore.configure.yaml_config_folder.nil?
     configure(task_config) if File.exists?(task_config)
   end
